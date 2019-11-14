@@ -33,17 +33,13 @@ void t::Loop() {
 	TString Cuts = "_NoCuts";
 
 	vector<TString> VectorCuts; VectorCuts.clear();
-//	VectorCuts.push_back("_Chi2");
-//	VectorCuts.push_back("_Collinearity");
-//	VectorCuts.push_back("_MatchedFlash");
-//	VectorCuts.push_back("_Distance");
-//	VectorCuts.push_back("_Coplanarity");
-//	VectorCuts.push_back("_TransImb");
+	VectorCuts.push_back("_NuScore");
+	VectorCuts.push_back("_ThreePlaneLogChi2");
+	VectorCuts.push_back("_MatchedFlash");
+	VectorCuts.push_back("_Collinearity");
 
-//	VectorCuts.push_back("_Distance");
 //	VectorCuts.push_back("_Chi2");
-//	VectorCuts.push_back("_Collinearity");
-//	VectorCuts.push_back("_MatchedFlash");
+//	VectorCuts.push_back("_Distance");
 //	VectorCuts.push_back("_Coplanarity");
 //	VectorCuts.push_back("_TransImb");
 
@@ -57,61 +53,16 @@ void t::Loop() {
 
 	// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-	TString FileName = "./OutputFiles/"+UBCodeVersion+"/CCQEStudies_"+WhichSample+Cuts+".root";
+	TString FileName = "./OutputFiles/"+UBCodeVersion+"/CCQEStudies_"+fWhichSample+Cuts+".root";
 	TFile* file = new TFile(FileName,"recreate");
-
-	// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-	// Binning & Ranges 
-
-	static const int NBinsMuonMomentum = 7; TString RecoLabelXAxisMuonMomentum = ";Reco P_{#mu} (GeV/c)"; 
-	static const double BinsMuonMomentum[NBinsMuonMomentum+1] = {0.1,0.3,0.5,0.7,0.9,1.1,1.3,1.5};
-
-	static const int NBinsProtonMomentum = 7; TString RecoLabelXAxisProtonMomentum = ";Reco P_{p} (GeV/c)";
-	static const double BinsProtonMomentum[NBinsProtonMomentum+1] = {0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0};
-
-	static const int NBinsMuonCosTheta = 7; TString RecoLabelXAxisMuonCosTheta = ";Reco cos(#theta_{#mu})"; 
-	static const double BinsMuonCosTheta[NBinsMuonCosTheta+1] = {-0.65,-0.41,-0.17,0.07,0.32,0.56,0.80,0.95};
-
-	static const int NBinsProtonCosTheta = 7; TString RecoLabelXAxisProtonCosTheta = ";Reco cos(#theta_{p})"; 
-	static const double BinsProtonCosTheta[NBinsProtonCosTheta+1] = {0.15,0.26,0.37,0.47,0.58,0.69,0.80,0.95};
-
-	static const int NBinsMuonPhi = 7; TString RecoLabelXAxisMuonPhi = ";Reco #phi_{#mu} (deg)"; 
-	static const double BinsMuonPhi[NBinsMuonPhi+1] = {-180.0,-128.6,-77.1,-25.7,25.7,77.1,128.6,180.0};
-
-	static const int NBinsProtonPhi = 7; TString RecoLabelXAxisProtonPhi = ";Reco #phi_{p} (deg)"; 
-	static const double BinsProtonPhi[NBinsMuonPhi+1] = {-180.0,-128.6,-77.1,-25.7,25.7,77.1,128.6,180.0};
-
-	static const int NBinsChi2CandidateMuon = 25; TString RecoLabelXAxisChi2CandidateMuon = ";(#chi^{2}_{p})^{#mu}";
-	static const double MinChi2CandidateMuon = 0., MaxChi2CandidateMuon = 500.;
-
-	static const int NBinsChi2CandidateProton = 25; TString RecoLabelXAxisChi2CandidateProton = ";(#chi^{2}_{p})^{p}";
-	static const double MinChi2CandidateProton = 0., MaxChi2CandidateProton = 500.;
-
-	static const int NBinsThreePlaneChi2CandidateMuon = 15; TString RecoLabelXAxisThreePlaneChi2CandidateMuon = ";3-Plane (#chi^{2}_{p})^{#mu}";
-	static const double MinThreePlaneChi2CandidateMuon = 0., MaxThreePlaneChi2CandidateMuon = 1.;
-
-	static const int NBinsThreePlaneChi2CandidateProton = 15; TString RecoLabelXAxisThreePlaneChi2CandidateProton = ";3-Plane (#chi^{2}_{p})^{p}";
-	static const double MinThreePlaneChi2CandidateProton = 0., MaxThreePlaneChi2CandidateProton = 1.;
-
-	static const int NBinsDeltaTheta = 18; TString RecoLabelXAxisDeltaTheta = ";#Delta#theta";
-	static const double MinDeltaTheta = 0., MaxDeltaTheta = 180.;
-
-	static const int NBinsDeltaPhi = 15; TString RecoLabelXAxisDeltaPhi = ";#Delta#phi";
-	static const double MinDeltaPhi = 0., MaxDeltaPhi = 360.;
-
-	static const int NBinsdYZ = 10; TString RecoLabelXAxisdYZ = ";d_{YZ} (cm)";
-	static const double MindYZ = 0., MaxdYZ = 500.;
-
-	static const int NBinsNPE = 10; TString RecoLabelXAxisNPE = ";# PE";
-	static const double MinNPE = 0., MaxNPE = 1000.;
-
-	static const int NBinsDistance = 15; TString RecoLabelXAxisDistance = ";#mu - p distance (cm)";
-	static const double MinDistance = 0., MaxDistance = 5.;
+	std::cout << std::endl << "Creating a new file: " << FileName << std::endl << std::endl << std::endl;
 
 	// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 	// 1D Reco Level Plots
+
+	TH1D* RecoNuScorePlot = new TH1D("RecoNuScorePlot",RecoLabelXAxisNuScore,NBinsNuScore,MinNuScore,MaxNuScore);
+	TH1D* RecoFlashScorePlot = new TH1D("RecoFlashScorePlot",RecoLabelXAxisFlashScore,NBinsFlashScore,MinNuScore,MaxFlashScore);
 
 	TH1D* RecoDistancePlot = new TH1D("RecoDistancePlot",RecoLabelXAxisDistance,NBinsDistance,MinDistance,MaxDistance);
 
@@ -121,26 +72,36 @@ void t::Loop() {
 	TH1D* RecoDeltaThetaPlot = new TH1D("RecoDeltaThetaPlot",RecoLabelXAxisDeltaTheta,NBinsDeltaTheta,MinDeltaTheta,MaxDeltaTheta);
 	TH1D* RecoDeltaPhiPlot = new TH1D("RecoDeltaPhiPlot",RecoLabelXAxisDeltaPhi,NBinsDeltaPhi,MinDeltaPhi,MaxDeltaPhi);
 
-	TH1D* RecoChi2CandidateMuonPlot = new TH1D("RecoChi2CandidateMuonPlot",RecoLabelXAxisChi2CandidateMuon,NBinsChi2CandidateMuon,MinChi2CandidateMuon,MaxChi2CandidateMuon);
-	TH1D* RecoChi2CandidateProtonPlot = new TH1D("RecoChi2CandidateProtonPlot",RecoLabelXAxisChi2CandidateProton,NBinsChi2CandidateProton,MinChi2CandidateProton,MaxChi2CandidateProton);
+	TH1D* RecoThreePlaneChi2LogLikelihoodCandidateMuonPlot = new TH1D("RecoThreePlaneChi2LogLikelihoodCandidateMuonPlot",
+		RecoLabelXAxisThreePlaneChi2MuonCandidateLogLikelihood,NBinsThreePlaneChi2LogLikelihood,MinThreePlaneChi2LogLikelihood,MaxThreePlaneChi2LogLikelihood);
+	TH1D* RecoThreePlaneChi2LogLikelihoodCandidateProtonPlot = new TH1D("RecoThreePlaneChi2LogLikelihoodCandidateProtonPlot",
+		RecoLabelXAxisThreePlaneChi2ProtonCandidateLogLikelihood,NBinsThreePlaneChi2LogLikelihood,MinThreePlaneChi2LogLikelihood,MaxThreePlaneChi2LogLikelihood);
 
-	TH1D* RecoThreePlaneChi2CandidateMuonPlot = new TH1D("RecoThreePlaneChi2CandidateMuonPlot",RecoLabelXAxisThreePlaneChi2CandidateMuon,
-							NBinsThreePlaneChi2CandidateMuon,MinThreePlaneChi2CandidateMuon,MaxThreePlaneChi2CandidateMuon);
-	TH1D* RecoThreePlaneChi2CandidateProtonPlot = new TH1D("RecoThreePlaneChi2CandidateProtonPlot",RecoLabelXAxisThreePlaneChi2CandidateProton,
-							NBinsThreePlaneChi2CandidateProton,MinThreePlaneChi2CandidateProton,MaxThreePlaneChi2CandidateProton);
+	TH1D* RecoMuonMomentumPlot = new TH1D("RecoMuonMomentumPlot",LabelXAxisMuonMomentum,NBinsMuonMomentum,ArrayNBinsMuonMomentum); // GeV/c
+	TH1D* RecoProtonMomentumPlot = new TH1D("RecoProtonMomentumPlot",LabelXAxisProtonMomentum,NBinsProtonMomentum,ArrayNBinsProtonMomentum); // GeV/c
 
-	TH1D* RecoMuonMomentumPlot = new TH1D("RecoMuonMomentumPlot",RecoLabelXAxisMuonMomentum,NBinsMuonMomentum,BinsMuonMomentum); // GeV/c
-	TH1D* RecoProtonMomentumPlot = new TH1D("RecoProtonMomentumPlot",RecoLabelXAxisProtonMomentum,NBinsProtonMomentum,BinsProtonMomentum); // GeV/c
+	TH1D* RecoMuonCosThetaPlot = new TH1D("RecoMuonCosThetaPlot",LabelXAxisMuonCosTheta,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta);
+	TH1D* RecoProtonCosThetaPlot = new TH1D("RecoProtonCosThetaPlot",LabelXAxisProtonCosTheta,NBinsProtonCosTheta,ArrayNBinsProtonCosTheta);
 
-	TH1D* RecoMuonCosThetaPlot = new TH1D("RecoMuonCosThetaPlot",RecoLabelXAxisMuonCosTheta,NBinsMuonCosTheta,BinsMuonCosTheta);
-	TH1D* RecoProtonCosThetaPlot = new TH1D("RecoProtonCosThetaPlot",RecoLabelXAxisProtonCosTheta,NBinsProtonCosTheta,BinsProtonCosTheta);
+	TH1D* RecoMuonPhiPlot = new TH1D("RecoMuonPhiPlot",LabelXAxisMuonPhi,NBinsMuonPhi,ArrayNBinsMuonPhi);
+	TH1D* RecoProtonPhiPlot = new TH1D("RecoProtonPhiPlot",LabelXAxisProtonPhi,NBinsProtonPhi,ArrayNBinsProtonPhi);
 
-	TH1D* RecoMuonPhiPlot = new TH1D("RecoMuonPhiPlot",RecoLabelXAxisMuonPhi,NBinsMuonPhi,BinsMuonPhi);
-	TH1D* RecoProtonPhiPlot = new TH1D("RecoProtonPhiPlot",RecoLabelXAxisProtonPhi,NBinsProtonPhi,BinsProtonPhi);
+	TH1D* RecoDeltaPTPlot = new TH1D("RecoDeltaPTPlot",LabelXAxisDeltaPT,NBinsDeltaPT,ArrayNBinsDeltaPT);
+	TH1D* RecoDeltaAlphaTPlot = new TH1D("RecoDeltaAlphaTPlot",LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);
+	TH1D* RecoDeltaPhiTPlot = new TH1D("RecoDeltaPhiTPlot",LabelXAxisDeltaPhiT,NBinsDeltaPhiT,ArrayNBinsDeltaPhiT);
+
+
+	// 2D Plot for Default Chi2 vs 3-Plane Chi2
+
+	TH2D* RecoChi2vsThreePlaneChi2TPlot = new TH2D("RecoChi2vsThreePlaneChi2TPlot",RecoLabelXAxisChi2+RecoLabelXAxisThreePlaneChi2,NBinsChi2,MinChi2,MaxChi2,
+										       NBinsThreePlaneChi2,MinThreePlaneChi2,MaxThreePlaneChi2);
 
 	// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 	// 1D Reco Level Plots for Signal CC1p
+
+	TH1D* CC1pRecoNuScorePlot = new TH1D("CC1pRecoNuScorePlot",RecoLabelXAxisNuScore,NBinsNuScore,MinNuScore,MaxNuScore);
+	TH1D* CC1pRecoFlashScorePlot = new TH1D("CC1pRecoFlashScorePlot",RecoLabelXAxisFlashScore,NBinsFlashScore,MinFlashScore,MaxFlashScore);
 
 	TH1D* CC1pRecoDistancePlot = new TH1D("CC1pRecoDistancePlot",RecoLabelXAxisDistance,NBinsDistance,MinDistance,MaxDistance);
 
@@ -150,27 +111,31 @@ void t::Loop() {
 	TH1D* CC1pRecoDeltaThetaPlot = new TH1D("CC1pRecoDeltaThetaPlot",RecoLabelXAxisDeltaTheta,NBinsDeltaTheta,MinDeltaTheta,MaxDeltaTheta);
 	TH1D* CC1pRecoDeltaPhiPlot = new TH1D("CC1pRecoDeltaPhiPlot",RecoLabelXAxisDeltaPhi,NBinsDeltaPhi,MinDeltaPhi,MaxDeltaPhi);
 
-	TH1D* CC1pRecoChi2CandidateMuonPlot = new TH1D("CC1pRecoChi2CandidateMuonPlot",RecoLabelXAxisChi2CandidateMuon,NBinsChi2CandidateMuon,MinChi2CandidateMuon,MaxChi2CandidateMuon);
-	TH1D* CC1pRecoChi2CandidateProtonPlot = new TH1D("CC1pRecoChi2CandidateProtonPlot",RecoLabelXAxisChi2CandidateProton,NBinsChi2CandidateProton,MinChi2CandidateProton,MaxChi2CandidateProton);
+	TH1D* CC1pRecoThreePlaneChi2LogLikelihoodCandidateMuonPlot = new TH1D("CC1pRecoThreePlaneChi2LogLikelihoodCandidateMuonPlot",
+		RecoLabelXAxisThreePlaneChi2MuonCandidateLogLikelihood,NBinsThreePlaneChi2LogLikelihood,MinThreePlaneChi2LogLikelihood,MaxThreePlaneChi2LogLikelihood);
+	TH1D* CC1pRecoThreePlaneChi2LogLikelihoodCandidateProtonPlot = new TH1D("CC1pRecoThreePlaneChi2LogLikelihoodCandidateProtonPlot",
+		RecoLabelXAxisThreePlaneChi2ProtonCandidateLogLikelihood,NBinsThreePlaneChi2LogLikelihood,MinThreePlaneChi2LogLikelihood,MaxThreePlaneChi2LogLikelihood);
 
-	TH1D* CC1pRecoThreePlaneChi2CandidateMuonPlot = new TH1D("CC1pRecoThreePlaneChi2CandidateMuonPlot",RecoLabelXAxisThreePlaneChi2CandidateMuon,
-							NBinsThreePlaneChi2CandidateMuon,MinThreePlaneChi2CandidateMuon,MaxThreePlaneChi2CandidateMuon);
-	TH1D* CC1pRecoThreePlaneChi2CandidateProtonPlot = new TH1D("CC1pRecoThreePlaneChi2CandidateProtonPlot",RecoLabelXAxisThreePlaneChi2CandidateProton,
-							NBinsThreePlaneChi2CandidateProton,MinThreePlaneChi2CandidateProton,MaxThreePlaneChi2CandidateProton);
+	TH1D* CC1pRecoMuonMomentumPlot = new TH1D("CC1pRecoMuonMomentumPlot",LabelXAxisMuonMomentum,NBinsMuonMomentum,ArrayNBinsMuonMomentum); // GeV/c
+	TH1D* CC1pRecoProtonMomentumPlot = new TH1D("CC1pRecoProtonMomentumPlot",LabelXAxisProtonMomentum,NBinsProtonMomentum,ArrayNBinsProtonMomentum); // GeV/c
 
+	TH1D* CC1pRecoMuonCosThetaPlot = new TH1D("CC1pRecoMuonCosThetaPlot",LabelXAxisMuonCosTheta,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta);
+	TH1D* CC1pRecoProtonCosThetaPlot = new TH1D("CC1pRecoProtonCosThetaPlot",LabelXAxisProtonCosTheta,NBinsProtonCosTheta,ArrayNBinsProtonCosTheta);
 
-	TH1D* CC1pRecoMuonMomentumPlot = new TH1D("CC1pRecoMuonMomentumPlot",RecoLabelXAxisMuonMomentum,NBinsMuonMomentum,BinsMuonMomentum); // GeV/c
-	TH1D* CC1pRecoProtonMomentumPlot = new TH1D("CC1pRecoProtonMomentumPlot",RecoLabelXAxisProtonMomentum,NBinsProtonMomentum,BinsProtonMomentum); // GeV/c
+	TH1D* CC1pRecoMuonPhiPlot = new TH1D("CC1pRecoMuonPhiPlot",LabelXAxisMuonPhi,NBinsMuonPhi,ArrayNBinsMuonPhi);
+	TH1D* CC1pRecoProtonPhiPlot = new TH1D("CC1pRecoProtonPhiPlot",LabelXAxisProtonPhi,NBinsProtonPhi,ArrayNBinsProtonPhi);
 
-	TH1D* CC1pRecoMuonCosThetaPlot = new TH1D("CC1pRecoMuonCosThetaPlot",RecoLabelXAxisMuonCosTheta,NBinsMuonCosTheta,BinsMuonCosTheta);
-	TH1D* CC1pRecoProtonCosThetaPlot = new TH1D("CC1pRecoProtonCosThetaPlot",RecoLabelXAxisProtonCosTheta,NBinsProtonCosTheta,BinsProtonCosTheta);
+	TH1D* CC1pRecoDeltaPTPlot = new TH1D("CC1pRecoDeltaPTPlot",LabelXAxisDeltaPT,NBinsDeltaPT,ArrayNBinsDeltaPT);
+	TH1D* CC1pRecoDeltaAlphaTPlot = new TH1D("CC1pRecoDeltaAlphaTPlot",LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);
+	TH1D* CC1pRecoDeltaPhiTPlot = new TH1D("CC1pRecoDeltaPhiTPlot",LabelXAxisDeltaPhiT,NBinsDeltaPhiT,ArrayNBinsDeltaPhiT);
 
-	TH1D* CC1pRecoMuonPhiPlot = new TH1D("CC1pRecoMuonPhiPlot",RecoLabelXAxisMuonPhi,NBinsMuonPhi,BinsMuonPhi);
-	TH1D* CC1pRecoProtonPhiPlot = new TH1D("CC1pRecoProtonPhiPlot",RecoLabelXAxisProtonPhi,NBinsProtonPhi,BinsProtonPhi);
 
 	// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 	// 1D Reco Level Plots for non-CC1p
+
+	TH1D* NonCC1pRecoNuScorePlot = new TH1D("NonCC1pRecoNuScorePlot",RecoLabelXAxisNuScore,NBinsNuScore,MinNuScore,MaxNuScore);
+	TH1D* NonCC1pRecoFlashScorePlot = new TH1D("NonCC1pRecoFlashScorePlot",RecoLabelXAxisFlashScore,NBinsFlashScore,MinNuScore,MaxFlashScore);
 
 	TH1D* NonCC1pRecoDistancePlot = new TH1D("NonCC1pRecoDistancePlot",RecoLabelXAxisDistance,NBinsDistance,MinDistance,MaxDistance);
 
@@ -180,29 +145,31 @@ void t::Loop() {
 	TH1D* NonCC1pRecoDeltaThetaPlot = new TH1D("NonCC1pRecoDeltaThetaPlot",RecoLabelXAxisDeltaTheta,NBinsDeltaTheta,MinDeltaTheta,MaxDeltaTheta);
 	TH1D* NonCC1pRecoDeltaPhiPlot = new TH1D("NonCC1pRecoDeltaPhiPlot",RecoLabelXAxisDeltaPhi,NBinsDeltaPhi,MinDeltaPhi,MaxDeltaPhi);
 
-	TH1D* NonCC1pRecoChi2CandidateMuonPlot = new TH1D("NonCC1pRecoChi2CandidateMuonPlot",RecoLabelXAxisChi2CandidateMuon,NBinsChi2CandidateMuon,MinChi2CandidateMuon,MaxChi2CandidateMuon);
-	TH1D* NonCC1pRecoChi2CandidateProtonPlot = new TH1D("NonCC1pRecoChi2CandidateProtonPlot"
-		,RecoLabelXAxisChi2CandidateProton,NBinsChi2CandidateProton,MinChi2CandidateProton,MaxChi2CandidateProton);
+	TH1D* NonCC1pRecoThreePlaneChi2LogLikelihoodCandidateMuonPlot = new TH1D("NonCC1pRecoThreePlaneChi2LogLikelihoodCandidateMuonPlot",
+		RecoLabelXAxisThreePlaneChi2MuonCandidateLogLikelihood,NBinsThreePlaneChi2LogLikelihood,MinThreePlaneChi2LogLikelihood,MaxThreePlaneChi2LogLikelihood);
+	TH1D* NonCC1pRecoThreePlaneChi2LogLikelihoodCandidateProtonPlot = new TH1D("NonCC1pRecoThreePlaneChi2LogLikelihoodCandidateProtonPlot",
+		RecoLabelXAxisThreePlaneChi2ProtonCandidateLogLikelihood,NBinsThreePlaneChi2LogLikelihood,MinThreePlaneChi2LogLikelihood,MaxThreePlaneChi2LogLikelihood);
 
-	TH1D* NonCC1pRecoThreePlaneChi2CandidateMuonPlot = new TH1D("NonCC1pRecoThreePlaneChi2CandidateMuonPlot",RecoLabelXAxisThreePlaneChi2CandidateMuon,
-							NBinsThreePlaneChi2CandidateMuon,MinThreePlaneChi2CandidateMuon,MaxThreePlaneChi2CandidateMuon);
-	TH1D* NonCC1pRecoThreePlaneChi2CandidateProtonPlot = new TH1D("NonCC1pRecoThreePlaneChi2CandidateProtonPlot",RecoLabelXAxisThreePlaneChi2CandidateProton,
-							NBinsThreePlaneChi2CandidateProton,MinThreePlaneChi2CandidateProton,MaxThreePlaneChi2CandidateProton);
+	TH1D* NonCC1pRecoMuonMomentumPlot = new TH1D("NonCC1pRecoMuonMomentumPlot",LabelXAxisMuonMomentum,NBinsMuonMomentum,ArrayNBinsMuonMomentum); // GeV/c
+	TH1D* NonCC1pRecoProtonMomentumPlot = new TH1D("NonCC1pRecoProtonMomentumPlot",LabelXAxisProtonMomentum,NBinsProtonMomentum,ArrayNBinsProtonMomentum); // GeV/c
 
-	TH1D* NonCC1pRecoMuonMomentumPlot = new TH1D("NonCC1pRecoMuonMomentumPlot",RecoLabelXAxisMuonMomentum,NBinsMuonMomentum,BinsMuonMomentum); // GeV/c
-	TH1D* NonCC1pRecoProtonMomentumPlot = new TH1D("NonCC1pRecoProtonMomentumPlot",RecoLabelXAxisProtonMomentum,NBinsProtonMomentum,BinsProtonMomentum); // GeV/c
+	TH1D* NonCC1pRecoMuonCosThetaPlot = new TH1D("NonCC1pRecoMuonCosThetaPlot",LabelXAxisMuonCosTheta,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta);
+	TH1D* NonCC1pRecoProtonCosThetaPlot = new TH1D("NonCC1pRecoProtonCosThetaPlot",LabelXAxisProtonCosTheta,NBinsProtonCosTheta,ArrayNBinsProtonCosTheta);
 
-	TH1D* NonCC1pRecoMuonCosThetaPlot = new TH1D("NonCC1pRecoMuonCosThetaPlot",RecoLabelXAxisMuonCosTheta,NBinsMuonCosTheta,BinsMuonCosTheta);
-	TH1D* NonCC1pRecoProtonCosThetaPlot = new TH1D("NonCC1pRecoProtonCosThetaPlot",RecoLabelXAxisProtonCosTheta,NBinsProtonCosTheta,BinsProtonCosTheta);
+	TH1D* NonCC1pRecoMuonPhiPlot = new TH1D("NonCC1pRecoMuonPhiPlot",LabelXAxisMuonPhi,NBinsMuonPhi,ArrayNBinsMuonPhi);
+	TH1D* NonCC1pRecoProtonPhiPlot = new TH1D("NonCC1pRecoProtonPhiPlot",LabelXAxisProtonPhi,NBinsProtonPhi,ArrayNBinsProtonPhi);
 
-	TH1D* NonCC1pRecoMuonPhiPlot = new TH1D("NonCC1pRecoMuonPhiPlot",RecoLabelXAxisMuonPhi,NBinsMuonPhi,BinsMuonPhi);
-	TH1D* NonCC1pRecoProtonPhiPlot = new TH1D("NonCC1pRecoProtonPhiPlot",RecoLabelXAxisProtonPhi,NBinsProtonPhi,BinsProtonPhi);
-
+	TH1D* NonCC1pRecoDeltaPTPlot = new TH1D("NonCC1pRecoDeltaPTPlot",LabelXAxisDeltaPT,NBinsDeltaPT,ArrayNBinsDeltaPT);
+	TH1D* NonCC1pRecoDeltaAlphaTPlot = new TH1D("NonCC1pRecoDeltaAlphaTPlot",LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);
+	TH1D* NonCC1pRecoDeltaPhiTPlot = new TH1D("NonCC1pRecoDeltaPhiTPlot",LabelXAxisDeltaPhiT,NBinsDeltaPhiT,ArrayNBinsDeltaPhiT);
 
 	// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 	// 1D Reco Level Plots for CCQE
+
+	TH1D* CCQERecoNuScorePlot = new TH1D("CCQERecoNuScorePlot",RecoLabelXAxisNuScore,NBinsNuScore,MinNuScore,MaxNuScore);
+	TH1D* CCQERecoFlashScorePlot = new TH1D("CCQERecoFlashScorePlot",RecoLabelXAxisFlashScore,NBinsFlashScore,MinFlashScore,MaxFlashScore);
 
 	TH1D* CCQERecoDistancePlot = new TH1D("CCQERecoDistancePlot",RecoLabelXAxisDistance,NBinsDistance,MinDistance,MaxDistance);
 
@@ -212,26 +179,30 @@ void t::Loop() {
 	TH1D* CCQERecoDeltaThetaPlot = new TH1D("CCQERecoDeltaThetaPlot",RecoLabelXAxisDeltaTheta,NBinsDeltaTheta,MinDeltaTheta,MaxDeltaTheta);
 	TH1D* CCQERecoDeltaPhiPlot = new TH1D("CCQERecoDeltaPhiPlot",RecoLabelXAxisDeltaPhi,NBinsDeltaPhi,MinDeltaPhi,MaxDeltaPhi);
 
-	TH1D* CCQERecoChi2CandidateMuonPlot = new TH1D("CCQERecoChi2CandidateMuonPlot",RecoLabelXAxisChi2CandidateMuon,NBinsChi2CandidateMuon,MinChi2CandidateMuon,MaxChi2CandidateMuon);
-	TH1D* CCQERecoChi2CandidateProtonPlot = new TH1D("CCQERecoChi2CandidateProtonPlot",RecoLabelXAxisChi2CandidateProton,NBinsChi2CandidateProton,MinChi2CandidateProton,MaxChi2CandidateProton);
+	TH1D* CCQERecoThreePlaneChi2LogLikelihoodCandidateMuonPlot = new TH1D("CCQERecoThreePlaneChi2LogLikelihoodCandidateMuonPlot",
+		RecoLabelXAxisThreePlaneChi2MuonCandidateLogLikelihood,NBinsThreePlaneChi2LogLikelihood,MinThreePlaneChi2LogLikelihood,MaxThreePlaneChi2LogLikelihood);
+	TH1D* CCQERecoThreePlaneChi2LogLikelihoodCandidateProtonPlot = new TH1D("CCQERecoThreePlaneChi2LogLikelihoodCandidateProtonPlot",
+		RecoLabelXAxisThreePlaneChi2ProtonCandidateLogLikelihood,NBinsThreePlaneChi2LogLikelihood,MinThreePlaneChi2LogLikelihood,MaxThreePlaneChi2LogLikelihood);
 
-	TH1D* CCQERecoThreePlaneChi2CandidateMuonPlot = new TH1D("CCQERecoThreePlaneChi2CandidateMuonPlot",RecoLabelXAxisThreePlaneChi2CandidateMuon,
-							NBinsThreePlaneChi2CandidateMuon,MinThreePlaneChi2CandidateMuon,MaxThreePlaneChi2CandidateMuon);
-	TH1D* CCQERecoThreePlaneChi2CandidateProtonPlot = new TH1D("CCQERecoThreePlaneChi2CandidateProtonPlot",RecoLabelXAxisThreePlaneChi2CandidateProton,
-							NBinsThreePlaneChi2CandidateProton,MinThreePlaneChi2CandidateProton,MaxThreePlaneChi2CandidateProton);
+	TH1D* CCQERecoMuonMomentumPlot = new TH1D("CCQERecoMuonMomentumPlot",LabelXAxisMuonMomentum,NBinsMuonMomentum,ArrayNBinsMuonMomentum); // GeV/c
+	TH1D* CCQERecoProtonMomentumPlot = new TH1D("CCQERecoProtonMomentumPlot",LabelXAxisProtonMomentum,NBinsProtonMomentum,ArrayNBinsProtonMomentum); // GeV/c
 
-	TH1D* CCQERecoMuonMomentumPlot = new TH1D("CCQERecoMuonMomentumPlot",RecoLabelXAxisMuonMomentum,NBinsMuonMomentum,BinsMuonMomentum); // GeV/c
-	TH1D* CCQERecoProtonMomentumPlot = new TH1D("CCQERecoProtonMomentumPlot",RecoLabelXAxisProtonMomentum,NBinsProtonMomentum,BinsProtonMomentum); // GeV/c
+	TH1D* CCQERecoMuonCosThetaPlot = new TH1D("CCQERecoMuonCosThetaPlot",LabelXAxisMuonCosTheta,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta);
+	TH1D* CCQERecoProtonCosThetaPlot = new TH1D("CCQERecoProtonCosThetaPlot",LabelXAxisProtonCosTheta,NBinsProtonCosTheta,ArrayNBinsProtonCosTheta);
 
-	TH1D* CCQERecoMuonCosThetaPlot = new TH1D("CCQERecoMuonCosThetaPlot",RecoLabelXAxisMuonCosTheta,NBinsMuonCosTheta,BinsMuonCosTheta);
-	TH1D* CCQERecoProtonCosThetaPlot = new TH1D("CCQERecoProtonCosThetaPlot",RecoLabelXAxisProtonCosTheta,NBinsProtonCosTheta,BinsProtonCosTheta);
+	TH1D* CCQERecoMuonPhiPlot = new TH1D("CCQERecoMuonPhiPlot",LabelXAxisMuonPhi,NBinsMuonPhi,ArrayNBinsMuonPhi);
+	TH1D* CCQERecoProtonPhiPlot = new TH1D("CCQERecoProtonPhiPlot",LabelXAxisProtonPhi,NBinsProtonPhi,ArrayNBinsProtonPhi);
 
-	TH1D* CCQERecoMuonPhiPlot = new TH1D("CCQERecoMuonPhiPlot",RecoLabelXAxisMuonPhi,NBinsMuonPhi,BinsMuonPhi);
-	TH1D* CCQERecoProtonPhiPlot = new TH1D("CCQERecoProtonPhiPlot",RecoLabelXAxisProtonPhi,NBinsProtonPhi,BinsProtonPhi);
+	TH1D* CCQERecoDeltaPTPlot = new TH1D("CCQERecoDeltaPTPlot",LabelXAxisDeltaPT,NBinsDeltaPT,ArrayNBinsDeltaPT);
+	TH1D* CCQERecoDeltaAlphaTPlot = new TH1D("CCQERecoDeltaAlphaTPlot",LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);
+	TH1D* CCQERecoDeltaPhiTPlot = new TH1D("CCQERecoDeltaPhiTPlot",LabelXAxisDeltaPhiT,NBinsDeltaPhiT,ArrayNBinsDeltaPhiT);
 
 	// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 	// 1D Reco Level Plots for CCMEC
+
+	TH1D* CCMECRecoNuScorePlot = new TH1D("CCMECRecoNuScorePlot",RecoLabelXAxisNuScore,NBinsNuScore,MinNuScore,MaxNuScore);
+	TH1D* CCMECRecoFlashScorePlot = new TH1D("CCMECRecoFlashScorePlot",RecoLabelXAxisFlashScore,NBinsFlashScore,MinFlashScore,MaxFlashScore);
 
 	TH1D* CCMECRecoDistancePlot = new TH1D("CCMECRecoDistancePlot",RecoLabelXAxisDistance,NBinsDistance,MinDistance,MaxDistance);
 
@@ -241,27 +212,30 @@ void t::Loop() {
 	TH1D* CCMECRecoDeltaThetaPlot = new TH1D("CCMECRecoDeltaThetaPlot",RecoLabelXAxisDeltaTheta,NBinsDeltaTheta,MinDeltaTheta,MaxDeltaTheta);
 	TH1D* CCMECRecoDeltaPhiPlot = new TH1D("CCMECRecoDeltaPhiPlot",RecoLabelXAxisDeltaPhi,NBinsDeltaPhi,MinDeltaPhi,MaxDeltaPhi);
 
-	TH1D* CCMECRecoChi2CandidateMuonPlot = new TH1D("CCMECRecoChi2CandidateMuonPlot",RecoLabelXAxisChi2CandidateMuon,NBinsChi2CandidateMuon,MinChi2CandidateMuon,MaxChi2CandidateMuon);
-	TH1D* CCMECRecoChi2CandidateProtonPlot = new TH1D("CCMECRecoChi2CandidateProtonPlot",RecoLabelXAxisChi2CandidateProton,NBinsChi2CandidateProton,MinChi2CandidateProton,MaxChi2CandidateProton);
+	TH1D* CCMECRecoThreePlaneChi2LogLikelihoodCandidateMuonPlot = new TH1D("CCMECRecoThreePlaneChi2LogLikelihoodCandidateMuonPlot",
+		RecoLabelXAxisThreePlaneChi2MuonCandidateLogLikelihood,NBinsThreePlaneChi2LogLikelihood,MinThreePlaneChi2LogLikelihood,MaxThreePlaneChi2LogLikelihood);
+	TH1D* CCMECRecoThreePlaneChi2LogLikelihoodCandidateProtonPlot = new TH1D("CCMECRecoThreePlaneChi2LogLikelihoodCandidateProtonPlot",
+		RecoLabelXAxisThreePlaneChi2ProtonCandidateLogLikelihood,NBinsThreePlaneChi2LogLikelihood,MinThreePlaneChi2LogLikelihood,MaxThreePlaneChi2LogLikelihood);
 
-	TH1D* CCMECRecoThreePlaneChi2CandidateMuonPlot = new TH1D("CCMECRecoThreePlaneChi2CandidateMuonPlot",RecoLabelXAxisThreePlaneChi2CandidateMuon,
-							NBinsThreePlaneChi2CandidateMuon,MinThreePlaneChi2CandidateMuon,MaxThreePlaneChi2CandidateMuon);
-	TH1D* CCMECRecoThreePlaneChi2CandidateProtonPlot = new TH1D("CCMECRecoThreePlaneChi2CandidateProtonPlot",RecoLabelXAxisThreePlaneChi2CandidateProton,
-							NBinsThreePlaneChi2CandidateProton,MinThreePlaneChi2CandidateProton,MaxThreePlaneChi2CandidateProton);
+	TH1D* CCMECRecoMuonMomentumPlot = new TH1D("CCMECRecoMuonMomentumPlot",LabelXAxisMuonMomentum,NBinsMuonMomentum,ArrayNBinsMuonMomentum); // GeV/c
+	TH1D* CCMECRecoProtonMomentumPlot = new TH1D("CCMECRecoProtonMomentumPlot",LabelXAxisProtonMomentum,NBinsProtonMomentum,ArrayNBinsProtonMomentum); // GeV/c
 
+	TH1D* CCMECRecoMuonCosThetaPlot = new TH1D("CCMECRecoMuonCosThetaPlot",LabelXAxisMuonCosTheta,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta);
+	TH1D* CCMECRecoProtonCosThetaPlot = new TH1D("CCMECRecoProtonCosThetaPlot",LabelXAxisProtonCosTheta,NBinsProtonCosTheta,ArrayNBinsProtonCosTheta);
 
-	TH1D* CCMECRecoMuonMomentumPlot = new TH1D("CCMECRecoMuonMomentumPlot",RecoLabelXAxisMuonMomentum,NBinsMuonMomentum,BinsMuonMomentum); // GeV/c
-	TH1D* CCMECRecoProtonMomentumPlot = new TH1D("CCMECRecoProtonMomentumPlot",RecoLabelXAxisProtonMomentum,NBinsProtonMomentum,BinsProtonMomentum); // GeV/c
+	TH1D* CCMECRecoMuonPhiPlot = new TH1D("CCMECRecoMuonPhiPlot",LabelXAxisMuonPhi,NBinsMuonPhi,ArrayNBinsMuonPhi);
+	TH1D* CCMECRecoProtonPhiPlot = new TH1D("CCMECRecoProtonPhiPlot",LabelXAxisProtonPhi,NBinsProtonPhi,ArrayNBinsProtonPhi);
 
-	TH1D* CCMECRecoMuonCosThetaPlot = new TH1D("CCMECRecoMuonCosThetaPlot",RecoLabelXAxisMuonCosTheta,NBinsMuonCosTheta,BinsMuonCosTheta);
-	TH1D* CCMECRecoProtonCosThetaPlot = new TH1D("CCMECRecoProtonCosThetaPlot",RecoLabelXAxisProtonCosTheta,NBinsProtonCosTheta,BinsProtonCosTheta);
-
-	TH1D* CCMECRecoMuonPhiPlot = new TH1D("CCMECRecoMuonPhiPlot",RecoLabelXAxisMuonPhi,NBinsMuonPhi,BinsMuonPhi);
-	TH1D* CCMECRecoProtonPhiPlot = new TH1D("CCMECRecoProtonPhiPlot",RecoLabelXAxisProtonPhi,NBinsProtonPhi,BinsProtonPhi);
+	TH1D* CCMECRecoDeltaPTPlot = new TH1D("CCMECRecoDeltaPTPlot",LabelXAxisDeltaPT,NBinsDeltaPT,ArrayNBinsDeltaPT);
+	TH1D* CCMECRecoDeltaAlphaTPlot = new TH1D("CCMECRecoDeltaAlphaTPlot",LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);
+	TH1D* CCMECRecoDeltaPhiTPlot = new TH1D("CCMECRecoDeltaPhiTPlot",LabelXAxisDeltaPhiT,NBinsDeltaPhiT,ArrayNBinsDeltaPhiT);
 
 	// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 	// 1D Reco Level Plots for CCRES
+
+	TH1D* CCRESRecoNuScorePlot = new TH1D("CCRESRecoNuScorePlot",RecoLabelXAxisNuScore,NBinsNuScore,MinNuScore,MaxNuScore);
+	TH1D* CCRESRecoFlashScorePlot = new TH1D("CCRESRecoFlashScorePlot",RecoLabelXAxisFlashScore,NBinsFlashScore,MinFlashScore,MaxFlashScore);
 
 	TH1D* CCRESRecoDistancePlot = new TH1D("CCRESRecoDistancePlot",RecoLabelXAxisDistance,NBinsDistance,MinDistance,MaxDistance);
 
@@ -271,26 +245,30 @@ void t::Loop() {
 	TH1D* CCRESRecoDeltaThetaPlot = new TH1D("CCRESRecoDeltaThetaPlot",RecoLabelXAxisDeltaTheta,NBinsDeltaTheta,MinDeltaTheta,MaxDeltaTheta);
 	TH1D* CCRESRecoDeltaPhiPlot = new TH1D("CCRESRecoDeltaPhiPlot",RecoLabelXAxisDeltaPhi,NBinsDeltaPhi,MinDeltaPhi,MaxDeltaPhi);
 
-	TH1D* CCRESRecoChi2CandidateMuonPlot = new TH1D("CCRESRecoChi2CandidateMuonPlot",RecoLabelXAxisChi2CandidateMuon,NBinsChi2CandidateMuon,MinChi2CandidateMuon,MaxChi2CandidateMuon);
-	TH1D* CCRESRecoChi2CandidateProtonPlot = new TH1D("CCRESRecoChi2CandidateProtonPlot",RecoLabelXAxisChi2CandidateProton,NBinsChi2CandidateProton,MinChi2CandidateProton,MaxChi2CandidateProton);
+	TH1D* CCRESRecoThreePlaneChi2LogLikelihoodCandidateMuonPlot = new TH1D("CCRESRecoThreePlaneChi2LogLikelihoodCandidateMuonPlot",
+		RecoLabelXAxisThreePlaneChi2MuonCandidateLogLikelihood,NBinsThreePlaneChi2LogLikelihood,MinThreePlaneChi2LogLikelihood,MaxThreePlaneChi2LogLikelihood);
+	TH1D* CCRESRecoThreePlaneChi2LogLikelihoodCandidateProtonPlot = new TH1D("CCRESRecoThreePlaneChi2LogLikelihoodCandidateProtonPlot",
+		RecoLabelXAxisThreePlaneChi2ProtonCandidateLogLikelihood,NBinsThreePlaneChi2LogLikelihood,MinThreePlaneChi2LogLikelihood,MaxThreePlaneChi2LogLikelihood);
 
-	TH1D* CCRESRecoThreePlaneChi2CandidateMuonPlot = new TH1D("CCRESRecoThreePlaneChi2CandidateMuonPlot",RecoLabelXAxisThreePlaneChi2CandidateMuon,
-							NBinsThreePlaneChi2CandidateMuon,MinThreePlaneChi2CandidateMuon,MaxThreePlaneChi2CandidateMuon);
-	TH1D* CCRESRecoThreePlaneChi2CandidateProtonPlot = new TH1D("CCRESRecoThreePlaneChi2CandidateProtonPlot",RecoLabelXAxisThreePlaneChi2CandidateProton,
-							NBinsThreePlaneChi2CandidateProton,MinThreePlaneChi2CandidateProton,MaxThreePlaneChi2CandidateProton);
+	TH1D* CCRESRecoMuonMomentumPlot = new TH1D("CCRESRecoMuonMomentumPlot",LabelXAxisMuonMomentum,NBinsMuonMomentum,ArrayNBinsMuonMomentum); // GeV/c
+	TH1D* CCRESRecoProtonMomentumPlot = new TH1D("CCRESRecoProtonMomentumPlot",LabelXAxisProtonMomentum,NBinsProtonMomentum,ArrayNBinsProtonMomentum); // GeV/c
 
-	TH1D* CCRESRecoMuonMomentumPlot = new TH1D("CCRESRecoMuonMomentumPlot",RecoLabelXAxisMuonMomentum,NBinsMuonMomentum,BinsMuonMomentum); // GeV/c
-	TH1D* CCRESRecoProtonMomentumPlot = new TH1D("CCRESRecoProtonMomentumPlot",RecoLabelXAxisProtonMomentum,NBinsProtonMomentum,BinsProtonMomentum); // GeV/c
+	TH1D* CCRESRecoMuonCosThetaPlot = new TH1D("CCRESRecoMuonCosThetaPlot",LabelXAxisMuonCosTheta,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta);
+	TH1D* CCRESRecoProtonCosThetaPlot = new TH1D("CCRESRecoProtonCosThetaPlot",LabelXAxisProtonCosTheta,NBinsProtonCosTheta,ArrayNBinsProtonCosTheta);
 
-	TH1D* CCRESRecoMuonCosThetaPlot = new TH1D("CCRESRecoMuonCosThetaPlot",RecoLabelXAxisMuonCosTheta,NBinsMuonCosTheta,BinsMuonCosTheta);
-	TH1D* CCRESRecoProtonCosThetaPlot = new TH1D("CCRESRecoProtonCosThetaPlot",RecoLabelXAxisProtonCosTheta,NBinsProtonCosTheta,BinsProtonCosTheta);
+	TH1D* CCRESRecoMuonPhiPlot = new TH1D("CCRESRecoMuonPhiPlot",LabelXAxisMuonPhi,NBinsMuonPhi,ArrayNBinsMuonPhi);
+	TH1D* CCRESRecoProtonPhiPlot = new TH1D("CCRESRecoProtonPhiPlot",LabelXAxisProtonPhi,NBinsProtonPhi,ArrayNBinsProtonPhi);
 
-	TH1D* CCRESRecoMuonPhiPlot = new TH1D("CCRESRecoMuonPhiPlot",RecoLabelXAxisMuonPhi,NBinsMuonPhi,BinsMuonPhi);
-	TH1D* CCRESRecoProtonPhiPlot = new TH1D("CCRESRecoProtonPhiPlot",RecoLabelXAxisProtonPhi,NBinsProtonPhi,BinsProtonPhi);
+	TH1D* CCRESRecoDeltaPTPlot = new TH1D("CCRESRecoDeltaPTPlot",LabelXAxisDeltaPT,NBinsDeltaPT,ArrayNBinsDeltaPT);
+	TH1D* CCRESRecoDeltaAlphaTPlot = new TH1D("CCRESRecoDeltaAlphaTPlot",LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);
+	TH1D* CCRESRecoDeltaPhiTPlot = new TH1D("CCRESRecoDeltaPhiTPlot",LabelXAxisDeltaPhiT,NBinsDeltaPhiT,ArrayNBinsDeltaPhiT);
 
 	// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 	// 1D Reco Level Plots for CCDIS
+
+	TH1D* CCDISRecoNuScorePlot = new TH1D("CCDISRecoNuScorePlot",RecoLabelXAxisNuScore,NBinsNuScore,MinNuScore,MaxNuScore);
+	TH1D* CCDISRecoFlashScorePlot = new TH1D("CCDISRecoFlashScorePlot",RecoLabelXAxisFlashScore,NBinsFlashScore,MinFlashScore,MaxFlashScore);
 
 	TH1D* CCDISRecoDistancePlot = new TH1D("CCDISRecoDistancePlot",RecoLabelXAxisDistance,NBinsDistance,MinDistance,MaxDistance);
 
@@ -300,22 +278,63 @@ void t::Loop() {
 	TH1D* CCDISRecoDeltaThetaPlot = new TH1D("CCDISRecoDeltaThetaPlot",RecoLabelXAxisDeltaTheta,NBinsDeltaTheta,MinDeltaTheta,MaxDeltaTheta);
 	TH1D* CCDISRecoDeltaPhiPlot = new TH1D("CCDISRecoDeltaPhiPlot",RecoLabelXAxisDeltaPhi,NBinsDeltaPhi,MinDeltaPhi,MaxDeltaPhi);
 
-	TH1D* CCDISRecoChi2CandidateMuonPlot = new TH1D("CCDISRecoChi2CandidateMuonPlot",RecoLabelXAxisChi2CandidateMuon,NBinsChi2CandidateMuon,MinChi2CandidateMuon,MaxChi2CandidateMuon);
-	TH1D* CCDISRecoChi2CandidateProtonPlot = new TH1D("CCDISRecoChi2CandidateProtonPlot",RecoLabelXAxisChi2CandidateProton,NBinsChi2CandidateProton,MinChi2CandidateProton,MaxChi2CandidateProton);
+	TH1D* CCDISRecoThreePlaneChi2LogLikelihoodCandidateMuonPlot = new TH1D("CCDISRecoThreePlaneChi2LogLikelihoodCandidateMuonPlot",
+		RecoLabelXAxisThreePlaneChi2MuonCandidateLogLikelihood,NBinsThreePlaneChi2LogLikelihood,MinThreePlaneChi2LogLikelihood,MaxThreePlaneChi2LogLikelihood);
+	TH1D* CCDISRecoThreePlaneChi2LogLikelihoodCandidateProtonPlot = new TH1D("CCDISRecoThreePlaneChi2LogLikelihoodCandidateProtonPlot",
+		RecoLabelXAxisThreePlaneChi2ProtonCandidateLogLikelihood,NBinsThreePlaneChi2LogLikelihood,MinThreePlaneChi2LogLikelihood,MaxThreePlaneChi2LogLikelihood);
 
-	TH1D* CCDISRecoThreePlaneChi2CandidateMuonPlot = new TH1D("CCDISRecoThreePlaneChi2CandidateMuonPlot",RecoLabelXAxisThreePlaneChi2CandidateMuon,
-							NBinsThreePlaneChi2CandidateMuon,MinThreePlaneChi2CandidateMuon,MaxThreePlaneChi2CandidateMuon);
-	TH1D* CCDISRecoThreePlaneChi2CandidateProtonPlot = new TH1D("CCDISRecoThreePlaneChi2CandidateProtonPlot",RecoLabelXAxisThreePlaneChi2CandidateProton,
-							NBinsThreePlaneChi2CandidateProton,MinThreePlaneChi2CandidateProton,MaxThreePlaneChi2CandidateProton);
+	TH1D* CCDISRecoMuonMomentumPlot = new TH1D("CCDISRecoMuonMomentumPlot",LabelXAxisMuonMomentum,NBinsMuonMomentum,ArrayNBinsMuonMomentum); // GeV/c
+	TH1D* CCDISRecoProtonMomentumPlot = new TH1D("CCDISRecoProtonMomentumPlot",LabelXAxisProtonMomentum,NBinsProtonMomentum,ArrayNBinsProtonMomentum); // GeV/c
 
-	TH1D* CCDISRecoMuonMomentumPlot = new TH1D("CCDISRecoMuonMomentumPlot",RecoLabelXAxisMuonMomentum,NBinsMuonMomentum,BinsMuonMomentum); // GeV/c
-	TH1D* CCDISRecoProtonMomentumPlot = new TH1D("CCDISRecoProtonMomentumPlot",RecoLabelXAxisProtonMomentum,NBinsProtonMomentum,BinsProtonMomentum); // GeV/c
+	TH1D* CCDISRecoMuonCosThetaPlot = new TH1D("CCDISRecoMuonCosThetaPlot",LabelXAxisMuonCosTheta,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta);
+	TH1D* CCDISRecoProtonCosThetaPlot = new TH1D("CCDISRecoProtonCosThetaPlot",LabelXAxisProtonCosTheta,NBinsProtonCosTheta,ArrayNBinsProtonCosTheta);
 
-	TH1D* CCDISRecoMuonCosThetaPlot = new TH1D("CCDISRecoMuonCosThetaPlot",RecoLabelXAxisMuonCosTheta,NBinsMuonCosTheta,BinsMuonCosTheta);
-	TH1D* CCDISRecoProtonCosThetaPlot = new TH1D("CCDISRecoProtonCosThetaPlot",RecoLabelXAxisProtonCosTheta,NBinsProtonCosTheta,BinsProtonCosTheta);
+	TH1D* CCDISRecoMuonPhiPlot = new TH1D("CCDISRecoMuonPhiPlot",LabelXAxisMuonPhi,NBinsMuonPhi,ArrayNBinsMuonPhi);
+	TH1D* CCDISRecoProtonPhiPlot = new TH1D("CCDISRecoProtonPhiPlot",LabelXAxisProtonPhi,NBinsProtonPhi,ArrayNBinsProtonPhi);
 
-	TH1D* CCDISRecoMuonPhiPlot = new TH1D("CCDISRecoMuonPhiPlot",RecoLabelXAxisMuonPhi,NBinsMuonPhi,BinsMuonPhi);
-	TH1D* CCDISRecoProtonPhiPlot = new TH1D("CCDISRecoProtonPhiPlot",RecoLabelXAxisProtonPhi,NBinsProtonPhi,BinsProtonPhi);
+	TH1D* CCDISRecoDeltaPTPlot = new TH1D("CCDISRecoDeltaPTPlot",LabelXAxisDeltaPT,NBinsDeltaPT,ArrayNBinsDeltaPT);
+	TH1D* CCDISRecoDeltaAlphaTPlot = new TH1D("CCDISRecoDeltaAlphaTPlot",LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);
+	TH1D* CCDISRecoDeltaPhiTPlot = new TH1D("CCDISRecoDeltaPhiTPlot",LabelXAxisDeltaPhiT,NBinsDeltaPhiT,ArrayNBinsDeltaPhiT);
+
+	// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+	// Chi2 PID Studies
+
+	// 1D Reco Level Plots
+
+	TH1D* RecoChi2Plot = new TH1D("RecoChi2Plot",RecoLabelXAxisChi2,NBinsChi2,MinChi2,MaxChi2);
+	TH1D* RecoThreePlaneChi2Plot = new TH1D("RecoThreePlaneChi2Plot",RecoLabelXAxisThreePlaneChi2,NBinsThreePlaneChi2,MinThreePlaneChi2,MaxThreePlaneChi2);
+	TH1D* RecoThreePlaneChi2LogLikelihoodPlot = new TH1D("RecoThreePlaneChi2LogLikelihoodPlot",RecoLabelXAxisThreePlaneChi2LogLikelihood,
+												NBinsThreePlaneChi2LogLikelihood,MinThreePlaneChi2LogLikelihood,MaxThreePlaneChi2LogLikelihood);
+
+	// Muon 1D Reco Level Plots
+
+	TH1D* MuonRecoChi2Plot = new TH1D("MuonRecoChi2Plot",RecoLabelXAxisChi2,NBinsChi2,MinChi2,MaxChi2);
+	TH1D* MuonRecoThreePlaneChi2Plot = new TH1D("MuonRecoThreePlaneChi2Plot",RecoLabelXAxisThreePlaneChi2,NBinsThreePlaneChi2,MinThreePlaneChi2,MaxThreePlaneChi2);
+	TH1D* MuonRecoThreePlaneChi2LogLikelihoodPlot = new TH1D("MuonRecoThreePlaneChi2LogLikelihoodPlot",RecoLabelXAxisThreePlaneChi2LogLikelihood,
+												NBinsThreePlaneChi2LogLikelihood,MinThreePlaneChi2LogLikelihood,MaxThreePlaneChi2LogLikelihood);
+
+	// Proton 1D Reco Level Plots
+
+	TH1D* ProtonRecoChi2Plot = new TH1D("ProtonRecoChi2Plot",RecoLabelXAxisChi2,NBinsChi2,MinChi2,MaxChi2);
+	TH1D* ProtonRecoThreePlaneChi2Plot = new TH1D("ProtonRecoThreePlaneChi2Plot",RecoLabelXAxisThreePlaneChi2,NBinsThreePlaneChi2,MinThreePlaneChi2,MaxThreePlaneChi2);
+	TH1D* ProtonRecoThreePlaneChi2LogLikelihoodPlot = new TH1D("ProtonRecoThreePlaneChi2LogLikelihoodPlot",RecoLabelXAxisThreePlaneChi2LogLikelihood,
+												NBinsThreePlaneChi2LogLikelihood,MinThreePlaneChi2LogLikelihood,MaxThreePlaneChi2LogLikelihood);
+
+	// Pion 1D Reco Level Plots
+
+	TH1D* PionRecoChi2Plot = new TH1D("PionRecoChi2Plot",RecoLabelXAxisChi2,NBinsChi2,MinChi2,MaxChi2);
+	TH1D* PionRecoThreePlaneChi2Plot = new TH1D("PionRecoThreePlaneChi2Plot",RecoLabelXAxisThreePlaneChi2,NBinsThreePlaneChi2,MinThreePlaneChi2,MaxThreePlaneChi2);
+	TH1D* PionRecoThreePlaneChi2LogLikelihoodPlot = new TH1D("PionRecoThreePlaneChi2LogLikelihoodPlot",RecoLabelXAxisThreePlaneChi2LogLikelihood,
+												NBinsThreePlaneChi2LogLikelihood,MinThreePlaneChi2LogLikelihood,MaxThreePlaneChi2LogLikelihood);
+
+	// Cosmic 1D Reco Level Plots
+
+	TH1D* CosmicRecoChi2Plot = new TH1D("CosmicRecoChi2Plot",RecoLabelXAxisChi2,NBinsChi2,MinChi2,MaxChi2);
+	TH1D* CosmicRecoThreePlaneChi2Plot = new TH1D("CosmicRecoThreePlaneChi2Plot",RecoLabelXAxisThreePlaneChi2,NBinsThreePlaneChi2,MinThreePlaneChi2,MaxThreePlaneChi2);
+	TH1D* CosmicRecoThreePlaneChi2LogLikelihoodPlot = new TH1D("CosmicRecoThreePlaneChi2LogLikelihoodPlot",RecoLabelXAxisThreePlaneChi2LogLikelihood,
+												NBinsThreePlaneChi2LogLikelihood,MinThreePlaneChi2LogLikelihood,MaxThreePlaneChi2LogLikelihood);
 
 	// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -333,19 +352,25 @@ void t::Loop() {
 		if (jentry%1000 == 0) std::cout << jentry/1000 << " k " << std::setprecision(3) << double(jentry)/nentries*100. << " %"<< std::endl;
 
 		// ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-//std::cout << "CandidateMu_P->size() = " << CandidateMu_P->size() << std::endl;
-//		if (CandidateMuP_Distance->size() != 1) { continue; }
+
 		if (CandidateMu_P->size() != 1) { continue; }
+
+		// Containment Demand
+
+		if (CandidateMu_StartContainment->at(0) == 0) { continue; }
+		if (CandidateP_StartContainment->at(0) == 0) { continue; }
+		if (CandidateP_EndContainment->at(0) == 0) { continue; }
 
 		// ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 		// POT Scaling
 
-		if (WhichSample == "ExtBNB9") { weight = E1DCNT_wcut / EXT;}
-		if (WhichSample == "Overlay9") { weight = ( tor860_wcut / OverlayPOT) * Weight;}
-		if (WhichSample == "Overlay9_DLdown") { weight = ( tor860_wcut / OverlayPOT_DLdown) * Weight;}
-		if (WhichSample == "Overlay9_SCE") { weight = ( tor860_wcut / OverlayPOT_SCE) * Weight;}
-		if (WhichSample == "OverlayDirt9") { weight = ( tor860_wcut / DirtPOT) * Weight;}
+		if (fWhichSample == "ExtBNB9") { weight = E1DCNT_wcut / EXT;}
+		if (fWhichSample == "OverlayDirt9") { weight = ( tor860_wcut / DirtPOT) * Weight;}
+
+		if (fWhichSample == "Overlay9") { weight = ( tor860_wcut / OverlayPOT) * Weight;}
+		if (fWhichSample == "Overlay9_DLdown") { weight = ( tor860_wcut / OverlayPOT_DLdown) * Weight;}
+		if (fWhichSample == "Overlay9_SCE") { weight = ( tor860_wcut / OverlayPOT_SCE) * Weight;}
 
 		// ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -364,19 +389,44 @@ void t::Loop() {
 		double reco_Pmu_ThreePlanechi2 = CandidateMu_ThreePlaneChi2->at(0);
 		double reco_Pp_ThreePlanechi2 = CandidateP_ThreePlaneChi2->at(0);
 
+		double reco_Pmu_ThreePlaneLogLikelihood = log(CandidateMu_ThreePlaneLogLikelihood->at(0));
+		double reco_Pp_ThreePlaneLogLikelihood = log(CandidateP_ThreePlaneLogLikelihood->at(0));
+
 		// ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 		TVector3 TVector3CandidateMuon;
 		TVector3CandidateMuon.SetMagThetaPhi(CandidateMu_P->at(0),TMath::ACos(CandidateMu_CosTheta->at(0)),CandidateMu_Phi->at(0)*TMath::Pi()/180.);
 
-//		TVector3 TVector3CandidateMuonTrans;
-//		TVector3CandidateMuonTrans.SetXYZ(TVector3CandidateMuon.X(),TVector3CandidateMuon.Y(),0.);
+		TVector3 TVector3CandidateMuonTrans;
+		TVector3CandidateMuonTrans.SetXYZ(TVector3CandidateMuon.X(),TVector3CandidateMuon.Y(),0.);
 
 		TVector3 TVector3CandidateProton;
 		TVector3CandidateProton.SetMagThetaPhi(CandidateP_P->at(0),TMath::ACos(CandidateP_CosTheta->at(0)),CandidateP_Phi->at(0)*TMath::Pi()/180.);
 
-//		TVector3 TVector3CandidateProtonTrans;
-//		TVector3CandidateProtonTrans.SetXYZ(TVector3CandidateProton.X(),TVector3CandidateProton.Y(),0.);
+		TVector3 TVector3CandidateProtonTrans;
+		TVector3CandidateProtonTrans.SetXYZ(TVector3CandidateProton.X(),TVector3CandidateProton.Y(),0.);
+
+		TVector3 TransMissMomentumV3 = TVector3CandidateMuonTrans + TVector3CandidateProtonTrans;
+
+		double TransMissMomentum = TransMissMomentumV3.Mag();
+
+		double DeltaAlphaT = TMath::ACos( (- TVector3CandidateMuonTrans*TransMissMomentumV3) /
+				( TVector3CandidateMuonTrans.Mag()*TransMissMomentum ) ) * 180./TMath::Pi();
+
+		double DeltaPhiT = TMath::ACos( (- TVector3CandidateMuonTrans*TVector3CandidateProton) /
+				( TVector3CandidateMuonTrans.Mag()*TVector3CandidateProton.Mag() ) ) * 180./TMath::Pi();
+
+		// ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+		// Ensure that the same events fill the same plots
+
+		if (TransMissMomentum < ArrayNBinsDeltaPT[0]) { continue; }
+		if (DeltaAlphaT < ArrayNBinsDeltaAlphaT[0]) { continue; }
+		if (DeltaPhiT < ArrayNBinsDeltaPhiT[0]) { continue; }
+
+		if (TransMissMomentum > ArrayNBinsDeltaPT[NBinsDeltaPT]) { continue; }
+		if (DeltaAlphaT > ArrayNBinsDeltaAlphaT[NBinsDeltaAlphaT]) { continue; }
+		if (DeltaPhiT > ArrayNBinsDeltaPhiT[NBinsDeltaPhiT]) { continue; }
 
 		// ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -396,7 +446,6 @@ void t::Loop() {
 		double dYZ = (BeamFlash - RecoVertex).Mag();
 
 		double distance = CandidateMuP_Distance->at(0);	
-		double chi2ratio = CandidateP_Chi2_YPlane->at(0) / CandidateMu_Chi2_YPlane->at(0);
 
 		// ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -406,11 +455,17 @@ void t::Loop() {
 
 		for (int i = 0; i < NCuts; i++) {
 
+			if (VectorCuts[i] == "_NuScore" && !( NuScore > MinimumNuScore) )  { PassedSelection = false; }
+
 			if (VectorCuts[i] == "_Chi2" && 
 				!(CandidateMu_Chi2_YPlane->at(0) > CandidateP_Chi2_YPlane->at(0) && CandidateP_Chi2_YPlane->at(0) < ProtonChi2Cut && CandidateMu_Chi2_YPlane->at(0) > MuonChi2Cut) )  
 				{ PassedSelection = false; }
 
-			if (VectorCuts[i] == "_MatchedFlash" && !(NPE > BeamFlashPEThreshold && dYZ < YZBeamFlashVertexMaxDistance) )
+			if (VectorCuts[i] == "_ThreePlaneLogChi2" && 
+				!(reco_Pp_ThreePlaneLogLikelihood > ProtonThreePlaneChi2LogLikelihoodCut && reco_Pmu_ThreePlaneLogLikelihood < MuonThreePlaneChi2LogLikelihoodCut) )  
+				{ PassedSelection = false; }
+
+			if (VectorCuts[i] == "_MatchedFlash" && !(NPE > BeamFlashPEThreshold /*&& dYZ < YZBeamFlashVertexMaxDistance*/) )
 				{ PassedSelection = false; }
 
 			if (VectorCuts[i] == "_Collinearity" && !( fabs(DeltaThetaProtonMuon_Deg - DeltaThetaCentralValue) < DeltaThetaOpeningAngle ) )  { PassedSelection = false; }
@@ -432,8 +487,8 @@ void t::Loop() {
 
 		int genie_mode = -1;
 		if (
-			WhichSample == "Overlay9"
-//			string(WhichSample).find("Overlay") != std::string::npos 
+			fWhichSample == "Overlay9"
+//			string(fWhichSample).find("Overlay") != std::string::npos 
 			&& MCParticle_Mode != -1 ) { genie_mode = MCParticle_Mode; }
 
 		// ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -441,8 +496,8 @@ void t::Loop() {
 		int fCC1p = 0;
 
 		if (    
-			WhichSample == "Overlay9"			
-//			string(WhichSample).find("Overlay") != std::string::npos
+			fWhichSample == "Overlay9"			
+////			string(fWhichSample).find("Overlay") != std::string::npos
 //			&& CC1p == 1
 			&& CandidateMu_MCParticle_Pdg->at(0) == MuonPdg
 			&& CandidateP_MCParticle_Pdg->at(0) == ProtonPdg
@@ -454,6 +509,9 @@ void t::Loop() {
 
 		// ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+		RecoNuScorePlot->Fill(NuScore,weight);
+		RecoFlashScorePlot->Fill(FlashScore,weight);
+
 		RecoDistancePlot->Fill(distance,weight);
 
 		RecodYZPlot->Fill(dYZ,weight);
@@ -462,11 +520,8 @@ void t::Loop() {
 		RecoDeltaThetaPlot->Fill(DeltaThetaProtonMuon_Deg,weight);
 		RecoDeltaPhiPlot->Fill(DeltaPhiProtonMuon_Deg,weight);
 
-		RecoChi2CandidateMuonPlot->Fill(reco_Pmu_chi2,weight);
-		RecoChi2CandidateProtonPlot->Fill(reco_Pp_chi2,weight);
-
-		RecoThreePlaneChi2CandidateMuonPlot->Fill(reco_Pmu_ThreePlanechi2,weight);
-		RecoThreePlaneChi2CandidateProtonPlot->Fill(reco_Pp_ThreePlanechi2,weight);
+		RecoThreePlaneChi2LogLikelihoodCandidateMuonPlot->Fill(reco_Pmu_ThreePlaneLogLikelihood,weight);
+		RecoThreePlaneChi2LogLikelihoodCandidateProtonPlot->Fill(reco_Pp_ThreePlaneLogLikelihood,weight);
 
 		RecoMuonMomentumPlot->Fill(reco_Pmu_mcs,weight);
 		RecoProtonMomentumPlot->Fill(reco_Pp,weight);
@@ -477,11 +532,22 @@ void t::Loop() {
 		RecoMuonPhiPlot->Fill(reco_Pmu_phi*180./TMath::Pi(),weight);
 		RecoProtonPhiPlot->Fill(reco_Pp_phi*180./TMath::Pi(),weight);
 
+		RecoDeltaPTPlot->Fill(TransMissMomentum,weight);
+		RecoDeltaAlphaTPlot->Fill(DeltaAlphaT,weight);
+		RecoDeltaPhiTPlot->Fill(DeltaPhiT,weight);
+
+		// 2D Plot for Default Chi2 vs 3-Plane Chi2
+
+		if (reco_Pmu_chi2 > 0 && reco_Pmu_ThreePlanechi2 > 0) { RecoChi2vsThreePlaneChi2TPlot->Fill(reco_Pmu_chi2,reco_Pmu_ThreePlanechi2); }
+
 		// ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 		// CC1p Signal
 
 		if (fCC1p == 1) {
+
+			CC1pRecoNuScorePlot->Fill(NuScore,weight);
+			CC1pRecoFlashScorePlot->Fill(FlashScore,weight);
 
 			CC1pRecoDistancePlot->Fill(distance,weight);
 
@@ -491,11 +557,8 @@ void t::Loop() {
 			CC1pRecoDeltaThetaPlot->Fill(DeltaThetaProtonMuon_Deg,weight);
 			CC1pRecoDeltaPhiPlot->Fill(DeltaPhiProtonMuon_Deg,weight);
 
-			CC1pRecoChi2CandidateMuonPlot->Fill(reco_Pmu_chi2,weight);
-			CC1pRecoChi2CandidateProtonPlot->Fill(reco_Pp_chi2,weight);
-
-			CC1pRecoThreePlaneChi2CandidateMuonPlot->Fill(reco_Pmu_ThreePlanechi2,weight);
-			CC1pRecoThreePlaneChi2CandidateProtonPlot->Fill(reco_Pp_ThreePlanechi2,weight);
+			CC1pRecoThreePlaneChi2LogLikelihoodCandidateMuonPlot->Fill(reco_Pmu_ThreePlaneLogLikelihood,weight);
+			CC1pRecoThreePlaneChi2LogLikelihoodCandidateProtonPlot->Fill(reco_Pp_ThreePlaneLogLikelihood,weight);
 
 			CC1pRecoMuonMomentumPlot->Fill(reco_Pmu_mcs,weight);
 			CC1pRecoProtonMomentumPlot->Fill(reco_Pp,weight);
@@ -506,6 +569,10 @@ void t::Loop() {
 			CC1pRecoMuonPhiPlot->Fill(reco_Pmu_phi*180./TMath::Pi(),weight);
 			CC1pRecoProtonPhiPlot->Fill(reco_Pp_phi*180./TMath::Pi(),weight);
 
+			CC1pRecoDeltaPTPlot->Fill(TransMissMomentum,weight);
+			CC1pRecoDeltaAlphaTPlot->Fill(DeltaAlphaT,weight);
+			CC1pRecoDeltaPhiTPlot->Fill(DeltaPhiT,weight);
+
 		}
 
 		// ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -513,6 +580,9 @@ void t::Loop() {
 		// Non-CC1p 
 
 		if (fCC1p != 1) {
+
+			NonCC1pRecoNuScorePlot->Fill(NuScore,weight);
+			NonCC1pRecoFlashScorePlot->Fill(FlashScore,weight);
 
 			NonCC1pRecoDistancePlot->Fill(distance,weight);
 
@@ -522,11 +592,8 @@ void t::Loop() {
 			NonCC1pRecoDeltaThetaPlot->Fill(DeltaThetaProtonMuon_Deg,weight);
 			NonCC1pRecoDeltaPhiPlot->Fill(DeltaPhiProtonMuon_Deg,weight);
 
-			NonCC1pRecoChi2CandidateMuonPlot->Fill(reco_Pmu_chi2,weight);
-			NonCC1pRecoChi2CandidateProtonPlot->Fill(reco_Pp_chi2,weight);
-
-			NonCC1pRecoThreePlaneChi2CandidateMuonPlot->Fill(reco_Pmu_ThreePlanechi2,weight);
-			NonCC1pRecoThreePlaneChi2CandidateProtonPlot->Fill(reco_Pp_ThreePlanechi2,weight);
+			NonCC1pRecoThreePlaneChi2LogLikelihoodCandidateMuonPlot->Fill(reco_Pmu_ThreePlaneLogLikelihood,weight);
+			NonCC1pRecoThreePlaneChi2LogLikelihoodCandidateProtonPlot->Fill(reco_Pp_ThreePlaneLogLikelihood,weight);
 
 			NonCC1pRecoMuonMomentumPlot->Fill(reco_Pmu_mcs,weight);
 			NonCC1pRecoProtonMomentumPlot->Fill(reco_Pp,weight);
@@ -537,6 +604,10 @@ void t::Loop() {
 			NonCC1pRecoMuonPhiPlot->Fill(reco_Pmu_phi*180./TMath::Pi(),weight);
 			NonCC1pRecoProtonPhiPlot->Fill(reco_Pp_phi*180./TMath::Pi(),weight);
 
+			NonCC1pRecoDeltaPTPlot->Fill(TransMissMomentum,weight);
+			NonCC1pRecoDeltaAlphaTPlot->Fill(DeltaAlphaT,weight);
+			NonCC1pRecoDeltaPhiTPlot->Fill(DeltaPhiT,weight);
+
 		}
 
 		// ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -546,6 +617,9 @@ void t::Loop() {
 
 		if (genie_mode == 0) {
 
+			CCQERecoNuScorePlot->Fill(NuScore,weight);
+			CCQERecoFlashScorePlot->Fill(FlashScore,weight);
+
 			CCQERecoDistancePlot->Fill(distance,weight);
 
 			CCQERecodYZPlot->Fill(dYZ,weight);
@@ -554,11 +628,8 @@ void t::Loop() {
 			CCQERecoDeltaThetaPlot->Fill(DeltaThetaProtonMuon_Deg,weight);
 			CCQERecoDeltaPhiPlot->Fill(DeltaPhiProtonMuon_Deg,weight);
 
-			CCQERecoChi2CandidateMuonPlot->Fill(reco_Pmu_chi2,weight);
-			CCQERecoChi2CandidateProtonPlot->Fill(reco_Pp_chi2,weight);
-
-			CCQERecoThreePlaneChi2CandidateMuonPlot->Fill(reco_Pmu_ThreePlanechi2,weight);
-			CCQERecoThreePlaneChi2CandidateProtonPlot->Fill(reco_Pp_ThreePlanechi2,weight);
+			CCQERecoThreePlaneChi2LogLikelihoodCandidateMuonPlot->Fill(reco_Pmu_ThreePlaneLogLikelihood,weight);
+			CCQERecoThreePlaneChi2LogLikelihoodCandidateProtonPlot->Fill(reco_Pp_ThreePlaneLogLikelihood,weight);
 
 			CCQERecoMuonMomentumPlot->Fill(reco_Pmu_mcs,weight);
 			CCQERecoProtonMomentumPlot->Fill(reco_Pp,weight);
@@ -569,6 +640,10 @@ void t::Loop() {
 			CCQERecoMuonPhiPlot->Fill(reco_Pmu_phi*180./TMath::Pi(),weight);
 			CCQERecoProtonPhiPlot->Fill(reco_Pp_phi*180./TMath::Pi(),weight);
 
+			CCQERecoDeltaPTPlot->Fill(TransMissMomentum,weight);
+			CCQERecoDeltaAlphaTPlot->Fill(DeltaAlphaT,weight);
+			CCQERecoDeltaPhiTPlot->Fill(DeltaPhiT,weight);
+
 		}
 
 		// ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -576,6 +651,9 @@ void t::Loop() {
 		// CCMEC
 
 		if (genie_mode == 10) {
+
+			CCMECRecoNuScorePlot->Fill(NuScore,weight);
+			CCMECRecoFlashScorePlot->Fill(FlashScore,weight);
 
 			CCMECRecoDistancePlot->Fill(distance,weight);
 
@@ -585,11 +663,8 @@ void t::Loop() {
 			CCMECRecoDeltaThetaPlot->Fill(DeltaThetaProtonMuon_Deg,weight);
 			CCMECRecoDeltaPhiPlot->Fill(DeltaPhiProtonMuon_Deg,weight);
 
-			CCMECRecoChi2CandidateMuonPlot->Fill(reco_Pmu_chi2,weight);
-			CCMECRecoChi2CandidateProtonPlot->Fill(reco_Pp_chi2,weight);
-
-			CCMECRecoThreePlaneChi2CandidateMuonPlot->Fill(reco_Pmu_ThreePlanechi2,weight);
-			CCMECRecoThreePlaneChi2CandidateProtonPlot->Fill(reco_Pp_ThreePlanechi2,weight);
+			CCMECRecoThreePlaneChi2LogLikelihoodCandidateMuonPlot->Fill(reco_Pmu_ThreePlaneLogLikelihood,weight);
+			CCMECRecoThreePlaneChi2LogLikelihoodCandidateProtonPlot->Fill(reco_Pp_ThreePlaneLogLikelihood,weight);
 
 			CCMECRecoMuonMomentumPlot->Fill(reco_Pmu_mcs,weight);
 			CCMECRecoProtonMomentumPlot->Fill(reco_Pp,weight);
@@ -600,6 +675,10 @@ void t::Loop() {
 			CCMECRecoMuonPhiPlot->Fill(reco_Pmu_phi*180./TMath::Pi(),weight);
 			CCMECRecoProtonPhiPlot->Fill(reco_Pp_phi*180./TMath::Pi(),weight);
 
+			CCMECRecoDeltaPTPlot->Fill(TransMissMomentum,weight);
+			CCMECRecoDeltaAlphaTPlot->Fill(DeltaAlphaT,weight);
+			CCMECRecoDeltaPhiTPlot->Fill(DeltaPhiT,weight);
+
 		}
 
 		// ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -607,6 +686,9 @@ void t::Loop() {
 		// CCRES
 
 		if (genie_mode == 1) {
+
+			CCRESRecoNuScorePlot->Fill(NuScore,weight);
+			CCRESRecoFlashScorePlot->Fill(FlashScore,weight);
 
 			CCRESRecoDistancePlot->Fill(distance,weight);
 
@@ -616,11 +698,8 @@ void t::Loop() {
 			CCRESRecoDeltaThetaPlot->Fill(DeltaThetaProtonMuon_Deg,weight);
 			CCRESRecoDeltaPhiPlot->Fill(DeltaPhiProtonMuon_Deg,weight);
 
-			CCRESRecoChi2CandidateMuonPlot->Fill(reco_Pmu_chi2,weight);
-			CCRESRecoChi2CandidateProtonPlot->Fill(reco_Pp_chi2,weight);
-
-			CCRESRecoThreePlaneChi2CandidateMuonPlot->Fill(reco_Pmu_ThreePlanechi2,weight);
-			CCRESRecoThreePlaneChi2CandidateProtonPlot->Fill(reco_Pp_ThreePlanechi2,weight);
+			CCRESRecoThreePlaneChi2LogLikelihoodCandidateMuonPlot->Fill(reco_Pmu_ThreePlaneLogLikelihood,weight);
+			CCRESRecoThreePlaneChi2LogLikelihoodCandidateProtonPlot->Fill(reco_Pp_ThreePlaneLogLikelihood,weight);
 
 			CCRESRecoMuonMomentumPlot->Fill(reco_Pmu_mcs,weight);
 			CCRESRecoProtonMomentumPlot->Fill(reco_Pp,weight);
@@ -631,6 +710,10 @@ void t::Loop() {
 			CCRESRecoMuonPhiPlot->Fill(reco_Pmu_phi*180./TMath::Pi(),weight);
 			CCRESRecoProtonPhiPlot->Fill(reco_Pp_phi*180./TMath::Pi(),weight);
 
+			CCRESRecoDeltaPTPlot->Fill(TransMissMomentum,weight);
+			CCRESRecoDeltaAlphaTPlot->Fill(DeltaAlphaT,weight);
+			CCRESRecoDeltaPhiTPlot->Fill(DeltaPhiT,weight);
+
 		}
 
 		// ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -638,6 +721,9 @@ void t::Loop() {
 		// CCDIS
 
 		if (genie_mode == 2) {
+
+			CCDISRecoNuScorePlot->Fill(NuScore,weight);
+			CCDISRecoFlashScorePlot->Fill(FlashScore,weight);
 
 			CCDISRecoDistancePlot->Fill(distance,weight);
 
@@ -647,11 +733,8 @@ void t::Loop() {
 			CCDISRecoDeltaThetaPlot->Fill(DeltaThetaProtonMuon_Deg,weight);
 			CCDISRecoDeltaPhiPlot->Fill(DeltaPhiProtonMuon_Deg,weight);
 
-			CCDISRecoChi2CandidateMuonPlot->Fill(reco_Pmu_chi2);
-			CCDISRecoChi2CandidateProtonPlot->Fill(reco_Pp_chi2);
-
-			CCDISRecoThreePlaneChi2CandidateMuonPlot->Fill(reco_Pmu_ThreePlanechi2);
-			CCDISRecoThreePlaneChi2CandidateProtonPlot->Fill(reco_Pp_ThreePlanechi2);
+			CCDISRecoThreePlaneChi2LogLikelihoodCandidateMuonPlot->Fill(reco_Pmu_ThreePlaneLogLikelihood,weight);
+			CCDISRecoThreePlaneChi2LogLikelihoodCandidateProtonPlot->Fill(reco_Pp_ThreePlaneLogLikelihood,weight);
 
 			CCDISRecoMuonMomentumPlot->Fill(reco_Pmu_mcs,weight);
 			CCDISRecoProtonMomentumPlot->Fill(reco_Pp,weight);
@@ -661,6 +744,97 @@ void t::Loop() {
 
 			CCDISRecoMuonPhiPlot->Fill(reco_Pmu_phi*180./TMath::Pi(),weight);
 			CCDISRecoProtonPhiPlot->Fill(reco_Pp_phi*180./TMath::Pi(),weight);
+
+			CCDISRecoDeltaPTPlot->Fill(TransMissMomentum,weight);
+			CCDISRecoDeltaAlphaTPlot->Fill(DeltaAlphaT,weight);
+			CCDISRecoDeltaPhiTPlot->Fill(DeltaPhiT,weight);
+
+		}
+
+		// ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+		// ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+		// Chi2 PID Studies
+
+		RecoChi2Plot->Fill(reco_Pmu_chi2,weight);
+		RecoChi2Plot->Fill(reco_Pp_chi2,weight);
+
+		RecoThreePlaneChi2Plot->Fill(reco_Pmu_ThreePlanechi2,weight);
+		RecoThreePlaneChi2Plot->Fill(reco_Pp_ThreePlanechi2,weight);
+
+		RecoThreePlaneChi2LogLikelihoodPlot->Fill(reco_Pmu_ThreePlaneLogLikelihood,weight);
+		RecoThreePlaneChi2LogLikelihoodPlot->Fill(reco_Pp_ThreePlaneLogLikelihood,weight);
+
+		// ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+		// Overlay particle breakdown using the Backtracker
+
+		if (CandidateMu_MCParticle_Pdg->size() > 0 && CandidateP_MCParticle_Pdg->size() > 0 ) {
+
+			if (CandidateMu_MCParticle_Pdg->at(0) == MuonPdg) {
+
+				MuonRecoChi2Plot->Fill(reco_Pmu_chi2,weight);		
+				MuonRecoThreePlaneChi2Plot->Fill(reco_Pmu_ThreePlanechi2,weight);
+				MuonRecoThreePlaneChi2LogLikelihoodPlot->Fill(reco_Pmu_ThreePlaneLogLikelihood,weight);	
+
+			}
+
+			if (CandidateP_MCParticle_Pdg->at(0) == MuonPdg) {
+
+				MuonRecoChi2Plot->Fill(reco_Pp_chi2,weight);		
+				MuonRecoThreePlaneChi2Plot->Fill(reco_Pp_ThreePlanechi2,weight);
+				MuonRecoThreePlaneChi2LogLikelihoodPlot->Fill(reco_Pp_ThreePlaneLogLikelihood,weight);	
+
+			}
+
+			// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+			if (CandidateMu_MCParticle_Pdg->at(0) == ProtonPdg) {
+
+				ProtonRecoChi2Plot->Fill(reco_Pmu_chi2,weight);		
+				ProtonRecoThreePlaneChi2Plot->Fill(reco_Pmu_ThreePlanechi2,weight);
+				ProtonRecoThreePlaneChi2LogLikelihoodPlot->Fill(reco_Pmu_ThreePlaneLogLikelihood,weight);	
+
+			}
+
+			if (CandidateP_MCParticle_Pdg->at(0) == ProtonPdg) {
+
+				ProtonRecoChi2Plot->Fill(reco_Pp_chi2,weight);		
+				ProtonRecoThreePlaneChi2Plot->Fill(reco_Pp_ThreePlanechi2,weight);
+				ProtonRecoThreePlaneChi2LogLikelihoodPlot->Fill(reco_Pp_ThreePlaneLogLikelihood,weight);	
+
+			}
+
+			// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+			if (CandidateMu_MCParticle_Pdg->at(0) == AbsChargedPionPdg) {
+
+				PionRecoChi2Plot->Fill(reco_Pmu_chi2,weight);		
+				PionRecoThreePlaneChi2Plot->Fill(reco_Pmu_ThreePlanechi2,weight);
+				PionRecoThreePlaneChi2LogLikelihoodPlot->Fill(reco_Pmu_ThreePlaneLogLikelihood,weight);	
+
+			}
+
+			if (CandidateP_MCParticle_Pdg->at(0) == AbsChargedPionPdg) {
+
+				PionRecoChi2Plot->Fill(reco_Pp_chi2,weight);		
+				PionRecoThreePlaneChi2Plot->Fill(reco_Pp_ThreePlanechi2,weight);
+				PionRecoThreePlaneChi2LogLikelihoodPlot->Fill(reco_Pp_ThreePlaneLogLikelihood,weight);	
+
+			}
+
+		} // End of the overlay particle breakdown using the Backtracker
+
+		else {
+
+			CosmicRecoChi2Plot->Fill(reco_Pmu_chi2,weight);
+			CosmicRecoChi2Plot->Fill(reco_Pp_chi2,weight);
+
+			CosmicRecoThreePlaneChi2Plot->Fill(reco_Pmu_ThreePlanechi2,weight);
+			CosmicRecoThreePlaneChi2Plot->Fill(reco_Pp_ThreePlanechi2,weight);
+
+			CosmicRecoThreePlaneChi2LogLikelihoodPlot->Fill(reco_Pmu_ThreePlaneLogLikelihood,weight);
+			CosmicRecoThreePlaneChi2LogLikelihoodPlot->Fill(reco_Pp_ThreePlaneLogLikelihood,weight);
 
 		}
 
@@ -675,13 +849,14 @@ void t::Loop() {
 	double nentriesError = sqrt(nentries);
 	double NEventsPassingSelectionCutsError = sqrt(NEventsPassingSelectionCuts);
 
-	std::cout << std::endl << "Number of " << WhichSample << " initial entries = " << nentries << " +/- " << nentriesError 
+	std::cout << std::endl << "Number of " << fWhichSample << " initial entries = " << nentries << " +/- " << nentriesError 
 	<< " (POT normalized: " << nentries*weight << " +/- " << nentriesError*weight << ")" << std::endl;
 
 	std::cout << std::endl << "Number of events passing our selection criteria = " << NEventsPassingSelectionCuts << " +/- " << NEventsPassingSelectionCutsError
 	<< " (POT normalized: " << NEventsPassingSelectionCuts*weight << " +/- " << NEventsPassingSelectionCutsError*weight << ")" << std::endl;
 
-	std::cout << std::endl << "Created a new file: " << FileName << std::endl << std::endl;
+	std::cout << std::endl << "Created a new file: " << FileName << std::endl << std::endl << std::endl;
+	std::cout << "---------------------------------------------------------------------" << std::endl << std::endl;
 
 
 } // End of the program

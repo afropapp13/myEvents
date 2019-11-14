@@ -92,8 +92,6 @@ void myTrueAnalysis::Loop()
 		bool TrueCCQElikeEvent = false;
 
 		// Loop over the MCParticles and determine the populations
-		// To be removed in next iteration
-//		int NumberMCParticles = MCParticle_Pdg->size();
 
 		for (int WhichMCParticle = 0; WhichMCParticle < NumberMCParticles; WhichMCParticle++) {
 
@@ -108,13 +106,12 @@ void myTrueAnalysis::Loop()
 			}
 
 			if (fabs(MCParticle_Pdg->at(WhichMCParticle)) == AbsChargedPionPdg && MCParticle_Mom->at(WhichMCParticle) > ChargedPionMomentumThres) { TrueChargedPionCounter++; }
-//			if (MCParticle_Pdg->at(WhichMCParticle) == NeutralPionPdg && MCParticle_Mom->at(WhichMCParticle) > NeutralPionMomentumThres) { TrueNeutralPionCounter++; }
 
 		} // end of the loop over the simb::MCParticles
 
 		// Signal definition: 1 mu (Pmu > 100 MeV / c), 1p (Pp > 300 MeV / c) & pi+/- (Ppi > 70 MeV / c)
 
-		if (TrueMuonCounter == 1 && TrueProtonCounter == 1 && TrueChargedPionCounter == 0 /*&& TrueNeutralPionCounter == 0*/) {
+		if (TrueMuonCounter == 1 && TrueProtonCounter == 1 && TrueChargedPionCounter == 0) {
 
 			// True muon
 
@@ -229,13 +226,13 @@ void myTrueAnalysis::Loop()
 					if (TrueRecoECal > ArrayNBinsECal[0] && TrueRecoECal < ArrayNBinsECal[NBinsECal]) { TrueECalPlot->Fill(TrueRecoECal,weight); }
 					if (RecoTrueQ2 > ArrayNBinsQ2[0] && RecoTrueQ2 < ArrayNBinsQ2[NBinsQ2]) { TrueQ2Plot->Fill(RecoTrueQ2,weight); }
 
-				}
+/*				}*/
 
 				// --------------------------------------------------------------------------------------------------------------------------------------------------
 
 				// CCQElike analysis
 
-				if (
+/*				if (
 					TrueMuonMomentum_GeV < ArrayNBinsMuonMomentum[NBinsMuonMomentum]
 					&& TrueProtonMomentum_GeV < ArrayNBinsProtonMomentum[NBinsProtonMomentum]
 					&& TrueMuonCosTheta > ArrayNBinsMuonCosTheta[0]
@@ -245,12 +242,12 @@ void myTrueAnalysis::Loop()
 					// Coplanarity cut & transverse imbalance for CCQElike selection
 					&& fabs(TrueDeltaPhiProtonMuon_Deg - DeltaPhiCentralValue) < DeltaPhiOpeningAngle
 					&& TrueTransMissMomentum < MaxTransMissMomentum
-				) {
+				) {*/
 
 					// True CCQElike event
 
-					TrueCCQElikeEvent = true;
-					TrueCCQElikeCounter++;
+/*					TrueCCQElikeEvent = true;
+					TrueCCQElikeCounter++;*/
 
 					// kinematic variables
 
@@ -288,14 +285,14 @@ void myTrueAnalysis::Loop()
 
 	// CCQElike analysis summary
 
-	std::cout << std::endl;
+/*	std::cout << std::endl;
 
 	if ( string(WhichSample).find("Overlay9") != std::string::npos) {
 
 		std::cout << std::endl << "True CCQElike events = " << TrueCCQElikeCounter << std::endl;
 		TxtFile << std::endl << "True CCQElike events = " << TrueCCQElikeCounter << std::endl;
 
-	}
+	}*/
 
 	// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 

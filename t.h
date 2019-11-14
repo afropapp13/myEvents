@@ -13,15 +13,12 @@
 
 using namespace Constants;
 
-TString WhichSample = "Run1Data9";
-//TString WhichSample = "Overlay9";
-//TString WhichSample = "ExtBNB9";
-//TString WhichSample = "OverlayDirt9";
-
-TString PathToFile = "mySamples/"+UBCodeVersion+"/PreSelection_"+WhichSample+"_"+UBCodeVersion+".root";
-
-
 class t {
+
+private:
+	TString fPathToFile;
+	TString fWhichSample;
+
 public :
    TTree          *fChain;   //!pointer to the analyzed TTree or TChain
    Int_t           fCurrent; //!current Tree number in a TChain
@@ -31,6 +28,8 @@ public :
    double           Weight;
    int             CC1p;
    int             MCParticle_Mode;
+   double          NuScore;
+   double          FlashScore;
    Int_t           NBeamFlashes;
    vector<double>  *BeamFlashes_YCenter;
    vector<double>  *BeamFlashes_ZCenter;
@@ -54,6 +53,7 @@ public :
 //   vector<double>  *CandidateMu_Length;
    vector<double>  *CandidateMu_Chi2_YPlane;
    vector<double>  *CandidateMu_ThreePlaneChi2;
+   vector<double>  *CandidateMu_ThreePlaneLogLikelihood;
    vector<int>     *CandidateMu_StartContainment;
    vector<int>     *CandidateMu_EndContainment;
    vector<int>     *CandidateMu_MCParticle_Pdg;
@@ -70,6 +70,7 @@ public :
 //   vector<double>  *CandidateP_Length;
    vector<double>  *CandidateP_Chi2_YPlane;
    vector<double>  *CandidateP_ThreePlaneChi2;
+   vector<double>  *CandidateP_ThreePlaneLogLikelihood;
    vector<int>     *CandidateP_StartContainment;
    vector<int>     *CandidateP_EndContainment;
    vector<int>     *CandidateP_MCParticle_Pdg;
@@ -90,6 +91,8 @@ public :
    TBranch        *b_Weight;   //!
    TBranch        *b_CC1p;   //!
    TBranch        *b_MCParticle_Mode;   //!
+   TBranch        *b_NuScore;   //!
+   TBranch        *b_FlashScore;   //!
    TBranch        *b_NBeamFlashes;   //!
    TBranch        *b_BeamFlashes_YCenter;   //!
    TBranch        *b_BeamFlashes_ZCenter;   //!
@@ -113,6 +116,7 @@ public :
 //   TBranch        *b_CandidateMu_Length;   //!
    TBranch        *b_CandidateMu_Chi2_YPlane;   //!
    TBranch        *b_CandidateMu_ThreePlaneChi2;   //!
+   TBranch        *b_CandidateMu_ThreePlaneLogLikelihood;   //!
    TBranch        *b_CandidateMu_StartContainment;   //!
    TBranch        *b_CandidateMu_EndContainment;   //!
    TBranch        *b_CandidateMu_MCParticle_Pdg;   //!
@@ -129,6 +133,7 @@ public :
 //   TBranch        *b_CandidateP_Length;   //!
    TBranch        *b_CandidateP_Chi2_YPlane;   //!
    TBranch        *b_CandidateP_ThreePlaneChi2;   //!
+   TBranch        *b_CandidateP_ThreePlaneLogLikelihood;   //!
    TBranch        *b_CandidateP_StartContainment;   //!
    TBranch        *b_CandidateP_EndContainment;   //!
    TBranch        *b_CandidateP_MCParticle_Pdg;   //!
@@ -144,7 +149,7 @@ public :
 //   TBranch        *b_PFParticle_NuMuDaughters;   //!
 //   TBranch        *b_PFParticle_NuMuDaughtersPdgCode;   //!
 
-   t(TTree *tree=0);
+   t(TString WhichSample, TTree *tree=0);
    virtual ~t();
    virtual Int_t    Cut(Long64_t entry);
    virtual Int_t    GetEntry(Long64_t entry);
@@ -158,13 +163,17 @@ public :
 #endif
 
 #ifdef t_cxx
-t::t(TTree *tree) : fChain(0) 
+t::t(TString WhichSample, TTree *tree) : fChain(0) 
 {
 
+   fWhichSample = WhichSample;
+
+   fPathToFile = "mySamples/"+UBCodeVersion+"/PreSelection_"+fWhichSample+"_"+UBCodeVersion+".root";
+
    if (tree == 0) {
-      TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject(PathToFile);
+      TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject(fPathToFile);
       if (!f || !f->IsOpen()) {
-         f = new TFile(PathToFile);
+         f = new TFile(fPathToFile);
       }
       f->GetObject("myPreSelection",tree);
 
@@ -222,6 +231,7 @@ void t::Init(TTree *tree)
 //   CandidateMu_Length = 0;
    CandidateMu_Chi2_YPlane = 0;
    CandidateMu_ThreePlaneChi2 = 0;
+   CandidateMu_ThreePlaneLogLikelihood = 0;
    CandidateMu_StartContainment = 0;
    CandidateMu_EndContainment = 0;
    CandidateMu_MCParticle_Pdg = 0;
@@ -238,6 +248,7 @@ void t::Init(TTree *tree)
 //   CandidateP_Length = 0;
    CandidateP_Chi2_YPlane = 0;
    CandidateP_ThreePlaneChi2 = 0;
+   CandidateP_ThreePlaneLogLikelihood = 0;
    CandidateP_StartContainment = 0;
    CandidateP_EndContainment = 0;
    CandidateP_MCParticle_Pdg = 0;
@@ -262,6 +273,8 @@ void t::Init(TTree *tree)
    fChain->SetBranchAddress("Weight", &Weight, &b_Weight);
    fChain->SetBranchAddress("CC1p", &CC1p, &b_CC1p);
    fChain->SetBranchAddress("MCParticle_Mode", &MCParticle_Mode, &b_MCParticle_Mode);
+   fChain->SetBranchAddress("NuScore", &NuScore, &b_NuScore);
+   fChain->SetBranchAddress("FlashScore", &FlashScore, &b_FlashScore);
    fChain->SetBranchAddress("NBeamFlashes", &NBeamFlashes, &b_NBeamFlashes);
    fChain->SetBranchAddress("BeamFlashes_YCenter", &BeamFlashes_YCenter, &b_BeamFlashes_YCenter);
    fChain->SetBranchAddress("BeamFlashes_ZCenter", &BeamFlashes_ZCenter, &b_BeamFlashes_ZCenter);
@@ -285,6 +298,7 @@ void t::Init(TTree *tree)
 //   fChain->SetBranchAddress("CandidateMu_Length", &CandidateMu_Length, &b_CandidateMu_Length);
    fChain->SetBranchAddress("CandidateMu_Chi2_YPlane", &CandidateMu_Chi2_YPlane, &b_CandidateMu_Chi2_YPlane);
    fChain->SetBranchAddress("CandidateMu_ThreePlaneChi2", &CandidateMu_ThreePlaneChi2, &b_CandidateMu_ThreePlaneChi2);
+   fChain->SetBranchAddress("CandidateMu_ThreePlaneLogLikelihood", &CandidateMu_ThreePlaneLogLikelihood, &b_CandidateMu_ThreePlaneLogLikelihood);
    fChain->SetBranchAddress("CandidateMu_StartContainment", &CandidateMu_StartContainment, &b_CandidateMu_StartContainment);
    fChain->SetBranchAddress("CandidateMu_EndContainment", &CandidateMu_EndContainment, &b_CandidateMu_EndContainment);
    fChain->SetBranchAddress("CandidateMu_MCParticle_Pdg", &CandidateMu_MCParticle_Pdg, &b_CandidateMu_MCParticle_Pdg);
@@ -301,6 +315,7 @@ void t::Init(TTree *tree)
 //   fChain->SetBranchAddress("CandidateP_Length", &CandidateP_Length, &b_CandidateP_Length);
    fChain->SetBranchAddress("CandidateP_Chi2_YPlane", &CandidateP_Chi2_YPlane, &b_CandidateP_Chi2_YPlane);
    fChain->SetBranchAddress("CandidateP_ThreePlaneChi2", &CandidateP_ThreePlaneChi2, &b_CandidateP_ThreePlaneChi2);
+   fChain->SetBranchAddress("CandidateP_ThreePlaneLogLikelihood", &CandidateP_ThreePlaneLogLikelihood, &b_CandidateP_ThreePlaneLogLikelihood);
    fChain->SetBranchAddress("CandidateP_StartContainment", &CandidateP_StartContainment, &b_CandidateP_StartContainment);
    fChain->SetBranchAddress("CandidateP_EndContainment", &CandidateP_EndContainment, &b_CandidateP_EndContainment);
    fChain->SetBranchAddress("CandidateP_MCParticle_Pdg", &CandidateP_MCParticle_Pdg, &b_CandidateP_MCParticle_Pdg);

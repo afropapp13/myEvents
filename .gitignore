@@ -1,2 +1,5 @@
 OutputFiles/*
 mySamples/*
+myPlots/*
+*.d
+*.so

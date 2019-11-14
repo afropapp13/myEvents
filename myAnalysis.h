@@ -11,10 +11,10 @@
 
 #include "../myCCQEAnalysis/Constants.h"
 
-TString WhichSample = "Run1Data9";
+//TString WhichSample = "Run1Data9";
 //TString WhichSample = "Overlay9";
 //TString WhichSample = "ExtBNB9";
-//TString WhichSample = "OverlayDirt9";
+TString WhichSample = "OverlayDirt9";
 
 //TString WhichSample = "Overlay9_SCE";
 //TString WhichSample = "Overlay9_DLdown";
@@ -37,7 +37,7 @@ public :
    vector<double>  *BeamFlashes_YCenter;
    vector<double>  *BeamFlashes_ZCenter;
    vector<double>  *BeamFlashes_TotalPE;
-   Int_t           NumberMCParticles;
+//   Int_t           NumberMCParticles;
    vector<double>  *CandidateMuP_Distance;
    vector<double>  *Vertex_X;
    vector<double>  *Vertex_Y;
@@ -82,7 +82,7 @@ public :
    TBranch        *b_BeamFlashes_YCenter;   //!
    TBranch        *b_BeamFlashes_ZCenter;   //!
    TBranch        *b_BeamFlashes_TotalPE;   //!
-   TBranch        *b_NumberMCParticles;   //!
+//   TBranch        *b_NumberMCParticles;   //!
    TBranch        *b_CandidateMuP_Distance;   //!
    TBranch        *b_Vertex_X;   //!
    TBranch        *b_Vertex_Y;   //!
@@ -228,7 +228,7 @@ void myAnalysis::Init(TTree *tree)
    fChain->SetBranchAddress("BeamFlashes_YCenter", &BeamFlashes_YCenter, &b_BeamFlashes_YCenter);
    fChain->SetBranchAddress("BeamFlashes_ZCenter", &BeamFlashes_ZCenter, &b_BeamFlashes_ZCenter);
    fChain->SetBranchAddress("BeamFlashes_TotalPE", &BeamFlashes_TotalPE, &b_BeamFlashes_TotalPE);
-   fChain->SetBranchAddress("NumberMCParticles", &NumberMCParticles, &b_NumberMCParticles);
+//   fChain->SetBranchAddress("NumberMCParticles", &NumberMCParticles, &b_NumberMCParticles);
    fChain->SetBranchAddress("CandidateMuP_Distance", &CandidateMuP_Distance, &b_CandidateMuP_Distance);
    fChain->SetBranchAddress("Vertex_X", &Vertex_X, &b_Vertex_X);
    fChain->SetBranchAddress("Vertex_Y", &Vertex_Y, &b_Vertex_Y);

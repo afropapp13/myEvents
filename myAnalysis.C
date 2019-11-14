@@ -214,6 +214,7 @@ void myAnalysis::Loop()
 		// Tracks
 
 		int NCandidatePairs = CandidateMuP_Distance->size();
+		if(NCandidatePairs != 1) { continue; }
 
 		for (int WhichCandidatePair = 0; WhichCandidatePair < NCandidatePairs; WhichCandidatePair++) {
 
@@ -280,9 +281,9 @@ void myAnalysis::Loop()
 			TVector3 RecoVertex(Vertex_X->at(WhichCandidatePair),Vertex_Y->at(WhichCandidatePair),Vertex_Z->at(WhichCandidatePair));
 			double dYZ = (BeamFlash - RecoVertex).Mag();	
 			if (dYZ > YZBeamFlashVertexMaxDistance || BeamFlashes_TotalPE->at(0) < NPE) { continue; }
-//			if (CandidateMu_Length->at(WhichCandidatePair) < CandidateP_Length->at(WhichCandidatePair)) { continue; }
 			if ( fabs(DeltaThetaProtonMuon_Deg - DeltaThetaCentralValue) > DeltaThetaOpeningAngle ) { continue; }
-			if ( CandidateMuP_Distance->at(WhichCandidatePair) > MaxMuPDistance ) { continue; }
+//			if ( CandidateMuP_Distance->at(WhichCandidatePair) > MaxMuPDistance ) { continue; } // 6 cm at PreSelection stage
+			if ( CandidateMuP_Distance->at(WhichCandidatePair) > 2 ) { continue; } // 2 cm to improve purity & reject cosmics
 
 			// --------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -333,7 +334,7 @@ void myAnalysis::Loop()
 				if (RecoECal > ArrayNBinsECal[0] && RecoECal < ArrayNBinsECal[NBinsECal]) { RecoECalPlot->Fill(RecoECal,weight); }
 				if (RecoQ2 > ArrayNBinsQ2[0] && RecoQ2 < ArrayNBinsQ2[NBinsQ2]) { RecoQ2Plot->Fill(RecoQ2,weight); }
 
-			}
+/*			}
 
 			// --------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -346,7 +347,7 @@ void myAnalysis::Loop()
 				&& CandidateP_Momentum_GeV < ArrayNBinsProtonMomentum[NBinsProtonMomentum]
 				&& CandidateMuonTrackCosTheta > ArrayNBinsMuonCosTheta[0] && CandidateMuonTrackCosTheta < ArrayNBinsMuonCosTheta[NBinsMuonCosTheta]
 				&& CandidateProtonTrackCosTheta > ArrayNBinsProtonCosTheta[0] && CandidateProtonTrackCosTheta < ArrayNBinsProtonCosTheta[NBinsProtonCosTheta]
-			) {
+			) {*/
 
 				CandidateRecoCCQElikeCounter++;
 
@@ -366,7 +367,8 @@ void myAnalysis::Loop()
 			// Backtracker only for the Overlay sample
 
 			if ( 
-				string(WhichSample).find("Overlay9") != std::string::npos
+//				string(WhichSample).find("Overlay9") != std::string::npos
+				WhichSample == "Overlay9"
 				&& CandidateMu_MCParticle_Pdg->at(WhichCandidatePair) == MuonPdg
 				&& CandidateP_MCParticle_Pdg->at(WhichCandidatePair) == ProtonPdg
 				&& CandidateMu_MCParticle_Purity->at(WhichCandidatePair) > PurityThreshold
@@ -484,7 +486,10 @@ void myAnalysis::Loop()
 						&& TrueCandidateMuonTrackMomentum_GeV > ArrayNBinsMuonMomentum[0] 
 						&& TrueCandidateProtonTrackMomentum_GeV > ArrayNBinsProtonMomentum[0]
 						&& fabs(RecoTrueDeltaThetaProtonMuon_Deg - DeltaThetaCentralValue) < DeltaThetaOpeningAngle
-						&& TrueCC1pEvent == true
+//						&& TrueCC1pEvent == true
+						&& TrueCandidateMuonTrackStartContainment == true
+						&& TrueCandidateProtonTrackStartContainment == true
+						&& TrueCandidateProtonTrackEndContainment == true
 					) {
 
 						CandidateTrueCC1pCounter++;
@@ -500,6 +505,30 @@ void myAnalysis::Loop()
 						CC1pRecoTrueDeltaPTPlot2D->Fill(RecoTrueTransMissMomentum,TransMissMomentum,weight);
 						CC1pRecoTrueDeltaAlphaTPlot2D->Fill(RecoTrueDeltaAlphaT,RecoDeltaAlphaT,weight);
 						CC1pRecoTrueDeltaPhiTPlot2D->Fill(RecoTrueDeltaPhiT,RecoDeltaPhiT,weight);
+
+						CC1pRecoMuonMomentumPlot->Fill(CandidateMu_Momentum_GeV,weight);
+						CC1pRecoMuonPhiPlot->Fill(CandidateMuonTrackPhi_Deg,weight);
+						CC1pRecoMuonCosThetaPlot->Fill(CandidateMuonTrackCosTheta,weight);
+
+						CC1pTrueMuonMomentumPlot->Fill(TrueCandidateMuonTrackMomentum_GeV,weight);
+						CC1pTrueMuonPhiPlot->Fill(TrueCandidateMuonTrackPhi_Deg,weight);
+						CC1pTrueMuonCosThetaPlot->Fill(TrueCandidateMuonTrackCosTheta,weight);
+
+						CC1pRecoTrueMuonMomentumPlot2D->Fill(TrueCandidateMuonTrackMomentum_GeV,CandidateMu_Momentum_GeV,weight);
+						CC1pRecoTrueMuonPhiPlot2D->Fill(TrueCandidateMuonTrackPhi_Deg,CandidateMuonTrackPhi_Deg,weight);
+						CC1pRecoTrueMuonCosThetaPlot2D->Fill(TrueCandidateMuonTrackCosTheta,CandidateMuonTrackCosTheta,weight);
+
+						CC1pRecoProtonMomentumPlot->Fill(CandidateP_Momentum_GeV,weight);
+						CC1pRecoProtonPhiPlot->Fill(CandidateProtonTrackPhi_Deg,weight);
+						CC1pRecoProtonCosThetaPlot->Fill(CandidateProtonTrackCosTheta,weight);
+
+						CC1pTrueProtonMomentumPlot->Fill(TrueCandidateProtonTrackMomentum_GeV,weight);
+						CC1pTrueProtonPhiPlot->Fill(TrueCandidateProtonTrackPhi_Deg,weight);
+						CC1pTrueProtonCosThetaPlot->Fill(TrueCandidateProtonTrackCosTheta,weight);
+
+						CC1pRecoTrueProtonMomentumPlot2D->Fill(TrueCandidateProtonTrackMomentum_GeV,CandidateP_Momentum_GeV,weight);
+						CC1pRecoTrueProtonPhiPlot2D->Fill(TrueCandidateProtonTrackPhi_Deg,CandidateProtonTrackPhi_Deg,weight);
+						CC1pRecoTrueProtonCosThetaPlot2D->Fill(TrueCandidateProtonTrackCosTheta,CandidateProtonTrackCosTheta,weight);
 
 						if (RecoECal > ArrayNBinsECal[0] && RecoECal < ArrayNBinsECal[NBinsECal] &&
 						    RecoTrueECal > ArrayNBinsECal[0] && RecoTrueECal < ArrayNBinsECal[NBinsECal]) { 
@@ -535,6 +564,22 @@ void myAnalysis::Loop()
 						BkgRecoTrueDeltaAlphaTPlot2D->Fill(RecoTrueDeltaAlphaT,RecoDeltaAlphaT,weight);
 						BkgRecoTrueDeltaPhiTPlot2D->Fill(RecoTrueDeltaPhiT,RecoDeltaPhiT,weight);
 
+						BkgRecoTrueMuonMomentumPlot->Fill(CandidateMu_Momentum_GeV,weight);
+						BkgRecoTrueMuonPhiPlot->Fill(CandidateMuonTrackPhi_Deg,weight);
+						BkgRecoTrueMuonCosThetaPlot->Fill(CandidateMuonTrackCosTheta,weight);
+
+						BkgRecoMuonMomentumPlot2D->Fill(TrueCandidateMuonTrackMomentum_GeV,CandidateMu_Momentum_GeV,weight);
+						BkgRecoMuonPhiPlot2D->Fill(TrueCandidateMuonTrackPhi_Deg,CandidateMuonTrackPhi_Deg,weight);
+						BkgRecoMuonCosThetaPlot2D->Fill(TrueCandidateMuonTrackCosTheta,CandidateMuonTrackCosTheta,weight);
+
+						BkgRecoTrueProtonMomentumPlot->Fill(CandidateP_Momentum_GeV,weight);
+						BkgRecoTrueProtonPhiPlot->Fill(CandidateProtonTrackPhi_Deg,weight);
+						BkgRecoTrueProtonCosThetaPlot->Fill(CandidateProtonTrackCosTheta,weight);
+
+						BkgRecoProtonMomentumPlot2D->Fill(TrueCandidateProtonTrackMomentum_GeV,CandidateP_Momentum_GeV,weight);
+						BkgRecoProtonPhiPlot2D->Fill(TrueCandidateProtonTrackPhi_Deg,CandidateProtonTrackPhi_Deg,weight);
+						BkgRecoProtonCosThetaPlot2D->Fill(TrueCandidateProtonTrackCosTheta,CandidateProtonTrackCosTheta,weight);
+
 						if (RecoECal > ArrayNBinsECal[0] && RecoECal < ArrayNBinsECal[NBinsECal] &&
 						    RecoTrueECal > ArrayNBinsECal[0] && RecoTrueECal < ArrayNBinsECal[NBinsECal]) { 
 			
@@ -560,7 +605,7 @@ void myAnalysis::Loop()
 
 				// CCQElike analysis with Backtracker
 
-				if ( 
+/*				if ( 
 					CandidateMu_Momentum_GeV < ArrayNBinsMuonMomentum[NBinsMuonMomentum]
 					&& CandidateP_Momentum_GeV < ArrayNBinsProtonMomentum[NBinsProtonMomentum]
 					&& CandidateMuonTrackCosTheta > ArrayNBinsMuonCosTheta[0] 
@@ -583,7 +628,7 @@ void myAnalysis::Loop()
 						&& fabs(RecoTrueDeltaThetaProtonMuon_Deg - DeltaThetaCentralValue) < DeltaThetaOpeningAngle 
 						&& fabs(RecoTrueDeltaPhiProtonMuon_Deg - DeltaPhiCentralValue) < DeltaPhiOpeningAngle 
 						&& RecoTrueTransMissMomentum < MaxTransMissMomentum
-						&& TrueCCQElikeEvent == true
+//						&& TrueCCQElikeEvent == true
 					) {
 
 						CandidateTrueCCQElikeCounter++;
@@ -641,7 +686,7 @@ void myAnalysis::Loop()
 					}
 
 				} // End of the CCQElike analysis with Backtracker
-
+*/
 				// ----------------------------------------------------------------------------------------------------------------------------------------------
 				// ----------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -668,7 +713,7 @@ void myAnalysis::Loop()
 					if (RecoECal > ArrayNBinsECal[0] && RecoECal < ArrayNBinsECal[NBinsECal]) { BkgRecoTrueECalPlot->Fill(RecoECal,weight); }
 					if (RecoQ2 > ArrayNBinsQ2[0] && RecoQ2 < ArrayNBinsQ2[NBinsQ2]) { BkgRecoTrueQ2Plot->Fill(RecoQ2,weight); }
 
-				} // End of the STV-CC1p analysis
+/*				} // End of the STV-CC1p analysis
 
 				// -----------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -686,7 +731,7 @@ void myAnalysis::Loop()
 				) {
 
 					InTimeCosmicsNonCCQElikeCounter++;
-
+*/
 					BkgRecoTrueMuonMomentumPlot->Fill(CandidateMu_Momentum_GeV,weight);
 					BkgRecoTrueMuonPhiPlot->Fill(CandidateMuonTrackPhi_Deg,weight);
 					BkgRecoTrueMuonCosThetaPlot->Fill(CandidateMuonTrackCosTheta,weight);
@@ -709,12 +754,12 @@ void myAnalysis::Loop()
 
 	std::cout << std::endl;
 
-	if ( string(WhichSample).find("Overlay9") != std::string::npos) {
+/*	if ( string(WhichSample).find("Overlay9") != std::string::npos) {
 
 		std::cout << std::endl << "True CC1p events = " << TrueCC1pCounter << std::endl;
 		TxtFile << std::endl << "True CC1p events = " << TrueCC1pCounter << std::endl;
 
-	}
+	}*/
 
 	std::cout << "Candidate Reco CC1p events = " << CandidateRecoCC1pCounter << std::endl;
 	TxtFile << "Candidate Reco CC1p events = " << CandidateRecoCC1pCounter << std::endl;
@@ -733,8 +778,8 @@ void myAnalysis::Loop()
 		double CC1pEfficiency = double(CandidateTrueCC1pCounter) / double(TrueCC1pCounter) * 100.;
 		double CC1pPurity = double(CandidateTrueCC1pCounter) / double(CandidateRecoCC1pCounter) * 100.;
 
-		std::cout << "STV Efficiency = " << CC1pEfficiency << " %" << std::endl;
-		TxtFile << "STV Efficiency = " << CC1pEfficiency << " %" << std::endl;
+/*		std::cout << "STV Efficiency = " << CC1pEfficiency << " %" << std::endl;
+		TxtFile << "STV Efficiency = " << CC1pEfficiency << " %" << std::endl;*/
 
 		std::cout << "STV Purity = " << CC1pPurity << " %" << std::endl;
 		TxtFile << "STV Purity = " << CC1pPurity << " %" << std::endl;
@@ -745,7 +790,7 @@ void myAnalysis::Loop()
 
 	// CCQElike analysis summary
 
-	std::cout << std::endl;
+/*	std::cout << std::endl;
 
 	if ( string(WhichSample).find("Overlay9") != std::string::npos) {
 
@@ -778,6 +823,7 @@ void myAnalysis::Loop()
 		TxtFile << "CCQElike Purity = " << CCQElikePurity << " %" << std::endl;
 
 	}
+*/
 	// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 	OutputFile->Write();
