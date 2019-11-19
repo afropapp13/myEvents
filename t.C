@@ -599,14 +599,14 @@ void t::Loop() {
 
 			// 2D Plots
 
-			CC1pRecoMuonMomentumPlot2D->Fill(True_CandidateMu_P->at(0),reco_Pmu_mcs,weight);
-			CC1pRecoProtonMomentumPlot2D->Fill(True_CandidateP_P->at(0),reco_Pp,weight);
+			CC1pRecoMuonMomentumPlot2D->Fill(reco_Pmu_mcs,True_CandidateMu_P->at(0),weight);
+			CC1pRecoProtonMomentumPlot2D->Fill(reco_Pp,True_CandidateP_P->at(0),weight);
 
-			CC1pRecoMuonCosThetaPlot2D->Fill(True_CandidateMu_CosTheta->at(0),reco_Pmu_cos_theta,weight);
-			CC1pRecoProtonCosThetaPlot2D->Fill(True_CandidateP_CosTheta->at(0),reco_Pp_cos_theta,weight);
+			CC1pRecoMuonCosThetaPlot2D->Fill(reco_Pmu_cos_theta,True_CandidateMu_CosTheta->at(0),weight);
+			CC1pRecoProtonCosThetaPlot2D->Fill(reco_Pp_cos_theta,True_CandidateP_CosTheta->at(0),weight);
 
-			CC1pRecoMuonPhiPlot2D->Fill(True_CandidateMu_Phi->at(0)*180./TMath::Pi(),reco_Pmu_phi*180./TMath::Pi(),weight);
-			CC1pRecoProtonPhiPlot2D->Fill(True_CandidateP_Phi->at(0)*180./TMath::Pi(),reco_Pp_phi*180./TMath::Pi(),weight);
+			CC1pRecoMuonPhiPlot2D->Fill(reco_Pmu_phi*180./TMath::Pi(),True_CandidateMu_Phi->at(0),weight);
+			CC1pRecoProtonPhiPlot2D->Fill(reco_Pp_phi*180./TMath::Pi(),True_CandidateP_Phi->at(0),weight);
 
 			// ---------------------------------------------------------------------------------------------------------------------
 
