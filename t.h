@@ -6,7 +6,7 @@
 #include <TFile.h>
 #include <TString.h>
 
-#include "../myCCQEAnalysis/Constants.h"
+#include "../mySTVAnalysis/Constants.h"
 
 #include <vector>
 #include <vector>
@@ -149,7 +149,7 @@ public :
 //   TBranch        *b_PFParticle_NuMuDaughters;   //!
 //   TBranch        *b_PFParticle_NuMuDaughtersPdgCode;   //!
 
-   t(TString WhichSample, TTree *tree=0);
+   t(TString WhichSample="", TTree *tree=0);
    virtual ~t();
    virtual Int_t    Cut(Long64_t entry);
    virtual Int_t    GetEntry(Long64_t entry);

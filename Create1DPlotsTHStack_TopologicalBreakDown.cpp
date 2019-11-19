@@ -15,7 +15,7 @@
 #include "/home/afroditi/Dropbox/PhD/Secondary_Code/SetOffsetAndSize.cpp"
 #include "/home/afroditi/Dropbox/PhD/Secondary_Code/ToString.cpp"
 
-#include "../myCCQEAnalysis/Constants.h"
+#include "../mySTVAnalysis/Constants.h"
 
 using namespace std;
 using namespace Constants;
@@ -106,7 +106,14 @@ void Create1DPlotsTHStack_TopologicalBreakDown() {
 	vector<TString> NameOfSamples;
 	
 	NameOfSamples.push_back("CCQEStudies_Run1Data9"+Cuts+".root"); LabelsOfSamples.push_back("Data Run-1");
-	NameOfSamples.push_back("CCQEStudies_Overlay9"+Cuts+".root"); LabelsOfSamples.push_back("Overlay");
+
+	NameOfSamples.push_back("CCQEStudies_Overlay9"+Cuts+".root"); LabelsOfSamples.push_back("Overlay"); // CV
+
+	// Detector Systematics
+
+	NameOfSamples.push_back("CCQEStudies_Overlay9_SCE"+Cuts+".root"); LabelsOfSamples.push_back("Overlay SCE");
+	NameOfSamples.push_back("CCQEStudies_Overlay9_DLdown"+Cuts+".root"); LabelsOfSamples.push_back("Overlay DLdown");
+
 	NameOfSamples.push_back("CCQEStudies_ExtBNB9"+Cuts+".root"); LabelsOfSamples.push_back("ExtBNB");
 	NameOfSamples.push_back("CCQEStudies_OverlayDirt9"+Cuts+".root"); LabelsOfSamples.push_back("Dirt");
 
@@ -318,7 +325,7 @@ void Create1DPlotsTHStack_TopologicalBreakDown() {
 		leg[WhichPlot]->SetTextFont(FontStyle);
 		leg[WhichPlot]->Draw();
 
-		PlotCanvas[WhichPlot]->SaveAs("./myPlots/pdf/1D/"+UBCodeVersion+"/TopologicalBreakDown/THStack_BreakDown_"+PlotNames[WhichPlot]+Cuts+"_"+UBCodeVersion+".pdf");
+//		PlotCanvas[WhichPlot]->SaveAs("./myPlots/pdf/1D/"+UBCodeVersion+"/TopologicalBreakDown/THStack_BreakDown_"+PlotNames[WhichPlot]+Cuts+"_"+UBCodeVersion+".pdf");
 		//delete PlotCanvas[WhichPlot];
 
 		// Purity 
@@ -326,7 +333,7 @@ void Create1DPlotsTHStack_TopologicalBreakDown() {
 		TH1D* SumNonBeamOn = (TH1D*)hratio[1][N1DPlots-1]->Clone(); 
 		SumNonBeamOn->Add(hratio[2][N1DPlots-1]);
 		SumNonBeamOn->Add(hratio[3][N1DPlots-1]);
-		double CC1pPurity = CC1pPlots[1][N1DPlots-1]->Integral() / SumNonBeamOn->Integral() * 100.;
+		int CC1pPurity = CC1pPlots[1][N1DPlots-1]->Integral() / SumNonBeamOn->Integral() * 100.;
 
 		midPad->cd();
 		TLatex latexPurity;

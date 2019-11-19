@@ -16,7 +16,7 @@
 #include <iomanip>
 #include <vector>
 
-#include "../myCCQEAnalysis/Constants.h"
+#include "../mySTVAnalysis/Constants.h"
 
 using namespace std;
 using namespace Constants;
@@ -128,6 +128,23 @@ void t::Loop() {
 	TH1D* CC1pRecoDeltaPTPlot = new TH1D("CC1pRecoDeltaPTPlot",LabelXAxisDeltaPT,NBinsDeltaPT,ArrayNBinsDeltaPT);
 	TH1D* CC1pRecoDeltaAlphaTPlot = new TH1D("CC1pRecoDeltaAlphaTPlot",LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);
 	TH1D* CC1pRecoDeltaPhiTPlot = new TH1D("CC1pRecoDeltaPhiTPlot",LabelXAxisDeltaPhiT,NBinsDeltaPhiT,ArrayNBinsDeltaPhiT);
+
+	// 2D Reco Level Plots for Signal CC1p
+
+	TH2D* CC1pRecoMuonMomentumPlot2D = new TH2D("CC1pRecoMuonMomentumPlot2D",LabelXAxisMuonMomentum2D,NBinsMuonMomentum,ArrayNBinsMuonMomentum,NBinsMuonMomentum,ArrayNBinsMuonMomentum);
+	TH2D* CC1pRecoProtonMomentumPlot2D = new TH2D("CC1pRecoProtonMomentumPlot2D",LabelXAxisProtonMomentum2D,NBinsProtonMomentum,
+											ArrayNBinsProtonMomentum,NBinsProtonMomentum,ArrayNBinsProtonMomentum);
+
+	TH2D* CC1pRecoMuonCosThetaPlot2D = new TH2D("CC1pRecoMuonCosThetaPlot2D",LabelXAxisMuonCosTheta2D,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta);
+	TH2D* CC1pRecoProtonCosThetaPlot2D = new TH2D("CC1pRecoProtonCosThetaPlot2D",LabelXAxisProtonCosTheta2D,NBinsProtonCosTheta,
+										ArrayNBinsProtonCosTheta,NBinsProtonCosTheta,ArrayNBinsProtonCosTheta);
+
+	TH2D* CC1pRecoMuonPhiPlot2D = new TH2D("CC1pRecoMuonPhiPlot2D",LabelXAxisMuonPhi2D,NBinsMuonPhi,ArrayNBinsMuonPhi,NBinsMuonPhi,ArrayNBinsMuonPhi);
+	TH2D* CC1pRecoProtonPhiPlot2D = new TH2D("CC1pRecoProtonPhiPlot2D",LabelXAxisProtonPhi2D,NBinsProtonPhi,ArrayNBinsProtonPhi,NBinsProtonPhi,ArrayNBinsProtonPhi);
+
+	TH2D* CC1pRecoDeltaPTPlot2D = new TH2D("CC1pRecoDeltaPTPlot2D",LabelXAxisDeltaPT2D,NBinsDeltaPT,ArrayNBinsDeltaPT,NBinsDeltaPT,ArrayNBinsDeltaPT);
+	TH2D* CC1pRecoDeltaAlphaTPlot2D = new TH2D("CC1pRecoDeltaAlphaTPlot2D",LabelXAxisDeltaAlphaT2D,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);
+	TH2D* CC1pRecoDeltaPhiTPlot2D = new TH2D("CC1pRecoDeltaPhiTPlot2D",LabelXAxisDeltaPhiT2D,NBinsDeltaPhiT,ArrayNBinsDeltaPhiT,NBinsDeltaPhiT,ArrayNBinsDeltaPhiT);
 
 
 	// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -368,7 +385,10 @@ void t::Loop() {
 		if (fWhichSample == "ExtBNB9") { weight = E1DCNT_wcut / EXT;}
 		if (fWhichSample == "OverlayDirt9") { weight = ( tor860_wcut / DirtPOT) * Weight;}
 
-		if (fWhichSample == "Overlay9") { weight = ( tor860_wcut / OverlayPOT) * Weight;}
+		if (fWhichSample == "Overlay9") { weight = ( tor860_wcut / OverlayPOT) * Weight;} // CV
+
+		// Systematics
+
 		if (fWhichSample == "Overlay9_DLdown") { weight = ( tor860_wcut / OverlayPOT_DLdown) * Weight;}
 		if (fWhichSample == "Overlay9_SCE") { weight = ( tor860_wcut / OverlayPOT_SCE) * Weight;}
 
@@ -487,8 +507,8 @@ void t::Loop() {
 
 		int genie_mode = -1;
 		if (
-			fWhichSample == "Overlay9"
-//			string(fWhichSample).find("Overlay") != std::string::npos 
+//			fWhichSample == "Overlay9"
+			string(fWhichSample).find("Overlay") != std::string::npos 
 			&& MCParticle_Mode != -1 ) { genie_mode = MCParticle_Mode; }
 
 		// ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -496,9 +516,8 @@ void t::Loop() {
 		int fCC1p = 0;
 
 		if (    
-			fWhichSample == "Overlay9"			
-////			string(fWhichSample).find("Overlay") != std::string::npos
-//			&& CC1p == 1
+//			fWhichSample == "Overlay9"			
+			string(fWhichSample).find("Overlay") != std::string::npos
 			&& CandidateMu_MCParticle_Pdg->at(0) == MuonPdg
 			&& CandidateP_MCParticle_Pdg->at(0) == ProtonPdg
 			&& CandidateMu_P->at(0) > ArrayNBinsMuonMomentum[0]
@@ -546,6 +565,8 @@ void t::Loop() {
 
 		if (fCC1p == 1) {
 
+			// 1D Plots
+
 			CC1pRecoNuScorePlot->Fill(NuScore,weight);
 			CC1pRecoFlashScorePlot->Fill(FlashScore,weight);
 
@@ -572,6 +593,52 @@ void t::Loop() {
 			CC1pRecoDeltaPTPlot->Fill(TransMissMomentum,weight);
 			CC1pRecoDeltaAlphaTPlot->Fill(DeltaAlphaT,weight);
 			CC1pRecoDeltaPhiTPlot->Fill(DeltaPhiT,weight);
+
+			// ---------------------------------------------------------------------------------------------------------------------
+			// ---------------------------------------------------------------------------------------------------------------------
+
+			// 2D Plots
+
+			CC1pRecoMuonMomentumPlot2D->Fill(True_CandidateMu_P->at(0),reco_Pmu_mcs,weight);
+			CC1pRecoProtonMomentumPlot2D->Fill(True_CandidateP_P->at(0),reco_Pp,weight);
+
+			CC1pRecoMuonCosThetaPlot2D->Fill(True_CandidateMu_CosTheta->at(0),reco_Pmu_cos_theta,weight);
+			CC1pRecoProtonCosThetaPlot2D->Fill(True_CandidateP_CosTheta->at(0),reco_Pp_cos_theta,weight);
+
+			CC1pRecoMuonPhiPlot2D->Fill(True_CandidateMu_Phi->at(0)*180./TMath::Pi(),reco_Pmu_phi*180./TMath::Pi(),weight);
+			CC1pRecoProtonPhiPlot2D->Fill(True_CandidateP_Phi->at(0)*180./TMath::Pi(),reco_Pp_phi*180./TMath::Pi(),weight);
+
+			// ---------------------------------------------------------------------------------------------------------------------
+
+			// True Level STV
+
+			TVector3 True_TVector3CandidateMuon;
+			True_TVector3CandidateMuon.SetMagThetaPhi(True_CandidateMu_P->at(0),TMath::ACos(True_CandidateMu_CosTheta->at(0)),True_CandidateMu_Phi->at(0)*TMath::Pi()/180.);
+
+			TVector3 True_TVector3CandidateMuonTrans;
+			True_TVector3CandidateMuonTrans.SetXYZ(True_TVector3CandidateMuon.X(),True_TVector3CandidateMuon.Y(),0.);
+
+			TVector3 True_TVector3CandidateProton;
+			True_TVector3CandidateProton.SetMagThetaPhi(True_CandidateP_P->at(0),TMath::ACos(True_CandidateP_CosTheta->at(0)),True_CandidateP_Phi->at(0)*TMath::Pi()/180.);
+
+			TVector3 True_TVector3CandidateProtonTrans;
+			True_TVector3CandidateProtonTrans.SetXYZ(True_TVector3CandidateProton.X(),True_TVector3CandidateProton.Y(),0.);
+
+			TVector3 True_TransMissMomentumV3 = True_TVector3CandidateMuonTrans + True_TVector3CandidateProtonTrans;
+
+			double True_TransMissMomentum = True_TransMissMomentumV3.Mag();
+
+			double True_DeltaAlphaT = TMath::ACos( (- True_TVector3CandidateMuonTrans*True_TransMissMomentumV3) /
+					( True_TVector3CandidateMuonTrans.Mag()*True_TransMissMomentum ) ) * 180./TMath::Pi();
+
+			double True_DeltaPhiT = TMath::ACos( (- True_TVector3CandidateMuonTrans*True_TVector3CandidateProton) /
+					( True_TVector3CandidateMuonTrans.Mag()*True_TVector3CandidateProton.Mag() ) ) * 180./TMath::Pi();
+
+			// ---------------------------------------------------------------------------------------------------------------------
+
+			CC1pRecoDeltaPTPlot2D->Fill(True_TransMissMomentum,TransMissMomentum,weight);
+			CC1pRecoDeltaAlphaTPlot2D->Fill(True_DeltaAlphaT,DeltaAlphaT,weight);
+			CC1pRecoDeltaPhiTPlot2D->Fill(True_DeltaPhiT,DeltaPhiT,weight);
 
 		}
 

@@ -6,8 +6,8 @@
 	WhichSampleArray.push_back("OverlayDirt9");
 
 	WhichSampleArray.push_back("Overlay9");
-//	WhichSampleArray.push_back("Overlay9_SCE");
-//	WhichSampleArray.push_back("Overlay9_DLdown");
+	WhichSampleArray.push_back("Overlay9_SCE");
+	WhichSampleArray.push_back("Overlay9_DLdown");
 
 	gROOT->ProcessLine(".L t.C+");
 	for (int i =0;i < (int)(WhichSampleArray.size()); i++) {
