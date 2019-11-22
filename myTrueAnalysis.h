@@ -9,23 +9,15 @@
 #include <vector>
 #include <vector>
 
-#include "../myCCQEAnalysis/Constants.h"
-
-//TString WhichSample = "Run1Data9";
-TString WhichSample = "Overlay9";
-//TString WhichSample = "ExtBNB9";
-//TString WhichSample = "OverlayDirt9";
-
-//TString WhichSample = "Overlay9_SCE";
-//TString WhichSample = "Overlay9_DLdown";
+#include "../mySTVAnalysis/Constants.h"
 
 using namespace Constants;
 
-
-TString PathToFile = "mySamples/"+UBCodeVersion+"/PreTruthSelection_"+WhichSample+"_"+UBCodeVersion+".root";
-
-
 class myTrueAnalysis {
+
+private:
+   TString fWhichSample;
+
 public :
    TTree          *fChain;   //!pointer to the analyzed TTree or TChain
    Int_t           fCurrent; //!current Tree number in a TChain
@@ -52,7 +44,7 @@ public :
    TBranch        *b_MCParticle_EndContainment;   //!
    TBranch        *b_MCParticle_Pdg;   //!
 
-   myTrueAnalysis(TTree *tree=0);
+   myTrueAnalysis(TString WhichSample,TTree *tree=0);
    virtual ~myTrueAnalysis();
    virtual Int_t    Cut(Long64_t entry);
    virtual Int_t    GetEntry(Long64_t entry);
@@ -66,8 +58,11 @@ public :
 #endif
 
 #ifdef myTrueAnalysis_cxx
-myTrueAnalysis::myTrueAnalysis(TTree *tree) : fChain(0) 
+myTrueAnalysis::myTrueAnalysis(TString WhichSample, TTree *tree) : fChain(0) 
 {
+
+   fWhichSample = WhichSample;
+   TString PathToFile = "mySamples/"+UBCodeVersion+"/PreTruthSelection_"+fWhichSample+"_"+UBCodeVersion+".root";
 
    if (tree == 0) {
       TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject(PathToFile);

@@ -16,7 +16,7 @@
 #include <iomanip>
 #include <vector>
 
-#include "../myCCQEAnalysis/Constants.h"
+#include "../mySTVAnalysis/Constants.h"
 #include "../../MyClasses/Tools.h"
 
 using namespace std;
@@ -32,12 +32,12 @@ void myTrueAnalysis::Loop()
 
 	// Output Files
 
-	TString FileName = "./OutputFiles/"+UBCodeVersion+"/TruthCCQEAnalysis_"+WhichSample+"_"+WhichRun+"_"+UBCodeVersion+".root";
+	TString FileName = "./OutputFiles/"+UBCodeVersion+"/TruthCCQEAnalysis_"+fWhichSample+"_"+WhichRun+"_"+UBCodeVersion+".root";
 	TFile* OutputFile = new TFile(FileName,"recreate");
 	std::cout << std::endl << "File " << FileName << " to be created"<< std::endl << std::endl;
 
 	ofstream TxtFile;
-	TxtFile.open ("./TxtFiles/"+UBCodeVersion+"/TruthCCQEAnalysis_"+WhichSample+"_"+WhichRun+"_"+UBCodeVersion+".txt");
+	TxtFile.open ("./TxtFiles/"+UBCodeVersion+"/TruthCCQEAnalysis_"+fWhichSample+"_"+WhichRun+"_"+UBCodeVersion+".txt");
 
 	// -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -274,7 +274,7 @@ void myTrueAnalysis::Loop()
 
 	std::cout << std::endl;
 
-	if ( string(WhichSample).find("Overlay9") != std::string::npos) {
+	if ( string(fWhichSample).find("Overlay9") != std::string::npos) {
 
 		std::cout << std::endl << "True CC1p events = " << TrueCC1pCounter << std::endl;
 		TxtFile << std::endl << "True CC1p events = " << TrueCC1pCounter << std::endl;
@@ -287,7 +287,7 @@ void myTrueAnalysis::Loop()
 
 /*	std::cout << std::endl;
 
-	if ( string(WhichSample).find("Overlay9") != std::string::npos) {
+	if ( string(fWhichSample).find("Overlay9") != std::string::npos) {
 
 		std::cout << std::endl << "True CCQElike events = " << TrueCCQElikeCounter << std::endl;
 		TxtFile << std::endl << "True CCQElike events = " << TrueCCQElikeCounter << std::endl;
