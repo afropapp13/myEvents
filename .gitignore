@@ -3,3 +3,5 @@ mySamples/*
 myPlots/*
 *.d
 *.so
+*.pcm
+.nfs*
