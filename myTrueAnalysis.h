@@ -24,6 +24,7 @@ public :
 
    // Declaration of leaf types
    double           Weight;
+   double           T2KWeight;
    Int_t           NumberMCParticles;
    vector<double>  *MCParticle_Mom;
    vector<double>  *MCParticle_Phi;
@@ -35,6 +36,7 @@ public :
 
    // List of branches
    TBranch        *b_Weight;   //!
+   TBranch        *b_T2KWeight;   //!
    TBranch        *b_NumberMCParticles;   //!
    TBranch        *b_MCParticle_Mom;   //!
    TBranch        *b_MCParticle_Phi;   //!
@@ -53,9 +55,11 @@ public :
    virtual void     Loop();
    virtual Bool_t   Notify();
    virtual void     Show(Long64_t entry = -1);
+
 };
 
 #endif
+
 
 #ifdef myTrueAnalysis_cxx
 myTrueAnalysis::myTrueAnalysis(TString WhichSample, TTree *tree) : fChain(0) 
@@ -119,6 +123,7 @@ void myTrueAnalysis::Init(TTree *tree)
    fChain->SetMakeClass(1);
 
    fChain->SetBranchAddress("Weight", &Weight, &b_Weight);
+   fChain->SetBranchAddress("T2KWeight", &T2KWeight, &b_T2KWeight);
    fChain->SetBranchAddress("NumberMCParticles", &NumberMCParticles, &b_NumberMCParticles);
    fChain->SetBranchAddress("MCParticle_Mom", &MCParticle_Mom, &b_MCParticle_Mom);
    fChain->SetBranchAddress("MCParticle_Phi", &MCParticle_Phi, &b_MCParticle_Phi);
@@ -132,27 +137,16 @@ void myTrueAnalysis::Init(TTree *tree)
 
 Bool_t myTrueAnalysis::Notify()
 {
-   // The Notify() function is called when a new file is opened. This
-   // can be either for a new TTree in a TChain or when when a new TTree
-   // is started when using PROOF. It is normally not necessary to make changes
-   // to the generated code, but the routine can be extended by the
-   // user if needed. The return value is currently not used.
-
    return kTRUE;
 }
 
 void myTrueAnalysis::Show(Long64_t entry)
 {
-// Print contents of entry.
-// If entry is not specified, print current entry
    if (!fChain) return;
    fChain->Show(entry);
 }
 Int_t myTrueAnalysis::Cut(Long64_t entry)
 {
-// This function may be called from Loop.
-// returns  1 if entry is accepted.
-// returns -1 otherwise.
    return 1;
 }
 #endif // #ifdef myTrueAnalysis_cxx

@@ -4,21 +4,23 @@
 
 	// -----------------------------------------------------------------------------------------
 
-	// Run 1
+	// Run 1 Systematics
 
-	WhichSampleArray.push_back("BeamOn9_Run1");
-	WhichSampleArray.push_back("ExtBNB9_Run1");
-	WhichSampleArray.push_back("OverlayDirt9_Run1");
-	WhichSampleArray.push_back("Overlay9_Run1");
+	WhichSampleArray.push_back("Overlay9_Run1_CV");
+	WhichSampleArray.push_back("Overlay9_Run1_X");
+	WhichSampleArray.push_back("Overlay9_Run1_YZ");
+	WhichSampleArray.push_back("Overlay9_Run1_LY");
+	WhichSampleArray.push_back("Overlay9_Run1_LYRayleigh");
+//	WhichSampleArray.push_back("Overlay9_Run1_LowE");
 
 	// -----------------------------------------------------------------------------------------
 
-	gROOT->ProcessLine(".L ../../myClass/Tools.cxx++");
+	gROOT->ProcessLine(".L ../../myClass/Tools.cxx+");
 	gROOT->ProcessLine(".L t.C+");
 	gROOT->ProcessLine(".L myTrueAnalysis.C+");
 
 
-	for (int i = 0;i < (int)(WhichSampleArray.size()); i++) {
+	for (int i =0;i < (int)(WhichSampleArray.size()); i++) {
 
 		gROOT->ProcessLine("t(\""+WhichSampleArray[i]+"\").Loop()");
 

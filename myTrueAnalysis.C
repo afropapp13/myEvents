@@ -1,5 +1,6 @@
 #define myTrueAnalysis_cxx
 #include "myTrueAnalysis.h"
+#include <TH2.h>
 #include <TStyle.h>
 #include <TCanvas.h>
 #include <TVector3.h>
@@ -12,15 +13,12 @@
 #include <TProfile.h>
 
 #include <iostream>
-#include <fstream>
 #include <iomanip>
 #include <vector>
 
-#include "../mySTVAnalysis/Constants.h"
 #include "../../MyClasses/Tools.h"
 
 using namespace std;
-using namespace Constants;
 
 void myTrueAnalysis::Loop()
 {
@@ -28,18 +26,18 @@ void myTrueAnalysis::Loop()
 	if (fChain == 0) return; Long64_t nentries = fChain->GetEntriesFast(); Long64_t nbytes = 0, nb = 0;
 	TH1D::SetDefaultSumw2();
 
-	// -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	// --------------------------------------------------------------------------------------------------------------------------------------------------
 
 	// Output Files
 
-	TString FileName = "./OutputFiles/"+UBCodeVersion+"/TruthCCQEAnalysis_"+fWhichSample+"_"+WhichRun+"_"+UBCodeVersion+".root";
+	TString FileName = "./OutputFiles/"+UBCodeVersion+"/TruthSTVAnalysis_"+fWhichSample+"_"+UBCodeVersion+".root";
 	TFile* OutputFile = new TFile(FileName,"recreate");
 	std::cout << std::endl << "File " << FileName << " to be created"<< std::endl << std::endl;
 
 	ofstream TxtFile;
-	TxtFile.open ("./TxtFiles/"+UBCodeVersion+"/TruthCCQEAnalysis_"+fWhichSample+"_"+WhichRun+"_"+UBCodeVersion+".txt");
+	TxtFile.open ("./TxtFiles/"+UBCodeVersion+"/TruthSTVAnalysis_"+fWhichSample+"_"+UBCodeVersion+".txt");
 
-	// -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	// ---------------------------------------------------------------------------------------------------------------------------------------------------
 
 	// 1D True Transverse Variables
 
@@ -56,9 +54,10 @@ void myTrueAnalysis::Loop()
 	TH1D* TrueProtonCosThetaPlot = new TH1D("TrueProtonCosThetaPlot",LabelXAxisProtonCosTheta,NBinsProtonCosTheta,ArrayNBinsProtonCosTheta);
 
 	TH1D* TrueECalPlot = new TH1D("TrueECalPlot",LabelXAxisECal,NBinsECal,ArrayNBinsECal);
+	TH1D* TrueEQEPlot = new TH1D("TrueEQEPlot",LabelXAxisEQE,NBinsEQE,ArrayNBinsEQE);
 	TH1D* TrueQ2Plot = new TH1D("TrueQ2Plot",LabelXAxisQ2,NBinsQ2,ArrayNBinsQ2);
 
-	// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	// -----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 	Tools tools;
 
@@ -75,12 +74,13 @@ void myTrueAnalysis::Loop()
 		Long64_t ientry = LoadTree(jentry); if (ientry < 0) break; nb = fChain->GetEntry(jentry); nbytes += nb;
 		if (jentry%1000 == 0) std::cout << jentry/1000 << " k " << std::setprecision(3) << double(jentry)/nentries*100. << " %"<< std::endl;
 
-		// -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+		// ----------------------------------------------------------------------------------------------------------------------------------------------------
 
 //		double weight = 1.;
-		double weight = Weight;
+//		double T2Kweight = 1.;
+		double weight = Weight * T2KWeight; // Weight from v3.0.4 to v.3.0.6 * weight from application of T2K tune
 
-		// ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+		// ---------------------------------------------------------------------------------------------------------------------------------------------------------
 
 		// Analysis over the simb::MCParticles
 
@@ -90,6 +90,8 @@ void myTrueAnalysis::Loop()
 		int TrueMuonCounter = 0, TrueProtonCounter = 0, TrueChargedPionCounter = 0, TrueNeutralPionCounter = 0;
 		bool TrueCC1pEvent = false;
 		bool TrueCCQElikeEvent = false;
+
+		// ---------------------------------------------------------------------------------------------------------------------------------------------------------
 
 		// Loop over the MCParticles and determine the populations
 
@@ -105,9 +107,12 @@ void myTrueAnalysis::Loop()
 				VectorTrueProtonIndex.push_back(WhichMCParticle);
 			}
 
-			if (fabs(MCParticle_Pdg->at(WhichMCParticle)) == AbsChargedPionPdg && MCParticle_Mom->at(WhichMCParticle) > ChargedPionMomentumThres) { TrueChargedPionCounter++; }
+			if (fabs(MCParticle_Pdg->at(WhichMCParticle)) == AbsChargedPionPdg && MCParticle_Mom->at(WhichMCParticle) > ChargedPionMomentumThres) 
+				{ TrueChargedPionCounter++; }
 
 		} // end of the loop over the simb::MCParticles
+
+		// ---------------------------------------------------------------------------------------------------------------------------------------------------------
 
 		// Signal definition: 1 mu (Pmu > 100 MeV / c), 1p (Pp > 300 MeV / c) & pi+/- (Ppi > 70 MeV / c)
 
@@ -165,6 +170,10 @@ void myTrueAnalysis::Loop()
 			// Reconstructed calorimetric energy using true level info / MCParticles
 
 			double TrueRecoECal = TrueProton_KE_GeV + TrueMuon_E_GeV + BE; // GeV
+
+			// Reconstructed QE energy using true level info / MCParticles
+
+			double TrueRecoEQE = ( ProtonMass_GeV * BE + ProtonMass_GeV * TrueMuon_E_GeV ) / ( ProtonMass_GeV - TrueMuon_E_GeV + TrueMuonMomentum_GeV * TrueMuonCosTheta);
 		
 			// Reconstructed neutrino using true level info / MCParticles
 
@@ -182,7 +191,7 @@ void myTrueAnalysis::Loop()
 			double TrueDeltaAlphaT = 
 				TMath::ACos( (- TVector3TrueMuonTransverse*TVector3TrueTransMissMomentum) / ( TVector3TrueMuonTransverseMag*TrueTransMissMomentum ) ) * 180./TMath::Pi();
 			double TrueDeltaPhiT = 
-				TMath::ACos( (- TVector3TrueMuonTransverse*TVector3TrueProtonTransverse) / ( TVector3TrueMuonTransverseMag*TVector3TrueProtonTransverseMag ) ) * 180./TMath::Pi();
+			TMath::ACos( (- TVector3TrueMuonTransverse*TVector3TrueProtonTransverse) / ( TVector3TrueMuonTransverseMag*TVector3TrueProtonTransverseMag ) ) * 180./TMath::Pi();
 
 			// Reconstructed q vector using true level info / MCParticles
 
@@ -195,9 +204,9 @@ void myTrueAnalysis::Loop()
 			// Same events fill all the plots
 
 			if (
-			    TrueMuonStartContainment == true //&& TrueMuonEndContainment 
+			    TrueMuonStartContainment == true 
 			    && TrueProtonStartContainment == true && TrueProtonEndContainment == true
-			    && fabs(TrueDeltaThetaProtonMuon_Deg - DeltaThetaCentralValue) < DeltaThetaOpeningAngle
+			    && TrueDeltaThetaProtonMuon_Deg  < DeltaThetaCut
 			    && TrueMuonMomentum_GeV > ArrayNBinsMuonMomentum[0]
 			    && TrueProtonMomentum_GeV > ArrayNBinsProtonMomentum[0]
 			) {
@@ -207,9 +216,24 @@ void myTrueAnalysis::Loop()
 				// STV analysis
 
 				if (
-				    TrueTransMissMomentum > ArrayNBinsDeltaPT[0] && TrueTransMissMomentum < ArrayNBinsDeltaPT[NBinsDeltaPT]
-				    && TrueDeltaAlphaT > ArrayNBinsDeltaAlphaT[0] && TrueDeltaAlphaT < ArrayNBinsDeltaAlphaT[NBinsDeltaAlphaT]
-				    && TrueDeltaPhiT > ArrayNBinsDeltaPhiT[0] && TrueDeltaPhiT < ArrayNBinsDeltaPhiT[NBinsDeltaPhiT]
+				    TrueTransMissMomentum > ArrayNBinsDeltaPT[0] 
+				    && TrueTransMissMomentum < ArrayNBinsDeltaPT[NBinsDeltaPT]
+				    && TrueDeltaAlphaT > ArrayNBinsDeltaAlphaT[0] 
+				    && TrueDeltaAlphaT < ArrayNBinsDeltaAlphaT[NBinsDeltaAlphaT]
+				    && TrueDeltaPhiT > ArrayNBinsDeltaPhiT[0] 
+				    && TrueDeltaPhiT < ArrayNBinsDeltaPhiT[NBinsDeltaPhiT]
+				    && TrueMuonMomentum_GeV < ArrayNBinsMuonMomentum[NBinsMuonMomentum]
+				    && TrueProtonMomentum_GeV < ArrayNBinsProtonMomentum[NBinsProtonMomentum]
+				    && TrueMuonCosTheta > ArrayNBinsMuonCosTheta[0]
+				    && TrueMuonCosTheta < ArrayNBinsMuonCosTheta[NBinsMuonCosTheta]
+				    && TrueProtonCosTheta > ArrayNBinsProtonCosTheta[0]
+				    && TrueProtonCosTheta < ArrayNBinsProtonCosTheta[NBinsProtonCosTheta]
+				    && TrueRecoECal > ArrayNBinsECal[0]
+				    && TrueRecoEQE > ArrayNBinsEQE[0]
+				    && RecoTrueQ2 > ArrayNBinsQ2[0]
+				    && TrueRecoECal < ArrayNBinsECal[NBinsECal]
+				    && TrueRecoEQE < ArrayNBinsEQE[NBinsEQE]
+				    && RecoTrueQ2 < ArrayNBinsQ2[NBinsQ2]
 				) {
 
 					// True CC1p event
@@ -223,33 +247,13 @@ void myTrueAnalysis::Loop()
 					TrueDeltaAlphaTPlot->Fill(TrueDeltaAlphaT,weight);
 					TrueDeltaPhiTPlot->Fill(TrueDeltaPhiT,weight);
 
-					if (TrueRecoECal > ArrayNBinsECal[0] && TrueRecoECal < ArrayNBinsECal[NBinsECal]) { TrueECalPlot->Fill(TrueRecoECal,weight); }
-					if (RecoTrueQ2 > ArrayNBinsQ2[0] && RecoTrueQ2 < ArrayNBinsQ2[NBinsQ2]) { TrueQ2Plot->Fill(RecoTrueQ2,weight); }
+					// Reconstructed energy & Q2
 
-/*				}*/
+					TrueECalPlot->Fill(TrueRecoECal,weight);
+					TrueEQEPlot->Fill(TrueRecoEQE,weight);
+					TrueQ2Plot->Fill(RecoTrueQ2,weight);
 
-				// --------------------------------------------------------------------------------------------------------------------------------------------------
-
-				// CCQElike analysis
-
-/*				if (
-					TrueMuonMomentum_GeV < ArrayNBinsMuonMomentum[NBinsMuonMomentum]
-					&& TrueProtonMomentum_GeV < ArrayNBinsProtonMomentum[NBinsProtonMomentum]
-					&& TrueMuonCosTheta > ArrayNBinsMuonCosTheta[0]
-					&& TrueMuonCosTheta < ArrayNBinsMuonCosTheta[NBinsMuonCosTheta]
-					&& TrueProtonCosTheta > ArrayNBinsProtonCosTheta[0]
-					&& TrueProtonCosTheta < ArrayNBinsProtonCosTheta[NBinsProtonCosTheta]
-					// Coplanarity cut & transverse imbalance for CCQElike selection
-					&& fabs(TrueDeltaPhiProtonMuon_Deg - DeltaPhiCentralValue) < DeltaPhiOpeningAngle
-					&& TrueTransMissMomentum < MaxTransMissMomentum
-				) {*/
-
-					// True CCQElike event
-
-/*					TrueCCQElikeEvent = true;
-					TrueCCQElikeCounter++;*/
-
-					// kinematic variables
+					// Kinematic variables
 
 					TrueMuonMomentumPlot->Fill(TrueMuonMomentum_GeV,weight);
 					TrueMuonPhiPlot->Fill(TrueMuonPhi_Deg,weight);
@@ -283,20 +287,9 @@ void myTrueAnalysis::Loop()
 
 	// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-	// CCQElike analysis summary
-
-/*	std::cout << std::endl;
-
-	if ( string(fWhichSample).find("Overlay9") != std::string::npos) {
-
-		std::cout << std::endl << "True CCQElike events = " << TrueCCQElikeCounter << std::endl;
-		TxtFile << std::endl << "True CCQElike events = " << TrueCCQElikeCounter << std::endl;
-
-	}*/
-
-	// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-	OutputFile->Write();
 	std::cout << std::endl << "File " << FileName << " has been created"<< std::endl << std::endl;
+	OutputFile->cd();
+	OutputFile->Write();
+	OutputFile->Close();
 
 } // End of the program
