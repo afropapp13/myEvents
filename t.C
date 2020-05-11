@@ -388,7 +388,11 @@ void t::Loop() {
 
 		if (string(fWhichSample).find("Overlay") != std::string::npos) {
 
-				TString PathToPOTFile = "mySamples/"+UBCodeVersion+"/PreSelection_"+fWhichSample+"_"+UBCodeVersion+"_POT.root";
+				// Locally
+				//TString PathToPOTFile = "mySamples/"+UBCodeVersion+"/PreSelection_"+fWhichSample+"_"+UBCodeVersion+"_POT.root";
+				// gpvm's
+				TString PathToPOTFile = "../PreSelection/OutputFiles/"+UBCodeVersion+"/PreSelection_"+fWhichSample+"_"+UBCodeVersion+"_POT.root";
+
 				TFile* POTFile = TFile::Open(PathToPOTFile,"readonly");
 				TH1D* POTCountHist = (TH1D*)(POTFile->Get("POTCountHist"));
 				POTCount = POTCountHist->GetBinContent(1);
