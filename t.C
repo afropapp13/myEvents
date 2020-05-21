@@ -448,12 +448,26 @@ void t::Loop() {
 
 			}
 
-
 			// ------------------------------------------------------------------------------------------------------------------------------------------------
 
 			if (string(fWhichSample).find("ExtBNB9") != std::string::npos) { weight = E1DCNT_wcut / EXT;}
 
 			else if (string(fWhichSample).find("Overlay") != std::string::npos) { weight = ( tor860_wcut / POTCount) * Weight * T2KWeight; }
+
+			// -------------------------------------------------------------------------------------------------------------------------------------------------
+
+			// EventWeight weights
+
+// Fix it !!!!
+
+			// Genie
+//			if (string(fWhichSample).find("Genie_All") != std::string::npos) { weight = weight * EventWeightValues[fWhichSample][fUniverse];}
+
+			// Flux
+//			if (string(fWhichSample).find("FluxUnisim") != std::string::npos || string(fWhichSample).find("Primary") != std::string::npos) 
+//				{ weight = weight * EventWeightValues[fWhichSample][fUniverse];}
+
+			// -------------------------------------------------------------------------------------------------------------------------------------------------
 
 			if ( fabs(weight) != weight || weight <= 0.) { continue; } // Securing against infinities & negative weights
 

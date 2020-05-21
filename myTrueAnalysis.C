@@ -80,6 +80,19 @@ void myTrueAnalysis::Loop()
 //		double T2Kweight = 1.;
 		double weight = Weight * T2KWeight; // Weight from v3.0.4 to v.3.0.6 * weight from application of T2K tune
 
+		// -------------------------------------------------------------------------------------------------------------------------------------------------
+
+		// EventWeight weights
+
+// Fix it !!!!
+
+		// Genie
+//		if (string(fWhichSample).find("Genie_All") != std::string::npos) { weight = weight * EventWeightValues[fWhichSample][fUniverse];}
+
+		// Flux
+//		if (string(fWhichSample).find("FluxUnisim") != std::string::npos || string(fWhichSample).find("Primary") != std::string::npos) 
+//			{ weight = weight * EventWeightValues[fWhichSample][fUniverse];}
+
 		// ---------------------------------------------------------------------------------------------------------------------------------------------------------
 
 		// Analysis over the simb::MCParticles
