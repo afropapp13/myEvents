@@ -1,6 +1,5 @@
-OutputFiles/*
-mySamples/*
-myPlots/*
+*.pdf
+*.root
 *.d
 *.so
 *.pcm
