@@ -156,7 +156,7 @@ void t::Loop() {
 		// 1D Reco Level Plots for non-CC1p
 
 		TH1D* NonCC1pRecoNuScorePlot = new TH1D("NonCC1pRecoNuScorePlot",RecoLabelXAxisNuScore,NBinsNuScore,MinNuScore,MaxNuScore);
-		TH1D* NonCC1pRecoFlashScorePlot = new TH1D("NonCC1pRecoFlashScorePlot",RecoLabelXAxisFlashScore,NBinsFlashScore,MinNuScore,MaxFlashScore);
+		TH1D* NonCC1pRecoFlashScorePlot = new TH1D("NonCC1pRecoFlashScorePlot",RecoLabelXAxisFlashScore,NBinsFlashScore,MinFlashScore,MaxFlashScore);
 
 		TH1D* NonCC1pRecoDistancePlot = new TH1D("NonCC1pRecoDistancePlot",RecoLabelXAxisDistance,NBinsDistance,MinDistance,MaxDistance);
 
@@ -744,7 +744,7 @@ void t::Loop() {
 
 			}
 
-			// ----------------------------------------------------------------------------------------------------------------------------------
+			// ----------------------------------------------------------------------------------------------------------------------
 
 			RecoNuScorePlot->Fill(NuScore,weight);
 			RecoFlashScorePlot->Fill(FlashScore,weight);
@@ -779,9 +779,10 @@ void t::Loop() {
 
 			// 2D Plot for Default Chi2 vs 3-Plane Chi2
 
-			if (reco_Pmu_chi2 > 0 && reco_Pmu_ThreePlanechi2 > 0) { RecoChi2vsThreePlaneChi2TPlot->Fill(reco_Pmu_chi2,reco_Pmu_ThreePlanechi2); }
+			if (reco_Pmu_chi2 > 0 && reco_Pmu_ThreePlanechi2 > 0) 
+				{ RecoChi2vsThreePlaneChi2TPlot->Fill(reco_Pmu_chi2,reco_Pmu_ThreePlanechi2); }
 
-			// -------------------------------------------------------------------------------------------------------------------------------------------------------
+			// ---------------------------------------------------------------------------------------------------------------------------
 
 			// CC1p Signal
 
