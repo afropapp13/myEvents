@@ -20,7 +20,7 @@ using namespace std;
 
 void t::Loop() {
 
-	// ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	// ---------------------------------------------------------------------------------------------------------------------------------------
 
 	int NEventsPassingSelectionCuts = 0;
 	TString Cuts = "_NoCuts";
@@ -51,12 +51,12 @@ void t::Loop() {
 		TFile* file = new TFile(FileName,"recreate");
 		std::cout << std::endl << "Creating a new file: " << FileName << std::endl << std::endl << std::endl;
 
-		// -----------------------------------------------------------------------------------------------------------------------------------------------------------
+		// --------------------------------------------------------------------------------------------------------------------------------
 
 		// 1D Reco Level Plots
 
 		TH1D* RecoNuScorePlot = new TH1D("RecoNuScorePlot",RecoLabelXAxisNuScore,NBinsNuScore,MinNuScore,MaxNuScore);
-		TH1D* RecoFlashScorePlot = new TH1D("RecoFlashScorePlot",RecoLabelXAxisFlashScore,NBinsFlashScore,MinNuScore,MaxFlashScore);
+		TH1D* RecoFlashScorePlot = new TH1D("RecoFlashScorePlot",RecoLabelXAxisFlashScore,NBinsFlashScore,MinFlashScore,MaxFlashScore);
 
 		TH1D* RecoDistancePlot = new TH1D("RecoDistancePlot",RecoLabelXAxisDistance,NBinsDistance,MinDistance,MaxDistance);
 
@@ -151,7 +151,7 @@ void t::Loop() {
 		TH2D* CC1pRecoEQEPlot2D = new TH2D("CC1pRecoEQEPlot2D",LabelXAxisEQE2D,NBinsEQE,ArrayNBinsEQE,NBinsEQE,ArrayNBinsEQE);
 		TH2D* CC1pRecoQ2Plot2D = new TH2D("CC1pRecoQ2Plot2D",LabelXAxisQ22D,NBinsQ2,ArrayNBinsQ2,NBinsQ2,ArrayNBinsQ2);
 
-		// -----------------------------------------------------------------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------------------
 
 		// 1D Reco Level Plots for non-CC1p
 

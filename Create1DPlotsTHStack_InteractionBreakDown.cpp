@@ -15,7 +15,7 @@
 #include "/home/afroditi/Dropbox/PhD/Secondary_Code/SetOffsetAndSize.cpp"
 #include "/home/afroditi/Dropbox/PhD/Secondary_Code/ToString.cpp"
 
-#include "../mySTVAnalysis/Constants.h"
+#include "../myClasses/Constants.h"
 
 using namespace std;
 using namespace Constants;
@@ -27,7 +27,7 @@ void Create1DPlotsTHStack_InteractionBreakDown() {
 
 	TString StorePath = "myPlots/";
 
-	// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	// ----------------------------------------------------------------------------------------------------------------------------------------
 
 	PlotNames.push_back("RecoNuScorePlot");
 	PlotNames.push_back("RecoFlashScorePlot");

@@ -15,7 +15,7 @@
 #include "/home/afroditi/Dropbox/PhD/Secondary_Code/SetOffsetAndSize.cpp"
 #include "/home/afroditi/Dropbox/PhD/Secondary_Code/ToString.cpp"
 
-#include "../mySTVAnalysis/Constants.h"
+#include "../myClasses/Constants.h"
 
 using namespace std;
 using namespace Constants;
@@ -26,7 +26,7 @@ void Chi2PID_BreakDown() {
 
 	TString StorePath = "myPlots/";
 
-	// --------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	// -----------------------------------------------------------------------------------------------------------------------------------------
 
 	// Keep them for historical reasons but don't plot them
 //	PlotNames.push_back("RecoChi2Plot");
@@ -36,7 +36,7 @@ void Chi2PID_BreakDown() {
 	const int N1DPlots = PlotNames.size();
 	cout << "Number of 1D Plots = " << N1DPlots << endl;
 
-	// ----------------------------------------------------------------------------------------------------------------------------------------------------------------
+	// -----------------------------------------------------------------------------------------------------------------------------------------------
 
 	// Selection cuts
 

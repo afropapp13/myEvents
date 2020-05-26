@@ -15,7 +15,7 @@
 #include "/home/afroditi/Dropbox/PhD/Secondary_Code/SetOffsetAndSize.cpp"
 #include "/home/afroditi/Dropbox/PhD/Secondary_Code/ToString.cpp"
 
-#include "../mySTVAnalysis/Constants.h"
+#include "../myClasses/Constants.h"
 
 using namespace std;
 using namespace Constants;
