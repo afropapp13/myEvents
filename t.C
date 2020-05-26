@@ -16,10 +16,7 @@
 #include <iomanip>
 #include <vector>
 
-#include "../mySTVAnalysis/Constants.h"
-
 using namespace std;
-using namespace Constants;
 
 void t::Loop() {
 
