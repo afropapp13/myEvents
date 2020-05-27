@@ -388,7 +388,7 @@ void t::Loop() {
 				// Locally
 				//TString PathToPOTFile = "mySamples/"+UBCodeVersion+"/PreSelection_"+fWhichSample+"_"+UBCodeVersion+"_POT.root";
 				// gpvm's
-				TString PathToPOTFile = "../PreSelection/OutputFiles/"+UBCodeVersion+"/PreSelection_"+fWhichSample+"_"+UBCodeVersion+"_POT.root";
+				TString PathToPOTFile = "mySamples/"+UBCodeVersion+"/PreSelection_"+fWhichSample+"_"+UBCodeVersion+"_POT.root";
 
 				TFile* POTFile = TFile::Open(PathToPOTFile,"readonly");
 				TH1D* POTCountHist = (TH1D*)(POTFile->Get("POTCountHist"));
