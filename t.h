@@ -171,7 +171,7 @@ t::t(TString WhichSample, TTree *tree) : fChain(0)
    fWhichSample = WhichSample;
 
 //   On the gpvm's
-   fPathToFile = "../PreSelection/OutputFiles/"+UBCodeVersion+"/PreSelection_"+fWhichSample+"_"+UBCodeVersion+".root";
+   fPathToFile = "mySamples/"+UBCodeVersion+"/PreSelection_"+fWhichSample+"_"+UBCodeVersion+".root";
 //   Locally
 //   fPathToFile = "mySamples/"+UBCodeVersion+"/PreSelection_"+fWhichSample+"_"+UBCodeVersion+".root";
 

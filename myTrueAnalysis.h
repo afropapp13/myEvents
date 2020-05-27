@@ -71,7 +71,7 @@ myTrueAnalysis::myTrueAnalysis(TString WhichSample, TTree *tree) : fChain(0)
 //   TString PathToFile = "mySamples/"+UBCodeVersion+"/PreTruthSelection_"+fWhichSample+"_"+UBCodeVersion+".root";
 
 // On the gpvm's
-   TString PathToFile = "../PreSelection/OutputFiles/"+UBCodeVersion+"/PreTruthSelection_"+fWhichSample+"_"+UBCodeVersion+".root";
+   TString PathToFile = "mySamples/"+UBCodeVersion+"/PreTruthSelection_"+fWhichSample+"_"+UBCodeVersion+".root";
 
    if (tree == 0) {
       TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject(PathToFile);
