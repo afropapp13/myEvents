@@ -79,6 +79,7 @@ void myTrueAnalysis::Loop()
 //		double weight = 1.;
 //		double T2Kweight = 1.;
 		double weight = Weight * T2KWeight; // Weight from v3.0.4 to v.3.0.6 * weight from application of T2K tune
+		if (weight <= 0 || weight > 10) { continue; }
 
 		// -------------------------------------------------------------------------------------------------------------------------------------
 
@@ -235,12 +236,15 @@ void myTrueAnalysis::Loop()
 				    && TrueDeltaAlphaT < ArrayNBinsDeltaAlphaT[NBinsDeltaAlphaT]
 				    && TrueDeltaPhiT > ArrayNBinsDeltaPhiT[0] 
 				    && TrueDeltaPhiT < ArrayNBinsDeltaPhiT[NBinsDeltaPhiT]
+				    
 				    && TrueMuonMomentum_GeV < ArrayNBinsMuonMomentum[NBinsMuonMomentum]
 				    && TrueProtonMomentum_GeV < ArrayNBinsProtonMomentum[NBinsProtonMomentum]
+				    
 				    && TrueMuonCosTheta > ArrayNBinsMuonCosTheta[0]
 				    && TrueMuonCosTheta < ArrayNBinsMuonCosTheta[NBinsMuonCosTheta]
 				    && TrueProtonCosTheta > ArrayNBinsProtonCosTheta[0]
 				    && TrueProtonCosTheta < ArrayNBinsProtonCosTheta[NBinsProtonCosTheta]
+				    
 				    && TrueRecoECal > ArrayNBinsECal[0]
 				    && TrueRecoEQE > ArrayNBinsEQE[0]
 				    && RecoTrueQ2 > ArrayNBinsQ2[0]
@@ -281,7 +285,7 @@ void myTrueAnalysis::Loop()
 
 			} // End of the angle selection cuts && the demand that we fill the plots with the same events
 
-		} // End of signal definition: 1 mu (Pmu > 100 MeV / c), 1p (Pp > 300 MeV / c), 0 pi0 & pi+/- (Ppi > 70 MeV / c)
+		} // End of signal definition: 1 mu (Pmu > 100 MeV / c), 1p (Pp > 200 MeV / c), 0 pi0 & pi+/- (Ppi > 70 MeV / c)
 
 	} // End of the loop over the events
 

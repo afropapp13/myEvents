@@ -466,7 +466,7 @@ void t::Loop() {
 
 			// -----------------------------------------------------------------------------------------------------------------------
 
-			if ( fabs(weight) != weight || weight <= 0.) { continue; } // Securing against infinities & negative weights
+			if ( fabs(weight) != weight || weight <= 0. || weight > 10) { continue; } // Securing against infinities & negative weights
 
 			// -----------------------------------------------------------------------------------------------------------------------
 
