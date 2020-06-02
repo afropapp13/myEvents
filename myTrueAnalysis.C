@@ -20,8 +20,7 @@
 
 using namespace std;
 
-void myTrueAnalysis::Loop()
-{
+void myTrueAnalysis::Loop() {
 
 	if (fChain == 0) return; Long64_t nentries = fChain->GetEntriesFast(); Long64_t nbytes = 0, nb = 0;
 	TH1D::SetDefaultSumw2();
@@ -110,25 +109,28 @@ void myTrueAnalysis::Loop()
 		// Loop over the MCParticles and determine the populations
 
 		for (int WhichMCParticle = 0; WhichMCParticle < NumberMCParticles; WhichMCParticle++) {
+		
+			double MCParticleMomentum = MCParticle_Mom->at(WhichMCParticle);
+			int MCParticlePdg = MCParticle_Pdg->at(WhichMCParticle);
 
-			if (MCParticle_Pdg->at(WhichMCParticle) == MuonPdg && MCParticle_Mom->at(WhichMCParticle) > ArrayNBinsMuonMomentum[0]) { 
+			if (MCParticlePdg == MuonPdg && MCParticleMomentum > ArrayNBinsMuonMomentum[0]) { 
 				TrueMuonCounter++; 
 				VectorTrueMuonIndex.push_back(WhichMCParticle);
 			}
 
-			if (MCParticle_Pdg->at(WhichMCParticle) == ProtonPdg && MCParticle_Mom->at(WhichMCParticle) > ArrayNBinsProtonMomentum[0]) { 
+			if (MCParticlePdg == ProtonPdg && MCParticleMomentum > ArrayNBinsProtonMomentum[0]) { 
 				TrueProtonCounter++; 
 				VectorTrueProtonIndex.push_back(WhichMCParticle);
 			}
 
-			if (fabs(MCParticle_Pdg->at(WhichMCParticle)) == AbsChargedPionPdg && MCParticle_Mom->at(WhichMCParticle) > ChargedPionMomentumThres) 
+			if (fabs(MCParticlePdg) == AbsChargedPionPdg && MCParticleMomentum > ChargedPionMomentumThres) 
 				{ TrueChargedPionCounter++; }
 
 		} // end of the loop over the simb::MCParticles
 
 		// ----------------------------------------------------------------------------------------------------------------------------------
 
-		// Signal definition: 1 mu (Pmu > 100 MeV / c), 1p (Pp > 300 MeV / c) & pi+/- (Ppi > 70 MeV / c)
+		// Signal definition: 1 mu (Pmu > 100 MeV / c), 1p (Pp > 200 MeV / c) & pi+/- (Ppi > 70 MeV / c)
 
 		if (TrueMuonCounter == 1 && TrueProtonCounter == 1 && TrueChargedPionCounter == 0) {
 
