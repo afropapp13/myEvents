@@ -100,7 +100,7 @@ void myTrueAnalysis::Loop() {
 		std::vector<int> VectorTrueMuonIndex; VectorTrueMuonIndex.clear();
 		std::vector<int> VectorTrueProtonIndex; VectorTrueProtonIndex.clear();
 
-		int TrueMuonCounter = 0, TrueProtonCounter = 0, TrueChargedPionCounter = 0, TrueNeutralPionCounter = 0;
+		int TrueMuonCounter = 0, TrueProtonCounter = 0, TrueChargedPionCounter = 0;
 		bool TrueCC1pEvent = false;
 		bool TrueCCQElikeEvent = false;
 
@@ -123,7 +123,7 @@ void myTrueAnalysis::Loop() {
 				VectorTrueProtonIndex.push_back(WhichMCParticle);
 			}
 
-			if (fabs(MCParticlePdg) == AbsChargedPionPdg && MCParticleMomentum > ChargedPionMomentumThres) 
+			if ( fabs(MCParticlePdg) == AbsChargedPionPdg && MCParticleMomentum > ChargedPionMomentumThres) 
 				{ TrueChargedPionCounter++; }
 
 		} // end of the loop over the simb::MCParticles
