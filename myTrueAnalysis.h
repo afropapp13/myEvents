@@ -23,8 +23,9 @@ public :
    Int_t           fCurrent; //!current Tree number in a TChain
 
    // Declaration of leaf types
-   double           Weight;
-   double           T2KWeight;
+   double          Weight;
+   double          T2KWeight;
+   int             CC1p;   
    Int_t           NumberMCParticles;
    vector<double>  *MCParticle_Mom;
    vector<double>  *MCParticle_Phi;
@@ -37,6 +38,7 @@ public :
    // List of branches
    TBranch        *b_Weight;   //!
    TBranch        *b_T2KWeight;   //!
+   TBranch        *b_CC1p;   //!   
    TBranch        *b_NumberMCParticles;   //!
    TBranch        *b_MCParticle_Mom;   //!
    TBranch        *b_MCParticle_Phi;   //!
@@ -129,6 +131,7 @@ void myTrueAnalysis::Init(TTree *tree)
 
    fChain->SetBranchAddress("Weight", &Weight, &b_Weight);
    fChain->SetBranchAddress("T2KWeight", &T2KWeight, &b_T2KWeight);
+   fChain->SetBranchAddress("CC1p", &CC1p, &b_CC1p);   
    fChain->SetBranchAddress("NumberMCParticles", &NumberMCParticles, &b_NumberMCParticles);
    fChain->SetBranchAddress("MCParticle_Mom", &MCParticle_Mom, &b_MCParticle_Mom);
    fChain->SetBranchAddress("MCParticle_Phi", &MCParticle_Phi, &b_MCParticle_Phi);

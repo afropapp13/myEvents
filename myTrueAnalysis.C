@@ -132,7 +132,7 @@ void myTrueAnalysis::Loop() {
 
 		// Signal definition: 1 mu (Pmu > 100 MeV / c), 1p (Pp > 200 MeV / c) & pi+/- (Ppi > 70 MeV / c)
 
-		if (TrueMuonCounter == 1 && TrueProtonCounter == 1 && TrueChargedPionCounter == 0) {
+		if (TrueMuonCounter == 1 && TrueProtonCounter == 1 && TrueChargedPionCounter == 0 && CC1p == 1) {
 
 			// True muon
 
@@ -287,7 +287,7 @@ void myTrueAnalysis::Loop() {
 
 			} // End of the angle selection cuts && the demand that we fill the plots with the same events
 
-		} // End of signal definition: 1 mu (Pmu > 100 MeV / c), 1p (Pp > 200 MeV / c), 0 pi0 & pi+/- (Ppi > 70 MeV / c)
+		} // End of signal definition: 1 mu (Pmu > 100 MeV / c), 1p (Pp > 200 MeV / c) & pi+/- (Ppi > 70 MeV / c)
 
 	} // End of the loop over the events
 

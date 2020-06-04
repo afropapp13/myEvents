@@ -706,23 +706,23 @@ void t::Loop() {
 			if (    
 	//			fWhichSample == "Overlay9"			
 				string(fWhichSample).find("Overlay") != std::string::npos
-				&& CandidateMu_MCParticle_Pdg->at(0) == MuonPdg
-				&& CandidateP_MCParticle_Pdg->at(0) == ProtonPdg
+//				&& CandidateMu_MCParticle_Pdg->at(0) == MuonPdg
+//				&& CandidateP_MCParticle_Pdg->at(0) == ProtonPdg
 
-//				&& True_CandidateMu_StartContainment->at(0) == 1
-//				&& True_CandidateP_StartContainment->at(0) == 1
-//				&& True_CandidateP_EndContainment->at(0) == 1
+////				&& True_CandidateMu_StartContainment->at(0) == 1
+////				&& True_CandidateP_StartContainment->at(0) == 1
+////				&& True_CandidateP_EndContainment->at(0) == 1
 
-				&& True_CandidateMu_P->at(0) > ArrayNBinsMuonMomentum[0]
-				&& True_CandidateP_P->at(0) > ArrayNBinsProtonMomentum[0]
-				&& True_CandidateMu_P->at(0) < ArrayNBinsMuonMomentum[NBinsMuonMomentum]
-				&& True_CandidateP_P->at(0) < ArrayNBinsProtonMomentum[NBinsProtonMomentum]
+//				&& True_CandidateMu_P->at(0) > ArrayNBinsMuonMomentum[0]
+//				&& True_CandidateP_P->at(0) > ArrayNBinsProtonMomentum[0]
+//				&& True_CandidateMu_P->at(0) < ArrayNBinsMuonMomentum[NBinsMuonMomentum]
+//				&& True_CandidateP_P->at(0) < ArrayNBinsProtonMomentum[NBinsProtonMomentum]
 
-				&& True_CandidateMu_CosTheta->at(0) > ArrayNBinsMuonCosTheta[0]
-				&& True_CandidateP_CosTheta->at(0) > ArrayNBinsProtonCosTheta[0]
-				&& True_CandidateMu_CosTheta->at(0) < ArrayNBinsMuonCosTheta[NBinsMuonCosTheta]
-				&& True_CandidateP_CosTheta->at(0) < ArrayNBinsProtonCosTheta[NBinsProtonCosTheta]
-				&& CC1p == 1 // Must be CC1p at truth level
+//				&& True_CandidateMu_CosTheta->at(0) > ArrayNBinsMuonCosTheta[0]
+//				&& True_CandidateP_CosTheta->at(0) > ArrayNBinsProtonCosTheta[0]
+//				&& True_CandidateMu_CosTheta->at(0) < ArrayNBinsMuonCosTheta[NBinsMuonCosTheta]
+//				&& True_CandidateP_CosTheta->at(0) < ArrayNBinsProtonCosTheta[NBinsProtonCosTheta]
+//				&& CC1p == 1 // Must be CC1p at truth level
 			) { 
 
 				// -----------------------------------------------------------------------------------------------------------
@@ -770,24 +770,24 @@ void t::Loop() {
 
 				// ---------------------------------------------------------------------------------------------------------------------
 
-				if ( 
-				    True_TransMissMomentum > ArrayNBinsDeltaPT[0]
-				 && True_TransMissMomentum < ArrayNBinsDeltaPT[NBinsDeltaPT]
-				 && True_DeltaAlphaT > ArrayNBinsDeltaAlphaT[0]
-				 && True_DeltaAlphaT < ArrayNBinsDeltaAlphaT[NBinsDeltaAlphaT]
-				 && True_DeltaPhiT > ArrayNBinsDeltaPhiT[0]
-				 && True_DeltaPhiT < ArrayNBinsDeltaPhiT[NBinsDeltaPhiT]
-				 && true_ECal > ArrayNBinsECal[0]
-				 && true_ECal < ArrayNBinsECal[NBinsECal]
-				 && true_EQE > ArrayNBinsEQE[0]
-				 && true_EQE < ArrayNBinsEQE[NBinsEQE]
-				 && true_Q2 > ArrayNBinsQ2[0]
-				 && true_Q2 < ArrayNBinsQ2[NBinsQ2]
-				) {
+//				if ( 
+//				    True_TransMissMomentum > ArrayNBinsDeltaPT[0]
+//				 && True_TransMissMomentum < ArrayNBinsDeltaPT[NBinsDeltaPT]
+//				 && True_DeltaAlphaT > ArrayNBinsDeltaAlphaT[0]
+//				 && True_DeltaAlphaT < ArrayNBinsDeltaAlphaT[NBinsDeltaAlphaT]
+//				 && True_DeltaPhiT > ArrayNBinsDeltaPhiT[0]
+//				 && True_DeltaPhiT < ArrayNBinsDeltaPhiT[NBinsDeltaPhiT]
+//				 && true_ECal > ArrayNBinsECal[0]
+//				 && true_ECal < ArrayNBinsECal[NBinsECal]
+//				 && true_EQE > ArrayNBinsEQE[0]
+//				 && true_EQE < ArrayNBinsEQE[NBinsEQE]
+//				 && true_Q2 > ArrayNBinsQ2[0]
+//				 && true_Q2 < ArrayNBinsQ2[NBinsQ2]
+//				) {
 
-					fCC1p = 1;
+//					fCC1p = 1;
 
-				}
+//				}
 
 			}
 
@@ -833,7 +833,8 @@ void t::Loop() {
 
 			// CC1p Signal
 
-			if (fCC1p == 1) {
+//			if (fCC1p == 1) {
+			if (CC1p == 1) {
 
 				// 1D Plots
 
@@ -904,7 +905,8 @@ void t::Loop() {
 
 			// Non-CC1p 
 
-			if (fCC1p != 1) {
+			if (CC1p != 1) {
+//			if (fCC1p != 1) {
 
 				NonCC1pRecoNuScorePlot->Fill(NuScore,weight);
 				NonCC1pRecoFlashScorePlot->Fill(FlashScore,weight);
@@ -1150,7 +1152,7 @@ void t::Loop() {
 
 				}
 
-				// --------------------------------------------------------------------------------------------------------------------------------------------------
+				// -----------------------------------------------------------------------------------------------------------------
 
 				if (CandidateMu_MCParticle_Pdg->at(0) == AbsChargedPionPdg) {
 
