@@ -181,8 +181,8 @@ void myTrueAnalysis::Loop() {
 			double TrueMuon_KE_MeV = tools.PToKE(MuonPdg,TrueMuonMomentum_MeV); // MeV
 			double TrueMuon_KE_GeV = TrueMuon_KE_MeV / 1000.; // GeV
 			double TrueMuon_E_GeV = TrueMuon_KE_GeV + MuonMass_GeV; // GeV
-			int TrueMuonStartContainment = MCParticle_StartContainment->at(VectorTrueMuonIndex.at(0));
-			int TrueMuonEndContainment = MCParticle_EndContainment->at(VectorTrueMuonIndex.at(0));
+//			int TrueMuonStartContainment = MCParticle_StartContainment->at(VectorTrueMuonIndex.at(0));
+//			int TrueMuonEndContainment = MCParticle_EndContainment->at(VectorTrueMuonIndex.at(0));
 
 			TVector3 TVector3TrueMuon;
 			TVector3TrueMuon.SetMagThetaPhi(TrueMuonMomentum_GeV,TrueMuonTheta,TrueMuonPhi);
@@ -201,8 +201,8 @@ void myTrueAnalysis::Loop() {
 			double TrueProton_KE_MeV = tools.PToKE(ProtonPdg,TrueProtonMomentum_MeV); // MeV
 			double TrueProton_KE_GeV = TrueProton_KE_MeV / 1000.; // GeV
 			double TrueProton_E_GeV = TrueProton_KE_GeV + ProtonMass_GeV; // GeV
-			int TrueProtonStartContainment = MCParticle_StartContainment->at(VectorTrueProtonIndex.at(0));
-			int TrueProtonEndContainment = MCParticle_EndContainment->at(VectorTrueProtonIndex.at(0));
+//			int TrueProtonStartContainment = MCParticle_StartContainment->at(VectorTrueProtonIndex.at(0));
+//			int TrueProtonEndContainment = MCParticle_EndContainment->at(VectorTrueProtonIndex.at(0));
 
 			TVector3 TVector3TrueProton;
 			TVector3TrueProton.SetMagThetaPhi(TrueProtonMomentum_GeV,TrueProtonTheta,TrueProtonPhi);
