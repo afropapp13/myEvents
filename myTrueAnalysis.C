@@ -64,6 +64,25 @@ void myTrueAnalysis::Loop() {
 
 	int TrueCC1pCounter = 0;
 	int TrueCCQElikeCounter = 0;
+	
+	// --------------------------------------------------------------------------------------------------------------------------------
+
+	// POT Counting
+
+	double POTCount = -99.;
+
+	if (string(fWhichSample).find("Overlay") != std::string::npos) {
+
+		// Locally
+		//TString PathToPOTFile = "mySamples/"+UBCodeVersion+"/PreSelection_"+fWhichSample+"_"+UBCodeVersion+"_POT.root";
+		// gpvm's
+		TString PathToPOTFile = "mySamples/"+UBCodeVersion+"/PreSelection_"+fWhichSample+"_"+UBCodeVersion+"_POT.root";
+		TFile* POTFile = TFile::Open(PathToPOTFile,"readonly");
+		TH1D* POTCountHist = (TH1D*)(POTFile->Get("POTCountHist"));
+		POTCount = POTCountHist->GetBinContent(1);
+		POTFile->Close();
+
+	}				
 
 	// ---------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -72,25 +91,6 @@ void myTrueAnalysis::Loop() {
 
 		Long64_t ientry = LoadTree(jentry); if (ientry < 0) break; nb = fChain->GetEntry(jentry); nbytes += nb;
 		if (jentry%1000 == 0) std::cout << jentry/1000 << " k " << std::setprecision(3) << double(jentry)/nentries*100. << " %"<< std::endl;
-		
-		// --------------------------------------------------------------------------------------------------------------------------------
-
-		// POT Counting
-
-		double POTCount = -99.;
-
-		if (string(fWhichSample).find("Overlay") != std::string::npos) {
-
-				// Locally
-				//TString PathToPOTFile = "mySamples/"+UBCodeVersion+"/PreSelection_"+fWhichSample+"_"+UBCodeVersion+"_POT.root";
-				// gpvm's
-				TString PathToPOTFile = "mySamples/"+UBCodeVersion+"/PreSelection_"+fWhichSample+"_"+UBCodeVersion+"_POT.root";
-
-				TFile* POTFile = TFile::Open(PathToPOTFile,"readonly");
-				TH1D* POTCountHist = (TH1D*)(POTFile->Get("POTCountHist"));
-				POTCount = POTCountHist->GetBinContent(1);
-				POTFile->Close();
-		}	
 		
 		// ------------------------------------------------------------------------------------------------------------------
 
