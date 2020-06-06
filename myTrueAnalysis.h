@@ -119,8 +119,8 @@ void myTrueAnalysis::Init(TTree *tree)
    MCParticle_Phi = 0;
    MCParticle_CosTheta = 0;
 //   MCParticle_Length = 0;
-   MCParticle_StartContainment = 0;
-   MCParticle_EndContainment = 0;
+//   MCParticle_StartContainment = 0;
+//   MCParticle_EndContainment = 0;
    MCParticle_Pdg = 0;
 
    // Set branch addresses and branch pointers
