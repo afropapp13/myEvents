@@ -11,9 +11,7 @@
 #include <iostream>
 #include <vector>
 
-#include  "/home/afroditi/Dropbox/PhD/Secondary_Code/CenterAxisTitle.cpp"
-#include "/home/afroditi/Dropbox/PhD/Secondary_Code/SetOffsetAndSize.cpp"
-#include "/home/afroditi/Dropbox/PhD/Secondary_Code/ToString.cpp"
+#include "/home/afroditi/Dropbox/PhD/Secondary_Code/myFunctions.cpp"
 
 #include "../myClasses/Constants.h"
 
@@ -25,6 +23,7 @@ void Create1DPlotsTHStack_TopologicalBreakDown() {
 	std::vector<TString> PlotNames; PlotNames.clear();
 
 	TString StorePath = "myPlots/";
+	gStyle->SetOptStat(0);
 
 	// -----------------------------------------------------------------------------------------------------------------------------------------
 
@@ -70,7 +69,7 @@ void Create1DPlotsTHStack_TopologicalBreakDown() {
 
 	int NCuts = (int)(VectorCuts.size());	
 
-	// -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	// -----------------------------------------------------------------------------------------------------------------------------------------
 
 	vector<TString> Runs;
 	Runs.push_back("Run1");
@@ -78,7 +77,7 @@ void Create1DPlotsTHStack_TopologicalBreakDown() {
 	int NRuns = (int)(Runs.size());
 	cout << "Number of Runs = " << NRuns << endl;
 
-	// -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	// -----------------------------------------------------------------------------------------------------------------------------------------
 
 	for (int WhichRun = 0; WhichRun < NRuns; WhichRun++) {
 
@@ -92,11 +91,12 @@ void Create1DPlotsTHStack_TopologicalBreakDown() {
 
 			TH1D::SetDefaultSumw2();
 
-			// ---------------------------------------------------------------------------------------------------------------------------------------
+			// ---------------------------------------------------------------------------------------------------------------------
 
 			vector<TCanvas*> PlotCanvas; PlotCanvas.clear();
 			vector<THStack*> THStacks; THStacks.clear();
-			gStyle->SetPalette(55); const Int_t NCont = 999; gStyle->SetNumberContours(NCont); gStyle->SetTitleSize(0.07,"t"); SetOffsetAndSize();
+			gStyle->SetPalette(55); const Int_t NCont = 999; 
+			gStyle->SetNumberContours(NCont); gStyle->SetTitleSize(0.07,"t");
 			vector<TLegend*> leg; leg.clear();
 
 			vector<vector<TH1D*> > Plots; Plots.clear();
@@ -124,7 +124,8 @@ void Create1DPlotsTHStack_TopologicalBreakDown() {
 			Colors.push_back(kBlack); Colors.push_back(kRed); Colors.push_back(kGray+2); Colors.push_back(kMagenta);
 
 			vector<int> ColorsOverlay; ColorsOverlay.clear(); 
-			ColorsOverlay.push_back(kRed); ColorsOverlay.push_back(kBlue); ColorsOverlay.push_back(kGreen); ColorsOverlay.push_back(kMagenta); ColorsOverlay.push_back(kOrange+7);
+			ColorsOverlay.push_back(kRed); ColorsOverlay.push_back(kBlue); 
+			ColorsOverlay.push_back(kGreen); ColorsOverlay.push_back(kMagenta); ColorsOverlay.push_back(kOrange+7);
 
 			const int NSamples = NameOfSamples.size();
 			vector<TFile*> FileSample; FileSample.clear();
@@ -145,7 +146,8 @@ void Create1DPlotsTHStack_TopologicalBreakDown() {
 					TH1D* CC1phist = (TH1D*)(FileSample[WhichSample]->Get("CC1p"+PlotNames[WhichPlot]));
 					TH1D* NonCC1phist = (TH1D*)(FileSample[WhichSample]->Get("NonCC1p"+PlotNames[WhichPlot]));
 
-					CenterAxisTitle(hist);
+					hist->GetXaxis()->CenterTitle();
+					hist->GetYaxis()->CenterTitle();					
 
 					hist->SetLineColor(Colors[WhichSample]);
 				
@@ -289,7 +291,7 @@ void Create1DPlotsTHStack_TopologicalBreakDown() {
 				text->SetTextSize(0.09);
 				text->DrawTextNDC(0.14, 0.87, Runs[WhichRun]);
 
-				// ------------------------------------------------------------------------------------------------------------------------------------
+				// -------------------------------------------------------------------------------------------------------------------
 
 				hratio[0][WhichPlot]->Add(hratio[2][WhichPlot],-1);
 				hratio[1][WhichPlot]->Add(hratio[3][WhichPlot]);
@@ -363,7 +365,9 @@ void Create1DPlotsTHStack_TopologicalBreakDown() {
 
 				// --------------------------------------------------------------------------------------
 
-				PlotCanvas[WhichPlot]->SaveAs("./myPlots/pdf/1D/"+UBCodeVersion+"/"+Cuts+"/TopologicalBreakDown/THStack_BreakDown_"+PlotNames[WhichPlot]+"_"+UBCodeVersion+Cuts+".pdf");
+				TString CanvasPath = "./myPlots/pdf/1D/"+UBCodeVersion+"/"+Cuts+"/TopologicalBreakDown/";
+				TString CanvasName = "THStack_BreakDown_"+PlotNames[WhichPlot]+"_"+UBCodeVersion+Cuts+".pdf";
+				PlotCanvas[WhichPlot]->SaveAs(CanvasPath+CanvasName);
 				delete PlotCanvas[WhichPlot];
 
 			} // End of the loop over the plots

@@ -11,9 +11,7 @@
 #include <iostream>
 #include <vector>
 
-#include  "/home/afroditi/Dropbox/PhD/Secondary_Code/CenterAxisTitle.cpp"
-#include "/home/afroditi/Dropbox/PhD/Secondary_Code/SetOffsetAndSize.cpp"
-#include "/home/afroditi/Dropbox/PhD/Secondary_Code/ToString.cpp"
+#include "/home/afroditi/Dropbox/PhD/Secondary_Code/myFunctions.cpp"
 
 #include "../myClasses/Constants.h"
 
@@ -25,6 +23,7 @@ void Chi2PID_BreakDown() {
 	vector<TString> PlotNames; PlotNames.clear();
 
 	TString StorePath = "myPlots/";
+	gStyle->SetOptStat(0);	
 
 	// -----------------------------------------------------------------------------------------------------------------------------------------
 
@@ -50,7 +49,7 @@ void Chi2PID_BreakDown() {
 
 	int NCuts = (int)(VectorCuts.size());	
 
-	// ----------------------------------------------------------------------------------------------------------------------------------------------------------------
+	// -------------------------------------------------------------------------------------------------------------------------------------------
 
 	vector<TString> Runs;
 	Runs.push_back("Run1");
@@ -60,7 +59,7 @@ void Chi2PID_BreakDown() {
 
 	for (int WhichRun = 0; WhichRun < NRuns; WhichRun++) {
 
-		// ----------------------------------------------------------------------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------------------
 
 		for (int i = 0; i < NCuts; i++) {
 
@@ -71,11 +70,11 @@ void Chi2PID_BreakDown() {
 			TString PathToFiles = "OutputFiles/" + UBCodeVersion + "/" + Cuts + "/";
 			TH1D::SetDefaultSumw2();
 
-			// ------------------------------------------------------------------------------------------------------------------------------------------------
+			// --------------------------------------------------------------------------------------------------------------------------
 
 			vector<TCanvas*> PlotCanvas; PlotCanvas.clear();
 			vector<THStack*> THStacks; THStacks.clear();
-			gStyle->SetPalette(55); const Int_t NCont = 999; gStyle->SetNumberContours(NCont); gStyle->SetTitleSize(0.07,"t"); SetOffsetAndSize();
+			gStyle->SetPalette(55); const Int_t NCont = 999; gStyle->SetNumberContours(NCont); gStyle->SetTitleSize(0.07,"t");
 			vector<TLegend*> leg; leg.clear();
 
 			vector<vector<TH1D*> > Plots; Plots.clear();
@@ -123,7 +122,7 @@ void Chi2PID_BreakDown() {
 					TH1D* Pionhist = (TH1D*)(FileSample[WhichSample]->Get("Pion"+PlotNames[WhichPlot]));
 					TH1D* Cosmichist = (TH1D*)(FileSample[WhichSample]->Get("Cosmic"+PlotNames[WhichPlot]));
 
-					CenterAxisTitle(hist);
+					//CenterAxisTitle(hist);
 
 					hist->SetLineColor(Colors[WhichSample]);
 
@@ -153,7 +152,7 @@ void Chi2PID_BreakDown() {
 
 			}
 
-			// -------------------------------------------------------------------------------------------------------------------------------------------------------
+			// ---------------------------------------------------------------------------------------------------------------------------
 
 			// Loop over the plots
 
@@ -192,11 +191,13 @@ void Chi2PID_BreakDown() {
 					Plots[WhichSample][WhichPlot]->SetTitle("");
 					Plots[WhichSample][WhichPlot]->SetLineWidth(4);
 
+					Plots[WhichSample][WhichPlot]->GetXaxis()->CenterTitle();
 					Plots[WhichSample][WhichPlot]->GetXaxis()->SetTitleFont(FontStyle);
 					Plots[WhichSample][WhichPlot]->GetXaxis()->SetLabelFont(FontStyle);
 					Plots[WhichSample][WhichPlot]->GetXaxis()->SetNdivisions(5);
 					Plots[WhichSample][WhichPlot]->GetXaxis()->SetLabelSize(0);
 
+					Plots[WhichSample][WhichPlot]->GetYaxis()->CenterTitle();
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitleFont(FontStyle);
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetLabelFont(FontStyle);
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetNdivisions(5);
@@ -284,7 +285,7 @@ void Chi2PID_BreakDown() {
 				text->SetTextSize(0.08);
 				text->DrawTextNDC(0.74, 0.87, Runs[WhichRun]);
 
-				// ---------------------------------------------------------------------------------------------------------------------------------------------------
+				// ---------------------------------------------------------------------------------------------------------------------
 
 				// Ratio plots
 
@@ -292,6 +293,7 @@ void Chi2PID_BreakDown() {
 				hratio[1][WhichPlot]->Add(hratio[3][WhichPlot]);
 				hratio[0][WhichPlot]->Divide(hratio[1][WhichPlot]);
 
+				hratio[0][WhichPlot]->GetXaxis()->CenterTitle();
 				hratio[0][WhichPlot]->GetXaxis()->SetTitleFont(FontStyle);
 				hratio[0][WhichPlot]->GetXaxis()->SetLabelFont(FontStyle);
 				hratio[0][WhichPlot]->GetYaxis()->SetTitle("#frac{BeamOn - ExtBNB}{Overlay}");
@@ -301,6 +303,7 @@ void Chi2PID_BreakDown() {
 				hratio[0][WhichPlot]->GetXaxis()->SetTitleOffset(0.88);
 				hratio[0][WhichPlot]->GetXaxis()->SetNdivisions(5);
 
+				hratio[0][WhichPlot]->GetYaxis()->CenterTitle();
 				hratio[0][WhichPlot]->GetYaxis()->SetTitleFont(FontStyle);
 				hratio[0][WhichPlot]->GetYaxis()->SetLabelFont(FontStyle);
 				hratio[0][WhichPlot]->GetYaxis()->SetRangeUser(0.9*hratio[0][WhichPlot]->GetMinimum(),1.1*hratio[0][WhichPlot]->GetMaximum());
@@ -327,7 +330,9 @@ void Chi2PID_BreakDown() {
 				leg[WhichPlot]->SetMargin(0.6);
 				leg[WhichPlot]->Draw();
 
-				PlotCanvas[WhichPlot]->SaveAs("./myPlots/pdf/1D/"+UBCodeVersion+"/"+Cuts+"/PID_BreakDown_"+PlotNames[WhichPlot]+Cuts+"_"+UBCodeVersion+".pdf");
+				TString CanvasPath = "./myPlots/pdf/1D/"+UBCodeVersion+"/"+Cuts+"/";
+				TString CanvasName = "PID_BreakDown_"+PlotNames[WhichPlot]+Cuts+"_"+UBCodeVersion+".pdf";
+				PlotCanvas[WhichPlot]->SaveAs(CanvasPath+CanvasName);
 				//delete PlotCanvas[WhichPlot];
 
 			} // End of the loop over the plots

@@ -72,12 +72,48 @@ void myTrueAnalysis::Loop() {
 
 		Long64_t ientry = LoadTree(jentry); if (ientry < 0) break; nb = fChain->GetEntry(jentry); nbytes += nb;
 		if (jentry%1000 == 0) std::cout << jentry/1000 << " k " << std::setprecision(3) << double(jentry)/nentries*100. << " %"<< std::endl;
+		
+		// --------------------------------------------------------------------------------------------------------------------------------
+
+		// POT Counting
+
+		double POTCount = -99.;
+
+		if (string(fWhichSample).find("Overlay") != std::string::npos) {
+
+				// Locally
+				//TString PathToPOTFile = "mySamples/"+UBCodeVersion+"/PreSelection_"+fWhichSample+"_"+UBCodeVersion+"_POT.root";
+				// gpvm's
+				TString PathToPOTFile = "mySamples/"+UBCodeVersion+"/PreSelection_"+fWhichSample+"_"+UBCodeVersion+"_POT.root";
+
+				TFile* POTFile = TFile::Open(PathToPOTFile,"readonly");
+				TH1D* POTCountHist = (TH1D*)(POTFile->Get("POTCountHist"));
+				POTCount = POTCountHist->GetBinContent(1);
+				POTFile->Close();
+		}	
+		
+		// ------------------------------------------------------------------------------------------------------------------
+
+		// POT Scaling
+
+
+		double tor860_wcut = 1;
+		double E1DCNT_wcut = 1.;
+		double EXT = 1.;
+
+		if (string(fWhichSample).find("Run1") != std::string::npos) {
+
+			tor860_wcut = tor860_wcut_Run1;
+			E1DCNT_wcut = E1DCNT_wcut_Run1;
+			EXT = EXT_Run1;
+
+		}			
 
 		// ------------------------------------------------------------------------------------------------------------------------------
 
 //		double weight = 1.;
 //		double T2Kweight = 1.;
-		double weight = Weight * T2KWeight; // Weight from v3.0.4 to v.3.0.6 * weight from application of T2K tune
+		double weight = ( tor860_wcut / POTCount) * Weight * T2KWeight; // Weight from v3.0.4 to v.3.0.6 * weight from application of T2K tune
 		if (weight <= 0 || weight > 10) { continue; }
 
 		// -------------------------------------------------------------------------------------------------------------------------------------
@@ -130,9 +166,9 @@ void myTrueAnalysis::Loop() {
 
 		// ----------------------------------------------------------------------------------------------------------------------------------
 
-		// Signal definition: 1 mu (Pmu > 100 MeV / c), 1p (Pp > 200 MeV / c) & pi+/- (Ppi > 70 MeV / c)
+		// Signal definition: 1 mu (Pmu > 100 MeV / c), 1p (Pp > 200 MeV / c) & 0 pi+/- (Ppi > 70 MeV / c)
 
-		if (TrueMuonCounter == 1 && TrueProtonCounter == 1 && TrueChargedPionCounter == 0 && CC1p == 1) {
+		if (/*TrueMuonCounter == 1 && TrueProtonCounter == 1 && TrueChargedPionCounter == 0 &&*/ CC1p == 1) {
 
 			// True muon
 
@@ -222,8 +258,8 @@ void myTrueAnalysis::Loop() {
 			if (
 //			    TrueMuonStartContainment == true 
 //			    && TrueProtonStartContainment == true && TrueProtonEndContainment == true
-			    /*&&*/ TrueDeltaThetaProtonMuon_Deg  < DeltaThetaCut
-			    && TrueMuonMomentum_GeV > ArrayNBinsMuonMomentum[0]
+			    /*&&*/ /*TrueDeltaThetaProtonMuon_Deg  < DeltaThetaCut
+			    &&*/ TrueMuonMomentum_GeV > ArrayNBinsMuonMomentum[0]
 			    && TrueProtonMomentum_GeV > ArrayNBinsProtonMomentum[0]
 			) {
 
@@ -297,7 +333,7 @@ void myTrueAnalysis::Loop() {
 
 	std::cout << std::endl;
 
-	if ( string(fWhichSample).find("Overlay9") != std::string::npos) {
+	if ( string(fWhichSample).find("Overlay9") != std::string::npos ) {
 
 		std::cout << std::endl << "True CC1p events = " << TrueCC1pCounter << std::endl;
 		TxtFile << std::endl << "True CC1p events = " << TrueCC1pCounter << std::endl;
