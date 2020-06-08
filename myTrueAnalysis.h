@@ -30,9 +30,9 @@ public :
    vector<double>  *MCParticle_Mom;
    vector<double>  *MCParticle_Phi;
    vector<double>  *MCParticle_CosTheta;
-//   vector<double>  *MCParticle_Length;
-//   vector<int>     *MCParticle_StartContainment;
-//   vector<int>     *MCParticle_EndContainment;
+   vector<double>  *MCParticle_Length;
+   vector<int>     *MCParticle_StartContainment;
+   vector<int>     *MCParticle_EndContainment;
    vector<int>     *MCParticle_Pdg;
 
    // List of branches
@@ -43,9 +43,9 @@ public :
    TBranch        *b_MCParticle_Mom;   //!
    TBranch        *b_MCParticle_Phi;   //!
    TBranch        *b_MCParticle_CosTheta;   //!
-//   TBranch        *b_MCParticle_Length;   //!
-//   TBranch        *b_MCParticle_StartContainment;   //!
-//   TBranch        *b_MCParticle_EndContainment;   //!
+   TBranch        *b_MCParticle_Length;   //!
+   TBranch        *b_MCParticle_StartContainment;   //!
+   TBranch        *b_MCParticle_EndContainment;   //!
    TBranch        *b_MCParticle_Pdg;   //!
 
    myTrueAnalysis(TString WhichSample,TTree *tree=0);
@@ -118,9 +118,9 @@ void myTrueAnalysis::Init(TTree *tree)
    MCParticle_Mom = 0;
    MCParticle_Phi = 0;
    MCParticle_CosTheta = 0;
-//   MCParticle_Length = 0;
-//   MCParticle_StartContainment = 0;
-//   MCParticle_EndContainment = 0;
+   MCParticle_Length = 0;
+   MCParticle_StartContainment = 0;
+   MCParticle_EndContainment = 0;
    MCParticle_Pdg = 0;
 
    // Set branch addresses and branch pointers
@@ -136,9 +136,9 @@ void myTrueAnalysis::Init(TTree *tree)
    fChain->SetBranchAddress("MCParticle_Mom", &MCParticle_Mom, &b_MCParticle_Mom);
    fChain->SetBranchAddress("MCParticle_Phi", &MCParticle_Phi, &b_MCParticle_Phi);
    fChain->SetBranchAddress("MCParticle_CosTheta", &MCParticle_CosTheta, &b_MCParticle_CosTheta);
-//   fChain->SetBranchAddress("MCParticle_Length", &MCParticle_Length, &b_MCParticle_Length);
-//   fChain->SetBranchAddress("MCParticle_StartContainment", &MCParticle_StartContainment, &b_MCParticle_StartContainment);
-//   fChain->SetBranchAddress("MCParticle_EndContainment", &MCParticle_EndContainment, &b_MCParticle_EndContainment);
+   fChain->SetBranchAddress("MCParticle_Length", &MCParticle_Length, &b_MCParticle_Length);
+   fChain->SetBranchAddress("MCParticle_StartContainment", &MCParticle_StartContainment, &b_MCParticle_StartContainment);
+   fChain->SetBranchAddress("MCParticle_EndContainment", &MCParticle_EndContainment, &b_MCParticle_EndContainment);
    fChain->SetBranchAddress("MCParticle_Pdg", &MCParticle_Pdg, &b_MCParticle_Pdg);
    Notify();
 }
