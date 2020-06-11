@@ -446,7 +446,6 @@ void t::Loop() {
 		// Loop over the events
 
 		for (Long64_t jentry=0; jentry<nentries;jentry++) {
-	//	for (Long64_t jentry=0; jentry<2000;jentry++) {
 
 			Long64_t ientry = LoadTree(jentry);
 			if (ientry < 0) break;
@@ -494,7 +493,13 @@ void t::Loop() {
 
 			if (string(fWhichSample).find("ExtBNB9") != std::string::npos) { weight = E1DCNT_wcut / EXT;}
 
-			else if (string(fWhichSample).find("Overlay") != std::string::npos) { weight = ( tor860_wcut / POTCount) * Weight * T2KWeight; }
+			else if (string(fWhichSample).find("Overlay") != std::string::npos) { 
+			
+				if (Weight < 0 || Weight > 10) { continue; }
+				if (T2KWeight < 0 || T2KWeight > 10) { continue; }				
+				weight = ( tor860_wcut / POTCount) * Weight * T2KWeight; 
+				
+			}
 
 			// ------------------------------------------------------------------------------------------------------------------------
 
@@ -511,7 +516,7 @@ void t::Loop() {
 
 			// -----------------------------------------------------------------------------------------------------------------------
 
-			if ( fabs(weight) != weight || weight <= 0. || weight > 10) { continue; } // Securing against infinities & negative weights
+			if ( fabs(weight) != weight) { continue; } // Securing against infinities
 
 			// -----------------------------------------------------------------------------------------------------------------------
 
@@ -527,12 +532,22 @@ void t::Loop() {
 			double reco_Pmu_cos_theta = CandidateMu_CosTheta->at(0);
 			double reco_Pmu_phi = CandidateMu_Phi->at(0) * TMath::Pi() / 180.;
 			double reco_Emu = TMath::Sqrt( reco_Pmu_mcs*reco_Pmu_mcs + MuonMass_GeV*MuonMass_GeV );
+			
+			TVector3 TVector3CandidateMuon(-1,-1,-1);
+			TVector3CandidateMuon.SetMag(reco_Pmu_mcs);
+			TVector3CandidateMuon.SetTheta(TMath::ACos(reco_Pmu_cos_theta));
+			TVector3CandidateMuon.SetPhi(reco_Pmu_phi);						
 
 			double reco_Pp = CandidateP_P->at(0);
 			double reco_Pp_cos_theta = CandidateP_CosTheta->at(0);
 			double reco_Pp_phi = CandidateP_Phi->at(0) * TMath::Pi() / 180.;
 			double reco_Ep = TMath::Sqrt( reco_Pp*reco_Pp + ProtonMass_GeV*ProtonMass_GeV );
 			double reco_Tp = reco_Ep - ProtonMass_GeV;
+			
+			TVector3 TVector3CandidateProton(-1,-1,-1);
+			TVector3CandidateProton.SetMag(reco_Pp);
+			TVector3CandidateProton.SetTheta(TMath::ACos(reco_Pp_cos_theta));
+			TVector3CandidateProton.SetPhi(reco_Pp_phi);	
 
 			// --------------------------------------------------------------------------------------------------------------------------
 
@@ -548,51 +563,26 @@ void t::Loop() {
 			double reco_Pp_ThreePlaneLogLikelihood = log(CandidateP_ThreePlaneLogLikelihood->at(0));
 
 			// -----------------------------------------------------------------------------------------------------------------------------
+			
+			double TransMissMomentum = Reco_Pt->at(0);
 
-			// Transverse variables
+			double DeltaAlphaT = Reco_DeltaAlphaT->at(0);
 
-			TVector3 TVector3CandidateMuon;
-			TVector3CandidateMuon.SetMagThetaPhi(CandidateMu_P->at(0),TMath::ACos(CandidateMu_CosTheta->at(0)),CandidateMu_Phi->at(0)*TMath::Pi()/180.);
-
-			TVector3 TVector3CandidateMuonTrans;
-			TVector3CandidateMuonTrans.SetXYZ(TVector3CandidateMuon.X(),TVector3CandidateMuon.Y(),0.);
-
-			TVector3 TVector3CandidateProton;
-			TVector3CandidateProton.SetMagThetaPhi(CandidateP_P->at(0),TMath::ACos(CandidateP_CosTheta->at(0)),CandidateP_Phi->at(0)*TMath::Pi()/180.);
-
-			TVector3 TVector3CandidateProtonTrans;
-			TVector3CandidateProtonTrans.SetXYZ(TVector3CandidateProton.X(),TVector3CandidateProton.Y(),0.);
-
-			TVector3 TransMissMomentumV3 = TVector3CandidateMuonTrans + TVector3CandidateProtonTrans;
-
-			double TransMissMomentum = TransMissMomentumV3.Mag();
-
-			double DeltaAlphaT = TMath::ACos( (- TVector3CandidateMuonTrans*TransMissMomentumV3) /
-					( TVector3CandidateMuonTrans.Mag()*TransMissMomentum ) ) * 180./TMath::Pi();
-			if (DeltaAlphaT >= 180.) { DeltaAlphaT -= 180.; }
-			if (DeltaAlphaT < 0.) { DeltaAlphaT += 180.; }
-
-			double DeltaPhiT = TMath::ACos( (- TVector3CandidateMuonTrans*TVector3CandidateProtonTrans) /
-					( TVector3CandidateMuonTrans.Mag()*TVector3CandidateProtonTrans.Mag() ) ) * 180./TMath::Pi();
-			if (DeltaPhiT >= 180.) { DeltaPhiT -= 180.; }
-			if (DeltaPhiT < 0.) { DeltaPhiT += 180.; }
+			double DeltaPhiT = Reco_DeltaPhiT->at(0);
 
 			// -------------------------------------------------------------------------------------------------------------------------
 
 			// Calorimetric Energy Reconstruction
 
-			double ECal = reco_Emu + reco_Tp +BE;
+			double ECal = Reco_ECal->at(0);
 
 			// QE Energy Reconstruction
 
-			double EQE = ( ProtonMass_GeV * BE + ProtonMass_GeV * reco_Emu ) / ( ProtonMass_GeV - reco_Emu + reco_Pmu_mcs * reco_Pmu_cos_theta);
+			double EQE = Reco_EQE->at(0);
 
 			// Reconstructed Q2
 
-			TLorentzVector reco_nu(0.,0.,ECal,ECal);
-			TLorentzVector TLorentzVector4CandidateMuon(TVector3CandidateMuon,reco_Emu);
-			TLorentzVector reco_q = reco_nu - TLorentzVector4CandidateMuon;
-			double reco_Q2 = - reco_q.Mag2();
+			double reco_Q2 = Reco_Q2->at(0);
 
 			// -------------------------------------------------------------------------------------------------------------------------
 			// -----------------------------------------------------------------------------------------------------------------------
@@ -642,6 +632,7 @@ void t::Loop() {
 			double DeltaThetaProtonMuon_Deg = DeltaThetaProtonMuon * 180. / TMath::Pi();
 			if (DeltaThetaProtonMuon_Deg >= 180.) { DeltaThetaProtonMuon_Deg -= 180.; }
 			if (DeltaThetaProtonMuon_Deg < 0.) { DeltaThetaProtonMuon_Deg += 180.; }
+			
 			double DeltaPhiProtonMuon = TVector3CandidateMuon.DeltaPhi(TVector3CandidateProton);
 			double DeltaPhiProtonMuon_Deg = DeltaPhiProtonMuon * 180. / TMath::Pi();
 			if (DeltaPhiProtonMuon_Deg >= 360.) { DeltaPhiProtonMuon_Deg -= 360.; }
@@ -692,104 +683,17 @@ void t::Loop() {
 
 			int genie_mode = -1;
 			if (
-	//			fWhichSample == "Overlay9"
-				string(fWhichSample).find("Overlay") != std::string::npos 
+				string(fWhichSample).find("Overlay9") != std::string::npos 
 				&& MCParticle_Mode != -1 ) { genie_mode = MCParticle_Mode; }
 
 			// -----------------------------------------------------------------------------------------------------------------------
 
-			int fCC1p = 0;
-
-			double True_TransMissMomentum = -99., True_DeltaAlphaT = -99., True_DeltaPhiT = -99.;
-			double true_ECal = -99., true_EQE = -99., true_Q2 = -99.;
-
-			if (    
-	//			fWhichSample == "Overlay9"			
-				string(fWhichSample).find("Overlay") != std::string::npos
-//				&& CandidateMu_MCParticle_Pdg->at(0) == MuonPdg
-//				&& CandidateP_MCParticle_Pdg->at(0) == ProtonPdg
-
-////				&& True_CandidateMu_StartContainment->at(0) == 1
-////				&& True_CandidateP_StartContainment->at(0) == 1
-////				&& True_CandidateP_EndContainment->at(0) == 1
-
-//				&& True_CandidateMu_P->at(0) > ArrayNBinsMuonMomentum[0]
-//				&& True_CandidateP_P->at(0) > ArrayNBinsProtonMomentum[0]
-//				&& True_CandidateMu_P->at(0) < ArrayNBinsMuonMomentum[NBinsMuonMomentum]
-//				&& True_CandidateP_P->at(0) < ArrayNBinsProtonMomentum[NBinsProtonMomentum]
-
-//				&& True_CandidateMu_CosTheta->at(0) > ArrayNBinsMuonCosTheta[0]
-//				&& True_CandidateP_CosTheta->at(0) > ArrayNBinsProtonCosTheta[0]
-//				&& True_CandidateMu_CosTheta->at(0) < ArrayNBinsMuonCosTheta[NBinsMuonCosTheta]
-//				&& True_CandidateP_CosTheta->at(0) < ArrayNBinsProtonCosTheta[NBinsProtonCosTheta]
-//				&& CC1p == 1 // Must be CC1p at truth level
-			) { 
-
-				// -----------------------------------------------------------------------------------------------------------
-
-				// True Level STV
-
-				TVector3 True_TVector3CandidateMuon;
-				TVector3 True_TVector3CandidateMuonTrans;
-				TVector3 True_TVector3CandidateProton;
-				TVector3 True_TVector3CandidateProtonTrans;
-
-				True_TVector3CandidateMuon.SetMagThetaPhi(True_CandidateMu_P->at(0),TMath::ACos(True_CandidateMu_CosTheta->at(0)),True_CandidateMu_Phi->at(0)*TMath::Pi()/180.);
-				True_TVector3CandidateMuonTrans.SetXYZ(True_TVector3CandidateMuon.X(),True_TVector3CandidateMuon.Y(),0.);
-
-				True_TVector3CandidateProton.SetMagThetaPhi(True_CandidateP_P->at(0),TMath::ACos(True_CandidateP_CosTheta->at(0)),True_CandidateP_Phi->at(0)*TMath::Pi()/180.);
-
-				True_TVector3CandidateProtonTrans.SetXYZ(True_TVector3CandidateProton.X(),True_TVector3CandidateProton.Y(),0.);
-
-				TVector3 True_TransMissMomentumV3 = True_TVector3CandidateMuonTrans + True_TVector3CandidateProtonTrans;
-
-				True_TransMissMomentum = True_TransMissMomentumV3.Mag();
-
-				True_DeltaAlphaT = TMath::ACos( (- True_TVector3CandidateMuonTrans*True_TransMissMomentumV3) /
-						( True_TVector3CandidateMuonTrans.Mag()*True_TransMissMomentum ) ) * 180./TMath::Pi();
-
-				True_DeltaPhiT = TMath::ACos( (- True_TVector3CandidateMuonTrans*True_TVector3CandidateProtonTrans) /
-						( True_TVector3CandidateMuonTrans.Mag()*True_TVector3CandidateProtonTrans.Mag() ) ) * 180./TMath::Pi();
-
-				// --------------------------------------------------------------------------------------------------------------
-
-				double true_Emu = TMath::Sqrt( True_CandidateMu_P->at(0)*True_CandidateMu_P->at(0) + MuonMass_GeV*MuonMass_GeV );
-				double true_Ep = TMath::Sqrt( True_CandidateP_P->at(0)*True_CandidateP_P->at(0) + ProtonMass_GeV*ProtonMass_GeV );
-				double true_Tp = true_Ep - ProtonMass_GeV;
-
-				true_ECal = true_Emu + true_Tp + BE;
-				true_EQE = ( ProtonMass_GeV * BE + ProtonMass_GeV * true_Emu ) / ( ProtonMass_GeV - true_Emu + True_CandidateMu_P->at(0) * True_CandidateMu_CosTheta->at(0));
-
-				TLorentzVector true_nu(0.,0.,true_ECal,true_ECal);
-				TVector3 TVector3TrueCandidateMuon;
-				TVector3TrueCandidateMuon.SetMagThetaPhi(True_CandidateMu_P->at(0),TMath::ACos(True_CandidateMu_CosTheta->at(0)),True_CandidateMu_Phi->at(0));
-
-				TLorentzVector TLorentzVector4TrueCandidateMuon(TVector3TrueCandidateMuon,true_Emu);
-				TLorentzVector true_q = true_nu - TLorentzVector4TrueCandidateMuon;
-				true_Q2 = - true_q.Mag2();
-
-				// ---------------------------------------------------------------------------------------------------------------------
-
-//				if ( 
-//				    True_TransMissMomentum > ArrayNBinsDeltaPT[0]
-//				 && True_TransMissMomentum < ArrayNBinsDeltaPT[NBinsDeltaPT]
-//				 && True_DeltaAlphaT > ArrayNBinsDeltaAlphaT[0]
-//				 && True_DeltaAlphaT < ArrayNBinsDeltaAlphaT[NBinsDeltaAlphaT]
-//				 && True_DeltaPhiT > ArrayNBinsDeltaPhiT[0]
-//				 && True_DeltaPhiT < ArrayNBinsDeltaPhiT[NBinsDeltaPhiT]
-//				 && true_ECal > ArrayNBinsECal[0]
-//				 && true_ECal < ArrayNBinsECal[NBinsECal]
-//				 && true_EQE > ArrayNBinsEQE[0]
-//				 && true_EQE < ArrayNBinsEQE[NBinsEQE]
-//				 && true_Q2 > ArrayNBinsQ2[0]
-//				 && true_Q2 < ArrayNBinsQ2[NBinsQ2]
-//				) {
-
-//					fCC1p = 1;
-
-//				}
-
-			}
+			double true_TransMissMomentum = True_Pt->at(0);
+			double true_DeltaAlphaT = True_DeltaAlphaT->at(0);
+			double true_DeltaPhiT = True_DeltaPhiT->at(0);
+			double true_ECal = True_ECal->at(0);
+			double true_EQE = True_EQE->at(0);
+			double true_Q2 = True_Q2->at(0);
 
 			// ----------------------------------------------------------------------------------------------------------------------
 
@@ -833,7 +737,6 @@ void t::Loop() {
 
 			// CC1p Signal
 
-//			if (fCC1p == 1) {
 			if (CC1p == 1) {
 
 				// 1D Plots
@@ -874,22 +777,22 @@ void t::Loop() {
 
 				// 2D Plots Kinematic Variables
 
-				CC1pRecoMuonMomentumPlot2D->Fill(reco_Pmu_mcs,True_CandidateMu_P->at(0));
-				CC1pRecoProtonMomentumPlot2D->Fill(reco_Pp,True_CandidateP_P->at(0));
+				CC1pRecoMuonMomentumPlot2D->Fill(True_CandidateMu_P->at(0),reco_Pmu_mcs);
+				CC1pRecoProtonMomentumPlot2D->Fill(True_CandidateP_P->at(0),reco_Pp);
 
-				CC1pRecoMuonCosThetaPlot2D->Fill(reco_Pmu_cos_theta,True_CandidateMu_CosTheta->at(0));
-				CC1pRecoProtonCosThetaPlot2D->Fill(reco_Pp_cos_theta,True_CandidateP_CosTheta->at(0));
+				CC1pRecoMuonCosThetaPlot2D->Fill(True_CandidateMu_CosTheta->at(0),reco_Pmu_cos_theta);
+				CC1pRecoProtonCosThetaPlot2D->Fill(True_CandidateP_CosTheta->at(0),reco_Pp_cos_theta);
 
-				CC1pRecoMuonPhiPlot2D->Fill(reco_Pmu_phi*180./TMath::Pi(),True_CandidateMu_Phi->at(0));
-				CC1pRecoProtonPhiPlot2D->Fill(reco_Pp_phi*180./TMath::Pi(),True_CandidateP_Phi->at(0));
+				CC1pRecoMuonPhiPlot2D->Fill(True_CandidateMu_Phi->at(0),reco_Pmu_phi*180./TMath::Pi());
+				CC1pRecoProtonPhiPlot2D->Fill(True_CandidateP_Phi->at(0),reco_Pp_phi*180./TMath::Pi());
 
 				// ---------------------------------------------------------------------------------------------------------------------
 
 				// True Level STV
 
-				CC1pRecoDeltaPTPlot2D->Fill(True_TransMissMomentum,TransMissMomentum);
-				CC1pRecoDeltaAlphaTPlot2D->Fill(True_DeltaAlphaT,DeltaAlphaT);
-				CC1pRecoDeltaPhiTPlot2D->Fill(True_DeltaPhiT,DeltaPhiT);
+				CC1pRecoDeltaPTPlot2D->Fill(true_TransMissMomentum,TransMissMomentum);
+				CC1pRecoDeltaAlphaTPlot2D->Fill(true_DeltaAlphaT,DeltaAlphaT);
+				CC1pRecoDeltaPhiTPlot2D->Fill(true_DeltaPhiT,DeltaPhiT);
 
 				// ---------------------------------------------------------------------------------------------------------------------
 
@@ -906,7 +809,6 @@ void t::Loop() {
 			// Non-CC1p 
 
 			if (CC1p != 1) {
-//			if (fCC1p != 1) {
 
 				NonCC1pRecoNuScorePlot->Fill(NuScore,weight);
 				NonCC1pRecoFlashScorePlot->Fill(FlashScore,weight);

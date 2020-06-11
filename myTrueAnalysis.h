@@ -27,26 +27,58 @@ public :
    double          T2KWeight;
    int             CC1p;   
    Int_t           NumberMCParticles;
-   vector<double>  *MCParticle_Mom;
-   vector<double>  *MCParticle_Phi;
-   vector<double>  *MCParticle_CosTheta;
-   vector<double>  *MCParticle_Length;
-   vector<int>     *MCParticle_StartContainment;
-   vector<int>     *MCParticle_EndContainment;
-   vector<int>     *MCParticle_Pdg;
+   
+   vector<double>  *Muon_MCParticle_Mom;
+   vector<double>  *Muon_MCParticle_Phi;
+   vector<double>  *Muon_MCParticle_CosTheta;
+   vector<double>  *Muon_MCParticle_Length;
+   vector<int>     *Muon_MCParticle_StartContainment;
+   vector<int>     *Muon_MCParticle_EndContainment;
+   vector<int>     *Muon_MCParticle_Pdg;
+   
+   vector<double>  *Proton_MCParticle_Mom;
+   vector<double>  *Proton_MCParticle_Phi;
+   vector<double>  *Proton_MCParticle_CosTheta;
+   vector<double>  *Proton_MCParticle_Length;
+   vector<int>     *Proton_MCParticle_StartContainment;
+   vector<int>     *Proton_MCParticle_EndContainment;
+   vector<int>     *Proton_MCParticle_Pdg;   
+   
+   vector<double>  *True_Pt;
+   vector<double>  *True_DeltaAlphaT;
+   vector<double>  *True_DeltaPhiT;
+   vector<double>  *True_ECal;
+   vector<double>  *True_EQE;
+   vector<double>  *True_Q2;         
 
    // List of branches
    TBranch        *b_Weight;   //!
    TBranch        *b_T2KWeight;   //!
    TBranch        *b_CC1p;   //!   
    TBranch        *b_NumberMCParticles;   //!
-   TBranch        *b_MCParticle_Mom;   //!
-   TBranch        *b_MCParticle_Phi;   //!
-   TBranch        *b_MCParticle_CosTheta;   //!
-   TBranch        *b_MCParticle_Length;   //!
-   TBranch        *b_MCParticle_StartContainment;   //!
-   TBranch        *b_MCParticle_EndContainment;   //!
-   TBranch        *b_MCParticle_Pdg;   //!
+   
+   TBranch        *b_Muon_MCParticle_Mom;   //!
+   TBranch        *b_Muon_MCParticle_Phi;   //!
+   TBranch        *b_Muon_MCParticle_CosTheta;   //!
+   TBranch        *b_Muon_MCParticle_Length;   //!
+   TBranch        *b_Muon_MCParticle_StartContainment;   //!
+   TBranch        *b_Muon_MCParticle_EndContainment;   //!
+   TBranch        *b_Muon_MCParticle_Pdg;   //!
+   
+   TBranch        *b_Proton_MCParticle_Mom;   //!
+   TBranch        *b_Proton_MCParticle_Phi;   //!
+   TBranch        *b_Proton_MCParticle_CosTheta;   //!
+   TBranch        *b_Proton_MCParticle_Length;   //!
+   TBranch        *b_Proton_MCParticle_StartContainment;   //!
+   TBranch        *b_Proton_MCParticle_EndContainment;   //!
+   TBranch        *b_Proton_MCParticle_Pdg;   //!   
+   
+   TBranch        *b_True_Pt;   //!
+   TBranch        *b_True_DeltaAlphaT;   //!
+   TBranch        *b_True_DeltaPhiT;   //!
+   TBranch        *b_True_ECal;   //!
+   TBranch        *b_True_EQE;   //!
+   TBranch        *b_True_Q2;   //!                  
 
    myTrueAnalysis(TString WhichSample,TTree *tree=0);
    virtual ~myTrueAnalysis();
@@ -115,13 +147,29 @@ void myTrueAnalysis::Init(TTree *tree)
 {
 
    // Set object pointer
-   MCParticle_Mom = 0;
-   MCParticle_Phi = 0;
-   MCParticle_CosTheta = 0;
-   MCParticle_Length = 0;
-   MCParticle_StartContainment = 0;
-   MCParticle_EndContainment = 0;
-   MCParticle_Pdg = 0;
+   
+   Muon_MCParticle_Mom = 0;
+   Muon_MCParticle_Phi = 0;
+   Muon_MCParticle_CosTheta = 0;
+   Muon_MCParticle_Length = 0;
+   Muon_MCParticle_StartContainment = 0;
+   Muon_MCParticle_EndContainment = 0;
+   Muon_MCParticle_Pdg = 0;
+
+   Proton_MCParticle_Mom = 0;
+   Proton_MCParticle_Phi = 0;
+   Proton_MCParticle_CosTheta = 0;
+   Proton_MCParticle_Length = 0;
+   Proton_MCParticle_StartContainment = 0;
+   Proton_MCParticle_EndContainment = 0;
+   Proton_MCParticle_Pdg = 0;
+   
+   True_Pt = 0;
+   True_DeltaAlphaT = 0;
+   True_DeltaPhiT = 0;
+   True_ECal = 0;
+   True_EQE = 0;
+   True_Q2 = 0;                  
 
    // Set branch addresses and branch pointers
    if (!tree) return;
@@ -133,13 +181,30 @@ void myTrueAnalysis::Init(TTree *tree)
    fChain->SetBranchAddress("T2KWeight", &T2KWeight, &b_T2KWeight);
    fChain->SetBranchAddress("CC1p", &CC1p, &b_CC1p);   
    fChain->SetBranchAddress("NumberMCParticles", &NumberMCParticles, &b_NumberMCParticles);
-   fChain->SetBranchAddress("MCParticle_Mom", &MCParticle_Mom, &b_MCParticle_Mom);
-   fChain->SetBranchAddress("MCParticle_Phi", &MCParticle_Phi, &b_MCParticle_Phi);
-   fChain->SetBranchAddress("MCParticle_CosTheta", &MCParticle_CosTheta, &b_MCParticle_CosTheta);
-   fChain->SetBranchAddress("MCParticle_Length", &MCParticle_Length, &b_MCParticle_Length);
-   fChain->SetBranchAddress("MCParticle_StartContainment", &MCParticle_StartContainment, &b_MCParticle_StartContainment);
-   fChain->SetBranchAddress("MCParticle_EndContainment", &MCParticle_EndContainment, &b_MCParticle_EndContainment);
-   fChain->SetBranchAddress("MCParticle_Pdg", &MCParticle_Pdg, &b_MCParticle_Pdg);
+   
+   fChain->SetBranchAddress("Muon_MCParticle_Mom", &Muon_MCParticle_Mom, &b_Muon_MCParticle_Mom);
+   fChain->SetBranchAddress("Muon_MCParticle_Phi", &Muon_MCParticle_Phi, &b_Muon_MCParticle_Phi);
+   fChain->SetBranchAddress("Muon_MCParticle_CosTheta", &Muon_MCParticle_CosTheta, &b_Muon_MCParticle_CosTheta);
+   fChain->SetBranchAddress("Muon_MCParticle_Length", &Muon_MCParticle_Length, &b_Muon_MCParticle_Length);
+   fChain->SetBranchAddress("Muon_MCParticle_StartContainment", &Muon_MCParticle_StartContainment, &b_Muon_MCParticle_StartContainment);
+   fChain->SetBranchAddress("Muon_MCParticle_EndContainment", &Muon_MCParticle_EndContainment, &b_Muon_MCParticle_EndContainment);
+   fChain->SetBranchAddress("Muon_MCParticle_Pdg", &Muon_MCParticle_Pdg, &b_Muon_MCParticle_Pdg);
+   
+   fChain->SetBranchAddress("Proton_MCParticle_Mom", &Proton_MCParticle_Mom, &b_Proton_MCParticle_Mom);
+   fChain->SetBranchAddress("Proton_MCParticle_Phi", &Proton_MCParticle_Phi, &b_Proton_MCParticle_Phi);
+   fChain->SetBranchAddress("Proton_MCParticle_CosTheta", &Proton_MCParticle_CosTheta, &b_Proton_MCParticle_CosTheta);
+   fChain->SetBranchAddress("Proton_MCParticle_Length", &Proton_MCParticle_Length, &b_Proton_MCParticle_Length);
+   fChain->SetBranchAddress("Proton_MCParticle_StartContainment", &Proton_MCParticle_StartContainment, &b_Proton_MCParticle_StartContainment);
+   fChain->SetBranchAddress("Proton_MCParticle_EndContainment", &Proton_MCParticle_EndContainment, &b_Proton_MCParticle_EndContainment);
+   fChain->SetBranchAddress("Proton_MCParticle_Pdg", &Proton_MCParticle_Pdg, &b_Proton_MCParticle_Pdg);   
+   
+   fChain->SetBranchAddress("True_Pt", &True_Pt, &b_True_Pt);
+   fChain->SetBranchAddress("True_DeltaAlphaT", &True_DeltaAlphaT, &b_True_DeltaAlphaT);
+   fChain->SetBranchAddress("True_DeltaPhiT", &True_DeltaPhiT, &b_True_DeltaPhiT);
+   fChain->SetBranchAddress("True_ECal", &True_ECal, &b_True_ECal);
+   fChain->SetBranchAddress("True_EQE", &True_EQE, &b_True_EQE);      
+   fChain->SetBranchAddress("True_Q2", &True_Q2, &b_True_Q2);   
+   
    Notify();
 }
 

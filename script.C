@@ -13,10 +13,8 @@
 
 	// -----------------------------------------------------------------------------------------
 
-//	Locally
-//	gROOT->ProcessLine(".L ../../myClass/Tools.cxx++");
-//	On the gpvm's'
 	gROOT->ProcessLine(".L /uboone/app/users/apapadop/uboonecode_v08_00_00_43/srcs/ubana/ubana/myClasses/Tools.cxx++");
+	gROOT->ProcessLine(".L /uboone/app/users/apapadop/uboonecode_v08_00_00_43/srcs/ubana/ubana/myClasses/STV_Tools.cxx++");	
 
 	gROOT->ProcessLine(".L t.C+");
 	gROOT->ProcessLine(".L myTrueAnalysis.C+");

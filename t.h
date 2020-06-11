@@ -82,6 +82,20 @@ public :
 //   vector<double>  *True_CandidateP_Length;
    vector<int>     *True_CandidateP_StartContainment;
    vector<int>     *True_CandidateP_EndContainment;
+   
+   vector<double>  *Reco_Pt;
+   vector<double>  *Reco_DeltaAlphaT;
+   vector<double>  *Reco_DeltaPhiT;
+   vector<double>  *Reco_ECal;
+   vector<double>  *Reco_EQE;
+   vector<double>  *Reco_Q2;
+   
+   vector<double>  *True_Pt;
+   vector<double>  *True_DeltaAlphaT;
+   vector<double>  *True_DeltaPhiT;
+   vector<double>  *True_ECal;
+   vector<double>  *True_EQE;
+   vector<double>  *True_Q2;                     
 
 //   Int_t           NuMuPFParticles;
 //   vector<int>     *PFParticle_NuMuDaughters;
@@ -146,6 +160,21 @@ public :
 //   TBranch        *b_True_CandidateP_Length;   //!
    TBranch        *b_True_CandidateP_StartContainment;   //!
    TBranch        *b_True_CandidateP_EndContainment;   //!
+   
+   TBranch        *b_Reco_Pt;   //!
+   TBranch        *b_Reco_DeltaAlphaT;   //!
+   TBranch        *b_Reco_DeltaPhiT;   //!
+   TBranch        *b_Reco_ECal;   //!
+   TBranch        *b_Reco_EQE;   //!
+   TBranch        *b_Reco_Q2;   //!
+   
+   TBranch        *b_True_Pt;   //!
+   TBranch        *b_True_DeltaAlphaT;   //!
+   TBranch        *b_True_DeltaPhiT;   //!
+   TBranch        *b_True_ECal;   //!
+   TBranch        *b_True_EQE;   //!
+   TBranch        *b_True_Q2;   //!   
+                     
 
 //   TBranch        *b_NuMuPFParticles;   //!
 //   TBranch        *b_PFParticle_NuMuDaughters;   //!
@@ -264,6 +293,20 @@ void t::Init(TTree *tree)
 //   True_CandidateP_Length = 0;
    True_CandidateP_StartContainment = 0;
    True_CandidateP_EndContainment = 0;
+   
+   Reco_Pt = 0;
+   Reco_DeltaAlphaT = 0;
+   Reco_DeltaPhiT = 0;
+   Reco_ECal = 0;
+   Reco_EQE = 0;
+   Reco_Q2 = 0;
+   
+   True_Pt = 0;
+   True_DeltaAlphaT = 0;
+   True_DeltaPhiT = 0;
+   True_ECal = 0;
+   True_EQE = 0;
+   True_Q2 = 0;                     
 
 //   PFParticle_NuMuDaughters = 0;
 //   PFParticle_NuMuDaughtersPdgCode = 0;
@@ -332,6 +375,20 @@ void t::Init(TTree *tree)
 //   fChain->SetBranchAddress("True_CandidateP_Length", &True_CandidateP_Length, &b_True_CandidateP_Length);
    fChain->SetBranchAddress("True_CandidateP_StartContainment", &True_CandidateP_StartContainment, &b_True_CandidateP_StartContainment);
    fChain->SetBranchAddress("True_CandidateP_EndContainment", &True_CandidateP_EndContainment, &b_True_CandidateP_EndContainment);
+   
+   fChain->SetBranchAddress("Reco_Pt", &Reco_Pt, &b_Reco_Pt);
+   fChain->SetBranchAddress("Reco_DeltaAlphaT", &Reco_DeltaAlphaT, &b_Reco_DeltaAlphaT);
+   fChain->SetBranchAddress("Reco_DeltaPhiT", &Reco_DeltaPhiT, &b_Reco_DeltaPhiT);
+   fChain->SetBranchAddress("Reco_ECal", &Reco_ECal, &b_Reco_ECal);
+   fChain->SetBranchAddress("Reco_EQE", &Reco_EQE, &b_Reco_EQE);
+   fChain->SetBranchAddress("Reco_Q2", &Reco_Q2, &b_Reco_Q2);
+   
+   fChain->SetBranchAddress("True_Pt", &True_Pt, &b_True_Pt);
+   fChain->SetBranchAddress("True_DeltaAlphaT", &True_DeltaAlphaT, &b_True_DeltaAlphaT);
+   fChain->SetBranchAddress("True_DeltaPhiT", &True_DeltaPhiT, &b_True_DeltaPhiT);
+   fChain->SetBranchAddress("True_ECal", &True_ECal, &b_True_ECal);
+   fChain->SetBranchAddress("True_EQE", &True_EQE, &b_True_EQE);
+   fChain->SetBranchAddress("True_Q2", &True_Q2, &b_True_Q2);                     
 
 //   fChain->SetBranchAddress("NuMuPFParticles", &NuMuPFParticles, &b_NuMuPFParticles);
 //   fChain->SetBranchAddress("PFParticle_NuMuDaughters", &PFParticle_NuMuDaughters, &b_PFParticle_NuMuDaughters);
