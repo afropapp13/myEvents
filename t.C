@@ -682,18 +682,28 @@ void t::Loop() {
 			// --------------------------------------------------------------------------------------------------------------------------------
 
 			int genie_mode = -1;
+			
+			double true_TransMissMomentum = -1;
+			double true_DeltaAlphaT = -1;
+			double true_DeltaPhiT = -1;
+			double true_ECal = -1;
+			double true_EQE = -1;
+			double true_Q2 = -1;			
+			
 			if (
 				string(fWhichSample).find("Overlay9") != std::string::npos 
-				&& MCParticle_Mode != -1 ) { genie_mode = MCParticle_Mode; }
-
-			// -----------------------------------------------------------------------------------------------------------------------
-
-			double true_TransMissMomentum = True_Pt->at(0);
-			double true_DeltaAlphaT = True_DeltaAlphaT->at(0);
-			double true_DeltaPhiT = True_DeltaPhiT->at(0);
-			double true_ECal = True_ECal->at(0);
-			double true_EQE = True_EQE->at(0);
-			double true_Q2 = True_Q2->at(0);
+				&& MCParticle_Mode != -1 ) { 
+				
+				genie_mode = MCParticle_Mode; 
+				
+				true_TransMissMomentum = True_Pt->at(0);
+				true_DeltaAlphaT = True_DeltaAlphaT->at(0);
+				true_DeltaPhiT = True_DeltaPhiT->at(0);
+				true_ECal = True_ECal->at(0);
+				true_EQE = True_EQE->at(0);
+				true_Q2 = True_Q2->at(0);				
+				
+			}
 
 			// ----------------------------------------------------------------------------------------------------------------------
 
