@@ -670,7 +670,7 @@ void t::Loop() {
 					//&& reco_Pmu_ThreePlaneLogLikelihood < MuonThreePlaneChi2LogLikelihoodCut) )  
 					{ PassedSelection = false; }
 
-				if (VectorCuts[i] == "_Collinearity" && !( DeltaThetaProtonMuon_Deg < DeltaThetaCut ) )  { PassedSelection = false; }
+				//if (VectorCuts[i] == "_Collinearity" && !( DeltaThetaProtonMuon_Deg < DeltaThetaCut ) )  { PassedSelection = false; }
 
 
 			}
