@@ -440,6 +440,10 @@ void t::Loop() {
 				POTCount = POTCountHist->GetBinContent(1);
 				POTFile->Close();
 		}
+		
+		// ------------------------------------------------------------------------------------------------------------------------------
+
+		Tools tools;		
 
 		// --------------------------------------------------------------------------------------------------------------------------------
 
@@ -459,8 +463,8 @@ void t::Loop() {
 
 			// Demand for exactly one muon/proton candidate
 
-			if (CandidateMu_P->size() != 1) { continue; }
-			if (CandidateP_P->size() != 1) { continue; }
+			if (CandidateMu_P_MCS->size() != 1) { continue; }
+			if (CandidateP_P_Range->size() != 1) { continue; }
 
 			// ------------------------------------------------------------------------------------------------------------------------
 
@@ -468,9 +472,34 @@ void t::Loop() {
 			// Fully contained proton candidates
 			// Either fully contained or semi-contained muon candidates
 
-			if (CandidateMu_StartContainment->at(0) == 0) { continue; }
-			if (CandidateP_StartContainment->at(0) == 0) { continue; }
-			if (CandidateP_EndContainment->at(0) == 0) { continue; }
+//			if (CandidateMu_StartContainment->at(0) == 0) { continue; }
+//			if (CandidateP_StartContainment->at(0) == 0) { continue; }
+//			if (CandidateP_EndContainment->at(0) == 0) { continue; }
+
+			double MuonTrackStartX = CandidateMu_StartX->at(0);
+			double MuonTrackStartY = CandidateMu_StartY->at(0);
+			double MuonTrackStartZ = CandidateMu_StartZ->at(0);
+			
+			double MuonTrackEndX = CandidateMu_EndX->at(0);
+			double MuonTrackEndY = CandidateMu_EndY->at(0);
+			double MuonTrackEndZ = CandidateMu_EndZ->at(0);
+			
+			double ProtonTrackStartX = CandidateP_StartX->at(0);
+			double ProtonTrackStartY = CandidateP_StartY->at(0);
+			double ProtonTrackStartZ = CandidateP_StartZ->at(0);
+			
+			double ProtonTrackEndX = CandidateP_EndX->at(0);
+			double ProtonTrackEndY = CandidateP_EndY->at(0);
+			double ProtonTrackEndZ = CandidateP_EndZ->at(0);			
+			
+			TVector3 CandidateMuonTrackStart(MuonTrackStartX,MuonTrackStartY,MuonTrackStartZ);
+			TVector3 CandidateMuonTrackEnd(MuonTrackEndX,MuonTrackEndY,MuonTrackEndZ);
+//			bool CandidateMuonTrackStartContainment = tools.inFVVector(CandidateMuonTrackStart);
+//			bool CandidateMuonTrackEndContainment = tools.inFVVector(CandidateMuonTrackStart);
+
+			if (tools.inFVVector(CandidateMuonTrackStart) == 0) { continue; }
+			if (tools.inFVVector(CandidateProtonTrackStart) == 0) { continue; }
+			if (tools.inFVVector(CandidateProtonTrackEnd) == 0) { continue; }
 
 			// ------------------------------------------------------------------------------------------------------------------
 
@@ -528,7 +557,7 @@ void t::Loop() {
 
 			// Muon & proton kinetic variables
 
-			double reco_Pmu_mcs = CandidateMu_P->at(0);
+			double reco_Pmu_mcs = CandidateMu_P_MCS->at(0);
 			double reco_Pmu_cos_theta = CandidateMu_CosTheta->at(0);
 			double reco_Pmu_phi = CandidateMu_Phi->at(0) * TMath::Pi() / 180.;
 			double reco_Emu = TMath::Sqrt( reco_Pmu_mcs*reco_Pmu_mcs + MuonMass_GeV*MuonMass_GeV );
@@ -538,7 +567,7 @@ void t::Loop() {
 			TVector3CandidateMuon.SetTheta(TMath::ACos(reco_Pmu_cos_theta));
 			TVector3CandidateMuon.SetPhi(reco_Pmu_phi);						
 
-			double reco_Pp = CandidateP_P->at(0);
+			double reco_Pp = CandidateP_P_Range->at(0);
 			double reco_Pp_cos_theta = CandidateP_CosTheta->at(0);
 			double reco_Pp_phi = CandidateP_Phi->at(0) * TMath::Pi() / 180.;
 			double reco_Ep = TMath::Sqrt( reco_Pp*reco_Pp + ProtonMass_GeV*ProtonMass_GeV );

@@ -48,40 +48,54 @@ public :
    vector<double>  *Vertex_X;
    vector<double>  *Vertex_Y;
    vector<double>  *Vertex_Z;
-   vector<double>  *CandidateMu_P;
+   vector<double>  *CandidateMu_StartX;
+   vector<double>  *CandidateMu_StartY;
+   vector<double>  *CandidateMu_StartZ;
+   vector<double>  *CandidateMu_EndX;
+   vector<double>  *CandidateMu_EndY;
+   vector<double>  *CandidateMu_EndZ;            
+   vector<double>  *CandidateMu_P_Range;
+   vector<double>  *CandidateMu_P_MCS;   
    vector<double>  *CandidateMu_Phi;
    vector<double>  *CandidateMu_CosTheta;
    vector<double>  *CandidateMu_Length;
    vector<double>  *CandidateMu_Chi2_YPlane;
    vector<double>  *CandidateMu_ThreePlaneChi2;
    vector<double>  *CandidateMu_ThreePlaneLogLikelihood;
-   vector<int>     *CandidateMu_StartContainment;
-   vector<int>     *CandidateMu_EndContainment;
+//   vector<int>     *CandidateMu_StartContainment;
+//   vector<int>     *CandidateMu_EndContainment;
    vector<int>     *CandidateMu_MCParticle_Pdg;
    vector<double>  *CandidateMu_MCParticle_Purity;
    vector<double>  *True_CandidateMu_P;
    vector<double>  *True_CandidateMu_Phi;
    vector<double>  *True_CandidateMu_CosTheta;
 //   vector<double>  *True_CandidateMu_Length;
-   vector<int>     *True_CandidateMu_StartContainment;
-   vector<int>     *True_CandidateMu_EndContainment;
-   vector<double>  *CandidateP_P;
+//   vector<int>     *True_CandidateMu_StartContainment;
+//   vector<int>     *True_CandidateMu_EndContainment;
+   vector<double>  *CandidateP_StartX;
+   vector<double>  *CandidateP_StartY;
+   vector<double>  *CandidateP_StartZ;
+   vector<double>  *CandidateP_EndX;
+   vector<double>  *CandidateP_EndY;
+   vector<double>  *CandidateP_EndZ;
+   vector<double>  *CandidateP_P_Range;
+   vector<double>  *CandidateP_P_MCS;   
    vector<double>  *CandidateP_Phi;
    vector<double>  *CandidateP_CosTheta;
    vector<double>  *CandidateP_Length;
    vector<double>  *CandidateP_Chi2_YPlane;
    vector<double>  *CandidateP_ThreePlaneChi2;
    vector<double>  *CandidateP_ThreePlaneLogLikelihood;
-   vector<int>     *CandidateP_StartContainment;
-   vector<int>     *CandidateP_EndContainment;
+//   vector<int>     *CandidateP_StartContainment;
+//   vector<int>     *CandidateP_EndContainment;
    vector<int>     *CandidateP_MCParticle_Pdg;
    vector<double>  *CandidateP_MCParticle_Purity;
    vector<double>  *True_CandidateP_P;
    vector<double>  *True_CandidateP_Phi;
    vector<double>  *True_CandidateP_CosTheta;
 //   vector<double>  *True_CandidateP_Length;
-   vector<int>     *True_CandidateP_StartContainment;
-   vector<int>     *True_CandidateP_EndContainment;
+//   vector<int>     *True_CandidateP_StartContainment;
+//   vector<int>     *True_CandidateP_EndContainment;
    
    vector<double>  *Reco_Pt;
    vector<double>  *Reco_DeltaAlphaT;
@@ -126,40 +140,54 @@ public :
    TBranch        *b_Vertex_X;   //!
    TBranch        *b_Vertex_Y;   //!
    TBranch        *b_Vertex_Z;   //!
-   TBranch        *b_CandidateMu_P;   //!
+   TBranch        *b_CandidateMu_StartX;   //!
+   TBranch        *b_CandidateMu_StartY;   //!
+   TBranch        *b_CandidateMu_StartZ;   //!
+   TBranch        *b_CandidateMu_EndX;   //!
+   TBranch        *b_CandidateMu_EndY;   //!
+   TBranch        *b_CandidateMu_EndZ;   //!          
+   TBranch        *b_CandidateMu_P_Range;   //!
+   TBranch        *b_CandidateMu_P_MCS;   //!   
    TBranch        *b_CandidateMu_Phi;   //!
    TBranch        *b_CandidateMu_CosTheta;   //!
    TBranch        *b_CandidateMu_Length;   //!
    TBranch        *b_CandidateMu_Chi2_YPlane;   //!
    TBranch        *b_CandidateMu_ThreePlaneChi2;   //!
    TBranch        *b_CandidateMu_ThreePlaneLogLikelihood;   //!
-   TBranch        *b_CandidateMu_StartContainment;   //!
-   TBranch        *b_CandidateMu_EndContainment;   //!
+//   TBranch        *b_CandidateMu_StartContainment;   //!
+//   TBranch        *b_CandidateMu_EndContainment;   //!
    TBranch        *b_CandidateMu_MCParticle_Pdg;   //!
    TBranch        *b_CandidateMu_MCParticle_Purity;   //!
    TBranch        *b_True_CandidateMu_P;   //!
    TBranch        *b_True_CandidateMu_Phi;   //!
    TBranch        *b_True_CandidateMu_CosTheta;   //!
 //   TBranch        *b_True_CandidateMu_Length;   //!
-   TBranch        *b_True_CandidateMu_StartContainment;   //!
-   TBranch        *b_True_CandidateMu_EndContainment;   //!
-   TBranch        *b_CandidateP_P;   //!
+//   TBranch        *b_True_CandidateMu_StartContainment;   //!
+//   TBranch        *b_True_CandidateMu_EndContainment;   //!
+   TBranch        *b_CandidateP_StartX;   //!
+   TBranch        *b_CandidateP_StartY;   //!
+   TBranch        *b_CandidateP_StartZ;   //!
+   TBranch        *b_CandidateP_EndX;   //!
+   TBranch        *b_CandidateP_EndY;   //!
+   TBranch        *b_CandidateP_EndZ;   //!
+   TBranch        *b_CandidateP_P_Range;   //!
+   TBranch        *b_CandidateP_P_MCS;   //!   
    TBranch        *b_CandidateP_Phi;   //!
    TBranch        *b_CandidateP_CosTheta;   //!
    TBranch        *b_CandidateP_Length;   //!
    TBranch        *b_CandidateP_Chi2_YPlane;   //!
    TBranch        *b_CandidateP_ThreePlaneChi2;   //!
    TBranch        *b_CandidateP_ThreePlaneLogLikelihood;   //!
-   TBranch        *b_CandidateP_StartContainment;   //!
-   TBranch        *b_CandidateP_EndContainment;   //!
+//   TBranch        *b_CandidateP_StartContainment;   //!
+//   TBranch        *b_CandidateP_EndContainment;   //!
    TBranch        *b_CandidateP_MCParticle_Pdg;   //!
    TBranch        *b_CandidateP_MCParticle_Purity;   //!
    TBranch        *b_True_CandidateP_P;   //!
    TBranch        *b_True_CandidateP_Phi;   //!
    TBranch        *b_True_CandidateP_CosTheta;   //!
 //   TBranch        *b_True_CandidateP_Length;   //!
-   TBranch        *b_True_CandidateP_StartContainment;   //!
-   TBranch        *b_True_CandidateP_EndContainment;   //!
+//   TBranch        *b_True_CandidateP_StartContainment;   //!
+//   TBranch        *b_True_CandidateP_EndContainment;   //!
    
    TBranch        *b_Reco_Pt;   //!
    TBranch        *b_Reco_DeltaAlphaT;   //!
@@ -259,40 +287,54 @@ void t::Init(TTree *tree)
    Vertex_X = 0;
    Vertex_Y = 0;
    Vertex_Z = 0;
-   CandidateMu_P = 0;
+   CandidateMu_StartX = 0;
+   CandidateMu_StartY = 0;
+   CandidateMu_StartZ = 0;
+   CandidateMu_EndX = 0;
+   CandidateMu_EndY = 0;
+   CandidateMu_EndZ = 0;            
+   CandidateMu_P_Range = 0;
+   CandidateMu_P_MCS = 0;   
    CandidateMu_Phi = 0;
    CandidateMu_CosTheta = 0;
    CandidateMu_Length = 0;
    CandidateMu_Chi2_YPlane = 0;
    CandidateMu_ThreePlaneChi2 = 0;
    CandidateMu_ThreePlaneLogLikelihood = 0;
-   CandidateMu_StartContainment = 0;
-   CandidateMu_EndContainment = 0;
+//   CandidateMu_StartContainment = 0;
+//   CandidateMu_EndContainment = 0;
    CandidateMu_MCParticle_Pdg = 0;
    CandidateMu_MCParticle_Purity = 0;
    True_CandidateMu_P = 0;
    True_CandidateMu_Phi = 0;
    True_CandidateMu_CosTheta = 0;
 //   True_CandidateMu_Length = 0;
-   True_CandidateMu_StartContainment = 0;
-   True_CandidateMu_EndContainment = 0;
-   CandidateP_P = 0;
+//   True_CandidateMu_StartContainment = 0;
+//   True_CandidateMu_EndContainment = 0;
+   CandidateP_StartX = 0;
+   CandidateP_StartY = 0;
+   CandidateP_StartZ = 0;
+   CandidateP_EndX = 0;
+   CandidateP_EndY = 0;
+   CandidateP_EndZ = 0;
+   CandidateP_P_Range = 0;
+   CandidateP_P_MCS = 0;   
    CandidateP_Phi = 0;
    CandidateP_CosTheta = 0;
    CandidateP_Length = 0;
    CandidateP_Chi2_YPlane = 0;
    CandidateP_ThreePlaneChi2 = 0;
    CandidateP_ThreePlaneLogLikelihood = 0;
-   CandidateP_StartContainment = 0;
-   CandidateP_EndContainment = 0;
+//   CandidateP_StartContainment = 0;
+//   CandidateP_EndContainment = 0;
    CandidateP_MCParticle_Pdg = 0;
    CandidateP_MCParticle_Purity = 0;
    True_CandidateP_P = 0;
    True_CandidateP_Phi = 0;
    True_CandidateP_CosTheta = 0;
 //   True_CandidateP_Length = 0;
-   True_CandidateP_StartContainment = 0;
-   True_CandidateP_EndContainment = 0;
+//   True_CandidateP_StartContainment = 0;
+//   True_CandidateP_EndContainment = 0;
    
    Reco_Pt = 0;
    Reco_DeltaAlphaT = 0;
@@ -341,40 +383,55 @@ void t::Init(TTree *tree)
    fChain->SetBranchAddress("Vertex_X", &Vertex_X, &b_Vertex_X);
    fChain->SetBranchAddress("Vertex_Y", &Vertex_Y, &b_Vertex_Y);
    fChain->SetBranchAddress("Vertex_Z", &Vertex_Z, &b_Vertex_Z);
-   fChain->SetBranchAddress("CandidateMu_P", &CandidateMu_P, &b_CandidateMu_P);
+
+   fChain->SetBranchAddress("CandidateMu_StartX", &CandidateMu_StartX, &b_CandidateMu_StartX);
+   fChain->SetBranchAddress("CandidateMu_StartY", &CandidateMu_StartY, &b_CandidateMu_StartY);
+   fChain->SetBranchAddress("CandidateMu_StartZ", &CandidateMu_StartZ, &b_CandidateMu_StartZ);
+   fChain->SetBranchAddress("CandidateMu_EndX", &CandidateMu_EndX, &b_CandidateMu_EndX);
+   fChain->SetBranchAddress("CandidateMu_EndY", &CandidateMu_EndY, &b_CandidateMu_EndY);
+   fChain->SetBranchAddress("CandidateMu_EndZ", &CandidateMu_EndZ, &b_CandidateMu_EndZ);         
+   fChain->SetBranchAddress("CandidateMu_P_Range", &CandidateMu_P_Range, &b_CandidateMu_P_Range);
+   fChain->SetBranchAddress("CandidateMu_P_MCS", &CandidateMu_P_MCS, &b_CandidateMu_P_MCS);   
    fChain->SetBranchAddress("CandidateMu_Phi", &CandidateMu_Phi, &b_CandidateMu_Phi);
    fChain->SetBranchAddress("CandidateMu_CosTheta", &CandidateMu_CosTheta, &b_CandidateMu_CosTheta);
    fChain->SetBranchAddress("CandidateMu_Length", &CandidateMu_Length, &b_CandidateMu_Length);
    fChain->SetBranchAddress("CandidateMu_Chi2_YPlane", &CandidateMu_Chi2_YPlane, &b_CandidateMu_Chi2_YPlane);
    fChain->SetBranchAddress("CandidateMu_ThreePlaneChi2", &CandidateMu_ThreePlaneChi2, &b_CandidateMu_ThreePlaneChi2);
    fChain->SetBranchAddress("CandidateMu_ThreePlaneLogLikelihood", &CandidateMu_ThreePlaneLogLikelihood, &b_CandidateMu_ThreePlaneLogLikelihood);
-   fChain->SetBranchAddress("CandidateMu_StartContainment", &CandidateMu_StartContainment, &b_CandidateMu_StartContainment);
-   fChain->SetBranchAddress("CandidateMu_EndContainment", &CandidateMu_EndContainment, &b_CandidateMu_EndContainment);
+//   fChain->SetBranchAddress("CandidateMu_StartContainment", &CandidateMu_StartContainment, &b_CandidateMu_StartContainment);
+//   fChain->SetBranchAddress("CandidateMu_EndContainment", &CandidateMu_EndContainment, &b_CandidateMu_EndContainment);
    fChain->SetBranchAddress("CandidateMu_MCParticle_Pdg", &CandidateMu_MCParticle_Pdg, &b_CandidateMu_MCParticle_Pdg);
    fChain->SetBranchAddress("CandidateMu_MCParticle_Purity", &CandidateMu_MCParticle_Purity, &b_CandidateMu_MCParticle_Purity);
    fChain->SetBranchAddress("True_CandidateMu_P", &True_CandidateMu_P, &b_True_CandidateMu_P);
    fChain->SetBranchAddress("True_CandidateMu_Phi", &True_CandidateMu_Phi, &b_True_CandidateMu_Phi);
    fChain->SetBranchAddress("True_CandidateMu_CosTheta", &True_CandidateMu_CosTheta, &b_True_CandidateMu_CosTheta);
 //   fChain->SetBranchAddress("True_CandidateMu_Length", &True_CandidateMu_Length, &b_True_CandidateMu_Length);
-   fChain->SetBranchAddress("True_CandidateMu_StartContainment", &True_CandidateMu_StartContainment, &b_True_CandidateMu_StartContainment);
-   fChain->SetBranchAddress("True_CandidateMu_EndContainment", &True_CandidateMu_EndContainment, &b_True_CandidateMu_EndContainment);
-   fChain->SetBranchAddress("CandidateP_P", &CandidateP_P, &b_CandidateP_P);
+//   fChain->SetBranchAddress("True_CandidateMu_StartContainment", &True_CandidateMu_StartContainment, &b_True_CandidateMu_StartContainment);
+//   fChain->SetBranchAddress("True_CandidateMu_EndContainment", &True_CandidateMu_EndContainment, &b_True_CandidateMu_EndContainment);
+   fChain->SetBranchAddress("CandidateP_StartX", &CandidateP_StartX, &b_CandidateP_StartX);
+   fChain->SetBranchAddress("CandidateP_StartY", &CandidateP_StartY, &b_CandidateP_StartY);
+   fChain->SetBranchAddress("CandidateP_StartZ", &CandidateP_StartZ, &b_CandidateP_StartZ);
+   fChain->SetBranchAddress("CandidateP_EndX", &CandidateP_EndX, &b_CandidateP_EndX);
+   fChain->SetBranchAddress("CandidateP_EndY", &CandidateP_EndY, &b_CandidateP_EndY);
+   fChain->SetBranchAddress("CandidateP_EndZ", &CandidateP_EndZ, &b_CandidateP_EndZ);
+   fChain->SetBranchAddress("CandidateP_P_Range", &CandidateP_P_Range, &b_CandidateP_P_Range);
+   fChain->SetBranchAddress("CandidateP_P_MCS", &CandidateP_P_MCS, &b_CandidateP_P_MCS);   
    fChain->SetBranchAddress("CandidateP_Phi", &CandidateP_Phi, &b_CandidateP_Phi);
    fChain->SetBranchAddress("CandidateP_CosTheta", &CandidateP_CosTheta, &b_CandidateP_CosTheta);
    fChain->SetBranchAddress("CandidateP_Length", &CandidateP_Length, &b_CandidateP_Length);
    fChain->SetBranchAddress("CandidateP_Chi2_YPlane", &CandidateP_Chi2_YPlane, &b_CandidateP_Chi2_YPlane);
    fChain->SetBranchAddress("CandidateP_ThreePlaneChi2", &CandidateP_ThreePlaneChi2, &b_CandidateP_ThreePlaneChi2);
    fChain->SetBranchAddress("CandidateP_ThreePlaneLogLikelihood", &CandidateP_ThreePlaneLogLikelihood, &b_CandidateP_ThreePlaneLogLikelihood);
-   fChain->SetBranchAddress("CandidateP_StartContainment", &CandidateP_StartContainment, &b_CandidateP_StartContainment);
-   fChain->SetBranchAddress("CandidateP_EndContainment", &CandidateP_EndContainment, &b_CandidateP_EndContainment);
+//   fChain->SetBranchAddress("CandidateP_StartContainment", &CandidateP_StartContainment, &b_CandidateP_StartContainment);
+//   fChain->SetBranchAddress("CandidateP_EndContainment", &CandidateP_EndContainment, &b_CandidateP_EndContainment);
    fChain->SetBranchAddress("CandidateP_MCParticle_Pdg", &CandidateP_MCParticle_Pdg, &b_CandidateP_MCParticle_Pdg);
    fChain->SetBranchAddress("CandidateP_MCParticle_Purity", &CandidateP_MCParticle_Purity, &b_CandidateP_MCParticle_Purity);
    fChain->SetBranchAddress("True_CandidateP_P", &True_CandidateP_P, &b_True_CandidateP_P);
    fChain->SetBranchAddress("True_CandidateP_Phi", &True_CandidateP_Phi, &b_True_CandidateP_Phi);
    fChain->SetBranchAddress("True_CandidateP_CosTheta", &True_CandidateP_CosTheta, &b_True_CandidateP_CosTheta);
 //   fChain->SetBranchAddress("True_CandidateP_Length", &True_CandidateP_Length, &b_True_CandidateP_Length);
-   fChain->SetBranchAddress("True_CandidateP_StartContainment", &True_CandidateP_StartContainment, &b_True_CandidateP_StartContainment);
-   fChain->SetBranchAddress("True_CandidateP_EndContainment", &True_CandidateP_EndContainment, &b_True_CandidateP_EndContainment);
+//   fChain->SetBranchAddress("True_CandidateP_StartContainment", &True_CandidateP_StartContainment, &b_True_CandidateP_StartContainment);
+//   fChain->SetBranchAddress("True_CandidateP_EndContainment", &True_CandidateP_EndContainment, &b_True_CandidateP_EndContainment);
    
    fChain->SetBranchAddress("Reco_Pt", &Reco_Pt, &b_Reco_Pt);
    fChain->SetBranchAddress("Reco_DeltaAlphaT", &Reco_DeltaAlphaT, &b_Reco_DeltaAlphaT);
