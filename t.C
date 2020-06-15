@@ -496,6 +496,10 @@ void t::Loop() {
 			
 			TVector3 CandidateMuonTrackStart(MuonTrackStartX,MuonTrackStartY,MuonTrackStartZ);
 			TVector3 CandidateMuonTrackEnd(MuonTrackEndX,MuonTrackEndY,MuonTrackEndZ);
+			
+			TVector3 CandidateProtonTrackStart(ProtonTrackStartX,ProtonTrackStartY,ProtonTrackStartZ);
+			TVector3 CandidateProtonTrackEnd(ProtonTrackEndX,ProtonTrackEndY,ProtonTrackEndZ);			
+			
 //			bool CandidateMuonTrackStartContainment = tools.inFVVector(CandidateMuonTrackStart);
 //			bool CandidateMuonTrackEndContainment = tools.inFVVector(CandidateMuonTrackStart);
 

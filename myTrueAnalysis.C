@@ -155,8 +155,8 @@ void myTrueAnalysis::Loop() {
 			double TrueMuon_KE_MeV = tools.PToKE(MuonPdg,TrueMuonMomentum_MeV); // MeV
 			double TrueMuon_KE_GeV = TrueMuon_KE_MeV / 1000.; // GeV
 			double TrueMuon_E_GeV = TrueMuon_KE_GeV + MuonMass_GeV; // GeV
-			int TrueMuonStartContainment = Muon_MCParticle_StartContainment->at(0);
-			int TrueMuonEndContainment = Muon_MCParticle_EndContainment->at(0);
+//			int TrueMuonStartContainment = Muon_MCParticle_StartContainment->at(0);
+//			int TrueMuonEndContainment = Muon_MCParticle_EndContainment->at(0);
 
 			TVector3 TVector3TrueMuon;
 			TVector3TrueMuon.SetMagThetaPhi(TrueMuonMomentum_GeV,TrueMuonTheta,TrueMuonPhi);
@@ -173,8 +173,8 @@ void myTrueAnalysis::Loop() {
 			double TrueProton_KE_MeV = tools.PToKE(ProtonPdg,TrueProtonMomentum_MeV); // MeV
 			double TrueProton_KE_GeV = TrueProton_KE_MeV / 1000.; // GeV
 			double TrueProton_E_GeV = TrueProton_KE_GeV + ProtonMass_GeV; // GeV
-			int TrueProtonStartContainment = Proton_MCParticle_StartContainment->at(0);
-			int TrueProtonEndContainment = Proton_MCParticle_EndContainment->at(0);
+//			int TrueProtonStartContainment = Proton_MCParticle_StartContainment->at(0);
+//			int TrueProtonEndContainment = Proton_MCParticle_EndContainment->at(0);
 
 			TVector3 TVector3TrueProton;
 			TVector3TrueProton.SetMagThetaPhi(TrueProtonMomentum_GeV,TrueProtonTheta,TrueProtonPhi);
@@ -214,9 +214,9 @@ void myTrueAnalysis::Loop() {
 			// Same events fill all the plots
 
 			if (
-			    TrueMuonStartContainment == true 
+			    /*TrueMuonStartContainment == true 
 			    && TrueProtonStartContainment == true 
-			    && TrueMuonMomentum_GeV > ArrayNBinsMuonMomentum[0]
+			    &&*/ TrueMuonMomentum_GeV > ArrayNBinsMuonMomentum[0]
 			    && TrueProtonMomentum_GeV > ArrayNBinsProtonMomentum[0]
 			) {
 
