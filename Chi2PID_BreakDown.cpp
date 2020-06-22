@@ -169,7 +169,7 @@ void Chi2PID_BreakDown() {
 				topPad->SetTopMargin(0.3);
 				topPad->SetBottomMargin(0.0);
 				midPad->SetBottomMargin(0.03);
-				midPad->SetTopMargin(0.0);
+				midPad->SetTopMargin(0.02);
 				botPad->SetTopMargin(0.);
 				botPad->SetBottomMargin(0.25);
 				botPad->SetGridy();
