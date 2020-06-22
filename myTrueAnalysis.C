@@ -66,6 +66,8 @@ void myTrueAnalysis::Loop() {
 	int TrueCC1pCounter = 0;
 	int TrueCCQElikeCounter = 0;
 	
+	double SumWeights = 0.;
+	
 	// --------------------------------------------------------------------------------------------------------------------------------
 
 	// POT Counting
@@ -143,6 +145,29 @@ void myTrueAnalysis::Loop() {
 		// Signal definition: 1 mu (Pmu > 100 MeV / c), 1p (Pp > 200 MeV / c) & 0 pi+/- (Ppi > 70 MeV / c)
 
 		if (CC1p == 1) {
+		
+			// --------------------------------------------------------------------------------------------------------------------		
+			
+			// Containment of the vertex defined as the start point of the muon in the TPC
+
+// TPCActive			
+			if (Muon_MCParticle_StartX->at(0) < 0.) { continue; } 
+			if (Muon_MCParticle_StartX->at(0) > 256.35) { continue; }
+			if (Muon_MCParticle_StartY->at(0) < -116.5) { continue; } 
+			if (Muon_MCParticle_StartY->at(0) > 116.5) { continue; }
+			if (Muon_MCParticle_StartZ->at(0) < 0.) { continue; } 
+			if (Muon_MCParticle_StartZ->at(0) > 1036.8) { continue; }						 				
+
+//TPC
+//			if (Muon_MCParticle_StartX->at(0) < -2.) { continue; } 
+//			if (Muon_MCParticle_StartX->at(0) > 258.) { continue; }
+//			if (Muon_MCParticle_StartY->at(0) < -126.) { continue; } 
+//			if (Muon_MCParticle_StartY->at(0) > 126.) { continue; }
+//			if (Muon_MCParticle_StartZ->at(0) < -5.) { continue; } 
+//			if (Muon_MCParticle_StartZ->at(0) > 1041.) { continue; }						 				
+				
+
+			// --------------------------------------------------------------------------------------------------------------------		
 
 			// True muon
 
@@ -252,6 +277,7 @@ void myTrueAnalysis::Loop() {
 
 					TrueCC1pEvent = true;
 					TrueCC1pCounter++;
+					SumWeights += Weight * T2KWeight;					
 
 					// STV
 
@@ -296,6 +322,14 @@ void myTrueAnalysis::Loop() {
 		TxtFile << std::endl << "True CC1p events = " << TrueCC1pCounter << std::endl;
 
 	}
+
+	// --------------------------------------------------------------------------------------------------------------------------------------------
+	
+//	double ScalingFactor = (double)(nentries) / SumWeights;
+//	double ScalingFactor = 1. / SumWeights;
+//	double ScalingFactor = 1.;
+	double ScalingFactor = (double)(TrueCC1pCounter) / SumWeights;	
+	cout << "Scaling Factor = " << ScalingFactor << endl;
 
 	// --------------------------------------------------------------------------------------------------------------------------------------------
 
