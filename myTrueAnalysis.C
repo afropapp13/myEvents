@@ -324,14 +324,6 @@ void myTrueAnalysis::Loop() {
 	}
 
 	// --------------------------------------------------------------------------------------------------------------------------------------------
-	
-//	double ScalingFactor = (double)(nentries) / SumWeights;
-//	double ScalingFactor = 1. / SumWeights;
-//	double ScalingFactor = 1.;
-	double ScalingFactor = (double)(TrueCC1pCounter) / SumWeights;	
-	cout << "Scaling Factor = " << ScalingFactor << endl;
-
-	// --------------------------------------------------------------------------------------------------------------------------------------------
 
 	std::cout << std::endl << "File " << FileName << " has been created"<< std::endl << std::endl;
 	OutputFile->cd();
