@@ -215,14 +215,8 @@ void myTrueAnalysis::Loop() {
 			TVector3TrueProton.SetMagThetaPhi(TrueProtonMomentum_GeV,TrueProtonTheta,TrueProtonPhi);
 			TLorentzVector TrueProton4V(TVector3TrueProton,TrueProton_E_GeV);
 
-			double TrueDeltaPhiProtonMuon = TVector3TrueMuon.DeltaPhi(TVector3TrueProton);
-			double TrueDeltaThetaProtonMuon = TVector3TrueMuon.Angle(TVector3TrueProton);
-			double TrueDeltaPhiProtonMuon_Deg = TrueDeltaPhiProtonMuon * 180. / TMath::Pi();
-			double TrueDeltaThetaProtonMuon_Deg = TrueDeltaThetaProtonMuon * 180. / TMath::Pi();
-			if (TrueDeltaThetaProtonMuon_Deg < 0.) { TrueDeltaPhiProtonMuon_Deg += 180.; }
-			if (TrueDeltaThetaProtonMuon_Deg > 180.) { TrueDeltaThetaProtonMuon_Deg -= 180.; }
-			if (TrueDeltaPhiProtonMuon_Deg < 0.) { TrueDeltaPhiProtonMuon_Deg += 360.; }
-			if (TrueDeltaPhiProtonMuon_Deg > 360.) { TrueDeltaPhiProtonMuon_Deg -= 360.; }
+			double TrueDeltaPhiProtonMuon_Deg = True_DeltaPhi;
+			double TrueDeltaThetaProtonMuon_Deg = True_DeltaTheta;
 
 			// Reconstructed calorimetric energy using true level info / MCParticles
 
@@ -238,6 +232,21 @@ void myTrueAnalysis::Loop() {
 
 			double TrueDeltaAlphaT = True_DeltaAlphaT->at(0);
 			double TrueDeltaPhiT = True_DeltaPhiT->at(0);
+			
+			// -----------------------------------------------------------------------------------------------------------------
+			
+			// CCQElike analysis
+			// Use the DeltaTheta, DeltaPhi & Pt cuts
+				
+			if (CCQElike) {
+			
+				if ( !(TMath::Abs(TrueDeltaPhiProtonMuon_Deg - 180.) < 35.) ) { continue; }
+				if ( !(TMath::Abs(TrueDeltaThetaProtonMuon_Deg - 90.) < 55.) ) { continue; }			
+				if ( !(TrueTransMissMomentum < 0.35) ) { continue; }							
+			
+			}	
+				
+			// -----------------------------------------------------------------------------------------------------------------	
 
 			// Reconstructed q vector using true level info / MCParticles
 

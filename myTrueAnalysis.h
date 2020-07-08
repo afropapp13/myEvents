@@ -58,6 +58,9 @@ public :
 //   vector<int>     *Proton_MCParticle_StartContainment;
 //   vector<int>     *Proton_MCParticle_EndContainment;
    vector<int>     *Proton_MCParticle_Pdg;   
+
+   vector<double>  *True_DeltaPhi;
+   vector<double>  *True_DeltaTheta;   
    
    vector<double>  *True_Pt;
    vector<double>  *True_DeltaAlphaT;
@@ -102,6 +105,9 @@ public :
 //   TBranch        *b_Proton_MCParticle_StartContainment;   //!
 //   TBranch        *b_Proton_MCParticle_EndContainment;   //!
    TBranch        *b_Proton_MCParticle_Pdg;   //!   
+   
+   TBranch        *b_True_DeltaPhi;   //!
+   TBranch        *b_True_DeltaTheta;   //!      
    
    TBranch        *b_True_Pt;   //!
    TBranch        *b_True_DeltaAlphaT;   //!
@@ -205,6 +211,9 @@ void myTrueAnalysis::Init(TTree *tree)
 //   Proton_MCParticle_StartContainment = 0;
 //   Proton_MCParticle_EndContainment = 0;
    Proton_MCParticle_Pdg = 0;
+
+   True_DeltaPhi = 0;
+   True_DeltaTheta = 0;   
    
    True_Pt = 0;
    True_DeltaAlphaT = 0;
@@ -254,6 +263,9 @@ void myTrueAnalysis::Init(TTree *tree)
 //   fChain->SetBranchAddress("Proton_MCParticle_StartContainment", &Proton_MCParticle_StartContainment, &b_Proton_MCParticle_StartContainment);
 //   fChain->SetBranchAddress("Proton_MCParticle_EndContainment", &Proton_MCParticle_EndContainment, &b_Proton_MCParticle_EndContainment);
    fChain->SetBranchAddress("Proton_MCParticle_Pdg", &Proton_MCParticle_Pdg, &b_Proton_MCParticle_Pdg);   
+
+   fChain->SetBranchAddress("True_DeltaPhi", &True_DeltaPhi, &b_True_DeltaPhi);
+   fChain->SetBranchAddress("True_DeltaTheta", &True_DeltaTheta, &b_True_DeltaTheta);   
    
    fChain->SetBranchAddress("True_Pt", &True_Pt, &b_True_Pt);
    fChain->SetBranchAddress("True_DeltaAlphaT", &True_DeltaAlphaT, &b_True_DeltaAlphaT);

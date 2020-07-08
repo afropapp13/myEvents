@@ -653,15 +653,21 @@ void t::Loop() {
 
 			// Relative angles
 
-			double DeltaThetaProtonMuon = TVector3CandidateMuon.Angle(TVector3CandidateProton);
-			double DeltaThetaProtonMuon_Deg = DeltaThetaProtonMuon * 180. / TMath::Pi();
-			if (DeltaThetaProtonMuon_Deg >= 180.) { DeltaThetaProtonMuon_Deg -= 180.; }
-			if (DeltaThetaProtonMuon_Deg < 0.) { DeltaThetaProtonMuon_Deg += 180.; }
+			double DeltaThetaProtonMuon_Deg = Reco_DeltaTheta;
+			double DeltaPhiProtonMuon_Deg = Reco_DeltaPhi;
+
+			// ------------------------------------------------------------------------------------------------------------------------
 			
-			double DeltaPhiProtonMuon = TVector3CandidateMuon.DeltaPhi(TVector3CandidateProton);
-			double DeltaPhiProtonMuon_Deg = DeltaPhiProtonMuon * 180. / TMath::Pi();
-			if (DeltaPhiProtonMuon_Deg >= 360.) { DeltaPhiProtonMuon_Deg -= 360.; }
-			if (DeltaPhiProtonMuon_Deg < 0.) { DeltaPhiProtonMuon_Deg += 360.; }
+			// CCQElike analysis
+			// Use the DeltaTheta, DeltaPhi & Pt cuts
+				
+			if (CCQElike) {
+			
+				if ( !(TMath::Abs(DeltaPhiProtonMuon_Deg - 180.) < 35.) ) { continue; }
+				if ( !(TMath::Abs(DeltaThetaProtonMuon_Deg - 90.) < 55.) ) { continue; }			
+				if ( !(TransMissMomentum < 0.35) ) { continue; }							
+			
+			}			
 
 			// ------------------------------------------------------------------------------------------------------------------------
 

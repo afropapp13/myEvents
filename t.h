@@ -99,6 +99,11 @@ public :
 //   vector<double>  *True_CandidateP_Length;
 //   vector<int>     *True_CandidateP_StartContainment;
 //   vector<int>     *True_CandidateP_EndContainment;
+
+   vector<double>  *Reco_DeltaPhi;
+   vector<double>  *Reco_DeltaTheta;
+   vector<double>  *True_DeltaPhi;
+   vector<double>  *True_DeltaTheta;      
    
    vector<double>  *Reco_Pt;
    vector<double>  *Reco_DeltaAlphaT;
@@ -194,6 +199,11 @@ public :
 //   TBranch        *b_True_CandidateP_Length;   //!
 //   TBranch        *b_True_CandidateP_StartContainment;   //!
 //   TBranch        *b_True_CandidateP_EndContainment;   //!
+
+   TBranch        *b_Reco_DeltaPhi;   //!
+   TBranch        *b_Reco_DeltaTheta;   //!
+   TBranch        *b_True_DeltaPhi;   //!
+   TBranch        *b_True_DeltaTheta;   //!      
    
    TBranch        *b_Reco_Pt;   //!
    TBranch        *b_Reco_DeltaAlphaT;   //!
@@ -341,6 +351,11 @@ void t::Init(TTree *tree)
 //   True_CandidateP_Length = 0;
 //   True_CandidateP_StartContainment = 0;
 //   True_CandidateP_EndContainment = 0;
+
+   Reco_DeltaPhi = 0;
+   Reco_DeltaTheta = 0;
+   True_DeltaPhi = 0;
+   True_DeltaTheta = 0;      
    
    Reco_Pt = 0;
    Reco_DeltaAlphaT = 0;
@@ -441,6 +456,11 @@ void t::Init(TTree *tree)
 //   fChain->SetBranchAddress("True_CandidateP_Length", &True_CandidateP_Length, &b_True_CandidateP_Length);
 //   fChain->SetBranchAddress("True_CandidateP_StartContainment", &True_CandidateP_StartContainment, &b_True_CandidateP_StartContainment);
 //   fChain->SetBranchAddress("True_CandidateP_EndContainment", &True_CandidateP_EndContainment, &b_True_CandidateP_EndContainment);
+
+   fChain->SetBranchAddress("Reco_DeltaPhi", &Reco_DeltaPhi, &b_Reco_DeltaPhi);
+   fChain->SetBranchAddress("Reco_DeltaTheta", &Reco_DeltaTheta, &b_Reco_DeltaTheta);
+   fChain->SetBranchAddress("True_DeltaPhi", &True_DeltaPhi, &b_True_DeltaPhi);
+   fChain->SetBranchAddress("True_DeltaTheta", &True_DeltaTheta, &b_True_DeltaTheta);      
    
    fChain->SetBranchAddress("Reco_Pt", &Reco_Pt, &b_Reco_Pt);
    fChain->SetBranchAddress("Reco_DeltaAlphaT", &Reco_DeltaAlphaT, &b_Reco_DeltaAlphaT);
