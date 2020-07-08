@@ -151,13 +151,22 @@ void myTrueAnalysis::Loop() {
 			
 			// Containment of the vertex defined as the start point of the muon in the TPC
 
+// Soft fiducial volume for true vertex 
+			
+			if (Muon_MCParticle_StartX->at(0) < 3.) { continue; } 
+			if (Muon_MCParticle_StartX->at(0) > 253.) { continue; }
+			if (Muon_MCParticle_StartY->at(0) < -115) { continue; } 
+			if (Muon_MCParticle_StartY->at(0) > 115) { continue; }
+			if (Muon_MCParticle_StartZ->at(0) < 3.) { continue; } 
+			if (Muon_MCParticle_StartZ->at(0) > 1033.) { continue; }
+
 // TPCActive			
-			if (Muon_MCParticle_StartX->at(0) < 0.) { continue; } 
-			if (Muon_MCParticle_StartX->at(0) > 256.35) { continue; }
-			if (Muon_MCParticle_StartY->at(0) < -116.5) { continue; } 
-			if (Muon_MCParticle_StartY->at(0) > 116.5) { continue; }
-			if (Muon_MCParticle_StartZ->at(0) < 0.) { continue; } 
-			if (Muon_MCParticle_StartZ->at(0) > 1036.8) { continue; }						 				
+//			if (Muon_MCParticle_StartX->at(0) < 0.) { continue; } 
+//			if (Muon_MCParticle_StartX->at(0) > 256.35) { continue; }
+//			if (Muon_MCParticle_StartY->at(0) < -116.5) { continue; } 
+//			if (Muon_MCParticle_StartY->at(0) > 116.5) { continue; }
+//			if (Muon_MCParticle_StartZ->at(0) < 0.) { continue; } 
+//			if (Muon_MCParticle_StartZ->at(0) > 1036.8) { continue; }						 				
 
 //TPC
 //			if (Muon_MCParticle_StartX->at(0) < -2.) { continue; } 
