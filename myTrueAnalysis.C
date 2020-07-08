@@ -223,8 +223,8 @@ void myTrueAnalysis::Loop() {
 			TVector3TrueProton.SetMagThetaPhi(TrueProtonMomentum_GeV,TrueProtonTheta,TrueProtonPhi);
 			TLorentzVector TrueProton4V(TVector3TrueProton,TrueProton_E_GeV);
 
-			double TrueDeltaPhiProtonMuon_Deg = True_DeltaPhi;
-			double TrueDeltaThetaProtonMuon_Deg = True_DeltaTheta;
+			double TrueDeltaPhiProtonMuon_Deg = True_DeltaPhi->at(0);
+			double TrueDeltaThetaProtonMuon_Deg = True_DeltaTheta->at(0);
 
 			// Reconstructed calorimetric energy using true level info / MCParticles
 

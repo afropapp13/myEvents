@@ -670,8 +670,8 @@ void t::Loop() {
 
 			// Relative angles
 
-			double DeltaThetaProtonMuon_Deg = Reco_DeltaTheta;
-			double DeltaPhiProtonMuon_Deg = Reco_DeltaPhi;
+			double DeltaThetaProtonMuon_Deg = Reco_DeltaTheta->at(0);
+			double DeltaPhiProtonMuon_Deg = Reco_DeltaPhi->at(0);
 
 			// ------------------------------------------------------------------------------------------------------------------------
 			
