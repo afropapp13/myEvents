@@ -82,31 +82,39 @@ void myTrueAnalysis::Loop() {
 		POTCount = POTCountHist->GetBinContent(1);
 		POTFile->Close();
 
-	}				
+	}	
+	
+	// ------------------------------------------------------------------------------------------------------------------
+
+	// POT Scaling
+
+
+	double tor860_wcut = 1;
+	double E1DCNT_wcut = 1.;
+	double EXT = 1.;
+
+	if (string(fWhichSample).find("Run1") != std::string::npos) {
+
+		tor860_wcut = tor860_wcut_Run1;
+		E1DCNT_wcut = E1DCNT_wcut_Run1;
+		EXT = EXT_Run1;
+
+	}
+	
+	if (string(fWhichSample).find("Run3") != std::string::npos) {
+
+		tor860_wcut = tor860_wcut_Run3;
+		E1DCNT_wcut = E1DCNT_wcut_Run3;
+		EXT = EXT_Run3;
+
+	}					
 
 	// ---------------------------------------------------------------------------------------------------------------------------------------------
 
 	for (Long64_t jentry=0; jentry<nentries;jentry++) {
 
 		Long64_t ientry = LoadTree(jentry); if (ientry < 0) break; nb = fChain->GetEntry(jentry); nbytes += nb;
-		if (jentry%1000 == 0) std::cout << jentry/1000 << " k " << std::setprecision(3) << double(jentry)/nentries*100. << " %"<< std::endl;
-		
-		// ------------------------------------------------------------------------------------------------------------------
-
-		// POT Scaling
-
-
-		double tor860_wcut = 1;
-		double E1DCNT_wcut = 1.;
-		double EXT = 1.;
-
-		if (string(fWhichSample).find("Run1") != std::string::npos) {
-
-			tor860_wcut = tor860_wcut_Run1;
-			E1DCNT_wcut = E1DCNT_wcut_Run1;
-			EXT = EXT_Run1;
-
-		}			
+		if (jentry%1000 == 0) std::cout << jentry/1000 << " k " << std::setprecision(3) << double(jentry)/nentries*100. << " %"<< std::endl;	
 
 		// ------------------------------------------------------------------------------------------------------------------------------
 

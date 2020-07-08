@@ -25,6 +25,10 @@ void t::Loop() {
 	// ---------------------------------------------------------------------------------------------------------------------------------------
 
 	int NEventsPassingSelectionCuts = 0;
+	int CC1pEventsPassingSelectionCuts = 0;
+	int CC1p1piEventsPassingSelectionCuts = 0;	
+	int CC2pEventsPassingSelectionCuts = 0;	
+		
 	TString Cuts = "_NoCuts";
 
 	vector<TString> VectorCuts; VectorCuts.clear();
@@ -442,7 +446,38 @@ void t::Loop() {
 		
 		// ------------------------------------------------------------------------------------------------------------------------------
 
-		Tools tools;		
+		Tools tools;
+		
+		// ------------------------------------------------------------------------------------------------------------------
+
+		// POT Scaling
+
+		double POTScale = 1.;
+
+		double tor860_wcut = 1;
+		double E1DCNT_wcut = 1.;
+		double EXT = 1.;
+
+		if (string(fWhichSample).find("Run1") != std::string::npos) {
+
+			tor860_wcut = tor860_wcut_Run1;
+			E1DCNT_wcut = E1DCNT_wcut_Run1;
+			EXT = EXT_Run1;
+
+		}
+		
+		if (string(fWhichSample).find("Run3") != std::string::npos) {
+
+			tor860_wcut = tor860_wcut_Run3;
+			E1DCNT_wcut = E1DCNT_wcut_Run3;
+			EXT = EXT_Run3;
+
+		}			
+		
+		if (string(fWhichSample).find("ExtBNB9") != std::string::npos) { weight = E1DCNT_wcut / EXT; POTScale = weight; }
+
+		if (string(fWhichSample).find("Overlay") != std::string::npos) { weight = tor860_wcut / POTCount; POTScale = weight; }	
+						
 
 		// --------------------------------------------------------------------------------------------------------------------------------
 
@@ -497,28 +532,9 @@ void t::Loop() {
 			if (tools.inFVVector(CandidateProtonTrackStart) == 0) { continue; }
 			if (tools.inFVVector(CandidateProtonTrackEnd) == 0) { continue; }
 
-			// ------------------------------------------------------------------------------------------------------------------
-
-			// POT Scaling
-
-
-			double tor860_wcut = 1;
-			double E1DCNT_wcut = 1.;
-			double EXT = 1.;
-
-			if (string(fWhichSample).find("Run1") != std::string::npos) {
-
-				tor860_wcut = tor860_wcut_Run1;
-				E1DCNT_wcut = E1DCNT_wcut_Run1;
-				EXT = EXT_Run1;
-
-			}
-
 			// -------------------------------------------------------------------------------------------------------------------------
 
-			if (string(fWhichSample).find("ExtBNB9") != std::string::npos) { weight = E1DCNT_wcut / EXT;}
-
-			else if (string(fWhichSample).find("Overlay") != std::string::npos) { 
+			if (string(fWhichSample).find("Overlay") != std::string::npos) { 
 			
 				if (Weight < 0 || Weight > 10) { continue; }
 				if (T2KWeight < 0 || T2KWeight > 10) { continue; }				
@@ -547,6 +563,7 @@ void t::Loop() {
 
 			// hard coded limit because something still looks weird in the dirt sample at low nu-score
 			// COH interaction & infinite weight
+			
 			if (NuScore < 0.04) { continue; }
 
 			// -----------------------------------------------------------------------------------------------------------------------------
@@ -776,9 +793,23 @@ void t::Loop() {
 
 			// ---------------------------------------------------------------------------------------------------------------------------
 
+			// CC1p1pi Background
+			
+			if (CC1p1pi == 1) { CC1p1piEventsPassingSelectionCuts++; }
+			
+			// ---------------------------------------------------------------------------------------------------------------------------
+
+			// CC2p Background
+			
+			if (CC2p == 1) { CC2pEventsPassingSelectionCuts++; }						
+
+			// ---------------------------------------------------------------------------------------------------------------------------
+
 			// CC1p Signal
 
 			if (CC1p == 1) {
+			
+				CC1pEventsPassingSelectionCuts++;
 
 				// 1D Plots
 
@@ -1136,18 +1167,61 @@ void t::Loop() {
 		file->Write();
 		file->Close();
 
-		double nentriesError = sqrt(nentries);
-		double NEventsPassingSelectionCutsError = sqrt(NEventsPassingSelectionCuts);
+		std::cout << std::endl << "Created a new file: " << FileName << std::endl << std::endl << std::endl;
+		std::cout << "---------------------------------------------------------------------" << std::endl << std::endl;
 
+		// -------------------------------------------------------------------------------------------------------------------------
+		
+		double nentriesError = sqrt(nentries);		
+		
 		std::cout << std::endl << "Number of " << fWhichSample << " initial entries = " << nentries << " +/- " << nentriesError 
-		<< " (POT normalized: " << nentries*weight << " +/- " << nentriesError*weight << ")" << std::endl;
+		<< " (POT normalized: " << nentries*POTScale << " +/- " << nentriesError*POTScale << ")" << std::endl;		
+		
+		// -------------------------------------------------------------------------------------------------------------------------	
+
+		// All reconstructed events passing the selection criteria
+
+		double NEventsPassingSelectionCutsError = sqrt(NEventsPassingSelectionCuts);
 
 		std::cout << std::endl << "Number of events passing our selection criteria = " << NEventsPassingSelectionCuts << " +/- " 
 		<< NEventsPassingSelectionCutsError
-		<< " (POT normalized: " << NEventsPassingSelectionCuts*weight << " +/- " << NEventsPassingSelectionCutsError*weight << ")" << std::endl;
+		<< " (POT normalized: " << NEventsPassingSelectionCuts*POTScale << " +/- " 
+		<< NEventsPassingSelectionCutsError*POTScale << ")" << std::endl;
+		
+		// -------------------------------------------------------------------------------------------------------------------------	
 
-		std::cout << std::endl << "Created a new file: " << FileName << std::endl << std::endl << std::endl;
-		std::cout << "---------------------------------------------------------------------" << std::endl << std::endl;
+		// All reconstructed CC1p events passing the selection criteria
+
+		double CC1pEventsPassingSelectionCutsError = sqrt(CC1pEventsPassingSelectionCuts);
+
+		std::cout << std::endl << "Number of CC1p events passing our selection criteria = " << CC1pEventsPassingSelectionCuts << " +/- " 
+		<< CC1pEventsPassingSelectionCutsError
+		<< " (POT normalized: " << CC1pEventsPassingSelectionCuts*POTScale << " +/- " 
+		<< CC1pEventsPassingSelectionCutsError*POTScale << ")" << std::endl;	
+		
+		// -------------------------------------------------------------------------------------------------------------------------	
+
+		// All reconstructed CC1p1pi events passing the selection criteria
+
+		double CC1p1piEventsPassingSelectionCutsError = sqrt(CC1p1piEventsPassingSelectionCuts);
+
+		std::cout << std::endl << "Number of CC1p1pi events passing our selection criteria = " << CC1p1piEventsPassingSelectionCuts << " +/- " 
+		<< CC1p1piEventsPassingSelectionCutsError
+		<< " (POT normalized: " << CC1p1piEventsPassingSelectionCuts*POTScale << " +/- " 
+		<< CC1p1piEventsPassingSelectionCutsError*POTScale << ")" << std::endl;
+		
+		// -------------------------------------------------------------------------------------------------------------------------	
+
+		// All reconstructed CC2p events passing the selection criteria
+
+		double CC2pEventsPassingSelectionCutsError = sqrt(CC2pEventsPassingSelectionCuts);
+
+		std::cout << std::endl << "Number of CC2p events passing our selection criteria = " << CC2pEventsPassingSelectionCuts << " +/- " 
+		<< CC2pEventsPassingSelectionCutsError
+		<< " (POT normalized: " << CC2pEventsPassingSelectionCuts*POTScale << " +/- " 
+		<< CC2pEventsPassingSelectionCutsError*POTScale << ")" << std::endl;						
+
+		// -------------------------------------------------------------------------------------------------------------------------	
 
 //	} // If we want to run on all cut combinations, include this } and remove the one at the beginning of the program
 
