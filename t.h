@@ -29,7 +29,7 @@ public :
    double           T2KWeight;
    double           ROOTinoWeight;   
    int             CC1p;
-   int             CC1p1p;
+   int             CC1p1pi;
    int             CC2p;      
    int             MCParticle_Mode;
    double          NuScore;
