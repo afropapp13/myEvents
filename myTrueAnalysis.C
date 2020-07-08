@@ -114,7 +114,8 @@ void myTrueAnalysis::Loop() {
 //		double T2Kweight = 1.;
 		if (Weight <= 0 || Weight > 10) { continue; }
 		if (T2KWeight <= 0 || T2KWeight > 10) { continue; }		
-		double weight = ( tor860_wcut / POTCount) * Weight * T2KWeight; // Weight from v3.0.4 to v.3.0.6 * weight from application of T2K tune
+		// Weight from v3.0.4 to v.3.0.6 * weight from application of T2K tune
+		double weight = ( tor860_wcut / POTCount) * Weight * T2KWeight * ROOTino;
 
 		// -------------------------------------------------------------------------------------------------------------------------------------
 

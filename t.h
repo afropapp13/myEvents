@@ -27,7 +27,10 @@ public :
 //   Int_t           PassedSwTrigger;
    double           Weight;
    double           T2KWeight;
+   double           ROOTinoWeight;   
    int             CC1p;
+   int             CC1p1p;
+   int             CC2p;      
    int             MCParticle_Mode;
    double          NuScore;
    double          FlashScore;
@@ -119,7 +122,10 @@ public :
 //   TBranch        *b_PassedSwTrigger;   //!
    TBranch        *b_Weight;   //!
    TBranch        *b_T2KWeight;   //!
+   TBranch        *b_ROOTinoWeight;   //!   
    TBranch        *b_CC1p;   //!
+   TBranch        *b_CC1p1pi;   //!
+   TBranch        *b_CC2p;   //!      
    TBranch        *b_MCParticle_Mode;   //!
    TBranch        *b_NuScore;   //!
    TBranch        *b_FlashScore;   //!
@@ -362,7 +368,10 @@ void t::Init(TTree *tree)
 //   fChain->SetBranchAddress("PassedSwTrigger", &PassedSwTrigger, &b_PassedSwTrigger);
    fChain->SetBranchAddress("Weight", &Weight, &b_Weight);
    fChain->SetBranchAddress("T2KWeight", &T2KWeight, &b_T2KWeight);
+   fChain->SetBranchAddress("ROOTinoWeight", &ROOTinoWeight, &b_ROOTinoWeight);   
    fChain->SetBranchAddress("CC1p", &CC1p, &b_CC1p);
+   fChain->SetBranchAddress("CC1p1pi", &CC1p1pi, &b_CC1p1pi);
+   fChain->SetBranchAddress("CC2p", &CC2p, &b_CC2p);      
    fChain->SetBranchAddress("MCParticle_Mode", &MCParticle_Mode, &b_MCParticle_Mode);
    fChain->SetBranchAddress("NuScore", &NuScore, &b_NuScore);
    fChain->SetBranchAddress("FlashScore", &FlashScore, &b_FlashScore);

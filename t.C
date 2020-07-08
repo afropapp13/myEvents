@@ -432,9 +432,6 @@ void t::Loop() {
 
 		if (string(fWhichSample).find("Overlay") != std::string::npos) {
 
-				// Locally
-				//TString PathToPOTFile = "mySamples/"+UBCodeVersion+"/PreSelection_"+fWhichSample+"_"+UBCodeVersion+"_POT.root";
-				// gpvm's
 				TString PathToPOTFile = "mySamples/"+UBCodeVersion+"/PreSelection_"+fWhichSample+"_"+UBCodeVersion+"_POT.root";
 
 				TFile* POTFile = TFile::Open(PathToPOTFile,"readonly");
@@ -474,10 +471,6 @@ void t::Loop() {
 			// Fully contained proton candidates
 			// Either fully contained or semi-contained muon candidates
 
-//			if (CandidateMu_StartContainment->at(0) == 0) { continue; }
-//			if (CandidateP_StartContainment->at(0) == 0) { continue; }
-//			if (CandidateP_EndContainment->at(0) == 0) { continue; }
-
 			double MuonTrackStartX = CandidateMu_StartX->at(0);
 			double MuonTrackStartY = CandidateMu_StartY->at(0);
 			double MuonTrackStartZ = CandidateMu_StartZ->at(0);
@@ -498,10 +491,7 @@ void t::Loop() {
 			TVector3 CandidateMuonTrackEnd(MuonTrackEndX,MuonTrackEndY,MuonTrackEndZ);
 			
 			TVector3 CandidateProtonTrackStart(ProtonTrackStartX,ProtonTrackStartY,ProtonTrackStartZ);
-			TVector3 CandidateProtonTrackEnd(ProtonTrackEndX,ProtonTrackEndY,ProtonTrackEndZ);			
-			
-//			bool CandidateMuonTrackStartContainment = tools.inFVVector(CandidateMuonTrackStart);
-//			bool CandidateMuonTrackEndContainment = tools.inFVVector(CandidateMuonTrackStart);
+			TVector3 CandidateProtonTrackEnd(ProtonTrackEndX,ProtonTrackEndY,ProtonTrackEndZ);
 
 			if (tools.inFVVector(CandidateMuonTrackStart) == 0) { continue; }
 			if (tools.inFVVector(CandidateProtonTrackStart) == 0) { continue; }
@@ -532,7 +522,7 @@ void t::Loop() {
 			
 				if (Weight < 0 || Weight > 10) { continue; }
 				if (T2KWeight < 0 || T2KWeight > 10) { continue; }				
-				weight = ( tor860_wcut / POTCount) * Weight * T2KWeight; 
+				weight = ( tor860_wcut / POTCount) * Weight * T2KWeight * ROOTinoWeight; 
 				
 			}
 

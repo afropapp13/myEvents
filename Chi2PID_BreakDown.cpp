@@ -28,7 +28,7 @@ void Chi2PID_BreakDown() {
 	// -----------------------------------------------------------------------------------------------------------------------------------------
 
 	// Keep them for historical reasons but don't plot them
-//	PlotNames.push_back("RecoChi2Plot");
+	PlotNames.push_back("RecoChi2Plot");
 //	PlotNames.push_back("RecoThreePlaneChi2Plot");
 	PlotNames.push_back("RecoThreePlaneChi2LogLikelihoodPlot");
 

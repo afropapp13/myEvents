@@ -25,7 +25,10 @@ public :
    // Declaration of leaf types
    double          Weight;
    double          T2KWeight;
-   int             CC1p;   
+   double          ROOTinoWeight;   
+   int             CC1p;
+   int             CC1p1pi;
+   int             CC2p;      
    Int_t           NumberMCParticles;
 
    vector<double>  *Muon_MCParticle_StartX;   
@@ -66,7 +69,10 @@ public :
    // List of branches
    TBranch        *b_Weight;   //!
    TBranch        *b_T2KWeight;   //!
-   TBranch        *b_CC1p;   //!   
+   TBranch        *b_ROOTinoWeight;   //!   
+   TBranch        *b_CC1p;   //!
+   TBranch        *b_CC1p1pi;   //!   
+   TBranch        *b_CC2p;   //!   
    TBranch        *b_NumberMCParticles;   //!
 
    TBranch        *b_Muon_MCParticle_StartX;   //!
@@ -215,7 +221,10 @@ void myTrueAnalysis::Init(TTree *tree)
 
    fChain->SetBranchAddress("Weight", &Weight, &b_Weight);
    fChain->SetBranchAddress("T2KWeight", &T2KWeight, &b_T2KWeight);
+   fChain->SetBranchAddress("ROOTinoWeight", &ROOTinoWeight, &b_ROOTinoWeight);   
    fChain->SetBranchAddress("CC1p", &CC1p, &b_CC1p);   
+   fChain->SetBranchAddress("CC1p1pi", &CC1p1pi, &b_CC1p1pi);
+   fChain->SetBranchAddress("CC2p", &CC2p, &b_CC2p);         
    fChain->SetBranchAddress("NumberMCParticles", &NumberMCParticles, &b_NumberMCParticles);
 
    fChain->SetBranchAddress("Muon_MCParticle_StartX", &Muon_MCParticle_StartX, &b_Muon_MCParticle_StartX);
