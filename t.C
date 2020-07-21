@@ -15,10 +15,24 @@
 #include <iostream>
 #include <iomanip>
 #include <vector>
+#include <string>
+#include <sstream>
 
 using namespace std;
 
 #include "ubana/myClasses/Tools.h"
+
+
+TString ToStringInt(int num) {
+
+	std::ostringstream start;
+	start << num;
+	string start1 = start.str();
+	return start1;
+
+}
+
+
 
 void t::Loop() {
 
@@ -26,8 +40,12 @@ void t::Loop() {
 
 	int NEventsPassingSelectionCuts = 0;
 	int CC1pEventsPassingSelectionCuts = 0;
-	int CC1p1piEventsPassingSelectionCuts = 0;	
-	int CC2pEventsPassingSelectionCuts = 0;	
+	int CC1p1piEventsPassingSelectionCuts = 0;
+	int CC2pEventsPassingSelectionCuts = 0;
+	int CC2p1piEventsPassingSelectionCuts = 0;
+	int CC3pEventsPassingSelectionCuts = 0;
+	int CC3p1piEventsPassingSelectionCuts = 0;
+	int CC3p2piEventsPassingSelectionCuts = 0;
 		
 	TString Cuts = "_NoCuts";
 
@@ -53,7 +71,18 @@ void t::Loop() {
 
 		// ---------------------------------------------------------------------------------------------------------------------------
 
-		TString FileName = "./OutputFiles/"+UBCodeVersion+"/"+Cuts+"/STVStudies_"+fWhichSample+Cuts+".root";
+		TString Extension = "";
+
+		// For overlays only for genie, flux and reinteraction uncertainties
+/*
+		if (fUniverseIndex != -1) {
+
+			Extension = "_"+fEventWeightLabel+"_"+ToStringInt(fUniverseIndex); 
+
+		}
+*/
+
+		TString FileName = "./OutputFiles/"+UBCodeVersion+"/"+Cuts+"/STVStudies_"+fWhichSample+Extension+Cuts+".root";
 		TFile* file = new TFile(FileName,"recreate");
 		std::cout << std::endl << "Creating a new file: " << FileName << std::endl << std::endl << std::endl;
 
@@ -476,8 +505,7 @@ void t::Loop() {
 		
 		if (string(fWhichSample).find("ExtBNB9") != std::string::npos) { weight = E1DCNT_wcut / EXT; POTScale = weight; }
 
-		if (string(fWhichSample).find("Overlay") != std::string::npos) { weight = tor860_wcut / POTCount; POTScale = weight; }	
-						
+		if (string(fWhichSample).find("Overlay") != std::string::npos) { weight = tor860_wcut / POTCount; POTScale = weight; }			
 
 		// --------------------------------------------------------------------------------------------------------------------------------
 
@@ -541,19 +569,61 @@ void t::Loop() {
 				weight = ( tor860_wcut / POTCount) * Weight * T2KWeight * ROOTinoWeight; 
 				
 			}
+			
+			// --------------------------------------------------------------------------------------------------------------------------------
 
-			// ------------------------------------------------------------------------------------------------------------------------
+			// Genie, flux & reinteraction weights for systematics
 
-			// EventWeight weights
+			if ( fUniverseIndex != -1 && (fWhichSample == "Overlay9_Run1" || fWhichSample == "Overlay9_Run2" || fWhichSample == "Overlay9_Run3" 
+			|| fWhichSample == "Overlay9_Run4" || fWhichSample == "Overlay9_Run5") ) {
 
-// Fix it !!!!
+				// Genie weights
 
-			// Genie
-//			if (string(fWhichSample).find("Genie_All") != std::string::npos) { weight = weight * EventWeightValues[fWhichSample][fUniverse];}
+				if (fEventWeightLabel == "All_UBGenie") { weight = weight*All_UBGenie->at(fUniverseIndex); }
+				if (fEventWeightLabel == "AxFFCCQEshape_UBGenie") { weight = weight*AxFFCCQEshape_UBGenie->at(fUniverseIndex); }
+				if (fEventWeightLabel == "DecayAngMEC_UBGenie") { weight = weight*DecayAngMEC_UBGenie->at(fUniverseIndex); }
+				if (fEventWeightLabel == "NormCCCOH_UBGenie") { weight = weight*NormCCCOH_UBGenie->at(fUniverseIndex); }
+				if (fEventWeightLabel == "NormNCCOH_UBGenie") { weight = weight*NormNCCOH_UBGenie->at(fUniverseIndex); }
+				if (fEventWeightLabel == "RPA_CCQE_Reduced_UBGenie") { weight = weight*RPA_CCQE_Reduced_UBGenie->at(fUniverseIndex); }
+				if (fEventWeightLabel == "RPA_CCQE_UBGenie") { weight = weight*RPA_CCQE_UBGenie->at(fUniverseIndex); }
+				if (fEventWeightLabel == "ThetaDelta2NRad_UBGenie") { weight = weight*ThetaDelta2NRad_UBGenie->at(fUniverseIndex); }
+				if (fEventWeightLabel == "Theta_Delta2Npi_UBGenie") { weight = weight*Theta_Delta2Npi_UBGenie->at(fUniverseIndex); }
+				if (fEventWeightLabel == "VecFFCCQEshape_UBGenie") { weight = weight*VecFFCCQEshape_UBGenie->at(fUniverseIndex); }
+				if (fEventWeightLabel == "XSecShape_CCMEC_UBGenie") { weight = weight*XSecShape_CCMEC_UBGenie->at(fUniverseIndex); }
 
-			// Flux
-//			if (string(fWhichSample).find("FluxUnisim") != std::string::npos || string(fWhichSample).find("Primary") != std::string::npos) 
-//				{ weight = weight * EventWeightValues[fWhichSample][fUniverse];}
+				// Flux weights
+
+				if (fEventWeightLabel == "expskin_FluxUnisim") { weight = weight*expskin_FluxUnisim->at(fUniverseIndex); }
+				if (fEventWeightLabel == "horncurrent_FluxUnisim") { weight = weight*horncurrent_FluxUnisim->at(fUniverseIndex); }
+				if (fEventWeightLabel == "kminus_PrimaryHadronNormalization") 
+					{ weight = weight*kminus_PrimaryHadronNormalization->at(fUniverseIndex); }
+				if (fEventWeightLabel == "kplus_PrimaryHadronFeynmanScaling") 
+					{ weight = weight*kplus_PrimaryHadronFeynmanScaling->at(fUniverseIndex); }
+				if (fEventWeightLabel == "kzero_PrimaryHadronSanfordWang") 
+					{ weight = weight*kzero_PrimaryHadronSanfordWang->at(fUniverseIndex); }
+				if (fEventWeightLabel == "nucleoninexsec_FluxUnisim") { weight = weight*nucleoninexsec_FluxUnisim->at(fUniverseIndex); }
+				if (fEventWeightLabel == "nucleonqexsec_FluxUnisim") { weight = weight*nucleonqexsec_FluxUnisim->at(fUniverseIndex); }
+				if (fEventWeightLabel == "nucleontotxsec_FluxUnisim") { weight = weight*nucleontotxsec_FluxUnisim->at(fUniverseIndex); }
+				if (fEventWeightLabel == "piminus_PrimaryHadronSWCentralSplineVariation") 
+					{ weight = weight*piminus_PrimaryHadronSWCentralSplineVariation->at(fUniverseIndex); }
+				if (fEventWeightLabel == "pioninexsec_FluxUnisim") { weight = weight*pioninexsec_FluxUnisim->at(fUniverseIndex); }
+				if (fEventWeightLabel == "pionqexsec_FluxUnisim") { weight = weight*pionqexsec_FluxUnisim->at(fUniverseIndex); }
+				if (fEventWeightLabel == "piontotxsec_FluxUnisim") { weight = weight*piontotxsec_FluxUnisim->at(fUniverseIndex); }
+				if (fEventWeightLabel == "piplus_PrimaryHadronSWCentralSplineVariation") 
+					{ weight = weight*piplus_PrimaryHadronSWCentralSplineVariation->at(fUniverseIndex); }
+
+				// Reinteraction weights
+
+				if (fEventWeightLabel == "reinteractions_piminus_Geant4") 
+					{ weight = weight*reinteractions_piminus_Geant4->at(fUniverseIndex); }
+				if (fEventWeightLabel == "reinteractions_piplus_Geant4") 
+					{ weight = weight*reinteractions_piplus_Geant4->at(fUniverseIndex); }
+				if (fEventWeightLabel == "reinteractions_proton_Geant4") 
+					{ weight = weight*reinteractions_proton_Geant4->at(fUniverseIndex); }
+				if (fEventWeightLabel == "xsr_scc_Fa3_SCC") { weight = weight*xsr_scc_Fa3_SCC->at(fUniverseIndex); }
+				if (fEventWeightLabel == "xsr_scc_Fv3_SCC") { weight = weight*xsr_scc_Fv3_SCC->at(fUniverseIndex); }			
+
+			}			
 
 			// -----------------------------------------------------------------------------------------------------------------------
 
@@ -801,7 +871,31 @@ void t::Loop() {
 
 			// CC2p Background
 			
-			if (CC2p == 1) { CC2pEventsPassingSelectionCuts++; }						
+			if (CC2p == 1) { CC2pEventsPassingSelectionCuts++; }
+
+			// ---------------------------------------------------------------------------------------------------------------------------
+
+			// CC2p1pi Background
+			
+			if (CC2p1pi == 1) { CC2p1piEventsPassingSelectionCuts++; }
+
+			// ---------------------------------------------------------------------------------------------------------------------------
+
+			// CC3p Background
+			
+			if (CC3p == 1) { CC3pEventsPassingSelectionCuts++; }
+
+			// ---------------------------------------------------------------------------------------------------------------------------
+
+			// CC3p1pi Background
+			
+			if (CC3p1pi == 1) { CC3p1piEventsPassingSelectionCuts++; }
+
+			// ---------------------------------------------------------------------------------------------------------------------------
+
+			// CC3p2pi Background
+			
+			if (CC3p2pi == 1) { CC3p2piEventsPassingSelectionCuts++; }					
 
 			// ---------------------------------------------------------------------------------------------------------------------------
 
@@ -1089,7 +1183,7 @@ void t::Loop() {
 			// --------------------------------------------------------------------------------------------------------------------------
 
 			// Overlay particle breakdown using the Backtracker
-
+/*
 			if (CandidateMu_MCParticle_Pdg->size() > 0 && CandidateP_MCParticle_Pdg->size() > 0 ) {
 
 				if (CandidateMu_MCParticle_Pdg->at(0) == MuonPdg) {
@@ -1158,7 +1252,7 @@ void t::Loop() {
 				CosmicRecoThreePlaneChi2LogLikelihoodPlot->Fill(reco_Pp_ThreePlaneLogLikelihood,weight/2.);
 
 			}
-
+*/
 			// -------------------------------------------------------------------------------------------------------------------------
 
 		} // End of the loop over the events
@@ -1190,6 +1284,8 @@ void t::Loop() {
 		
 		// -------------------------------------------------------------------------------------------------------------------------	
 
+		if ( string(fWhichSample).find("Overlay9") != std::string::npos ) {
+
 		// All reconstructed CC1p events passing the selection criteria
 
 		double CC1pEventsPassingSelectionCutsError = sqrt(CC1pEventsPassingSelectionCuts);
@@ -1219,7 +1315,53 @@ void t::Loop() {
 		std::cout << std::endl << "Number of CC2p events passing our selection criteria = " << CC2pEventsPassingSelectionCuts << " +/- " 
 		<< CC2pEventsPassingSelectionCutsError
 		<< " (POT normalized: " << CC2pEventsPassingSelectionCuts*POTScale << " +/- " 
-		<< CC2pEventsPassingSelectionCutsError*POTScale << ")" << std::endl;						
+		<< CC2pEventsPassingSelectionCutsError*POTScale << ")" << std::endl;
+
+		// -------------------------------------------------------------------------------------------------------------------------	
+
+		// All reconstructed CC2p1pi events passing the selection criteria
+
+		double CC2p1piEventsPassingSelectionCutsError = sqrt(CC2p1piEventsPassingSelectionCuts);
+
+		std::cout << std::endl << "Number of CC2p1pi events passing our selection criteria = " << CC2p1piEventsPassingSelectionCuts << " +/- " 
+		<< CC2p1piEventsPassingSelectionCutsError
+		<< " (POT normalized: " << CC2p1piEventsPassingSelectionCuts*POTScale << " +/- " 
+		<< CC2p1piEventsPassingSelectionCutsError*POTScale << ")" << std::endl;						
+
+		// -------------------------------------------------------------------------------------------------------------------------	
+
+		// All reconstructed CC3p events passing the selection criteria
+
+		double CC3pEventsPassingSelectionCutsError = sqrt(CC3pEventsPassingSelectionCuts);
+
+		std::cout << std::endl << "Number of CC3p events passing our selection criteria = " << CC3pEventsPassingSelectionCuts << " +/- " 
+		<< CC3pEventsPassingSelectionCutsError
+		<< " (POT normalized: " << CC3pEventsPassingSelectionCuts*POTScale << " +/- " 
+		<< CC3pEventsPassingSelectionCutsError*POTScale << ")" << std::endl;
+
+		// -------------------------------------------------------------------------------------------------------------------------	
+
+		// All reconstructed CC3p1pi events passing the selection criteria
+
+		double CC3p1piEventsPassingSelectionCutsError = sqrt(CC3p1piEventsPassingSelectionCuts);
+
+		std::cout << std::endl << "Number of CC3p1pi events passing our selection criteria = " << CC3p1piEventsPassingSelectionCuts << " +/- " 
+		<< CC3p1piEventsPassingSelectionCutsError
+		<< " (POT normalized: " << CC3p1piEventsPassingSelectionCuts*POTScale << " +/- " 
+		<< CC3p1piEventsPassingSelectionCutsError*POTScale << ")" << std::endl;
+
+		// -------------------------------------------------------------------------------------------------------------------------	
+
+		// All reconstructed CC3p2pi events passing the selection criteria
+
+		double CC3p2piEventsPassingSelectionCutsError = sqrt(CC3p2piEventsPassingSelectionCuts);
+
+		std::cout << std::endl << "Number of CC3p2pi events passing our selection criteria = " << CC3p2piEventsPassingSelectionCuts << " +/- " 
+		<< CC3p2piEventsPassingSelectionCutsError
+		<< " (POT normalized: " << CC3p2piEventsPassingSelectionCuts*POTScale << " +/- " 
+		<< CC3p2piEventsPassingSelectionCutsError*POTScale << ")" << std::endl;	
+
+		}
 
 		// -------------------------------------------------------------------------------------------------------------------------	
 

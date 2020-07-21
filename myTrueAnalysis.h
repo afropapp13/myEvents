@@ -17,6 +17,8 @@ class myTrueAnalysis {
 
 private:
    TString fWhichSample;
+   TString fEventWeightLabel;
+   int     fUniverseIndex;   
 
 public :
    TTree          *fChain;   //!pointer to the analyzed TTree or TChain
@@ -26,9 +28,44 @@ public :
    double          Weight;
    double          T2KWeight;
    double          ROOTinoWeight;   
+
+   vector<double>  *All_UBGenie;
+   vector<double>  *AxFFCCQEshape_UBGenie;
+   vector<double>  *DecayAngMEC_UBGenie;
+   vector<double>  *NormCCCOH_UBGenie;
+   vector<double>  *NormNCCOH_UBGenie;
+   vector<double>  *RPA_CCQE_Reduced_UBGenie;
+   vector<double>  *RPA_CCQE_UBGenie;
+   vector<double>  *ThetaDelta2NRad_UBGenie;
+   vector<double>  *Theta_Delta2Npi_UBGenie;
+   vector<double>  *VecFFCCQEshape_UBGenie;
+   vector<double>  *XSecShape_CCMEC_UBGenie;
+   vector<double>  *expskin_FluxUnisim;
+   vector<double>  *horncurrent_FluxUnisim;
+   vector<double>  *kminus_PrimaryHadronNormalization;
+   vector<double>  *kplus_PrimaryHadronFeynmanScaling;
+   vector<double>  *kzero_PrimaryHadronSanfordWang;
+   vector<double>  *nucleoninexsec_FluxUnisim;
+   vector<double>  *nucleonqexsec_FluxUnisim;
+   vector<double>  *nucleontotxsec_FluxUnisim;
+   vector<double>  *piminus_PrimaryHadronSWCentralSplineVariation;
+   vector<double>  *pioninexsec_FluxUnisim;
+   vector<double>  *pionqexsec_FluxUnisim;
+   vector<double>  *piontotxsec_FluxUnisim;
+   vector<double>  *piplus_PrimaryHadronSWCentralSplineVariation;
+   vector<double>  *reinteractions_piminus_Geant4;
+   vector<double>  *reinteractions_piplus_Geant4;
+   vector<double>  *reinteractions_proton_Geant4;
+   vector<double>  *xsr_scc_Fa3_SCC;
+   vector<double>  *xsr_scc_Fv3_SCC;   
+   
    int             CC1p;
    int             CC1p1pi;
-   int             CC2p;      
+   int             CC2p;
+   int             CC2p1pi;
+   int             CC3p;
+   int             CC3p1pi;
+   int             CC3p2pi;   
    Int_t           NumberMCParticles;
 
    vector<double>  *Muon_MCParticle_StartX;   
@@ -73,9 +110,44 @@ public :
    TBranch        *b_Weight;   //!
    TBranch        *b_T2KWeight;   //!
    TBranch        *b_ROOTinoWeight;   //!   
+   
+   TBranch        *b_All_UBGenie;   //!                           
+   TBranch        *b_AxFFCCQEshape_UBGenie;   //!                 
+   TBranch        *b_DecayAngMEC_UBGenie;   //!                   
+   TBranch        *b_NormCCCOH_UBGenie;   //!                     
+   TBranch        *b_NormNCCOH_UBGenie;   //!                     
+   TBranch        *b_RPA_CCQE_Reduced_UBGenie;   //!              
+   TBranch        *b_RPA_CCQE_UBGenie;   //!                      
+   TBranch        *b_ThetaDelta2NRad_UBGenie;   //!               
+   TBranch        *b_Theta_Delta2Npi_UBGenie;   //!               
+   TBranch        *b_VecFFCCQEshape_UBGenie;   //!                
+   TBranch        *b_XSecShape_CCMEC_UBGenie;   //!               
+   TBranch        *b_expskin_FluxUnisim;   //!                    
+   TBranch        *b_horncurrent_FluxUnisim;   //!                
+   TBranch        *b_kminus_PrimaryHadronNormalization;   //!     
+   TBranch        *b_kplus_PrimaryHadronFeynmanScaling;   //!     
+   TBranch        *b_kzero_PrimaryHadronSanfordWang;   //!        
+   TBranch        *b_nucleoninexsec_FluxUnisim;   //!             
+   TBranch        *b_nucleonqexsec_FluxUnisim;   //!              
+   TBranch        *b_nucleontotxsec_FluxUnisim;   //!             
+   TBranch        *b_piminus_PrimaryHadronSWCentralSplineVariation;   //!                                                             
+   TBranch        *b_pioninexsec_FluxUnisim;   //!                
+   TBranch        *b_pionqexsec_FluxUnisim;   //!                 
+   TBranch        *b_piontotxsec_FluxUnisim;   //!                
+   TBranch        *b_piplus_PrimaryHadronSWCentralSplineVariation;   //!                                                              
+   TBranch        *b_reinteractions_piminus_Geant4;   //!         
+   TBranch        *b_reinteractions_piplus_Geant4;   //! 
+   TBranch        *b_reinteractions_proton_Geant4;   //!                                                       
+   TBranch        *b_xsr_scc_Fa3_SCC;   //!                                                                                                        
+   TBranch        *b_xsr_scc_Fv3_SCC;   //!   
+   
    TBranch        *b_CC1p;   //!
-   TBranch        *b_CC1p1pi;   //!   
-   TBranch        *b_CC2p;   //!   
+   TBranch        *b_CC1p1pi;   //!
+   TBranch        *b_CC2p;   //!
+   TBranch        *b_CC2p1pi;   //!
+   TBranch        *b_CC3p;   //!
+   TBranch        *b_CC3p1pi;   //!
+   TBranch        *b_CC3p2pi;   //!
    TBranch        *b_NumberMCParticles;   //!
 
    TBranch        *b_Muon_MCParticle_StartX;   //!
@@ -116,7 +188,7 @@ public :
    TBranch        *b_True_EQE;   //!
    TBranch        *b_True_Q2;   //!                  
 
-   myTrueAnalysis(TString WhichSample,TTree *tree=0);
+   myTrueAnalysis(TString WhichSample="",TString WhichEventWeightLabel="", int UniverseIndex=-1,TTree *tree=0);
    virtual ~myTrueAnalysis();
    virtual Int_t    Cut(Long64_t entry);
    virtual Int_t    GetEntry(Long64_t entry);
@@ -132,16 +204,18 @@ public :
 
 
 #ifdef myTrueAnalysis_cxx
-myTrueAnalysis::myTrueAnalysis(TString WhichSample, TTree *tree) : fChain(0) 
+myTrueAnalysis::myTrueAnalysis(TString WhichSample, TString WhichEventWeightLabel, int UniverseIndex, TTree *tree) : fChain(0) 
 {
 
    fWhichSample = WhichSample;
+   fEventWeightLabel = WhichEventWeightLabel;
+   fUniverseIndex = UniverseIndex;   
 
 // LOcally
 //   TString PathToFile = "mySamples/"+UBCodeVersion+"/PreTruthSelection_"+fWhichSample+"_"+UBCodeVersion+".root";
 
 // On the gpvm's
-   TString PathToFile = "mySamples/"+UBCodeVersion+"/PreTruthSelection_"+fWhichSample+"_"+UBCodeVersion+".root";
+   TString PathToFile = "/uboone/data/users/apapadop/myEvents/mySamples/"+UBCodeVersion+"/PreTruthSelection_"+fWhichSample+"_"+UBCodeVersion+".root";
 
    if (tree == 0) {
       TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject(PathToFile);
@@ -183,6 +257,36 @@ void myTrueAnalysis::Init(TTree *tree)
 {
 
    // Set object pointer
+   
+   All_UBGenie = 0;
+   AxFFCCQEshape_UBGenie = 0;
+   DecayAngMEC_UBGenie = 0;
+   NormCCCOH_UBGenie = 0;
+   NormNCCOH_UBGenie = 0;
+   RPA_CCQE_Reduced_UBGenie = 0;
+   RPA_CCQE_UBGenie = 0;
+   ThetaDelta2NRad_UBGenie = 0;
+   Theta_Delta2Npi_UBGenie = 0;
+   VecFFCCQEshape_UBGenie = 0;
+   XSecShape_CCMEC_UBGenie = 0;
+   expskin_FluxUnisim = 0;
+   horncurrent_FluxUnisim = 0;
+   kminus_PrimaryHadronNormalization = 0;
+   kplus_PrimaryHadronFeynmanScaling = 0;
+   kzero_PrimaryHadronSanfordWang = 0;
+   nucleoninexsec_FluxUnisim = 0;
+   nucleonqexsec_FluxUnisim = 0;
+   nucleontotxsec_FluxUnisim = 0;
+   piminus_PrimaryHadronSWCentralSplineVariation = 0;
+   pioninexsec_FluxUnisim = 0;
+   pionqexsec_FluxUnisim = 0;
+   piontotxsec_FluxUnisim = 0;
+   piplus_PrimaryHadronSWCentralSplineVariation = 0;
+   reinteractions_piminus_Geant4 = 0;
+   reinteractions_piplus_Geant4 = 0;
+   reinteractions_proton_Geant4 = 0;
+   xsr_scc_Fa3_SCC = 0;
+   xsr_scc_Fv3_SCC = 0;   
 
    Muon_MCParticle_StartX = 0;
    Muon_MCParticle_StartY = 0;
@@ -230,10 +334,45 @@ void myTrueAnalysis::Init(TTree *tree)
 
    fChain->SetBranchAddress("Weight", &Weight, &b_Weight);
    fChain->SetBranchAddress("T2KWeight", &T2KWeight, &b_T2KWeight);
-   fChain->SetBranchAddress("ROOTinoWeight", &ROOTinoWeight, &b_ROOTinoWeight);   
+   fChain->SetBranchAddress("ROOTinoWeight", &ROOTinoWeight, &b_ROOTinoWeight); 
+ 
+   fChain->SetBranchAddress("All_UBGenie", &All_UBGenie, &b_All_UBGenie);
+   fChain->SetBranchAddress("AxFFCCQEshape_UBGenie", &AxFFCCQEshape_UBGenie, &b_AxFFCCQEshape_UBGenie);
+   fChain->SetBranchAddress("DecayAngMEC_UBGenie", &DecayAngMEC_UBGenie, &b_DecayAngMEC_UBGenie);
+   fChain->SetBranchAddress("NormCCCOH_UBGenie", &NormCCCOH_UBGenie, &b_NormCCCOH_UBGenie);
+   fChain->SetBranchAddress("NormNCCOH_UBGenie", &NormNCCOH_UBGenie, &b_NormNCCOH_UBGenie);
+   fChain->SetBranchAddress("RPA_CCQE_Reduced_UBGenie", &RPA_CCQE_Reduced_UBGenie, &b_RPA_CCQE_Reduced_UBGenie);
+   fChain->SetBranchAddress("RPA_CCQE_UBGenie", &RPA_CCQE_UBGenie, &b_RPA_CCQE_UBGenie);
+   fChain->SetBranchAddress("ThetaDelta2NRad_UBGenie", &ThetaDelta2NRad_UBGenie, &b_ThetaDelta2NRad_UBGenie);
+   fChain->SetBranchAddress("Theta_Delta2Npi_UBGenie", &Theta_Delta2Npi_UBGenie, &b_Theta_Delta2Npi_UBGenie);
+   fChain->SetBranchAddress("VecFFCCQEshape_UBGenie", &VecFFCCQEshape_UBGenie, &b_VecFFCCQEshape_UBGenie);
+   fChain->SetBranchAddress("XSecShape_CCMEC_UBGenie", &XSecShape_CCMEC_UBGenie, &b_XSecShape_CCMEC_UBGenie);
+   fChain->SetBranchAddress("expskin_FluxUnisim", &expskin_FluxUnisim, &b_expskin_FluxUnisim);
+   fChain->SetBranchAddress("horncurrent_FluxUnisim", &horncurrent_FluxUnisim, &b_horncurrent_FluxUnisim);
+   fChain->SetBranchAddress("kminus_PrimaryHadronNormalization", &kminus_PrimaryHadronNormalization, &b_kminus_PrimaryHadronNormalization);
+   fChain->SetBranchAddress("kplus_PrimaryHadronFeynmanScaling", &kplus_PrimaryHadronFeynmanScaling, &b_kplus_PrimaryHadronFeynmanScaling);
+   fChain->SetBranchAddress("kzero_PrimaryHadronSanfordWang", &kzero_PrimaryHadronSanfordWang, &b_kzero_PrimaryHadronSanfordWang);
+   fChain->SetBranchAddress("nucleoninexsec_FluxUnisim", &nucleoninexsec_FluxUnisim, &b_nucleoninexsec_FluxUnisim);
+   fChain->SetBranchAddress("nucleonqexsec_FluxUnisim", &nucleonqexsec_FluxUnisim, &b_nucleonqexsec_FluxUnisim);
+   fChain->SetBranchAddress("nucleontotxsec_FluxUnisim", &nucleontotxsec_FluxUnisim, &b_nucleontotxsec_FluxUnisim);
+   fChain->SetBranchAddress("piminus_PrimaryHadronSWCentralSplineVariation", &piminus_PrimaryHadronSWCentralSplineVariation, &b_piminus_PrimaryHadronSWCentralSplineVariation);
+   fChain->SetBranchAddress("pioninexsec_FluxUnisim", &pioninexsec_FluxUnisim, &b_pioninexsec_FluxUnisim);
+   fChain->SetBranchAddress("pionqexsec_FluxUnisim", &pionqexsec_FluxUnisim, &b_pionqexsec_FluxUnisim);
+   fChain->SetBranchAddress("piontotxsec_FluxUnisim", &piontotxsec_FluxUnisim, &b_piontotxsec_FluxUnisim);
+   fChain->SetBranchAddress("piplus_PrimaryHadronSWCentralSplineVariation", &piplus_PrimaryHadronSWCentralSplineVariation, &b_piplus_PrimaryHadronSWCentralSplineVariation);
+   fChain->SetBranchAddress("reinteractions_piminus_Geant4", &reinteractions_piminus_Geant4, &b_reinteractions_piminus_Geant4);
+   fChain->SetBranchAddress("reinteractions_piplus_Geant4", &reinteractions_piplus_Geant4, &b_reinteractions_piplus_Geant4);
+   fChain->SetBranchAddress("reinteractions_proton_Geant4", &reinteractions_proton_Geant4, &b_reinteractions_proton_Geant4);
+   fChain->SetBranchAddress("xsr_scc_Fa3_SCC", &xsr_scc_Fa3_SCC, &b_xsr_scc_Fa3_SCC);
+   fChain->SetBranchAddress("xsr_scc_Fv3_SCC", &xsr_scc_Fv3_SCC, &b_xsr_scc_Fv3_SCC);   
+     
    fChain->SetBranchAddress("CC1p", &CC1p, &b_CC1p);   
    fChain->SetBranchAddress("CC1p1pi", &CC1p1pi, &b_CC1p1pi);
-   fChain->SetBranchAddress("CC2p", &CC2p, &b_CC2p);         
+   fChain->SetBranchAddress("CC2p", &CC2p, &b_CC2p);
+   fChain->SetBranchAddress("CC2p1pi", &CC2p1pi, &b_CC2p1pi);
+   fChain->SetBranchAddress("CC3p", &CC3p, &b_CC3p);
+   fChain->SetBranchAddress("CC3p1pi", &CC3p1pi, &b_CC3p1pi);
+   fChain->SetBranchAddress("CC3p2pi", &CC3p2pi, &b_CC3p2pi);
    fChain->SetBranchAddress("NumberMCParticles", &NumberMCParticles, &b_NumberMCParticles);
 
    fChain->SetBranchAddress("Muon_MCParticle_StartX", &Muon_MCParticle_StartX, &b_Muon_MCParticle_StartX);

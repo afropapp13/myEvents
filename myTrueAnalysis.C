@@ -127,16 +127,58 @@ void myTrueAnalysis::Loop() {
 
 		// -------------------------------------------------------------------------------------------------------------------------------------
 
-		// EventWeight weights
+		// Genie, flux & reinteraction weights for systematics
 
-// Fix it !!!!
+		if ( fUniverseIndex != -1 && (fWhichSample == "Overlay9_Run1" || fWhichSample == "Overlay9_Run2" || fWhichSample == "Overlay9_Run3" 
+		|| fWhichSample == "Overlay9_Run4" || fWhichSample == "Overlay9_Run5") ) {
 
-		// Genie
-//		if (string(fWhichSample).find("Genie_All") != std::string::npos) { weight = weight * EventWeightValues[fWhichSample][fUniverse];}
+			// Genie weights
 
-		// Flux
-//		if (string(fWhichSample).find("FluxUnisim") != std::string::npos || string(fWhichSample).find("Primary") != std::string::npos) 
-//			{ weight = weight * EventWeightValues[fWhichSample][fUniverse];}
+			if (fEventWeightLabel == "All_UBGenie") { weight = weight*All_UBGenie->at(fUniverseIndex); }
+			if (fEventWeightLabel == "AxFFCCQEshape_UBGenie") { weight = weight*AxFFCCQEshape_UBGenie->at(fUniverseIndex); }
+			if (fEventWeightLabel == "DecayAngMEC_UBGenie") { weight = weight*DecayAngMEC_UBGenie->at(fUniverseIndex); }
+			if (fEventWeightLabel == "NormCCCOH_UBGenie") { weight = weight*NormCCCOH_UBGenie->at(fUniverseIndex); }
+			if (fEventWeightLabel == "NormNCCOH_UBGenie") { weight = weight*NormNCCOH_UBGenie->at(fUniverseIndex); }
+			if (fEventWeightLabel == "RPA_CCQE_Reduced_UBGenie") { weight = weight*RPA_CCQE_Reduced_UBGenie->at(fUniverseIndex); }
+			if (fEventWeightLabel == "RPA_CCQE_UBGenie") { weight = weight*RPA_CCQE_UBGenie->at(fUniverseIndex); }
+			if (fEventWeightLabel == "ThetaDelta2NRad_UBGenie") { weight = weight*ThetaDelta2NRad_UBGenie->at(fUniverseIndex); }
+			if (fEventWeightLabel == "Theta_Delta2Npi_UBGenie") { weight = weight*Theta_Delta2Npi_UBGenie->at(fUniverseIndex); }
+			if (fEventWeightLabel == "VecFFCCQEshape_UBGenie") { weight = weight*VecFFCCQEshape_UBGenie->at(fUniverseIndex); }
+			if (fEventWeightLabel == "XSecShape_CCMEC_UBGenie") { weight = weight*XSecShape_CCMEC_UBGenie->at(fUniverseIndex); }
+
+			// Flux weights
+
+			if (fEventWeightLabel == "expskin_FluxUnisim") { weight = weight*expskin_FluxUnisim->at(fUniverseIndex); }
+			if (fEventWeightLabel == "horncurrent_FluxUnisim") { weight = weight*horncurrent_FluxUnisim->at(fUniverseIndex); }
+			if (fEventWeightLabel == "kminus_PrimaryHadronNormalization") 
+				{ weight = weight*kminus_PrimaryHadronNormalization->at(fUniverseIndex); }
+			if (fEventWeightLabel == "kplus_PrimaryHadronFeynmanScaling") 
+				{ weight = weight*kplus_PrimaryHadronFeynmanScaling->at(fUniverseIndex); }
+			if (fEventWeightLabel == "kzero_PrimaryHadronSanfordWang") 
+				{ weight = weight*kzero_PrimaryHadronSanfordWang->at(fUniverseIndex); }
+			if (fEventWeightLabel == "nucleoninexsec_FluxUnisim") { weight = weight*nucleoninexsec_FluxUnisim->at(fUniverseIndex); }
+			if (fEventWeightLabel == "nucleonqexsec_FluxUnisim") { weight = weight*nucleonqexsec_FluxUnisim->at(fUniverseIndex); }
+			if (fEventWeightLabel == "nucleontotxsec_FluxUnisim") { weight = weight*nucleontotxsec_FluxUnisim->at(fUniverseIndex); }
+			if (fEventWeightLabel == "piminus_PrimaryHadronSWCentralSplineVariation") 
+				{ weight = weight*piminus_PrimaryHadronSWCentralSplineVariation->at(fUniverseIndex); }
+			if (fEventWeightLabel == "pioninexsec_FluxUnisim") { weight = weight*pioninexsec_FluxUnisim->at(fUniverseIndex); }
+			if (fEventWeightLabel == "pionqexsec_FluxUnisim") { weight = weight*pionqexsec_FluxUnisim->at(fUniverseIndex); }
+			if (fEventWeightLabel == "piontotxsec_FluxUnisim") { weight = weight*piontotxsec_FluxUnisim->at(fUniverseIndex); }
+			if (fEventWeightLabel == "piplus_PrimaryHadronSWCentralSplineVariation") 
+				{ weight = weight*piplus_PrimaryHadronSWCentralSplineVariation->at(fUniverseIndex); }
+
+			// Reinteraction weights
+
+			if (fEventWeightLabel == "reinteractions_piminus_Geant4") 
+				{ weight = weight*reinteractions_piminus_Geant4->at(fUniverseIndex); }
+			if (fEventWeightLabel == "reinteractions_piplus_Geant4") 
+				{ weight = weight*reinteractions_piplus_Geant4->at(fUniverseIndex); }
+			if (fEventWeightLabel == "reinteractions_proton_Geant4") 
+				{ weight = weight*reinteractions_proton_Geant4->at(fUniverseIndex); }
+			if (fEventWeightLabel == "xsr_scc_Fa3_SCC") { weight = weight*xsr_scc_Fa3_SCC->at(fUniverseIndex); }
+			if (fEventWeightLabel == "xsr_scc_Fv3_SCC") { weight = weight*xsr_scc_Fv3_SCC->at(fUniverseIndex); }		
+
+		}
 
 		// ---------------------------------------------------------------------------------------------------------------------------------
 
