@@ -22,7 +22,6 @@ using namespace std;
 
 #include "ubana/myClasses/Tools.h"
 
-
 TString ToStringInt(int num) {
 
 	std::ostringstream start;
@@ -31,8 +30,6 @@ TString ToStringInt(int num) {
 	return start1;
 
 }
-
-
 
 void t::Loop() {
 
@@ -74,13 +71,12 @@ void t::Loop() {
 		TString Extension = "";
 
 		// For overlays only for genie, flux and reinteraction uncertainties
-/*
+
 		if (fUniverseIndex != -1) {
 
 			Extension = "_"+fEventWeightLabel+"_"+ToStringInt(fUniverseIndex); 
 
 		}
-*/
 
 		TString FileName = "./OutputFiles/"+UBCodeVersion+"/"+Cuts+"/STVStudies_"+fWhichSample+Extension+Cuts+".root";
 		TFile* file = new TFile(FileName,"recreate");
@@ -124,6 +120,16 @@ void t::Loop() {
 		TH1D* RecoECalPlot = new TH1D("RecoECalPlot",LabelXAxisECal,NBinsECal,ArrayNBinsECal);
 		TH1D* RecoEQEPlot = new TH1D("RecoEQEPlot",LabelXAxisEQE,NBinsEQE,ArrayNBinsEQE);
 		TH1D* RecoQ2Plot = new TH1D("RecoQ2Plot",LabelXAxisQ2,NBinsQ2,ArrayNBinsQ2);
+		
+		// 2D Analysis
+		
+		TH2D* RecoCosThetaMuPmuPlot = new TH2D("RecoCosThetaMuPmuPlot",LabelXAxisMuonCosTheta+LabelXAxisMuonMomentum
+			,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta[0],ArrayNBinsMuonCosTheta[NBinsMuonCosTheta]
+			,NBinsMuonMomentum,ArrayNBinsMuonMomentum[0],ArrayNBinsMuonMomentum[NBinsMuonMomentum]);
+			
+		TH2D* RecoCosThetaPPpPlot = new TH2D("RecoCosThetaPPpPlot",LabelXAxisProtonCosTheta+LabelXAxisProtonMomentum
+			,NBinsProtonCosTheta,ArrayNBinsProtonCosTheta[0],ArrayNBinsProtonCosTheta[NBinsProtonCosTheta]
+			,NBinsProtonMomentum,ArrayNBinsProtonMomentum[0],ArrayNBinsProtonMomentum[NBinsProtonMomentum]);					
 
 		// 2D Plot for Default Chi2 vs 3-Plane Chi2
 
@@ -170,6 +176,16 @@ void t::Loop() {
 		TH1D* CC1pRecoECalPlot = new TH1D("CC1pRecoECalPlot",LabelXAxisECal,NBinsECal,ArrayNBinsECal);
 		TH1D* CC1pRecoEQEPlot = new TH1D("CC1pRecoEQEPlot",LabelXAxisEQE,NBinsEQE,ArrayNBinsEQE);
 		TH1D* CC1pRecoQ2Plot = new TH1D("CC1pRecoQ2Plot",LabelXAxisQ2,NBinsQ2,ArrayNBinsQ2);
+		
+		// 2D Analysis
+		
+		TH2D* CC1pRecoCosThetaMuPmuPlot = new TH2D("CC1pRecoCosThetaMuPmuPlot",LabelXAxisMuonCosTheta+LabelXAxisMuonMomentum
+			,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta[0],ArrayNBinsMuonCosTheta[NBinsMuonCosTheta]
+			,NBinsMuonMomentum,ArrayNBinsMuonMomentum[0],ArrayNBinsMuonMomentum[NBinsMuonMomentum]);
+			
+		TH2D* CC1pRecoCosThetaPPpPlot = new TH2D("CC1pRecoCosThetaPPpPlot",LabelXAxisProtonCosTheta+LabelXAxisProtonMomentum
+			,NBinsProtonCosTheta,ArrayNBinsProtonCosTheta[0],ArrayNBinsProtonCosTheta[NBinsProtonCosTheta]
+			,NBinsProtonMomentum,ArrayNBinsProtonMomentum[0],ArrayNBinsProtonMomentum[NBinsProtonMomentum]);		
 
 		// 2D Reco Level Plots for Signal CC1p
 
@@ -242,6 +258,16 @@ void t::Loop() {
 		TH1D* NonCC1pRecoECalPlot = new TH1D("NonCC1pRecoECalPlot",LabelXAxisECal,NBinsECal,ArrayNBinsECal);
 		TH1D* NonCC1pRecoEQEPlot = new TH1D("NonCC1pRecoEQEPlot",LabelXAxisEQE,NBinsEQE,ArrayNBinsEQE);
 		TH1D* NonCC1pRecoQ2Plot = new TH1D("NonCC1pRecoQ2Plot",LabelXAxisQ2,NBinsQ2,ArrayNBinsQ2);
+		
+		// 2D Analysis
+		
+		TH2D* NonCC1pRecoCosThetaMuPmuPlot = new TH2D("NonCC1pRecoCosThetaMuPmuPlot",LabelXAxisMuonCosTheta+LabelXAxisMuonMomentum
+			,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta[0],ArrayNBinsMuonCosTheta[NBinsMuonCosTheta]
+			,NBinsMuonMomentum,ArrayNBinsMuonMomentum[0],ArrayNBinsMuonMomentum[NBinsMuonMomentum]);
+			
+		TH2D* NonCC1pRecoCosThetaPPpPlot = new TH2D("NonCC1pRecoCosThetaPPpPlot",LabelXAxisProtonCosTheta+LabelXAxisProtonMomentum
+			,NBinsProtonCosTheta,ArrayNBinsProtonCosTheta[0],ArrayNBinsProtonCosTheta[NBinsProtonCosTheta]
+			,NBinsProtonMomentum,ArrayNBinsProtonMomentum[0],ArrayNBinsProtonMomentum[NBinsProtonMomentum]);		
 
 		// ---------------------------------------------------------------------------------------------------------------------------------
 		// --------------------------------------------------------------------------------------------------------------------------------
@@ -284,6 +310,16 @@ void t::Loop() {
 		TH1D* CCQERecoECalPlot = new TH1D("CCQERecoECalPlot",LabelXAxisECal,NBinsECal,ArrayNBinsECal);
 		TH1D* CCQERecoEQEPlot = new TH1D("CCQERecoEQEPlot",LabelXAxisEQE,NBinsEQE,ArrayNBinsEQE);
 		TH1D* CCQERecoQ2Plot = new TH1D("CCQERecoQ2Plot",LabelXAxisQ2,NBinsQ2,ArrayNBinsQ2);
+		
+		// 2D Analysis
+		
+		TH2D* CCQERecoCosThetaMuPmuPlot = new TH2D("CCQERecoCosThetaMuPmuPlot",LabelXAxisMuonCosTheta+LabelXAxisMuonMomentum
+			,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta[0],ArrayNBinsMuonCosTheta[NBinsMuonCosTheta]
+			,NBinsMuonMomentum,ArrayNBinsMuonMomentum[0],ArrayNBinsMuonMomentum[NBinsMuonMomentum]);
+			
+		TH2D* CCQERecoCosThetaPPpPlot = new TH2D("CCQERecoCosThetaPPpPlot",LabelXAxisProtonCosTheta+LabelXAxisProtonMomentum
+			,NBinsProtonCosTheta,ArrayNBinsProtonCosTheta[0],ArrayNBinsProtonCosTheta[NBinsProtonCosTheta]
+			,NBinsProtonMomentum,ArrayNBinsProtonMomentum[0],ArrayNBinsProtonMomentum[NBinsProtonMomentum]);		
 
 		// ---------------------------------------------------------------------------------------------------------------------------------
 
@@ -325,6 +361,16 @@ void t::Loop() {
 		TH1D* CCMECRecoECalPlot = new TH1D("CCMECRecoECalPlot",LabelXAxisECal,NBinsECal,ArrayNBinsECal);
 		TH1D* CCMECRecoEQEPlot = new TH1D("CCMECRecoEQEPlot",LabelXAxisEQE,NBinsEQE,ArrayNBinsEQE);
 		TH1D* CCMECRecoQ2Plot = new TH1D("CCMECRecoQ2Plot",LabelXAxisQ2,NBinsQ2,ArrayNBinsQ2);
+		
+		// 2D Analysis
+		
+		TH2D* CCMECRecoCosThetaMuPmuPlot = new TH2D("CCMECRecoCosThetaMuPmuPlot",LabelXAxisMuonCosTheta+LabelXAxisMuonMomentum
+			,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta[0],ArrayNBinsMuonCosTheta[NBinsMuonCosTheta]
+			,NBinsMuonMomentum,ArrayNBinsMuonMomentum[0],ArrayNBinsMuonMomentum[NBinsMuonMomentum]);
+			
+		TH2D* CCMECRecoCosThetaPPpPlot = new TH2D("CCMECRecoCosThetaPPpPlot",LabelXAxisProtonCosTheta+LabelXAxisProtonMomentum
+			,NBinsProtonCosTheta,ArrayNBinsProtonCosTheta[0],ArrayNBinsProtonCosTheta[NBinsProtonCosTheta]
+			,NBinsProtonMomentum,ArrayNBinsProtonMomentum[0],ArrayNBinsProtonMomentum[NBinsProtonMomentum]);		
 
 		// ------------------------------------------------------------------------------------------------------------------------------
 
@@ -366,6 +412,16 @@ void t::Loop() {
 		TH1D* CCRESRecoECalPlot = new TH1D("CCRESRecoECalPlot",LabelXAxisECal,NBinsECal,ArrayNBinsECal);
 		TH1D* CCRESRecoEQEPlot = new TH1D("CCRESRecoEQEPlot",LabelXAxisEQE,NBinsEQE,ArrayNBinsEQE);
 		TH1D* CCRESRecoQ2Plot = new TH1D("CCRESRecoQ2Plot",LabelXAxisQ2,NBinsQ2,ArrayNBinsQ2);
+		
+		// 2D Analysis
+		
+		TH2D* CCRESRecoCosThetaMuPmuPlot = new TH2D("CCRESRecoCosThetaMuPmuPlot",LabelXAxisMuonCosTheta+LabelXAxisMuonMomentum
+			,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta[0],ArrayNBinsMuonCosTheta[NBinsMuonCosTheta]
+			,NBinsMuonMomentum,ArrayNBinsMuonMomentum[0],ArrayNBinsMuonMomentum[NBinsMuonMomentum]);
+			
+		TH2D* CCRESRecoCosThetaPPpPlot = new TH2D("CCRESRecoCosThetaPPpPlot",LabelXAxisProtonCosTheta+LabelXAxisProtonMomentum
+			,NBinsProtonCosTheta,ArrayNBinsProtonCosTheta[0],ArrayNBinsProtonCosTheta[NBinsProtonCosTheta]
+			,NBinsProtonMomentum,ArrayNBinsProtonMomentum[0],ArrayNBinsProtonMomentum[NBinsProtonMomentum]);		
 
 		// ---------------------------------------------------------------------------------------------------------------------------------
 
@@ -407,6 +463,16 @@ void t::Loop() {
 		TH1D* CCDISRecoECalPlot = new TH1D("CCDISRecoECalPlot",LabelXAxisECal,NBinsECal,ArrayNBinsECal);
 		TH1D* CCDISRecoEQEPlot = new TH1D("CCDISRecoEQEPlot",LabelXAxisEQE,NBinsEQE,ArrayNBinsEQE);
 		TH1D* CCDISRecoQ2Plot = new TH1D("CCDISRecoQ2Plot",LabelXAxisQ2,NBinsQ2,ArrayNBinsQ2);
+		
+		// 2D Analysis
+		
+		TH2D* CCDISRecoCosThetaMuPmuPlot = new TH2D("CCDISRecoCosThetaMuPmuPlot",LabelXAxisMuonCosTheta+LabelXAxisMuonMomentum
+			,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta[0],ArrayNBinsMuonCosTheta[NBinsMuonCosTheta]
+			,NBinsMuonMomentum,ArrayNBinsMuonMomentum[0],ArrayNBinsMuonMomentum[NBinsMuonMomentum]);
+			
+		TH2D* CCDISRecoCosThetaPPpPlot = new TH2D("CCDISRecoCosThetaPPpPlot",LabelXAxisProtonCosTheta+LabelXAxisProtonMomentum
+			,NBinsProtonCosTheta,ArrayNBinsProtonCosTheta[0],ArrayNBinsProtonCosTheta[NBinsProtonCosTheta]
+			,NBinsProtonMomentum,ArrayNBinsProtonMomentum[0],ArrayNBinsProtonMomentum[NBinsProtonMomentum]);		
 
 		// --------------------------------------------------------------------------------------------------------------------------------
 		// ------------------------------------------------------------------------------------------------------------------------------
@@ -495,13 +561,37 @@ void t::Loop() {
 
 		}
 		
+//		if (string(fWhichSample).find("Run2") != std::string::npos) {
+
+//			tor860_wcut = tor860_wcut_Run2;
+//			E1DCNT_wcut = E1DCNT_wcut_Run2;
+//			EXT = EXT_Run2;
+
+//		}
+		
 		if (string(fWhichSample).find("Run3") != std::string::npos) {
 
 			tor860_wcut = tor860_wcut_Run3;
 			E1DCNT_wcut = E1DCNT_wcut_Run3;
 			EXT = EXT_Run3;
 
-		}			
+		}
+		
+//		if (string(fWhichSample).find("Run4") != std::string::npos) {
+
+//			tor860_wcut = tor860_wcut_Run4;
+//			E1DCNT_wcut = E1DCNT_wcut_Run4;
+//			EXT = EXT_Run4;
+
+//		}
+
+//		if (string(fWhichSample).find("Run5") != std::string::npos) {
+
+//			tor860_wcut = tor860_wcut_Run5;
+//			E1DCNT_wcut = E1DCNT_wcut_Run5;
+//			EXT = EXT_Run5;
+
+//		}	
 		
 		if (string(fWhichSample).find("ExtBNB9") != std::string::npos) { weight = E1DCNT_wcut / EXT; POTScale = weight; }
 
@@ -584,7 +674,7 @@ void t::Loop() {
 				if (fEventWeightLabel == "DecayAngMEC_UBGenie") { weight = weight*DecayAngMEC_UBGenie->at(fUniverseIndex); }
 				if (fEventWeightLabel == "NormCCCOH_UBGenie") { weight = weight*NormCCCOH_UBGenie->at(fUniverseIndex); }
 				if (fEventWeightLabel == "NormNCCOH_UBGenie") { weight = weight*NormNCCOH_UBGenie->at(fUniverseIndex); }
-				if (fEventWeightLabel == "RPA_CCQE_Reduced_UBGenie") { weight = weight*RPA_CCQE_Reduced_UBGenie->at(fUniverseIndex); }
+//				if (fEventWeightLabel == "RPA_CCQE_Reduced_UBGenie") { weight = weight*RPA_CCQE_Reduced_UBGenie->at(fUniverseIndex); }
 				if (fEventWeightLabel == "RPA_CCQE_UBGenie") { weight = weight*RPA_CCQE_UBGenie->at(fUniverseIndex); }
 				if (fEventWeightLabel == "ThetaDelta2NRad_UBGenie") { weight = weight*ThetaDelta2NRad_UBGenie->at(fUniverseIndex); }
 				if (fEventWeightLabel == "Theta_Delta2Npi_UBGenie") { weight = weight*Theta_Delta2Npi_UBGenie->at(fUniverseIndex); }
@@ -620,8 +710,8 @@ void t::Loop() {
 					{ weight = weight*reinteractions_piplus_Geant4->at(fUniverseIndex); }
 				if (fEventWeightLabel == "reinteractions_proton_Geant4") 
 					{ weight = weight*reinteractions_proton_Geant4->at(fUniverseIndex); }
-				if (fEventWeightLabel == "xsr_scc_Fa3_SCC") { weight = weight*xsr_scc_Fa3_SCC->at(fUniverseIndex); }
-				if (fEventWeightLabel == "xsr_scc_Fv3_SCC") { weight = weight*xsr_scc_Fv3_SCC->at(fUniverseIndex); }			
+//				if (fEventWeightLabel == "xsr_scc_Fa3_SCC") { weight = weight*xsr_scc_Fa3_SCC->at(fUniverseIndex); }
+//				if (fEventWeightLabel == "xsr_scc_Fv3_SCC") { weight = weight*xsr_scc_Fv3_SCC->at(fUniverseIndex); }			
 
 			}			
 
@@ -855,6 +945,11 @@ void t::Loop() {
 			RecoECalPlot->Fill(ECal,weight);
 			RecoEQEPlot->Fill(EQE,weight);
 			RecoQ2Plot->Fill(reco_Q2,weight);
+			
+			// 2D Analysis
+		
+			RecoCosThetaMuPmuPlot->Fill(reco_Pmu_cos_theta,reco_Pmu_mcs,weight);
+			RecoCosThetaPPpPlot->Fill(reco_Pp_cos_theta,reco_Pp,weight);
 
 			// 2D Plot for Default Chi2 vs 3-Plane Chi2
 
@@ -937,6 +1032,11 @@ void t::Loop() {
 				CC1pRecoECalPlot->Fill(ECal,weight);
 				CC1pRecoEQEPlot->Fill(EQE,weight);
 				CC1pRecoQ2Plot->Fill(reco_Q2,weight);
+				
+				// 2D Analysis
+			
+				CC1pRecoCosThetaMuPmuPlot->Fill(reco_Pmu_cos_theta,reco_Pmu_mcs,weight);
+				CC1pRecoCosThetaPPpPlot->Fill(reco_Pp_cos_theta,reco_Pp,weight);				
 
 				// ---------------------------------------------------------------------------------------------------------------------
 				// ---------------------------------------------------------------------------------------------------------------------
@@ -1006,6 +1106,11 @@ void t::Loop() {
 				NonCC1pRecoECalPlot->Fill(ECal,weight);
 				NonCC1pRecoEQEPlot->Fill(EQE,weight);
 				NonCC1pRecoQ2Plot->Fill(reco_Q2,weight);
+				
+				// 2D Analysis
+			
+				NonCC1pRecoCosThetaMuPmuPlot->Fill(reco_Pmu_cos_theta,reco_Pmu_mcs,weight);
+				NonCC1pRecoCosThetaPPpPlot->Fill(reco_Pp_cos_theta,reco_Pp,weight);				
 
 			}
 
@@ -1046,6 +1151,11 @@ void t::Loop() {
 				CCQERecoECalPlot->Fill(ECal,weight);
 				CCQERecoEQEPlot->Fill(EQE,weight);
 				CCQERecoQ2Plot->Fill(reco_Q2,weight);
+				
+				// 2D Analysis
+			
+				CCQERecoCosThetaMuPmuPlot->Fill(reco_Pmu_cos_theta,reco_Pmu_mcs,weight);
+				CCQERecoCosThetaPPpPlot->Fill(reco_Pp_cos_theta,reco_Pp,weight);				
 
 			}
 
@@ -1085,6 +1195,11 @@ void t::Loop() {
 				CCMECRecoECalPlot->Fill(ECal,weight);
 				CCMECRecoEQEPlot->Fill(EQE,weight);
 				CCMECRecoQ2Plot->Fill(reco_Q2,weight);
+				
+				// 2D Analysis
+			
+				CCMECRecoCosThetaMuPmuPlot->Fill(reco_Pmu_cos_theta,reco_Pmu_mcs,weight);
+				CCMECRecoCosThetaPPpPlot->Fill(reco_Pp_cos_theta,reco_Pp,weight);				
 
 			}
 
@@ -1124,6 +1239,11 @@ void t::Loop() {
 				CCRESRecoECalPlot->Fill(ECal,weight);
 				CCRESRecoEQEPlot->Fill(EQE,weight);
 				CCRESRecoQ2Plot->Fill(reco_Q2,weight);
+				
+				// 2D Analysis
+			
+				CCRESRecoCosThetaMuPmuPlot->Fill(reco_Pmu_cos_theta,reco_Pmu_mcs,weight);
+				CCRESRecoCosThetaPPpPlot->Fill(reco_Pp_cos_theta,reco_Pp,weight);				
 
 			}
 
@@ -1163,6 +1283,11 @@ void t::Loop() {
 				CCDISRecoECalPlot->Fill(ECal,weight);
 				CCDISRecoEQEPlot->Fill(EQE,weight);
 				CCDISRecoQ2Plot->Fill(reco_Q2,weight);
+				
+				// 2D Analysis
+			
+				CCDISRecoCosThetaMuPmuPlot->Fill(reco_Pmu_cos_theta,reco_Pmu_mcs,weight);
+				CCDISRecoCosThetaPPpPlot->Fill(reco_Pp_cos_theta,reco_Pp,weight);				
 
 			}
 
@@ -1183,7 +1308,7 @@ void t::Loop() {
 			// --------------------------------------------------------------------------------------------------------------------------
 
 			// Overlay particle breakdown using the Backtracker
-/*
+
 			if (CandidateMu_MCParticle_Pdg->size() > 0 && CandidateP_MCParticle_Pdg->size() > 0 ) {
 
 				if (CandidateMu_MCParticle_Pdg->at(0) == MuonPdg) {
@@ -1252,7 +1377,7 @@ void t::Loop() {
 				CosmicRecoThreePlaneChi2LogLikelihoodPlot->Fill(reco_Pp_ThreePlaneLogLikelihood,weight/2.);
 
 			}
-*/
+
 			// -------------------------------------------------------------------------------------------------------------------------
 
 		} // End of the loop over the events

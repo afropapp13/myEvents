@@ -34,7 +34,7 @@ public :
    vector<double>  *DecayAngMEC_UBGenie;
    vector<double>  *NormCCCOH_UBGenie;
    vector<double>  *NormNCCOH_UBGenie;
-   vector<double>  *RPA_CCQE_Reduced_UBGenie;
+//   vector<double>  *RPA_CCQE_Reduced_UBGenie;
    vector<double>  *RPA_CCQE_UBGenie;
    vector<double>  *ThetaDelta2NRad_UBGenie;
    vector<double>  *Theta_Delta2Npi_UBGenie;
@@ -56,8 +56,8 @@ public :
    vector<double>  *reinteractions_piminus_Geant4;
    vector<double>  *reinteractions_piplus_Geant4;
    vector<double>  *reinteractions_proton_Geant4;
-   vector<double>  *xsr_scc_Fa3_SCC;
-   vector<double>  *xsr_scc_Fv3_SCC;   
+//   vector<double>  *xsr_scc_Fa3_SCC;
+//   vector<double>  *xsr_scc_Fv3_SCC;   
    
    int             CC1p;
    int             CC1p1pi;
@@ -116,7 +116,7 @@ public :
    TBranch        *b_DecayAngMEC_UBGenie;   //!                   
    TBranch        *b_NormCCCOH_UBGenie;   //!                     
    TBranch        *b_NormNCCOH_UBGenie;   //!                     
-   TBranch        *b_RPA_CCQE_Reduced_UBGenie;   //!              
+//   TBranch        *b_RPA_CCQE_Reduced_UBGenie;   //!              
    TBranch        *b_RPA_CCQE_UBGenie;   //!                      
    TBranch        *b_ThetaDelta2NRad_UBGenie;   //!               
    TBranch        *b_Theta_Delta2Npi_UBGenie;   //!               
@@ -138,8 +138,8 @@ public :
    TBranch        *b_reinteractions_piminus_Geant4;   //!         
    TBranch        *b_reinteractions_piplus_Geant4;   //! 
    TBranch        *b_reinteractions_proton_Geant4;   //!                                                       
-   TBranch        *b_xsr_scc_Fa3_SCC;   //!                                                                                                        
-   TBranch        *b_xsr_scc_Fv3_SCC;   //!   
+//   TBranch        *b_xsr_scc_Fa3_SCC;   //!                                                                                                        
+//   TBranch        *b_xsr_scc_Fv3_SCC;   //!   
    
    TBranch        *b_CC1p;   //!
    TBranch        *b_CC1p1pi;   //!
@@ -263,7 +263,7 @@ void myTrueAnalysis::Init(TTree *tree)
    DecayAngMEC_UBGenie = 0;
    NormCCCOH_UBGenie = 0;
    NormNCCOH_UBGenie = 0;
-   RPA_CCQE_Reduced_UBGenie = 0;
+//   RPA_CCQE_Reduced_UBGenie = 0;
    RPA_CCQE_UBGenie = 0;
    ThetaDelta2NRad_UBGenie = 0;
    Theta_Delta2Npi_UBGenie = 0;
@@ -285,8 +285,8 @@ void myTrueAnalysis::Init(TTree *tree)
    reinteractions_piminus_Geant4 = 0;
    reinteractions_piplus_Geant4 = 0;
    reinteractions_proton_Geant4 = 0;
-   xsr_scc_Fa3_SCC = 0;
-   xsr_scc_Fv3_SCC = 0;   
+//   xsr_scc_Fa3_SCC = 0;
+//   xsr_scc_Fv3_SCC = 0;   
 
    Muon_MCParticle_StartX = 0;
    Muon_MCParticle_StartY = 0;
@@ -341,7 +341,7 @@ void myTrueAnalysis::Init(TTree *tree)
    fChain->SetBranchAddress("DecayAngMEC_UBGenie", &DecayAngMEC_UBGenie, &b_DecayAngMEC_UBGenie);
    fChain->SetBranchAddress("NormCCCOH_UBGenie", &NormCCCOH_UBGenie, &b_NormCCCOH_UBGenie);
    fChain->SetBranchAddress("NormNCCOH_UBGenie", &NormNCCOH_UBGenie, &b_NormNCCOH_UBGenie);
-   fChain->SetBranchAddress("RPA_CCQE_Reduced_UBGenie", &RPA_CCQE_Reduced_UBGenie, &b_RPA_CCQE_Reduced_UBGenie);
+//   fChain->SetBranchAddress("RPA_CCQE_Reduced_UBGenie", &RPA_CCQE_Reduced_UBGenie, &b_RPA_CCQE_Reduced_UBGenie);
    fChain->SetBranchAddress("RPA_CCQE_UBGenie", &RPA_CCQE_UBGenie, &b_RPA_CCQE_UBGenie);
    fChain->SetBranchAddress("ThetaDelta2NRad_UBGenie", &ThetaDelta2NRad_UBGenie, &b_ThetaDelta2NRad_UBGenie);
    fChain->SetBranchAddress("Theta_Delta2Npi_UBGenie", &Theta_Delta2Npi_UBGenie, &b_Theta_Delta2Npi_UBGenie);
@@ -363,8 +363,8 @@ void myTrueAnalysis::Init(TTree *tree)
    fChain->SetBranchAddress("reinteractions_piminus_Geant4", &reinteractions_piminus_Geant4, &b_reinteractions_piminus_Geant4);
    fChain->SetBranchAddress("reinteractions_piplus_Geant4", &reinteractions_piplus_Geant4, &b_reinteractions_piplus_Geant4);
    fChain->SetBranchAddress("reinteractions_proton_Geant4", &reinteractions_proton_Geant4, &b_reinteractions_proton_Geant4);
-   fChain->SetBranchAddress("xsr_scc_Fa3_SCC", &xsr_scc_Fa3_SCC, &b_xsr_scc_Fa3_SCC);
-   fChain->SetBranchAddress("xsr_scc_Fv3_SCC", &xsr_scc_Fv3_SCC, &b_xsr_scc_Fv3_SCC);   
+//   fChain->SetBranchAddress("xsr_scc_Fa3_SCC", &xsr_scc_Fa3_SCC, &b_xsr_scc_Fa3_SCC);
+//   fChain->SetBranchAddress("xsr_scc_Fv3_SCC", &xsr_scc_Fv3_SCC, &b_xsr_scc_Fv3_SCC);   
      
    fChain->SetBranchAddress("CC1p", &CC1p, &b_CC1p);   
    fChain->SetBranchAddress("CC1p1pi", &CC1p1pi, &b_CC1p1pi);

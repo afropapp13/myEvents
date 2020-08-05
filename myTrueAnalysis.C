@@ -21,6 +21,16 @@
 
 using namespace std;
 
+TString TrueToStringInt(int num) {
+
+	std::ostringstream start;
+	start << num;
+	string start1 = start.str();
+	return start1;
+
+}
+
+
 void myTrueAnalysis::Loop() {
 
 	if (fChain == 0) return; Long64_t nentries = fChain->GetEntriesFast(); Long64_t nbytes = 0, nb = 0;
@@ -28,9 +38,19 @@ void myTrueAnalysis::Loop() {
 
 	// ---------------------------------------------------------------------------------------------------------------------------------------------
 
+	TString Extension = "";
+
+	// For overlays only for genie, flux and reinteraction uncertainties
+
+	if (fUniverseIndex != -1) {
+
+		Extension = "_"+fEventWeightLabel+"_"+TrueToStringInt(fUniverseIndex); 
+
+	}
+
 	// Output Files
 
-	TString FileName = "./OutputFiles/"+UBCodeVersion+"/TruthSTVAnalysis_"+fWhichSample+"_"+UBCodeVersion+".root";
+	TString FileName = "./OutputFiles/"+UBCodeVersion+"/TruthSTVAnalysis_"+fWhichSample+Extension+"_"+UBCodeVersion+".root";
 	TFile* OutputFile = new TFile(FileName,"recreate");
 	std::cout << std::endl << "File " << FileName << " to be created"<< std::endl << std::endl;
 
@@ -39,7 +59,7 @@ void myTrueAnalysis::Loop() {
 
 	// --------------------------------------------------------------------------------------------------------------------------------------------
 
-	// 1D True Transverse Variables
+	// 1D True Variables
 
 	TH1D* TrueDeltaPTPlot = new TH1D("TrueDeltaPTPlot",LabelXAxisDeltaPT,NBinsDeltaPT,ArrayNBinsDeltaPT);
 	TH1D* TrueDeltaAlphaTPlot = new TH1D("TrueDeltaAlphaTPlot",LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);
@@ -56,6 +76,16 @@ void myTrueAnalysis::Loop() {
 	TH1D* TrueECalPlot = new TH1D("TrueECalPlot",LabelXAxisECal,NBinsECal,ArrayNBinsECal);
 	TH1D* TrueEQEPlot = new TH1D("TrueEQEPlot",LabelXAxisEQE,NBinsEQE,ArrayNBinsEQE);
 	TH1D* TrueQ2Plot = new TH1D("TrueQ2Plot",LabelXAxisQ2,NBinsQ2,ArrayNBinsQ2);
+	
+	// 2D Analysis
+		
+	TH2D* TrueCosThetaMuPmuPlot = new TH2D("TrueCosThetaMuPmuPlot",LabelXAxisMuonCosTheta+LabelXAxisMuonMomentum
+			,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta[0],ArrayNBinsMuonCosTheta[NBinsMuonCosTheta]
+			,NBinsMuonMomentum,ArrayNBinsMuonMomentum[0],ArrayNBinsMuonMomentum[NBinsMuonMomentum]);
+			
+	TH2D* TrueCosThetaPPpPlot = new TH2D("TrueCosThetaPPpPlot",LabelXAxisProtonCosTheta+LabelXAxisProtonMomentum
+			,NBinsProtonCosTheta,ArrayNBinsProtonCosTheta[0],ArrayNBinsProtonCosTheta[NBinsProtonCosTheta]
+			,NBinsProtonMomentum,ArrayNBinsProtonMomentum[0],ArrayNBinsProtonMomentum[NBinsProtonMomentum]);	
 
 	// ---------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -101,13 +131,37 @@ void myTrueAnalysis::Loop() {
 
 	}
 	
+//	if (string(fWhichSample).find("Run2") != std::string::npos) {
+
+//		tor860_wcut = tor860_wcut_Run2;
+//		E1DCNT_wcut = E1DCNT_wcut_Run2;
+//		EXT = EXT_Run2;
+
+//	}	
+	
 	if (string(fWhichSample).find("Run3") != std::string::npos) {
 
 		tor860_wcut = tor860_wcut_Run3;
 		E1DCNT_wcut = E1DCNT_wcut_Run3;
 		EXT = EXT_Run3;
 
-	}					
+	}	
+	
+//	if (string(fWhichSample).find("Run4") != std::string::npos) {
+
+//		tor860_wcut = tor860_wcut_Run4;
+//		E1DCNT_wcut = E1DCNT_wcut_Run4;
+//		EXT = EXT_Run4;
+
+//	}		
+
+//	if (string(fWhichSample).find("Run5") != std::string::npos) {
+
+//		tor860_wcut = tor860_wcut_Run5;
+//		E1DCNT_wcut = E1DCNT_wcut_Run5;
+//		EXT = EXT_Run5;
+
+//	}
 
 	// ---------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -175,8 +229,8 @@ void myTrueAnalysis::Loop() {
 				{ weight = weight*reinteractions_piplus_Geant4->at(fUniverseIndex); }
 			if (fEventWeightLabel == "reinteractions_proton_Geant4") 
 				{ weight = weight*reinteractions_proton_Geant4->at(fUniverseIndex); }
-			if (fEventWeightLabel == "xsr_scc_Fa3_SCC") { weight = weight*xsr_scc_Fa3_SCC->at(fUniverseIndex); }
-			if (fEventWeightLabel == "xsr_scc_Fv3_SCC") { weight = weight*xsr_scc_Fv3_SCC->at(fUniverseIndex); }		
+//			if (fEventWeightLabel == "xsr_scc_Fa3_SCC") { weight = weight*xsr_scc_Fa3_SCC->at(fUniverseIndex); }
+//			if (fEventWeightLabel == "xsr_scc_Fv3_SCC") { weight = weight*xsr_scc_Fv3_SCC->at(fUniverseIndex); }		
 
 		}
 
@@ -369,6 +423,12 @@ void myTrueAnalysis::Loop() {
 					TrueProtonMomentumPlot->Fill(TrueProtonMomentum_GeV,weight);
 					TrueProtonPhiPlot->Fill(TrueProtonPhi_Deg,weight);
 					TrueProtonCosThetaPlot->Fill(TrueProtonCosTheta,weight);
+					
+					// 2D Analysis
+		
+					TrueCosThetaMuPmuPlot->Fill(TrueMuonCosTheta,TrueMuonMomentum_GeV,weight);
+					TrueCosThetaPPpPlot->Fill(TrueProtonCosTheta,TrueProtonMomentum_GeV,weight);					
+					
 				}
 
 				// -----------------------------------------------------------------------------------------------------------------
