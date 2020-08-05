@@ -194,8 +194,8 @@ public :
    TBranch        *b_reinteractions_piminus_Geant4;   //!         
    TBranch        *b_reinteractions_piplus_Geant4;   //! 
    TBranch        *b_reinteractions_proton_Geant4;   //!                                                       
-   TBranch        *b_xsr_scc_Fa3_SCC;   //!                                                                                                        
-   TBranch        *b_xsr_scc_Fv3_SCC;   //!
+//   TBranch        *b_xsr_scc_Fa3_SCC;   //!                                                                                                        
+//   TBranch        *b_xsr_scc_Fv3_SCC;   //!
   
    TBranch        *b_CC1p;   //!
    TBranch        *b_CC1p1pi;   //!
@@ -392,8 +392,8 @@ void t::Init(TTree *tree)
    reinteractions_piminus_Geant4 = 0;
    reinteractions_piplus_Geant4 = 0;
    reinteractions_proton_Geant4 = 0;
-   xsr_scc_Fa3_SCC = 0;
-   xsr_scc_Fv3_SCC = 0;
+//   xsr_scc_Fa3_SCC = 0;
+//   xsr_scc_Fv3_SCC = 0;
 
    BeamFlashes_YCenter = 0;
    BeamFlashes_ZCenter = 0;
@@ -519,8 +519,8 @@ void t::Init(TTree *tree)
    fChain->SetBranchAddress("reinteractions_piminus_Geant4", &reinteractions_piminus_Geant4, &b_reinteractions_piminus_Geant4);
    fChain->SetBranchAddress("reinteractions_piplus_Geant4", &reinteractions_piplus_Geant4, &b_reinteractions_piplus_Geant4);
    fChain->SetBranchAddress("reinteractions_proton_Geant4", &reinteractions_proton_Geant4, &b_reinteractions_proton_Geant4);
-   fChain->SetBranchAddress("xsr_scc_Fa3_SCC", &xsr_scc_Fa3_SCC, &b_xsr_scc_Fa3_SCC);
-   fChain->SetBranchAddress("xsr_scc_Fv3_SCC", &xsr_scc_Fv3_SCC, &b_xsr_scc_Fv3_SCC);
+//   fChain->SetBranchAddress("xsr_scc_Fa3_SCC", &xsr_scc_Fa3_SCC, &b_xsr_scc_Fa3_SCC);
+//   fChain->SetBranchAddress("xsr_scc_Fv3_SCC", &xsr_scc_Fv3_SCC, &b_xsr_scc_Fv3_SCC);
       
    fChain->SetBranchAddress("CC1p", &CC1p, &b_CC1p);
    fChain->SetBranchAddress("CC1p1pi", &CC1p1pi, &b_CC1p1pi);
