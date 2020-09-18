@@ -50,16 +50,22 @@ void myTrueAnalysis::Loop() {
 
 	// Output Files
 
-	TString FileName = "./OutputFiles/"+UBCodeVersion+"/TruthSTVAnalysis_"+fWhichSample+Extension+"_"+UBCodeVersion+".root";
+//	TString FileName = "./OutputFiles/"+UBCodeVersion+"/TruthSTVAnalysis_"+fWhichSample+Extension+"_"+UBCodeVersion+".root";
+	TString FileName = "/uboone/data/users/apapadop/myEvents/OutputFiles/"+UBCodeVersion+\
+			    "/TruthSTVAnalysis_"+fWhichSample+Extension+"_"+UBCodeVersion+".root";	
 	TFile* OutputFile = new TFile(FileName,"recreate");
 	std::cout << std::endl << "File " << FileName << " to be created"<< std::endl << std::endl;
 
-	ofstream TxtFile;
-	TxtFile.open ("./TxtFiles/"+UBCodeVersion+"/TruthSTVAnalysis_"+fWhichSample+"_"+UBCodeVersion+".txt");
+//	ofstream TxtFile;
+//	TxtFile.open ("./TxtFiles/"+UBCodeVersion+"/TruthSTVAnalysis_"+fWhichSample+"_"+UBCodeVersion+".txt");
 
 	// --------------------------------------------------------------------------------------------------------------------------------------------
 
 	// 1D True Variables
+	
+	TH1D* TruekMissPlot = new TH1D("TruekMissPlot",LabelXAxiskMiss,NBinskMiss,ArrayNBinskMiss);
+	TH1D* TruePMissMinusPlot = new TH1D("TruePMissMinusPlot",LabelXAxisPMissMinus,NBinsPMissMinus,ArrayNBinsPMissMinus);
+	TH1D* TruePMissPlot = new TH1D("TruePMissPlot",LabelXAxisPMiss,NBinsPMiss,ArrayNBinsPMiss);	
 
 	TH1D* TrueDeltaPTPlot = new TH1D("TrueDeltaPTPlot",LabelXAxisDeltaPT,NBinsDeltaPT,ArrayNBinsDeltaPT);
 	TH1D* TrueDeltaAlphaTPlot = new TH1D("TrueDeltaAlphaTPlot",LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);
@@ -78,14 +84,17 @@ void myTrueAnalysis::Loop() {
 	TH1D* TrueQ2Plot = new TH1D("TrueQ2Plot",LabelXAxisQ2,NBinsQ2,ArrayNBinsQ2);
 	
 	// 2D Analysis
+
+	// For now and until box opening
+	int NBins2DAnalysis = 4;
 		
 	TH2D* TrueCosThetaMuPmuPlot = new TH2D("TrueCosThetaMuPmuPlot",LabelXAxisMuonCosTheta+LabelXAxisMuonMomentum
-			,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta[0],ArrayNBinsMuonCosTheta[NBinsMuonCosTheta]
-			,NBinsMuonMomentum,ArrayNBinsMuonMomentum[0],ArrayNBinsMuonMomentum[NBinsMuonMomentum]);
+			,NBins2DAnalysis,ArrayNBinsMuonCosTheta[0],ArrayNBinsMuonCosTheta[NBinsMuonCosTheta]
+			,NBins2DAnalysis,ArrayNBinsMuonMomentum[0],ArrayNBinsMuonMomentum[NBinsMuonMomentum]);
 			
 	TH2D* TrueCosThetaPPpPlot = new TH2D("TrueCosThetaPPpPlot",LabelXAxisProtonCosTheta+LabelXAxisProtonMomentum
-			,NBinsProtonCosTheta,ArrayNBinsProtonCosTheta[0],ArrayNBinsProtonCosTheta[NBinsProtonCosTheta]
-			,NBinsProtonMomentum,ArrayNBinsProtonMomentum[0],ArrayNBinsProtonMomentum[NBinsProtonMomentum]);	
+			,NBins2DAnalysis,ArrayNBinsProtonCosTheta[0],ArrayNBinsProtonCosTheta[NBinsProtonCosTheta]
+			,NBins2DAnalysis,ArrayNBinsProtonMomentum[0],ArrayNBinsProtonMomentum[NBinsProtonMomentum]);	
 
 	// ---------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -100,13 +109,19 @@ void myTrueAnalysis::Loop() {
 	
 	// --------------------------------------------------------------------------------------------------------------------------------
 
+	TH1D* POTScalePlot = new TH1D("POTScalePlot","",1,0,1);
+	TH1D* NEventsPlot = new TH1D("NEventsPlot","",1,0,1);
+	TH1D* NSelectedPlot = new TH1D("NSelectedPlot","",1,0,1);	
+	
+	// --------------------------------------------------------------------------------------------------------------------------------
+
 	// POT Counting
 
 	double POTCount = -99.;
 
 	if (string(fWhichSample).find("Overlay") != std::string::npos) {
 
-		TString PathToPOTFile = "mySamples/"+UBCodeVersion+"/PreSelection_"+fWhichSample+"_"+UBCodeVersion+"_POT.root";
+		TString PathToPOTFile = "/uboone/data/users/apapadop/myEvents/mySamples/"+UBCodeVersion+"/PreSelection_"+fWhichSample+"_"+UBCodeVersion+"_POT.root";
 		TFile* POTFile = TFile::Open(PathToPOTFile,"readonly");
 		TH1D* POTCountHist = (TH1D*)(POTFile->Get("POTCountHist"));
 		POTCount = POTCountHist->GetBinContent(1);
@@ -118,6 +133,7 @@ void myTrueAnalysis::Loop() {
 
 	// POT Scaling
 
+	double POTScalingFactor = 1.;
 
 	double tor860_wcut = 1;
 	double E1DCNT_wcut = 1.;
@@ -177,7 +193,8 @@ void myTrueAnalysis::Loop() {
 		if (Weight <= 0 || Weight > 10) { continue; }
 		if (T2KWeight <= 0 || T2KWeight > 10) { continue; }		
 		// Weight from v3.0.4 to v.3.0.6 * weight from application of T2K tune
-		double weight = ( tor860_wcut / POTCount) * Weight * T2KWeight * ROOTinoWeight;
+		POTScalingFactor = tor860_wcut / POTCount;
+		double weight = POTScalingFactor * Weight * T2KWeight * ROOTinoWeight;
 
 		// -------------------------------------------------------------------------------------------------------------------------------------
 
@@ -332,6 +349,10 @@ void myTrueAnalysis::Loop() {
 
 			// Definition of Transverse Variables
 
+			double TruekMiss = True_kMiss->at(0);
+			double TruePMissMinus = True_PMissMinus->at(0);
+			double TrueMissMomentum = True_PMiss->at(0);
+
 			double TrueTransMissMomentum = True_Pt->at(0);
 
 			double TrueDeltaAlphaT = True_DeltaAlphaT->at(0);
@@ -404,6 +425,10 @@ void myTrueAnalysis::Loop() {
 
 					// STV
 
+					TruekMissPlot->Fill(TruekMiss,weight);
+					TruePMissMinusPlot->Fill(TruePMissMinus,weight);
+					TruePMissPlot->Fill(TrueMissMomentum,weight);
+
 					TrueDeltaPTPlot->Fill(TrueTransMissMomentum,weight);
 					TrueDeltaAlphaTPlot->Fill(TrueDeltaAlphaT,weight);
 					TrueDeltaPhiTPlot->Fill(TrueDeltaPhiT,weight);
@@ -448,9 +473,18 @@ void myTrueAnalysis::Loop() {
 	if ( string(fWhichSample).find("Overlay9") != std::string::npos ) {
 
 		std::cout << std::endl << "True CC1p events = " << TrueCC1pCounter << std::endl;
-		TxtFile << std::endl << "True CC1p events = " << TrueCC1pCounter << std::endl;
+//		TxtFile << std::endl << "True CC1p events = " << TrueCC1pCounter << std::endl;
 
 	}
+	
+	POTScalePlot->SetBinContent(1,POTScalingFactor);
+	POTScalePlot->SetBinError(1,0);
+
+	NEventsPlot->SetBinContent(1,nentries);
+	NEventsPlot->SetBinError(1,TMath::Sqrt(nentries));
+
+	NSelectedPlot->SetBinContent(1,TrueCC1pCounter);
+	NSelectedPlot->SetBinError(1,sqrt(TrueCC1pCounter));	
 
 	// --------------------------------------------------------------------------------------------------------------------------------------------
 

@@ -27,6 +27,10 @@ void Create1DPlotsTHStack_TopologicalBreakDown() {
 
 	// -----------------------------------------------------------------------------------------------------------------------------------------
 
+//	PlotNames.push_back("RecokMissPlot");
+//	PlotNames.push_back("RecoPMissMinusPlot");
+//	PlotNames.push_back("RecoPMissPlot");
+
 	PlotNames.push_back("RecoNuScorePlot");
 	PlotNames.push_back("RecoFlashScorePlot");
 
@@ -219,7 +223,7 @@ void Create1DPlotsTHStack_TopologicalBreakDown() {
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetLabelFont(FontStyle);
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetNdivisions(5);
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetLabelSize(0.06);
-					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitle("# events");
+					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitle("# Events");
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitleSize(0.08);
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitleOffset(0.6);
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTickSize(0);
@@ -324,7 +328,7 @@ void Create1DPlotsTHStack_TopologicalBreakDown() {
 				RatioLine->SetLineWidth(4);
 				RatioLine->SetLineColor(kPink+8);
 				RatioLine->SetLineStyle(4);
-				RatioLine->Draw("same");
+				//RatioLine->Draw("same");
 			
 				topPad->cd();
 				leg[WhichPlot]->SetTextSize(0.5);

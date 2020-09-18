@@ -1,5 +1,5 @@
-#define t_cxx
-#include "t.h"
+#define myRecoAnalysis_cxx
+#include "myRecoAnalysis.h"
 #include <TH2.h>
 #include <TStyle.h>
 #include <TCanvas.h>
@@ -31,7 +31,7 @@ TString ToStringInt(int num) {
 
 }
 
-void t::Loop() {
+void myRecoAnalysis::Loop() {
 
 	// ---------------------------------------------------------------------------------------------------------------------------------------
 
@@ -43,6 +43,19 @@ void t::Loop() {
 	int CC3pEventsPassingSelectionCuts = 0;
 	int CC3p1piEventsPassingSelectionCuts = 0;
 	int CC3p2piEventsPassingSelectionCuts = 0;
+	int MisIndetifiedMuonAsPion = 0;
+	int MisIndetifiedMuonAsProton = 0;
+	int MisIndetifiedMuonAsAntiMuon = 0;
+	int MisIndetifiedProtonAsPion = 0;
+	int MisIndetifiedProtonAsDeuterium = 0;
+	int MisIndetifiedProtonAsElectron = 0;
+	int MisIndetifiedMuPToElectronElectron = 0;
+	int MisIndetifiedMuPToMuMu = 0;
+	int MisIndetifiedMuPToPiPi = 0;
+	int CandidateMuon_MCParticle_OutFV = 0;
+	int CandidateProton_MCParticle_OutFV = 0;
+	int MultipleVertices = 0;
+	int InTimeCosmics = 0;
 		
 	TString Cuts = "_NoCuts";
 
@@ -78,7 +91,9 @@ void t::Loop() {
 
 		}
 
-		TString FileName = "./OutputFiles/"+UBCodeVersion+"/"+Cuts+"/STVStudies_"+fWhichSample+Extension+Cuts+".root";
+//		TString FileName = "./OutputFiles/"+UBCodeVersion+"/"+Cuts+"/STVStudies_"+fWhichSample+Extension+Cuts+".root";
+		TString FileName = "/uboone/data/users/apapadop/myEvents/OutputFiles/"+UBCodeVersion+"/"+\
+				    Cuts+"/STVStudies_"+fWhichSample+Extension+Cuts+".root";
 		TFile* file = new TFile(FileName,"recreate");
 		std::cout << std::endl << "Creating a new file: " << FileName << std::endl << std::endl << std::endl;
 
@@ -113,6 +128,10 @@ void t::Loop() {
 		TH1D* RecoMuonPhiPlot = new TH1D("RecoMuonPhiPlot",LabelXAxisMuonPhi,NBinsMuonPhi,ArrayNBinsMuonPhi);
 		TH1D* RecoProtonPhiPlot = new TH1D("RecoProtonPhiPlot",LabelXAxisProtonPhi,NBinsProtonPhi,ArrayNBinsProtonPhi);
 
+		TH1D* RecokMissPlot = new TH1D("RecokMissPlot",LabelXAxiskMiss,NBinskMiss,ArrayNBinskMiss);
+		TH1D* RecoPMissMinusPlot = new TH1D("RecoPMissMinusPlot",LabelXAxisPMissMinus,NBinsPMissMinus,ArrayNBinsPMissMinus);
+		TH1D* RecoPMissPlot = new TH1D("RecoPMissPlot",LabelXAxisPMiss,NBinsPMiss,ArrayNBinsPMiss);
+
 		TH1D* RecoDeltaPTPlot = new TH1D("RecoDeltaPTPlot",LabelXAxisDeltaPT,NBinsDeltaPT,ArrayNBinsDeltaPT);
 		TH1D* RecoDeltaAlphaTPlot = new TH1D("RecoDeltaAlphaTPlot",LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);
 		TH1D* RecoDeltaPhiTPlot = new TH1D("RecoDeltaPhiTPlot",LabelXAxisDeltaPhiT,NBinsDeltaPhiT,ArrayNBinsDeltaPhiT);
@@ -122,14 +141,17 @@ void t::Loop() {
 		TH1D* RecoQ2Plot = new TH1D("RecoQ2Plot",LabelXAxisQ2,NBinsQ2,ArrayNBinsQ2);
 		
 		// 2D Analysis
+
+		// For now and until MicroBooNE box opening
+		int NBins2DAnalysis = 4;
 		
 		TH2D* RecoCosThetaMuPmuPlot = new TH2D("RecoCosThetaMuPmuPlot",LabelXAxisMuonCosTheta+LabelXAxisMuonMomentum
-			,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta[0],ArrayNBinsMuonCosTheta[NBinsMuonCosTheta]
-			,NBinsMuonMomentum,ArrayNBinsMuonMomentum[0],ArrayNBinsMuonMomentum[NBinsMuonMomentum]);
+			,NBins2DAnalysis,ArrayNBinsMuonCosTheta[0],ArrayNBinsMuonCosTheta[NBinsMuonCosTheta]
+			,NBins2DAnalysis,ArrayNBinsMuonMomentum[0],ArrayNBinsMuonMomentum[NBinsMuonMomentum]);
 			
 		TH2D* RecoCosThetaPPpPlot = new TH2D("RecoCosThetaPPpPlot",LabelXAxisProtonCosTheta+LabelXAxisProtonMomentum
-			,NBinsProtonCosTheta,ArrayNBinsProtonCosTheta[0],ArrayNBinsProtonCosTheta[NBinsProtonCosTheta]
-			,NBinsProtonMomentum,ArrayNBinsProtonMomentum[0],ArrayNBinsProtonMomentum[NBinsProtonMomentum]);					
+			,NBins2DAnalysis,ArrayNBinsProtonCosTheta[0],ArrayNBinsProtonCosTheta[NBinsProtonCosTheta]
+			,NBins2DAnalysis,ArrayNBinsProtonMomentum[0],ArrayNBinsProtonMomentum[NBinsProtonMomentum]);					
 
 		// 2D Plot for Default Chi2 vs 3-Plane Chi2
 
@@ -169,6 +191,10 @@ void t::Loop() {
 		TH1D* CC1pRecoMuonPhiPlot = new TH1D("CC1pRecoMuonPhiPlot",LabelXAxisMuonPhi,NBinsMuonPhi,ArrayNBinsMuonPhi);
 		TH1D* CC1pRecoProtonPhiPlot = new TH1D("CC1pRecoProtonPhiPlot",LabelXAxisProtonPhi,NBinsProtonPhi,ArrayNBinsProtonPhi);
 
+		TH1D* CC1pRecokMissPlot = new TH1D("CC1pRecokMissPlot",LabelXAxiskMiss,NBinskMiss,ArrayNBinskMiss);
+		TH1D* CC1pRecoPMissMinusPlot = new TH1D("CC1pRecoPMissMinusPlot",LabelXAxisPMissMinus,NBinsPMissMinus,ArrayNBinsPMissMinus);
+		TH1D* CC1pRecoPMissPlot = new TH1D("CC1pRecoPMissPlot",LabelXAxisPMiss,NBinsPMiss,ArrayNBinsPMiss);
+
 		TH1D* CC1pRecoDeltaPTPlot = new TH1D("CC1pRecoDeltaPTPlot",LabelXAxisDeltaPT,NBinsDeltaPT,ArrayNBinsDeltaPT);
 		TH1D* CC1pRecoDeltaAlphaTPlot = new TH1D("CC1pRecoDeltaAlphaTPlot",LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);
 		TH1D* CC1pRecoDeltaPhiTPlot = new TH1D("CC1pRecoDeltaPhiTPlot",LabelXAxisDeltaPhiT,NBinsDeltaPhiT,ArrayNBinsDeltaPhiT);
@@ -180,12 +206,12 @@ void t::Loop() {
 		// 2D Analysis
 		
 		TH2D* CC1pRecoCosThetaMuPmuPlot = new TH2D("CC1pRecoCosThetaMuPmuPlot",LabelXAxisMuonCosTheta+LabelXAxisMuonMomentum
-			,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta[0],ArrayNBinsMuonCosTheta[NBinsMuonCosTheta]
-			,NBinsMuonMomentum,ArrayNBinsMuonMomentum[0],ArrayNBinsMuonMomentum[NBinsMuonMomentum]);
+			,NBins2DAnalysis,ArrayNBinsMuonCosTheta[0],ArrayNBinsMuonCosTheta[NBinsMuonCosTheta]
+			,NBins2DAnalysis,ArrayNBinsMuonMomentum[0],ArrayNBinsMuonMomentum[NBinsMuonMomentum]);
 			
 		TH2D* CC1pRecoCosThetaPPpPlot = new TH2D("CC1pRecoCosThetaPPpPlot",LabelXAxisProtonCosTheta+LabelXAxisProtonMomentum
-			,NBinsProtonCosTheta,ArrayNBinsProtonCosTheta[0],ArrayNBinsProtonCosTheta[NBinsProtonCosTheta]
-			,NBinsProtonMomentum,ArrayNBinsProtonMomentum[0],ArrayNBinsProtonMomentum[NBinsProtonMomentum]);		
+			,NBins2DAnalysis,ArrayNBinsProtonCosTheta[0],ArrayNBinsProtonCosTheta[NBinsProtonCosTheta]
+			,NBins2DAnalysis,ArrayNBinsProtonMomentum[0],ArrayNBinsProtonMomentum[NBinsProtonMomentum]);		
 
 		// 2D Reco Level Plots for Signal CC1p
 
@@ -251,6 +277,10 @@ void t::Loop() {
 		TH1D* NonCC1pRecoMuonPhiPlot = new TH1D("NonCC1pRecoMuonPhiPlot",LabelXAxisMuonPhi,NBinsMuonPhi,ArrayNBinsMuonPhi);
 		TH1D* NonCC1pRecoProtonPhiPlot = new TH1D("NonCC1pRecoProtonPhiPlot",LabelXAxisProtonPhi,NBinsProtonPhi,ArrayNBinsProtonPhi);
 
+		TH1D* NonCC1pRecokMissPlot = new TH1D("NonCC1pRecokMissPlot",LabelXAxiskMiss,NBinskMiss,ArrayNBinskMiss);
+		TH1D* NonCC1pRecoPMissMinusPlot = new TH1D("NonCC1pRecoPMissMinusPlot",LabelXAxisPMissMinus,NBinsPMissMinus,ArrayNBinsPMissMinus);
+		TH1D* NonCC1pRecoPMissPlot = new TH1D("NonCC1pRecoPMissPlot",LabelXAxisPMiss,NBinsPMiss,ArrayNBinsPMiss);
+
 		TH1D* NonCC1pRecoDeltaPTPlot = new TH1D("NonCC1pRecoDeltaPTPlot",LabelXAxisDeltaPT,NBinsDeltaPT,ArrayNBinsDeltaPT);
 		TH1D* NonCC1pRecoDeltaAlphaTPlot = new TH1D("NonCC1pRecoDeltaAlphaTPlot",LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);
 		TH1D* NonCC1pRecoDeltaPhiTPlot = new TH1D("NonCC1pRecoDeltaPhiTPlot",LabelXAxisDeltaPhiT,NBinsDeltaPhiT,ArrayNBinsDeltaPhiT);
@@ -262,8 +292,8 @@ void t::Loop() {
 		// 2D Analysis
 		
 		TH2D* NonCC1pRecoCosThetaMuPmuPlot = new TH2D("NonCC1pRecoCosThetaMuPmuPlot",LabelXAxisMuonCosTheta+LabelXAxisMuonMomentum
-			,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta[0],ArrayNBinsMuonCosTheta[NBinsMuonCosTheta]
-			,NBinsMuonMomentum,ArrayNBinsMuonMomentum[0],ArrayNBinsMuonMomentum[NBinsMuonMomentum]);
+			,NBins2DAnalysis,ArrayNBinsMuonCosTheta[0],ArrayNBinsMuonCosTheta[NBinsMuonCosTheta]
+			,NBins2DAnalysis,ArrayNBinsMuonMomentum[0],ArrayNBinsMuonMomentum[NBinsMuonMomentum]);
 			
 		TH2D* NonCC1pRecoCosThetaPPpPlot = new TH2D("NonCC1pRecoCosThetaPPpPlot",LabelXAxisProtonCosTheta+LabelXAxisProtonMomentum
 			,NBinsProtonCosTheta,ArrayNBinsProtonCosTheta[0],ArrayNBinsProtonCosTheta[NBinsProtonCosTheta]
@@ -303,6 +333,10 @@ void t::Loop() {
 		TH1D* CCQERecoMuonPhiPlot = new TH1D("CCQERecoMuonPhiPlot",LabelXAxisMuonPhi,NBinsMuonPhi,ArrayNBinsMuonPhi);
 		TH1D* CCQERecoProtonPhiPlot = new TH1D("CCQERecoProtonPhiPlot",LabelXAxisProtonPhi,NBinsProtonPhi,ArrayNBinsProtonPhi);
 
+		TH1D* CCQERecokMissPlot = new TH1D("CCQERecokMissPlot",LabelXAxiskMiss,NBinskMiss,ArrayNBinskMiss);
+		TH1D* CCQERecoPMissMinusPlot = new TH1D("CCQERecoPMissMinusPlot",LabelXAxisPMissMinus,NBinsPMissMinus,ArrayNBinsPMissMinus);
+		TH1D* CCQERecoPMissPlot = new TH1D("CCQERecoPMissPlot",LabelXAxisPMiss,NBinsPMiss,ArrayNBinsPMiss);
+
 		TH1D* CCQERecoDeltaPTPlot = new TH1D("CCQERecoDeltaPTPlot",LabelXAxisDeltaPT,NBinsDeltaPT,ArrayNBinsDeltaPT);
 		TH1D* CCQERecoDeltaAlphaTPlot = new TH1D("CCQERecoDeltaAlphaTPlot",LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);
 		TH1D* CCQERecoDeltaPhiTPlot = new TH1D("CCQERecoDeltaPhiTPlot",LabelXAxisDeltaPhiT,NBinsDeltaPhiT,ArrayNBinsDeltaPhiT);
@@ -314,12 +348,12 @@ void t::Loop() {
 		// 2D Analysis
 		
 		TH2D* CCQERecoCosThetaMuPmuPlot = new TH2D("CCQERecoCosThetaMuPmuPlot",LabelXAxisMuonCosTheta+LabelXAxisMuonMomentum
-			,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta[0],ArrayNBinsMuonCosTheta[NBinsMuonCosTheta]
-			,NBinsMuonMomentum,ArrayNBinsMuonMomentum[0],ArrayNBinsMuonMomentum[NBinsMuonMomentum]);
+			,NBins2DAnalysis,ArrayNBinsMuonCosTheta[0],ArrayNBinsMuonCosTheta[NBinsMuonCosTheta]
+			,NBins2DAnalysis,ArrayNBinsMuonMomentum[0],ArrayNBinsMuonMomentum[NBinsMuonMomentum]);
 			
 		TH2D* CCQERecoCosThetaPPpPlot = new TH2D("CCQERecoCosThetaPPpPlot",LabelXAxisProtonCosTheta+LabelXAxisProtonMomentum
-			,NBinsProtonCosTheta,ArrayNBinsProtonCosTheta[0],ArrayNBinsProtonCosTheta[NBinsProtonCosTheta]
-			,NBinsProtonMomentum,ArrayNBinsProtonMomentum[0],ArrayNBinsProtonMomentum[NBinsProtonMomentum]);		
+			,NBins2DAnalysis,ArrayNBinsProtonCosTheta[0],ArrayNBinsProtonCosTheta[NBinsProtonCosTheta]
+			,NBins2DAnalysis,ArrayNBinsProtonMomentum[0],ArrayNBinsProtonMomentum[NBinsProtonMomentum]);		
 
 		// ---------------------------------------------------------------------------------------------------------------------------------
 
@@ -354,6 +388,10 @@ void t::Loop() {
 		TH1D* CCMECRecoMuonPhiPlot = new TH1D("CCMECRecoMuonPhiPlot",LabelXAxisMuonPhi,NBinsMuonPhi,ArrayNBinsMuonPhi);
 		TH1D* CCMECRecoProtonPhiPlot = new TH1D("CCMECRecoProtonPhiPlot",LabelXAxisProtonPhi,NBinsProtonPhi,ArrayNBinsProtonPhi);
 
+		TH1D* CCMECRecokMissPlot = new TH1D("CCMECRecokMissPlot",LabelXAxiskMiss,NBinskMiss,ArrayNBinskMiss);
+		TH1D* CCMECRecoPMissMinusPlot = new TH1D("CCMECRecoPMissMinusPlot",LabelXAxisPMissMinus,NBinsPMissMinus,ArrayNBinsPMissMinus);
+		TH1D* CCMECRecoPMissPlot = new TH1D("CCMECRecoPMissPlot",LabelXAxisPMiss,NBinsPMiss,ArrayNBinsPMiss);
+
 		TH1D* CCMECRecoDeltaPTPlot = new TH1D("CCMECRecoDeltaPTPlot",LabelXAxisDeltaPT,NBinsDeltaPT,ArrayNBinsDeltaPT);
 		TH1D* CCMECRecoDeltaAlphaTPlot = new TH1D("CCMECRecoDeltaAlphaTPlot",LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);
 		TH1D* CCMECRecoDeltaPhiTPlot = new TH1D("CCMECRecoDeltaPhiTPlot",LabelXAxisDeltaPhiT,NBinsDeltaPhiT,ArrayNBinsDeltaPhiT);
@@ -365,12 +403,12 @@ void t::Loop() {
 		// 2D Analysis
 		
 		TH2D* CCMECRecoCosThetaMuPmuPlot = new TH2D("CCMECRecoCosThetaMuPmuPlot",LabelXAxisMuonCosTheta+LabelXAxisMuonMomentum
-			,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta[0],ArrayNBinsMuonCosTheta[NBinsMuonCosTheta]
-			,NBinsMuonMomentum,ArrayNBinsMuonMomentum[0],ArrayNBinsMuonMomentum[NBinsMuonMomentum]);
+			,NBins2DAnalysis,ArrayNBinsMuonCosTheta[0],ArrayNBinsMuonCosTheta[NBinsMuonCosTheta]
+			,NBins2DAnalysis,ArrayNBinsMuonMomentum[0],ArrayNBinsMuonMomentum[NBinsMuonMomentum]);
 			
 		TH2D* CCMECRecoCosThetaPPpPlot = new TH2D("CCMECRecoCosThetaPPpPlot",LabelXAxisProtonCosTheta+LabelXAxisProtonMomentum
-			,NBinsProtonCosTheta,ArrayNBinsProtonCosTheta[0],ArrayNBinsProtonCosTheta[NBinsProtonCosTheta]
-			,NBinsProtonMomentum,ArrayNBinsProtonMomentum[0],ArrayNBinsProtonMomentum[NBinsProtonMomentum]);		
+			,NBins2DAnalysis,ArrayNBinsProtonCosTheta[0],ArrayNBinsProtonCosTheta[NBinsProtonCosTheta]
+			,NBins2DAnalysis,ArrayNBinsProtonMomentum[0],ArrayNBinsProtonMomentum[NBinsProtonMomentum]);		
 
 		// ------------------------------------------------------------------------------------------------------------------------------
 
@@ -405,6 +443,10 @@ void t::Loop() {
 		TH1D* CCRESRecoMuonPhiPlot = new TH1D("CCRESRecoMuonPhiPlot",LabelXAxisMuonPhi,NBinsMuonPhi,ArrayNBinsMuonPhi);
 		TH1D* CCRESRecoProtonPhiPlot = new TH1D("CCRESRecoProtonPhiPlot",LabelXAxisProtonPhi,NBinsProtonPhi,ArrayNBinsProtonPhi);
 
+		TH1D* CCRESRecokMissPlot = new TH1D("CCRESRecokMissPlot",LabelXAxiskMiss,NBinskMiss,ArrayNBinskMiss);
+		TH1D* CCRESRecoPMissMinusPlot = new TH1D("CCRESRecoPMissMinusPlot",LabelXAxisPMissMinus,NBinsPMissMinus,ArrayNBinsPMissMinus);
+		TH1D* CCRESRecoPMissPlot = new TH1D("CCRESRecoPMissPlot",LabelXAxisPMiss,NBinsPMiss,ArrayNBinsPMiss);
+
 		TH1D* CCRESRecoDeltaPTPlot = new TH1D("CCRESRecoDeltaPTPlot",LabelXAxisDeltaPT,NBinsDeltaPT,ArrayNBinsDeltaPT);
 		TH1D* CCRESRecoDeltaAlphaTPlot = new TH1D("CCRESRecoDeltaAlphaTPlot",LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);
 		TH1D* CCRESRecoDeltaPhiTPlot = new TH1D("CCRESRecoDeltaPhiTPlot",LabelXAxisDeltaPhiT,NBinsDeltaPhiT,ArrayNBinsDeltaPhiT);
@@ -416,12 +458,12 @@ void t::Loop() {
 		// 2D Analysis
 		
 		TH2D* CCRESRecoCosThetaMuPmuPlot = new TH2D("CCRESRecoCosThetaMuPmuPlot",LabelXAxisMuonCosTheta+LabelXAxisMuonMomentum
-			,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta[0],ArrayNBinsMuonCosTheta[NBinsMuonCosTheta]
-			,NBinsMuonMomentum,ArrayNBinsMuonMomentum[0],ArrayNBinsMuonMomentum[NBinsMuonMomentum]);
+			,NBins2DAnalysis,ArrayNBinsMuonCosTheta[0],ArrayNBinsMuonCosTheta[NBinsMuonCosTheta]
+			,NBins2DAnalysis,ArrayNBinsMuonMomentum[0],ArrayNBinsMuonMomentum[NBinsMuonMomentum]);
 			
 		TH2D* CCRESRecoCosThetaPPpPlot = new TH2D("CCRESRecoCosThetaPPpPlot",LabelXAxisProtonCosTheta+LabelXAxisProtonMomentum
-			,NBinsProtonCosTheta,ArrayNBinsProtonCosTheta[0],ArrayNBinsProtonCosTheta[NBinsProtonCosTheta]
-			,NBinsProtonMomentum,ArrayNBinsProtonMomentum[0],ArrayNBinsProtonMomentum[NBinsProtonMomentum]);		
+			,NBins2DAnalysis,ArrayNBinsProtonCosTheta[0],ArrayNBinsProtonCosTheta[NBinsProtonCosTheta]
+			,NBins2DAnalysis,ArrayNBinsProtonMomentum[0],ArrayNBinsProtonMomentum[NBinsProtonMomentum]);		
 
 		// ---------------------------------------------------------------------------------------------------------------------------------
 
@@ -456,6 +498,10 @@ void t::Loop() {
 		TH1D* CCDISRecoMuonPhiPlot = new TH1D("CCDISRecoMuonPhiPlot",LabelXAxisMuonPhi,NBinsMuonPhi,ArrayNBinsMuonPhi);
 		TH1D* CCDISRecoProtonPhiPlot = new TH1D("CCDISRecoProtonPhiPlot",LabelXAxisProtonPhi,NBinsProtonPhi,ArrayNBinsProtonPhi);
 
+		TH1D* CCDISRecokMissPlot = new TH1D("CCDISRecokMissPlot",LabelXAxiskMiss,NBinskMiss,ArrayNBinskMiss);
+		TH1D* CCDISRecoPMissMinusPlot = new TH1D("CCDISRecoPMissMinusPlot",LabelXAxisPMissMinus,NBinsPMissMinus,ArrayNBinsPMissMinus);
+		TH1D* CCDISRecoPMissPlot = new TH1D("CCDISRecoPMissPlot",LabelXAxisPMiss,NBinsPMiss,ArrayNBinsPMiss);
+
 		TH1D* CCDISRecoDeltaPTPlot = new TH1D("CCDISRecoDeltaPTPlot",LabelXAxisDeltaPT,NBinsDeltaPT,ArrayNBinsDeltaPT);
 		TH1D* CCDISRecoDeltaAlphaTPlot = new TH1D("CCDISRecoDeltaAlphaTPlot",LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);
 		TH1D* CCDISRecoDeltaPhiTPlot = new TH1D("CCDISRecoDeltaPhiTPlot",LabelXAxisDeltaPhiT,NBinsDeltaPhiT,ArrayNBinsDeltaPhiT);
@@ -467,12 +513,12 @@ void t::Loop() {
 		// 2D Analysis
 		
 		TH2D* CCDISRecoCosThetaMuPmuPlot = new TH2D("CCDISRecoCosThetaMuPmuPlot",LabelXAxisMuonCosTheta+LabelXAxisMuonMomentum
-			,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta[0],ArrayNBinsMuonCosTheta[NBinsMuonCosTheta]
-			,NBinsMuonMomentum,ArrayNBinsMuonMomentum[0],ArrayNBinsMuonMomentum[NBinsMuonMomentum]);
+			,NBins2DAnalysis,ArrayNBinsMuonCosTheta[0],ArrayNBinsMuonCosTheta[NBinsMuonCosTheta]
+			,NBins2DAnalysis,ArrayNBinsMuonMomentum[0],ArrayNBinsMuonMomentum[NBinsMuonMomentum]);
 			
 		TH2D* CCDISRecoCosThetaPPpPlot = new TH2D("CCDISRecoCosThetaPPpPlot",LabelXAxisProtonCosTheta+LabelXAxisProtonMomentum
-			,NBinsProtonCosTheta,ArrayNBinsProtonCosTheta[0],ArrayNBinsProtonCosTheta[NBinsProtonCosTheta]
-			,NBinsProtonMomentum,ArrayNBinsProtonMomentum[0],ArrayNBinsProtonMomentum[NBinsProtonMomentum]);		
+			,NBins2DAnalysis,ArrayNBinsProtonCosTheta[0],ArrayNBinsProtonCosTheta[NBinsProtonCosTheta]
+			,NBins2DAnalysis,ArrayNBinsProtonMomentum[0],ArrayNBinsProtonMomentum[NBinsProtonMomentum]);		
 
 		// --------------------------------------------------------------------------------------------------------------------------------
 		// ------------------------------------------------------------------------------------------------------------------------------
@@ -525,13 +571,26 @@ void t::Loop() {
 
 		// --------------------------------------------------------------------------------------------------------------------------------
 
+		TH1D* POTScalePlot = new TH1D("POTScalePlot","",1,0,1);
+		TH1D* NEventsPlot = new TH1D("NEventsPlot","",1,0,1);
+		TH1D* NSelectedPlot = new TH1D("NSelectedPlot","",1,0,1);
+		TH1D* NCC1pPlot = new TH1D("NCC1pPlot","",1,0,1);
+		TH1D* NCC1p1piPlot = new TH1D("NCC1p1piPlot","",1,0,1);
+		TH1D* NCC2pPlot = new TH1D("NCC2pPlot","",1,0,1);
+		TH1D* NCC2p1piPlot = new TH1D("NCC2p1piPlot","",1,0,1);
+		TH1D* NCC3pPlot = new TH1D("NCC3pPlot","",1,0,1);
+		TH1D* NCC3p1piPlot = new TH1D("NCC3p1piPlot","",1,0,1);
+		TH1D* NCC3p2piPlot = new TH1D("NCC3p2piPlot","",1,0,1);
+
+		// --------------------------------------------------------------------------------------------------------------------------------
+
 		// POT Counting
 
 		double POTCount = -99.;
 
 		if (string(fWhichSample).find("Overlay") != std::string::npos) {
 
-				TString PathToPOTFile = "mySamples/"+UBCodeVersion+"/PreSelection_"+fWhichSample+"_"+UBCodeVersion+"_POT.root";
+				TString PathToPOTFile = "/uboone/data/users/apapadop/myEvents/mySamples/"+UBCodeVersion+"/PreSelection_"+fWhichSample+"_"+UBCodeVersion+"_POT.root";
 
 				TFile* POTFile = TFile::Open(PathToPOTFile,"readonly");
 				TH1D* POTCountHist = (TH1D*)(POTFile->Get("POTCountHist"));
@@ -624,31 +683,9 @@ void t::Loop() {
 			// Fully contained proton candidates
 			// Either fully contained or semi-contained muon candidates
 
-			double MuonTrackStartX = CandidateMu_StartX->at(0);
-			double MuonTrackStartY = CandidateMu_StartY->at(0);
-			double MuonTrackStartZ = CandidateMu_StartZ->at(0);
-			
-			double MuonTrackEndX = CandidateMu_EndX->at(0);
-			double MuonTrackEndY = CandidateMu_EndY->at(0);
-			double MuonTrackEndZ = CandidateMu_EndZ->at(0);
-			
-			double ProtonTrackStartX = CandidateP_StartX->at(0);
-			double ProtonTrackStartY = CandidateP_StartY->at(0);
-			double ProtonTrackStartZ = CandidateP_StartZ->at(0);
-			
-			double ProtonTrackEndX = CandidateP_EndX->at(0);
-			double ProtonTrackEndY = CandidateP_EndY->at(0);
-			double ProtonTrackEndZ = CandidateP_EndZ->at(0);			
-			
-			TVector3 CandidateMuonTrackStart(MuonTrackStartX,MuonTrackStartY,MuonTrackStartZ);
-			TVector3 CandidateMuonTrackEnd(MuonTrackEndX,MuonTrackEndY,MuonTrackEndZ);
-			
-			TVector3 CandidateProtonTrackStart(ProtonTrackStartX,ProtonTrackStartY,ProtonTrackStartZ);
-			TVector3 CandidateProtonTrackEnd(ProtonTrackEndX,ProtonTrackEndY,ProtonTrackEndZ);
-
-			if (tools.inFVVector(CandidateMuonTrackStart) == 0) { continue; }
-			if (tools.inFVVector(CandidateProtonTrackStart) == 0) { continue; }
-			if (tools.inFVVector(CandidateProtonTrackEnd) == 0) { continue; }
+			if (CandidateMu_StartContainment->at(0) == 0) { continue; }
+			if (CandidateP_StartContainment->at(0) == 0) { continue; }
+			if (CandidateP_EndContainment->at(0) == 0) { continue; }
 
 			// -------------------------------------------------------------------------------------------------------------------------
 
@@ -730,7 +767,8 @@ void t::Loop() {
 
 			// Muon & proton kinetic variables
 
-			double reco_Pmu_mcs = CandidateMu_P_MCS->at(0);
+			double reco_Pmu_mcs = CandidateMu_P_Range->at(0);
+			if (CandidateMu_EndContainment->at(0) == 0) { reco_Pmu_mcs = CandidateMu_P_MCS->at(0); }
 			double reco_Pmu_cos_theta = CandidateMu_CosTheta->at(0);
 			double reco_Pmu_phi = CandidateMu_Phi->at(0) * TMath::Pi() / 180.;
 			double reco_Emu = TMath::Sqrt( reco_Pmu_mcs*reco_Pmu_mcs + MuonMass_GeV*MuonMass_GeV );
@@ -765,6 +803,18 @@ void t::Loop() {
 			double reco_Pp_ThreePlaneLogLikelihood = log(CandidateP_ThreePlaneLogLikelihood->at(0));
 
 			// -----------------------------------------------------------------------------------------------------------------------------
+
+			// Miss quantities
+
+			double kMiss = Reco_kMiss->at(0);
+
+			double PMissMinus = Reco_PMissMinus->at(0);
+
+			double MissMomentum = Reco_PMiss->at(0);
+
+			// -----------------------------------------------------------------------------------------------------------------------------
+
+			// STV quantities
 			
 			double TransMissMomentum = Reco_Pt->at(0);
 
@@ -799,14 +849,18 @@ void t::Loop() {
 			if (reco_Pp_cos_theta < ArrayNBinsProtonCosTheta[0]) { continue; }
 			if (reco_Pp_phi < ArrayNBinsProtonPhi[0]) { continue; }
 
+//			if (MissMomentum < ArrayNBinsPMiss[0]) { continue; }
+//			if (PMissMinus < ArrayNBinsPMissMinus[0]) { continue; }
+//			if (kMiss < ArrayNBinskMiss[0]) { continue; }
+
 			if (TransMissMomentum < ArrayNBinsDeltaPT[0]) { continue; }
 			if (DeltaAlphaT < ArrayNBinsDeltaAlphaT[0]) { continue; }
 			if (DeltaPhiT < ArrayNBinsDeltaPhiT[0]) { continue; }
 
-			if (ECal < ArrayNBinsECal[0]) { continue; }
+/*			if (ECal < ArrayNBinsECal[0]) { continue; }
 			if (EQE < ArrayNBinsEQE[0]) { continue; }
 			if (reco_Q2 < ArrayNBinsQ2[0]) { continue; }
-
+*/
 			// --------------------------------------------------------------------------------------------------------------------
 
 			if (reco_Pmu_mcs > ArrayNBinsMuonMomentum[NBinsMuonMomentum]) { continue; }
@@ -817,14 +871,18 @@ void t::Loop() {
 			if (reco_Pp_cos_theta > ArrayNBinsProtonCosTheta[NBinsProtonCosTheta]) { continue; }
 			if (reco_Pp_phi > ArrayNBinsProtonPhi[NBinsProtonPhi]) { continue; }
 
+//			if (MissMomentum > ArrayNBinsPMiss[NBinsPMiss]) { continue; }
+//			if (PMissMinus > ArrayNBinsPMissMinus[NBinsPMissMinus]) { continue; }
+//			if (kMiss > ArrayNBinskMiss[NBinskMiss]) { continue; }
+
 			if (TransMissMomentum > ArrayNBinsDeltaPT[NBinsDeltaPT]) { continue; }
 			if (DeltaAlphaT > ArrayNBinsDeltaAlphaT[NBinsDeltaAlphaT]) { continue; }
 			if (DeltaPhiT > ArrayNBinsDeltaPhiT[NBinsDeltaPhiT]) { continue; }
 
-			if (ECal > ArrayNBinsECal[NBinsECal]) { continue; }
+/*			if (ECal > ArrayNBinsECal[NBinsECal]) { continue; }
 			if (EQE > ArrayNBinsEQE[NBinsEQE]) { continue; }
 			if (reco_Q2 > ArrayNBinsQ2[NBinsQ2]) { continue; }
-
+*/
 			// ----------------------------------------------------------------------------------------------------------------------------
 			// ---------------------------------------------------------------------------------------------------------------------------
 
@@ -890,7 +948,10 @@ void t::Loop() {
 			// --------------------------------------------------------------------------------------------------------------------------------
 
 			int genie_mode = -1;
-			
+
+			double true_kMiss = -1;
+			double true_PMissMinus = -1;
+			double true_PMiss = -1;			
 			double true_TransMissMomentum = -1;
 			double true_DeltaAlphaT = -1;
 			double true_DeltaPhiT = -1;
@@ -903,7 +964,10 @@ void t::Loop() {
 				&& MCParticle_Mode != -1 ) { 
 				
 				genie_mode = MCParticle_Mode; 
-				
+
+				true_kMiss = True_kMiss->at(0);
+				true_PMissMinus = True_PMissMinus->at(0);
+				true_PMiss = True_PMiss->at(0);				
 				true_TransMissMomentum = True_Pt->at(0);
 				true_DeltaAlphaT = True_DeltaAlphaT->at(0);
 				true_DeltaPhiT = True_DeltaPhiT->at(0);
@@ -937,6 +1001,10 @@ void t::Loop() {
 
 			RecoMuonPhiPlot->Fill(reco_Pmu_phi*180./TMath::Pi(),weight);
 			RecoProtonPhiPlot->Fill(reco_Pp_phi*180./TMath::Pi(),weight);
+
+			RecokMissPlot->Fill(kMiss,weight);
+			RecoPMissMinusPlot->Fill(PMissMinus,weight);
+			RecoPMissPlot->Fill(MissMomentum,weight);
 
 			RecoDeltaPTPlot->Fill(TransMissMomentum,weight);
 			RecoDeltaAlphaTPlot->Fill(DeltaAlphaT,weight);
@@ -994,397 +1062,449 @@ void t::Loop() {
 
 			// ---------------------------------------------------------------------------------------------------------------------------
 
-			// CC1p Signal
+			if (string(fWhichSample).find("Overlay") != std::string::npos) { 
 
-			if (CC1p == 1) {
-			
-				CC1pEventsPassingSelectionCuts++;
+				// CC1p Signal
 
-				// 1D Plots
-
-				CC1pRecoNuScorePlot->Fill(NuScore,weight);
-				CC1pRecoFlashScorePlot->Fill(FlashScore,weight);
-
-				CC1pRecoDistancePlot->Fill(distance,weight);
-
-				CC1pRecodYZPlot->Fill(dYZ,weight);
-				CC1pRecoNPEPlot->Fill(NPE,weight);
-
-				CC1pRecoDeltaThetaPlot->Fill(DeltaThetaProtonMuon_Deg,weight);
-				CC1pRecoDeltaPhiPlot->Fill(DeltaPhiProtonMuon_Deg,weight);
-
-				CC1pRecoThreePlaneChi2LogLikelihoodCandidateMuonPlot->Fill(reco_Pmu_ThreePlaneLogLikelihood,weight);
-				CC1pRecoThreePlaneChi2LogLikelihoodCandidateProtonPlot->Fill(reco_Pp_ThreePlaneLogLikelihood,weight);
-
-				CC1pRecoMuonMomentumPlot->Fill(reco_Pmu_mcs,weight);
-				CC1pRecoProtonMomentumPlot->Fill(reco_Pp,weight);
-
-				CC1pRecoMuonCosThetaPlot->Fill(reco_Pmu_cos_theta,weight);
-				CC1pRecoProtonCosThetaPlot->Fill(reco_Pp_cos_theta,weight);
-
-				CC1pRecoMuonPhiPlot->Fill(reco_Pmu_phi*180./TMath::Pi(),weight);
-				CC1pRecoProtonPhiPlot->Fill(reco_Pp_phi*180./TMath::Pi(),weight);
-
-				CC1pRecoDeltaPTPlot->Fill(TransMissMomentum,weight);
-				CC1pRecoDeltaAlphaTPlot->Fill(DeltaAlphaT,weight);
-				CC1pRecoDeltaPhiTPlot->Fill(DeltaPhiT,weight);
-
-				CC1pRecoECalPlot->Fill(ECal,weight);
-				CC1pRecoEQEPlot->Fill(EQE,weight);
-				CC1pRecoQ2Plot->Fill(reco_Q2,weight);
+				if (CC1p == 1 && CandidateMu_MCParticle_Pdg->at(0) == MuonPdg && CandidateP_MCParticle_Pdg->at(0) == ProtonPdg 
+				&& True_CandidateMu_StartContainment->at(0) == 1 && True_CandidateP_StartContainment->at(0) == 1 && True_CandidateP_EndContainment->at(0) == 1) {
 				
-				// 2D Analysis
-			
-				CC1pRecoCosThetaMuPmuPlot->Fill(reco_Pmu_cos_theta,reco_Pmu_mcs,weight);
-				CC1pRecoCosThetaPPpPlot->Fill(reco_Pp_cos_theta,reco_Pp,weight);				
+					CC1pEventsPassingSelectionCuts++;
 
-				// ---------------------------------------------------------------------------------------------------------------------
-				// ---------------------------------------------------------------------------------------------------------------------
+					// 1D Plots
 
-				// 2D Plots Kinematic Variables
+					CC1pRecoNuScorePlot->Fill(NuScore,weight);
+					CC1pRecoFlashScorePlot->Fill(FlashScore,weight);
 
-				CC1pRecoMuonMomentumPlot2D->Fill(True_CandidateMu_P->at(0),reco_Pmu_mcs);
-				CC1pRecoProtonMomentumPlot2D->Fill(True_CandidateP_P->at(0),reco_Pp);
+					CC1pRecoDistancePlot->Fill(distance,weight);
 
-				CC1pRecoMuonCosThetaPlot2D->Fill(True_CandidateMu_CosTheta->at(0),reco_Pmu_cos_theta);
-				CC1pRecoProtonCosThetaPlot2D->Fill(True_CandidateP_CosTheta->at(0),reco_Pp_cos_theta);
+					CC1pRecodYZPlot->Fill(dYZ,weight);
+					CC1pRecoNPEPlot->Fill(NPE,weight);
 
-				CC1pRecoMuonPhiPlot2D->Fill(True_CandidateMu_Phi->at(0),reco_Pmu_phi*180./TMath::Pi());
-				CC1pRecoProtonPhiPlot2D->Fill(True_CandidateP_Phi->at(0),reco_Pp_phi*180./TMath::Pi());
+					CC1pRecoDeltaThetaPlot->Fill(DeltaThetaProtonMuon_Deg,weight);
+					CC1pRecoDeltaPhiPlot->Fill(DeltaPhiProtonMuon_Deg,weight);
 
-				// ---------------------------------------------------------------------------------------------------------------------
+					CC1pRecoThreePlaneChi2LogLikelihoodCandidateMuonPlot->Fill(reco_Pmu_ThreePlaneLogLikelihood,weight);
+					CC1pRecoThreePlaneChi2LogLikelihoodCandidateProtonPlot->Fill(reco_Pp_ThreePlaneLogLikelihood,weight);
 
-				// True Level STV
+					CC1pRecoMuonMomentumPlot->Fill(reco_Pmu_mcs,weight);
+					CC1pRecoProtonMomentumPlot->Fill(reco_Pp,weight);
 
-				CC1pRecoDeltaPTPlot2D->Fill(true_TransMissMomentum,TransMissMomentum);
-				CC1pRecoDeltaAlphaTPlot2D->Fill(true_DeltaAlphaT,DeltaAlphaT);
-				CC1pRecoDeltaPhiTPlot2D->Fill(true_DeltaPhiT,DeltaPhiT);
+					CC1pRecoMuonCosThetaPlot->Fill(reco_Pmu_cos_theta,weight);
+					CC1pRecoProtonCosThetaPlot->Fill(reco_Pp_cos_theta,weight);
 
-				// ---------------------------------------------------------------------------------------------------------------------
+					CC1pRecoMuonPhiPlot->Fill(reco_Pmu_phi*180./TMath::Pi(),weight);
+					CC1pRecoProtonPhiPlot->Fill(reco_Pp_phi*180./TMath::Pi(),weight);
 
-				// True level energy reconstruction & Q2
+					CC1pRecokMissPlot->Fill(kMiss,weight);
+					CC1pRecoPMissMinusPlot->Fill(PMissMinus,weight);
+					CC1pRecoPMissPlot->Fill(MissMomentum,weight);
 
-				CC1pRecoECalPlot2D->Fill(true_ECal,ECal);
-				CC1pRecoEQEPlot2D->Fill(true_EQE,EQE);
-				CC1pRecoQ2Plot2D->Fill(true_Q2,reco_Q2);
+					CC1pRecoDeltaPTPlot->Fill(TransMissMomentum,weight);
+					CC1pRecoDeltaAlphaTPlot->Fill(DeltaAlphaT,weight);
+					CC1pRecoDeltaPhiTPlot->Fill(DeltaPhiT,weight);
 
-			}
-
-			// --------------------------------------------------------------------------------------------------------------------------------
-
-			// Non-CC1p 
-
-			if (CC1p != 1) {
-
-				NonCC1pRecoNuScorePlot->Fill(NuScore,weight);
-				NonCC1pRecoFlashScorePlot->Fill(FlashScore,weight);
-
-				NonCC1pRecoDistancePlot->Fill(distance,weight);
-
-				NonCC1pRecodYZPlot->Fill(dYZ,weight);
-				NonCC1pRecoNPEPlot->Fill(NPE,weight);
-
-				NonCC1pRecoDeltaThetaPlot->Fill(DeltaThetaProtonMuon_Deg,weight);
-				NonCC1pRecoDeltaPhiPlot->Fill(DeltaPhiProtonMuon_Deg,weight);
-
-				NonCC1pRecoThreePlaneChi2LogLikelihoodCandidateMuonPlot->Fill(reco_Pmu_ThreePlaneLogLikelihood,weight);
-				NonCC1pRecoThreePlaneChi2LogLikelihoodCandidateProtonPlot->Fill(reco_Pp_ThreePlaneLogLikelihood,weight);
-
-				NonCC1pRecoMuonMomentumPlot->Fill(reco_Pmu_mcs,weight);
-				NonCC1pRecoProtonMomentumPlot->Fill(reco_Pp,weight);
-
-				NonCC1pRecoMuonCosThetaPlot->Fill(reco_Pmu_cos_theta,weight);
-				NonCC1pRecoProtonCosThetaPlot->Fill(reco_Pp_cos_theta,weight);
-
-				NonCC1pRecoMuonPhiPlot->Fill(reco_Pmu_phi*180./TMath::Pi(),weight);
-				NonCC1pRecoProtonPhiPlot->Fill(reco_Pp_phi*180./TMath::Pi(),weight);
-
-				NonCC1pRecoDeltaPTPlot->Fill(TransMissMomentum,weight);
-				NonCC1pRecoDeltaAlphaTPlot->Fill(DeltaAlphaT,weight);
-				NonCC1pRecoDeltaPhiTPlot->Fill(DeltaPhiT,weight);
-
-				NonCC1pRecoECalPlot->Fill(ECal,weight);
-				NonCC1pRecoEQEPlot->Fill(EQE,weight);
-				NonCC1pRecoQ2Plot->Fill(reco_Q2,weight);
+					CC1pRecoECalPlot->Fill(ECal,weight);
+					CC1pRecoEQEPlot->Fill(EQE,weight);
+					CC1pRecoQ2Plot->Fill(reco_Q2,weight);
+					
+					// 2D Analysis
 				
-				// 2D Analysis
-			
-				NonCC1pRecoCosThetaMuPmuPlot->Fill(reco_Pmu_cos_theta,reco_Pmu_mcs,weight);
-				NonCC1pRecoCosThetaPPpPlot->Fill(reco_Pp_cos_theta,reco_Pp,weight);				
+					CC1pRecoCosThetaMuPmuPlot->Fill(reco_Pmu_cos_theta,reco_Pmu_mcs,weight);
+					CC1pRecoCosThetaPPpPlot->Fill(reco_Pp_cos_theta,reco_Pp,weight);				
 
-			}
+					// ---------------------------------------------------------------------------------------------------------------------
+					// ---------------------------------------------------------------------------------------------------------------------
 
-			// -------------------------------------------------------------------------------------------------------------------------
-			// ------------------------------------------------------------------------------------------------------------------------
+					// 2D Plots Kinematic Variables
 
-			// CCQE
+					CC1pRecoMuonMomentumPlot2D->Fill(True_CandidateMu_P->at(0),reco_Pmu_mcs);
+					CC1pRecoProtonMomentumPlot2D->Fill(True_CandidateP_P->at(0),reco_Pp);
 
-			if (genie_mode == 0) {
+					CC1pRecoMuonCosThetaPlot2D->Fill(True_CandidateMu_CosTheta->at(0),reco_Pmu_cos_theta);
+					CC1pRecoProtonCosThetaPlot2D->Fill(True_CandidateP_CosTheta->at(0),reco_Pp_cos_theta);
 
-				CCQERecoNuScorePlot->Fill(NuScore,weight);
-				CCQERecoFlashScorePlot->Fill(FlashScore,weight);
+					CC1pRecoMuonPhiPlot2D->Fill(True_CandidateMu_Phi->at(0),reco_Pmu_phi*180./TMath::Pi());
+					CC1pRecoProtonPhiPlot2D->Fill(True_CandidateP_Phi->at(0),reco_Pp_phi*180./TMath::Pi());
 
-				CCQERecoDistancePlot->Fill(distance,weight);
+					// ---------------------------------------------------------------------------------------------------------------------
 
-				CCQERecodYZPlot->Fill(dYZ,weight);
-				CCQERecoNPEPlot->Fill(NPE,weight);
+					// True Level STV
 
-				CCQERecoDeltaThetaPlot->Fill(DeltaThetaProtonMuon_Deg,weight);
-				CCQERecoDeltaPhiPlot->Fill(DeltaPhiProtonMuon_Deg,weight);
+					CC1pRecoDeltaPTPlot2D->Fill(true_TransMissMomentum,TransMissMomentum);
+					CC1pRecoDeltaAlphaTPlot2D->Fill(true_DeltaAlphaT,DeltaAlphaT);
+					CC1pRecoDeltaPhiTPlot2D->Fill(true_DeltaPhiT,DeltaPhiT);
 
-				CCQERecoThreePlaneChi2LogLikelihoodCandidateMuonPlot->Fill(reco_Pmu_ThreePlaneLogLikelihood,weight);
-				CCQERecoThreePlaneChi2LogLikelihoodCandidateProtonPlot->Fill(reco_Pp_ThreePlaneLogLikelihood,weight);
+					// ---------------------------------------------------------------------------------------------------------------------
 
-				CCQERecoMuonMomentumPlot->Fill(reco_Pmu_mcs,weight);
-				CCQERecoProtonMomentumPlot->Fill(reco_Pp,weight);
+					// True level energy reconstruction & Q2
 
-				CCQERecoMuonCosThetaPlot->Fill(reco_Pmu_cos_theta,weight);
-				CCQERecoProtonCosThetaPlot->Fill(reco_Pp_cos_theta,weight);
-
-				CCQERecoMuonPhiPlot->Fill(reco_Pmu_phi*180./TMath::Pi(),weight);
-				CCQERecoProtonPhiPlot->Fill(reco_Pp_phi*180./TMath::Pi(),weight);
-
-				CCQERecoDeltaPTPlot->Fill(TransMissMomentum,weight);
-				CCQERecoDeltaAlphaTPlot->Fill(DeltaAlphaT,weight);
-				CCQERecoDeltaPhiTPlot->Fill(DeltaPhiT,weight);
-
-				CCQERecoECalPlot->Fill(ECal,weight);
-				CCQERecoEQEPlot->Fill(EQE,weight);
-				CCQERecoQ2Plot->Fill(reco_Q2,weight);
-				
-				// 2D Analysis
-			
-				CCQERecoCosThetaMuPmuPlot->Fill(reco_Pmu_cos_theta,reco_Pmu_mcs,weight);
-				CCQERecoCosThetaPPpPlot->Fill(reco_Pp_cos_theta,reco_Pp,weight);				
-
-			}
-
-			// ------------------------------------------------------------------------------------------------------------------------
-
-			// CCMEC
-
-			if (genie_mode == 10) {
-
-				CCMECRecoNuScorePlot->Fill(NuScore,weight);
-				CCMECRecoFlashScorePlot->Fill(FlashScore,weight);
-
-				CCMECRecoDistancePlot->Fill(distance,weight);
-
-				CCMECRecodYZPlot->Fill(dYZ,weight);
-				CCMECRecoNPEPlot->Fill(NPE,weight);
-
-				CCMECRecoDeltaThetaPlot->Fill(DeltaThetaProtonMuon_Deg,weight);
-				CCMECRecoDeltaPhiPlot->Fill(DeltaPhiProtonMuon_Deg,weight);
-
-				CCMECRecoThreePlaneChi2LogLikelihoodCandidateMuonPlot->Fill(reco_Pmu_ThreePlaneLogLikelihood,weight);
-				CCMECRecoThreePlaneChi2LogLikelihoodCandidateProtonPlot->Fill(reco_Pp_ThreePlaneLogLikelihood,weight);
-
-				CCMECRecoMuonMomentumPlot->Fill(reco_Pmu_mcs,weight);
-				CCMECRecoProtonMomentumPlot->Fill(reco_Pp,weight);
-
-				CCMECRecoMuonCosThetaPlot->Fill(reco_Pmu_cos_theta,weight);
-				CCMECRecoProtonCosThetaPlot->Fill(reco_Pp_cos_theta,weight);
-
-				CCMECRecoMuonPhiPlot->Fill(reco_Pmu_phi*180./TMath::Pi(),weight);
-				CCMECRecoProtonPhiPlot->Fill(reco_Pp_phi*180./TMath::Pi(),weight);
-
-				CCMECRecoDeltaPTPlot->Fill(TransMissMomentum,weight);
-				CCMECRecoDeltaAlphaTPlot->Fill(DeltaAlphaT,weight);
-				CCMECRecoDeltaPhiTPlot->Fill(DeltaPhiT,weight);
-
-				CCMECRecoECalPlot->Fill(ECal,weight);
-				CCMECRecoEQEPlot->Fill(EQE,weight);
-				CCMECRecoQ2Plot->Fill(reco_Q2,weight);
-				
-				// 2D Analysis
-			
-				CCMECRecoCosThetaMuPmuPlot->Fill(reco_Pmu_cos_theta,reco_Pmu_mcs,weight);
-				CCMECRecoCosThetaPPpPlot->Fill(reco_Pp_cos_theta,reco_Pp,weight);				
-
-			}
-
-			// -------------------------------------------------------------------------------------------------------------------------
-
-			// CCRES
-
-			if (genie_mode == 1) {
-
-				CCRESRecoNuScorePlot->Fill(NuScore,weight);
-				CCRESRecoFlashScorePlot->Fill(FlashScore,weight);
-
-				CCRESRecoDistancePlot->Fill(distance,weight);
-
-				CCRESRecodYZPlot->Fill(dYZ,weight);
-				CCRESRecoNPEPlot->Fill(NPE,weight);
-
-				CCRESRecoDeltaThetaPlot->Fill(DeltaThetaProtonMuon_Deg,weight);
-				CCRESRecoDeltaPhiPlot->Fill(DeltaPhiProtonMuon_Deg,weight);
-
-				CCRESRecoThreePlaneChi2LogLikelihoodCandidateMuonPlot->Fill(reco_Pmu_ThreePlaneLogLikelihood,weight);
-				CCRESRecoThreePlaneChi2LogLikelihoodCandidateProtonPlot->Fill(reco_Pp_ThreePlaneLogLikelihood,weight);
-
-				CCRESRecoMuonMomentumPlot->Fill(reco_Pmu_mcs,weight);
-				CCRESRecoProtonMomentumPlot->Fill(reco_Pp,weight);
-
-				CCRESRecoMuonCosThetaPlot->Fill(reco_Pmu_cos_theta,weight);
-				CCRESRecoProtonCosThetaPlot->Fill(reco_Pp_cos_theta,weight);
-
-				CCRESRecoMuonPhiPlot->Fill(reco_Pmu_phi*180./TMath::Pi(),weight);
-				CCRESRecoProtonPhiPlot->Fill(reco_Pp_phi*180./TMath::Pi(),weight);
-
-				CCRESRecoDeltaPTPlot->Fill(TransMissMomentum,weight);
-				CCRESRecoDeltaAlphaTPlot->Fill(DeltaAlphaT,weight);
-				CCRESRecoDeltaPhiTPlot->Fill(DeltaPhiT,weight);
-
-				CCRESRecoECalPlot->Fill(ECal,weight);
-				CCRESRecoEQEPlot->Fill(EQE,weight);
-				CCRESRecoQ2Plot->Fill(reco_Q2,weight);
-				
-				// 2D Analysis
-			
-				CCRESRecoCosThetaMuPmuPlot->Fill(reco_Pmu_cos_theta,reco_Pmu_mcs,weight);
-				CCRESRecoCosThetaPPpPlot->Fill(reco_Pp_cos_theta,reco_Pp,weight);				
-
-			}
-
-			// -------------------------------------------------------------------------------------------------------------------------
-
-			// CCDIS
-
-			if (genie_mode == 2) {
-
-				CCDISRecoNuScorePlot->Fill(NuScore,weight);
-				CCDISRecoFlashScorePlot->Fill(FlashScore,weight);
-
-				CCDISRecoDistancePlot->Fill(distance,weight);
-
-				CCDISRecodYZPlot->Fill(dYZ,weight);
-				CCDISRecoNPEPlot->Fill(NPE,weight);
-
-				CCDISRecoDeltaThetaPlot->Fill(DeltaThetaProtonMuon_Deg,weight);
-				CCDISRecoDeltaPhiPlot->Fill(DeltaPhiProtonMuon_Deg,weight);
-
-				CCDISRecoThreePlaneChi2LogLikelihoodCandidateMuonPlot->Fill(reco_Pmu_ThreePlaneLogLikelihood,weight);
-				CCDISRecoThreePlaneChi2LogLikelihoodCandidateProtonPlot->Fill(reco_Pp_ThreePlaneLogLikelihood,weight);
-
-				CCDISRecoMuonMomentumPlot->Fill(reco_Pmu_mcs,weight);
-				CCDISRecoProtonMomentumPlot->Fill(reco_Pp,weight);
-
-				CCDISRecoMuonCosThetaPlot->Fill(reco_Pmu_cos_theta,weight);
-				CCDISRecoProtonCosThetaPlot->Fill(reco_Pp_cos_theta,weight);
-
-				CCDISRecoMuonPhiPlot->Fill(reco_Pmu_phi*180./TMath::Pi(),weight);
-				CCDISRecoProtonPhiPlot->Fill(reco_Pp_phi*180./TMath::Pi(),weight);
-
-				CCDISRecoDeltaPTPlot->Fill(TransMissMomentum,weight);
-				CCDISRecoDeltaAlphaTPlot->Fill(DeltaAlphaT,weight);
-				CCDISRecoDeltaPhiTPlot->Fill(DeltaPhiT,weight);
-
-				CCDISRecoECalPlot->Fill(ECal,weight);
-				CCDISRecoEQEPlot->Fill(EQE,weight);
-				CCDISRecoQ2Plot->Fill(reco_Q2,weight);
-				
-				// 2D Analysis
-			
-				CCDISRecoCosThetaMuPmuPlot->Fill(reco_Pmu_cos_theta,reco_Pmu_mcs,weight);
-				CCDISRecoCosThetaPPpPlot->Fill(reco_Pp_cos_theta,reco_Pp,weight);				
-
-			}
-
-			// -------------------------------------------------------------------------------------------------------------------------
-			// -------------------------------------------------------------------------------------------------------------------------
-
-			// Chi2 PID Studies
-
-			RecoChi2Plot->Fill(reco_Pmu_chi2,weight);
-			RecoChi2Plot->Fill(reco_Pp_chi2,weight);
-
-			RecoThreePlaneChi2Plot->Fill(reco_Pmu_ThreePlanechi2,weight);
-			RecoThreePlaneChi2Plot->Fill(reco_Pp_ThreePlanechi2,weight);
-
-			RecoThreePlaneChi2LogLikelihoodPlot->Fill(reco_Pmu_ThreePlaneLogLikelihood,weight/2.);
-			RecoThreePlaneChi2LogLikelihoodPlot->Fill(reco_Pp_ThreePlaneLogLikelihood,weight/2.);
-
-			// --------------------------------------------------------------------------------------------------------------------------
-
-			// Overlay particle breakdown using the Backtracker
-
-			if (CandidateMu_MCParticle_Pdg->size() > 0 && CandidateP_MCParticle_Pdg->size() > 0 ) {
-
-				if (CandidateMu_MCParticle_Pdg->at(0) == MuonPdg) {
-
-					MuonRecoChi2Plot->Fill(reco_Pmu_chi2,weight);		
-					MuonRecoThreePlaneChi2Plot->Fill(reco_Pmu_ThreePlanechi2,weight);
-					MuonRecoThreePlaneChi2LogLikelihoodPlot->Fill(reco_Pmu_ThreePlaneLogLikelihood,weight/2.);	
+					CC1pRecoECalPlot2D->Fill(true_ECal,ECal);
+					CC1pRecoEQEPlot2D->Fill(true_EQE,EQE);
+					CC1pRecoQ2Plot2D->Fill(true_Q2,reco_Q2);
 
 				}
 
-				if (CandidateP_MCParticle_Pdg->at(0) == MuonPdg) {
+				// --------------------------------------------------------------------------------------------------------------------------------
 
-					MuonRecoChi2Plot->Fill(reco_Pp_chi2,weight);		
-					MuonRecoThreePlaneChi2Plot->Fill(reco_Pp_ThreePlanechi2,weight);
-					MuonRecoThreePlaneChi2LogLikelihoodPlot->Fill(reco_Pp_ThreePlaneLogLikelihood,weight/2.);	
+				// Non-CC1p 
+
+	//			if (CC1p != 1) {
+				else {
+
+					if (CC1p1pi != 1 && CC2p != 1 && CC2p1pi != 1 && CC3p != 1 && CC3p1pi != 1 && CC3p2pi != 1) {
+
+						if ( TMath::Abs(CandidateMu_MCParticle_Pdg->at(0)) == AbsChargedPionPdg && CandidateP_MCParticle_Pdg->at(0) == ProtonPdg) 
+							{ MisIndetifiedMuonAsPion++;  }
+						else if ( TMath::Abs(CandidateP_MCParticle_Pdg->at(0)) == AbsChargedPionPdg && CandidateMu_MCParticle_Pdg->at(0) == MuonPdg) 
+							{ MisIndetifiedProtonAsPion++;  }
+						else if ( CandidateP_MCParticle_Pdg->at(0) == DeuteriumPdg && CandidateMu_MCParticle_Pdg->at(0) == MuonPdg) { MisIndetifiedProtonAsDeuterium++;  }
+						else if ( TMath::Abs(CandidateP_MCParticle_Pdg->at(0)) == ElectronPdg && CandidateMu_MCParticle_Pdg->at(0) == MuonPdg) 				
+							{ MisIndetifiedProtonAsElectron++;  }
+						else if ( TMath::Abs(CandidateP_MCParticle_Pdg->at(0)) == ElectronPdg && TMath::Abs(CandidateMu_MCParticle_Pdg->at(0)) == ElectronPdg) 
+							{ MisIndetifiedMuPToElectronElectron++;  }
+						else if ( TMath::Abs(CandidateP_MCParticle_Pdg->at(0)) == MuonPdg && TMath::Abs(CandidateMu_MCParticle_Pdg->at(0)) == MuonPdg) 
+							{ MisIndetifiedMuPToMuMu++;  }
+						else if ( TMath::Abs(CandidateP_MCParticle_Pdg->at(0)) == AbsChargedPionPdg && TMath::Abs(CandidateMu_MCParticle_Pdg->at(0)) == AbsChargedPionPdg) 
+							{ MisIndetifiedMuPToPiPi++;  }
+						else if ( CandidateMu_MCParticle_Pdg->at(0) == ProtonPdg && CandidateP_MCParticle_Pdg->at(0) == ProtonPdg) { MisIndetifiedMuonAsProton++;  }
+						else if ( CandidateMu_MCParticle_Pdg->at(0) == -MuonPdg && CandidateP_MCParticle_Pdg->at(0) == ProtonPdg) { MisIndetifiedMuonAsAntiMuon++;  }
+						else if ( True_CandidateMu_StartContainment->at(0) == 0 ) { CandidateMuon_MCParticle_OutFV++; }
+						else if ( True_CandidateP_StartContainment->at(0) == 0 || True_CandidateP_EndContainment->at(0) == 0) { CandidateProton_MCParticle_OutFV++; }
+						else if ( True_CandidateMu_StartX->at(0) != True_CandidateP_StartX->at(0) 
+						|| True_CandidateMu_StartY->at(0) != True_CandidateP_StartY->at(0)
+						|| True_CandidateMu_StartZ->at(0) != True_CandidateP_StartZ->at(0) ) { MultipleVertices++; }
+						else if ( CandidateMu_MCParticle_Pdg->at(0) == -99. || CandidateP_MCParticle_Pdg->at(0) == -99.) { InTimeCosmics++; }
+
+					}
+
+					NonCC1pRecoNuScorePlot->Fill(NuScore,weight);
+					NonCC1pRecoFlashScorePlot->Fill(FlashScore,weight);
+
+					NonCC1pRecoDistancePlot->Fill(distance,weight);
+
+					NonCC1pRecodYZPlot->Fill(dYZ,weight);
+					NonCC1pRecoNPEPlot->Fill(NPE,weight);
+
+					NonCC1pRecoDeltaThetaPlot->Fill(DeltaThetaProtonMuon_Deg,weight);
+					NonCC1pRecoDeltaPhiPlot->Fill(DeltaPhiProtonMuon_Deg,weight);
+
+					NonCC1pRecoThreePlaneChi2LogLikelihoodCandidateMuonPlot->Fill(reco_Pmu_ThreePlaneLogLikelihood,weight);
+					NonCC1pRecoThreePlaneChi2LogLikelihoodCandidateProtonPlot->Fill(reco_Pp_ThreePlaneLogLikelihood,weight);
+
+					NonCC1pRecoMuonMomentumPlot->Fill(reco_Pmu_mcs,weight);
+					NonCC1pRecoProtonMomentumPlot->Fill(reco_Pp,weight);
+
+					NonCC1pRecoMuonCosThetaPlot->Fill(reco_Pmu_cos_theta,weight);
+					NonCC1pRecoProtonCosThetaPlot->Fill(reco_Pp_cos_theta,weight);
+
+					NonCC1pRecoMuonPhiPlot->Fill(reco_Pmu_phi*180./TMath::Pi(),weight);
+					NonCC1pRecoProtonPhiPlot->Fill(reco_Pp_phi*180./TMath::Pi(),weight);
+
+					NonCC1pRecokMissPlot->Fill(kMiss,weight);
+					NonCC1pRecoPMissMinusPlot->Fill(PMissMinus,weight);
+					NonCC1pRecoPMissPlot->Fill(MissMomentum,weight);
+
+					NonCC1pRecoDeltaPTPlot->Fill(TransMissMomentum,weight);
+					NonCC1pRecoDeltaAlphaTPlot->Fill(DeltaAlphaT,weight);
+					NonCC1pRecoDeltaPhiTPlot->Fill(DeltaPhiT,weight);
+
+					NonCC1pRecoECalPlot->Fill(ECal,weight);
+					NonCC1pRecoEQEPlot->Fill(EQE,weight);
+					NonCC1pRecoQ2Plot->Fill(reco_Q2,weight);
+					
+					// 2D Analysis
+				
+					NonCC1pRecoCosThetaMuPmuPlot->Fill(reco_Pmu_cos_theta,reco_Pmu_mcs,weight);
+					NonCC1pRecoCosThetaPPpPlot->Fill(reco_Pp_cos_theta,reco_Pp,weight);				
 
 				}
 
-				// ----------------------------------------------------------------------------------------------------------------
+				// -------------------------------------------------------------------------------------------------------------------------
+				// ------------------------------------------------------------------------------------------------------------------------
 
-				if (CandidateMu_MCParticle_Pdg->at(0) == ProtonPdg) {
+				// CCQE
 
-					ProtonRecoChi2Plot->Fill(reco_Pmu_chi2,weight);		
-					ProtonRecoThreePlaneChi2Plot->Fill(reco_Pmu_ThreePlanechi2,weight);
-					ProtonRecoThreePlaneChi2LogLikelihoodPlot->Fill(reco_Pmu_ThreePlaneLogLikelihood,weight/2.);	
+				if (genie_mode == 0) {
+
+					CCQERecoNuScorePlot->Fill(NuScore,weight);
+					CCQERecoFlashScorePlot->Fill(FlashScore,weight);
+
+					CCQERecoDistancePlot->Fill(distance,weight);
+
+					CCQERecodYZPlot->Fill(dYZ,weight);
+					CCQERecoNPEPlot->Fill(NPE,weight);
+
+					CCQERecoDeltaThetaPlot->Fill(DeltaThetaProtonMuon_Deg,weight);
+					CCQERecoDeltaPhiPlot->Fill(DeltaPhiProtonMuon_Deg,weight);
+
+					CCQERecoThreePlaneChi2LogLikelihoodCandidateMuonPlot->Fill(reco_Pmu_ThreePlaneLogLikelihood,weight);
+					CCQERecoThreePlaneChi2LogLikelihoodCandidateProtonPlot->Fill(reco_Pp_ThreePlaneLogLikelihood,weight);
+
+					CCQERecoMuonMomentumPlot->Fill(reco_Pmu_mcs,weight);
+					CCQERecoProtonMomentumPlot->Fill(reco_Pp,weight);
+
+					CCQERecoMuonCosThetaPlot->Fill(reco_Pmu_cos_theta,weight);
+					CCQERecoProtonCosThetaPlot->Fill(reco_Pp_cos_theta,weight);
+
+					CCQERecoMuonPhiPlot->Fill(reco_Pmu_phi*180./TMath::Pi(),weight);
+					CCQERecoProtonPhiPlot->Fill(reco_Pp_phi*180./TMath::Pi(),weight);
+
+					CCQERecokMissPlot->Fill(kMiss,weight);
+					CCQERecoPMissMinusPlot->Fill(PMissMinus,weight);
+					CCQERecoPMissPlot->Fill(MissMomentum,weight);
+
+					CCQERecoDeltaPTPlot->Fill(TransMissMomentum,weight);
+					CCQERecoDeltaAlphaTPlot->Fill(DeltaAlphaT,weight);
+					CCQERecoDeltaPhiTPlot->Fill(DeltaPhiT,weight);
+
+					CCQERecoECalPlot->Fill(ECal,weight);
+					CCQERecoEQEPlot->Fill(EQE,weight);
+					CCQERecoQ2Plot->Fill(reco_Q2,weight);
+					
+					// 2D Analysis
+				
+					CCQERecoCosThetaMuPmuPlot->Fill(reco_Pmu_cos_theta,reco_Pmu_mcs,weight);
+					CCQERecoCosThetaPPpPlot->Fill(reco_Pp_cos_theta,reco_Pp,weight);				
 
 				}
 
-				if (CandidateP_MCParticle_Pdg->at(0) == ProtonPdg) {
+				// ------------------------------------------------------------------------------------------------------------------------
 
-					ProtonRecoChi2Plot->Fill(reco_Pp_chi2,weight);		
-					ProtonRecoThreePlaneChi2Plot->Fill(reco_Pp_ThreePlanechi2,weight);
-					ProtonRecoThreePlaneChi2LogLikelihoodPlot->Fill(reco_Pp_ThreePlaneLogLikelihood,weight/2.);	
+				// CCMEC
+
+				if (genie_mode == 10) {
+
+					CCMECRecoNuScorePlot->Fill(NuScore,weight);
+					CCMECRecoFlashScorePlot->Fill(FlashScore,weight);
+
+					CCMECRecoDistancePlot->Fill(distance,weight);
+
+					CCMECRecodYZPlot->Fill(dYZ,weight);
+					CCMECRecoNPEPlot->Fill(NPE,weight);
+
+					CCMECRecoDeltaThetaPlot->Fill(DeltaThetaProtonMuon_Deg,weight);
+					CCMECRecoDeltaPhiPlot->Fill(DeltaPhiProtonMuon_Deg,weight);
+
+					CCMECRecoThreePlaneChi2LogLikelihoodCandidateMuonPlot->Fill(reco_Pmu_ThreePlaneLogLikelihood,weight);
+					CCMECRecoThreePlaneChi2LogLikelihoodCandidateProtonPlot->Fill(reco_Pp_ThreePlaneLogLikelihood,weight);
+
+					CCMECRecoMuonMomentumPlot->Fill(reco_Pmu_mcs,weight);
+					CCMECRecoProtonMomentumPlot->Fill(reco_Pp,weight);
+
+					CCMECRecoMuonCosThetaPlot->Fill(reco_Pmu_cos_theta,weight);
+					CCMECRecoProtonCosThetaPlot->Fill(reco_Pp_cos_theta,weight);
+
+					CCMECRecoMuonPhiPlot->Fill(reco_Pmu_phi*180./TMath::Pi(),weight);
+					CCMECRecoProtonPhiPlot->Fill(reco_Pp_phi*180./TMath::Pi(),weight);
+
+					CCMECRecokMissPlot->Fill(kMiss,weight);
+					CCMECRecoPMissMinusPlot->Fill(PMissMinus,weight);
+					CCMECRecoPMissPlot->Fill(MissMomentum,weight);
+
+					CCMECRecoDeltaPTPlot->Fill(TransMissMomentum,weight);
+					CCMECRecoDeltaAlphaTPlot->Fill(DeltaAlphaT,weight);
+					CCMECRecoDeltaPhiTPlot->Fill(DeltaPhiT,weight);
+
+					CCMECRecoECalPlot->Fill(ECal,weight);
+					CCMECRecoEQEPlot->Fill(EQE,weight);
+					CCMECRecoQ2Plot->Fill(reco_Q2,weight);
+					
+					// 2D Analysis
+				
+					CCMECRecoCosThetaMuPmuPlot->Fill(reco_Pmu_cos_theta,reco_Pmu_mcs,weight);
+					CCMECRecoCosThetaPPpPlot->Fill(reco_Pp_cos_theta,reco_Pp,weight);				
 
 				}
 
-				// -----------------------------------------------------------------------------------------------------------------
+				// -------------------------------------------------------------------------------------------------------------------------
 
-				if (CandidateMu_MCParticle_Pdg->at(0) == AbsChargedPionPdg) {
+				// CCRES
 
-					PionRecoChi2Plot->Fill(reco_Pmu_chi2,weight);		
-					PionRecoThreePlaneChi2Plot->Fill(reco_Pmu_ThreePlanechi2,weight);
-					PionRecoThreePlaneChi2LogLikelihoodPlot->Fill(reco_Pmu_ThreePlaneLogLikelihood,weight/2.);	
+				if (genie_mode == 1) {
+
+					CCRESRecoNuScorePlot->Fill(NuScore,weight);
+					CCRESRecoFlashScorePlot->Fill(FlashScore,weight);
+
+					CCRESRecoDistancePlot->Fill(distance,weight);
+
+					CCRESRecodYZPlot->Fill(dYZ,weight);
+					CCRESRecoNPEPlot->Fill(NPE,weight);
+
+					CCRESRecoDeltaThetaPlot->Fill(DeltaThetaProtonMuon_Deg,weight);
+					CCRESRecoDeltaPhiPlot->Fill(DeltaPhiProtonMuon_Deg,weight);
+
+					CCRESRecoThreePlaneChi2LogLikelihoodCandidateMuonPlot->Fill(reco_Pmu_ThreePlaneLogLikelihood,weight);
+					CCRESRecoThreePlaneChi2LogLikelihoodCandidateProtonPlot->Fill(reco_Pp_ThreePlaneLogLikelihood,weight);
+
+					CCRESRecoMuonMomentumPlot->Fill(reco_Pmu_mcs,weight);
+					CCRESRecoProtonMomentumPlot->Fill(reco_Pp,weight);
+
+					CCRESRecoMuonCosThetaPlot->Fill(reco_Pmu_cos_theta,weight);
+					CCRESRecoProtonCosThetaPlot->Fill(reco_Pp_cos_theta,weight);
+
+					CCRESRecoMuonPhiPlot->Fill(reco_Pmu_phi*180./TMath::Pi(),weight);
+					CCRESRecoProtonPhiPlot->Fill(reco_Pp_phi*180./TMath::Pi(),weight);
+
+					CCRESRecokMissPlot->Fill(kMiss,weight);
+					CCRESRecoPMissMinusPlot->Fill(PMissMinus,weight);
+					CCRESRecoPMissPlot->Fill(MissMomentum,weight);
+
+					CCRESRecoDeltaPTPlot->Fill(TransMissMomentum,weight);
+					CCRESRecoDeltaAlphaTPlot->Fill(DeltaAlphaT,weight);
+					CCRESRecoDeltaPhiTPlot->Fill(DeltaPhiT,weight);
+
+					CCRESRecoECalPlot->Fill(ECal,weight);
+					CCRESRecoEQEPlot->Fill(EQE,weight);
+					CCRESRecoQ2Plot->Fill(reco_Q2,weight);
+					
+					// 2D Analysis
+				
+					CCRESRecoCosThetaMuPmuPlot->Fill(reco_Pmu_cos_theta,reco_Pmu_mcs,weight);
+					CCRESRecoCosThetaPPpPlot->Fill(reco_Pp_cos_theta,reco_Pp,weight);				
 
 				}
 
-				if (CandidateP_MCParticle_Pdg->at(0) == AbsChargedPionPdg) {
+				// -------------------------------------------------------------------------------------------------------------------------
 
-					PionRecoChi2Plot->Fill(reco_Pp_chi2,weight);		
-					PionRecoThreePlaneChi2Plot->Fill(reco_Pp_ThreePlanechi2,weight);
-					PionRecoThreePlaneChi2LogLikelihoodPlot->Fill(reco_Pp_ThreePlaneLogLikelihood,weight/2.);	
+				// CCDIS
+
+				if (genie_mode == 2) {
+
+					CCDISRecoNuScorePlot->Fill(NuScore,weight);
+					CCDISRecoFlashScorePlot->Fill(FlashScore,weight);
+
+					CCDISRecoDistancePlot->Fill(distance,weight);
+
+					CCDISRecodYZPlot->Fill(dYZ,weight);
+					CCDISRecoNPEPlot->Fill(NPE,weight);
+
+					CCDISRecoDeltaThetaPlot->Fill(DeltaThetaProtonMuon_Deg,weight);
+					CCDISRecoDeltaPhiPlot->Fill(DeltaPhiProtonMuon_Deg,weight);
+
+					CCDISRecoThreePlaneChi2LogLikelihoodCandidateMuonPlot->Fill(reco_Pmu_ThreePlaneLogLikelihood,weight);
+					CCDISRecoThreePlaneChi2LogLikelihoodCandidateProtonPlot->Fill(reco_Pp_ThreePlaneLogLikelihood,weight);
+
+					CCDISRecoMuonMomentumPlot->Fill(reco_Pmu_mcs,weight);
+					CCDISRecoProtonMomentumPlot->Fill(reco_Pp,weight);
+
+					CCDISRecoMuonCosThetaPlot->Fill(reco_Pmu_cos_theta,weight);
+					CCDISRecoProtonCosThetaPlot->Fill(reco_Pp_cos_theta,weight);
+
+					CCDISRecoMuonPhiPlot->Fill(reco_Pmu_phi*180./TMath::Pi(),weight);
+					CCDISRecoProtonPhiPlot->Fill(reco_Pp_phi*180./TMath::Pi(),weight);
+
+					CCDISRecokMissPlot->Fill(kMiss,weight);
+					CCDISRecoPMissMinusPlot->Fill(PMissMinus,weight);
+					CCDISRecoPMissPlot->Fill(MissMomentum,weight);
+
+					CCDISRecoDeltaPTPlot->Fill(TransMissMomentum,weight);
+					CCDISRecoDeltaAlphaTPlot->Fill(DeltaAlphaT,weight);
+					CCDISRecoDeltaPhiTPlot->Fill(DeltaPhiT,weight);
+
+					CCDISRecoECalPlot->Fill(ECal,weight);
+					CCDISRecoEQEPlot->Fill(EQE,weight);
+					CCDISRecoQ2Plot->Fill(reco_Q2,weight);
+					
+					// 2D Analysis
+				
+					CCDISRecoCosThetaMuPmuPlot->Fill(reco_Pmu_cos_theta,reco_Pmu_mcs,weight);
+					CCDISRecoCosThetaPPpPlot->Fill(reco_Pp_cos_theta,reco_Pp,weight);				
 
 				}
 
-			} // End of the overlay particle breakdown using the Backtracker
+				// -------------------------------------------------------------------------------------------------------------------------
+				// -------------------------------------------------------------------------------------------------------------------------
 
-			else {
+				// Chi2 PID Studies
 
-				CosmicRecoChi2Plot->Fill(reco_Pmu_chi2,weight);
-				CosmicRecoChi2Plot->Fill(reco_Pp_chi2,weight);
+				RecoChi2Plot->Fill(reco_Pmu_chi2,weight);
+				RecoChi2Plot->Fill(reco_Pp_chi2,weight);
 
-				CosmicRecoThreePlaneChi2Plot->Fill(reco_Pmu_ThreePlanechi2,weight);
-				CosmicRecoThreePlaneChi2Plot->Fill(reco_Pp_ThreePlanechi2,weight);
+				RecoThreePlaneChi2Plot->Fill(reco_Pmu_ThreePlanechi2,weight);
+				RecoThreePlaneChi2Plot->Fill(reco_Pp_ThreePlanechi2,weight);
 
-				CosmicRecoThreePlaneChi2LogLikelihoodPlot->Fill(reco_Pmu_ThreePlaneLogLikelihood,weight/2.);
-				CosmicRecoThreePlaneChi2LogLikelihoodPlot->Fill(reco_Pp_ThreePlaneLogLikelihood,weight/2.);
+				RecoThreePlaneChi2LogLikelihoodPlot->Fill(reco_Pmu_ThreePlaneLogLikelihood,weight/2.);
+				RecoThreePlaneChi2LogLikelihoodPlot->Fill(reco_Pp_ThreePlaneLogLikelihood,weight/2.);
 
-			}
+				// --------------------------------------------------------------------------------------------------------------------------
+
+				// Overlay particle breakdown using the Backtracker
+
+				if (CandidateMu_MCParticle_Pdg->size() > 0 && CandidateP_MCParticle_Pdg->size() > 0 ) {
+
+					if (CandidateMu_MCParticle_Pdg->at(0) == MuonPdg) {
+
+						MuonRecoChi2Plot->Fill(reco_Pmu_chi2,weight);		
+						MuonRecoThreePlaneChi2Plot->Fill(reco_Pmu_ThreePlanechi2,weight);
+						MuonRecoThreePlaneChi2LogLikelihoodPlot->Fill(reco_Pmu_ThreePlaneLogLikelihood,weight/2.);	
+
+					}
+
+					if (CandidateP_MCParticle_Pdg->at(0) == MuonPdg) {
+
+						MuonRecoChi2Plot->Fill(reco_Pp_chi2,weight);		
+						MuonRecoThreePlaneChi2Plot->Fill(reco_Pp_ThreePlanechi2,weight);
+						MuonRecoThreePlaneChi2LogLikelihoodPlot->Fill(reco_Pp_ThreePlaneLogLikelihood,weight/2.);	
+
+					}
+
+					// ----------------------------------------------------------------------------------------------------------------
+
+					if (CandidateMu_MCParticle_Pdg->at(0) == ProtonPdg) {
+
+						ProtonRecoChi2Plot->Fill(reco_Pmu_chi2,weight);		
+						ProtonRecoThreePlaneChi2Plot->Fill(reco_Pmu_ThreePlanechi2,weight);
+						ProtonRecoThreePlaneChi2LogLikelihoodPlot->Fill(reco_Pmu_ThreePlaneLogLikelihood,weight/2.);	
+
+					}
+
+					if (CandidateP_MCParticle_Pdg->at(0) == ProtonPdg) {
+
+						ProtonRecoChi2Plot->Fill(reco_Pp_chi2,weight);		
+						ProtonRecoThreePlaneChi2Plot->Fill(reco_Pp_ThreePlanechi2,weight);
+						ProtonRecoThreePlaneChi2LogLikelihoodPlot->Fill(reco_Pp_ThreePlaneLogLikelihood,weight/2.);	
+
+					}
+
+					// -----------------------------------------------------------------------------------------------------------------
+
+					if (CandidateMu_MCParticle_Pdg->at(0) == AbsChargedPionPdg) {
+
+						PionRecoChi2Plot->Fill(reco_Pmu_chi2,weight);		
+						PionRecoThreePlaneChi2Plot->Fill(reco_Pmu_ThreePlanechi2,weight);
+						PionRecoThreePlaneChi2LogLikelihoodPlot->Fill(reco_Pmu_ThreePlaneLogLikelihood,weight/2.);	
+
+					}
+
+					if (CandidateP_MCParticle_Pdg->at(0) == AbsChargedPionPdg) {
+
+						PionRecoChi2Plot->Fill(reco_Pp_chi2,weight);		
+						PionRecoThreePlaneChi2Plot->Fill(reco_Pp_ThreePlanechi2,weight);
+						PionRecoThreePlaneChi2LogLikelihoodPlot->Fill(reco_Pp_ThreePlaneLogLikelihood,weight/2.);	
+
+					}
+
+				} // End of the overlay particle breakdown using the Backtracker
+
+				else {
+
+					CosmicRecoChi2Plot->Fill(reco_Pmu_chi2,weight);
+					CosmicRecoChi2Plot->Fill(reco_Pp_chi2,weight);
+
+					CosmicRecoThreePlaneChi2Plot->Fill(reco_Pmu_ThreePlanechi2,weight);
+					CosmicRecoThreePlaneChi2Plot->Fill(reco_Pp_ThreePlanechi2,weight);
+
+					CosmicRecoThreePlaneChi2LogLikelihoodPlot->Fill(reco_Pmu_ThreePlaneLogLikelihood,weight/2.);
+					CosmicRecoThreePlaneChi2LogLikelihoodPlot->Fill(reco_Pp_ThreePlaneLogLikelihood,weight/2.);
+
+				}
+
+			} // End of the Overlay case and the breakdown into CC1p/NonCC1p & QE,MEC,RES,DIS
 
 			// -------------------------------------------------------------------------------------------------------------------------
 
 		} // End of the loop over the events
-
-		file->cd();
-		file->Write();
-		file->Close();
 
 		std::cout << std::endl << "Created a new file: " << FileName << std::endl << std::endl << std::endl;
 		std::cout << "---------------------------------------------------------------------" << std::endl << std::endl;
@@ -1409,84 +1529,290 @@ void t::Loop() {
 		
 		// -------------------------------------------------------------------------------------------------------------------------	
 
+		double CC1pEventsPassingSelectionCutsError = 0;
+		double CC1p1piEventsPassingSelectionCutsError = 0;
+		double CC2pEventsPassingSelectionCutsError = 0;
+		double CC2p1piEventsPassingSelectionCutsError = 0;
+		double CC3pEventsPassingSelectionCutsError = 0;
+		double CC3p1piEventsPassingSelectionCutsError = 0;
+		double CC3p2piEventsPassingSelectionCutsError = 0;
+		double MisIndetifiedMuonAsPionError = 0;
+		double MisIndetifiedProtonAsPionError = 0;
+		double MisIndetifiedProtonAsDeuteriumError = 0;
+		double MisIndetifiedProtonAsElectronError = 0;
+		double MisIndetifiedMuPToElectronElectronError = 0;
+		double MisIndetifiedMuPToMuMuError = 0;
+		double MisIndetifiedMuPToPiPiError = 0;
+		double MisIndetifiedMuonAsProtonError = 0;
+		double MisIndetifiedMuonAsAntiMuonError = 0;
+		double CandidateMuon_MCParticle_OutFVError = 0;
+		double CandidateProton_MCParticle_OutFVError = 0;
+		double MultipleVerticesError = 0;
+		double InTimeCosmicsError = 0;
+
 		if ( string(fWhichSample).find("Overlay9") != std::string::npos ) {
 
-		// All reconstructed CC1p events passing the selection criteria
+			// All reconstructed CC1p events passing the selection criteria
 
-		double CC1pEventsPassingSelectionCutsError = sqrt(CC1pEventsPassingSelectionCuts);
+			CC1pEventsPassingSelectionCutsError = sqrt(CC1pEventsPassingSelectionCuts);
 
-		std::cout << std::endl << "Number of CC1p events passing our selection criteria = " << CC1pEventsPassingSelectionCuts << " +/- " 
-		<< CC1pEventsPassingSelectionCutsError
-		<< " (POT normalized: " << CC1pEventsPassingSelectionCuts*POTScale << " +/- " 
-		<< CC1pEventsPassingSelectionCutsError*POTScale << ")" << std::endl;	
-		
-		// -------------------------------------------------------------------------------------------------------------------------	
+			std::cout << std::endl << "Number of CC1p events passing our selection criteria = " << CC1pEventsPassingSelectionCuts << " +/- " 
+			<< CC1pEventsPassingSelectionCutsError
+			<< " (POT normalized: " << CC1pEventsPassingSelectionCuts*POTScale << " +/- " 
+			<< CC1pEventsPassingSelectionCutsError*POTScale << ")" << std::endl;	
+			
+			// -------------------------------------------------------------------------------------------------------------------------	
 
-		// All reconstructed CC1p1pi events passing the selection criteria
+			// All reconstructed CC1p1pi events passing the selection criteria
 
-		double CC1p1piEventsPassingSelectionCutsError = sqrt(CC1p1piEventsPassingSelectionCuts);
+			CC1p1piEventsPassingSelectionCutsError = sqrt(CC1p1piEventsPassingSelectionCuts);
 
-		std::cout << std::endl << "Number of CC1p1pi events passing our selection criteria = " << CC1p1piEventsPassingSelectionCuts << " +/- " 
-		<< CC1p1piEventsPassingSelectionCutsError
-		<< " (POT normalized: " << CC1p1piEventsPassingSelectionCuts*POTScale << " +/- " 
-		<< CC1p1piEventsPassingSelectionCutsError*POTScale << ")" << std::endl;
-		
-		// -------------------------------------------------------------------------------------------------------------------------	
+			std::cout << std::endl << "Number of CC1p1pi events passing our selection criteria = " << CC1p1piEventsPassingSelectionCuts << " +/- " 
+			<< CC1p1piEventsPassingSelectionCutsError
+			<< " (POT normalized: " << CC1p1piEventsPassingSelectionCuts*POTScale << " +/- " 
+			<< CC1p1piEventsPassingSelectionCutsError*POTScale << ")" << std::endl;
+			
+			// -------------------------------------------------------------------------------------------------------------------------	
 
-		// All reconstructed CC2p events passing the selection criteria
+			// All reconstructed CC2p events passing the selection criteria
 
-		double CC2pEventsPassingSelectionCutsError = sqrt(CC2pEventsPassingSelectionCuts);
+			CC2pEventsPassingSelectionCutsError = sqrt(CC2pEventsPassingSelectionCuts);
 
-		std::cout << std::endl << "Number of CC2p events passing our selection criteria = " << CC2pEventsPassingSelectionCuts << " +/- " 
-		<< CC2pEventsPassingSelectionCutsError
-		<< " (POT normalized: " << CC2pEventsPassingSelectionCuts*POTScale << " +/- " 
-		<< CC2pEventsPassingSelectionCutsError*POTScale << ")" << std::endl;
+			std::cout << std::endl << "Number of CC2p events passing our selection criteria = " << CC2pEventsPassingSelectionCuts << " +/- " 
+			<< CC2pEventsPassingSelectionCutsError
+			<< " (POT normalized: " << CC2pEventsPassingSelectionCuts*POTScale << " +/- " 
+			<< CC2pEventsPassingSelectionCutsError*POTScale << ")" << std::endl;
 
-		// -------------------------------------------------------------------------------------------------------------------------	
+			// -------------------------------------------------------------------------------------------------------------------------	
 
-		// All reconstructed CC2p1pi events passing the selection criteria
+			// All reconstructed CC2p1pi events passing the selection criteria
 
-		double CC2p1piEventsPassingSelectionCutsError = sqrt(CC2p1piEventsPassingSelectionCuts);
+			CC2p1piEventsPassingSelectionCutsError = sqrt(CC2p1piEventsPassingSelectionCuts);
 
-		std::cout << std::endl << "Number of CC2p1pi events passing our selection criteria = " << CC2p1piEventsPassingSelectionCuts << " +/- " 
-		<< CC2p1piEventsPassingSelectionCutsError
-		<< " (POT normalized: " << CC2p1piEventsPassingSelectionCuts*POTScale << " +/- " 
-		<< CC2p1piEventsPassingSelectionCutsError*POTScale << ")" << std::endl;						
+			std::cout << std::endl << "Number of CC2p1pi events passing our selection criteria = " << CC2p1piEventsPassingSelectionCuts << " +/- " 
+			<< CC2p1piEventsPassingSelectionCutsError
+			<< " (POT normalized: " << CC2p1piEventsPassingSelectionCuts*POTScale << " +/- " 
+			<< CC2p1piEventsPassingSelectionCutsError*POTScale << ")" << std::endl;						
 
-		// -------------------------------------------------------------------------------------------------------------------------	
+			// -------------------------------------------------------------------------------------------------------------------------	
 
-		// All reconstructed CC3p events passing the selection criteria
+			// All reconstructed CC3p events passing the selection criteria
 
-		double CC3pEventsPassingSelectionCutsError = sqrt(CC3pEventsPassingSelectionCuts);
+			CC3pEventsPassingSelectionCutsError = sqrt(CC3pEventsPassingSelectionCuts);
 
-		std::cout << std::endl << "Number of CC3p events passing our selection criteria = " << CC3pEventsPassingSelectionCuts << " +/- " 
-		<< CC3pEventsPassingSelectionCutsError
-		<< " (POT normalized: " << CC3pEventsPassingSelectionCuts*POTScale << " +/- " 
-		<< CC3pEventsPassingSelectionCutsError*POTScale << ")" << std::endl;
+			std::cout << std::endl << "Number of CC3p events passing our selection criteria = " << CC3pEventsPassingSelectionCuts << " +/- " 
+			<< CC3pEventsPassingSelectionCutsError
+			<< " (POT normalized: " << CC3pEventsPassingSelectionCuts*POTScale << " +/- " 
+			<< CC3pEventsPassingSelectionCutsError*POTScale << ")" << std::endl;
 
-		// -------------------------------------------------------------------------------------------------------------------------	
+			// -------------------------------------------------------------------------------------------------------------------------	
 
-		// All reconstructed CC3p1pi events passing the selection criteria
+			// All reconstructed CC3p1pi events passing the selection criteria
 
-		double CC3p1piEventsPassingSelectionCutsError = sqrt(CC3p1piEventsPassingSelectionCuts);
+			CC3p1piEventsPassingSelectionCutsError = sqrt(CC3p1piEventsPassingSelectionCuts);
 
-		std::cout << std::endl << "Number of CC3p1pi events passing our selection criteria = " << CC3p1piEventsPassingSelectionCuts << " +/- " 
-		<< CC3p1piEventsPassingSelectionCutsError
-		<< " (POT normalized: " << CC3p1piEventsPassingSelectionCuts*POTScale << " +/- " 
-		<< CC3p1piEventsPassingSelectionCutsError*POTScale << ")" << std::endl;
+			std::cout << std::endl << "Number of CC3p1pi events passing our selection criteria = " << CC3p1piEventsPassingSelectionCuts << " +/- " 
+			<< CC3p1piEventsPassingSelectionCutsError
+			<< " (POT normalized: " << CC3p1piEventsPassingSelectionCuts*POTScale << " +/- " 
+			<< CC3p1piEventsPassingSelectionCutsError*POTScale << ")" << std::endl;
 
-		// -------------------------------------------------------------------------------------------------------------------------	
+			// -------------------------------------------------------------------------------------------------------------------------	
 
-		// All reconstructed CC3p2pi events passing the selection criteria
+			// All reconstructed CC3p2pi events passing the selection criteria
 
-		double CC3p2piEventsPassingSelectionCutsError = sqrt(CC3p2piEventsPassingSelectionCuts);
+			CC3p2piEventsPassingSelectionCutsError = sqrt(CC3p2piEventsPassingSelectionCuts);
 
-		std::cout << std::endl << "Number of CC3p2pi events passing our selection criteria = " << CC3p2piEventsPassingSelectionCuts << " +/- " 
-		<< CC3p2piEventsPassingSelectionCutsError
-		<< " (POT normalized: " << CC3p2piEventsPassingSelectionCuts*POTScale << " +/- " 
-		<< CC3p2piEventsPassingSelectionCutsError*POTScale << ")" << std::endl;	
+			std::cout << std::endl << "Number of CC3p2pi events passing our selection criteria = " << CC3p2piEventsPassingSelectionCuts << " +/- " 
+			<< CC3p2piEventsPassingSelectionCutsError
+			<< " (POT normalized: " << CC3p2piEventsPassingSelectionCuts*POTScale << " +/- " 
+			<< CC3p2piEventsPassingSelectionCutsError*POTScale << ")" << std::endl;	
+
+			// -------------------------------------------------------------------------------------------------------------------------	
+
+			// Mis-identified muon-pion events passing the selection criteria
+
+			MisIndetifiedMuonAsPionError = sqrt(MisIndetifiedMuonAsPion);
+
+			std::cout << std::endl << "Number of pi-p events passing our selection criteria = " << MisIndetifiedMuonAsPion << " +/- " 
+			<< MisIndetifiedMuonAsPionError
+			<< " (POT normalized: " << MisIndetifiedMuonAsPion*POTScale << " +/- " 
+			<< MisIndetifiedMuonAsPionError*POTScale << ")" << std::endl;	
+
+			// -------------------------------------------------------------------------------------------------------------------------	
+
+			// Mis-identified muon-proton events passing the selection criteria
+
+			MisIndetifiedMuonAsProtonError = sqrt(MisIndetifiedMuonAsProton);
+
+			std::cout << std::endl << "Number of p-p events passing our selection criteria = " << MisIndetifiedMuonAsProton << " +/- " 
+			<< MisIndetifiedMuonAsProtonError
+			<< " (POT normalized: " << MisIndetifiedMuonAsProton*POTScale << " +/- " 
+			<< MisIndetifiedMuonAsProtonError*POTScale << ")" << std::endl;	
+
+			// -------------------------------------------------------------------------------------------------------------------------	
+
+			// Mis-identified muon- anti-muon events passing the selection criteria
+
+			MisIndetifiedMuonAsAntiMuonError = sqrt(MisIndetifiedMuonAsAntiMuon);
+
+			std::cout << std::endl << "Number of  anti-muon - p events passing our selection criteria = " << MisIndetifiedMuonAsAntiMuon << " +/- " 
+			<< MisIndetifiedMuonAsAntiMuonError
+			<< " (POT normalized: " << MisIndetifiedMuonAsAntiMuon*POTScale << " +/- " 
+			<< MisIndetifiedMuonAsAntiMuonError*POTScale << ")" << std::endl;
+
+			// -------------------------------------------------------------------------------------------------------------------------	
+
+			// Mis-identified muon-pion events passing the selection criteria
+
+			MisIndetifiedProtonAsPionError = sqrt(MisIndetifiedProtonAsPion);
+
+			std::cout << std::endl << "Number of mu-pion events passing our selection criteria = " << MisIndetifiedProtonAsPion << " +/- " 
+			<< MisIndetifiedProtonAsPionError
+			<< " (POT normalized: " << MisIndetifiedProtonAsPion*POTScale << " +/- " 
+			<< MisIndetifiedProtonAsPionError*POTScale << ")" << std::endl;
+
+			// -------------------------------------------------------------------------------------------------------------------------	
+
+			// Mis-identified muon-pion events passing the selection criteria
+
+			MisIndetifiedProtonAsDeuteriumError = sqrt(MisIndetifiedProtonAsDeuterium);
+
+			std::cout << std::endl << "Number of mu-D events passing our selection criteria = " << MisIndetifiedProtonAsDeuterium << " +/- " 
+			<< MisIndetifiedProtonAsDeuteriumError
+			<< " (POT normalized: " << MisIndetifiedProtonAsDeuterium*POTScale << " +/- " 
+			<< MisIndetifiedProtonAsDeuteriumError*POTScale << ")" << std::endl;
+
+			// -------------------------------------------------------------------------------------------------------------------------	
+
+			// Mis-identified muon-pion events passing the selection criteria
+
+			MisIndetifiedProtonAsElectronError = sqrt(MisIndetifiedProtonAsElectron);
+
+			std::cout << std::endl << "Number of mu-e events passing our selection criteria = " << MisIndetifiedProtonAsElectron << " +/- " 
+			<< MisIndetifiedProtonAsElectronError
+			<< " (POT normalized: " << MisIndetifiedProtonAsElectron*POTScale << " +/- " 
+			<< MisIndetifiedProtonAsElectronError*POTScale << ")" << std::endl;
+
+			// -------------------------------------------------------------------------------------------------------------------------	
+
+			// Mis-identified e-e events passing the selection criteria
+
+			MisIndetifiedMuPToElectronElectronError = sqrt(MisIndetifiedMuPToElectronElectron);
+
+			std::cout << std::endl << "Number of e-e events passing our selection criteria = " << MisIndetifiedMuPToElectronElectron << " +/- " 
+			<< MisIndetifiedMuPToElectronElectronError
+			<< " (POT normalized: " << MisIndetifiedMuPToElectronElectron*POTScale << " +/- " 
+			<< MisIndetifiedMuPToElectronElectronError*POTScale << ")" << std::endl;
+
+			// -------------------------------------------------------------------------------------------------------------------------	
+
+			// Mis-identified mu-mu events passing the selection criteria
+
+			MisIndetifiedMuPToMuMuError = sqrt(MisIndetifiedMuPToMuMu);
+
+			std::cout << std::endl << "Number of mu-mu events passing our selection criteria = " << MisIndetifiedMuPToMuMu << " +/- " 
+			<< MisIndetifiedMuPToMuMuError
+			<< " (POT normalized: " << MisIndetifiedMuPToMuMu*POTScale << " +/- " 
+			<< MisIndetifiedMuPToMuMuError*POTScale << ")" << std::endl;
+
+			// -------------------------------------------------------------------------------------------------------------------------	
+
+			// Mis-identified pi-pi events passing the selection criteria
+
+			MisIndetifiedMuPToPiPiError = sqrt(MisIndetifiedMuPToPiPi);
+
+			std::cout << std::endl << "Number of pi-pi events passing our selection criteria = " << MisIndetifiedMuPToPiPi << " +/- " 
+			<< MisIndetifiedMuPToPiPiError
+			<< " (POT normalized: " << MisIndetifiedMuPToPiPi*POTScale << " +/- " 
+			<< MisIndetifiedMuPToPiPiError*POTScale << ")" << std::endl;
+
+			// -------------------------------------------------------------------------------------------------------------------------	
+
+			// Muon Candidate MC Particle outside FV
+
+			CandidateMuon_MCParticle_OutFVError = sqrt(CandidateMuon_MCParticle_OutFV);
+
+			std::cout << std::endl << "Number of events with Muon Candidate MC Particle outside FV = " << CandidateMuon_MCParticle_OutFV << " +/- " 
+			<< CandidateMuon_MCParticle_OutFVError
+			<< " (POT normalized: " << CandidateMuon_MCParticle_OutFV*POTScale << " +/- " 
+			<< CandidateMuon_MCParticle_OutFVError*POTScale << ")" << std::endl;	
+
+			// -------------------------------------------------------------------------------------------------------------------------	
+
+			// Muon Candidate MC Particle outside FV
+
+			CandidateProton_MCParticle_OutFVError = sqrt(CandidateProton_MCParticle_OutFV);
+
+			std::cout << std::endl << "Number of events with Proton Candidate MC Particle outside FV = " << CandidateProton_MCParticle_OutFV << " +/- " 
+			<< CandidateProton_MCParticle_OutFVError
+			<< " (POT normalized: " << CandidateProton_MCParticle_OutFV*POTScale << " +/- " 
+			<< CandidateProton_MCParticle_OutFVError*POTScale << ")" << std::endl;
+
+			// -------------------------------------------------------------------------------------------------------------------------	
+
+			// Multiple Vertices
+
+			MultipleVerticesError = sqrt(MultipleVertices);
+
+			std::cout << std::endl << "Number of events with multiple vertices = " << MultipleVertices << " +/- " 
+			<< MultipleVerticesError
+			<< " (POT normalized: " << MultipleVertices*POTScale << " +/- " 
+			<< MultipleVerticesError*POTScale << ")" << std::endl;
+
+			// -------------------------------------------------------------------------------------------------------------------------	
+
+			// In-time cosmics
+
+			InTimeCosmicsError = sqrt(InTimeCosmics);
+
+			std::cout << std::endl << "Number of in-time cosmics = " << InTimeCosmics << " +/- " 
+			<< InTimeCosmicsError
+			<< " (POT normalized: " << InTimeCosmics*POTScale << " +/- " 
+			<< InTimeCosmicsError*POTScale << ")" << std::endl;	
 
 		}
+
+		cout << endl;
+
+		// -------------------------------------------------------------------------------------------------------------------------
+
+		// Keep track of the event counters and the POT normalization
+
+		POTScalePlot->SetBinContent(1,POTScale);
+		POTScalePlot->SetBinError(1,0);
+
+		NEventsPlot->SetBinContent(1,nentries);
+		NEventsPlot->SetBinError(1,nentriesError);
+
+		NSelectedPlot->SetBinContent(1,NEventsPassingSelectionCuts);
+		NSelectedPlot->SetBinError(1,NEventsPassingSelectionCutsError);
+
+		NCC1pPlot->SetBinContent(1,CC1pEventsPassingSelectionCuts);
+		NCC1pPlot->SetBinError(1,CC1pEventsPassingSelectionCutsError);
+
+		NCC1p1piPlot->SetBinContent(1,CC1p1piEventsPassingSelectionCuts);
+		NCC1p1piPlot->SetBinError(1,CC1p1piEventsPassingSelectionCutsError);
+
+		NCC2pPlot->SetBinContent(1,CC2pEventsPassingSelectionCuts);
+		NCC2pPlot->SetBinError(1,CC2pEventsPassingSelectionCutsError);
+
+		NCC2p1piPlot->SetBinContent(1,CC2p1piEventsPassingSelectionCuts);
+		NCC2p1piPlot->SetBinError(1,CC2p1piEventsPassingSelectionCutsError);
+
+		NCC3pPlot->SetBinContent(1,CC3pEventsPassingSelectionCuts);
+		NCC3pPlot->SetBinError(1,CC3pEventsPassingSelectionCutsError);
+
+		NCC3p1piPlot->SetBinContent(1,CC3p1piEventsPassingSelectionCuts);
+		NCC3p1piPlot->SetBinError(1,CC3p1piEventsPassingSelectionCutsError);
+
+		NCC3p2piPlot->SetBinContent(1,CC3p2piEventsPassingSelectionCuts);
+		NCC3p2piPlot->SetBinError(1,CC3p2piEventsPassingSelectionCutsError);
+
+		// -------------------------------------------------------------------------------------------------------------------------	
+
+		file->cd();
+		file->Write();
+		file->Close();
 
 		// -------------------------------------------------------------------------------------------------------------------------	
 

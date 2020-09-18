@@ -28,6 +28,10 @@ void Create1DPlotsTHStack_InteractionBreakDown() {
 
 	// ----------------------------------------------------------------------------------------------------------------------------------------
 
+//	PlotNames.push_back("RecoPMissMinusPlot");
+//	PlotNames.push_back("RecoPMissPlot");
+//	PlotNames.push_back("RecokMissPlot");
+
 	PlotNames.push_back("RecoNuScorePlot");
 	PlotNames.push_back("RecoFlashScorePlot");
 
@@ -54,7 +58,6 @@ void Create1DPlotsTHStack_InteractionBreakDown() {
 	PlotNames.push_back("RecoECalPlot");
 	PlotNames.push_back("RecoEQEPlot");
 	PlotNames.push_back("RecoQ2Plot");
-
 
 	const int N1DPlots = PlotNames.size();
 	cout << "Number of 1D Plots = " << N1DPlots << endl;
@@ -87,7 +90,7 @@ void Create1DPlotsTHStack_InteractionBreakDown() {
 
 			Cuts = Cuts + VectorCuts[i];
 
-	//	} // If we want to run only on a specific cut combination, include this } and remove the one at the end of the program
+//		} // If we want to run only on a specific cut combination, include this } and remove the one at the end of the program
 
 			TString PathToFiles = "OutputFiles/"+UBCodeVersion+"/"+Cuts+"/";
 
@@ -338,7 +341,7 @@ void Create1DPlotsTHStack_InteractionBreakDown() {
 				RatioLine->SetLineWidth(4);
 				RatioLine->SetLineColor(kPink+8);
 				RatioLine->SetLineStyle(4);
-				RatioLine->Draw("same");
+				//RatioLine->Draw("same");
 		
 				topPad->cd();
 				leg[WhichPlot]->SetTextSize(0.5);
