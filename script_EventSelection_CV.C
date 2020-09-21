@@ -13,10 +13,10 @@
 	
 	// Run 3
 
-//	WhichSampleArray.push_back("BeamOn9_Run3");
-//	WhichSampleArray.push_back("ExtBNB9_Run3");
-//	WhichSampleArray.push_back("OverlayDirt9_Run3");
-//	WhichSampleArray.push_back("Overlay9_Run3");	
+	WhichSampleArray.push_back("BeamOn9_Run3");
+	WhichSampleArray.push_back("ExtBNB9_Run3");
+	WhichSampleArray.push_back("OverlayDirt9_Run3");
+	WhichSampleArray.push_back("Overlay9_Run3");	
 
 	// -----------------------------------------------------------------------------------------
 

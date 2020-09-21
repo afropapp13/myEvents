@@ -857,10 +857,10 @@ void myRecoAnalysis::Loop() {
 			if (DeltaAlphaT < ArrayNBinsDeltaAlphaT[0]) { continue; }
 			if (DeltaPhiT < ArrayNBinsDeltaPhiT[0]) { continue; }
 
-/*			if (ECal < ArrayNBinsECal[0]) { continue; }
+			if (ECal < ArrayNBinsECal[0]) { continue; }
 			if (EQE < ArrayNBinsEQE[0]) { continue; }
 			if (reco_Q2 < ArrayNBinsQ2[0]) { continue; }
-*/
+
 			// --------------------------------------------------------------------------------------------------------------------
 
 			if (reco_Pmu_mcs > ArrayNBinsMuonMomentum[NBinsMuonMomentum]) { continue; }
@@ -879,10 +879,10 @@ void myRecoAnalysis::Loop() {
 			if (DeltaAlphaT > ArrayNBinsDeltaAlphaT[NBinsDeltaAlphaT]) { continue; }
 			if (DeltaPhiT > ArrayNBinsDeltaPhiT[NBinsDeltaPhiT]) { continue; }
 
-/*			if (ECal > ArrayNBinsECal[NBinsECal]) { continue; }
+			if (ECal > ArrayNBinsECal[NBinsECal]) { continue; }
 			if (EQE > ArrayNBinsEQE[NBinsEQE]) { continue; }
 			if (reco_Q2 > ArrayNBinsQ2[NBinsQ2]) { continue; }
-*/
+
 			// ----------------------------------------------------------------------------------------------------------------------------
 			// ---------------------------------------------------------------------------------------------------------------------------
 
@@ -1550,7 +1550,8 @@ void myRecoAnalysis::Loop() {
 		double MultipleVerticesError = 0;
 		double InTimeCosmicsError = 0;
 
-		if ( string(fWhichSample).find("Overlay9") != std::string::npos ) {
+		if ( (fWhichSample == "Overlay9_Run1" || fWhichSample == "Overlay9_Run2" || fWhichSample == "Overlay9_Run3" || fWhichSample == "Overlay9_Run4" || fWhichSample == "Overlay9_Run5")
+			&& fUniverseIndex != -1) {
 
 			// All reconstructed CC1p events passing the selection criteria
 
