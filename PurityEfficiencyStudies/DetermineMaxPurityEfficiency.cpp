@@ -170,7 +170,7 @@ void DetermineMaxPurityEfficiency() {
 	}
 
 	legNuScorePurity->SetBorderSize(0);
-	legNuScorePurity->SetTextSize(TextSize-0.02);
+	legNuScorePurity->SetTextSize(TextSize-0.03);
 	legNuScorePurity->SetTextFont(TextFont);
 	legNuScorePurity->Draw();
 
@@ -225,7 +225,7 @@ void DetermineMaxPurityEfficiency() {
 	}
 
 	legNuScoreEfficiency->SetBorderSize(0);
-	legNuScoreEfficiency->SetTextSize(TextSize-0.02);
+	legNuScoreEfficiency->SetTextSize(TextSize-0.03);
 	legNuScoreEfficiency->SetTextFont(TextFont);
 	legNuScoreEfficiency->Draw();
 
@@ -259,7 +259,7 @@ void DetermineMaxPurityEfficiency() {
 		NuScoreProductGraph->GetXaxis()->SetLabelFont(TextFont);
 		NuScoreProductGraph->GetXaxis()->SetLabelSize(TextSize);
 
-		NuScoreProductGraph->GetYaxis()->SetRangeUser(0,0.2);
+		NuScoreProductGraph->GetYaxis()->SetRangeUser(0,0.25);
 		NuScoreProductGraph->GetYaxis()->SetNdivisions(6);
 		NuScoreProductGraph->GetYaxis()->SetTitle("Purity*Efficiency");
 		NuScoreProductGraph->GetYaxis()->SetTitleOffset(0.95);
@@ -280,7 +280,7 @@ void DetermineMaxPurityEfficiency() {
 	}
 
 	legNuScoreProduct->SetBorderSize(0);
-	legNuScoreProduct->SetTextSize(TextSize-0.02);
+	legNuScoreProduct->SetTextSize(TextSize-0.03);
 	legNuScoreProduct->SetTextFont(TextFont);
 	legNuScoreProduct->Draw();
 
