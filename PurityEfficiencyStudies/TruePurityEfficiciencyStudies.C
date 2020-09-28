@@ -59,7 +59,7 @@ void TruePurityEfficiciencyStudies::Loop() {
 
 	// Output Files
 
-	TString FileName = "OutputFiles/TruthPurityEfficiencyStudies_Overlay9_Run1_"+Extension+Cuts+".root";
+	TString FileName = "OutputFiles/TruthPurityEfficiencyStudies_Overlay9_Run1"+Extension+Cuts+".root";
 	TFile* OutputFile = new TFile(FileName,"recreate");
 	std::cout << std::endl << "File " << FileName << " to be created"<< std::endl << std::endl;
 

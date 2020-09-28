@@ -108,7 +108,7 @@ public :
    vector<double>  *CandidateMu_P_MCS;   
    vector<double>  *CandidateMu_Phi;
    vector<double>  *CandidateMu_CosTheta;
-   vector<double>  *CandidateMu_Length;
+//   vector<double>  *CandidateMu_Length;
    vector<double>  *CandidateMu_Chi2_YPlane;
    vector<double>  *CandidateMu_ThreePlaneChi2;
    vector<double>  *CandidateMu_ThreePlaneLogLikelihood;
@@ -141,7 +141,7 @@ public :
    vector<double>  *CandidateP_P_MCS;   
    vector<double>  *CandidateP_Phi;
    vector<double>  *CandidateP_CosTheta;
-   vector<double>  *CandidateP_Length;
+//   vector<double>  *CandidateP_Length;
    vector<double>  *CandidateP_Chi2_YPlane;
    vector<double>  *CandidateP_ThreePlaneChi2;
    vector<double>  *CandidateP_ThreePlaneLogLikelihood;
@@ -300,7 +300,7 @@ public :
    TBranch        *b_CandidateP_P_MCS;   //!   
    TBranch        *b_CandidateP_Phi;   //!
    TBranch        *b_CandidateP_CosTheta;   //!
-   TBranch        *b_CandidateP_Length;   //!
+//   TBranch        *b_CandidateP_Length;   //!
    TBranch        *b_CandidateP_Chi2_YPlane;   //!
    TBranch        *b_CandidateP_ThreePlaneChi2;   //!
    TBranch        *b_CandidateP_ThreePlaneLogLikelihood;   //!
@@ -477,7 +477,7 @@ void PurityEfficiencyStudies::Init(TTree *tree)
    CandidateMu_P_MCS = 0;   
    CandidateMu_Phi = 0;
    CandidateMu_CosTheta = 0;
-   CandidateMu_Length = 0;
+//   CandidateMu_Length = 0;
    CandidateMu_Chi2_YPlane = 0;
    CandidateMu_ThreePlaneChi2 = 0;
    CandidateMu_ThreePlaneLogLikelihood = 0;
@@ -510,7 +510,7 @@ void PurityEfficiencyStudies::Init(TTree *tree)
    CandidateP_P_MCS = 0;   
    CandidateP_Phi = 0;
    CandidateP_CosTheta = 0;
-   CandidateP_Length = 0;
+//   CandidateP_Length = 0;
    CandidateP_Chi2_YPlane = 0;
    CandidateP_ThreePlaneChi2 = 0;
    CandidateP_ThreePlaneLogLikelihood = 0;
@@ -640,7 +640,7 @@ void PurityEfficiencyStudies::Init(TTree *tree)
    fChain->SetBranchAddress("CandidateMu_P_MCS", &CandidateMu_P_MCS, &b_CandidateMu_P_MCS);   
    fChain->SetBranchAddress("CandidateMu_Phi", &CandidateMu_Phi, &b_CandidateMu_Phi);
    fChain->SetBranchAddress("CandidateMu_CosTheta", &CandidateMu_CosTheta, &b_CandidateMu_CosTheta);
-   fChain->SetBranchAddress("CandidateMu_Length", &CandidateMu_Length, &b_CandidateMu_Length);
+//   fChain->SetBranchAddress("CandidateMu_Length", &CandidateMu_Length, &b_CandidateMu_Length);
    fChain->SetBranchAddress("CandidateMu_Chi2_YPlane", &CandidateMu_Chi2_YPlane, &b_CandidateMu_Chi2_YPlane);
    fChain->SetBranchAddress("CandidateMu_ThreePlaneChi2", &CandidateMu_ThreePlaneChi2, &b_CandidateMu_ThreePlaneChi2);
    fChain->SetBranchAddress("CandidateMu_ThreePlaneLogLikelihood", &CandidateMu_ThreePlaneLogLikelihood, &b_CandidateMu_ThreePlaneLogLikelihood);
@@ -673,7 +673,7 @@ void PurityEfficiencyStudies::Init(TTree *tree)
    fChain->SetBranchAddress("CandidateP_P_MCS", &CandidateP_P_MCS, &b_CandidateP_P_MCS);   
    fChain->SetBranchAddress("CandidateP_Phi", &CandidateP_Phi, &b_CandidateP_Phi);
    fChain->SetBranchAddress("CandidateP_CosTheta", &CandidateP_CosTheta, &b_CandidateP_CosTheta);
-   fChain->SetBranchAddress("CandidateP_Length", &CandidateP_Length, &b_CandidateP_Length);
+//   fChain->SetBranchAddress("CandidateP_Length", &CandidateP_Length, &b_CandidateP_Length);
    fChain->SetBranchAddress("CandidateP_Chi2_YPlane", &CandidateP_Chi2_YPlane, &b_CandidateP_Chi2_YPlane);
    fChain->SetBranchAddress("CandidateP_ThreePlaneChi2", &CandidateP_ThreePlaneChi2, &b_CandidateP_ThreePlaneChi2);
    fChain->SetBranchAddress("CandidateP_ThreePlaneLogLikelihood", &CandidateP_ThreePlaneLogLikelihood, &b_CandidateP_ThreePlaneLogLikelihood);
