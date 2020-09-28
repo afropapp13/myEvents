@@ -259,7 +259,7 @@ void DetermineMaxPurityEfficiency() {
 		NuScoreProductGraph->GetXaxis()->SetLabelFont(TextFont);
 		NuScoreProductGraph->GetXaxis()->SetLabelSize(TextSize);
 
-		NuScoreProductGraph->GetYaxis()->SetRangeUser(0,0.15);
+		NuScoreProductGraph->GetYaxis()->SetRangeUser(0,0.2);
 		NuScoreProductGraph->GetYaxis()->SetNdivisions(6);
 		NuScoreProductGraph->GetYaxis()->SetTitle("Purity*Efficiency");
 		NuScoreProductGraph->GetYaxis()->SetTitleOffset(0.95);
