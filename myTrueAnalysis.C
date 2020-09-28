@@ -253,6 +253,10 @@ void myTrueAnalysis::Loop() {
 
 		// ---------------------------------------------------------------------------------------------------------------------------------
 
+		SumWeights += weight / POTScalingFactor;					
+
+		// ---------------------------------------------------------------------------------------------------------------------------------
+
 		// Analysis over the simb::MCParticles
 
 		std::vector<int> VectorTrueMuonIndex; VectorTrueMuonIndex.clear();
@@ -271,32 +275,9 @@ void myTrueAnalysis::Loop() {
 			// --------------------------------------------------------------------------------------------------------------------		
 			
 			// Containment of the vertex defined as the start point of the muon in the TPC
+			// Soft fiducial volume for true vertex
 
-// Soft fiducial volume for true vertex 
-			
-			if (Muon_MCParticle_StartX->at(0) < 3.) { continue; } 
-			if (Muon_MCParticle_StartX->at(0) > 253.) { continue; }
-			if (Muon_MCParticle_StartY->at(0) < -115) { continue; } 
-			if (Muon_MCParticle_StartY->at(0) > 115) { continue; }
-			if (Muon_MCParticle_StartZ->at(0) < 3.) { continue; } 
-			if (Muon_MCParticle_StartZ->at(0) > 1033.) { continue; }
-
-// TPCActive			
-//			if (Muon_MCParticle_StartX->at(0) < 0.) { continue; } 
-//			if (Muon_MCParticle_StartX->at(0) > 256.35) { continue; }
-//			if (Muon_MCParticle_StartY->at(0) < -116.5) { continue; } 
-//			if (Muon_MCParticle_StartY->at(0) > 116.5) { continue; }
-//			if (Muon_MCParticle_StartZ->at(0) < 0.) { continue; } 
-//			if (Muon_MCParticle_StartZ->at(0) > 1036.8) { continue; }						 				
-
-//TPC
-//			if (Muon_MCParticle_StartX->at(0) < -2.) { continue; } 
-//			if (Muon_MCParticle_StartX->at(0) > 258.) { continue; }
-//			if (Muon_MCParticle_StartY->at(0) < -126.) { continue; } 
-//			if (Muon_MCParticle_StartY->at(0) > 126.) { continue; }
-//			if (Muon_MCParticle_StartZ->at(0) < -5.) { continue; } 
-//			if (Muon_MCParticle_StartZ->at(0) > 1041.) { continue; }						 				
-				
+			if (Muon_MCParticle_StartContainment->at(0) == 0) { continue; }
 
 			// --------------------------------------------------------------------------------------------------------------------		
 
@@ -307,16 +288,17 @@ void myTrueAnalysis::Loop() {
 			double TrueMuonPhi_Deg = Muon_MCParticle_Phi->at(0);
 			double TrueMuonPhi = TrueMuonPhi_Deg * TMath::Pi() / 180.;
 			double TrueMuonMomentum_GeV = Muon_MCParticle_Mom->at(0); // GeV
-			double TrueMuonMomentum_MeV = 1000. * TrueMuonMomentum_GeV; // MeV
-			double TrueMuon_KE_MeV = tools.PToKE(MuonPdg,TrueMuonMomentum_MeV); // MeV
-			double TrueMuon_KE_GeV = TrueMuon_KE_MeV / 1000.; // GeV
-			double TrueMuon_E_GeV = TrueMuon_KE_GeV + MuonMass_GeV; // GeV
+//			double TrueMuonMomentum_MeV = 1000. * TrueMuonMomentum_GeV; // MeV
+//			double TrueMuon_KE_MeV = tools.PToKE(MuonPdg,TrueMuonMomentum_MeV); // MeV
+//			double TrueMuon_KE_GeV = TrueMuon_KE_MeV / 1000.; // GeV
+//			double TrueMuon_E_GeV = TrueMuon_KE_GeV + MuonMass_GeV; // GeV
+			double TrueMuon_E_GeV = TMath::Sqrt( TMath::Power(TrueMuonMomentum_GeV,2.) + TMath::Power(MuonMass_GeV,2.) ); // GeV
 //			int TrueMuonStartContainment = Muon_MCParticle_StartContainment->at(0);
 //			int TrueMuonEndContainment = Muon_MCParticle_EndContainment->at(0);
 
-			TVector3 TVector3TrueMuon;
-			TVector3TrueMuon.SetMagThetaPhi(TrueMuonMomentum_GeV,TrueMuonTheta,TrueMuonPhi);
-			TLorentzVector TrueMuon4V(TVector3TrueMuon,TrueMuon_E_GeV);
+//			TVector3 TVector3TrueMuon;
+//			TVector3TrueMuon.SetMagThetaPhi(TrueMuonMomentum_GeV,TrueMuonTheta,TrueMuonPhi);
+//			TLorentzVector TrueMuon4V(TVector3TrueMuon,TrueMuon_E_GeV);
 
 			// True proton
 
@@ -325,16 +307,17 @@ void myTrueAnalysis::Loop() {
 			double TrueProtonPhi_Deg = Proton_MCParticle_Phi->at(0);
 			double TrueProtonPhi = TrueProtonPhi_Deg * TMath::Pi() / 180.;
 			double TrueProtonMomentum_GeV = Proton_MCParticle_Mom->at(0); // GeV
-			double TrueProtonMomentum_MeV = 1000. * TrueProtonMomentum_GeV; // MeV
-			double TrueProton_KE_MeV = tools.PToKE(ProtonPdg,TrueProtonMomentum_MeV); // MeV
-			double TrueProton_KE_GeV = TrueProton_KE_MeV / 1000.; // GeV
-			double TrueProton_E_GeV = TrueProton_KE_GeV + ProtonMass_GeV; // GeV
+//			double TrueProtonMomentum_MeV = 1000. * TrueProtonMomentum_GeV; // MeV
+//			double TrueProton_KE_MeV = tools.PToKE(ProtonPdg,TrueProtonMomentum_MeV); // MeV
+//			double TrueProton_KE_GeV = TrueProton_KE_MeV / 1000.; // GeV
+//			double TrueProton_E_GeV = TrueProton_KE_GeV + ProtonMass_GeV; // GeV
+			double TrueProton_E_GeV = TMath::Sqrt( TMath::Power(TrueProtonMomentum_GeV,2.) + TMath::Power(ProtonMass_GeV,2.) ); // GeV
 //			int TrueProtonStartContainment = Proton_MCParticle_StartContainment->at(0);
 //			int TrueProtonEndContainment = Proton_MCParticle_EndContainment->at(0);
 
-			TVector3 TVector3TrueProton;
-			TVector3TrueProton.SetMagThetaPhi(TrueProtonMomentum_GeV,TrueProtonTheta,TrueProtonPhi);
-			TLorentzVector TrueProton4V(TVector3TrueProton,TrueProton_E_GeV);
+//			TVector3 TVector3TrueProton;
+//			TVector3TrueProton.SetMagThetaPhi(TrueProtonMomentum_GeV,TrueProtonTheta,TrueProtonPhi);
+//			TLorentzVector TrueProton4V(TVector3TrueProton,TrueProton_E_GeV);
 
 			double TrueDeltaPhiProtonMuon_Deg = True_DeltaPhi->at(0);
 			double TrueDeltaThetaProtonMuon_Deg = True_DeltaTheta->at(0);
@@ -421,7 +404,6 @@ void myTrueAnalysis::Loop() {
 
 					TrueCC1pEvent = true;
 					TrueCC1pCounter++;
-					SumWeights += Weight * T2KWeight;					
 
 					// STV
 
@@ -485,6 +467,10 @@ void myTrueAnalysis::Loop() {
 
 	NSelectedPlot->SetBinContent(1,TrueCC1pCounter);
 	NSelectedPlot->SetBinError(1,sqrt(TrueCC1pCounter));	
+
+	// --------------------------------------------------------------------------------------------------------------------------------------------
+
+//	double ScaleDueToWeights = double(fChain->GetEntries()) / double(SumWeights);
 
 	// --------------------------------------------------------------------------------------------------------------------------------------------
 

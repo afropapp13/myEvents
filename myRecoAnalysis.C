@@ -926,10 +926,10 @@ void myRecoAnalysis::Loop() {
 
 				if (VectorCuts[i] == "_NuScore" && !( NuScore > MinimumNuScore) )  { PassedSelection = false; }
 
-				if (VectorCuts[i] == "_Chi2" && 
-					!(CandidateMu_Chi2_YPlane->at(0) > CandidateP_Chi2_YPlane->at(0) && 
-					CandidateP_Chi2_YPlane->at(0) < ProtonChi2Cut && CandidateMu_Chi2_YPlane->at(0) > MuonChi2Cut) )  
-					{ PassedSelection = false; }
+//				if (VectorCuts[i] == "_Chi2" && 
+//					!(CandidateMu_Chi2_YPlane->at(0) > CandidateP_Chi2_YPlane->at(0) && 
+//					CandidateP_Chi2_YPlane->at(0) < ProtonChi2Cut && CandidateMu_Chi2_YPlane->at(0) > MuonChi2Cut) )  
+//					{ PassedSelection = false; }
 
 				if (VectorCuts[i] == "_ThreePlaneLogChi2" && 
 					!(reco_Pp_ThreePlaneLogLikelihood > ProtonThreePlaneChi2LogLikelihoodCut) ) 
@@ -1067,7 +1067,7 @@ void myRecoAnalysis::Loop() {
 				// CC1p Signal
 
 				if (CC1p == 1 && CandidateMu_MCParticle_Pdg->at(0) == MuonPdg && CandidateP_MCParticle_Pdg->at(0) == ProtonPdg 
-				&& True_CandidateMu_StartContainment->at(0) == 1 && True_CandidateP_StartContainment->at(0) == 1 && True_CandidateP_EndContainment->at(0) == 1) {
+				    && True_CandidateMu_StartContainment->at(0) == 1 ) {
 				
 					CC1pEventsPassingSelectionCuts++;
 

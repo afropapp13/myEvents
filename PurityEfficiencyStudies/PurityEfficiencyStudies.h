@@ -1,5 +1,5 @@
-#ifndef myRecoAnalysis_h
-#define myRecoAnalysis_h
+#ifndef PurityEfficiencyStudies_h
+#define PurityEfficiencyStudies_h
 
 #include <TROOT.h>
 #include <TChain.h>
@@ -13,7 +13,7 @@
 
 using namespace Constants;
 
-class myRecoAnalysis {
+class PurityEfficiencyStudies {
 
 private:
 	TString fPathToFile;
@@ -108,7 +108,7 @@ public :
    vector<double>  *CandidateMu_P_MCS;   
    vector<double>  *CandidateMu_Phi;
    vector<double>  *CandidateMu_CosTheta;
-//   vector<double>  *CandidateMu_Length;
+   vector<double>  *CandidateMu_Length;
    vector<double>  *CandidateMu_Chi2_YPlane;
    vector<double>  *CandidateMu_ThreePlaneChi2;
    vector<double>  *CandidateMu_ThreePlaneLogLikelihood;
@@ -141,7 +141,7 @@ public :
    vector<double>  *CandidateP_P_MCS;   
    vector<double>  *CandidateP_Phi;
    vector<double>  *CandidateP_CosTheta;
-//   vector<double>  *CandidateP_Length;
+   vector<double>  *CandidateP_Length;
    vector<double>  *CandidateP_Chi2_YPlane;
    vector<double>  *CandidateP_ThreePlaneChi2;
    vector<double>  *CandidateP_ThreePlaneLogLikelihood;
@@ -267,7 +267,7 @@ public :
    TBranch        *b_CandidateMu_P_MCS;   //!   
    TBranch        *b_CandidateMu_Phi;   //!
    TBranch        *b_CandidateMu_CosTheta;   //!
-//   TBranch        *b_CandidateMu_Length;   //!
+   TBranch        *b_CandidateMu_Length;   //!
    TBranch        *b_CandidateMu_Chi2_YPlane;   //!
    TBranch        *b_CandidateMu_ThreePlaneChi2;   //!
    TBranch        *b_CandidateMu_ThreePlaneLogLikelihood;   //!
@@ -300,7 +300,7 @@ public :
    TBranch        *b_CandidateP_P_MCS;   //!   
    TBranch        *b_CandidateP_Phi;   //!
    TBranch        *b_CandidateP_CosTheta;   //!
-//   TBranch        *b_CandidateP_Length;   //!
+   TBranch        *b_CandidateP_Length;   //!
    TBranch        *b_CandidateP_Chi2_YPlane;   //!
    TBranch        *b_CandidateP_ThreePlaneChi2;   //!
    TBranch        *b_CandidateP_ThreePlaneLogLikelihood;   //!
@@ -345,8 +345,8 @@ public :
 //   TBranch        *b_PFParticle_NuMuDaughters;   //!
 //   TBranch        *b_PFParticle_NuMuDaughtersPdgCode;   //!
 
-   myRecoAnalysis(TString WhichSample="",TString WhichEventWeightLabel="", int UniverseIndex=-1, TTree *tree=0);
-   virtual ~myRecoAnalysis();
+   PurityEfficiencyStudies(TString WhichSample="",TString WhichEventWeightLabel="", int UniverseIndex=-1, TTree *tree=0);
+   virtual ~PurityEfficiencyStudies();
    virtual Int_t    Cut(Long64_t entry);
    virtual Int_t    GetEntry(Long64_t entry);
    virtual Long64_t LoadTree(Long64_t entry);
@@ -358,8 +358,8 @@ public :
 
 #endif
 
-#ifdef myRecoAnalysis_cxx
-myRecoAnalysis::myRecoAnalysis(TString WhichSample, TString WhichEventWeightLabel, int UniverseIndex, TTree *tree) : fChain(0) 
+#ifdef PurityEfficiencyStudies_cxx
+PurityEfficiencyStudies::PurityEfficiencyStudies(TString WhichSample, TString WhichEventWeightLabel, int UniverseIndex, TTree *tree) : fChain(0) 
 {
 
    fWhichSample = WhichSample;
@@ -383,19 +383,19 @@ myRecoAnalysis::myRecoAnalysis(TString WhichSample, TString WhichEventWeightLabe
    Init(tree);
 }
 
-myRecoAnalysis::~myRecoAnalysis()
+PurityEfficiencyStudies::~PurityEfficiencyStudies()
 {
    if (!fChain) return;
    delete fChain->GetCurrentFile();
 }
 
-Int_t myRecoAnalysis::GetEntry(Long64_t entry)
+Int_t PurityEfficiencyStudies::GetEntry(Long64_t entry)
 {
 // Read contents of entry.
    if (!fChain) return 0;
    return fChain->GetEntry(entry);
 }
-Long64_t myRecoAnalysis::LoadTree(Long64_t entry)
+Long64_t PurityEfficiencyStudies::LoadTree(Long64_t entry)
 {
 // Set the environment to read one entry
    if (!fChain) return -5;
@@ -408,7 +408,7 @@ Long64_t myRecoAnalysis::LoadTree(Long64_t entry)
    return centry;
 }
 
-void myRecoAnalysis::Init(TTree *tree)
+void PurityEfficiencyStudies::Init(TTree *tree)
 {
 
    // Set object pointer
@@ -477,7 +477,7 @@ void myRecoAnalysis::Init(TTree *tree)
    CandidateMu_P_MCS = 0;   
    CandidateMu_Phi = 0;
    CandidateMu_CosTheta = 0;
-//   CandidateMu_Length = 0;
+   CandidateMu_Length = 0;
    CandidateMu_Chi2_YPlane = 0;
    CandidateMu_ThreePlaneChi2 = 0;
    CandidateMu_ThreePlaneLogLikelihood = 0;
@@ -510,7 +510,7 @@ void myRecoAnalysis::Init(TTree *tree)
    CandidateP_P_MCS = 0;   
    CandidateP_Phi = 0;
    CandidateP_CosTheta = 0;
-//   CandidateP_Length = 0;
+   CandidateP_Length = 0;
    CandidateP_Chi2_YPlane = 0;
    CandidateP_ThreePlaneChi2 = 0;
    CandidateP_ThreePlaneLogLikelihood = 0;
@@ -640,7 +640,7 @@ void myRecoAnalysis::Init(TTree *tree)
    fChain->SetBranchAddress("CandidateMu_P_MCS", &CandidateMu_P_MCS, &b_CandidateMu_P_MCS);   
    fChain->SetBranchAddress("CandidateMu_Phi", &CandidateMu_Phi, &b_CandidateMu_Phi);
    fChain->SetBranchAddress("CandidateMu_CosTheta", &CandidateMu_CosTheta, &b_CandidateMu_CosTheta);
-//   fChain->SetBranchAddress("CandidateMu_Length", &CandidateMu_Length, &b_CandidateMu_Length);
+   fChain->SetBranchAddress("CandidateMu_Length", &CandidateMu_Length, &b_CandidateMu_Length);
    fChain->SetBranchAddress("CandidateMu_Chi2_YPlane", &CandidateMu_Chi2_YPlane, &b_CandidateMu_Chi2_YPlane);
    fChain->SetBranchAddress("CandidateMu_ThreePlaneChi2", &CandidateMu_ThreePlaneChi2, &b_CandidateMu_ThreePlaneChi2);
    fChain->SetBranchAddress("CandidateMu_ThreePlaneLogLikelihood", &CandidateMu_ThreePlaneLogLikelihood, &b_CandidateMu_ThreePlaneLogLikelihood);
@@ -673,7 +673,7 @@ void myRecoAnalysis::Init(TTree *tree)
    fChain->SetBranchAddress("CandidateP_P_MCS", &CandidateP_P_MCS, &b_CandidateP_P_MCS);   
    fChain->SetBranchAddress("CandidateP_Phi", &CandidateP_Phi, &b_CandidateP_Phi);
    fChain->SetBranchAddress("CandidateP_CosTheta", &CandidateP_CosTheta, &b_CandidateP_CosTheta);
-//   fChain->SetBranchAddress("CandidateP_Length", &CandidateP_Length, &b_CandidateP_Length);
+   fChain->SetBranchAddress("CandidateP_Length", &CandidateP_Length, &b_CandidateP_Length);
    fChain->SetBranchAddress("CandidateP_Chi2_YPlane", &CandidateP_Chi2_YPlane, &b_CandidateP_Chi2_YPlane);
    fChain->SetBranchAddress("CandidateP_ThreePlaneChi2", &CandidateP_ThreePlaneChi2, &b_CandidateP_ThreePlaneChi2);
    fChain->SetBranchAddress("CandidateP_ThreePlaneLogLikelihood", &CandidateP_ThreePlaneLogLikelihood, &b_CandidateP_ThreePlaneLogLikelihood);
@@ -720,7 +720,7 @@ void myRecoAnalysis::Init(TTree *tree)
    Notify();
 }
 
-Bool_t myRecoAnalysis::Notify()
+Bool_t PurityEfficiencyStudies::Notify()
 {
    // The Notify() function is called when a new file is opened. This
    // can be either for a new TTree in a TChain or when when a new TTree
@@ -731,18 +731,18 @@ Bool_t myRecoAnalysis::Notify()
    return kTRUE;
 }
 
-void myRecoAnalysis::Show(Long64_t entry)
+void PurityEfficiencyStudies::Show(Long64_t entry)
 {
 // Print contents of entry.
 // If entry is not specified, print current entry
    if (!fChain) return;
    fChain->Show(entry);
 }
-Int_t myRecoAnalysis::Cut(Long64_t entry)
+Int_t PurityEfficiencyStudies::Cut(Long64_t entry)
 {
 // This function may be called from Loop.
 // returns  1 if entry is accepted.
 // returns -1 otherwise.
    return 1;
 }
-#endif // #ifdef myRecoAnalysis_cxx
+#endif // #ifdef PurityEfficiencyStudies_cxx
