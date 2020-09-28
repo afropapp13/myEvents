@@ -10,13 +10,34 @@
 	WhichSampleArray.push_back("ExtBNB9_Run1");
 	WhichSampleArray.push_back("OverlayDirt9_Run1");
 	WhichSampleArray.push_back("Overlay9_Run1");
+
+	// Run 2
+
+//	WhichSampleArray.push_back("BeamOn9_Run2");
+//	WhichSampleArray.push_back("ExtBNB9_Run2");
+	WhichSampleArray.push_back("OverlayDirt9_Run2");
+	WhichSampleArray.push_back("Overlay9_Run2");
 	
 	// Run 3
 
 	WhichSampleArray.push_back("BeamOn9_Run3");
 	WhichSampleArray.push_back("ExtBNB9_Run3");
 	WhichSampleArray.push_back("OverlayDirt9_Run3");
-	WhichSampleArray.push_back("Overlay9_Run3");	
+	WhichSampleArray.push_back("Overlay9_Run3");
+
+	// Run 4
+
+//	WhichSampleArray.push_back("BeamOn9_Run4");
+//	WhichSampleArray.push_back("ExtBNB9_Run4");
+//	WhichSampleArray.push_back("OverlayDirt9_Run4");
+//	WhichSampleArray.push_back("Overlay9_Run4");	
+
+	// Run 5
+
+//	WhichSampleArray.push_back("BeamOn9_Run5");
+//	WhichSampleArray.push_back("ExtBNB9_Run5");
+//	WhichSampleArray.push_back("OverlayDirt9_Run5");
+//	WhichSampleArray.push_back("Overlay9_Run5");
 
 	// -----------------------------------------------------------------------------------------
 
