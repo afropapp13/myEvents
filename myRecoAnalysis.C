@@ -106,6 +106,7 @@ void myRecoAnalysis::Loop() {
 
 		TH1D* RecoDistancePlot = new TH1D("RecoDistancePlot",RecoLabelXAxisDistance,NBinsDistance,MinDistance,MaxDistance);
 
+		TH1D* RecodLengthDifferencePlot = new TH1D("RecodLengthDifferencePlot",RecoLabelXAxisLengthDifference,NBinsLengthDifference,MinLengthDifference,MaxLengthDifference);
 		TH1D* RecodYZPlot = new TH1D("RecodYZPlot",RecoLabelXAxisdYZ,NBinsdYZ,MindYZ,MaxdYZ);
 		TH1D* RecoNPEPlot = new TH1D("RecoNPEPlot",RecoLabelXAxisNPE,NBinsNPE,MinNPE,MaxNPE);
 
@@ -167,6 +168,7 @@ void myRecoAnalysis::Loop() {
 
 		TH1D* CC1pRecoDistancePlot = new TH1D("CC1pRecoDistancePlot",RecoLabelXAxisDistance,NBinsDistance,MinDistance,MaxDistance);
 
+		TH1D* CC1pRecodLengthDifferencePlot = new TH1D("CC1pRecodLengthDifferencePlot",RecoLabelXAxisLengthDifference,NBinsLengthDifference,MinLengthDifference,MaxLengthDifference);
 		TH1D* CC1pRecodYZPlot = new TH1D("CC1pRecodYZPlot",RecoLabelXAxisdYZ,NBinsdYZ,MindYZ,MaxdYZ);
 		TH1D* CC1pRecoNPEPlot = new TH1D("CC1pRecoNPEPlot",RecoLabelXAxisNPE,NBinsNPE,MinNPE,MaxNPE);
 
@@ -251,6 +253,7 @@ void myRecoAnalysis::Loop() {
 
 		TH1D* NonCC1pRecoDistancePlot = new TH1D("NonCC1pRecoDistancePlot",RecoLabelXAxisDistance,NBinsDistance,MinDistance,MaxDistance);
 
+		TH1D* NonCC1pRecodLengthDifferencePlot = new TH1D("NonCC1pRecodLengthDifferencePlot",RecoLabelXAxisLengthDifference,NBinsLengthDifference,MinLengthDifference,MaxLengthDifference);
 		TH1D* NonCC1pRecodYZPlot = new TH1D("NonCC1pRecodYZPlot",RecoLabelXAxisdYZ,NBinsdYZ,MindYZ,MaxdYZ);
 		TH1D* NonCC1pRecoNPEPlot = new TH1D("NonCC1pRecoNPEPlot",RecoLabelXAxisNPE,NBinsNPE,MinNPE,MaxNPE);
 
@@ -309,6 +312,7 @@ void myRecoAnalysis::Loop() {
 
 		TH1D* CCQERecoDistancePlot = new TH1D("CCQERecoDistancePlot",RecoLabelXAxisDistance,NBinsDistance,MinDistance,MaxDistance);
 
+		TH1D* CCQERecodLengthDifferencePlot = new TH1D("CCQERecodLengthDifferencePlot",RecoLabelXAxisLengthDifference,NBinsLengthDifference,MinLengthDifference,MaxLengthDifference);
 		TH1D* CCQERecodYZPlot = new TH1D("CCQERecodYZPlot",RecoLabelXAxisdYZ,NBinsdYZ,MindYZ,MaxdYZ);
 		TH1D* CCQERecoNPEPlot = new TH1D("CCQERecoNPEPlot",RecoLabelXAxisNPE,NBinsNPE,MinNPE,MaxNPE);
 
@@ -364,6 +368,7 @@ void myRecoAnalysis::Loop() {
 
 		TH1D* CCMECRecoDistancePlot = new TH1D("CCMECRecoDistancePlot",RecoLabelXAxisDistance,NBinsDistance,MinDistance,MaxDistance);
 
+		TH1D* CCMECRecodLengthDifferencePlot = new TH1D("CCMECRecodLengthDifferencePlot",RecoLabelXAxisLengthDifference,NBinsLengthDifference,MinLengthDifference,MaxLengthDifference);
 		TH1D* CCMECRecodYZPlot = new TH1D("CCMECRecodYZPlot",RecoLabelXAxisdYZ,NBinsdYZ,MindYZ,MaxdYZ);
 		TH1D* CCMECRecoNPEPlot = new TH1D("CCMECRecoNPEPlot",RecoLabelXAxisNPE,NBinsNPE,MinNPE,MaxNPE);
 
@@ -419,6 +424,7 @@ void myRecoAnalysis::Loop() {
 
 		TH1D* CCRESRecoDistancePlot = new TH1D("CCRESRecoDistancePlot",RecoLabelXAxisDistance,NBinsDistance,MinDistance,MaxDistance);
 
+		TH1D* CCRESRecodLengthDifferencePlot = new TH1D("CCRESRecodLengthDifferencePlot",RecoLabelXAxisLengthDifference,NBinsLengthDifference,MinLengthDifference,MaxLengthDifference);
 		TH1D* CCRESRecodYZPlot = new TH1D("CCRESRecodYZPlot",RecoLabelXAxisdYZ,NBinsdYZ,MindYZ,MaxdYZ);
 		TH1D* CCRESRecoNPEPlot = new TH1D("CCRESRecoNPEPlot",RecoLabelXAxisNPE,NBinsNPE,MinNPE,MaxNPE);
 
@@ -474,6 +480,7 @@ void myRecoAnalysis::Loop() {
 
 		TH1D* CCDISRecoDistancePlot = new TH1D("CCDISRecoDistancePlot",RecoLabelXAxisDistance,NBinsDistance,MinDistance,MaxDistance);
 
+		TH1D* CCDISRecodLengthDifferencePlot = new TH1D("CCDISRecodLengthDifferencePlot",RecoLabelXAxisLengthDifference,NBinsLengthDifference,MinLengthDifference,MaxLengthDifference);
 		TH1D* CCDISRecodYZPlot = new TH1D("CCDISRecodYZPlot",RecoLabelXAxisdYZ,NBinsdYZ,MindYZ,MaxdYZ);
 		TH1D* CCDISRecoNPEPlot = new TH1D("CCDISRecoNPEPlot",RecoLabelXAxisNPE,NBinsNPE,MinNPE,MaxNPE);
 
@@ -620,13 +627,13 @@ void myRecoAnalysis::Loop() {
 
 		}
 		
-//		if (string(fWhichSample).find("Run2") != std::string::npos) {
+		if (string(fWhichSample).find("Run2") != std::string::npos) {
 
-//			tor860_wcut = tor860_wcut_Run2;
-//			E1DCNT_wcut = E1DCNT_wcut_Run2;
-//			EXT = EXT_Run2;
+			tor860_wcut = tor860_wcut_Run2;
+			E1DCNT_wcut = E1DCNT_wcut_Run2;
+			EXT = EXT_Run2;
 
-//		}
+		}
 		
 		if (string(fWhichSample).find("Run3") != std::string::npos) {
 
@@ -636,21 +643,21 @@ void myRecoAnalysis::Loop() {
 
 		}
 		
-//		if (string(fWhichSample).find("Run4") != std::string::npos) {
+		if (string(fWhichSample).find("Run4") != std::string::npos) {
 
-//			tor860_wcut = tor860_wcut_Run4;
-//			E1DCNT_wcut = E1DCNT_wcut_Run4;
-//			EXT = EXT_Run4;
+			tor860_wcut = tor860_wcut_Run4;
+			E1DCNT_wcut = E1DCNT_wcut_Run4;
+			EXT = EXT_Run4;
 
-//		}
+		}
 
-//		if (string(fWhichSample).find("Run5") != std::string::npos) {
+		if (string(fWhichSample).find("Run5") != std::string::npos) {
 
-//			tor860_wcut = tor860_wcut_Run5;
-//			E1DCNT_wcut = E1DCNT_wcut_Run5;
-//			EXT = EXT_Run5;
+			tor860_wcut = tor860_wcut_Run5;
+			E1DCNT_wcut = E1DCNT_wcut_Run5;
+			EXT = EXT_Run5;
 
-//		}	
+		}	
 		
 		if (string(fWhichSample).find("ExtBNB9") != std::string::npos) { weight = E1DCNT_wcut / EXT; POTScale = weight; }
 
@@ -799,8 +806,14 @@ void myRecoAnalysis::Loop() {
 			double reco_Pmu_ThreePlanechi2 = CandidateMu_ThreePlaneChi2->at(0);
 			double reco_Pp_ThreePlanechi2 = CandidateP_ThreePlaneChi2->at(0);
 
-			double reco_Pmu_ThreePlaneLogLikelihood = log(CandidateMu_ThreePlaneLogLikelihood->at(0));
-			double reco_Pp_ThreePlaneLogLikelihood = log(CandidateP_ThreePlaneLogLikelihood->at(0));
+			double reco_Pmu_ThreePlaneLogLikelihood = CandidateMu_ThreePlaneLogLikelihood->at(0);
+			double reco_Pp_ThreePlaneLogLikelihood = CandidateP_ThreePlaneLogLikelihood->at(0);
+
+			// -----------------------------------------------------------------------------------------------------------------------------
+
+			double l_muCandidate = CandidateMu_Length->at(0);
+			double l_pCandidate = CandidateP_Length->at(0);
+			double LengthDifference = l_muCandidate - l_pCandidate;
 
 			// -----------------------------------------------------------------------------------------------------------------------------
 
@@ -984,6 +997,7 @@ void myRecoAnalysis::Loop() {
 
 			RecoDistancePlot->Fill(distance,weight);
 
+			RecoLengthDifferencePlot->Fill(LengthDifference,weight);
 			RecodYZPlot->Fill(dYZ,weight);
 			RecoNPEPlot->Fill(NPE,weight);
 
@@ -1078,6 +1092,7 @@ void myRecoAnalysis::Loop() {
 
 					CC1pRecoDistancePlot->Fill(distance,weight);
 
+					CC1pRecoLengthDifferencePlot->Fill(LengthDifference,weight);
 					CC1pRecodYZPlot->Fill(dYZ,weight);
 					CC1pRecoNPEPlot->Fill(NPE,weight);
 
@@ -1183,6 +1198,7 @@ void myRecoAnalysis::Loop() {
 
 					NonCC1pRecoDistancePlot->Fill(distance,weight);
 
+					NonCC1pRecoLengthDifferencePlot->Fill(LengthDifference,weight);
 					NonCC1pRecodYZPlot->Fill(dYZ,weight);
 					NonCC1pRecoNPEPlot->Fill(NPE,weight);
 
@@ -1232,6 +1248,7 @@ void myRecoAnalysis::Loop() {
 
 					CCQERecoDistancePlot->Fill(distance,weight);
 
+					CCQERecoLengthDifferencePlot->Fill(LengthDifference,weight);
 					CCQERecodYZPlot->Fill(dYZ,weight);
 					CCQERecoNPEPlot->Fill(NPE,weight);
 
@@ -1280,6 +1297,7 @@ void myRecoAnalysis::Loop() {
 
 					CCMECRecoDistancePlot->Fill(distance,weight);
 
+					CCMECRecoLengthDifferencePlot->Fill(LengthDifference,weight);
 					CCMECRecodYZPlot->Fill(dYZ,weight);
 					CCMECRecoNPEPlot->Fill(NPE,weight);
 
@@ -1328,6 +1346,7 @@ void myRecoAnalysis::Loop() {
 
 					CCRESRecoDistancePlot->Fill(distance,weight);
 
+					CCRESRecoLengthDifferencePlot->Fill(LengthDifference,weight);
 					CCRESRecodYZPlot->Fill(dYZ,weight);
 					CCRESRecoNPEPlot->Fill(NPE,weight);
 
@@ -1376,6 +1395,7 @@ void myRecoAnalysis::Loop() {
 
 					CCDISRecoDistancePlot->Fill(distance,weight);
 
+					CCDISRecoLengthDifferencePlot->Fill(LengthDifference,weight);
 					CCDISRecodYZPlot->Fill(dYZ,weight);
 					CCDISRecoNPEPlot->Fill(NPE,weight);
 

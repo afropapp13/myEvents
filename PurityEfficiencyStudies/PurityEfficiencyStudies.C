@@ -272,8 +272,8 @@ void PurityEfficiencyStudies::Loop() {
 			double reco_Pmu_ThreePlanechi2 = CandidateMu_ThreePlaneChi2->at(0);
 			double reco_Pp_ThreePlanechi2 = CandidateP_ThreePlaneChi2->at(0);
 
-			double reco_Pmu_ThreePlaneLogLikelihood = log(CandidateMu_ThreePlaneLogLikelihood->at(0));
-			double reco_Pp_ThreePlaneLogLikelihood = log(CandidateP_ThreePlaneLogLikelihood->at(0));
+			double reco_Pmu_ThreePlaneLogLikelihood = CandidateMu_ThreePlaneLogLikelihood->at(0);
+			double reco_Pp_ThreePlaneLogLikelihood = CandidateP_ThreePlaneLogLikelihood->at(0);
 
 			// -----------------------------------------------------------------------------------------------------------------------------
 
@@ -442,7 +442,7 @@ void PurityEfficiencyStudies::Loop() {
 				// CC1p Signal
 
 				if (CC1p == 1 && CandidateMu_MCParticle_Pdg->at(0) == MuonPdg && CandidateP_MCParticle_Pdg->at(0) == ProtonPdg 
-				&& True_CandidateMu_StartContainment->at(0) == 1 && True_CandidateP_StartContainment->at(0) == 1 && True_CandidateP_EndContainment->at(0) == 1) {
+				    && True_CandidateMu_StartContainment->at(0) == 1) {
 				
 					CC1pEventsPassingSelectionCuts++;
 

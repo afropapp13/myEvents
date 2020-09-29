@@ -127,7 +127,7 @@ void DetermineMaxPurityEfficiency() {
 	NuScorePurityCanvas->SetBottomMargin(0.15);
 	NuScorePurityCanvas->SetLeftMargin(0.15);
 
-	TLegend* legNuScorePurity = new TLegend(0.35,0.15,0.9,0.5);
+	TLegend* legNuScorePurity = new TLegend(0.35,0.17,0.88,0.5);
 	legNuScorePurity->SetNColumns(3);
 
 	for (int WhichLL = 0; WhichLL < NBinsLL; WhichLL++) {
@@ -182,7 +182,7 @@ void DetermineMaxPurityEfficiency() {
 	NuScoreEfficiencyCanvas->SetBottomMargin(0.15);
 	NuScoreEfficiencyCanvas->SetLeftMargin(0.15);
 
-	TLegend* legNuScoreEfficiency = new TLegend(0.35,0.53,0.9,0.89);
+	TLegend* legNuScoreEfficiency = new TLegend(0.35,0.55,0.88,0.89);
 	legNuScoreEfficiency->SetNColumns(3);
 
 	for (int WhichLL = 0; WhichLL < NBinsLL; WhichLL++) {
@@ -237,7 +237,7 @@ void DetermineMaxPurityEfficiency() {
 	NuScoreProductCanvas->SetBottomMargin(0.15);
 	NuScoreProductCanvas->SetLeftMargin(0.15);
 
-	TLegend* legNuScoreProduct = new TLegend(0.35,0.55,0.9,0.89);
+	TLegend* legNuScoreProduct = new TLegend(0.35,0.59,0.88,0.89);
 	legNuScoreProduct->SetNColumns(3);
 
 	for (int WhichLL = 0; WhichLL < NBinsLL; WhichLL++) {
