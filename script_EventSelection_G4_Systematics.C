@@ -8,11 +8,9 @@
 
 	// -----------------------------------------------------------------------------------------
 
-	// Run 1 G4 Systematics
-
 	WhichSampleArray.push_back("Overlay9_Run1");
 //	WhichSampleArray.push_back("Overlay9_Run2");
-//	WhichSampleArray.push_back("Overlay9_Run3");
+	WhichSampleArray.push_back("Overlay9_Run3");
 //	WhichSampleArray.push_back("Overlay9_Run4");
 //	WhichSampleArray.push_back("Overlay9_Run5");				
 	

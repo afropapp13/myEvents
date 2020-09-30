@@ -7,9 +7,13 @@
 
 	// -----------------------------------------------------------------------------------------
 
-	// Run 1 Systematics
-
 	WhichSampleArray.push_back("Overlay9_Run1");
+//	WhichSampleArray.push_back("Overlay9_Run2");
+	WhichSampleArray.push_back("Overlay9_Run3");
+//	WhichSampleArray.push_back("Overlay9_Run4");
+//	WhichSampleArray.push_back("Overlay9_Run5");
+
+	// -----------------------------------------------------------------------------------------
 
 	EventWeightLabels.push_back("AxFFCCQEshape_UBGenie"); Universes.push_back(2);
 	EventWeightLabels.push_back("DecayAngMEC_UBGenie"); Universes.push_back(2);
@@ -33,8 +37,6 @@
 
 	gROOT->ProcessLine(".L myRecoAnalysis.C+");
 	gROOT->ProcessLine(".L myTrueAnalysis.C+");
-
-	int NUniverses = 2;
 
 	for (int i = 0;i < (int)(WhichSampleArray.size()); i++) {
 

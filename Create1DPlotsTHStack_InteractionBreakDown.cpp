@@ -28,15 +28,16 @@ void Create1DPlotsTHStack_InteractionBreakDown() {
 
 	// ----------------------------------------------------------------------------------------------------------------------------------------
 
-//	PlotNames.push_back("RecoPMissMinusPlot");
-//	PlotNames.push_back("RecoPMissPlot");
-//	PlotNames.push_back("RecokMissPlot");
+	PlotNames.push_back("RecoPMissMinusPlot");
+	PlotNames.push_back("RecoPMissPlot");
+	PlotNames.push_back("RecokMissPlot");
 
 	PlotNames.push_back("RecoNuScorePlot");
 	PlotNames.push_back("RecoFlashScorePlot");
 
 	PlotNames.push_back("RecoDistancePlot");
 
+	PlotNames.push_back("RecoLengthDifferencePlot");
 	PlotNames.push_back("RecodYZPlot");
 	PlotNames.push_back("RecoNPEPlot");
 
@@ -137,7 +138,7 @@ void Create1DPlotsTHStack_InteractionBreakDown() {
 				vector<TH1D*> CCMECCurrentPlots; CCMECCurrentPlots.clear();
 				vector<TH1D*> CCRESCurrentPlots; CCRESCurrentPlots.clear();
 				vector<TH1D*> CCDISCurrentPlots; CCDISCurrentPlots.clear();
-				vector<TH1D*> CCCosmicCurrentPlots; CCCosmicCurrentPlots.clear();
+//				vector<TH1D*> CCCosmicCurrentPlots; CCCosmicCurrentPlots.clear();
 
 				vector<TH1D*> Currenthratio;  Currenthratio.clear();
 
@@ -148,7 +149,7 @@ void Create1DPlotsTHStack_InteractionBreakDown() {
 					TH1D* CCMEChist = (TH1D*)(FileSample[WhichSample]->Get("CCMEC"+PlotNames[WhichPlot]));
 					TH1D* CCREShist = (TH1D*)(FileSample[WhichSample]->Get("CCRES"+PlotNames[WhichPlot]));
 					TH1D* CCDIShist = (TH1D*)(FileSample[WhichSample]->Get("CCDIS"+PlotNames[WhichPlot]));
-					TH1D* CCCosmichist = (TH1D*)(FileSample[WhichSample]->Get("Cosmic"+PlotNames[WhichPlot]));
+//					TH1D* CCCosmichist = (TH1D*)(FileSample[WhichSample]->Get("Cosmic"+PlotNames[WhichPlot]));
 
 					hist->GetXaxis()->CenterTitle();
 					hist->GetYaxis()->CenterTitle();					
@@ -166,22 +167,26 @@ void Create1DPlotsTHStack_InteractionBreakDown() {
 					CCMECCurrentPlots.push_back(CCMEChist);
 					CCRESCurrentPlots.push_back(CCREShist);
 					CCDISCurrentPlots.push_back(CCDIShist);
-					CCCosmicCurrentPlots.push_back(CCCosmichist);
+//					CCCosmicCurrentPlots.push_back(CCCosmichist);
 
 					Currenthratio.push_back((TH1D*)hist->Clone());
 		
-				}
+				} // End of the loop over the plots
 
 				Plots.push_back(CurrentPlots);
 				CCQEPlots.push_back(CCQECurrentPlots);
 				CCMECPlots.push_back(CCMECCurrentPlots);
 				CCRESPlots.push_back(CCRESCurrentPlots);
 				CCDISPlots.push_back(CCDISCurrentPlots);
-				CCCCDISPlots.push_back(CCCosmicCurrentPlots);
+//				CCCCDISPlots.push_back(CCCosmicCurrentPlots);
 
 				hratio.push_back(Currenthratio);
 
-			}
+
+
+
+
+			} // End of the loop over the samples
 
 			// Loop over the plots
 

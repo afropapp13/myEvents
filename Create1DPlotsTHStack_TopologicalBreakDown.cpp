@@ -27,15 +27,16 @@ void Create1DPlotsTHStack_TopologicalBreakDown() {
 
 	// -----------------------------------------------------------------------------------------------------------------------------------------
 
-//	PlotNames.push_back("RecokMissPlot");
-//	PlotNames.push_back("RecoPMissMinusPlot");
-//	PlotNames.push_back("RecoPMissPlot");
+	PlotNames.push_back("RecokMissPlot");
+	PlotNames.push_back("RecoPMissMinusPlot");
+	PlotNames.push_back("RecoPMissPlot");
 
 	PlotNames.push_back("RecoNuScorePlot");
 	PlotNames.push_back("RecoFlashScorePlot");
 
 	PlotNames.push_back("RecoDistancePlot");
 
+	PlotNames.push_back("RecoLengthDifferencePlot");
 	PlotNames.push_back("RecodYZPlot");
 	PlotNames.push_back("RecoNPEPlot");
 

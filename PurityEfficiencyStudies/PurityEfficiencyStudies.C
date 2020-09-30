@@ -147,13 +147,13 @@ void PurityEfficiencyStudies::Loop() {
 
 		}
 		
-//		if (string(fWhichSample).find("Run2") != std::string::npos) {
+		if (string(fWhichSample).find("Run2") != std::string::npos) {
 
-//			tor860_wcut = tor860_wcut_Run2;
-//			E1DCNT_wcut = E1DCNT_wcut_Run2;
-//			EXT = EXT_Run2;
+			tor860_wcut = tor860_wcut_Run2;
+			E1DCNT_wcut = E1DCNT_wcut_Run2;
+			EXT = EXT_Run2;
 
-//		}
+		}
 		
 		if (string(fWhichSample).find("Run3") != std::string::npos) {
 
@@ -163,21 +163,21 @@ void PurityEfficiencyStudies::Loop() {
 
 		}
 		
-//		if (string(fWhichSample).find("Run4") != std::string::npos) {
+		if (string(fWhichSample).find("Run4") != std::string::npos) {
 
-//			tor860_wcut = tor860_wcut_Run4;
-//			E1DCNT_wcut = E1DCNT_wcut_Run4;
-//			EXT = EXT_Run4;
+			tor860_wcut = tor860_wcut_Run4;
+			E1DCNT_wcut = E1DCNT_wcut_Run4;
+			EXT = EXT_Run4;
 
-//		}
+		}
 
-//		if (string(fWhichSample).find("Run5") != std::string::npos) {
+		if (string(fWhichSample).find("Run5") != std::string::npos) {
 
-//			tor860_wcut = tor860_wcut_Run5;
-//			E1DCNT_wcut = E1DCNT_wcut_Run5;
-//			EXT = EXT_Run5;
+			tor860_wcut = tor860_wcut_Run5;
+			E1DCNT_wcut = E1DCNT_wcut_Run5;
+			EXT = EXT_Run5;
 
-//		}	
+		}	
 		
 		if (string(fWhichSample).find("ExtBNB9") != std::string::npos) { weight = E1DCNT_wcut / EXT; POTScale = weight; }
 
@@ -277,6 +277,11 @@ void PurityEfficiencyStudies::Loop() {
 
 			// -----------------------------------------------------------------------------------------------------------------------------
 
+			double l_muCandidate = CandidateMu_Length->at(0);
+			double l_pCandidate = CandidateP_Length->at(0);
+
+			// -----------------------------------------------------------------------------------------------------------------------------
+
 			// Miss quantities
 
 			double kMiss = Reco_kMiss->at(0);
@@ -308,6 +313,14 @@ void PurityEfficiencyStudies::Loop() {
 			// Reconstructed Q2
 
 			double reco_Q2 = Reco_Q2->at(0);
+
+			// -------------------------------------------------------------------------------------------------------------------------
+
+			// Studies for pre- chi2 & nuscore cuts
+
+//			if (l_muCandidate - l_pCandidate < 0) { continue; }
+//			if (kMiss > 0.6) { continue; }
+//			if (PMissMinus < 0.6) { continue; }
 
 			// -------------------------------------------------------------------------------------------------------------------------
 			// -----------------------------------------------------------------------------------------------------------------------
