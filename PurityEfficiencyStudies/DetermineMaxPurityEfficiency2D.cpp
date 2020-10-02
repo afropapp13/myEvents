@@ -10,11 +10,30 @@
 
 #include <iostream>
 #include <vector>
+#include <algorithm>
+#include <cmath>
 
 #include "../../../myClasses/Constants.h"
 
 using namespace std;
 using namespace Constants;
+
+std::vector<double> GetMax(double Array[], int SizeArray){
+
+	double max = -99999.;
+	double index = -99999.;	
+
+	for (int i = 0; i < SizeArray; i++) {
+	
+		if (Array[i] > max) { max = Array[i]; index = i;}
+	
+	}
+	
+	std::vector<double> MaxQuantities{max,index};
+	
+	return MaxQuantities;
+	
+}
 
 TString ToString(double num) {
 
@@ -25,7 +44,7 @@ TString ToString(double num) {
 
 }
 
-void DetermineMaxPurityEfficiency() {
+void DetermineMaxPurityEfficiency2D() {
 
 	TH1D::SetDefaultSumw2();
 	gStyle->SetOptStat(0);	
@@ -90,6 +109,8 @@ void DetermineMaxPurityEfficiency() {
 
 			double LocalLLThres = MinLL + LLStep * WhichLL;
 			LLArray[WhichLL] = LocalLLThres;
+
+			// TString to grab the plot of interest (2D grid)
 
 			TString PlotNuScoreLLThres = "RecoMuonCosThetaPlot_NuScoreThres_"+TString(std::to_string(WhichNuScore))+"_LLThres_"+TString(std::to_string(WhichLL));
 
@@ -239,12 +260,26 @@ void DetermineMaxPurityEfficiency() {
 
 	TLegend* legNuScoreProduct = new TLegend(0.35,0.59,0.88,0.89);
 	legNuScoreProduct->SetNColumns(3);
+	
+	double GlobalMax = -99.;
+	int GlobalLLThresBin = -99.;
+	int GlobalNuScoreThresBin = -99.;	
 
 	for (int WhichLL = 0; WhichLL < NBinsLL; WhichLL++) {
 
 		double LocalLLThres = MinLL + LLStep * WhichLL;
-
-		TGraph* NuScoreProductGraph = new TGraph(NBinsNuScore,NuScoreArray,InvertedProductArray[WhichLL]);
+		
+		TGraph* NuScoreProductGraph = new TGraph(NBinsNuScore,NuScoreArray,InvertedProductArray[WhichLL]);		
+		
+		std::vector<double> LocalMax = GetMax(InvertedProductArray[WhichLL],NBinsNuScore);
+		
+		if (LocalMax.at(0) > GlobalMax) {
+		
+			GlobalMax = LocalMax.at(0);
+			GlobalLLThresBin = WhichLL;
+			GlobalNuScoreThresBin = LocalMax.at(1);
+		
+		}
 
 		NuScoreProductGraph->SetLineColor(WhichLL+1);
 		NuScoreProductGraph->SetMarkerStyle(8);
@@ -286,7 +321,25 @@ void DetermineMaxPurityEfficiency() {
 
 	NuScoreProductCanvas->SaveAs(PlotsPath+"TwoDScanProduct.pdf");
 
-	// ----------------------------------------------------------------------------------------------------------------------------------------
+	// ----------------------------------------------------------------------------------------------------------------------------------------	
+	
+	double SelectedLLThres = MinLL + LLStep * GlobalLLThresBin;
+	double SelectedNuScoreThres = MinNuScore + NuScoreStep * GlobalNuScoreThresBin;	
+	
+	cout << endl << endl << "Max located for LL Thres > " << SelectedLLThres << " annd NuScore > " << SelectedNuScoreThres << endl;
+	cout << "Corresponds to purity of " << InvertedPurityArray[GlobalLLThresBin][GlobalNuScoreThresBin];
+	cout << " and efficiency = " << InvertedEfficiencyArray[GlobalLLThresBin][GlobalNuScoreThresBin] << endl << endl;
 
+	// ----------------------------------------------------------------------------------------------------------------------------------------
+	
+	// Beam On events that we would have with the candidate set of cuts
+	
+	TString PlotNuScoreLLThres = "RecoMuonCosThetaPlot_NuScoreThres_"+TString(std::to_string(GlobalNuScoreThresBin))+"_LLThres_"+TString(std::to_string(GlobalLLThresBin));
+
+	TH1D* hRecoBeamOn = (TH1D*)(RecoBeamOnFile->Get(PlotNuScoreLLThres));
+	
+	cout << "BeamOn events with candidate set of cuts = " << hRecoBeamOn->GetEntries() << endl << endl;	
+
+	// ----------------------------------------------------------------------------------------------------------------------------------------
 
 } // End of the program 

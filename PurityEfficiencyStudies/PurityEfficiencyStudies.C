@@ -73,9 +73,25 @@ void PurityEfficiencyStudies::Loop() {
 		double MinNuScore = 0., MaxNuScore = 1.;
 		double NuScoreStep = (MaxNuScore - MinNuScore) / double(NBinsNuScore);
 
-		int NBinsLL = 20;
-		double MinLL = -5., MaxLL = 5.;
-		double LLStep = (MaxLL - MinLL) / double(NBinsLL);
+		int NBinsLLP = 20;
+		double MinLLP = -5., MaxLLP = 5.;
+		double LLPStep = (MaxLLP - MinLLP) / double(NBinsLLP);
+
+		int NBinsLLMu = 20;
+		double MinLLMu = -5., MaxLLMu = 5.;
+		double LLMuStep = (MaxLLMu - MinLLMu) / double(NBinsLLMu);
+
+		int NBinsLength = 20;
+		double MinLength = -150., MaxLength = 500.;
+		double LengthStep = (MaxLength - MinLength) / double(NBinsLength);
+
+		int NBinsPMissMinus = 20;
+		double MinPMissMinus = 0., MaxPMissMinus = 1.5;
+		double PMissMinusStep = (MaxPMissMinus - MinPMissMinus) / double(NBinsPMissMinus);
+
+		int NBinskMiss = 20;
+		double MinkMiss = 0., MaxkMiss = 1.05;
+		double kMissStep = (MaxkMiss - MinkMiss) / double(NBinskMiss);
 
 		// --------------------------------------------------------------------------------------------------------------------------------
 
@@ -85,17 +101,16 @@ void PurityEfficiencyStudies::Loop() {
 
 		TH1D* OldCutsRecoMuonCosThetaPlot = new TH1D("OldCutsRecoMuonCosThetaPlot",LabelXAxisMuonCosTheta,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta);
 
-		TH1D* RecoMuonCosThetaPlotStudy[NBinsNuScore][NBinsLL];
-
 		TH1D* CC1pRecoMuonCosThetaPlot = new TH1D("CC1pRecoMuonCosThetaPlot",LabelXAxisMuonCosTheta,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta);
 
-		TH1D* CC1pRecoMuonCosThetaPlotStudy[NBinsNuScore][NBinsLL];
+		// --------------------------------------------------------------------------------------------------------------------------------
 
-
+		TH1D* RecoMuonCosThetaPlotStudy[NBinsNuScore][NBinsLLP];
+		TH1D* CC1pRecoMuonCosThetaPlotStudy[NBinsNuScore][NBinsLLP];
 
 		for (int WhichNuScore = 0; WhichNuScore < NBinsNuScore; WhichNuScore++) {
 
-			for (int WhichLL = 0; WhichLL < NBinsLL; WhichLL++) {
+			for (int WhichLL = 0; WhichLL < NBinsLLP; WhichLL++) {
 
 				TString PlotNuScoreLLThres = "RecoMuonCosThetaPlot_NuScoreThres_"+TString(std::to_string(WhichNuScore))+"_LLThres_"+TString(std::to_string(WhichLL));
 
@@ -106,6 +121,120 @@ void PurityEfficiencyStudies::Loop() {
 				CC1pRecoMuonCosThetaPlotStudy[WhichNuScore][WhichLL] = new TH1D(CC1pPlotNuScoreLLThres,LabelXAxisMuonCosTheta,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta);
 
 			}
+
+		}
+
+		// --------------------------------------------------------------------------------------------------------------------------------
+
+		// LLP Only Study
+
+		TH1D* RecoMuonCosThetaPlotLLPOnlyStudy[NBinsLLP];
+		TH1D* CC1pRecoMuonCosThetaPlotLLPOnlyStudy[NBinsLLP];
+
+		for (int WhichBin = 0; WhichBin < NBinsLLP; WhichBin++) {
+
+				TString PlotLLPOnlyThres = "RecoMuonCosThetaPlot_LLPThres_"+TString(std::to_string(WhichBin));
+
+				RecoMuonCosThetaPlotLLPOnlyStudy[WhichBin] = new TH1D(PlotLLPOnlyThres,LabelXAxisMuonCosTheta,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta);
+
+				TString CC1pPlotLLPOnlyThres = "CC1pRecoMuonCosThetaPlot_LLPThres_"+TString(std::to_string(WhichBin));
+
+				CC1pRecoMuonCosThetaPlotLLPOnlyStudy[WhichBin] = new TH1D(CC1pPlotLLPOnlyThres,LabelXAxisMuonCosTheta,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta);
+
+		}
+
+		// --------------------------------------------------------------------------------------------------------------------------------
+
+		// LLMu Only Study
+
+		TH1D* RecoMuonCosThetaPlotLLMuOnlyStudy[NBinsLLMu];
+		TH1D* CC1pRecoMuonCosThetaPlotLLMuOnlyStudy[NBinsLLMu];
+
+		for (int WhichBin = 0; WhichBin < NBinsLLMu; WhichBin++) {
+
+				TString PlotLLMuOnlyThres = "RecoMuonCosThetaPlot_LLMuThres_"+TString(std::to_string(WhichBin));
+
+				RecoMuonCosThetaPlotLLMuOnlyStudy[WhichBin] = new TH1D(PlotLLMuOnlyThres,LabelXAxisMuonCosTheta,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta);
+
+				TString CC1pPlotLLMuOnlyThres = "CC1pRecoMuonCosThetaPlot_LLMuThres_"+TString(std::to_string(WhichBin));
+
+				CC1pRecoMuonCosThetaPlotLLMuOnlyStudy[WhichBin] = new TH1D(CC1pPlotLLMuOnlyThres,LabelXAxisMuonCosTheta,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta);
+
+		}
+
+		// --------------------------------------------------------------------------------------------------------------------------------
+
+		// NuScore Only Study
+
+		TH1D* RecoMuonCosThetaPlotNuScoreOnlyStudy[NBinsNuScore];
+		TH1D* CC1pRecoMuonCosThetaPlotNuScoreOnlyStudy[NBinsNuScore];
+
+		for (int WhichBin = 0; WhichBin < NBinsNuScore; WhichBin++) {
+
+				TString PlotNuScoreOnlyThres = "RecoMuonCosThetaPlot_NuScoreThres_"+TString(std::to_string(WhichBin));
+
+				RecoMuonCosThetaPlotNuScoreOnlyStudy[WhichBin] = new TH1D(PlotNuScoreOnlyThres,LabelXAxisMuonCosTheta,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta);
+
+				TString CC1pPlotNuScoreOnlyThres = "CC1pRecoMuonCosThetaPlot_NuScoreThres_"+TString(std::to_string(WhichBin));
+
+				CC1pRecoMuonCosThetaPlotNuScoreOnlyStudy[WhichBin] = new TH1D(CC1pPlotNuScoreOnlyThres,LabelXAxisMuonCosTheta,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta);
+
+		}
+
+		// --------------------------------------------------------------------------------------------------------------------------------
+
+		// Length Only Study
+
+		TH1D* RecoMuonCosThetaPlotLengthOnlyStudy[NBinsLength];
+		TH1D* CC1pRecoMuonCosThetaPlotLengthOnlyStudy[NBinsLength];
+
+		for (int WhichBin = 0; WhichBin < NBinsLength; WhichBin++) {
+
+				TString PlotLengthOnlyThres = "RecoMuonCosThetaPlot_LengthThres_"+TString(std::to_string(WhichBin));
+
+				RecoMuonCosThetaPlotLengthOnlyStudy[WhichBin] = new TH1D(PlotLengthOnlyThres,LabelXAxisMuonCosTheta,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta);
+
+				TString CC1pPlotLengthOnlyThres = "CC1pRecoMuonCosThetaPlot_LengthThres_"+TString(std::to_string(WhichBin));
+
+				CC1pRecoMuonCosThetaPlotLengthOnlyStudy[WhichBin] = new TH1D(CC1pPlotLengthOnlyThres,LabelXAxisMuonCosTheta,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta);
+
+		}
+
+		// --------------------------------------------------------------------------------------------------------------------------------
+
+		// PMissMinus Only Study
+
+		TH1D* RecoMuonCosThetaPlotPMissMinusOnlyStudy[NBinsPMissMinus];
+		TH1D* CC1pRecoMuonCosThetaPlotPMissMinusOnlyStudy[NBinsPMissMinus];
+
+		for (int WhichBin = 0; WhichBin < NBinsPMissMinus; WhichBin++) {
+
+				TString PlotPMissMinusOnlyThres = "RecoMuonCosThetaPlot_PMissMinusThres_"+TString(std::to_string(WhichBin));
+
+				RecoMuonCosThetaPlotPMissMinusOnlyStudy[WhichBin] = new TH1D(PlotPMissMinusOnlyThres,LabelXAxisMuonCosTheta,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta);
+
+				TString CC1pPlotPMissMinusOnlyThres = "CC1pRecoMuonCosThetaPlot_PMissMinusThres_"+TString(std::to_string(WhichBin));
+
+				CC1pRecoMuonCosThetaPlotPMissMinusOnlyStudy[WhichBin] = new TH1D(CC1pPlotPMissMinusOnlyThres,LabelXAxisMuonCosTheta,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta);
+
+		}
+
+		// --------------------------------------------------------------------------------------------------------------------------------
+
+		// kMiss Only Study
+
+		TH1D* RecoMuonCosThetaPlotkMissOnlyStudy[NBinskMiss];
+		TH1D* CC1pRecoMuonCosThetaPlotkMissOnlyStudy[NBinskMiss];
+
+		for (int WhichBin = 0; WhichBin < NBinskMiss; WhichBin++) {
+
+				TString PlotkMissOnlyThres = "RecoMuonCosThetaPlot_kMissThres_"+TString(std::to_string(WhichBin));
+
+				RecoMuonCosThetaPlotkMissOnlyStudy[WhichBin] = new TH1D(PlotkMissOnlyThres,LabelXAxisMuonCosTheta,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta);
+
+				TString CC1pPlotkMissOnlyThres = "CC1pRecoMuonCosThetaPlot_kMissThres_"+TString(std::to_string(WhichBin));
+
+				CC1pRecoMuonCosThetaPlotkMissOnlyStudy[WhichBin] = new TH1D(CC1pPlotkMissOnlyThres,LabelXAxisMuonCosTheta,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta);
 
 		}
 
@@ -279,6 +408,7 @@ void PurityEfficiencyStudies::Loop() {
 
 			double l_muCandidate = CandidateMu_Length->at(0);
 			double l_pCandidate = CandidateP_Length->at(0);
+			double LengthDiff = l_muCandidate - l_pCandidate;
 
 			// -----------------------------------------------------------------------------------------------------------------------------
 
@@ -318,7 +448,7 @@ void PurityEfficiencyStudies::Loop() {
 
 			// Studies for pre- chi2 & nuscore cuts
 
-//			if (l_muCandidate - l_pCandidate < 0) { continue; }
+//			if (LengthDiff < 0) { continue; }
 //			if (kMiss > 0.6) { continue; }
 //			if (PMissMinus < 0.6) { continue; }
 
@@ -419,6 +549,8 @@ void PurityEfficiencyStudies::Loop() {
 
 			// ----------------------------------------------------------------------------------------------------------------------
 
+			// Default Plots
+
 			RecoMuonCosThetaPlot->Fill(reco_Pmu_cos_theta,weight);
 
 			if (NuScore > 0.6 && reco_Pp_ThreePlaneLogLikelihood > -1) {
@@ -429,13 +561,113 @@ void PurityEfficiencyStudies::Loop() {
 
 			}
 
+			// ----------------------------------------------------------------------------------------------------------------------
+
+			// 1D LLP Only Study
+
+			for (int WhichBin = 0; WhichBin < NBinsLLP; WhichBin++) {
+
+				double LocalThres = MinLLP + LLPStep * WhichBin;
+
+				if (reco_Pp_ThreePlaneLogLikelihood > LocalThres) {
+					
+					RecoMuonCosThetaPlotLLPOnlyStudy[WhichBin]->Fill(reco_Pmu_cos_theta,weight);
+
+				}
+
+			}
+
+			// ----------------------------------------------------------------------------------------------------------------------
+
+			// 1D LLMu Only Study
+
+			for (int WhichBin = 0; WhichBin < NBinsLLMu; WhichBin++) {
+
+				double LocalThres = MinLLMu + LLMuStep * WhichBin;
+
+				if (reco_Pmu_ThreePlaneLogLikelihood > LocalThres) {
+					
+					RecoMuonCosThetaPlotLLMuOnlyStudy[WhichBin]->Fill(reco_Pmu_cos_theta,weight);
+
+				}
+
+			}
+
+			// ----------------------------------------------------------------------------------------------------------------------
+
+			// 1D NuScore Only Study
+
+			for (int WhichBin = 0; WhichBin < NBinsNuScore; WhichBin++) {
+
+				double LocalThres = MinNuScore + NuScoreStep * WhichBin;
+
+				if (NuScore > LocalThres) {
+					
+					RecoMuonCosThetaPlotNuScoreOnlyStudy[WhichBin]->Fill(reco_Pmu_cos_theta,weight);
+
+				}
+
+			}
+
+			// ----------------------------------------------------------------------------------------------------------------------
+
+			// 1D Length Only Study
+
+			for (int WhichBin = 0; WhichBin < NBinsLength; WhichBin++) {
+
+				double LocalThres = MinLength + LengthStep * WhichBin;
+
+				if (LengthDiff > LocalThres) {
+					
+					RecoMuonCosThetaPlotLengthOnlyStudy[WhichBin]->Fill(reco_Pmu_cos_theta,weight);
+
+				}
+
+			}
+
+			// ----------------------------------------------------------------------------------------------------------------------
+
+			// 1D PMissMinus Only Study
+
+			for (int WhichBin = 0; WhichBin < NBinsPMissMinus; WhichBin++) {
+
+				double LocalThres = MinPMissMinus + PMissMinusStep * WhichBin;
+
+				if (PMissMinus > LocalThres) {
+					
+					RecoMuonCosThetaPlotPMissMinusOnlyStudy[WhichBin]->Fill(reco_Pmu_cos_theta,weight);
+
+				}
+
+			}
+
+			// ----------------------------------------------------------------------------------------------------------------------
+
+			// 1D kMiss Only Study
+
+			for (int WhichBin = 0; WhichBin < NBinskMiss; WhichBin++) {
+
+				double LocalThres = MinkMiss + kMissStep * WhichBin;
+
+				if (kMiss > LocalThres) {
+					
+					RecoMuonCosThetaPlotkMissOnlyStudy[WhichBin]->Fill(reco_Pmu_cos_theta,weight);
+
+				}
+
+			}
+
+			// ----------------------------------------------------------------------------------------------------------------------
+
+			// 2D LL & nu score study
+
 			for (int WhichNuScore = 0; WhichNuScore < NBinsNuScore; WhichNuScore++) {
 
 				double LocalNuScoreThres = MinNuScore + NuScoreStep * WhichNuScore;
 
-				for (int WhichLL = 0; WhichLL < NBinsLL; WhichLL++) {
+				for (int WhichLL = 0; WhichLL < NBinsLLP; WhichLL++) {
 
-					double LocalLLThres = MinLL + LLStep * WhichLL;
+					double LocalLLThres = MinLLP + LLPStep * WhichLL;
 
 					if (NuScore > LocalNuScoreThres && reco_Pp_ThreePlaneLogLikelihood > LocalLLThres) {
 					
@@ -456,18 +688,122 @@ void PurityEfficiencyStudies::Loop() {
 
 				if (CC1p == 1 && CandidateMu_MCParticle_Pdg->at(0) == MuonPdg && CandidateP_MCParticle_Pdg->at(0) == ProtonPdg 
 				    && True_CandidateMu_StartContainment->at(0) == 1) {
+
+					// ---------------------------------------------------------------------------------------------------------------------------
+
+					// Default plots
 				
 					CC1pEventsPassingSelectionCuts++;
 
 					RecoMuonCosThetaPlot->Fill(reco_Pmu_cos_theta,weight);
 
+					// ---------------------------------------------------------------------------------------------------------------------------
+
+					// 1D LLP only study
+
+					for (int WhichBin = 0; WhichBin < NBinsLLP; WhichBin++) {
+
+						double LocalThres = MinLLP + LLPStep * WhichBin;
+
+						if (reco_Pp_ThreePlaneLogLikelihood > LocalThres) {
+							
+							CC1pRecoMuonCosThetaPlotLLPOnlyStudy[WhichBin]->Fill(reco_Pmu_cos_theta,weight);
+
+						}
+
+					}
+
+					// ---------------------------------------------------------------------------------------------------------------------------
+
+					// 1D LLMu only study
+
+					for (int WhichBin = 0; WhichBin < NBinsLLMu; WhichBin++) {
+
+						double LocalThres = MinLLMu + LLMuStep * WhichBin;
+
+						if (reco_Pmu_ThreePlaneLogLikelihood > LocalThres) {
+							
+							CC1pRecoMuonCosThetaPlotLLMuOnlyStudy[WhichBin]->Fill(reco_Pmu_cos_theta,weight);
+
+						}
+
+					}
+
+					// ---------------------------------------------------------------------------------------------------------------------------
+
+					// 1D NuScore only study
+
+					for (int WhichBin = 0; WhichBin < NBinsNuScore; WhichBin++) {
+
+						double LocalThres = MinNuScore + NuScoreStep * WhichBin;
+
+						if (NuScore > LocalThres) {
+							
+							CC1pRecoMuonCosThetaPlotNuScoreOnlyStudy[WhichBin]->Fill(reco_Pmu_cos_theta,weight);
+
+						}
+
+					}
+
+					// ---------------------------------------------------------------------------------------------------------------------------
+
+					// 1D Length only study
+
+					for (int WhichBin = 0; WhichBin < NBinsLength; WhichBin++) {
+
+						double LocalThres = MinLength + LengthStep * WhichBin;
+
+						if (LengthDiff > LocalThres) {
+							
+							CC1pRecoMuonCosThetaPlotLengthOnlyStudy[WhichBin]->Fill(reco_Pmu_cos_theta,weight);
+
+						}
+
+					}
+
+					// ---------------------------------------------------------------------------------------------------------------------------
+
+					// 1D PMissMinus only study
+
+					for (int WhichBin = 0; WhichBin < NBinsPMissMinus; WhichBin++) {
+
+						double LocalThres = MinPMissMinus + PMissMinusStep * WhichBin;
+
+						if (PMissMinus > LocalThres) {
+							
+							CC1pRecoMuonCosThetaPlotPMissMinusOnlyStudy[WhichBin]->Fill(reco_Pmu_cos_theta,weight);
+
+						}
+
+					}
+
+					// ---------------------------------------------------------------------------------------------------------------------------
+
+					// 1D kMiss only study
+
+					for (int WhichBin = 0; WhichBin < NBinskMiss; WhichBin++) {
+
+						double LocalThres = MinkMiss + kMissStep * WhichBin;
+
+						if (kMiss > LocalThres) {
+							
+							CC1pRecoMuonCosThetaPlotkMissOnlyStudy[WhichBin]->Fill(reco_Pmu_cos_theta,weight);
+
+						}
+
+					}
+
+					// ---------------------------------------------------------------------------------------------------------------------------
+
+					// 2D LL & nu score study
+
 					for (int WhichNuScore = 0; WhichNuScore < NBinsNuScore; WhichNuScore++) {
 
 						double LocalNuScoreThres = MinNuScore + NuScoreStep * WhichNuScore;
 
-						for (int WhichLL = 0; WhichLL < NBinsLL; WhichLL++) {
+						for (int WhichLL = 0; WhichLL < NBinsLLP; WhichLL++) {
 
-							double LocalLLThres = MinLL + LLStep * WhichLL;
+							double LocalLLThres = MinLLP + LLPStep * WhichLL;
 
 							if (NuScore > LocalNuScoreThres && reco_Pp_ThreePlaneLogLikelihood > LocalLLThres) {
 							
@@ -478,6 +814,8 @@ void PurityEfficiencyStudies::Loop() {
 						}
 
 					}
+
+					// ---------------------------------------------------------------------------------------------------------------------------
 
 				}
 

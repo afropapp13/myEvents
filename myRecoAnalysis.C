@@ -698,8 +698,8 @@ void myRecoAnalysis::Loop() {
 
 			if (string(fWhichSample).find("Overlay") != std::string::npos) { 
 			
-				if (Weight < 0 || Weight > 10) { continue; }
-				if (T2KWeight < 0 || T2KWeight > 10) { continue; }				
+				if (Weight < 0 || Weight > 30) { continue; }
+				if (T2KWeight < 0 || T2KWeight > 30) { continue; }				
 				weight = ( tor860_wcut / POTCount) * Weight * T2KWeight * ROOTinoWeight; 
 				
 			}
@@ -870,9 +870,9 @@ void myRecoAnalysis::Loop() {
 			if (DeltaAlphaT < ArrayNBinsDeltaAlphaT[0]) { continue; }
 			if (DeltaPhiT < ArrayNBinsDeltaPhiT[0]) { continue; }
 
-			if (ECal < ArrayNBinsECal[0]) { continue; }
-			if (EQE < ArrayNBinsEQE[0]) { continue; }
-			if (reco_Q2 < ArrayNBinsQ2[0]) { continue; }
+//			if (ECal < ArrayNBinsECal[0]) { continue; }
+//			if (EQE < ArrayNBinsEQE[0]) { continue; }
+//			if (reco_Q2 < ArrayNBinsQ2[0]) { continue; }
 
 			// --------------------------------------------------------------------------------------------------------------------
 
@@ -892,9 +892,9 @@ void myRecoAnalysis::Loop() {
 			if (DeltaAlphaT > ArrayNBinsDeltaAlphaT[NBinsDeltaAlphaT]) { continue; }
 			if (DeltaPhiT > ArrayNBinsDeltaPhiT[NBinsDeltaPhiT]) { continue; }
 
-			if (ECal > ArrayNBinsECal[NBinsECal]) { continue; }
-			if (EQE > ArrayNBinsEQE[NBinsEQE]) { continue; }
-			if (reco_Q2 > ArrayNBinsQ2[NBinsQ2]) { continue; }
+//			if (ECal > ArrayNBinsECal[NBinsECal]) { continue; }
+//			if (EQE > ArrayNBinsEQE[NBinsEQE]) { continue; }
+//			if (reco_Q2 > ArrayNBinsQ2[NBinsQ2]) { continue; }
 
 			// ----------------------------------------------------------------------------------------------------------------------------
 			// ---------------------------------------------------------------------------------------------------------------------------
@@ -1128,8 +1128,8 @@ void myRecoAnalysis::Loop() {
 					CC1pRecoCosThetaMuPmuPlot->Fill(reco_Pmu_cos_theta,reco_Pmu_mcs,weight);
 					CC1pRecoCosThetaPPpPlot->Fill(reco_Pp_cos_theta,reco_Pp,weight);				
 
-					// ---------------------------------------------------------------------------------------------------------------------
-					// ---------------------------------------------------------------------------------------------------------------------
+					// --------------------------------------------------------------------------------------------------
+					// --------------------------------------------------------------------------------------------------
 
 					// 2D Plots Kinematic Variables
 
@@ -1142,7 +1142,7 @@ void myRecoAnalysis::Loop() {
 					CC1pRecoMuonPhiPlot2D->Fill(True_CandidateMu_Phi->at(0),reco_Pmu_phi*180./TMath::Pi());
 					CC1pRecoProtonPhiPlot2D->Fill(True_CandidateP_Phi->at(0),reco_Pp_phi*180./TMath::Pi());
 
-					// ---------------------------------------------------------------------------------------------------------------------
+					// -----------------------------------------------------------------------------------------------------
 
 					// True Level STV
 
@@ -1150,7 +1150,7 @@ void myRecoAnalysis::Loop() {
 					CC1pRecoDeltaAlphaTPlot2D->Fill(true_DeltaAlphaT,DeltaAlphaT);
 					CC1pRecoDeltaPhiTPlot2D->Fill(true_DeltaPhiT,DeltaPhiT);
 
-					// ---------------------------------------------------------------------------------------------------------------------
+					// -----------------------------------------------------------------------------------------------------
 
 					// True level energy reconstruction & Q2
 
@@ -1160,7 +1160,7 @@ void myRecoAnalysis::Loop() {
 
 				}
 
-				// --------------------------------------------------------------------------------------------------------------------------------
+				// -------------------------------------------------------------------------------------------------------------
 
 				// Non-CC1p 
 
