@@ -577,6 +577,29 @@ void myRecoAnalysis::Loop() {
 			MinThreePlaneChi2LogLikelihood,MaxThreePlaneChi2LogLikelihood);
 
 		// --------------------------------------------------------------------------------------------------------------------------------
+		// --------------------------------------------------------------------------------------------------------------------------------
+
+		// Optical & calorimetric info (only Reco & CC1pReco) for selection cuts
+
+		TH2D* RecodYZvsNPE2D = new TH2D("RecodYZvsNPE2D",RecoLabelXAxisNPE+RecoLabelXAxisdYZ,NBinsNPE,MinNPE,MaxNPE,NBinsdYZ,MindYZ,MaxdYZ);
+		TH2D* CC1pRecodYZvsNPE2D = new TH2D("CC1pRecodYZvsNPE2D",RecoLabelXAxisNPE+RecoLabelXAxisdYZ,NBinsNPE,MinNPE,MaxNPE,NBinsdYZ,MindYZ,MaxdYZ);
+
+		TH2D* RecoChi2PvsChi2Mu2D = new TH2D("RecoChi2PvsChi2Mu2D",";#chi^{2}_{#mu};#chi^{2}_{p}",NBinsChi2,MinChi2,MaxChi2,NBinsChi2,MinChi2,MaxChi2);
+		TH2D* CC1pRecoChi2PvsChi2Mu2D = new TH2D("CC1pRecoChi2PvsChi2Mu2D",";#chi^{2}_{#mu};#chi^{2}_{p}",NBinsChi2,MinChi2,MaxChi2,NBinsChi2,MinChi2,MaxChi2);
+
+		TH2D* RecoLLPvsLLMu2D = new TH2D("RecoLLPvsLLMu2D",RecoLabelXAxisThreePlaneChi2MuonCandidateLogLikelihood+RecoLabelXAxisThreePlaneChi2ProtonCandidateLogLikelihood,
+						 2*NBinsThreePlaneChi2LogLikelihood,MinThreePlaneChi2LogLikelihood,MaxThreePlaneChi2LogLikelihood,
+						 2*NBinsThreePlaneChi2LogLikelihood,MinThreePlaneChi2LogLikelihood,MaxThreePlaneChi2LogLikelihood);
+		TH2D* CC1pRecoLLPvsLLMu2D = new TH2D("CC1pRecoLLPvsLLMu2D",RecoLabelXAxisThreePlaneChi2MuonCandidateLogLikelihood+RecoLabelXAxisThreePlaneChi2ProtonCandidateLogLikelihood,
+						 2*NBinsThreePlaneChi2LogLikelihood,MinThreePlaneChi2LogLikelihood,MaxThreePlaneChi2LogLikelihood,
+						 2*NBinsThreePlaneChi2LogLikelihood,MinThreePlaneChi2LogLikelihood,MaxThreePlaneChi2LogLikelihood);
+
+		TH2D* RecoLengthPvsLengthMu2D = new TH2D("RecoLengthPvsLengthMu2D",RecoLabelXAxisMuonLength+RecoLabelXAxisProtonLength,
+							 NBinsMuonLength,MinMuonLength,MaxMuonLength,NBinsProtonLength,MinProtonLength,MaxProtonLength);
+		TH2D* CC1pRecoLengthPvsLengthMu2D = new TH2D("CC1pRecoLengthPvsLengthMu2D",RecoLabelXAxisMuonLength+RecoLabelXAxisProtonLength,
+							 NBinsMuonLength,MinMuonLength,MaxMuonLength,NBinsProtonLength,MinProtonLength,MaxProtonLength);
+
+		// --------------------------------------------------------------------------------------------------------------------------------
 
 		TH1D* POTScalePlot = new TH1D("POTScalePlot","",1,0,1);
 		TH1D* NEventsPlot = new TH1D("NEventsPlot","",1,0,1);
@@ -659,9 +682,9 @@ void myRecoAnalysis::Loop() {
 
 		}	
 		
-		if (string(fWhichSample).find("ExtBNB9") != std::string::npos) { weight = E1DCNT_wcut / EXT; POTScale = weight; }
+		if (string(fWhichSample).find("ExtBNB9") != std::string::npos) { POTScale = E1DCNT_wcut / EXT; }
 
-		if (string(fWhichSample).find("Overlay") != std::string::npos) { weight = tor860_wcut / POTCount; POTScale = weight; }			
+		if (string(fWhichSample).find("Overlay") != std::string::npos) { POTScale = tor860_wcut / POTCount; }			
 
 		// --------------------------------------------------------------------------------------------------------------------------------
 
@@ -696,11 +719,13 @@ void myRecoAnalysis::Loop() {
 
 			// -------------------------------------------------------------------------------------------------------------------------
 
+			weight = POTScale;
+
 			if (string(fWhichSample).find("Overlay") != std::string::npos) { 
 			
 				if (Weight < 0 || Weight > 30) { continue; }
 				if (T2KWeight < 0 || T2KWeight > 30) { continue; }				
-				weight = ( tor860_wcut / POTCount) * Weight * T2KWeight * ROOTinoWeight; 
+				weight = POTScale * Weight * T2KWeight * ROOTinoWeight; 
 				
 			}
 			
@@ -1038,6 +1063,14 @@ void myRecoAnalysis::Loop() {
 			if (reco_Pmu_chi2 > 0 && reco_Pmu_ThreePlanechi2 > 0) 
 				{ RecoChi2vsThreePlaneChi2TPlot->Fill(reco_Pmu_chi2,reco_Pmu_ThreePlanechi2); }
 
+
+			// 2D Optical & calorimetric info
+
+			RecodYZvsNPE2D->Fill(NPE,dYZ,weight);
+			RecoChi2PvsChi2Mu2D->Fill(reco_Pmu_chi2,reco_Pp_chi2,weight);
+			RecoLLPvsLLMu2D->Fill(reco_Pmu_ThreePlaneLogLikelihood,reco_Pp_ThreePlaneLogLikelihood,weight);
+			RecoLengthPvsLengthMu2D->Fill(l_muCandidate,l_pCandidate,weight);
+
 			// ---------------------------------------------------------------------------------------------------------------------------
 
 			// CC1p1pi Background
@@ -1158,6 +1191,15 @@ void myRecoAnalysis::Loop() {
 					CC1pRecoEQEPlot2D->Fill(true_EQE,EQE);
 					CC1pRecoQ2Plot2D->Fill(true_Q2,reco_Q2);
 
+					// -----------------------------------------------------------------------------------------------------
+
+					// 2D Optical & calorimetric info
+
+					CC1pRecodYZvsNPE2D->Fill(NPE,dYZ,weight);
+					CC1pRecoChi2PvsChi2Mu2D->Fill(reco_Pmu_chi2,reco_Pp_chi2,weight);
+					CC1pRecoLLPvsLLMu2D->Fill(reco_Pmu_ThreePlaneLogLikelihood,reco_Pp_ThreePlaneLogLikelihood,weight);
+					CC1pRecoLengthPvsLengthMu2D->Fill(l_muCandidate,l_pCandidate,weight);
+
 				}
 
 				// -------------------------------------------------------------------------------------------------------------
@@ -1185,7 +1227,7 @@ void myRecoAnalysis::Loop() {
 						else if ( CandidateMu_MCParticle_Pdg->at(0) == ProtonPdg && CandidateP_MCParticle_Pdg->at(0) == ProtonPdg) { MisIndetifiedMuonAsProton++;  }
 						else if ( CandidateMu_MCParticle_Pdg->at(0) == -MuonPdg && CandidateP_MCParticle_Pdg->at(0) == ProtonPdg) { MisIndetifiedMuonAsAntiMuon++;  }
 						else if ( True_CandidateMu_StartContainment->at(0) == 0 ) { CandidateMuon_MCParticle_OutFV++; }
-						else if ( True_CandidateP_StartContainment->at(0) == 0 || True_CandidateP_EndContainment->at(0) == 0) { CandidateProton_MCParticle_OutFV++; }
+//						else if ( True_CandidateP_StartContainment->at(0) == 0 || True_CandidateP_EndContainment->at(0) == 0) { CandidateProton_MCParticle_OutFV++; }
 						else if ( True_CandidateMu_StartX->at(0) != True_CandidateP_StartX->at(0) 
 						|| True_CandidateMu_StartY->at(0) != True_CandidateP_StartY->at(0)
 						|| True_CandidateMu_StartZ->at(0) != True_CandidateP_StartZ->at(0) ) { MultipleVertices++; }

@@ -69,6 +69,7 @@ void DetermineMaxPurityEfficiency1D() {
 //	TString CutName = "Length";
 //	TString CutName = "PMissMinus";
 //	TString CutName = "kMiss";
+//	TString CutName = "DeltaTheta";
 
 	// ----------------------------------------------------------------------------------------------------------------------------------------
 
@@ -85,8 +86,7 @@ void DetermineMaxPurityEfficiency1D() {
 
 	// --------------------------------------------------------------------------------------------------------------------------------
 
-	int NBins = -99;
-	double Min = -99., Max = 99.;
+	int NBins = -99; double Min = -99., Max = 99.;
 
 	if (CutName == "LLP") {
 
@@ -127,6 +127,13 @@ void DetermineMaxPurityEfficiency1D() {
 
 		NBins = 20;
 		Min = 0., Max = 1.05;
+
+	}
+
+	if (CutName == "DeltaTheta") {
+
+		NBins = 19;
+		Min = 5., Max = 90.;
 
 	}
 
@@ -231,6 +238,19 @@ void DetermineMaxPurityEfficiency1D() {
 	latBeamOn->SetTextFont(TextFont);
 	latBeamOn->SetTextSize(TextSize);
 	latBeamOn->DrawLatexNDC(0.2,0.75,"Beam On Events = "+ToString(hRecoBeamOn->GetEntries()));
+
+	// ----------------------------------------------------------------------------------------------------------------------------------------
+	
+	// Cosmic contamination fraction that we would have with the candidate set of cuts
+
+	TString ExtBNBPlotThres = "RecoMuonCosThetaPlot_"+CutName+"Thres_"+TString(std::to_string(GlobalThresBin));
+	TH1D* hRecoExtBNB = (TH1D*)(RecoExtBNBFile->Get(ExtBNBPlotThres));
+	TH1D* hRecoExtBNBDefault = (TH1D*)(RecoExtBNBFile->Get("RecoMuonCosThetaPlot"));
+	
+	TLatex* latExtBNB = new TLatex();
+	latExtBNB->SetTextFont(TextFont);
+	latExtBNB->SetTextSize(TextSize);
+	latExtBNB->DrawLatexNDC(0.2,0.7,"Cosmic Frac = "+ToString(hRecoExtBNB->GetEntries() / hRecoExtBNBDefault->GetEntries()));
 
 //	ProductCanvas->SaveAs(PlotsPath+CutName+"_TwoDScanProduct.pdf");
 

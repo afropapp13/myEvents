@@ -62,6 +62,8 @@ void DetermineMaxPurityEfficiency2D() {
 
 	TString RunNumber = "Run1";
 
+	TString CutName = "LLP";
+
 	// ----------------------------------------------------------------------------------------------------------------------------------------
 
 	TFile* TruthCC1pFile = TFile::Open("OutputFiles/TruthPurityEfficiencyStudies_Overlay9_Run1_NoCuts.root");
@@ -76,6 +78,9 @@ void DetermineMaxPurityEfficiency2D() {
 	TFile* RecoExtBNBFile = TFile::Open("OutputFiles/PurityEfficiencyStudies_ExtBNB9_Run1_NoCuts.root");
 
 	// --------------------------------------------------------------------------------------------------------------------------------
+
+	int NBinsXaxis = -99; double MinXaxis = -99., MaxXaxis = 99.;
+	int NBinsLeg = -99; double MinLeg = -99., MaxLeg = 99.;
 
 	int NBinsNuScore = 20;
 	double MinNuScore = 0., MaxNuScore = 1.;

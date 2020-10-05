@@ -93,6 +93,10 @@ void PurityEfficiencyStudies::Loop() {
 		double MinkMiss = 0., MaxkMiss = 1.05;
 		double kMissStep = (MaxkMiss - MinkMiss) / double(NBinskMiss);
 
+		int NBinsDeltaTheta = 19;
+		double MinDeltaTheta = 5., MaxDeltaTheta = 90.;
+		double DeltaThetaStep = (MaxDeltaTheta - MinDeltaTheta) / double(NBinsDeltaTheta);
+
 		// --------------------------------------------------------------------------------------------------------------------------------
 
 		// 1D Reco Level Plots
@@ -105,22 +109,43 @@ void PurityEfficiencyStudies::Loop() {
 
 		// --------------------------------------------------------------------------------------------------------------------------------
 
+		// 2D NuScore vs LLp Study 
+
 		TH1D* RecoMuonCosThetaPlotStudy[NBinsNuScore][NBinsLLP];
 		TH1D* CC1pRecoMuonCosThetaPlotStudy[NBinsNuScore][NBinsLLP];
 
-		for (int WhichNuScore = 0; WhichNuScore < NBinsNuScore; WhichNuScore++) {
+		for (int WhichXBin = 0; WhichXBin < NBinsNuScore; WhichXBin++) {
 
-			for (int WhichLL = 0; WhichLL < NBinsLLP; WhichLL++) {
+			for (int WhichLegBin = 0; WhichLegBin < NBinsLLP; WhichLegBin++) {
 
-				TString PlotNuScoreLLThres = "RecoMuonCosThetaPlot_NuScoreThres_"+TString(std::to_string(WhichNuScore))+"_LLThres_"+TString(std::to_string(WhichLL));
+				TString PlotThres = "RecoMuonCosThetaPlot_NuScoreVsLLPThres_"+TString(std::to_string(WhichXBin))+"_"+TString(std::to_string(WhichLegBin));
 
-				RecoMuonCosThetaPlotStudy[WhichNuScore][WhichLL] = new TH1D(PlotNuScoreLLThres,LabelXAxisMuonCosTheta,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta);
+				RecoMuonCosThetaPlotStudy[WhichXBin][WhichLegBin] = new TH1D(PlotThres,LabelXAxisMuonCosTheta,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta);
 
-				TString CC1pPlotNuScoreLLThres = "CC1pRecoMuonCosThetaPlot_NuScoreThres_"+TString(std::to_string(WhichNuScore))+"_LLThres_"+TString(std::to_string(WhichLL));
+				TString CC1pPlotThres = "CC1pRecoMuonCosThetaPlot_NuScoreVsLLPThres_"+TString(std::to_string(WhichXBin))+"_"+TString(std::to_string(WhichLegBin));
 
-				CC1pRecoMuonCosThetaPlotStudy[WhichNuScore][WhichLL] = new TH1D(CC1pPlotNuScoreLLThres,LabelXAxisMuonCosTheta,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta);
+				CC1pRecoMuonCosThetaPlotStudy[WhichXBin][WhichLegBin] = new TH1D(CC1pPlotThres,LabelXAxisMuonCosTheta,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta);
 
 			}
+
+		}
+
+		// --------------------------------------------------------------------------------------------------------------------------------
+
+		// DeltaTheta Only Study
+
+		TH1D* RecoMuonCosThetaPlotDeltaThetaOnlyStudy[NBinsLLP];
+		TH1D* CC1pRecoMuonCosThetaPlotDeltaThetaOnlyStudy[NBinsLLP];
+
+		for (int WhichBin = 0; WhichBin < NBinsDeltaTheta; WhichBin++) {
+
+				TString PlotOnlyThres = "RecoMuonCosThetaPlot_DeltaThetaThres_"+TString(std::to_string(WhichBin));
+
+				RecoMuonCosThetaPlotDeltaThetaOnlyStudy[WhichBin] = new TH1D(PlotOnlyThres,LabelXAxisMuonCosTheta,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta);
+
+				TString CC1pPlotOnlyThres = "CC1pRecoMuonCosThetaPlot_DeltaThetaThres_"+TString(std::to_string(WhichBin));
+
+				CC1pRecoMuonCosThetaPlotDeltaThetaOnlyStudy[WhichBin] = new TH1D(CC1pPlotOnlyThres,LabelXAxisMuonCosTheta,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta);
 
 		}
 
@@ -445,14 +470,6 @@ void PurityEfficiencyStudies::Loop() {
 			double reco_Q2 = Reco_Q2->at(0);
 
 			// -------------------------------------------------------------------------------------------------------------------------
-
-			// Studies for pre- chi2 & nuscore cuts
-
-//			if (LengthDiff < 0) { continue; }
-//			if (kMiss > 0.6) { continue; }
-//			if (PMissMinus < 0.6) { continue; }
-
-			// -------------------------------------------------------------------------------------------------------------------------
 			// -----------------------------------------------------------------------------------------------------------------------
 
 			// Make sure that the same events fill the same plots
@@ -490,6 +507,30 @@ void PurityEfficiencyStudies::Loop() {
 //			if (ECal > ArrayNBinsECal[NBinsECal]) { continue; }
 //			if (EQE > ArrayNBinsEQE[NBinsEQE]) { continue; }
 //			if (reco_Q2 > ArrayNBinsQ2[NBinsQ2]) { continue; }
+
+			// --------------------------------------------------------------------------------------------------------------------
+
+			// Default Plots
+
+			RecoMuonCosThetaPlot->Fill(reco_Pmu_cos_theta,weight);
+
+			if (NuScore > 0.6 && reco_Pp_ThreePlaneLogLikelihood > -1) {
+
+				OldNEventsPassingSelectionCuts++;
+
+				OldCutsRecoMuonCosThetaPlot->Fill(reco_Pmu_cos_theta,weight);
+
+			}
+
+			// -------------------------------------------------------------------------------------------------------------------------
+
+			// Studies for selection cuts
+
+//			if (reco_Pp_ThreePlaneLogLikelihood < 0.) { continue; }
+//			if (NuScore < 0.4) { continue; }
+//			if (LengthDiff < 0) { continue; }
+//			if (kMiss > 0.6) { continue; }
+//			if (PMissMinus < 0.6) { continue; }
 
 			// ----------------------------------------------------------------------------------------------------------------------------
 			// ---------------------------------------------------------------------------------------------------------------------------
@@ -545,20 +586,6 @@ void PurityEfficiencyStudies::Loop() {
 				true_EQE = True_EQE->at(0);
 				true_Q2 = True_Q2->at(0);				
 				
-			}
-
-			// ----------------------------------------------------------------------------------------------------------------------
-
-			// Default Plots
-
-			RecoMuonCosThetaPlot->Fill(reco_Pmu_cos_theta,weight);
-
-			if (NuScore > 0.6 && reco_Pp_ThreePlaneLogLikelihood > -1) {
-
-				OldNEventsPassingSelectionCuts++;
-
-				OldCutsRecoMuonCosThetaPlot->Fill(reco_Pmu_cos_theta,weight);
-
 			}
 
 			// ----------------------------------------------------------------------------------------------------------------------
@@ -652,6 +679,22 @@ void PurityEfficiencyStudies::Loop() {
 				if (kMiss > LocalThres) {
 					
 					RecoMuonCosThetaPlotkMissOnlyStudy[WhichBin]->Fill(reco_Pmu_cos_theta,weight);
+
+				}
+
+			}
+
+			// ----------------------------------------------------------------------------------------------------------------------
+
+			// 1D DeltaTheta Only Study
+
+			for (int WhichBin = 0; WhichBin < NBinsDeltaTheta; WhichBin++) {
+
+				double LocalThres = MinDeltaTheta + DeltaThetaStep * WhichBin;
+
+				if ( TMath::Abs(DeltaThetaProtonMuon_Deg - 90.) < LocalThres) {
+					
+					RecoMuonCosThetaPlotDeltaThetaOnlyStudy[WhichBin]->Fill(reco_Pmu_cos_theta,weight);
 
 				}
 
@@ -788,6 +831,22 @@ void PurityEfficiencyStudies::Loop() {
 						if (kMiss > LocalThres) {
 							
 							CC1pRecoMuonCosThetaPlotkMissOnlyStudy[WhichBin]->Fill(reco_Pmu_cos_theta,weight);
+
+						}
+
+					}
+
+					// ----------------------------------------------------------------------------------------------------------------------
+
+					// 1D DeltaTheta Only Study
+
+					for (int WhichBin = 0; WhichBin < NBinsDeltaTheta; WhichBin++) {
+
+						double LocalThres = MinDeltaTheta + DeltaThetaStep * WhichBin;
+
+						if ( TMath::Abs(DeltaThetaProtonMuon_Deg - 90.) < LocalThres) {
+							
+							CC1pRecoMuonCosThetaPlotDeltaThetaOnlyStudy[WhichBin]->Fill(reco_Pmu_cos_theta,weight);
 
 						}
 

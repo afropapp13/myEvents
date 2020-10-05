@@ -147,13 +147,13 @@ void myTrueAnalysis::Loop() {
 
 	}
 	
-//	if (string(fWhichSample).find("Run2") != std::string::npos) {
+	if (string(fWhichSample).find("Run2") != std::string::npos) {
 
-//		tor860_wcut = tor860_wcut_Run2;
-//		E1DCNT_wcut = E1DCNT_wcut_Run2;
-//		EXT = EXT_Run2;
+		tor860_wcut = tor860_wcut_Run2;
+		E1DCNT_wcut = E1DCNT_wcut_Run2;
+		EXT = EXT_Run2;
 
-//	}	
+	}	
 	
 	if (string(fWhichSample).find("Run3") != std::string::npos) {
 
@@ -163,21 +163,21 @@ void myTrueAnalysis::Loop() {
 
 	}	
 	
-//	if (string(fWhichSample).find("Run4") != std::string::npos) {
+	if (string(fWhichSample).find("Run4") != std::string::npos) {
 
-//		tor860_wcut = tor860_wcut_Run4;
-//		E1DCNT_wcut = E1DCNT_wcut_Run4;
-//		EXT = EXT_Run4;
+		tor860_wcut = tor860_wcut_Run4;
+		E1DCNT_wcut = E1DCNT_wcut_Run4;
+		EXT = EXT_Run4;
 
-//	}		
+	}		
 
-//	if (string(fWhichSample).find("Run5") != std::string::npos) {
+	if (string(fWhichSample).find("Run5") != std::string::npos) {
 
-//		tor860_wcut = tor860_wcut_Run5;
-//		E1DCNT_wcut = E1DCNT_wcut_Run5;
-//		EXT = EXT_Run5;
+		tor860_wcut = tor860_wcut_Run5;
+		E1DCNT_wcut = E1DCNT_wcut_Run5;
+		EXT = EXT_Run5;
 
-//	}
+	}
 
 	// ---------------------------------------------------------------------------------------------------------------------------------------------
 
