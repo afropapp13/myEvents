@@ -380,7 +380,7 @@ void Create1DPlotsTHStack_InteractionBreakDown() {
 				latexCosmic.SetTextFont(FontStyle);
 				latexCosmic.SetTextSize(0.09);
 				TString LabelCosmic = "Cosmics = " + ToString(CosmicContamination/10.) + " %";
-				latexCosmic.DrawLatexNDC(0.57,0.8, LabelCosmic);
+//				latexCosmic.DrawLatexNDC(0.57,0.8, LabelCosmic);
 
 				// --------------------------------------------------------------------------------------
 

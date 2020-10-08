@@ -614,6 +614,27 @@ void myRecoAnalysis::Loop() {
 
 		// --------------------------------------------------------------------------------------------------------------------------------
 
+		// CC1p STV Resolution Playground plots
+
+		int NBinsCC1pSTVReso = 100; double MinCC1pSTV = -50.,MaxCC1pSTV = 50.;
+
+		TH1D* Playground_CC1pRecoDeltaPTPlot_FullyContainedMuon = new TH1D("Playground_CC1pRecoDeltaPTPlot_FullyContainedMuon",";#deltaP_{T} resolution (%)",NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
+		TH1D* Playground_CC1pRecoDeltaPTPlot_ExitingShortMuon = new TH1D("Playground_CC1pRecoDeltaPTPlot_ExitingShortMuon",";#deltaP_{T} resolution (%)",NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
+		TH1D* Playground_CC1pRecoDeltaPTPlot_ExitingMediumMuon = new TH1D("Playground_CC1pRecoDeltaPTPlot_ExitingMediumMuon",";#deltaP_{T} resolution (%)",NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
+		TH1D* Playground_CC1pRecoDeltaPTPlot_ExitingLongMuon = new TH1D("Playground_CC1pRecoDeltaPTPlot_ExitingLongMuon",";#deltaP_{T} resolution (%)",NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
+
+		TH1D* Playground_CC1pRecoDeltaAlphaTPlot_FullyContainedMuon = new TH1D("Playground_CC1pRecoDeltaAlphaTPlot_FullyContainedMuon",";#delta#alpha_{T} resolution (%)",NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
+		TH1D* Playground_CC1pRecoDeltaAlphaTPlot_ExitingShortMuon = new TH1D("Playground_CC1pRecoDeltaAlphaTPlot_ExitingShortMuon",";#delta#alpha_{T} resolution (%)",NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
+		TH1D* Playground_CC1pRecoDeltaAlphaTPlot_ExitingMediumMuon = new TH1D("Playground_CC1pRecoDeltaAlphaTPlot_ExitingMediumMuon",";#delta#alpha_{T} resolution (%)",NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
+		TH1D* Playground_CC1pRecoDeltaAlphaTPlot_ExitingLongMuon = new TH1D("Playground_CC1pRecoDeltaAlphaTPlot_ExitingLongMuon",";#delta#alpha_{T} resolution (%)",NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
+
+		TH1D* Playground_CC1pRecoDeltaPhiTPlot_FullyContainedMuon = new TH1D("Playground_CC1pRecoDeltaPhiTPlot_FullyContainedMuon",";#delta#phi_{T} resolution (%)",NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
+		TH1D* Playground_CC1pRecoDeltaPhiTPlot_ExitingShortMuon = new TH1D("Playground_CC1pRecoDeltaPhiTPlot_ExitingShortMuon",";#delta#phi_{T} resolution (%)",NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
+		TH1D* Playground_CC1pRecoDeltaPhiTPlot_ExitingMediumMuon = new TH1D("Playground_CC1pRecoDeltaPhiTPlot_ExitingMediumMuon",";#delta#phi_{T} resolution (%)",NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
+		TH1D* Playground_CC1pRecoDeltaPhiTPlot_ExitingLongMuon = new TH1D("Playground_CC1pRecoDeltaPhiTPlot_ExitingLongMuon",";#delta#phi_{T} resolution (%)",NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);		
+
+		// --------------------------------------------------------------------------------------------------------------------------------
+
 		// POT Counting
 
 		double POTCount = -99.;
@@ -723,8 +744,8 @@ void myRecoAnalysis::Loop() {
 
 			if (string(fWhichSample).find("Overlay") != std::string::npos) { 
 			
-				if (Weight < 0 || Weight > 30) { continue; }
-				if (T2KWeight < 0 || T2KWeight > 30) { continue; }				
+				if (Weight <= 0 || Weight > 30) { continue; }
+				if (T2KWeight <= 0 || T2KWeight > 30) { continue; }				
 				weight = POTScale * Weight * T2KWeight * ROOTinoWeight; 
 				
 			}
@@ -738,17 +759,17 @@ void myRecoAnalysis::Loop() {
 
 				// Genie weights
 
-				if (fEventWeightLabel == "All_UBGenie") { weight = weight*All_UBGenie->at(fUniverseIndex); }
-				if (fEventWeightLabel == "AxFFCCQEshape_UBGenie") { weight = weight*AxFFCCQEshape_UBGenie->at(fUniverseIndex); }
-				if (fEventWeightLabel == "DecayAngMEC_UBGenie") { weight = weight*DecayAngMEC_UBGenie->at(fUniverseIndex); }
-				if (fEventWeightLabel == "NormCCCOH_UBGenie") { weight = weight*NormCCCOH_UBGenie->at(fUniverseIndex); }
-				if (fEventWeightLabel == "NormNCCOH_UBGenie") { weight = weight*NormNCCOH_UBGenie->at(fUniverseIndex); }
-//				if (fEventWeightLabel == "RPA_CCQE_Reduced_UBGenie") { weight = weight*RPA_CCQE_Reduced_UBGenie->at(fUniverseIndex); }
-				if (fEventWeightLabel == "RPA_CCQE_UBGenie") { weight = weight*RPA_CCQE_UBGenie->at(fUniverseIndex); }
-				if (fEventWeightLabel == "ThetaDelta2NRad_UBGenie") { weight = weight*ThetaDelta2NRad_UBGenie->at(fUniverseIndex); }
-				if (fEventWeightLabel == "Theta_Delta2Npi_UBGenie") { weight = weight*Theta_Delta2Npi_UBGenie->at(fUniverseIndex); }
-				if (fEventWeightLabel == "VecFFCCQEshape_UBGenie") { weight = weight*VecFFCCQEshape_UBGenie->at(fUniverseIndex); }
-				if (fEventWeightLabel == "XSecShape_CCMEC_UBGenie") { weight = weight*XSecShape_CCMEC_UBGenie->at(fUniverseIndex); }
+				if (fEventWeightLabel == "All_UBGenie") { weight = weight*All_UBGenie->at(fUniverseIndex) / T2KWeight; }
+				if (fEventWeightLabel == "AxFFCCQEshape_UBGenie") { weight = weight*AxFFCCQEshape_UBGenie->at(fUniverseIndex) / T2KWeight; }
+				if (fEventWeightLabel == "DecayAngMEC_UBGenie") { weight = weight*DecayAngMEC_UBGenie->at(fUniverseIndex) / T2KWeight; }
+				if (fEventWeightLabel == "NormCCCOH_UBGenie") { weight = weight*NormCCCOH_UBGenie->at(fUniverseIndex) / T2KWeight; }
+				if (fEventWeightLabel == "NormNCCOH_UBGenie") { weight = weight*NormNCCOH_UBGenie->at(fUniverseIndex) / T2KWeight; }
+//				if (fEventWeightLabel == "RPA_CCQE_Reduced_UBGenie") { weight = weight*RPA_CCQE_Reduced_UBGenie->at(fUniverseIndex) / T2KWeight; }
+				if (fEventWeightLabel == "RPA_CCQE_UBGenie") { weight = weight*RPA_CCQE_UBGenie->at(fUniverseIndex) / T2KWeight; }
+				if (fEventWeightLabel == "ThetaDelta2NRad_UBGenie") { weight = weight*ThetaDelta2NRad_UBGenie->at(fUniverseIndex) / T2KWeight; }
+				if (fEventWeightLabel == "Theta_Delta2Npi_UBGenie") { weight = weight*Theta_Delta2Npi_UBGenie->at(fUniverseIndex) / T2KWeight; }
+				if (fEventWeightLabel == "VecFFCCQEshape_UBGenie") { weight = weight*VecFFCCQEshape_UBGenie->at(fUniverseIndex) / T2KWeight; }
+				if (fEventWeightLabel == "XSecShape_CCMEC_UBGenie") { weight = weight*XSecShape_CCMEC_UBGenie->at(fUniverseIndex) / T2KWeight; }
 
 				// Flux weights
 
@@ -793,7 +814,7 @@ void myRecoAnalysis::Loop() {
 			// hard coded limit because something still looks weird in the dirt sample at low nu-score
 			// COH interaction & infinite weight
 			
-			if (NuScore < 0.04) { continue; }
+			//if (NuScore < 0.04) { continue; }
 
 			// -----------------------------------------------------------------------------------------------------------------------------
 
@@ -962,19 +983,29 @@ void myRecoAnalysis::Loop() {
 
 			for (int i = 0; i < NCuts; i++) {
 
-				if (VectorCuts[i] == "_NuScore" && !( NuScore > MinimumNuScore) )  { PassedSelection = false; }
+//				if (VectorCuts[i] == "_NuScore" && !( NuScore > MinimumNuScore) )  { PassedSelection = false; }
 
-//				if (VectorCuts[i] == "_Chi2" && 
-//					!(CandidateMu_Chi2_YPlane->at(0) > CandidateP_Chi2_YPlane->at(0) && 
-//					CandidateP_Chi2_YPlane->at(0) < ProtonChi2Cut && CandidateMu_Chi2_YPlane->at(0) > MuonChi2Cut) )  
+////				if (VectorCuts[i] == "_Chi2" && 
+////					!(CandidateMu_Chi2_YPlane->at(0) > CandidateP_Chi2_YPlane->at(0) && 
+////					CandidateP_Chi2_YPlane->at(0) < ProtonChi2Cut && CandidateMu_Chi2_YPlane->at(0) > MuonChi2Cut) )  
+////					{ PassedSelection = false; }
+
+//				if (VectorCuts[i] == "_ThreePlaneLogChi2" && 
+//					!(reco_Pp_ThreePlaneLogLikelihood > ProtonThreePlaneChi2LogLikelihoodCut) ) 
+//					//&& reco_Pmu_ThreePlaneLogLikelihood < MuonThreePlaneChi2LogLikelihoodCut) )  
 //					{ PassedSelection = false; }
 
-				if (VectorCuts[i] == "_ThreePlaneLogChi2" && 
-					!(reco_Pp_ThreePlaneLogLikelihood > ProtonThreePlaneChi2LogLikelihoodCut) ) 
-					//&& reco_Pmu_ThreePlaneLogLikelihood < MuonThreePlaneChi2LogLikelihoodCut) )  
-					{ PassedSelection = false; }
+//				//if (VectorCuts[i] == "_Collinearity" && !( DeltaThetaProtonMuon_Deg < DeltaThetaCut ) )  { PassedSelection = false; }
 
-				//if (VectorCuts[i] == "_Collinearity" && !( DeltaThetaProtonMuon_Deg < DeltaThetaCut ) )  { PassedSelection = false; }
+
+				// WATCH OUT !!!!!!!!!!!!!!!!!!!!!!!!!!! 
+				// INVERTED CUTS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+				if (VectorCuts[i] == "_NuScore" && !( reco_Pp_ThreePlaneLogLikelihood > ProtonThreePlaneChi2LogLikelihoodCut ) )  { PassedSelection = false; }
+
+				if (VectorCuts[i] == "_ThreePlaneLogChi2" && 
+					!( NuScore > MinimumNuScore ) ) 
+					{ PassedSelection = false; }
 
 
 			}
@@ -1070,6 +1101,14 @@ void myRecoAnalysis::Loop() {
 			RecoChi2PvsChi2Mu2D->Fill(reco_Pmu_chi2,reco_Pp_chi2,weight);
 			RecoLLPvsLLMu2D->Fill(reco_Pmu_ThreePlaneLogLikelihood,reco_Pp_ThreePlaneLogLikelihood,weight);
 			RecoLengthPvsLengthMu2D->Fill(l_muCandidate,l_pCandidate,weight);
+
+
+			// -------------------------------------------------------------------------------------------------------------------------
+
+			// Playground for Reco plots
+
+
+
 
 			// ---------------------------------------------------------------------------------------------------------------------------
 
@@ -1200,6 +1239,55 @@ void myRecoAnalysis::Loop() {
 					CC1pRecoLLPvsLLMu2D->Fill(reco_Pmu_ThreePlaneLogLikelihood,reco_Pp_ThreePlaneLogLikelihood,weight);
 					CC1pRecoLengthPvsLengthMu2D->Fill(l_muCandidate,l_pCandidate,weight);
 
+
+					// -------------------------------------------------------------------------------------------------------------------------
+
+					// Playground for CC1p STV resolution plots
+
+					double CC1pDeltaPTReso = ( TransMissMomentum - true_TransMissMomentum) / true_TransMissMomentum*100.;
+					double CC1pDeltaAlphaTReso = ( DeltaAlphaT - true_DeltaAlphaT) / true_DeltaAlphaT*100.;
+					double CC1pDeltaPhiTReso = ( DeltaPhiT - true_DeltaPhiT) / true_DeltaPhiT*100.;
+
+					// Contained Muon
+
+					if (CandidateMu_EndContainment->at(0) == 1) {
+
+						Playground_CC1pRecoDeltaPTPlot_FullyContainedMuon->Fill(CC1pDeltaPTReso,weight);
+						Playground_CC1pRecoDeltaAlphaTPlot_FullyContainedMuon->Fill(CC1pDeltaAlphaTReso,weight);
+						Playground_CC1pRecoDeltaPhiTPlot_FullyContainedMuon->Fill(CC1pDeltaPhiTReso,weight);
+
+					} else {
+
+						if ( CandidateMu_Length->at(0) < 7 ) {
+
+							Playground_CC1pRecoDeltaPTPlot_ExitingShortMuon->Fill(CC1pDeltaPTReso,weight);
+							Playground_CC1pRecoDeltaAlphaTPlot_ExitingShortMuon->Fill(CC1pDeltaAlphaTReso,weight);
+							Playground_CC1pRecoDeltaPhiTPlot_ExitingShortMuon->Fill(CC1pDeltaPhiTReso,weight);
+
+						}
+
+						if ( CandidateMu_Length->at(0) > 7 && CandidateMu_Length->at(0) < 9 ) {
+
+							Playground_CC1pRecoDeltaPTPlot_ExitingMediumMuon->Fill(CC1pDeltaPTReso,weight);
+							Playground_CC1pRecoDeltaAlphaTPlot_ExitingMediumMuon->Fill(CC1pDeltaAlphaTReso,weight);
+							Playground_CC1pRecoDeltaPhiTPlot_ExitingMediumMuon->Fill(CC1pDeltaPhiTReso,weight);
+
+						}
+
+
+						if ( CandidateMu_Length->at(0) > 9) {
+
+							Playground_CC1pRecoDeltaPTPlot_ExitingLongMuon->Fill(CC1pDeltaPTReso,weight);
+							Playground_CC1pRecoDeltaAlphaTPlot_ExitingLongMuon->Fill(CC1pDeltaAlphaTReso,weight);
+							Playground_CC1pRecoDeltaPhiTPlot_ExitingLongMuon->Fill(CC1pDeltaPhiTReso,weight);
+
+						}
+
+
+					}
+
+					// -------------------------------------------------------------------------------------------------------------------------
+
 				}
 
 				// -------------------------------------------------------------------------------------------------------------
@@ -1228,10 +1316,10 @@ void myRecoAnalysis::Loop() {
 						else if ( CandidateMu_MCParticle_Pdg->at(0) == -MuonPdg && CandidateP_MCParticle_Pdg->at(0) == ProtonPdg) { MisIndetifiedMuonAsAntiMuon++;  }
 						else if ( True_CandidateMu_StartContainment->at(0) == 0 ) { CandidateMuon_MCParticle_OutFV++; }
 //						else if ( True_CandidateP_StartContainment->at(0) == 0 || True_CandidateP_EndContainment->at(0) == 0) { CandidateProton_MCParticle_OutFV++; }
+						else if ( CandidateMu_MCParticle_Pdg->at(0) == -99. || CandidateP_MCParticle_Pdg->at(0) == -99.) { InTimeCosmics++; }
 						else if ( True_CandidateMu_StartX->at(0) != True_CandidateP_StartX->at(0) 
 						|| True_CandidateMu_StartY->at(0) != True_CandidateP_StartY->at(0)
 						|| True_CandidateMu_StartZ->at(0) != True_CandidateP_StartZ->at(0) ) { MultipleVertices++; }
-						else if ( CandidateMu_MCParticle_Pdg->at(0) == -99. || CandidateP_MCParticle_Pdg->at(0) == -99.) { InTimeCosmics++; }
 
 					}
 
@@ -1575,8 +1663,8 @@ void myRecoAnalysis::Loop() {
 		
 		double nentriesError = sqrt(nentries);		
 		
-		std::cout << std::endl << "Number of " << fWhichSample << " initial entries = " << nentries << " +/- " << nentriesError 
-		<< " (POT normalized: " << nentries*POTScale << " +/- " << nentriesError*POTScale << ")" << std::endl;		
+//		std::cout << std::endl << "Number of " << fWhichSample << " initial entries = " << nentries << " +/- " << nentriesError 
+//		<< " (POT normalized: " << nentries*POTScale << " +/- " << nentriesError*POTScale << ")" << std::endl;		
 		
 		// -------------------------------------------------------------------------------------------------------------------------	
 
@@ -1613,16 +1701,16 @@ void myRecoAnalysis::Loop() {
 		double InTimeCosmicsError = 0;
 
 		if ( (fWhichSample == "Overlay9_Run1" || fWhichSample == "Overlay9_Run2" || fWhichSample == "Overlay9_Run3" || fWhichSample == "Overlay9_Run4" || fWhichSample == "Overlay9_Run5")
-			&& fUniverseIndex != -1) {
+			&& fUniverseIndex == -1) {
 
 			// All reconstructed CC1p events passing the selection criteria
 
 			CC1pEventsPassingSelectionCutsError = sqrt(CC1pEventsPassingSelectionCuts);
 
-			std::cout << std::endl << "Number of CC1p events passing our selection criteria = " << CC1pEventsPassingSelectionCuts << " +/- " 
+			std::cout << std::endl << "CC1p & " << CC1pEventsPassingSelectionCuts << " $\\pm$ " 
 			<< CC1pEventsPassingSelectionCutsError
-			<< " (POT normalized: " << CC1pEventsPassingSelectionCuts*POTScale << " +/- " 
-			<< CC1pEventsPassingSelectionCutsError*POTScale << ")" << std::endl;	
+			<< " & " << CC1pEventsPassingSelectionCuts*POTScale << " $\\pm$ " 
+			<< CC1pEventsPassingSelectionCutsError*POTScale << " \\tabularnewline \n\\hline" << std::endl;
 			
 			// -------------------------------------------------------------------------------------------------------------------------	
 
@@ -1630,10 +1718,10 @@ void myRecoAnalysis::Loop() {
 
 			CC1p1piEventsPassingSelectionCutsError = sqrt(CC1p1piEventsPassingSelectionCuts);
 
-			std::cout << std::endl << "Number of CC1p1pi events passing our selection criteria = " << CC1p1piEventsPassingSelectionCuts << " +/- " 
+			std::cout << std::endl << std::endl << "CC1p1$\\pi$ & " << CC1p1piEventsPassingSelectionCuts << " $\\pm$ " 
 			<< CC1p1piEventsPassingSelectionCutsError
-			<< " (POT normalized: " << CC1p1piEventsPassingSelectionCuts*POTScale << " +/- " 
-			<< CC1p1piEventsPassingSelectionCutsError*POTScale << ")" << std::endl;
+			<< " & " << CC1p1piEventsPassingSelectionCuts*POTScale << " $\\pm$ " 
+			<< CC1p1piEventsPassingSelectionCutsError*POTScale << " \\tabularnewline \n\\hline" << std::endl;
 			
 			// -------------------------------------------------------------------------------------------------------------------------	
 
@@ -1641,10 +1729,10 @@ void myRecoAnalysis::Loop() {
 
 			CC2pEventsPassingSelectionCutsError = sqrt(CC2pEventsPassingSelectionCuts);
 
-			std::cout << std::endl << "Number of CC2p events passing our selection criteria = " << CC2pEventsPassingSelectionCuts << " +/- " 
+			std::cout << "CC2p & " << CC2pEventsPassingSelectionCuts << " $\\pm$ " 
 			<< CC2pEventsPassingSelectionCutsError
-			<< " (POT normalized: " << CC2pEventsPassingSelectionCuts*POTScale << " +/- " 
-			<< CC2pEventsPassingSelectionCutsError*POTScale << ")" << std::endl;
+			<< " & " << CC2pEventsPassingSelectionCuts*POTScale << " $\\pm$ " 
+			<< CC2pEventsPassingSelectionCutsError*POTScale << " \\tabularnewline \n\\hline" << std::endl;
 
 			// -------------------------------------------------------------------------------------------------------------------------	
 
@@ -1652,10 +1740,10 @@ void myRecoAnalysis::Loop() {
 
 			CC2p1piEventsPassingSelectionCutsError = sqrt(CC2p1piEventsPassingSelectionCuts);
 
-			std::cout << std::endl << "Number of CC2p1pi events passing our selection criteria = " << CC2p1piEventsPassingSelectionCuts << " +/- " 
+			std::cout << "CC2p1$\\pi$ & " << CC2p1piEventsPassingSelectionCuts << " $\\pm$ " 
 			<< CC2p1piEventsPassingSelectionCutsError
-			<< " (POT normalized: " << CC2p1piEventsPassingSelectionCuts*POTScale << " +/- " 
-			<< CC2p1piEventsPassingSelectionCutsError*POTScale << ")" << std::endl;						
+			<< " & " << CC2p1piEventsPassingSelectionCuts*POTScale << " $\\pm$ " 
+			<< CC2p1piEventsPassingSelectionCutsError*POTScale << " \\tabularnewline \n\\hline" << std::endl;						
 
 			// -------------------------------------------------------------------------------------------------------------------------	
 
@@ -1663,10 +1751,10 @@ void myRecoAnalysis::Loop() {
 
 			CC3pEventsPassingSelectionCutsError = sqrt(CC3pEventsPassingSelectionCuts);
 
-			std::cout << std::endl << "Number of CC3p events passing our selection criteria = " << CC3pEventsPassingSelectionCuts << " +/- " 
+			std::cout << "CC3p & " << CC3pEventsPassingSelectionCuts << " $\\pm$ " 
 			<< CC3pEventsPassingSelectionCutsError
-			<< " (POT normalized: " << CC3pEventsPassingSelectionCuts*POTScale << " +/- " 
-			<< CC3pEventsPassingSelectionCutsError*POTScale << ")" << std::endl;
+			<< " & " << CC3pEventsPassingSelectionCuts*POTScale << " $\\pm$ " 
+			<< CC3pEventsPassingSelectionCutsError*POTScale << " \\tabularnewline \n\\hline" << std::endl;
 
 			// -------------------------------------------------------------------------------------------------------------------------	
 
@@ -1674,10 +1762,10 @@ void myRecoAnalysis::Loop() {
 
 			CC3p1piEventsPassingSelectionCutsError = sqrt(CC3p1piEventsPassingSelectionCuts);
 
-			std::cout << std::endl << "Number of CC3p1pi events passing our selection criteria = " << CC3p1piEventsPassingSelectionCuts << " +/- " 
+			std::cout << "CC3p1$\\pi$ & " << CC3p1piEventsPassingSelectionCuts << " $\\pm$ " 
 			<< CC3p1piEventsPassingSelectionCutsError
-			<< " (POT normalized: " << CC3p1piEventsPassingSelectionCuts*POTScale << " +/- " 
-			<< CC3p1piEventsPassingSelectionCutsError*POTScale << ")" << std::endl;
+			<< " & " << CC3p1piEventsPassingSelectionCuts*POTScale << " $\\pm$ " 
+			<< CC3p1piEventsPassingSelectionCutsError*POTScale << " \\tabularnewline \n\\hline" << std::endl;
 
 			// -------------------------------------------------------------------------------------------------------------------------	
 
@@ -1685,10 +1773,10 @@ void myRecoAnalysis::Loop() {
 
 			CC3p2piEventsPassingSelectionCutsError = sqrt(CC3p2piEventsPassingSelectionCuts);
 
-			std::cout << std::endl << "Number of CC3p2pi events passing our selection criteria = " << CC3p2piEventsPassingSelectionCuts << " +/- " 
+			std::cout << "CC3p2$\\pi$ & " << CC3p2piEventsPassingSelectionCuts << " $\\pm$ " 
 			<< CC3p2piEventsPassingSelectionCutsError
-			<< " (POT normalized: " << CC3p2piEventsPassingSelectionCuts*POTScale << " +/- " 
-			<< CC3p2piEventsPassingSelectionCutsError*POTScale << ")" << std::endl;	
+			<< " & " << CC3p2piEventsPassingSelectionCuts*POTScale << " $\\pm$ " 
+			<< CC3p2piEventsPassingSelectionCutsError*POTScale << " \\tabularnewline \n\\hline" << std::endl;
 
 			// -------------------------------------------------------------------------------------------------------------------------	
 
@@ -1696,10 +1784,10 @@ void myRecoAnalysis::Loop() {
 
 			MisIndetifiedMuonAsPionError = sqrt(MisIndetifiedMuonAsPion);
 
-			std::cout << std::endl << "Number of pi-p events passing our selection criteria = " << MisIndetifiedMuonAsPion << " +/- " 
+			std::cout << "$\\pi$-p & " << MisIndetifiedMuonAsPion << " $\\pm$ " 
 			<< MisIndetifiedMuonAsPionError
-			<< " (POT normalized: " << MisIndetifiedMuonAsPion*POTScale << " +/- " 
-			<< MisIndetifiedMuonAsPionError*POTScale << ")" << std::endl;	
+			<< " & " << MisIndetifiedMuonAsPion*POTScale << " $\\pm$ " 
+			<< MisIndetifiedMuonAsPionError*POTScale << " \\tabularnewline \n\\hline" << std::endl;	
 
 			// -------------------------------------------------------------------------------------------------------------------------	
 
@@ -1707,10 +1795,10 @@ void myRecoAnalysis::Loop() {
 
 			MisIndetifiedMuonAsProtonError = sqrt(MisIndetifiedMuonAsProton);
 
-			std::cout << std::endl << "Number of p-p events passing our selection criteria = " << MisIndetifiedMuonAsProton << " +/- " 
+			std::cout << "p-p & " << MisIndetifiedMuonAsProton << " $\\pm$ " 
 			<< MisIndetifiedMuonAsProtonError
-			<< " (POT normalized: " << MisIndetifiedMuonAsProton*POTScale << " +/- " 
-			<< MisIndetifiedMuonAsProtonError*POTScale << ")" << std::endl;	
+			<< " & " << MisIndetifiedMuonAsProton*POTScale << " $\\pm$ " 
+			<< MisIndetifiedMuonAsProtonError*POTScale << " \\tabularnewline \n\\hline" << std::endl;	
 
 			// -------------------------------------------------------------------------------------------------------------------------	
 
@@ -1718,10 +1806,10 @@ void myRecoAnalysis::Loop() {
 
 			MisIndetifiedMuonAsAntiMuonError = sqrt(MisIndetifiedMuonAsAntiMuon);
 
-			std::cout << std::endl << "Number of  anti-muon - p events passing our selection criteria = " << MisIndetifiedMuonAsAntiMuon << " +/- " 
+			std::cout << "$\\mu^{+}$ - p & " << MisIndetifiedMuonAsAntiMuon << " $\\pm$ " 
 			<< MisIndetifiedMuonAsAntiMuonError
-			<< " (POT normalized: " << MisIndetifiedMuonAsAntiMuon*POTScale << " +/- " 
-			<< MisIndetifiedMuonAsAntiMuonError*POTScale << ")" << std::endl;
+			<< " & " << MisIndetifiedMuonAsAntiMuon*POTScale << " $\\pm$ " 
+			<< MisIndetifiedMuonAsAntiMuonError*POTScale <<" \\tabularnewline \n\\hline" << std::endl;
 
 			// -------------------------------------------------------------------------------------------------------------------------	
 
@@ -1729,10 +1817,10 @@ void myRecoAnalysis::Loop() {
 
 			MisIndetifiedProtonAsPionError = sqrt(MisIndetifiedProtonAsPion);
 
-			std::cout << std::endl << "Number of mu-pion events passing our selection criteria = " << MisIndetifiedProtonAsPion << " +/- " 
+			std::cout << "$\\mu$-$\\pi$ & " << MisIndetifiedProtonAsPion << " $\\pm$ " 
 			<< MisIndetifiedProtonAsPionError
-			<< " (POT normalized: " << MisIndetifiedProtonAsPion*POTScale << " +/- " 
-			<< MisIndetifiedProtonAsPionError*POTScale << ")" << std::endl;
+			<< " & " << MisIndetifiedProtonAsPion*POTScale << " $\\pm$ " 
+			<< MisIndetifiedProtonAsPionError*POTScale << " \\tabularnewline \n\\hline" << std::endl;
 
 			// -------------------------------------------------------------------------------------------------------------------------	
 
@@ -1740,10 +1828,10 @@ void myRecoAnalysis::Loop() {
 
 			MisIndetifiedProtonAsDeuteriumError = sqrt(MisIndetifiedProtonAsDeuterium);
 
-			std::cout << std::endl << "Number of mu-D events passing our selection criteria = " << MisIndetifiedProtonAsDeuterium << " +/- " 
+			std::cout << "$\\mu$-D & " << MisIndetifiedProtonAsDeuterium << " $\\pm$ " 
 			<< MisIndetifiedProtonAsDeuteriumError
-			<< " (POT normalized: " << MisIndetifiedProtonAsDeuterium*POTScale << " +/- " 
-			<< MisIndetifiedProtonAsDeuteriumError*POTScale << ")" << std::endl;
+			<< " & " << MisIndetifiedProtonAsDeuterium*POTScale << " $\\pm$ " 
+			<< MisIndetifiedProtonAsDeuteriumError*POTScale << " \\tabularnewline \n\\hline" << std::endl;
 
 			// -------------------------------------------------------------------------------------------------------------------------	
 
@@ -1751,10 +1839,10 @@ void myRecoAnalysis::Loop() {
 
 			MisIndetifiedProtonAsElectronError = sqrt(MisIndetifiedProtonAsElectron);
 
-			std::cout << std::endl << "Number of mu-e events passing our selection criteria = " << MisIndetifiedProtonAsElectron << " +/- " 
+			std::cout << "$\\mu$-e & " << MisIndetifiedProtonAsElectron << " $\\pm$ " 
 			<< MisIndetifiedProtonAsElectronError
-			<< " (POT normalized: " << MisIndetifiedProtonAsElectron*POTScale << " +/- " 
-			<< MisIndetifiedProtonAsElectronError*POTScale << ")" << std::endl;
+			<< " & " << MisIndetifiedProtonAsElectron*POTScale << " $\\pm$ " 
+			<< MisIndetifiedProtonAsElectronError*POTScale << " \\tabularnewline \n\\hline" << std::endl;
 
 			// -------------------------------------------------------------------------------------------------------------------------	
 
@@ -1762,10 +1850,10 @@ void myRecoAnalysis::Loop() {
 
 			MisIndetifiedMuPToElectronElectronError = sqrt(MisIndetifiedMuPToElectronElectron);
 
-			std::cout << std::endl << "Number of e-e events passing our selection criteria = " << MisIndetifiedMuPToElectronElectron << " +/- " 
+			std::cout << "e-e & " << MisIndetifiedMuPToElectronElectron << " $\\pm$ " 
 			<< MisIndetifiedMuPToElectronElectronError
-			<< " (POT normalized: " << MisIndetifiedMuPToElectronElectron*POTScale << " +/- " 
-			<< MisIndetifiedMuPToElectronElectronError*POTScale << ")" << std::endl;
+			<< " & " << MisIndetifiedMuPToElectronElectron*POTScale << " $\\pm$ " 
+			<< MisIndetifiedMuPToElectronElectronError*POTScale << " \\tabularnewline \n\\hline" << std::endl;
 
 			// -------------------------------------------------------------------------------------------------------------------------	
 
@@ -1773,10 +1861,10 @@ void myRecoAnalysis::Loop() {
 
 			MisIndetifiedMuPToMuMuError = sqrt(MisIndetifiedMuPToMuMu);
 
-			std::cout << std::endl << "Number of mu-mu events passing our selection criteria = " << MisIndetifiedMuPToMuMu << " +/- " 
+			std::cout << "$\\mu$-$\\mu$ & " << MisIndetifiedMuPToMuMu << " $\\pm$ " 
 			<< MisIndetifiedMuPToMuMuError
-			<< " (POT normalized: " << MisIndetifiedMuPToMuMu*POTScale << " +/- " 
-			<< MisIndetifiedMuPToMuMuError*POTScale << ")" << std::endl;
+			<< " & " << MisIndetifiedMuPToMuMu*POTScale << " $\\pm$ " 
+			<< MisIndetifiedMuPToMuMuError*POTScale << " \\tabularnewline \n\\hline" << std::endl;
 
 			// -------------------------------------------------------------------------------------------------------------------------	
 
@@ -1784,10 +1872,10 @@ void myRecoAnalysis::Loop() {
 
 			MisIndetifiedMuPToPiPiError = sqrt(MisIndetifiedMuPToPiPi);
 
-			std::cout << std::endl << "Number of pi-pi events passing our selection criteria = " << MisIndetifiedMuPToPiPi << " +/- " 
+			std::cout << "$\\pi$-$\\pi$ & " << MisIndetifiedMuPToPiPi << " $\\pm$ " 
 			<< MisIndetifiedMuPToPiPiError
-			<< " (POT normalized: " << MisIndetifiedMuPToPiPi*POTScale << " +/- " 
-			<< MisIndetifiedMuPToPiPiError*POTScale << ")" << std::endl;
+			<< " & " << MisIndetifiedMuPToPiPi*POTScale << " $\\pm$ " 
+			<< MisIndetifiedMuPToPiPiError*POTScale << " \\tabularnewline \n\\hline" << std::endl;
 
 			// -------------------------------------------------------------------------------------------------------------------------	
 
@@ -1795,32 +1883,10 @@ void myRecoAnalysis::Loop() {
 
 			CandidateMuon_MCParticle_OutFVError = sqrt(CandidateMuon_MCParticle_OutFV);
 
-			std::cout << std::endl << "Number of events with Muon Candidate MC Particle outside FV = " << CandidateMuon_MCParticle_OutFV << " +/- " 
+			std::cout << "True vertex outside FV & " << CandidateMuon_MCParticle_OutFV << " $\\pm$ " 
 			<< CandidateMuon_MCParticle_OutFVError
-			<< " (POT normalized: " << CandidateMuon_MCParticle_OutFV*POTScale << " +/- " 
-			<< CandidateMuon_MCParticle_OutFVError*POTScale << ")" << std::endl;	
-
-			// -------------------------------------------------------------------------------------------------------------------------	
-
-			// Muon Candidate MC Particle outside FV
-
-			CandidateProton_MCParticle_OutFVError = sqrt(CandidateProton_MCParticle_OutFV);
-
-			std::cout << std::endl << "Number of events with Proton Candidate MC Particle outside FV = " << CandidateProton_MCParticle_OutFV << " +/- " 
-			<< CandidateProton_MCParticle_OutFVError
-			<< " (POT normalized: " << CandidateProton_MCParticle_OutFV*POTScale << " +/- " 
-			<< CandidateProton_MCParticle_OutFVError*POTScale << ")" << std::endl;
-
-			// -------------------------------------------------------------------------------------------------------------------------	
-
-			// Multiple Vertices
-
-			MultipleVerticesError = sqrt(MultipleVertices);
-
-			std::cout << std::endl << "Number of events with multiple vertices = " << MultipleVertices << " +/- " 
-			<< MultipleVerticesError
-			<< " (POT normalized: " << MultipleVertices*POTScale << " +/- " 
-			<< MultipleVerticesError*POTScale << ")" << std::endl;
+			<< " & " << CandidateMuon_MCParticle_OutFV*POTScale << " $\\pm$ " 
+			<< CandidateMuon_MCParticle_OutFVError*POTScale << " \\tabularnewline \n\\hline" << std::endl;	
 
 			// -------------------------------------------------------------------------------------------------------------------------	
 
@@ -1828,10 +1894,21 @@ void myRecoAnalysis::Loop() {
 
 			InTimeCosmicsError = sqrt(InTimeCosmics);
 
-			std::cout << std::endl << "Number of in-time cosmics = " << InTimeCosmics << " +/- " 
+			std::cout << "In-time cosmics & " << InTimeCosmics << " $\\pm$ " 
 			<< InTimeCosmicsError
-			<< " (POT normalized: " << InTimeCosmics*POTScale << " +/- " 
-			<< InTimeCosmicsError*POTScale << ")" << std::endl;	
+			<< " & " << InTimeCosmics*POTScale << " $\\pm$ " 
+			<< InTimeCosmicsError*POTScale << " \\tabularnewline \n\\hline" << std::endl;	
+
+			// -------------------------------------------------------------------------------------------------------------------------	
+
+			// Multiple Vertices
+
+			MultipleVerticesError = sqrt(MultipleVertices);
+
+			std::cout << "Multiple vertices & " << MultipleVertices << " $\\pm$ " 
+			<< MultipleVerticesError
+			<< " & " << MultipleVertices*POTScale << " $\\pm$ " 
+			<< MultipleVerticesError*POTScale << " \\tabularnewline \n\\hline" << std::endl;
 
 		}
 
