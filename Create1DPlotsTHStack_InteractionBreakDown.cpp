@@ -60,6 +60,13 @@ void Create1DPlotsTHStack_InteractionBreakDown() {
 	PlotNames.push_back("RecoEQEPlot");
 	PlotNames.push_back("RecoQ2Plot");
 
+	PlotNames.push_back("RecoMuonLengthPlot");
+	PlotNames.push_back("RecoProtonLengthPlot");
+//	PlotNames.push_back("RecoMuonTracksScorePlot");
+//	PlotNames.push_back("RecoProtonTracksScorePlot");
+	PlotNames.push_back("RecodMuonVertexDistancePlot");
+	PlotNames.push_back("RecodProtonVertexDistancePlot");
+
 	const int N1DPlots = PlotNames.size();
 	cout << "Number of 1D Plots = " << N1DPlots << endl;
 

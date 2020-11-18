@@ -91,9 +91,7 @@ void myRecoAnalysis::Loop() {
 
 		}
 
-//		TString FileName = "./OutputFiles/"+UBCodeVersion+"/"+Cuts+"/STVStudies_"+fWhichSample+Extension+Cuts+".root";
-		TString FileName = "/uboone/data/users/apapadop/myEvents/OutputFiles/"+UBCodeVersion+"/"+\
-				    Cuts+"/STVStudies_"+fWhichSample+Extension+Cuts+".root";
+		TString FileName = PathToFiles+Cuts+"/STVStudies_"+fWhichSample+Extension+Cuts+".root";
 		TFile* file = new TFile(FileName,"recreate");
 		std::cout << std::endl << "Creating a new file: " << FileName << std::endl << std::endl << std::endl;
 
@@ -103,8 +101,16 @@ void myRecoAnalysis::Loop() {
 
 		TH1D* RecoNuScorePlot = new TH1D("RecoNuScorePlot",RecoLabelXAxisNuScore,NBinsNuScore,MinNuScore,MaxNuScore);
 		TH1D* RecoFlashScorePlot = new TH1D("RecoFlashScorePlot",RecoLabelXAxisFlashScore,NBinsFlashScore,MinFlashScore,MaxFlashScore);
-
 		TH1D* RecoDistancePlot = new TH1D("RecoDistancePlot",RecoLabelXAxisDistance,NBinsDistance,MinDistance,MaxDistance);
+
+		TH1D* RecoMuonLengthPlot = new TH1D("RecoMuonLengthPlot",RecoLabelXAxisMuonLength,NBinsMuonLength,MinMuonLength,MaxMuonLength);
+		TH1D* RecoProtonLengthPlot = new TH1D("RecoProtonLengthPlot",RecoLabelXAxisProtonLength,NBinsProtonLength,MinProtonLength,MaxProtonLength);
+	
+		TH1D* RecodMuonTracksScorePlot = new TH1D("RecodMuonTracksScorePlot",RecoLabelXAxisMuonTrackScore,NBinsTrackScore,MinTrackScore,MaxTrackScore);	
+		TH1D* RecodProtonTracksScorePlot = new TH1D("RecodProtonTracksScorePlot",RecoLabelXAxisProtonTrackScore,NBinsTrackScore,MinTrackScore,MaxTrackScore);	
+		TH1D* RecodMuonVertexDistancePlot = new TH1D("RecodMuonVertexDistancePlot",RecoLabelXAxisMuonVertexDistanceTrackScore,NBinsMuonVertexDistance,MinMuonVertexDistance,MaxMuonVertexDistance);
+		TH1D* RecodProtonVertexDistancePlot = new TH1D("RecodProtonVertexDistancePlot",RecoLabelXAxisProtonVertexDistanceTrackScore,NBinsProtonVertexDistance,MinProtonVertexDistance,MaxProtonVertexDistance);	
+
 
 		TH1D* RecoLengthDifferencePlot = new TH1D("RecoLengthDifferencePlot",RecoLabelXAxisLengthDifference,NBinsLengthDifference,MinLengthDifference,MaxLengthDifference);
 		TH1D* RecodYZPlot = new TH1D("RecodYZPlot",RecoLabelXAxisdYZ,NBinsdYZ,MindYZ,MaxdYZ);
@@ -165,8 +171,15 @@ void myRecoAnalysis::Loop() {
 
 		TH1D* CC1pRecoNuScorePlot = new TH1D("CC1pRecoNuScorePlot",RecoLabelXAxisNuScore,NBinsNuScore,MinNuScore,MaxNuScore);
 		TH1D* CC1pRecoFlashScorePlot = new TH1D("CC1pRecoFlashScorePlot",RecoLabelXAxisFlashScore,NBinsFlashScore,MinFlashScore,MaxFlashScore);
-
 		TH1D* CC1pRecoDistancePlot = new TH1D("CC1pRecoDistancePlot",RecoLabelXAxisDistance,NBinsDistance,MinDistance,MaxDistance);
+
+		TH1D* CC1pRecoMuonLengthPlot = new TH1D("CC1pRecoMuonLengthPlot",RecoLabelXAxisMuonLength,NBinsMuonLength,MinMuonLength,MaxMuonLength);
+		TH1D* CC1pRecoProtonLengthPlot = new TH1D("CC1pRecoProtonLengthPlot",RecoLabelXAxisProtonLength,NBinsProtonLength,MinProtonLength,MaxProtonLength);
+
+		TH1D* CC1pRecodMuonTracksScorePlot = new TH1D("CC1pRecodMuonTracksScorePlot",RecoLabelXAxisMuonTrackScore,NBinsTrackScore,MinTrackScore,MaxTrackScore);	
+		TH1D* CC1pRecodProtonTracksScorePlot = new TH1D("CC1pRecodProtonTracksScorePlot",RecoLabelXAxisProtonTrackScore,NBinsTrackScore,MinTrackScore,MaxTrackScore);	
+		TH1D* CC1pRecodMuonVertexDistancePlot = new TH1D("CC1pRecodMuonVertexDistancePlot",RecoLabelXAxisMuonVertexDistanceTrackScore,NBinsMuonVertexDistance,MinMuonVertexDistance,MaxMuonVertexDistance);
+		TH1D* CC1pRecodProtonVertexDistancePlot = new TH1D("CC1pRecodProtonVertexDistancePlot",RecoLabelXAxisProtonVertexDistanceTrackScore,NBinsProtonVertexDistance,MinProtonVertexDistance,MaxProtonVertexDistance);
 
 		TH1D* CC1pRecoLengthDifferencePlot = new TH1D("CC1pRecoLengthDifferencePlot",RecoLabelXAxisLengthDifference,NBinsLengthDifference,MinLengthDifference,MaxLengthDifference);
 		TH1D* CC1pRecodYZPlot = new TH1D("CC1pRecodYZPlot",RecoLabelXAxisdYZ,NBinsdYZ,MindYZ,MaxdYZ);
@@ -250,8 +263,15 @@ void myRecoAnalysis::Loop() {
 		TH1D* NonCC1pRecoNuScorePlot = new TH1D("NonCC1pRecoNuScorePlot",RecoLabelXAxisNuScore,NBinsNuScore,MinNuScore,MaxNuScore);
 		TH1D* NonCC1pRecoFlashScorePlot = new TH1D("NonCC1pRecoFlashScorePlot",RecoLabelXAxisFlashScore,
 			NBinsFlashScore,MinFlashScore,MaxFlashScore);
-
 		TH1D* NonCC1pRecoDistancePlot = new TH1D("NonCC1pRecoDistancePlot",RecoLabelXAxisDistance,NBinsDistance,MinDistance,MaxDistance);
+
+		TH1D* NonCC1pRecoMuonLengthPlot = new TH1D("NonCC1pRecoMuonLengthPlot",RecoLabelXAxisMuonLength,NBinsMuonLength,MinMuonLength,MaxMuonLength);
+		TH1D* NonCC1pRecoProtonLengthPlot = new TH1D("NonCC1pRecoProtonLengthPlot",RecoLabelXAxisProtonLength,NBinsProtonLength,MinProtonLength,MaxProtonLength);
+
+		TH1D* NonCC1pRecodMuonTracksScorePlot = new TH1D("NonCC1pRecodMuonTracksScorePlot",RecoLabelXAxisMuonTrackScore,NBinsTrackScore,MinTrackScore,MaxTrackScore);	
+		TH1D* NonCC1pRecodProtonTracksScorePlot = new TH1D("NonCC1pRecodProtonTracksScorePlot",RecoLabelXAxisProtonTrackScore,NBinsTrackScore,MinTrackScore,MaxTrackScore);	
+		TH1D* NonCC1pRecodMuonVertexDistancePlot = new TH1D("NonCC1pRecodMuonVertexDistancePlot",RecoLabelXAxisMuonVertexDistanceTrackScore,NBinsMuonVertexDistance,MinMuonVertexDistance,MaxMuonVertexDistance);
+		TH1D* NonCC1pRecodProtonVertexDistancePlot = new TH1D("NonCC1pRecodProtonVertexDistancePlot",RecoLabelXAxisProtonVertexDistanceTrackScore,NBinsProtonVertexDistance,MinProtonVertexDistance,MaxProtonVertexDistance);
 
 		TH1D* NonCC1pRecoLengthDifferencePlot = new TH1D("NonCC1pRecoLengthDifferencePlot",RecoLabelXAxisLengthDifference,NBinsLengthDifference,MinLengthDifference,MaxLengthDifference);
 		TH1D* NonCC1pRecodYZPlot = new TH1D("NonCC1pRecodYZPlot",RecoLabelXAxisdYZ,NBinsdYZ,MindYZ,MaxdYZ);
@@ -309,8 +329,15 @@ void myRecoAnalysis::Loop() {
 
 		TH1D* CCQERecoNuScorePlot = new TH1D("CCQERecoNuScorePlot",RecoLabelXAxisNuScore,NBinsNuScore,MinNuScore,MaxNuScore);
 		TH1D* CCQERecoFlashScorePlot = new TH1D("CCQERecoFlashScorePlot",RecoLabelXAxisFlashScore,NBinsFlashScore,MinFlashScore,MaxFlashScore);
-
 		TH1D* CCQERecoDistancePlot = new TH1D("CCQERecoDistancePlot",RecoLabelXAxisDistance,NBinsDistance,MinDistance,MaxDistance);
+
+		TH1D* CCQERecoMuonLengthPlot = new TH1D("CCQERecoMuonLengthPlot",RecoLabelXAxisMuonLength,NBinsMuonLength,MinMuonLength,MaxMuonLength);
+		TH1D* CCQERecoProtonLengthPlot = new TH1D("CCQERecoProtonLengthPlot",RecoLabelXAxisProtonLength,NBinsProtonLength,MinProtonLength,MaxProtonLength);
+
+		TH1D* CCQERecodMuonTracksScorePlot = new TH1D("CCQERecodMuonTracksScorePlot",RecoLabelXAxisMuonTrackScore,NBinsTrackScore,MinTrackScore,MaxTrackScore);	
+		TH1D* CCQERecodProtonTracksScorePlot = new TH1D("CCQERecodProtonTracksScorePlot",RecoLabelXAxisProtonTrackScore,NBinsTrackScore,MinTrackScore,MaxTrackScore);	
+		TH1D* CCQERecodMuonVertexDistancePlot = new TH1D("CCQERecodMuonVertexDistancePlot",RecoLabelXAxisMuonVertexDistanceTrackScore,NBinsMuonVertexDistance,MinMuonVertexDistance,MaxMuonVertexDistance);
+		TH1D* CCQERecodProtonVertexDistancePlot = new TH1D("CCQERecodProtonVertexDistancePlot",RecoLabelXAxisProtonVertexDistanceTrackScore,NBinsProtonVertexDistance,MinProtonVertexDistance,MaxProtonVertexDistance);
 
 		TH1D* CCQERecoLengthDifferencePlot = new TH1D("CCQERecoLengthDifferencePlot",RecoLabelXAxisLengthDifference,NBinsLengthDifference,MinLengthDifference,MaxLengthDifference);
 		TH1D* CCQERecodYZPlot = new TH1D("CCQERecodYZPlot",RecoLabelXAxisdYZ,NBinsdYZ,MindYZ,MaxdYZ);
@@ -365,8 +392,15 @@ void myRecoAnalysis::Loop() {
 
 		TH1D* CCMECRecoNuScorePlot = new TH1D("CCMECRecoNuScorePlot",RecoLabelXAxisNuScore,NBinsNuScore,MinNuScore,MaxNuScore);
 		TH1D* CCMECRecoFlashScorePlot = new TH1D("CCMECRecoFlashScorePlot",RecoLabelXAxisFlashScore,NBinsFlashScore,MinFlashScore,MaxFlashScore);
-
 		TH1D* CCMECRecoDistancePlot = new TH1D("CCMECRecoDistancePlot",RecoLabelXAxisDistance,NBinsDistance,MinDistance,MaxDistance);
+
+		TH1D* CCMECRecoMuonLengthPlot = new TH1D("CCMECRecoMuonLengthPlot",RecoLabelXAxisMuonLength,NBinsMuonLength,MinMuonLength,MaxMuonLength);
+		TH1D* CCMECRecoProtonLengthPlot = new TH1D("CCMECRecoProtonLengthPlot",RecoLabelXAxisProtonLength,NBinsProtonLength,MinProtonLength,MaxProtonLength);
+
+		TH1D* CCMECRecodMuonTracksScorePlot = new TH1D("CCMECRecodMuonTracksScorePlot",RecoLabelXAxisMuonTrackScore,NBinsTrackScore,MinTrackScore,MaxTrackScore);	
+		TH1D* CCMECRecodProtonTracksScorePlot = new TH1D("CCMECRecodProtonTracksScorePlot",RecoLabelXAxisProtonTrackScore,NBinsTrackScore,MinTrackScore,MaxTrackScore);	
+		TH1D* CCMECRecodMuonVertexDistancePlot = new TH1D("CCMECRecodMuonVertexDistancePlot",RecoLabelXAxisMuonVertexDistanceTrackScore,NBinsMuonVertexDistance,MinMuonVertexDistance,MaxMuonVertexDistance);
+		TH1D* CCMECRecodProtonVertexDistancePlot = new TH1D("CCMECRecodProtonVertexDistancePlot",RecoLabelXAxisProtonVertexDistanceTrackScore,NBinsProtonVertexDistance,MinProtonVertexDistance,MaxProtonVertexDistance);
 
 		TH1D* CCMECRecoLengthDifferencePlot = new TH1D("CCMECRecoLengthDifferencePlot",RecoLabelXAxisLengthDifference,NBinsLengthDifference,MinLengthDifference,MaxLengthDifference);
 		TH1D* CCMECRecodYZPlot = new TH1D("CCMECRecodYZPlot",RecoLabelXAxisdYZ,NBinsdYZ,MindYZ,MaxdYZ);
@@ -421,8 +455,15 @@ void myRecoAnalysis::Loop() {
 
 		TH1D* CCRESRecoNuScorePlot = new TH1D("CCRESRecoNuScorePlot",RecoLabelXAxisNuScore,NBinsNuScore,MinNuScore,MaxNuScore);
 		TH1D* CCRESRecoFlashScorePlot = new TH1D("CCRESRecoFlashScorePlot",RecoLabelXAxisFlashScore,NBinsFlashScore,MinFlashScore,MaxFlashScore);
-
 		TH1D* CCRESRecoDistancePlot = new TH1D("CCRESRecoDistancePlot",RecoLabelXAxisDistance,NBinsDistance,MinDistance,MaxDistance);
+
+		TH1D* CCRESRecoMuonLengthPlot = new TH1D("CCRESRecoMuonLengthPlot",RecoLabelXAxisMuonLength,NBinsMuonLength,MinMuonLength,MaxMuonLength);
+		TH1D* CCRESRecoProtonLengthPlot = new TH1D("CCRESRecoProtonLengthPlot",RecoLabelXAxisProtonLength,NBinsProtonLength,MinProtonLength,MaxProtonLength);
+
+		TH1D* CCRESRecodMuonTracksScorePlot = new TH1D("CCRESRecodMuonTracksScorePlot",RecoLabelXAxisMuonTrackScore,NBinsTrackScore,MinTrackScore,MaxTrackScore);	
+		TH1D* CCRESRecodProtonTracksScorePlot = new TH1D("CCRESRecodProtonTracksScorePlot",RecoLabelXAxisProtonTrackScore,NBinsTrackScore,MinTrackScore,MaxTrackScore);	
+		TH1D* CCRESRecodMuonVertexDistancePlot = new TH1D("CCRESRecodMuonVertexDistancePlot",RecoLabelXAxisMuonVertexDistanceTrackScore,NBinsMuonVertexDistance,MinMuonVertexDistance,MaxMuonVertexDistance);
+		TH1D* CCRESRecodProtonVertexDistancePlot = new TH1D("CCRESRecodProtonVertexDistancePlot",RecoLabelXAxisProtonVertexDistanceTrackScore,NBinsProtonVertexDistance,MinProtonVertexDistance,MaxProtonVertexDistance);
 
 		TH1D* CCRESRecoLengthDifferencePlot = new TH1D("CCRESRecoLengthDifferencePlot",RecoLabelXAxisLengthDifference,NBinsLengthDifference,MinLengthDifference,MaxLengthDifference);
 		TH1D* CCRESRecodYZPlot = new TH1D("CCRESRecodYZPlot",RecoLabelXAxisdYZ,NBinsdYZ,MindYZ,MaxdYZ);
@@ -477,8 +518,15 @@ void myRecoAnalysis::Loop() {
 
 		TH1D* CCDISRecoNuScorePlot = new TH1D("CCDISRecoNuScorePlot",RecoLabelXAxisNuScore,NBinsNuScore,MinNuScore,MaxNuScore);
 		TH1D* CCDISRecoFlashScorePlot = new TH1D("CCDISRecoFlashScorePlot",RecoLabelXAxisFlashScore,NBinsFlashScore,MinFlashScore,MaxFlashScore);
-
 		TH1D* CCDISRecoDistancePlot = new TH1D("CCDISRecoDistancePlot",RecoLabelXAxisDistance,NBinsDistance,MinDistance,MaxDistance);
+
+		TH1D* CCDISRecoMuonLengthPlot = new TH1D("CCDISRecoMuonLengthPlot",RecoLabelXAxisMuonLength,NBinsMuonLength,MinMuonLength,MaxMuonLength);
+		TH1D* CCDISRecoProtonLengthPlot = new TH1D("CCDISRecoProtonLengthPlot",RecoLabelXAxisProtonLength,NBinsProtonLength,MinProtonLength,MaxProtonLength);
+
+		TH1D* CCDISRecodMuonTracksScorePlot = new TH1D("CCDISRecodMuonTracksScorePlot",RecoLabelXAxisMuonTrackScore,NBinsTrackScore,MinTrackScore,MaxTrackScore);	
+		TH1D* CCDISRecodProtonTracksScorePlot = new TH1D("CCDISRecodProtonTracksScorePlot",RecoLabelXAxisProtonTrackScore,NBinsTrackScore,MinTrackScore,MaxTrackScore);	
+		TH1D* CCDISRecodMuonVertexDistancePlot = new TH1D("CCDISRecodMuonVertexDistancePlot",RecoLabelXAxisMuonVertexDistanceTrackScore,NBinsMuonVertexDistance,MinMuonVertexDistance,MaxMuonVertexDistance);
+		TH1D* CCDISRecodProtonVertexDistancePlot = new TH1D("CCDISRecodProtonVertexDistancePlot",RecoLabelXAxisProtonVertexDistanceTrackScore,NBinsProtonVertexDistance,MinProtonVertexDistance,MaxProtonVertexDistance);
 
 		TH1D* CCDISRecoLengthDifferencePlot = new TH1D("CCDISRecoLengthDifferencePlot",RecoLabelXAxisLengthDifference,NBinsLengthDifference,MinLengthDifference,MaxLengthDifference);
 		TH1D* CCDISRecodYZPlot = new TH1D("CCDISRecodYZPlot",RecoLabelXAxisdYZ,NBinsdYZ,MindYZ,MaxdYZ);
@@ -829,7 +877,9 @@ void myRecoAnalysis::Loop() {
 			TVector3 TVector3CandidateMuon(-1,-1,-1);
 			TVector3CandidateMuon.SetMag(reco_Pmu_mcs);
 			TVector3CandidateMuon.SetTheta(TMath::ACos(reco_Pmu_cos_theta));
-			TVector3CandidateMuon.SetPhi(reco_Pmu_phi);						
+			TVector3CandidateMuon.SetPhi(reco_Pmu_phi);	
+
+			TVector3 CandidateMuonStart(CandidateMu_StartX->at(0),CandidateMu_StartY->at(0),CandidateMu_StartZ->at(0));
 
 			double reco_Pp = CandidateP_P_Range->at(0);
 			double reco_Pp_cos_theta = CandidateP_CosTheta->at(0);
@@ -841,6 +891,8 @@ void myRecoAnalysis::Loop() {
 			TVector3CandidateProton.SetMag(reco_Pp);
 			TVector3CandidateProton.SetTheta(TMath::ACos(reco_Pp_cos_theta));
 			TVector3CandidateProton.SetPhi(reco_Pp_phi);	
+
+			TVector3 CandidateProtonStart(CandidateP_StartX->at(0),CandidateP_StartY->at(0),CandidateP_StartZ->at(0));
 
 			// --------------------------------------------------------------------------------------------------------------------------
 
@@ -860,6 +912,9 @@ void myRecoAnalysis::Loop() {
 			double l_muCandidate = CandidateMu_Length->at(0);
 			double l_pCandidate = CandidateP_Length->at(0);
 			double LengthDifference = l_muCandidate - l_pCandidate;
+			double MuonTrackScore = CandidateMu_TrackScore->at(0);
+			double ProtonTrackScore = CandidateP_TrackScore->at(0);
+			double distance = CandidateMuP_Distance->at(0);	
 
 			// -----------------------------------------------------------------------------------------------------------------------------
 
@@ -973,7 +1028,8 @@ void myRecoAnalysis::Loop() {
 			TVector3 RecoVertex(Vertex_X->at(0),Vertex_Y->at(0),Vertex_Z->at(0));
 			double dYZ = (BeamFlash - RecoVertex).Mag();
 
-			double distance = CandidateMuP_Distance->at(0);	
+			double MuonVertexDistance = (CandidateMuonStart-RecoVertex).Mag();	
+			double ProtonVertexDistance = (CandidateProtonStart-RecoVertex).Mag();	
 
 			// -------------------------------------------------------------------------------------------------------------------------
 
@@ -1050,8 +1106,14 @@ void myRecoAnalysis::Loop() {
 
 			RecoNuScorePlot->Fill(NuScore,weight);
 			RecoFlashScorePlot->Fill(FlashScore,weight);
-
 			RecoDistancePlot->Fill(distance,weight);
+
+			RecoMuonLengthPlot->Fill(l_muCandidate,weight);
+			RecoProtonLengthPlot->Fill(l_pCandidate,weight);
+			RecodMuonTracksScorePlot->Fill(MuonTrackScore,weight);
+			RecodProtonTracksScorePlot->Fill(ProtonTrackScore,weight);
+			RecodMuonVertexDistancePlot->Fill(MuonVertexDistance,weight);
+			RecodProtonVertexDistancePlot->Fill(ProtonVertexDistance,weight);	
 
 			RecoLengthDifferencePlot->Fill(LengthDifference,weight);
 			RecodYZPlot->Fill(dYZ,weight);
@@ -1102,6 +1164,18 @@ void myRecoAnalysis::Loop() {
 			RecoLLPvsLLMu2D->Fill(reco_Pmu_ThreePlaneLogLikelihood,reco_Pp_ThreePlaneLogLikelihood,weight);
 			RecoLengthPvsLengthMu2D->Fill(l_muCandidate,l_pCandidate,weight);
 
+			// -------------------------------------------------------------------------------------------------------------------------
+
+			// Chi2 PID Studies
+
+			RecoChi2Plot->Fill(reco_Pmu_chi2,weight);
+			RecoChi2Plot->Fill(reco_Pp_chi2,weight);
+
+			RecoThreePlaneChi2Plot->Fill(reco_Pmu_ThreePlanechi2,weight);
+			RecoThreePlaneChi2Plot->Fill(reco_Pp_ThreePlanechi2,weight);
+
+			RecoThreePlaneChi2LogLikelihoodPlot->Fill(reco_Pmu_ThreePlaneLogLikelihood,weight/2.);
+			RecoThreePlaneChi2LogLikelihoodPlot->Fill(reco_Pp_ThreePlaneLogLikelihood,weight/2.);
 
 			// -------------------------------------------------------------------------------------------------------------------------
 
@@ -1163,6 +1237,13 @@ void myRecoAnalysis::Loop() {
 					CC1pRecoFlashScorePlot->Fill(FlashScore,weight);
 
 					CC1pRecoDistancePlot->Fill(distance,weight);
+
+					CC1pRecoMuonLengthPlot->Fill(l_muCandidate,weight);
+					CC1pRecoProtonLengthPlot->Fill(l_pCandidate,weight);
+					CC1pRecodMuonTracksScorePlot->Fill(MuonTrackScore,weight);
+					CC1pRecodProtonTracksScorePlot->Fill(ProtonTrackScore,weight);
+					CC1pRecodMuonVertexDistancePlot->Fill(MuonVertexDistance,weight);
+					CC1pRecodProtonVertexDistancePlot->Fill(ProtonVertexDistance,weight);
 
 					CC1pRecoLengthDifferencePlot->Fill(LengthDifference,weight);
 					CC1pRecodYZPlot->Fill(dYZ,weight);
@@ -1328,6 +1409,13 @@ void myRecoAnalysis::Loop() {
 
 					NonCC1pRecoDistancePlot->Fill(distance,weight);
 
+					NonCC1pRecoMuonLengthPlot->Fill(l_muCandidate,weight);
+					NonCC1pRecoProtonLengthPlot->Fill(l_pCandidate,weight);
+					NonCC1pRecodMuonTracksScorePlot->Fill(MuonTrackScore,weight);
+					NonCC1pRecodProtonTracksScorePlot->Fill(ProtonTrackScore,weight);
+					NonCC1pRecodMuonVertexDistancePlot->Fill(MuonVertexDistance,weight);
+					NonCC1pRecodProtonVertexDistancePlot->Fill(ProtonVertexDistance,weight);
+
 					NonCC1pRecoLengthDifferencePlot->Fill(LengthDifference,weight);
 					NonCC1pRecodYZPlot->Fill(dYZ,weight);
 					NonCC1pRecoNPEPlot->Fill(NPE,weight);
@@ -1378,6 +1466,13 @@ void myRecoAnalysis::Loop() {
 
 					CCQERecoDistancePlot->Fill(distance,weight);
 
+					CCQERecoMuonLengthPlot->Fill(l_muCandidate,weight);
+					CCQERecoProtonLengthPlot->Fill(l_pCandidate,weight);
+					CCQERecodMuonTracksScorePlot->Fill(MuonTrackScore,weight);
+					CCQERecodProtonTracksScorePlot->Fill(ProtonTrackScore,weight);
+					CCQERecodMuonVertexDistancePlot->Fill(MuonVertexDistance,weight);
+					CCQERecodProtonVertexDistancePlot->Fill(ProtonVertexDistance,weight);
+
 					CCQERecoLengthDifferencePlot->Fill(LengthDifference,weight);
 					CCQERecodYZPlot->Fill(dYZ,weight);
 					CCQERecoNPEPlot->Fill(NPE,weight);
@@ -1426,6 +1521,13 @@ void myRecoAnalysis::Loop() {
 					CCMECRecoFlashScorePlot->Fill(FlashScore,weight);
 
 					CCMECRecoDistancePlot->Fill(distance,weight);
+
+					CCMECRecoMuonLengthPlot->Fill(l_muCandidate,weight);
+					CCMECRecoProtonLengthPlot->Fill(l_pCandidate,weight);
+					CCMECRecodMuonTracksScorePlot->Fill(MuonTrackScore,weight);
+					CCMECRecodProtonTracksScorePlot->Fill(ProtonTrackScore,weight);
+					CCMECRecodMuonVertexDistancePlot->Fill(MuonVertexDistance,weight);
+					CCMECRecodProtonVertexDistancePlot->Fill(ProtonVertexDistance,weight);
 
 					CCMECRecoLengthDifferencePlot->Fill(LengthDifference,weight);
 					CCMECRecodYZPlot->Fill(dYZ,weight);
@@ -1476,6 +1578,13 @@ void myRecoAnalysis::Loop() {
 
 					CCRESRecoDistancePlot->Fill(distance,weight);
 
+					CCRESRecoMuonLengthPlot->Fill(l_muCandidate,weight);
+					CCRESRecoProtonLengthPlot->Fill(l_pCandidate,weight);
+					CCRESRecodMuonTracksScorePlot->Fill(MuonTrackScore,weight);
+					CCRESRecodProtonTracksScorePlot->Fill(ProtonTrackScore,weight);
+					CCRESRecodMuonVertexDistancePlot->Fill(MuonVertexDistance,weight);
+					CCRESRecodProtonVertexDistancePlot->Fill(ProtonVertexDistance,weight);
+
 					CCRESRecoLengthDifferencePlot->Fill(LengthDifference,weight);
 					CCRESRecodYZPlot->Fill(dYZ,weight);
 					CCRESRecoNPEPlot->Fill(NPE,weight);
@@ -1525,6 +1634,13 @@ void myRecoAnalysis::Loop() {
 
 					CCDISRecoDistancePlot->Fill(distance,weight);
 
+					CCDISRecoMuonLengthPlot->Fill(l_muCandidate,weight);
+					CCDISRecoProtonLengthPlot->Fill(l_pCandidate,weight);
+					CCDISRecodMuonTracksScorePlot->Fill(MuonTrackScore,weight);
+					CCDISRecodProtonTracksScorePlot->Fill(ProtonTrackScore,weight);
+					CCDISRecodMuonVertexDistancePlot->Fill(MuonVertexDistance,weight);
+					CCDISRecodProtonVertexDistancePlot->Fill(ProtonVertexDistance,weight);
+
 					CCDISRecoLengthDifferencePlot->Fill(LengthDifference,weight);
 					CCDISRecodYZPlot->Fill(dYZ,weight);
 					CCDISRecoNPEPlot->Fill(NPE,weight);
@@ -1562,20 +1678,6 @@ void myRecoAnalysis::Loop() {
 					CCDISRecoCosThetaPPpPlot->Fill(reco_Pp_cos_theta,reco_Pp,weight);				
 
 				}
-
-				// -------------------------------------------------------------------------------------------------------------------------
-				// -------------------------------------------------------------------------------------------------------------------------
-
-				// Chi2 PID Studies
-
-				RecoChi2Plot->Fill(reco_Pmu_chi2,weight);
-				RecoChi2Plot->Fill(reco_Pp_chi2,weight);
-
-				RecoThreePlaneChi2Plot->Fill(reco_Pmu_ThreePlanechi2,weight);
-				RecoThreePlaneChi2Plot->Fill(reco_Pp_ThreePlanechi2,weight);
-
-				RecoThreePlaneChi2LogLikelihoodPlot->Fill(reco_Pmu_ThreePlaneLogLikelihood,weight/2.);
-				RecoThreePlaneChi2LogLikelihoodPlot->Fill(reco_Pp_ThreePlaneLogLikelihood,weight/2.);
 
 				// --------------------------------------------------------------------------------------------------------------------------
 

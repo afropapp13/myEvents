@@ -50,9 +50,7 @@ void myTrueAnalysis::Loop() {
 
 	// Output Files
 
-//	TString FileName = "./OutputFiles/"+UBCodeVersion+"/TruthSTVAnalysis_"+fWhichSample+Extension+"_"+UBCodeVersion+".root";
-	TString FileName = "/uboone/data/users/apapadop/myEvents/OutputFiles/"+UBCodeVersion+\
-			    "/TruthSTVAnalysis_"+fWhichSample+Extension+"_"+UBCodeVersion+".root";	
+	TString FileName = PathToFiles+"/TruthSTVAnalysis_"+fWhichSample+Extension+"_"+UBCodeVersion+".root";	
 	TFile* OutputFile = new TFile(FileName,"recreate");
 	std::cout << std::endl << "File " << FileName << " to be created"<< std::endl << std::endl;
 
