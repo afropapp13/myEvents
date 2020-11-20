@@ -89,6 +89,7 @@ public :
    vector<double>  *Vertex_X;
    vector<double>  *Vertex_Y;
    vector<double>  *Vertex_Z;
+   vector<double>  *VertexActivity_50x100;
 
    vector<double>  *CandidateMu_TrackScore;
    vector<double>  *CandidateMu_StartX;
@@ -250,6 +251,7 @@ public :
    TBranch        *b_Vertex_X;   //!
    TBranch        *b_Vertex_Y;   //!
    TBranch        *b_Vertex_Z;   //!
+   TBranch        *b_VertexActivity_50x100;   //!
 
    TBranch        *b_CandidateMu_TrackScore;   //!
    TBranch        *b_CandidateMu_StartX;   //!
@@ -462,6 +464,7 @@ void myRecoAnalysis::Init(TTree *tree)
    Vertex_X = 0;
    Vertex_Y = 0;
    Vertex_Z = 0;
+   VertexActivity_50x100 = 0;
 
    CandidateMu_TrackScore = 0;
    CandidateMu_StartX = 0;
@@ -627,6 +630,7 @@ void myRecoAnalysis::Init(TTree *tree)
    fChain->SetBranchAddress("Vertex_X", &Vertex_X, &b_Vertex_X);
    fChain->SetBranchAddress("Vertex_Y", &Vertex_Y, &b_Vertex_Y);
    fChain->SetBranchAddress("Vertex_Z", &Vertex_Z, &b_Vertex_Z);
+   fChain->SetBranchAddress("VertexActivity_50x100", &VertexActivity_50x100, &b_VertexActivity_50x100);
 
    fChain->SetBranchAddress("CandidateMu_TrackScore", &CandidateMu_TrackScore, &b_CandidateMu_TrackScore);
    fChain->SetBranchAddress("CandidateMu_StartX", &CandidateMu_StartX, &b_CandidateMu_StartX);

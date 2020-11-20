@@ -27,15 +27,13 @@ void Create1DPlotsTHStack_TopologicalBreakDown() {
 
 	// -----------------------------------------------------------------------------------------------------------------------------------------
 
-	PlotNames.push_back("RecokMissPlot");
 	PlotNames.push_back("RecoPMissMinusPlot");
 	PlotNames.push_back("RecoPMissPlot");
+	PlotNames.push_back("RecokMissPlot");
 
 	PlotNames.push_back("RecoNuScorePlot");
 	PlotNames.push_back("RecoFlashScorePlot");
-
 	PlotNames.push_back("RecoDistancePlot");
-
 	PlotNames.push_back("RecoLengthDifferencePlot");
 	PlotNames.push_back("RecodYZPlot");
 	PlotNames.push_back("RecoNPEPlot");
@@ -61,10 +59,15 @@ void Create1DPlotsTHStack_TopologicalBreakDown() {
 
 	PlotNames.push_back("RecoMuonLengthPlot");
 	PlotNames.push_back("RecoProtonLengthPlot");
-//	PlotNames.push_back("RecoMuonTracksScorePlot");
-//	PlotNames.push_back("RecoProtonTracksScorePlot");
+	PlotNames.push_back("RecodMuonTracksScorePlot");
+	PlotNames.push_back("RecodProtonTracksScorePlot");
 	PlotNames.push_back("RecodMuonVertexDistancePlot");
 	PlotNames.push_back("RecodProtonVertexDistancePlot");
+	PlotNames.push_back("RecoVertexActivityPlot");
+
+	PlotNames.push_back("RecoVertexXPlot");
+	PlotNames.push_back("RecoVertexYPlot");
+	PlotNames.push_back("RecoVertexZPlot");
 
 	const int N1DPlots = PlotNames.size();
 	cout << "Number of 1D Plots = " << N1DPlots << endl;
