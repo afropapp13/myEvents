@@ -50,7 +50,7 @@ void myTrueAnalysis::Loop() {
 
 	// Output Files
 
-	TString FileName = PathToFiles+"/TruthSTVAnalysis_"+fWhichSample+Extension+"_"+UBCodeVersion+".root";	
+	TString FileName = PathToFiles+"TruthSTVAnalysis_"+fWhichSample+Extension+"_"+UBCodeVersion+".root";	
 	TFile* OutputFile = new TFile(FileName,"recreate");
 	std::cout << std::endl << "File " << FileName << " to be created"<< std::endl << std::endl;
 
@@ -60,6 +60,8 @@ void myTrueAnalysis::Loop() {
 	// --------------------------------------------------------------------------------------------------------------------------------------------
 
 	// 1D True Variables
+
+	TH1D* TruePi0Plot = new TH1D("TruePi0Plot",";# #pi^{0}",4,-0.5,3.5);
 	
 	TH1D* TruekMissPlot = new TH1D("TruekMissPlot",LabelXAxiskMiss,NBinskMiss,ArrayNBinskMiss);
 	TH1D* TruePMissMinusPlot = new TH1D("TruePMissMinusPlot",LabelXAxisPMissMinus,NBinsPMissMinus,ArrayNBinsPMissMinus);
@@ -84,6 +86,8 @@ void myTrueAnalysis::Loop() {
 	TH1D* TrueVertexXPlot = new TH1D("TrueVertexXPlot",RecoLabelXAxisVertexX,NBinsVertexX,MinVertexX,MaxVertexX);
 	TH1D* TrueVertexYPlot = new TH1D("TrueVertexYPlot",RecoLabelXAxisVertexY,NBinsVertexY,MinVertexY,MaxVertexY);
 	TH1D* TrueVertexZPlot = new TH1D("TrueVertexZPlot",RecoLabelXAxisVertexZ,NBinsVertexZ,MinVertexZ,MaxVertexZ);
+
+	TH1D* TrueEvPlot = new TH1D("TrueEvPlot",RecoLabelXAxisEv,NBinsEv,MinEv,MaxEv);
 	
 	// 2D Analysis
 
@@ -276,10 +280,10 @@ void myTrueAnalysis::Loop() {
 		
 			// --------------------------------------------------------------------------------------------------------------------		
 			
-			// Containment of the vertex defined as the start point of the muon in the TPC
+			// Containment of the vertex has already been demanded in PreTruthSelection
 			// Soft fiducial volume for true vertex
 
-			if (Muon_MCParticle_StartContainment->at(0) == 0) { continue; }
+			//if (Muon_MCParticle_StartContainment->at(0) == 0) { continue; }
 
 			// --------------------------------------------------------------------------------------------------------------------		
 
@@ -345,7 +349,8 @@ void myTrueAnalysis::Loop() {
 
 			// True Vertex
 
-			TVector3 TrueVertex(Muon_MCParticle_StartX->at(0),Muon_MCParticle_StartY->at(0),Muon_MCParticle_StartZ->at(0));
+//			TVector3 TrueVertex(Muon_MCParticle_StartX->at(0),Muon_MCParticle_StartY->at(0),Muon_MCParticle_StartZ->at(0));
+			TVector3 TrueVertex(True_Vx,True_Vy,True_Vz);
 			
 			// -----------------------------------------------------------------------------------------------------------------
 			
@@ -406,6 +411,9 @@ void myTrueAnalysis::Loop() {
 //				    && RecoTrueQ2 < ArrayNBinsQ2[NBinsQ2]
 				) {
 
+					// No weight to be applied in Pi0 multiplicity plot
+					TruePi0Plot->Fill(NumberPi0);
+
 					// True CC1p event
 
 					TrueCC1pEvent = true;
@@ -442,6 +450,10 @@ void myTrueAnalysis::Loop() {
 					TrueVertexXPlot->Fill(TrueVertex.X(),weight);
 					TrueVertexYPlot->Fill(TrueVertex.Y(),weight);
 					TrueVertexZPlot->Fill(TrueVertex.Z(),weight);
+
+					// True Energy
+
+					TrueEvPlot->Fill(True_Ev,weight);
 					
 					// 2D Analysis
 		

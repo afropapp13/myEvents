@@ -61,6 +61,12 @@ public :
 //   vector<double>  *xsr_scc_Fa3_SCC;
 //   vector<double>  *xsr_scc_Fv3_SCC;
 
+   double          True_Ev;
+   double          True_Vx;
+   double          True_Vy;
+   double          True_Vz;
+
+   int NumberPi0;
    
    int             CC1p;
    int             CC1p1pi;
@@ -114,6 +120,7 @@ public :
    vector<double>  *CandidateMu_Chi2_YPlane;
    vector<double>  *CandidateMu_ThreePlaneChi2;
    vector<double>  *CandidateMu_ThreePlaneLogLikelihood;
+   vector<double>  *CandidateMu_LLR_PID;
    vector<int>     *CandidateMu_StartContainment;
    vector<int>     *CandidateMu_EndContainment;
    vector<int>     *CandidateMu_MCParticle_Pdg;
@@ -148,6 +155,7 @@ public :
    vector<double>  *CandidateP_Chi2_YPlane;
    vector<double>  *CandidateP_ThreePlaneChi2;
    vector<double>  *CandidateP_ThreePlaneLogLikelihood;
+   vector<double>  *CandidateP_LLR_PID;
    vector<int>     *CandidateP_StartContainment;
    vector<int>     *CandidateP_EndContainment;
    vector<int>     *CandidateP_MCParticle_Pdg;
@@ -223,6 +231,13 @@ public :
    TBranch        *b_reinteractions_proton_Geant4;   //!                                                       
 //   TBranch        *b_xsr_scc_Fa3_SCC;   //!                                                                                                        
 //   TBranch        *b_xsr_scc_Fv3_SCC;   //!
+
+   TBranch        *b_True_Ev;   //!
+   TBranch        *b_True_Vx;   //!
+   TBranch        *b_True_Vy;   //!
+   TBranch        *b_True_Vz;   //!
+
+   TBranch        *b_NumberPi0;   //!
   
    TBranch        *b_CC1p;   //!
    TBranch        *b_CC1p1pi;   //!
@@ -276,6 +291,7 @@ public :
    TBranch        *b_CandidateMu_Chi2_YPlane;   //!
    TBranch        *b_CandidateMu_ThreePlaneChi2;   //!
    TBranch        *b_CandidateMu_ThreePlaneLogLikelihood;   //!
+   TBranch        *b_CandidateMu_LLR_PID;   //!
    TBranch        *b_CandidateMu_StartContainment;   //!
    TBranch        *b_CandidateMu_EndContainment;   //!
    TBranch        *b_CandidateMu_MCParticle_Pdg;   //!
@@ -310,6 +326,7 @@ public :
    TBranch        *b_CandidateP_Chi2_YPlane;   //!
    TBranch        *b_CandidateP_ThreePlaneChi2;   //!
    TBranch        *b_CandidateP_ThreePlaneLogLikelihood;   //!
+   TBranch        *b_CandidateP_LLR_PID;   //!
    TBranch        *b_CandidateP_StartContainment;   //!
    TBranch        *b_CandidateP_EndContainment;   //!
    TBranch        *b_CandidateP_MCParticle_Pdg;   //!
@@ -489,6 +506,7 @@ void myRecoAnalysis::Init(TTree *tree)
    CandidateMu_Chi2_YPlane = 0;
    CandidateMu_ThreePlaneChi2 = 0;
    CandidateMu_ThreePlaneLogLikelihood = 0;
+   CandidateMu_LLR_PID = 0;
    CandidateMu_StartContainment = 0;
    CandidateMu_EndContainment = 0;
    CandidateMu_MCParticle_Pdg = 0;
@@ -523,6 +541,7 @@ void myRecoAnalysis::Init(TTree *tree)
    CandidateP_Chi2_YPlane = 0;
    CandidateP_ThreePlaneChi2 = 0;
    CandidateP_ThreePlaneLogLikelihood = 0;
+   CandidateP_LLR_PID = 0;
    CandidateP_StartContainment = 0;
    CandidateP_EndContainment = 0;
    CandidateP_MCParticle_Pdg = 0;
@@ -602,6 +621,13 @@ void myRecoAnalysis::Init(TTree *tree)
    fChain->SetBranchAddress("reinteractions_proton_Geant4", &reinteractions_proton_Geant4, &b_reinteractions_proton_Geant4);
 //   fChain->SetBranchAddress("xsr_scc_Fa3_SCC", &xsr_scc_Fa3_SCC, &b_xsr_scc_Fa3_SCC);
 //   fChain->SetBranchAddress("xsr_scc_Fv3_SCC", &xsr_scc_Fv3_SCC, &b_xsr_scc_Fv3_SCC);
+
+   fChain->SetBranchAddress("True_Ev", &True_Ev, &b_True_Ev);
+   fChain->SetBranchAddress("True_Vx", &True_Vx, &b_True_Vx);
+   fChain->SetBranchAddress("True_Vy", &True_Vy, &b_True_Vy);
+   fChain->SetBranchAddress("True_Vz", &True_Vz, &b_True_Vz);
+
+   fChain->SetBranchAddress("NumberPi0", &NumberPi0, &b_NumberPi0);
       
    fChain->SetBranchAddress("CC1p", &CC1p, &b_CC1p);
    fChain->SetBranchAddress("CC1p1pi", &CC1p1pi, &b_CC1p1pi);
@@ -655,6 +681,7 @@ void myRecoAnalysis::Init(TTree *tree)
    fChain->SetBranchAddress("CandidateMu_Chi2_YPlane", &CandidateMu_Chi2_YPlane, &b_CandidateMu_Chi2_YPlane);
    fChain->SetBranchAddress("CandidateMu_ThreePlaneChi2", &CandidateMu_ThreePlaneChi2, &b_CandidateMu_ThreePlaneChi2);
    fChain->SetBranchAddress("CandidateMu_ThreePlaneLogLikelihood", &CandidateMu_ThreePlaneLogLikelihood, &b_CandidateMu_ThreePlaneLogLikelihood);
+   fChain->SetBranchAddress("CandidateMu_LLR_PID", &CandidateMu_LLR_PID, &b_CandidateMu_LLR_PID);
    fChain->SetBranchAddress("CandidateMu_StartContainment", &CandidateMu_StartContainment, &b_CandidateMu_StartContainment);
    fChain->SetBranchAddress("CandidateMu_EndContainment", &CandidateMu_EndContainment, &b_CandidateMu_EndContainment);
    fChain->SetBranchAddress("CandidateMu_MCParticle_Pdg", &CandidateMu_MCParticle_Pdg, &b_CandidateMu_MCParticle_Pdg);
@@ -689,6 +716,7 @@ void myRecoAnalysis::Init(TTree *tree)
    fChain->SetBranchAddress("CandidateP_Chi2_YPlane", &CandidateP_Chi2_YPlane, &b_CandidateP_Chi2_YPlane);
    fChain->SetBranchAddress("CandidateP_ThreePlaneChi2", &CandidateP_ThreePlaneChi2, &b_CandidateP_ThreePlaneChi2);
    fChain->SetBranchAddress("CandidateP_ThreePlaneLogLikelihood", &CandidateP_ThreePlaneLogLikelihood, &b_CandidateP_ThreePlaneLogLikelihood);
+   fChain->SetBranchAddress("CandidateP_LLR_PID", &CandidateP_LLR_PID, &b_CandidateP_LLR_PID);
    fChain->SetBranchAddress("CandidateP_StartContainment", &CandidateP_StartContainment, &b_CandidateP_StartContainment);
    fChain->SetBranchAddress("CandidateP_EndContainment", &CandidateP_EndContainment, &b_CandidateP_EndContainment);
    fChain->SetBranchAddress("CandidateP_MCParticle_Pdg", &CandidateP_MCParticle_Pdg, &b_CandidateP_MCParticle_Pdg);

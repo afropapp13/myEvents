@@ -20,6 +20,8 @@ using namespace Constants;
 
 void Create1DPlotsTHStack_InteractionBreakDown() {
 
+	// ----------------------------------------------------------------------------------------------------------------------------------------
+
 	TH1D::SetDefaultSumw2();
 	vector<TString> PlotNames; PlotNames.clear();
 
@@ -44,6 +46,9 @@ void Create1DPlotsTHStack_InteractionBreakDown() {
 
 	PlotNames.push_back("RecoThreePlaneChi2LogLikelihoodCandidateMuonPlot");
 	PlotNames.push_back("RecoThreePlaneChi2LogLikelihoodCandidateProtonPlot");
+
+	PlotNames.push_back("RecoMuonLLRPIDPlot");
+	PlotNames.push_back("RecoProtonLLRPIDPlot");
 
 	PlotNames.push_back("RecoMuonMomentumPlot");
 	PlotNames.push_back("RecoProtonMomentumPlot");
@@ -70,6 +75,8 @@ void Create1DPlotsTHStack_InteractionBreakDown() {
 	PlotNames.push_back("RecoVertexYPlot");
 	PlotNames.push_back("RecoVertexZPlot");
 
+	PlotNames.push_back("RecoEvPlot");
+
 	const int N1DPlots = PlotNames.size();
 	cout << "Number of 1D Plots = " << N1DPlots << endl;
 
@@ -78,11 +85,19 @@ void Create1DPlotsTHStack_InteractionBreakDown() {
 	TString Cuts = "_NoCuts";
 
 	vector<TString> VectorCuts; VectorCuts.clear();
+
+	// v52
+	VectorCuts.push_back("");
+	VectorCuts.push_back("_PID");
+	VectorCuts.push_back("_NuScore");
+
+	/*
+	// up to v43
 	VectorCuts.push_back("");
 	VectorCuts.push_back("_NuScore");
 	VectorCuts.push_back("_ThreePlaneLogChi2");
 	VectorCuts.push_back("_Collinearity");
-
+	*/
 	int NCuts = (int)(VectorCuts.size());	
 
 	// ------------------------------------------------------------------------------------------------------------------------------------------
@@ -132,9 +147,10 @@ void Create1DPlotsTHStack_InteractionBreakDown() {
 			vector<int> Colors; Colors.clear(); 
 			Colors.push_back(kBlack); Colors.push_back(kRed); Colors.push_back(kGray+2); Colors.push_back(kMagenta);
 
-			vector<int> ColorsOverlay; ColorsOverlay.clear(); 
-			ColorsOverlay.push_back(kRed); ColorsOverlay.push_back(kGreen); 
-			ColorsOverlay.push_back(kBlue); ColorsOverlay.push_back(kMagenta); ColorsOverlay.push_back(kOrange+7);
+			//vector<int> ColorsOverlay; ColorsOverlay.clear(); 
+			//ColorsOverlay.push_back(kRed); ColorsOverlay.push_back(kGreen); 
+			//ColorsOverlay.push_back(kBlue); ColorsOverlay.push_back(kMagenta); ColorsOverlay.push_back(kOrange+7);
+			vector<int> ColorsOverlay{kBlue-5,kYellow+1,kOrange+7,kRed+1,kBlue};
 
 			const int NSamples = NameOfSamples.size();
 			vector<TFile*> FileSample; FileSample.clear();

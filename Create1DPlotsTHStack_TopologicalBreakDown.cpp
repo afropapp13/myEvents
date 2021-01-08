@@ -44,6 +44,9 @@ void Create1DPlotsTHStack_TopologicalBreakDown() {
 	PlotNames.push_back("RecoThreePlaneChi2LogLikelihoodCandidateMuonPlot");
 	PlotNames.push_back("RecoThreePlaneChi2LogLikelihoodCandidateProtonPlot");
 
+	PlotNames.push_back("RecoMuonLLRPIDPlot");
+	PlotNames.push_back("RecoProtonLLRPIDPlot");
+
 	PlotNames.push_back("RecoMuonMomentumPlot");
 	PlotNames.push_back("RecoProtonMomentumPlot");
 	PlotNames.push_back("RecoMuonCosThetaPlot");
@@ -69,6 +72,8 @@ void Create1DPlotsTHStack_TopologicalBreakDown() {
 	PlotNames.push_back("RecoVertexYPlot");
 	PlotNames.push_back("RecoVertexZPlot");
 
+	PlotNames.push_back("RecoEvPlot");
+
 	const int N1DPlots = PlotNames.size();
 	cout << "Number of 1D Plots = " << N1DPlots << endl;
 
@@ -77,10 +82,11 @@ void Create1DPlotsTHStack_TopologicalBreakDown() {
 	TString Cuts = "_NoCuts";
 
 	vector<TString> VectorCuts; VectorCuts.clear();
-	VectorCuts.push_back("");
-	VectorCuts.push_back("_NuScore");
-	VectorCuts.push_back("_ThreePlaneLogChi2");
-	VectorCuts.push_back("_Collinearity");
+
+//	VectorCuts.push_back("");
+//	VectorCuts.push_back("_NuScore");
+//	VectorCuts.push_back("_ThreePlaneLogChi2");
+//	VectorCuts.push_back("_Collinearity");
 
 	int NCuts = (int)(VectorCuts.size());	
 
@@ -138,9 +144,10 @@ void Create1DPlotsTHStack_TopologicalBreakDown() {
 			vector<int> Colors; Colors.clear(); 
 			Colors.push_back(kBlack); Colors.push_back(kRed); Colors.push_back(kGray+2); Colors.push_back(kMagenta);
 
-			vector<int> ColorsOverlay; ColorsOverlay.clear(); 
-			ColorsOverlay.push_back(kRed); ColorsOverlay.push_back(kBlue); 
-			ColorsOverlay.push_back(kGreen); ColorsOverlay.push_back(kMagenta); ColorsOverlay.push_back(kOrange+7);
+			//vector<int> ColorsOverlay; ColorsOverlay.clear(); 
+			//ColorsOverlay.push_back(kRed); ColorsOverlay.push_back(kBlue); 
+			//ColorsOverlay.push_back(kGreen); ColorsOverlay.push_back(kMagenta); ColorsOverlay.push_back(kOrange+7);
+			vector<int> ColorsOverlay{kBlue-5,kYellow+1,kOrange+7,kRed+1,kBlue};
 
 			const int NSamples = NameOfSamples.size();
 			vector<TFile*> FileSample; FileSample.clear();

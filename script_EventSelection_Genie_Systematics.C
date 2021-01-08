@@ -29,8 +29,6 @@
 
 	// -----------------------------------------------------------------------------------------
 
-//	Locally
-//	gROOT->ProcessLine(".L ../../myClass/Tools.cxx++");
 //	On the gpvm's'
 	gROOT->ProcessLine(".L /uboone/app/users/apapadop/uboonecode_v08_00_00_43/srcs/ubana/ubana/myClasses/Tools.cxx++");
 	gROOT->ProcessLine(".L /uboone/app/users/apapadop/uboonecode_v08_00_00_43/srcs/ubana/ubana/myClasses/STV_Tools.cxx++");	
@@ -46,8 +44,8 @@
 
 				gROOT->ProcessLine("myRecoAnalysis(\""+WhichSampleArray[i]+"\",\""+EventWeightLabels[j]+"\","+TString(std::to_string(k))+").Loop()");
 
-				//if (string(WhichSampleArray[i]).find("Overlay9") != std::string::npos) 
-				//  { gROOT->ProcessLine("myTrueAnalysis(\""+WhichSampleArray[i]+"\",\""+EventWeightLabels[j]+"\","+TString(std::to_string(k))+").Loop()"); } 
+				if (string(WhichSampleArray[i]).find("Overlay9") != std::string::npos) 
+				  { gROOT->ProcessLine("myTrueAnalysis(\""+WhichSampleArray[i]+"\",\""+EventWeightLabels[j]+"\","+TString(std::to_string(k))+").Loop()"); } 
 
 			} // End of the loop over the universes
 			  

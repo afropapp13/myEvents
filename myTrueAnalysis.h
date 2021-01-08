@@ -58,6 +58,13 @@ public :
    vector<double>  *reinteractions_proton_Geant4;
 //   vector<double>  *xsr_scc_Fa3_SCC;
 //   vector<double>  *xsr_scc_Fv3_SCC;   
+
+   double             True_Ev;
+   double             True_Vx;
+   double             True_Vy;
+   double             True_Vz;
+
+   int             NumberPi0;
    
    int             CC1p;
    int             CC1p1pi;
@@ -144,6 +151,13 @@ public :
    TBranch        *b_reinteractions_proton_Geant4;   //!                                                       
 //   TBranch        *b_xsr_scc_Fa3_SCC;   //!                                                                                                        
 //   TBranch        *b_xsr_scc_Fv3_SCC;   //!   
+
+   TBranch        *b_True_Ev;   //!
+   TBranch        *b_True_Vx;   //!
+   TBranch        *b_True_Vy;   //!
+   TBranch        *b_True_Vz;   //!
+
+   TBranch        *b_NumberPi0;   //!
    
    TBranch        *b_CC1p;   //!
    TBranch        *b_CC1p1pi;   //!
@@ -377,6 +391,13 @@ void myTrueAnalysis::Init(TTree *tree)
    fChain->SetBranchAddress("reinteractions_proton_Geant4", &reinteractions_proton_Geant4, &b_reinteractions_proton_Geant4);
 //   fChain->SetBranchAddress("xsr_scc_Fa3_SCC", &xsr_scc_Fa3_SCC, &b_xsr_scc_Fa3_SCC);
 //   fChain->SetBranchAddress("xsr_scc_Fv3_SCC", &xsr_scc_Fv3_SCC, &b_xsr_scc_Fv3_SCC);   
+
+   fChain->SetBranchAddress("True_Ev", &True_Ev, &b_True_Ev);   
+   fChain->SetBranchAddress("True_Vx", &True_Vx, &b_True_Vx);   
+   fChain->SetBranchAddress("True_Vy", &True_Vy, &b_True_Vy);   
+   fChain->SetBranchAddress("True_Vz", &True_Vz, &b_True_Vz);   
+
+   fChain->SetBranchAddress("NumberPi0", &NumberPi0, &b_NumberPi0);   
      
    fChain->SetBranchAddress("CC1p", &CC1p, &b_CC1p);   
    fChain->SetBranchAddress("CC1p1pi", &CC1p1pi, &b_CC1p1pi);
