@@ -83,10 +83,18 @@ void Create1DPlotsTHStack_TopologicalBreakDown() {
 
 	vector<TString> VectorCuts; VectorCuts.clear();
 
-//	VectorCuts.push_back("");
-//	VectorCuts.push_back("_NuScore");
-//	VectorCuts.push_back("_ThreePlaneLogChi2");
-//	VectorCuts.push_back("_Collinearity");
+	// v52
+	VectorCuts.push_back("");
+	VectorCuts.push_back("_PID");
+	VectorCuts.push_back("_NuScore");
+
+	/*
+	// up to v43
+	VectorCuts.push_back("");
+	VectorCuts.push_back("_NuScore");
+	VectorCuts.push_back("_ThreePlaneLogChi2");
+	VectorCuts.push_back("_Collinearity");
+	*/
 
 	int NCuts = (int)(VectorCuts.size());	
 
@@ -234,7 +242,7 @@ void Create1DPlotsTHStack_TopologicalBreakDown() {
 
 					Plots[WhichSample][WhichPlot]->GetXaxis()->SetTitleFont(FontStyle);
 					Plots[WhichSample][WhichPlot]->GetXaxis()->SetLabelFont(FontStyle);
-					Plots[WhichSample][WhichPlot]->GetXaxis()->SetNdivisions(5);
+					Plots[WhichSample][WhichPlot]->GetXaxis()->SetNdivisions(6);
 					Plots[WhichSample][WhichPlot]->GetXaxis()->SetLabelSize(0);
 
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitleFont(FontStyle);

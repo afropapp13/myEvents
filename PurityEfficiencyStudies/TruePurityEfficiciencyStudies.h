@@ -9,7 +9,7 @@
 #include <vector>
 #include <vector>
 
-#include "/uboone/app/users/apapadop/uboonecode_v08_00_00_43/srcs/ubana/ubana/myClasses/Constants.h"
+#include "ubana/myClasses/Constants.h"
 
 using namespace Constants;
 
@@ -219,10 +219,6 @@ TruePurityEfficiciencyStudies::TruePurityEfficiciencyStudies(TString WhichSample
    fEventWeightLabel = WhichEventWeightLabel;
    fUniverseIndex = UniverseIndex;   
 
-// LOcally
-//   TString PathToFile = "mySamples/"+UBCodeVersion+"/PreTruthSelection_"+fWhichSample+"_"+UBCodeVersion+".root";
-
-// On the gpvm's
    TString PathToFile = "/uboone/data/users/apapadop/myEvents/mySamples/"+UBCodeVersion+"/PreTruthSelection_"+fWhichSample+"_"+UBCodeVersion+".root";
 
    if (tree == 0) {

@@ -6,7 +6,7 @@
 #include <TFile.h>
 #include <TString.h>
 
-#include "/uboone/app/users/apapadop/uboonecode_v08_00_00_43/srcs/ubana/ubana/myClasses/Constants.h"
+#include "ubana/myClasses/Constants.h"
 
 #include <vector>
 #include <vector>
@@ -367,10 +367,7 @@ PurityEfficiencyStudies::PurityEfficiencyStudies(TString WhichSample, TString Wh
    fEventWeightLabel = WhichEventWeightLabel;
    fUniverseIndex = UniverseIndex;
 
-//   On the gpvm's
    fPathToFile = "/uboone/data/users/apapadop/myEvents/mySamples/"+UBCodeVersion+"/PreSelection_"+fWhichSample+"_"+UBCodeVersion+".root";
-//   Locally
-//   fPathToFile = "mySamples/"+UBCodeVersion+"/PreSelection_"+fWhichSample+"_"+UBCodeVersion+".root";
 
    if (tree == 0) {
       TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject(fPathToFile);

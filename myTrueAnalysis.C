@@ -62,6 +62,7 @@ void myTrueAnalysis::Loop() {
 	// 1D True Variables
 
 	TH1D* TruePi0Plot = new TH1D("TruePi0Plot",";# #pi^{0}",4,-0.5,3.5);
+	TH1D* TrueNeutronPlot = new TH1D("TrueNeutronPlot",";# neutrons",6,-0.5,5.5);
 	
 	TH1D* TruekMissPlot = new TH1D("TruekMissPlot",LabelXAxiskMiss,NBinskMiss,ArrayNBinskMiss);
 	TH1D* TruePMissMinusPlot = new TH1D("TruePMissMinusPlot",LabelXAxisPMissMinus,NBinsPMissMinus,ArrayNBinsPMissMinus);
@@ -411,8 +412,10 @@ void myTrueAnalysis::Loop() {
 //				    && RecoTrueQ2 < ArrayNBinsQ2[NBinsQ2]
 				) {
 
-					// No weight to be applied in Pi0 multiplicity plot
+					// No weight to be applied in the multiplicity plots
+
 					TruePi0Plot->Fill(NumberPi0);
+					TrueNeutronPlot->Fill(NumberNeutrons);
 
 					// True CC1p event
 

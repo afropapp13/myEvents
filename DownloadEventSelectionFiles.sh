@@ -1,17 +1,13 @@
-
-export UserID=apapadop
-
-export UBCode=v08_00_00_43
-#export RunNumber=Run1
+. ../myClasses/Constants.sh
 
 export NoCuts=_NoCuts
-export Cuts=_NoCuts_NuScore_ThreePlaneLogChi2_Collinearity
+#export Cuts=_NoCuts_NuScore_ThreePlaneLogChi2_Collinearity
+export Cuts=_NoCuts_PID_NuScore
 
 export OutPutDir=/uboone/data/users/$UserID/myEvents/OutputFiles/$UBCode
 
-declare -a arrRun=("Run1")
-declare -a arrCuts=("_NoCuts" "_NuScore" "_ThreePlaneLogChi2" "_Collinearity")
-
+declare -a arrRun=("Run1" "Run3")
+declare -a arrCuts=("_NoCuts" "_PID" "_NuScore")
 
 # Loop over the run numbers
 

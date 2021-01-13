@@ -124,6 +124,7 @@ void myRecoAnalysis::Loop() {
 		// 1D Reco Level Plots
 
 		TH1D* RecoPi0Plot = new TH1D("RecoPi0Plot",";# #pi^{0}",4,-0.5,3.5);
+		TH1D* RecoNeutronPlot = new TH1D("RecoNeutronPlot",";# neutrons",6,-0.5,5.5);
 
 		TH1D* RecoEvPlot = new TH1D("RecoEvPlot",RecoLabelXAxisEv,NBinsEv,MinEv,MaxEv);
 		TH1D* RecoNuScorePlot = new TH1D("RecoNuScorePlot",RecoLabelXAxisNuScore,NBinsNuScore,MinNuScore,MaxNuScore);
@@ -1186,8 +1187,9 @@ void myRecoAnalysis::Loop() {
 
 			// ----------------------------------------------------------------------------------------------------------------------
 
-			// No weight to be applied in Pi0 multiplicity plot
+			// No weight to be applied in the multiplicity plots
 			RecoPi0Plot->Fill(NumberPi0); 
+			RecoNeutronPlot->Fill(NumberNeutrons); 
 
 			RecoEvPlot->Fill(True_Ev,weight);
 			RecoNuScorePlot->Fill(NuScore,weight);
@@ -1205,8 +1207,8 @@ void myRecoAnalysis::Loop() {
 			RecoThreePlaneChi2LogLikelihoodCandidateMuonPlot->Fill(reco_Pmu_ThreePlaneLogLikelihood,weight);
 			RecoThreePlaneChi2LogLikelihoodCandidateProtonPlot->Fill(reco_Pp_ThreePlaneLogLikelihood,weight);
 
-			RecoMuonLLRPIDPlot->Fill(reco_mu_LLR_PID,weight);
-			RecoProtonLLRPIDPlot->Fill(reco_p_LLR_PID,weight);
+			RecoMuonLLRPIDPlot->Fill(reco_mu_LLR_Score,weight);
+			RecoProtonLLRPIDPlot->Fill(reco_p_LLR_Score,weight);
 
 			RecoMuonLengthPlot->Fill(l_muCandidate,weight);
 			RecodMuonTracksScorePlot->Fill(MuonTrackScore,weight);
@@ -1264,8 +1266,8 @@ void myRecoAnalysis::Loop() {
 			RecoChi2Plot->Fill(reco_Pmu_chi2,weight/2.);
 			RecoChi2Plot->Fill(reco_Pp_chi2,weight/2.);
 
-			RecoLLRPIDPlot->Fill(reco_mu_LLR_PID,weight/2.);
-			RecoLLRPIDPlot->Fill(reco_p_LLR_PID,weight/2.);
+			RecoLLRPIDPlot->Fill(reco_mu_LLR_Score,weight/2.);
+			RecoLLRPIDPlot->Fill(reco_p_LLR_Score,weight/2.);
 
 			RecoThreePlaneChi2Plot->Fill(reco_Pmu_ThreePlanechi2,weight/2.);
 			RecoThreePlaneChi2Plot->Fill(reco_Pp_ThreePlanechi2,weight/2.);
@@ -1354,8 +1356,8 @@ void myRecoAnalysis::Loop() {
 					CC1pRecoThreePlaneChi2LogLikelihoodCandidateMuonPlot->Fill(reco_Pmu_ThreePlaneLogLikelihood,weight);
 					CC1pRecoThreePlaneChi2LogLikelihoodCandidateProtonPlot->Fill(reco_Pp_ThreePlaneLogLikelihood,weight);
 
-					CC1pRecoMuonLLRPIDPlot->Fill(reco_mu_LLR_PID,weight);
-					CC1pRecoProtonLLRPIDPlot->Fill(reco_p_LLR_PID,weight);
+					CC1pRecoMuonLLRPIDPlot->Fill(reco_mu_LLR_Score,weight);
+					CC1pRecoProtonLLRPIDPlot->Fill(reco_p_LLR_Score,weight);
 
 					CC1pRecoMuonLengthPlot->Fill(l_muCandidate,weight);
 					CC1pRecodMuonTracksScorePlot->Fill(MuonTrackScore,weight);
@@ -1534,8 +1536,8 @@ void myRecoAnalysis::Loop() {
 					NonCC1pRecoThreePlaneChi2LogLikelihoodCandidateMuonPlot->Fill(reco_Pmu_ThreePlaneLogLikelihood,weight);
 					NonCC1pRecoThreePlaneChi2LogLikelihoodCandidateProtonPlot->Fill(reco_Pp_ThreePlaneLogLikelihood,weight);
 
-					NonCC1pRecoMuonLLRPIDPlot->Fill(reco_mu_LLR_PID,weight);
-					NonCC1pRecoProtonLLRPIDPlot->Fill(reco_p_LLR_PID,weight);
+					NonCC1pRecoMuonLLRPIDPlot->Fill(reco_mu_LLR_Score,weight);
+					NonCC1pRecoProtonLLRPIDPlot->Fill(reco_p_LLR_Score,weight);
 
 					NonCC1pRecoMuonLengthPlot->Fill(l_muCandidate,weight);
 					NonCC1pRecodMuonTracksScorePlot->Fill(MuonTrackScore,weight);
@@ -1598,8 +1600,8 @@ void myRecoAnalysis::Loop() {
 					CCQERecoThreePlaneChi2LogLikelihoodCandidateMuonPlot->Fill(reco_Pmu_ThreePlaneLogLikelihood,weight);
 					CCQERecoThreePlaneChi2LogLikelihoodCandidateProtonPlot->Fill(reco_Pp_ThreePlaneLogLikelihood,weight);
 
-					CCQERecoMuonLLRPIDPlot->Fill(reco_mu_LLR_PID,weight);
-					CCQERecoProtonLLRPIDPlot->Fill(reco_p_LLR_PID,weight);
+					CCQERecoMuonLLRPIDPlot->Fill(reco_mu_LLR_Score,weight);
+					CCQERecoProtonLLRPIDPlot->Fill(reco_p_LLR_Score,weight);
 
 					CCQERecoMuonLengthPlot->Fill(l_muCandidate,weight);
 					CCQERecodMuonTracksScorePlot->Fill(MuonTrackScore,weight);
@@ -1661,8 +1663,8 @@ void myRecoAnalysis::Loop() {
 					CCMECRecoThreePlaneChi2LogLikelihoodCandidateMuonPlot->Fill(reco_Pmu_ThreePlaneLogLikelihood,weight);
 					CCMECRecoThreePlaneChi2LogLikelihoodCandidateProtonPlot->Fill(reco_Pp_ThreePlaneLogLikelihood,weight);
 
-					CCMECRecoMuonLLRPIDPlot->Fill(reco_mu_LLR_PID,weight);
-					CCMECRecoProtonLLRPIDPlot->Fill(reco_p_LLR_PID,weight);
+					CCMECRecoMuonLLRPIDPlot->Fill(reco_mu_LLR_Score,weight);
+					CCMECRecoProtonLLRPIDPlot->Fill(reco_p_LLR_Score,weight);
 
 					CCMECRecoMuonLengthPlot->Fill(l_muCandidate,weight);
 					CCMECRecodMuonTracksScorePlot->Fill(MuonTrackScore,weight);
@@ -1724,8 +1726,8 @@ void myRecoAnalysis::Loop() {
 					CCRESRecoThreePlaneChi2LogLikelihoodCandidateMuonPlot->Fill(reco_Pmu_ThreePlaneLogLikelihood,weight);
 					CCRESRecoThreePlaneChi2LogLikelihoodCandidateProtonPlot->Fill(reco_Pp_ThreePlaneLogLikelihood,weight);
 
-					CCRESRecoMuonLLRPIDPlot->Fill(reco_mu_LLR_PID,weight);
-					CCRESRecoProtonLLRPIDPlot->Fill(reco_p_LLR_PID,weight);
+					CCRESRecoMuonLLRPIDPlot->Fill(reco_mu_LLR_Score,weight);
+					CCRESRecoProtonLLRPIDPlot->Fill(reco_p_LLR_Score,weight);
 
 					CCRESRecoMuonLengthPlot->Fill(l_muCandidate,weight);
 					CCRESRecodMuonTracksScorePlot->Fill(MuonTrackScore,weight);
@@ -1787,8 +1789,8 @@ void myRecoAnalysis::Loop() {
 					CCDISRecoThreePlaneChi2LogLikelihoodCandidateMuonPlot->Fill(reco_Pmu_ThreePlaneLogLikelihood,weight);
 					CCDISRecoThreePlaneChi2LogLikelihoodCandidateProtonPlot->Fill(reco_Pp_ThreePlaneLogLikelihood,weight);
 
-					CCDISRecoMuonLLRPIDPlot->Fill(reco_mu_LLR_PID,weight);
-					CCDISRecoProtonLLRPIDPlot->Fill(reco_p_LLR_PID,weight);
+					CCDISRecoMuonLLRPIDPlot->Fill(reco_mu_LLR_Score,weight);
+					CCDISRecoProtonLLRPIDPlot->Fill(reco_p_LLR_Score,weight);
 
 					CCDISRecoMuonLengthPlot->Fill(l_muCandidate,weight);
 					CCDISRecodMuonTracksScorePlot->Fill(MuonTrackScore,weight);
@@ -1836,7 +1838,7 @@ void myRecoAnalysis::Loop() {
 
 					if (CandidateMu_MCParticle_Pdg->at(0) == MuonPdg) {
 
-						MuonRecoLLRPIDPlot->Fill(reco_mu_LLR_PID,weight/2.);
+						MuonRecoLLRPIDPlot->Fill(reco_mu_LLR_Score,weight/2.);
 						MuonRecoChi2Plot->Fill(reco_Pmu_chi2,weight/2.);		
 						MuonRecoThreePlaneChi2Plot->Fill(reco_Pmu_ThreePlanechi2,weight/2.);
 						MuonRecoThreePlaneChi2LogLikelihoodPlot->Fill(reco_Pmu_ThreePlaneLogLikelihood,weight/2.);	
@@ -1845,7 +1847,7 @@ void myRecoAnalysis::Loop() {
 
 					if (CandidateP_MCParticle_Pdg->at(0) == MuonPdg) {
 
-						MuonRecoLLRPIDPlot->Fill(reco_p_LLR_PID,weight/2.);
+						MuonRecoLLRPIDPlot->Fill(reco_p_LLR_Score,weight/2.);
 						MuonRecoChi2Plot->Fill(reco_Pp_chi2,weight/2.);		
 						MuonRecoThreePlaneChi2Plot->Fill(reco_Pp_ThreePlanechi2,weight/2.);
 						MuonRecoThreePlaneChi2LogLikelihoodPlot->Fill(reco_Pp_ThreePlaneLogLikelihood,weight/2.);	
@@ -1856,7 +1858,7 @@ void myRecoAnalysis::Loop() {
 
 					if (CandidateMu_MCParticle_Pdg->at(0) == ProtonPdg) {
 
-						ProtonRecoLLRPIDPlot->Fill(reco_p_LLR_PID,weight);
+						ProtonRecoLLRPIDPlot->Fill(reco_mu_LLR_Score,weight);
 						ProtonRecoChi2Plot->Fill(reco_Pmu_chi2,weight);		
 						ProtonRecoThreePlaneChi2Plot->Fill(reco_Pmu_ThreePlanechi2,weight);
 						ProtonRecoThreePlaneChi2LogLikelihoodPlot->Fill(reco_Pmu_ThreePlaneLogLikelihood,weight/2.);	
@@ -1865,7 +1867,7 @@ void myRecoAnalysis::Loop() {
 
 					if (CandidateP_MCParticle_Pdg->at(0) == ProtonPdg) {
 
-						ProtonRecoLLRPIDPlot->Fill(reco_mu_LLR_PID,weight/2.);
+						ProtonRecoLLRPIDPlot->Fill(reco_p_LLR_Score,weight/2.);
 						ProtonRecoChi2Plot->Fill(reco_Pp_chi2,weight/2.);		
 						ProtonRecoThreePlaneChi2Plot->Fill(reco_Pp_ThreePlanechi2,weight/2.);
 						ProtonRecoThreePlaneChi2LogLikelihoodPlot->Fill(reco_Pp_ThreePlaneLogLikelihood,weight/2.);	
@@ -1876,7 +1878,7 @@ void myRecoAnalysis::Loop() {
 
 					if (CandidateMu_MCParticle_Pdg->at(0) == AbsChargedPionPdg) {
 
-						PionRecoLLRPIDPlot->Fill(reco_mu_LLR_PID,weight/2.);
+						PionRecoLLRPIDPlot->Fill(reco_mu_LLR_Score,weight/2.);
 						PionRecoChi2Plot->Fill(reco_Pmu_chi2,weight/2.);		
 						PionRecoThreePlaneChi2Plot->Fill(reco_Pmu_ThreePlanechi2,weight/2.);
 						PionRecoThreePlaneChi2LogLikelihoodPlot->Fill(reco_Pmu_ThreePlaneLogLikelihood,weight/2.);	
@@ -1885,7 +1887,7 @@ void myRecoAnalysis::Loop() {
 
 					if (CandidateP_MCParticle_Pdg->at(0) == AbsChargedPionPdg) {
 
-						PionRecoLLRPIDPlot->Fill(reco_p_LLR_PID,weight/2.);
+						PionRecoLLRPIDPlot->Fill(reco_p_LLR_Score,weight/2.);
 						PionRecoChi2Plot->Fill(reco_Pp_chi2,weight/2.);		
 						PionRecoThreePlaneChi2Plot->Fill(reco_Pp_ThreePlanechi2,weight/2.);
 						PionRecoThreePlaneChi2LogLikelihoodPlot->Fill(reco_Pp_ThreePlaneLogLikelihood,weight/2.);	
@@ -1896,8 +1898,8 @@ void myRecoAnalysis::Loop() {
 
 				else {
 
-					CosmicRecoLLRPIDPlot->Fill(reco_mu_LLR_PID,weight/2.);
-					CosmicRecoLLRPIDPlot->Fill(reco_p_LLR_PID,weight/2.);
+					CosmicRecoLLRPIDPlot->Fill(reco_mu_LLR_Score,weight/2.);
+					CosmicRecoLLRPIDPlot->Fill(reco_p_LLR_Score,weight/2.);
 
 					CosmicRecoChi2Plot->Fill(reco_Pmu_chi2,weight/2.);
 					CosmicRecoChi2Plot->Fill(reco_Pp_chi2,weight/2.);
@@ -2178,11 +2180,11 @@ void myRecoAnalysis::Loop() {
 
 		// To be saved in the txt file
 
-		myTxtFile << "\n\nStarting with " << TotalCounter << " preselected events" << std::endl << std::endl;
-		myTxtFile << "\n\n" << ContainmentCounter << " events passing containment requirement" << std::endl << std::endl;
-		myTxtFile << "\n\n" << ContainedVertexCounter << " events passing contained vertex requirement" << std::endl << std::endl;
-		myTxtFile << "\n\n" << NEventsPassingSelectionCuts << " events passing selection cuts" << std::endl << std::endl;
-		myTxtFile << "\n\n" << KinematicsCounter << " events passing common kinematic ranges" << std::endl << std::endl;
+		myTxtFile << "\n\nStarting with " << TotalCounter << " preselected events (" << int(100.*double(TotalCounter)/double(TotalCounter)) << " %)" << std::endl << std::endl;
+		myTxtFile << "\n\n" << ContainmentCounter << " events passing containment requirement (" << int(100.*double(ContainmentCounter)/double(TotalCounter)) << " %)" << std::endl << std::endl;
+		myTxtFile << "\n\n" << ContainedVertexCounter << " events passing contained vertex requirement (" << int(100.*double(ContainedVertexCounter)/double(TotalCounter)) << " %)" << std::endl << std::endl;
+		myTxtFile << "\n\n" << NEventsPassingSelectionCuts << " events passing selection cuts (" << int(100.*double(NEventsPassingSelectionCuts)/double(TotalCounter)) << " %)" << std::endl << std::endl;
+		myTxtFile << "\n\n" << KinematicsCounter << " events passing common kinematic ranges (" << int(100.*double(KinematicsCounter)/double(TotalCounter)) << " %)" << std::endl << std::endl;
 
 		// -------------------------------------------------------------------------------------------------------------------------
 

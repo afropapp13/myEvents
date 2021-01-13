@@ -9,7 +9,7 @@
 #include <vector>
 #include <vector>
 
-#include "/uboone/app/users/apapadop/uboonecode_v08_00_00_43/srcs/ubana/ubana/myClasses/Constants.h"
+#include "ubana/myClasses/Constants.h"
 
 using namespace Constants;
 
@@ -65,6 +65,7 @@ public :
    double             True_Vz;
 
    int             NumberPi0;
+   int             NumberNeutrons;
    
    int             CC1p;
    int             CC1p1pi;
@@ -158,6 +159,7 @@ public :
    TBranch        *b_True_Vz;   //!
 
    TBranch        *b_NumberPi0;   //!
+   TBranch        *b_NumberNeutrons;   //!
    
    TBranch        *b_CC1p;   //!
    TBranch        *b_CC1p1pi;   //!
@@ -233,11 +235,7 @@ myTrueAnalysis::myTrueAnalysis(TString WhichSample, TString WhichEventWeightLabe
    fEventWeightLabel = WhichEventWeightLabel;
    fUniverseIndex = UniverseIndex;   
 
-// LOcally
-//   TString PathToFile = "mySamples/"+UBCodeVersion+"/PreTruthSelection_"+fWhichSample+"_"+UBCodeVersion+".root";
-
-// On the gpvm's
-   TString PathToFile = "/uboone/data/users/apapadop/myEvents/mySamples/"+UBCodeVersion+"/PreTruthSelection_"+fWhichSample+"_"+UBCodeVersion+".root";
+   TString PathToFile = "/pnfs/uboone/persistent/users/apapadop/mySamples/"+UBCodeVersion+"/PreTruthSelection_"+fWhichSample+"_"+UBCodeVersion+".root";
 
    if (tree == 0) {
       TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject(PathToFile);
@@ -398,6 +396,7 @@ void myTrueAnalysis::Init(TTree *tree)
    fChain->SetBranchAddress("True_Vz", &True_Vz, &b_True_Vz);   
 
    fChain->SetBranchAddress("NumberPi0", &NumberPi0, &b_NumberPi0);   
+   fChain->SetBranchAddress("NumberNeutrons", &NumberNeutrons, &b_NumberNeutrons);   
      
    fChain->SetBranchAddress("CC1p", &CC1p, &b_CC1p);   
    fChain->SetBranchAddress("CC1p1pi", &CC1p1pi, &b_CC1p1pi);

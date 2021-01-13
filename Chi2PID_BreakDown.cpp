@@ -196,7 +196,7 @@ void Chi2PID_BreakDown() {
 					Plots[WhichSample][WhichPlot]->GetXaxis()->CenterTitle();
 					Plots[WhichSample][WhichPlot]->GetXaxis()->SetTitleFont(FontStyle);
 					Plots[WhichSample][WhichPlot]->GetXaxis()->SetLabelFont(FontStyle);
-					Plots[WhichSample][WhichPlot]->GetXaxis()->SetNdivisions(5);
+					Plots[WhichSample][WhichPlot]->GetXaxis()->SetNdivisions(6);
 					Plots[WhichSample][WhichPlot]->GetXaxis()->SetLabelSize(0);
 
 					Plots[WhichSample][WhichPlot]->GetYaxis()->CenterTitle();
@@ -324,7 +324,7 @@ void Chi2PID_BreakDown() {
 				RatioLine->SetLineWidth(4);
 				RatioLine->SetLineColor(kPink+8);
 				RatioLine->SetLineStyle(4);
-				RatioLine->Draw("same");
+				//RatioLine->Draw("same");
 		
 				topPad->cd();
 				leg[WhichPlot]->SetTextSize(0.5);

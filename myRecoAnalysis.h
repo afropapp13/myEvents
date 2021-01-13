@@ -6,7 +6,7 @@
 #include <TFile.h>
 #include <TString.h>
 
-#include "/uboone/app/users/apapadop/uboonecode_v08_00_00_43/srcs/ubana/ubana/myClasses/Constants.h"
+#include "/ubana/myClasses/Constants.h"
 
 #include <vector>
 #include <vector>
@@ -67,6 +67,7 @@ public :
    double          True_Vz;
 
    int NumberPi0;
+   int NumberNeutrons;
    
    int             CC1p;
    int             CC1p1pi;
@@ -238,6 +239,7 @@ public :
    TBranch        *b_True_Vz;   //!
 
    TBranch        *b_NumberPi0;   //!
+   TBranch        *b_NumberNeutrons;   //!
   
    TBranch        *b_CC1p;   //!
    TBranch        *b_CC1p1pi;   //!
@@ -390,10 +392,7 @@ myRecoAnalysis::myRecoAnalysis(TString WhichSample, TString WhichEventWeightLabe
    fEventWeightLabel = WhichEventWeightLabel;
    fUniverseIndex = UniverseIndex;
 
-//   On the gpvm's
-   fPathToFile = "/uboone/data/users/apapadop/myEvents/mySamples/"+UBCodeVersion+"/PreSelection_"+fWhichSample+"_"+UBCodeVersion+".root";
-//   Locally
-//   fPathToFile = "mySamples/"+UBCodeVersion+"/PreSelection_"+fWhichSample+"_"+UBCodeVersion+".root";
+   fPathToFile = "/pnfs/uboone/persistent/users/apapadop/mySamples/"+UBCodeVersion+"/PreSelection_"+fWhichSample+"_"+UBCodeVersion+".root";
 
    if (tree == 0) {
       TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject(fPathToFile);
@@ -628,6 +627,7 @@ void myRecoAnalysis::Init(TTree *tree)
    fChain->SetBranchAddress("True_Vz", &True_Vz, &b_True_Vz);
 
    fChain->SetBranchAddress("NumberPi0", &NumberPi0, &b_NumberPi0);
+   fChain->SetBranchAddress("NumberNeutrons", &NumberNeutrons, &b_NumberNeutrons);
       
    fChain->SetBranchAddress("CC1p", &CC1p, &b_CC1p);
    fChain->SetBranchAddress("CC1p1pi", &CC1p1pi, &b_CC1p1pi);

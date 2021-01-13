@@ -28,7 +28,7 @@ root -l script_EventSelection_Flux_Systematics.C
 
 ###########################################################################################################################################################################
 
-# Plotting code in ProduceValidationPlots.cpp
+# Plotting code in ProduceValidationPlots.cpp locally
 
 # 3 plane log likelihood particle breakdown 
 gROOT->ProcessLine(".L Chi2PID_BreakDown.cpp++"); gROOT->ProcessLine("Chi2PID_BreakDown()");

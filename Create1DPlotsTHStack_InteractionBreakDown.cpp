@@ -98,6 +98,7 @@ void Create1DPlotsTHStack_InteractionBreakDown() {
 	VectorCuts.push_back("_ThreePlaneLogChi2");
 	VectorCuts.push_back("_Collinearity");
 	*/
+
 	int NCuts = (int)(VectorCuts.size());	
 
 	// ------------------------------------------------------------------------------------------------------------------------------------------
@@ -253,7 +254,7 @@ void Create1DPlotsTHStack_InteractionBreakDown() {
 
 					Plots[WhichSample][WhichPlot]->GetXaxis()->SetTitleFont(FontStyle);
 					Plots[WhichSample][WhichPlot]->GetXaxis()->SetLabelFont(FontStyle);
-					Plots[WhichSample][WhichPlot]->GetXaxis()->SetNdivisions(5);
+					Plots[WhichSample][WhichPlot]->GetXaxis()->SetNdivisions(6);
 					Plots[WhichSample][WhichPlot]->GetXaxis()->SetLabelSize(0);
 
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitleFont(FontStyle);
