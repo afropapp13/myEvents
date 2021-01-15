@@ -219,7 +219,7 @@ TruePurityEfficiciencyStudies::TruePurityEfficiciencyStudies(TString WhichSample
    fEventWeightLabel = WhichEventWeightLabel;
    fUniverseIndex = UniverseIndex;   
 
-   TString PathToFile = "/uboone/data/users/apapadop/myEvents/mySamples/"+UBCodeVersion+"/PreTruthSelection_"+fWhichSample+"_"+UBCodeVersion+".root";
+   TString PathToFile = "/pnfs/uboone/persistent/users/apapadop/mySamples/"+UBCodeVersion+"/PreTruthSelection_"+fWhichSample+"_"+UBCodeVersion+".root";
 
    if (tree == 0) {
       TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject(PathToFile);

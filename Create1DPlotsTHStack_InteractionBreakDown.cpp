@@ -105,6 +105,10 @@ void Create1DPlotsTHStack_InteractionBreakDown() {
 
 	vector<TString> Runs;
 	Runs.push_back("Run1");
+//	Runs.push_back("Run2");
+//	Runs.push_back("Run3");
+//	Runs.push_back("Run4");
+//	Runs.push_back("Run5");
 
 	int NRuns = (int)(Runs.size());
 	cout << "Number of Runs = " << NRuns << endl;
@@ -230,9 +234,10 @@ void Create1DPlotsTHStack_InteractionBreakDown() {
 				topPad->SetTopMargin(0.3);
 				topPad->SetBottomMargin(0.0);
 				midPad->SetBottomMargin(0.03);
-				midPad->SetTopMargin(0.0);
-				botPad->SetTopMargin(0.);
+				midPad->SetTopMargin(0.03);
+				botPad->SetTopMargin(0.03);
 				botPad->SetBottomMargin(0.25);
+				botPad->SetGridx();
 				botPad->SetGridy();
 				topPad->Draw();
 				midPad->Draw();
@@ -254,12 +259,12 @@ void Create1DPlotsTHStack_InteractionBreakDown() {
 
 					Plots[WhichSample][WhichPlot]->GetXaxis()->SetTitleFont(FontStyle);
 					Plots[WhichSample][WhichPlot]->GetXaxis()->SetLabelFont(FontStyle);
-					Plots[WhichSample][WhichPlot]->GetXaxis()->SetNdivisions(6);
+					Plots[WhichSample][WhichPlot]->GetXaxis()->SetNdivisions(8);
 					Plots[WhichSample][WhichPlot]->GetXaxis()->SetLabelSize(0);
 
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitleFont(FontStyle);
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetLabelFont(FontStyle);
-					Plots[WhichSample][WhichPlot]->GetYaxis()->SetNdivisions(5);
+					Plots[WhichSample][WhichPlot]->GetYaxis()->SetNdivisions(6);
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetLabelSize(0.06);
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitle("# events");
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitleSize(0.08);
@@ -342,23 +347,23 @@ void Create1DPlotsTHStack_InteractionBreakDown() {
 
 				// --------------------------------------------------------------------------------------------------------
 
-				hratio[0][WhichPlot]->Add(hratio[2][WhichPlot],-1);
+				hratio[1][WhichPlot]->Add(hratio[2][WhichPlot]);
 				hratio[1][WhichPlot]->Add(hratio[3][WhichPlot]);
 				hratio[0][WhichPlot]->Divide(hratio[1][WhichPlot]);
 
 				hratio[0][WhichPlot]->GetXaxis()->SetTitleFont(FontStyle);
 				hratio[0][WhichPlot]->GetXaxis()->SetLabelFont(FontStyle);
-				hratio[0][WhichPlot]->GetYaxis()->SetTitle("#frac{BeamOn - ExtBNB}{Overlay}");
+				hratio[0][WhichPlot]->GetYaxis()->SetTitle("#frac{BeamOn}{MC+ExtBNB}");
 				hratio[0][WhichPlot]->GetXaxis()->SetTitle(Plots[0][WhichPlot]->GetXaxis()->GetTitle());
 				hratio[0][WhichPlot]->GetXaxis()->SetTitleSize(0.13);
 				hratio[0][WhichPlot]->GetXaxis()->SetLabelSize(0.12);
 				hratio[0][WhichPlot]->GetXaxis()->SetTitleOffset(0.88);
-				hratio[0][WhichPlot]->GetXaxis()->SetNdivisions(5);
+				hratio[0][WhichPlot]->GetXaxis()->SetNdivisions(8);
 
 				hratio[0][WhichPlot]->GetYaxis()->SetTitleFont(FontStyle);
 				hratio[0][WhichPlot]->GetYaxis()->SetLabelFont(FontStyle);
 				hratio[0][WhichPlot]->GetYaxis()->SetRangeUser(0.9*hratio[0][WhichPlot]->GetMinimum(),1.1*hratio[0][WhichPlot]->GetMaximum());
-				hratio[0][WhichPlot]->GetYaxis()->SetNdivisions(4);
+				hratio[0][WhichPlot]->GetYaxis()->SetNdivisions(6);
 				hratio[0][WhichPlot]->GetYaxis()->SetTitleOffset(0.35);
 				hratio[0][WhichPlot]->GetYaxis()->SetTitleSize(0.1);
 				hratio[0][WhichPlot]->GetYaxis()->SetLabelSize(0.11);
@@ -387,7 +392,7 @@ void Create1DPlotsTHStack_InteractionBreakDown() {
 				TH1D* SumNonBeamOn = (TH1D*)hratio[1][N1DPlots-1]->Clone(); 
 				SumNonBeamOn->Add(hratio[2][N1DPlots-1]);
 				SumNonBeamOn->Add(hratio[3][N1DPlots-1]);
-				int CCQEPurity = CCQEPlots[1][N1DPlots-1]->Integral() / SumNonBeamOn->Integral() * 1000.;
+				int CCQEPurity = CCQEPlots[1][WhichPlot]->Integral() / SumNonBeamOn->Integral() * 1000.;
 
 				midPad->cd();
 				TLatex* latexPurity = new TLatex();
@@ -400,14 +405,14 @@ void Create1DPlotsTHStack_InteractionBreakDown() {
 
 				// Cosmic Contamination 
 
-				int CosmicContamination = Plots[2][N1DPlots-1]->Integral() / SumNonBeamOn->Integral() * 1000.;
+				int CosmicContamination = Plots[2][WhichPlot]->Integral() / SumNonBeamOn->Integral() * 1000.;
 
 				midPad->cd();
 				TLatex latexCosmic;
 				latexCosmic.SetTextFont(FontStyle);
 				latexCosmic.SetTextSize(0.09);
 				TString LabelCosmic = "Cosmics = " + ToString(CosmicContamination/10.) + " %";
-//				latexCosmic.DrawLatexNDC(0.57,0.8, LabelCosmic);
+				latexCosmic.DrawLatexNDC(0.57,0.8, LabelCosmic);
 
 				// --------------------------------------------------------------------------------------
 

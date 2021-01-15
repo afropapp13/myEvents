@@ -367,7 +367,7 @@ PurityEfficiencyStudies::PurityEfficiencyStudies(TString WhichSample, TString Wh
    fEventWeightLabel = WhichEventWeightLabel;
    fUniverseIndex = UniverseIndex;
 
-   fPathToFile = "/uboone/data/users/apapadop/myEvents/mySamples/"+UBCodeVersion+"/PreSelection_"+fWhichSample+"_"+UBCodeVersion+".root";
+   fPathToFile = "/pnfs/uboone/persistent/users/apapadop/mySamples/"+UBCodeVersion+"/PreSelection_"+fWhichSample+"_"+UBCodeVersion+".root";
 
    if (tree == 0) {
       TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject(fPathToFile);

@@ -86,7 +86,7 @@ void TruePurityEfficiciencyStudies::Loop() {
 
 	if (string(fWhichSample).find("Overlay") != std::string::npos) {
 
-		TString PathToPOTFile = "/uboone/data/users/apapadop/myEvents/mySamples/"+UBCodeVersion+"/PreSelection_"+fWhichSample+"_"+UBCodeVersion+"_POT.root";
+		TString PathToPOTFile = "/pnfs/uboone/persistent/users/apapadop/mySamples/"+UBCodeVersion+"/PreSelection_"+fWhichSample+"_"+UBCodeVersion+"_POT.root";
 		TFile* POTFile = TFile::Open(PathToPOTFile,"readonly");
 		TH1D* POTCountHist = (TH1D*)(POTFile->Get("POTCountHist"));
 		POTCount = POTCountHist->GetBinContent(1);

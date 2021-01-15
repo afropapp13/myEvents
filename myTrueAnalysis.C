@@ -101,7 +101,16 @@ void myTrueAnalysis::Loop() {
 			
 	TH2D* TrueCosThetaPPpPlot = new TH2D("TrueCosThetaPPpPlot",LabelXAxisProtonCosTheta+LabelXAxisProtonMomentum
 			,NBins2DAnalysis,ArrayNBinsProtonCosTheta[0],ArrayNBinsProtonCosTheta[NBinsProtonCosTheta]
-			,NBins2DAnalysis,ArrayNBinsProtonMomentum[0],ArrayNBinsProtonMomentum[NBinsProtonMomentum]);	
+			,NBins2DAnalysis,ArrayNBinsProtonMomentum[0],ArrayNBinsProtonMomentum[NBinsProtonMomentum]);
+
+
+	// --------------------------------------------------------------------------------------------------------------------------------
+
+	TH1D* TrueMuonTrueMomentumLongitudinalRatio = new TH1D("TrueMuonTrueMomentumLongitudinalRatio",";#frac{P^{true}_{#mu,||}}{P^{true}_{#mu}}",25,0.,1.);		
+	TH1D* TrueProtonTrueMomentumLongitudinalRatio = new TH1D("TrueProtonTrueMomentumLongitudinalRatio",";#frac{P^{true}_{p,||}}{P^{true}_{p}}",25,0.,1.);
+
+	TH1D* TrueMuonTrueMomentumTransverseRatio = new TH1D("TrueMuonTrueMomentumTransverseRatio",";#frac{P^{true}_{#mu,T}}{P^{true}_{#mu}}",25,0.,1.);		
+	TH1D* TrueProtonTrueMomentumTransverseRatio = new TH1D("TrueProtonTrueMomentumTransverseRatio",";#frac{P^{true}_{p,T}}{P^{true}_{p}}",25,0.,1.);	
 
 	// ---------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -128,7 +137,7 @@ void myTrueAnalysis::Loop() {
 
 	if (string(fWhichSample).find("Overlay") != std::string::npos) {
 
-		TString PathToPOTFile = "/uboone/data/users/apapadop/myEvents/mySamples/"+UBCodeVersion+"/PreSelection_"+fWhichSample+"_"+UBCodeVersion+"_POT.root";
+		TString PathToPOTFile = "/pnfs/uboone/persistent/users/apapadop/mySamples/"+UBCodeVersion+"/PreSelection_"+fWhichSample+"_"+UBCodeVersion+"_POT.root";
 		TFile* POTFile = TFile::Open(PathToPOTFile,"readonly");
 		TH1D* POTCountHist = (TH1D*)(POTFile->Get("POTCountHist"));
 		POTCount = POTCountHist->GetBinContent(1);
@@ -461,7 +470,25 @@ void myTrueAnalysis::Loop() {
 					// 2D Analysis
 		
 					TrueCosThetaMuPmuPlot->Fill(TrueMuonCosTheta,TrueMuonMomentum_GeV,weight);
-					TrueCosThetaPPpPlot->Fill(TrueProtonCosTheta,TrueProtonMomentum_GeV,weight);					
+					TrueCosThetaPPpPlot->Fill(TrueProtonCosTheta,TrueProtonMomentum_GeV,weight);
+
+					// Playground for CC1p true momenta (longitudinal & perpendicular) ratios
+
+					TVector TrueCandidateMuon(1,1,1);
+					TrueCandidateMuon.SetMag(TrueMuonMomentum_GeV);
+					TrueCandidateMuon.SetPhi(TrueMuonPhi);
+					TrueCandidateMuon.SetCosTheta(TrueMuonCosTheta);
+
+					TVector TrueCandidateProton(1,1,1);
+					TrueCandidateProton.SetMag(TrueProtonMomentum_GeV);
+					TrueCandidateProton.SetPhi(TrueProtonPhi);
+					TrueCandidateProton.SetCosTheta(TrueProtonCosTheta);	
+
+					TrueMuonTrueMomentumLongitudinalRatio->Fill(TrueCandidateMuon.Z() / TrueCandidateMuon.Mag(),weight);
+					TrueMuonTrueMomentumTransverseRatio->Fill(TrueCandidateMuon.Pt() / TrueCandidateMuon.Mag(),weight);
+
+					TrueProtonTrueMomentumLongitudinalRatio->Fill(TrueCandidateProton.Z() / TrueCandidateProton.Mag(),weight);
+					TrueProtonTrueMomentumTransverseRatio->Fill(TrueCandidateProton.Pt() / TrueCandidateProton.Mag(),weight);				
 					
 				}
 

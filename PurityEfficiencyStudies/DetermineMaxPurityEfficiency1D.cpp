@@ -55,9 +55,9 @@ void DetermineMaxPurityEfficiency1D() {
 
 	// ----------------------------------------------------------------------------------------------------------------------------------------
 
-	TString UserID = "apapadop";
+	//TString UserID = "apapadop";
 
-	TString PlotsPath = "/uboone/data/users/"+UserID+"/mySTVAnalysis/myPlots/"+UBCodeVersion+"/Overlay9/"; 
+	//TString PlotsPath = "/uboone/data/users/"+UserID+"/mySTVAnalysis/myPlots/"+UBCodeVersion+"/Overlay9/"; 
 
 	// ----------------------------------------------------------------------------------------------------------------------------------------
 

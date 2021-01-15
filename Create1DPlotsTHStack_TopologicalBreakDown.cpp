@@ -102,6 +102,10 @@ void Create1DPlotsTHStack_TopologicalBreakDown() {
 
 	vector<TString> Runs;
 	Runs.push_back("Run1");
+//	Runs.push_back("Run2");
+//	Runs.push_back("Run3");
+//	Runs.push_back("Run4");
+//	Runs.push_back("Run5");
 
 	int NRuns = (int)(Runs.size());
 	cout << "Number of Runs = " << NRuns << endl;
@@ -141,20 +145,12 @@ void Create1DPlotsTHStack_TopologicalBreakDown() {
 
 			NameOfSamples.push_back("STVStudies_Overlay9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("Overlay"); // CV
 
-			// Detector Systematics
-
-			//NameOfSamples.push_back("CCQEStudies_Overlay9_SCE"+Cuts+".root"); LabelsOfSamples.push_back("Overlay SCE");
-			//NameOfSamples.push_back("CCQEStudies_Overlay9_DLdown"+Cuts+".root"); LabelsOfSamples.push_back("Overlay DLdown");
-
 			NameOfSamples.push_back("STVStudies_ExtBNB9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("ExtBNB");
 			NameOfSamples.push_back("STVStudies_OverlayDirt9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("Dirt");
 
 			vector<int> Colors; Colors.clear(); 
 			Colors.push_back(kBlack); Colors.push_back(kRed); Colors.push_back(kGray+2); Colors.push_back(kMagenta);
 
-			//vector<int> ColorsOverlay; ColorsOverlay.clear(); 
-			//ColorsOverlay.push_back(kRed); ColorsOverlay.push_back(kBlue); 
-			//ColorsOverlay.push_back(kGreen); ColorsOverlay.push_back(kMagenta); ColorsOverlay.push_back(kOrange+7);
 			vector<int> ColorsOverlay{kBlue-5,kYellow+1,kOrange+7,kRed+1,kBlue};
 
 			const int NSamples = NameOfSamples.size();
@@ -218,9 +214,10 @@ void Create1DPlotsTHStack_TopologicalBreakDown() {
 				topPad->SetTopMargin(0.3);
 				topPad->SetBottomMargin(0.0);
 				midPad->SetBottomMargin(0.03);
-				midPad->SetTopMargin(0.0);
-				botPad->SetTopMargin(0.);
+				midPad->SetTopMargin(0.03);
+				botPad->SetTopMargin(0.03);
 				botPad->SetBottomMargin(0.25);
+				botPad->SetGridx();
 				botPad->SetGridy();
 				topPad->Draw();
 				midPad->Draw();
@@ -242,12 +239,12 @@ void Create1DPlotsTHStack_TopologicalBreakDown() {
 
 					Plots[WhichSample][WhichPlot]->GetXaxis()->SetTitleFont(FontStyle);
 					Plots[WhichSample][WhichPlot]->GetXaxis()->SetLabelFont(FontStyle);
-					Plots[WhichSample][WhichPlot]->GetXaxis()->SetNdivisions(6);
+					Plots[WhichSample][WhichPlot]->GetXaxis()->SetNdivisions(8);
 					Plots[WhichSample][WhichPlot]->GetXaxis()->SetLabelSize(0);
 
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitleFont(FontStyle);
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetLabelFont(FontStyle);
-					Plots[WhichSample][WhichPlot]->GetYaxis()->SetNdivisions(5);
+					Plots[WhichSample][WhichPlot]->GetYaxis()->SetNdivisions(6);
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetLabelSize(0.06);
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitle("# Events");
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitleSize(0.08);
@@ -323,23 +320,23 @@ void Create1DPlotsTHStack_TopologicalBreakDown() {
 
 				// -------------------------------------------------------------------------------------------------------------------
 
-				hratio[0][WhichPlot]->Add(hratio[2][WhichPlot],-1);
+				hratio[1][WhichPlot]->Add(hratio[2][WhichPlot]);
 				hratio[1][WhichPlot]->Add(hratio[3][WhichPlot]);
 				hratio[0][WhichPlot]->Divide(hratio[1][WhichPlot]);
 
 				hratio[0][WhichPlot]->GetXaxis()->SetTitleFont(FontStyle);
 				hratio[0][WhichPlot]->GetXaxis()->SetLabelFont(FontStyle);
-				hratio[0][WhichPlot]->GetYaxis()->SetTitle("#frac{BeamOn - ExtBNB}{Overlay}");
+				hratio[0][WhichPlot]->GetYaxis()->SetTitle("#frac{BeamOn}{MC+ExtBNB}");
 				hratio[0][WhichPlot]->GetXaxis()->SetTitle(Plots[0][WhichPlot]->GetXaxis()->GetTitle());
 				hratio[0][WhichPlot]->GetXaxis()->SetTitleSize(0.13);
 				hratio[0][WhichPlot]->GetXaxis()->SetLabelSize(0.12);
 				hratio[0][WhichPlot]->GetXaxis()->SetTitleOffset(0.88);
-				hratio[0][WhichPlot]->GetXaxis()->SetNdivisions(5);
+				hratio[0][WhichPlot]->GetXaxis()->SetNdivisions(8);
 
 				hratio[0][WhichPlot]->GetYaxis()->SetTitleFont(FontStyle);
 				hratio[0][WhichPlot]->GetYaxis()->SetLabelFont(FontStyle);
 				hratio[0][WhichPlot]->GetYaxis()->SetRangeUser(0.9*hratio[0][WhichPlot]->GetMinimum(),1.1*hratio[0][WhichPlot]->GetMaximum());
-				hratio[0][WhichPlot]->GetYaxis()->SetNdivisions(4);
+				hratio[0][WhichPlot]->GetYaxis()->SetNdivisions(6);
 				hratio[0][WhichPlot]->GetYaxis()->SetTitleOffset(0.35);
 				hratio[0][WhichPlot]->GetYaxis()->SetTitleSize(0.1);
 				hratio[0][WhichPlot]->GetYaxis()->SetLabelSize(0.11);
@@ -371,7 +368,7 @@ void Create1DPlotsTHStack_TopologicalBreakDown() {
 
 				// CC1p Purity 
 
-				int CC1pPurity = CC1pPlots[1][N1DPlots-1]->Integral() / SumNonBeamOn->Integral() * 1000.;
+				int CC1pPurity = CC1pPlots[1][WhichPlot]->Integral() / SumNonBeamOn->Integral() * 1000.;
 
 				midPad->cd();
 				TLatex latexPurity;
@@ -382,9 +379,9 @@ void Create1DPlotsTHStack_TopologicalBreakDown() {
 
 				// --------------------------------------------------------------------------------------
 
-				// Cosmic Contamination 
+				// Cosmic Contamination
 
-				int CosmicContamination = Plots[2][N1DPlots-1]->Integral() / SumNonBeamOn->Integral() * 1000.;
+				int CosmicContamination = Plots[2][WhichPlot]->Integral() / SumNonBeamOn->Integral() * 1000.;
 
 				midPad->cd();
 				TLatex latexCosmic;

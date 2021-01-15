@@ -134,6 +134,7 @@ void myRecoAnalysis::Loop() {
 		TH1D* RecodYZPlot = new TH1D("RecodYZPlot",RecoLabelXAxisdYZ,NBinsdYZ,MindYZ,MaxdYZ);
 		TH1D* RecoNPEPlot = new TH1D("RecoNPEPlot",RecoLabelXAxisNPE,NBinsNPE,MinNPE,MaxNPE);
 		TH1D* RecoVertexActivityPlot = new TH1D("RecoVertexActivityPlot",RecoLabelXAxisVertexActivity,NBinsVertexActivity,MinVertexActivity,MaxVertexActivity);	
+		TH1D* RecoNonZeroVertexActivityPlot = new TH1D("RecoNonZeroVertexActivityPlot",RecoLabelXAxisVertexActivity,NBinsVertexActivity,MinVertexActivity,MaxVertexActivity);	
 
 		TH1D* RecoVertexXPlot = new TH1D("RecoVertexXPlot",RecoLabelXAxisVertexX,NBinsVertexX,MinVertexX,MaxVertexX);
 		TH1D* RecoVertexYPlot = new TH1D("RecoVertexYPlot",RecoLabelXAxisVertexY,NBinsVertexY,MinVertexY,MaxVertexY);
@@ -198,6 +199,10 @@ void myRecoAnalysis::Loop() {
 		TH2D* RecoChi2vsThreePlaneChi2TPlot = new TH2D("RecoChi2vsThreePlaneChi2TPlot",RecoLabelXAxisChi2+RecoLabelXAxisThreePlaneChi2,
 			NBinsChi2,MinChi2,MaxChi2,NBinsThreePlaneChi2,MinThreePlaneChi2,MaxThreePlaneChi2);
 
+		// Momentum vs Length
+
+		TH2D* RecoMuonMomentumVsLengthPlot = new TH2D("RecoMuonMomentumVsLengthPlot",";l_{#mu} [cm];P_{#mu} [GeV/cm]",100,0,100,50,0,0.5);
+
 		// -------------------------------------------------------------------------------------------------------------------------------
 
 		// 1D Reco Level Plots for Signal CC1p
@@ -210,6 +215,7 @@ void myRecoAnalysis::Loop() {
 		TH1D* CC1pRecodYZPlot = new TH1D("CC1pRecodYZPlot",RecoLabelXAxisdYZ,NBinsdYZ,MindYZ,MaxdYZ);
 		TH1D* CC1pRecoNPEPlot = new TH1D("CC1pRecoNPEPlot",RecoLabelXAxisNPE,NBinsNPE,MinNPE,MaxNPE);
 		TH1D* CC1pRecoVertexActivityPlot = new TH1D("CC1pRecoVertexActivityPlot",RecoLabelXAxisVertexActivity,NBinsVertexActivity,MinVertexActivity,MaxVertexActivity);
+		TH1D* CC1pRecoNonZeroVertexActivityPlot = new TH1D("CC1pRecoNonZeroVertexActivityPlot",RecoLabelXAxisVertexActivity,NBinsVertexActivity,MinVertexActivity,MaxVertexActivity);
 
 		TH1D* CC1pRecoVertexXPlot = new TH1D("CC1pRecoVertexXPlot",RecoLabelXAxisVertexX,NBinsVertexX,MinVertexX,MaxVertexX);
 		TH1D* CC1pRecoVertexYPlot = new TH1D("CC1pRecoVertexYPlot",RecoLabelXAxisVertexY,NBinsVertexY,MinVertexY,MaxVertexY);
@@ -310,6 +316,7 @@ void myRecoAnalysis::Loop() {
 		TH1D* NonCC1pRecodYZPlot = new TH1D("NonCC1pRecodYZPlot",RecoLabelXAxisdYZ,NBinsdYZ,MindYZ,MaxdYZ);
 		TH1D* NonCC1pRecoNPEPlot = new TH1D("NonCC1pRecoNPEPlot",RecoLabelXAxisNPE,NBinsNPE,MinNPE,MaxNPE);
 		TH1D* NonCC1pRecoVertexActivityPlot = new TH1D("NonCC1pRecoVertexActivityPlot",RecoLabelXAxisVertexActivity,NBinsVertexActivity,MinVertexActivity,MaxVertexActivity);
+		TH1D* NonCC1pRecoNonZeroVertexActivityPlot = new TH1D("NonCC1pRecoNonZeroVertexActivityPlot",RecoLabelXAxisVertexActivity,NBinsVertexActivity,MinVertexActivity,MaxVertexActivity);
 
 		TH1D* NonCC1pRecoVertexXPlot = new TH1D("NonCC1pRecoVertexXPlot",RecoLabelXAxisVertexX,NBinsVertexX,MinVertexX,MaxVertexX);
 		TH1D* NonCC1pRecoVertexYPlot = new TH1D("NonCC1pRecoVertexYPlot",RecoLabelXAxisVertexY,NBinsVertexY,MinVertexY,MaxVertexY);
@@ -383,6 +390,7 @@ void myRecoAnalysis::Loop() {
 		TH1D* CCQERecodYZPlot = new TH1D("CCQERecodYZPlot",RecoLabelXAxisdYZ,NBinsdYZ,MindYZ,MaxdYZ);
 		TH1D* CCQERecoNPEPlot = new TH1D("CCQERecoNPEPlot",RecoLabelXAxisNPE,NBinsNPE,MinNPE,MaxNPE);
 		TH1D* CCQERecoVertexActivityPlot = new TH1D("CCQERecoVertexActivityPlot",RecoLabelXAxisVertexActivity,NBinsVertexActivity,MinVertexActivity,MaxVertexActivity);
+		TH1D* CCQERecoNonZeroVertexActivityPlot = new TH1D("CCQERecoNonZeroVertexActivityPlot",RecoLabelXAxisVertexActivity,NBinsVertexActivity,MinVertexActivity,MaxVertexActivity);
 
 		TH1D* CCQERecoVertexXPlot = new TH1D("CCQERecoVertexXPlot",RecoLabelXAxisVertexX,NBinsVertexX,MinVertexX,MaxVertexX);
 		TH1D* CCQERecoVertexYPlot = new TH1D("CCQERecoVertexYPlot",RecoLabelXAxisVertexY,NBinsVertexY,MinVertexY,MaxVertexY);
@@ -453,6 +461,7 @@ void myRecoAnalysis::Loop() {
 		TH1D* CCMECRecodYZPlot = new TH1D("CCMECRecodYZPlot",RecoLabelXAxisdYZ,NBinsdYZ,MindYZ,MaxdYZ);
 		TH1D* CCMECRecoNPEPlot = new TH1D("CCMECRecoNPEPlot",RecoLabelXAxisNPE,NBinsNPE,MinNPE,MaxNPE);
 		TH1D* CCMECRecoVertexActivityPlot = new TH1D("CCMECRecoVertexActivityPlot",RecoLabelXAxisVertexActivity,NBinsVertexActivity,MinVertexActivity,MaxVertexActivity);
+		TH1D* CCMECRecoNonZeroVertexActivityPlot = new TH1D("CCMECRecoNonZeroVertexActivityPlot",RecoLabelXAxisVertexActivity,NBinsVertexActivity,MinVertexActivity,MaxVertexActivity);
 
 		TH1D* CCMECRecoVertexXPlot = new TH1D("CCMECRecoVertexXPlot",RecoLabelXAxisVertexX,NBinsVertexX,MinVertexX,MaxVertexX);
 		TH1D* CCMECRecoVertexYPlot = new TH1D("CCMECRecoVertexYPlot",RecoLabelXAxisVertexY,NBinsVertexY,MinVertexY,MaxVertexY);
@@ -523,6 +532,7 @@ void myRecoAnalysis::Loop() {
 		TH1D* CCRESRecodYZPlot = new TH1D("CCRESRecodYZPlot",RecoLabelXAxisdYZ,NBinsdYZ,MindYZ,MaxdYZ);
 		TH1D* CCRESRecoNPEPlot = new TH1D("CCRESRecoNPEPlot",RecoLabelXAxisNPE,NBinsNPE,MinNPE,MaxNPE);
 		TH1D* CCRESRecoVertexActivityPlot = new TH1D("CCRESRecoVertexActivityPlot",RecoLabelXAxisVertexActivity,NBinsVertexActivity,MinVertexActivity,MaxVertexActivity);
+		TH1D* CCRESRecoNonZeroVertexActivityPlot = new TH1D("CCRESRecoNonZeroVertexActivityPlot",RecoLabelXAxisVertexActivity,NBinsVertexActivity,MinVertexActivity,MaxVertexActivity);
 
 		TH1D* CCRESRecoVertexXPlot = new TH1D("CCRESRecoVertexXPlot",RecoLabelXAxisVertexX,NBinsVertexX,MinVertexX,MaxVertexX);
 		TH1D* CCRESRecoVertexYPlot = new TH1D("CCRESRecoVertexYPlot",RecoLabelXAxisVertexY,NBinsVertexY,MinVertexY,MaxVertexY);
@@ -593,6 +603,7 @@ void myRecoAnalysis::Loop() {
 		TH1D* CCDISRecodYZPlot = new TH1D("CCDISRecodYZPlot",RecoLabelXAxisdYZ,NBinsdYZ,MindYZ,MaxdYZ);
 		TH1D* CCDISRecoNPEPlot = new TH1D("CCDISRecoNPEPlot",RecoLabelXAxisNPE,NBinsNPE,MinNPE,MaxNPE);
 		TH1D* CCDISRecoVertexActivityPlot = new TH1D("CCDISRecoVertexActivityPlot",RecoLabelXAxisVertexActivity,NBinsVertexActivity,MinVertexActivity,MaxVertexActivity);
+		TH1D* CCDISRecoNonZeroVertexActivityPlot = new TH1D("CCDISRecoNonZeroVertexActivityPlot",RecoLabelXAxisVertexActivity,NBinsVertexActivity,MinVertexActivity,MaxVertexActivity);
 
 		TH1D* CCDISRecoVertexXPlot = new TH1D("CCDISRecoVertexXPlot",RecoLabelXAxisVertexX,NBinsVertexX,MinVertexX,MaxVertexX);
 		TH1D* CCDISRecoVertexYPlot = new TH1D("CCDISRecoVertexYPlot",RecoLabelXAxisVertexY,NBinsVertexY,MinVertexY,MaxVertexY);
@@ -742,26 +753,66 @@ void myRecoAnalysis::Loop() {
 		TH1D* NCC3p2piPlot = new TH1D("NCC3p2piPlot","",1,0,1);
 
 		// --------------------------------------------------------------------------------------------------------------------------------
+		// --------------------------------------------------------------------------------------------------------------------------------
 
 		// CC1p STV Resolution Playground plots
 
 		int NBinsCC1pSTVReso = 200; double MinCC1pSTV = -100.,MaxCC1pSTV = 100.;
 
-		TH1D* Playground_CC1pRecoDeltaPTPlot_FullyContainedMuon = new TH1D("Playground_CC1pRecoDeltaPTPlot_FullyContainedMuon",";#deltaP_{T} resolution (%)",NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
-		TH1D* Playground_CC1pRecoDeltaPTPlot_ExitingShortMuon = new TH1D("Playground_CC1pRecoDeltaPTPlot_ExitingShortMuon",";#deltaP_{T} resolution (%)",NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
-		TH1D* Playground_CC1pRecoDeltaPTPlot_ExitingMediumMuon = new TH1D("Playground_CC1pRecoDeltaPTPlot_ExitingMediumMuon",";#deltaP_{T} resolution (%)",NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
-		TH1D* Playground_CC1pRecoDeltaPTPlot_ExitingLongMuon = new TH1D("Playground_CC1pRecoDeltaPTPlot_ExitingLongMuon",";#deltaP_{T} resolution (%)",NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
+		TString LabelDeltaPTResolution = ";#deltaP_{T} resolution (%)";
+		TString LabelDeltaAlphaTResolution = ";#delta#alpha_{T} resolution (%)";
+		TString LabelDeltaPhiTResolution = ";#delta#phi_{T} resolution (%)";
 
-		TH1D* Playground_CC1pRecoDeltaAlphaTPlot_FullyContainedMuon = new TH1D("Playground_CC1pRecoDeltaAlphaTPlot_FullyContainedMuon",";#delta#alpha_{T} resolution (%)",NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
-		TH1D* Playground_CC1pRecoDeltaAlphaTPlot_ExitingShortMuon = new TH1D("Playground_CC1pRecoDeltaAlphaTPlot_ExitingShortMuon",";#delta#alpha_{T} resolution (%)",NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
-		TH1D* Playground_CC1pRecoDeltaAlphaTPlot_ExitingMediumMuon = new TH1D("Playground_CC1pRecoDeltaAlphaTPlot_ExitingMediumMuon",";#delta#alpha_{T} resolution (%)",NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
-		TH1D* Playground_CC1pRecoDeltaAlphaTPlot_ExitingLongMuon = new TH1D("Playground_CC1pRecoDeltaAlphaTPlot_ExitingLongMuon",";#delta#alpha_{T} resolution (%)",NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
+		TH1D* Playground_CC1pRecoDeltaPTPlot_FullyContainedMuon = new TH1D("Playground_CC1pRecoDeltaPTPlot_FullyContainedMuon",LabelDeltaPTResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
+		TH1D* Playground_CC1pRecoDeltaPTPlot_ExitingShortMuon = new TH1D("Playground_CC1pRecoDeltaPTPlot_ExitingShortMuon",LabelDeltaPTResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
+		TH1D* Playground_CC1pRecoDeltaPTPlot_ExitingMediumMuon = new TH1D("Playground_CC1pRecoDeltaPTPlot_ExitingMediumMuon",LabelDeltaPTResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
+		TH1D* Playground_CC1pRecoDeltaPTPlot_ExitingLongMuon = new TH1D("Playground_CC1pRecoDeltaPTPlot_ExitingLongMuon",LabelDeltaPTResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
 
-		TH1D* Playground_CC1pRecoDeltaPhiTPlot_FullyContainedMuon = new TH1D("Playground_CC1pRecoDeltaPhiTPlot_FullyContainedMuon",";#delta#phi_{T} resolution (%)",NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
-		TH1D* Playground_CC1pRecoDeltaPhiTPlot_ExitingShortMuon = new TH1D("Playground_CC1pRecoDeltaPhiTPlot_ExitingShortMuon",";#delta#phi_{T} resolution (%)",NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
-		TH1D* Playground_CC1pRecoDeltaPhiTPlot_ExitingMediumMuon = new TH1D("Playground_CC1pRecoDeltaPhiTPlot_ExitingMediumMuon",";#delta#phi_{T} resolution (%)",NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
-		TH1D* Playground_CC1pRecoDeltaPhiTPlot_ExitingLongMuon = new TH1D("Playground_CC1pRecoDeltaPhiTPlot_ExitingLongMuon",";#delta#phi_{T} resolution (%)",NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);		
+		TH1D* Playground_CC1pRecoDeltaAlphaTPlot_FullyContainedMuon = new TH1D("Playground_CC1pRecoDeltaAlphaTPlot_FullyContainedMuon",LabelDeltaAlphaTResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
+		TH1D* Playground_CC1pRecoDeltaAlphaTPlot_ExitingShortMuon = new TH1D("Playground_CC1pRecoDeltaAlphaTPlot_ExitingShortMuon",LabelDeltaAlphaTResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
+		TH1D* Playground_CC1pRecoDeltaAlphaTPlot_ExitingMediumMuon = new TH1D("Playground_CC1pRecoDeltaAlphaTPlot_ExitingMediumMuon",LabelDeltaAlphaTResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
+		TH1D* Playground_CC1pRecoDeltaAlphaTPlot_ExitingLongMuon = new TH1D("Playground_CC1pRecoDeltaAlphaTPlot_ExitingLongMuon",LabelDeltaAlphaTResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
 
+		TH1D* Playground_CC1pRecoDeltaPhiTPlot_FullyContainedMuon = new TH1D("Playground_CC1pRecoDeltaPhiTPlot_FullyContainedMuon",LabelDeltaPhiTResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
+		TH1D* Playground_CC1pRecoDeltaPhiTPlot_ExitingShortMuon = new TH1D("Playground_CC1pRecoDeltaPhiTPlot_ExitingShortMuon",LabelDeltaPhiTResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
+		TH1D* Playground_CC1pRecoDeltaPhiTPlot_ExitingMediumMuon = new TH1D("Playground_CC1pRecoDeltaPhiTPlot_ExitingMediumMuon",LabelDeltaPhiTResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
+		TH1D* Playground_CC1pRecoDeltaPhiTPlot_ExitingLongMuon = new TH1D("Playground_CC1pRecoDeltaPhiTPlot_ExitingLongMuon",LabelDeltaPhiTResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
+
+		const int NSlices = 3;
+
+		TH1D* Playground_CC1pRecoDeltaPTPlot_FullyContainedMuon_Slice[NSlices];
+		TH1D* Playground_CC1pRecoDeltaPTPlot_ExitingShortMuon_Slice[NSlices];
+		TH1D* Playground_CC1pRecoDeltaPTPlot_ExitingMediumMuon_Slice[NSlices];
+		TH1D* Playground_CC1pRecoDeltaPTPlot_ExitingLongMuon_Slice[NSlices];
+
+		for (int WhichSlice = 0; WhichSlice < NSlices; WhichSlice++) {
+
+			Playground_CC1pRecoDeltaPTPlot_FullyContainedMuon_Slice[WhichSlice] = new TH1D("Playground_CC1pRecoDeltaPTPlot_FullyContainedMuon_Slice_"+ToStringInt(WhichSlice+1),LabelDeltaPTResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
+			Playground_CC1pRecoDeltaPTPlot_ExitingShortMuon_Slice[WhichSlice] = new TH1D("Playground_CC1pRecoDeltaPTPlot_ExitingShortMuon_Slice_"+ToStringInt(WhichSlice+1),LabelDeltaPTResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
+			Playground_CC1pRecoDeltaPTPlot_ExitingMediumMuon_Slice[WhichSlice] = new TH1D("Playground_CC1pRecoDeltaPTPlot_ExitingMediumMuon_Slice_"+ToStringInt(WhichSlice+1),LabelDeltaPTResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
+			Playground_CC1pRecoDeltaPTPlot_ExitingLongMuon_Slice[WhichSlice] = new TH1D("Playground_CC1pRecoDeltaPTPlot_ExitingLongMuon_Slice_"+ToStringInt(WhichSlice+1),LabelDeltaPTResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
+
+			Playground_CC1pRecoDeltaAlphaTPlot_FullyContainedMuon_Slice[WhichSlice] = new TH1D("Playground_CC1pRecoDeltaAlphaTPlot_FullyContainedMuon_Slice_"+ToStringInt(WhichSlice+1),LabelDeltaAlphaTResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
+			Playground_CC1pRecoDeltaAlphaTPlot_ExitingShortMuon_Slice[WhichSlice] = new TH1D("Playground_CC1pRecoDeltaAlphaTPlot_ExitingShortMuon_Slice_"+ToStringInt(WhichSlice+1),LabelDeltaAlphaTResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
+			Playground_CC1pRecoDeltaAlphaTPlot_ExitingMediumMuon_Slice[WhichSlice] = new TH1D("Playground_CC1pRecoDeltaAlphaTPlot_ExitingMediumMuon_Slice_"+ToStringInt(WhichSlice+1),LabelDeltaAlphaTResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
+			Playground_CC1pRecoDeltaAlphaTPlot_ExitingLongMuon_Slice[WhichSlice] = new TH1D("Playground_CC1pRecoDeltaAlphaTPlot_ExitingLongMuon_Slice_"+ToStringInt(WhichSlice+1),LabelDeltaAlphaTResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
+
+			Playground_CC1pRecoDeltaPhiTPlot_FullyContainedMuon_Slice[WhichSlice] = new TH1D("Playground_CC1pRecoDeltaPhiTPlot_FullyContainedMuon_Slice_"+ToStringInt(WhichSlice+1),LabelDeltaPhiTResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
+			Playground_CC1pRecoDeltaPhiTPlot_ExitingShortMuon_Slice[WhichSlice] = new TH1D("Playground_CC1pRecoDeltaPhiTPlot_ExitingShortMuon_Slice_"+ToStringInt(WhichSlice+1),LabelDeltaPhiTResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
+			Playground_CC1pRecoDeltaPhiTPlot_ExitingMediumMuon_Slice[WhichSlice] = new TH1D("Playground_CC1pRecoDeltaPhiTPlot_ExitingMediumMuon_Slice_"+ToStringInt(WhichSlice+1),LabelDeltaPhiTResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
+			Playground_CC1pRecoDeltaPhiTPlot_ExitingLongMuon_Slice[WhichSlice] = new TH1D("Playground_CC1pRecoDeltaPhiTPlot_ExitingLongMuon_Slice_"+ToStringInt(WhichSlice+1),LabelDeltaPhiTResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
+
+		}		
+
+		// --------------------------------------------------------------------------------------------------------------------------------
+
+		TH1D* CC1pRecoMuonTrueMomentumLongitudinalRatio = new TH1D("CC1pRecoMuonTrueMomentumLongitudinalRatio",";#frac{P^{true}_{#mu,||}}{P^{true}_{#mu}}",25,0.,1.);		
+		TH1D* CC1pRecoProtonTrueMomentumLongitudinalRatio = new TH1D("CC1pRecoProtonTrueMomentumLongitudinalRatio",";#frac{P^{true}_{p,||}}{P^{true}_{p}}",25,0.,1.);
+
+		TH1D* CC1pRecoMuonTrueMomentumTransverseRatio = new TH1D("CC1pRecoMuonTrueMomentumTransverseRatio",";#frac{P^{true}_{#mu,T}}{P^{true}_{#mu}}",25,0.,1.);		
+		TH1D* CC1pRecoProtonTrueMomentumTransverseRatio = new TH1D("CC1pRecoProtonTrueMomentumTransverseRatio",";#frac{P^{true}_{p,T}}{P^{true}_{p}}",25,0.,1.);		
+
+		// --------------------------------------------------------------------------------------------------------------------------------
 		// --------------------------------------------------------------------------------------------------------------------------------
 
 		// POT Counting
@@ -770,7 +821,7 @@ void myRecoAnalysis::Loop() {
 
 		if (string(fWhichSample).find("Overlay") != std::string::npos) {
 
-				TString PathToPOTFile = "/uboone/data/users/apapadop/myEvents/mySamples/"+UBCodeVersion+"/PreSelection_"+fWhichSample+"_"+UBCodeVersion+"_POT.root";
+				TString PathToPOTFile = "/pnfs/uboone/persistent/users/apapadop/mySamples/"+UBCodeVersion+"/PreSelection_"+fWhichSample+"_"+UBCodeVersion+"_POT.root";
 
 				TFile* POTFile = TFile::Open(PathToPOTFile,"readonly");
 				TH1D* POTCountHist = (TH1D*)(POTFile->Get("POTCountHist"));
@@ -1198,7 +1249,8 @@ void myRecoAnalysis::Loop() {
 			RecoLengthDifferencePlot->Fill(LengthDifference,weight);
 			RecodYZPlot->Fill(dYZ,weight);
 			RecoNPEPlot->Fill(NPE,weight);
-			RecoVertexActivityPlot->Fill(VertexActivity,weight);	
+			RecoVertexActivityPlot->Fill(VertexActivity,weight);
+			if (VertexActivity > 0) { RecoNonZeroVertexActivityPlot->Fill(VertexActivity,weight); }	
 
 			RecoVertexXPlot->Fill(Vertex_X->at(0),weight);
 			RecoVertexYPlot->Fill(Vertex_Y->at(0),weight);
@@ -1240,6 +1292,8 @@ void myRecoAnalysis::Loop() {
 			RecoECalPlot->Fill(ECal,weight);
 			RecoEQEPlot->Fill(EQE,weight);
 			RecoQ2Plot->Fill(reco_Q2,weight);
+
+			RecoMuonMomentumVsLengthPlot->Fill(l_muCandidate,reco_Pmu_mcs,weight);
 			
 			// 2D Analysis
 		
@@ -1347,7 +1401,8 @@ void myRecoAnalysis::Loop() {
 					CC1pRecoLengthDifferencePlot->Fill(LengthDifference,weight);
 					CC1pRecodYZPlot->Fill(dYZ,weight);
 					CC1pRecoNPEPlot->Fill(NPE,weight);
-					CC1pRecoVertexActivityPlot->Fill(VertexActivity,weight);	
+					CC1pRecoVertexActivityPlot->Fill(VertexActivity,weight);
+					if (VertexActivity > 0) { CC1pRecoNonZeroVertexActivityPlot->Fill(VertexActivity,weight); }		
 
 					CC1pRecoVertexXPlot->Fill(Vertex_X->at(0),weight);
 					CC1pRecoVertexYPlot->Fill(Vertex_Y->at(0),weight);
@@ -1445,7 +1500,44 @@ void myRecoAnalysis::Loop() {
 					double CC1pDeltaAlphaTReso = ( DeltaAlphaT - true_DeltaAlphaT) / true_DeltaAlphaT*100.;
 					double CC1pDeltaPhiTReso = ( DeltaPhiT - true_DeltaPhiT) / true_DeltaPhiT*100.;
 
-					// Contained Muon
+					// -------------------------------------------------------------------------------------------------------------------------
+
+					// Playground for CC1p true momenta (longitudinal & perpendicular) ratios
+
+					TVector TrueCandidateMuon(1,1,1);
+					TrueCandidateMuon.SetMag(True_CandidateMu_P->at(0));
+					TrueCandidateMuon.SetPhi(True_CandidateMu_Phi->at(0));
+					TrueCandidateMuon.SetCosTheta(True_CandidateMu_CosTheta->at(0));
+
+					TVector TrueCandidateProton(1,1,1);
+					TrueCandidateProton.SetMag(True_CandidateP_P->at(0));
+					TrueCandidateProton.SetPhi(True_CandidateP_Phi->at(0));
+					TrueCandidateProton.SetCosTheta(True_CandidateP_CosTheta->at(0));
+
+					CC1pRecoMuonTrueMomentumLongitudinalRatio->Fill(TrueCandidateMuon.Z() / TrueCandidateMuon.Mag(),weight);
+					CC1pRecoMuonTrueMomentumTransverseRatio->Fill(TrueCandidateMuon.Pt() / TrueCandidateMuon.Mag(),weight);
+
+					CC1pRecoProtonTrueMomentumLongitudinalRatio->Fill(TrueCandidateProton.Z() / TrueCandidateProton.Mag(),weight);
+					CC1pRecoProtonTrueMomentumTransverseRatio->Fill(TrueCandidateProton.Pt() / TrueCandidateProton.Mag(),weight);
+
+					// -------------------------------------------------------------------------------------------------------------------------
+
+					int PTSlice = -1;
+					if (TransMissMomentum < 0.3) { PTSlice = 0; }  
+					if (TransMissMomentum > 0.3 && TransMissMomentum < 0.6) { PTSlice = 1; }  
+					if (TransMissMomentum > 0.6) { PTSlice = 2; }
+
+					int DeltaAlphaTSlice = -1;
+					if (DeltaAlphaT < 60) { DeltaAlphaTSlice = 0; }  
+					if (DeltaAlphaT > 60 && DeltaAlphaT < 120) { DeltaAlphaTSlice = 1; }  
+					if (DeltaAlphaT > 120) { DeltaAlphaTSlice = 2; }
+
+					int DeltaPhiTSlice = -1;
+					if (DeltaPhiT < 60) { DeltaPhiTSlice = 0; }  
+					if (DeltaPhiT > 60 && DeltaPhiT < 120) { DeltaPhiTSlice = 1; }  
+					if (DeltaPhiT > 120) { DeltaPhiTSlice = 2; }
+
+					// Contained Muon  
 
 					if (CandidateMu_EndContainment->at(0) == 1) {
 
@@ -1453,30 +1545,48 @@ void myRecoAnalysis::Loop() {
 						Playground_CC1pRecoDeltaAlphaTPlot_FullyContainedMuon->Fill(CC1pDeltaAlphaTReso,weight);
 						Playground_CC1pRecoDeltaPhiTPlot_FullyContainedMuon->Fill(CC1pDeltaPhiTReso,weight);
 
+						Playground_CC1pRecoDeltaPTPlot_FullyContainedMuon_Slice[PTSlice]->Fill(CC1pDeltaPTReso,weight);
+						Playground_CC1pRecoDeltaAlphaTPlot_FullyContainedMuon_Slice[DeltaAlphaTSlice]->Fill(CC1pDeltaAlphaTReso,weight);
+						Playground_CC1pRecoDeltaPhiTPlot_FullyContainedMuon_Slice[DeltaPhiTSlice]->Fill(CC1pDeltaPhiTReso,weight);
+
 					} else {
 
-						if ( CandidateMu_Length->at(0) < 100 ) { // cm
+						// Exitting Muon
+
+						if ( CandidateMu_Length->at(0) < 200 ) { // cm
 
 							Playground_CC1pRecoDeltaPTPlot_ExitingShortMuon->Fill(CC1pDeltaPTReso,weight);
 							Playground_CC1pRecoDeltaAlphaTPlot_ExitingShortMuon->Fill(CC1pDeltaAlphaTReso,weight);
 							Playground_CC1pRecoDeltaPhiTPlot_ExitingShortMuon->Fill(CC1pDeltaPhiTReso,weight);
 
+							Playground_CC1pRecoDeltaPTPlot_ExitingShortMuon_Slice[PTSlice]->Fill(CC1pDeltaPTReso,weight);
+							Playground_CC1pRecoDeltaAlphaTPlot_ExitingShortMuon_Slice[DeltaAlphaTSlice]->Fill(CC1pDeltaAlphaTReso,weight);
+							Playground_CC1pRecoDeltaPhiTPlot_ExitingShortMuon_Slice[DeltaPhiTSlice]->Fill(CC1pDeltaPhiTReso,weight);
+
 						}
 
-						if ( CandidateMu_Length->at(0) > 100 && CandidateMu_Length->at(0) < 200 ) { // cm
+						if ( CandidateMu_Length->at(0) > 200 && CandidateMu_Length->at(0) < 500 ) { // cm
 
 							Playground_CC1pRecoDeltaPTPlot_ExitingMediumMuon->Fill(CC1pDeltaPTReso,weight);
 							Playground_CC1pRecoDeltaAlphaTPlot_ExitingMediumMuon->Fill(CC1pDeltaAlphaTReso,weight);
 							Playground_CC1pRecoDeltaPhiTPlot_ExitingMediumMuon->Fill(CC1pDeltaPhiTReso,weight);
 
+							Playground_CC1pRecoDeltaPTPlot_ExitingMediumMuon_Slice[PTSlice]->Fill(CC1pDeltaPTReso,weight);
+							Playground_CC1pRecoDeltaAlphaTPlot_ExitingMediumMuon_Slice[DeltaAlphaTSlice]->Fill(CC1pDeltaAlphaTReso,weight);
+							Playground_CC1pRecoDeltaPhiTPlot_ExitingMediumMuon_Slice[DeltaPhiTSlice]->Fill(CC1pDeltaPhiTReso,weight);
+
 						}
 
 
-						if ( CandidateMu_Length->at(0) > 200) { // cm
+						if ( CandidateMu_Length->at(0) > 500) { // cm
 
 							Playground_CC1pRecoDeltaPTPlot_ExitingLongMuon->Fill(CC1pDeltaPTReso,weight);
 							Playground_CC1pRecoDeltaAlphaTPlot_ExitingLongMuon->Fill(CC1pDeltaAlphaTReso,weight);
 							Playground_CC1pRecoDeltaPhiTPlot_ExitingLongMuon->Fill(CC1pDeltaPhiTReso,weight);
+
+							Playground_CC1pRecoDeltaPTPlot_ExitingLongMuon_Slice[PTSlice]->Fill(CC1pDeltaPTReso,weight);
+							Playground_CC1pRecoDeltaAlphaTPlot_ExitingLongMuon_Slice[DeltaAlphaTSlice]->Fill(CC1pDeltaAlphaTReso,weight);
+							Playground_CC1pRecoDeltaPhiTPlot_ExitingLongMuon_Slice[DeltaPhiTSlice]->Fill(CC1pDeltaPhiTReso,weight);
 
 						}
 
@@ -1528,6 +1638,7 @@ void myRecoAnalysis::Loop() {
 					NonCC1pRecodYZPlot->Fill(dYZ,weight);
 					NonCC1pRecoNPEPlot->Fill(NPE,weight);
 					NonCC1pRecoVertexActivityPlot->Fill(VertexActivity,weight);	
+					if (VertexActivity > 0) { NonCC1pRecoNonZeroVertexActivityPlot->Fill(VertexActivity,weight); }		
 
 					NonCC1pRecoVertexXPlot->Fill(Vertex_X->at(0),weight);
 					NonCC1pRecoVertexYPlot->Fill(Vertex_Y->at(0),weight);
@@ -1591,7 +1702,8 @@ void myRecoAnalysis::Loop() {
 					CCQERecoLengthDifferencePlot->Fill(LengthDifference,weight);
 					CCQERecodYZPlot->Fill(dYZ,weight);
 					CCQERecoNPEPlot->Fill(NPE,weight);
-					CCQERecoVertexActivityPlot->Fill(VertexActivity,weight);	
+					CCQERecoVertexActivityPlot->Fill(VertexActivity,weight);
+					if (VertexActivity > 0) { CCQERecoNonZeroVertexActivityPlot->Fill(VertexActivity,weight); }			
 
 					CCQERecoVertexXPlot->Fill(Vertex_X->at(0),weight);
 					CCQERecoVertexYPlot->Fill(Vertex_Y->at(0),weight);
@@ -1654,7 +1766,8 @@ void myRecoAnalysis::Loop() {
 					CCMECRecoLengthDifferencePlot->Fill(LengthDifference,weight);
 					CCMECRecodYZPlot->Fill(dYZ,weight);
 					CCMECRecoNPEPlot->Fill(NPE,weight);
-					CCMECRecoVertexActivityPlot->Fill(VertexActivity,weight);	
+					CCMECRecoVertexActivityPlot->Fill(VertexActivity,weight);
+					if (VertexActivity > 0) { CCMECRecoNonZeroVertexActivityPlot->Fill(VertexActivity,weight); }				
 
 					CCMECRecoVertexXPlot->Fill(Vertex_X->at(0),weight);
 					CCMECRecoVertexYPlot->Fill(Vertex_Y->at(0),weight);
@@ -1717,7 +1830,8 @@ void myRecoAnalysis::Loop() {
 					CCRESRecoLengthDifferencePlot->Fill(LengthDifference,weight);
 					CCRESRecodYZPlot->Fill(dYZ,weight);
 					CCRESRecoNPEPlot->Fill(NPE,weight);
-					CCRESRecoVertexActivityPlot->Fill(VertexActivity,weight);	
+					CCRESRecoVertexActivityPlot->Fill(VertexActivity,weight);
+					if (VertexActivity > 0) { CCRESRecoNonZeroVertexActivityPlot->Fill(VertexActivity,weight); }				
 
 					CCRESRecoVertexXPlot->Fill(Vertex_X->at(0),weight);
 					CCRESRecoVertexYPlot->Fill(Vertex_Y->at(0),weight);
@@ -1780,7 +1894,8 @@ void myRecoAnalysis::Loop() {
 					CCDISRecoLengthDifferencePlot->Fill(LengthDifference,weight);
 					CCDISRecodYZPlot->Fill(dYZ,weight);
 					CCDISRecoNPEPlot->Fill(NPE,weight);
-					CCDISRecoVertexActivityPlot->Fill(VertexActivity,weight);	
+					CCDISRecoVertexActivityPlot->Fill(VertexActivity,weight);
+					if (VertexActivity > 0) { CCDISRecoNonZeroVertexActivityPlot->Fill(VertexActivity,weight); }				
 
 					CCDISRecoVertexXPlot->Fill(Vertex_X->at(0),weight);
 					CCDISRecoVertexYPlot->Fill(Vertex_Y->at(0),weight);
