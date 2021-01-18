@@ -37,8 +37,11 @@ void myRecoAnalysis::Loop() {
 
 	int TotalCounter = 0;
 	int ContainmentCounter = 0;
-	int KinematicsCounter = 0;
 	int ContainedVertexCounter = 0;
+	int KinematicsCounter = 0;
+
+	int PIDCounter = 0;
+	int NuScoreCounter = 0;
 
 	// ---------------------------------------------------------------------------------------------------------------------------------------
 
@@ -303,6 +306,8 @@ void myRecoAnalysis::Loop() {
 		TH2D* CC1pRecoEQEPlot2D = new TH2D("CC1pRecoEQEPlot2D",LabelXAxisEQE2D,NBinsEQE,ArrayNBinsEQE,NBinsEQE,ArrayNBinsEQE);
 		TH2D* CC1pRecoQ2Plot2D = new TH2D("CC1pRecoQ2Plot2D",LabelXAxisQ22D,NBinsQ2,ArrayNBinsQ2,NBinsQ2,ArrayNBinsQ2);
 
+		TH2D* CC1pRecoMuonMomentumVsLengthPlot = new TH2D("CC1pRecoMuonMomentumVsLengthPlot",";l_{#mu} [cm];P_{#mu} [GeV/cm]",100,0,100,50,0,0.5);
+
 		// -------------------------------------------------------------------------------------------------------------------------------------
 
 		// 1D Reco Level Plots for non-CC1p
@@ -375,7 +380,9 @@ void myRecoAnalysis::Loop() {
 			
 		TH2D* NonCC1pRecoCosThetaPPpPlot = new TH2D("NonCC1pRecoCosThetaPPpPlot",LabelXAxisProtonCosTheta+LabelXAxisProtonMomentum
 			,NBinsProtonCosTheta,ArrayNBinsProtonCosTheta[0],ArrayNBinsProtonCosTheta[NBinsProtonCosTheta]
-			,NBinsProtonMomentum,ArrayNBinsProtonMomentum[0],ArrayNBinsProtonMomentum[NBinsProtonMomentum]);		
+			,NBinsProtonMomentum,ArrayNBinsProtonMomentum[0],ArrayNBinsProtonMomentum[NBinsProtonMomentum]);
+
+		TH2D* NonCC1pRecoMuonMomentumVsLengthPlot = new TH2D("NonCC1pRecoMuonMomentumVsLengthPlot",";l_{#mu} [cm];P_{#mu} [GeV/cm]",100,0,100,50,0,0.5);		
 
 		// ---------------------------------------------------------------------------------------------------------------------------------
 		// --------------------------------------------------------------------------------------------------------------------------------
@@ -785,6 +792,16 @@ void myRecoAnalysis::Loop() {
 		TH1D* Playground_CC1pRecoDeltaPTPlot_ExitingMediumMuon_Slice[NSlices];
 		TH1D* Playground_CC1pRecoDeltaPTPlot_ExitingLongMuon_Slice[NSlices];
 
+		TH1D* Playground_CC1pRecoDeltaAlphaTPlot_FullyContainedMuon_Slice[NSlices];
+		TH1D* Playground_CC1pRecoDeltaAlphaTPlot_ExitingShortMuon_Slice[NSlices];
+		TH1D* Playground_CC1pRecoDeltaAlphaTPlot_ExitingMediumMuon_Slice[NSlices];
+		TH1D* Playground_CC1pRecoDeltaAlphaTPlot_ExitingLongMuon_Slice[NSlices];
+
+		TH1D* Playground_CC1pRecoDeltaPhiTPlot_FullyContainedMuon_Slice[NSlices];
+		TH1D* Playground_CC1pRecoDeltaPhiTPlot_ExitingShortMuon_Slice[NSlices];
+		TH1D* Playground_CC1pRecoDeltaPhiTPlot_ExitingMediumMuon_Slice[NSlices];
+		TH1D* Playground_CC1pRecoDeltaPhiTPlot_ExitingLongMuon_Slice[NSlices];
+
 		for (int WhichSlice = 0; WhichSlice < NSlices; WhichSlice++) {
 
 			Playground_CC1pRecoDeltaPTPlot_FullyContainedMuon_Slice[WhichSlice] = new TH1D("Playground_CC1pRecoDeltaPTPlot_FullyContainedMuon_Slice_"+ToStringInt(WhichSlice+1),LabelDeltaPTResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
@@ -806,11 +823,11 @@ void myRecoAnalysis::Loop() {
 
 		// --------------------------------------------------------------------------------------------------------------------------------
 
-		TH1D* CC1pRecoMuonTrueMomentumLongitudinalRatio = new TH1D("CC1pRecoMuonTrueMomentumLongitudinalRatio",";#frac{P^{true}_{#mu,||}}{P^{true}_{#mu}}",25,0.,1.);		
-		TH1D* CC1pRecoProtonTrueMomentumLongitudinalRatio = new TH1D("CC1pRecoProtonTrueMomentumLongitudinalRatio",";#frac{P^{true}_{p,||}}{P^{true}_{p}}",25,0.,1.);
+		TH1D* CC1pRecoMuonTrueMomentumLongitudinalRatio = new TH1D("CC1pRecoMuonTrueMomentumLongitudinalRatio",";P^{true}_{#mu,||}/P^{true}_{#mu}",25,0.,1.);		
+		TH1D* CC1pRecoProtonTrueMomentumLongitudinalRatio = new TH1D("CC1pRecoProtonTrueMomentumLongitudinalRatio",";P^{true}_{p,||}/P^{true}_{p}",25,0.,1.);
 
-		TH1D* CC1pRecoMuonTrueMomentumTransverseRatio = new TH1D("CC1pRecoMuonTrueMomentumTransverseRatio",";#frac{P^{true}_{#mu,T}}{P^{true}_{#mu}}",25,0.,1.);		
-		TH1D* CC1pRecoProtonTrueMomentumTransverseRatio = new TH1D("CC1pRecoProtonTrueMomentumTransverseRatio",";#frac{P^{true}_{p,T}}{P^{true}_{p}}",25,0.,1.);		
+		TH1D* CC1pRecoMuonTrueMomentumTransverseRatio = new TH1D("CC1pRecoMuonTrueMomentumTransverseRatio",";P^{true}_{#mu,T}/P^{true}_{#mu}",25,0.,1.);		
+		TH1D* CC1pRecoProtonTrueMomentumTransverseRatio = new TH1D("CC1pRecoProtonTrueMomentumTransverseRatio",";P^{true}_{p,T}/P^{true}_{p}",25,0.,1.);		
 
 		// --------------------------------------------------------------------------------------------------------------------------------
 		// --------------------------------------------------------------------------------------------------------------------------------
@@ -1142,11 +1159,12 @@ void myRecoAnalysis::Loop() {
 
 			for (int i = 0; i < NCuts; i++) {
 
-				if (VectorCuts[i] == "_NuScore" && !( NuScore > MinimumNuScore) )  { PassedSelection = false; }
-
-				if (VectorCuts[i] == "_PID" && 
-					!(reco_Pp_ThreePlaneLogLikelihood > ProtonThreePlaneChi2LogLikelihoodCut) ) 
+				if (VectorCuts[i] == "_PID" && !(reco_Pp_ThreePlaneLogLikelihood > ProtonThreePlaneChi2LogLikelihoodCut) ) 
 					{ PassedSelection = false; }
+				if (VectorCuts[i] == "_PID" && (reco_Pp_ThreePlaneLogLikelihood > ProtonThreePlaneChi2LogLikelihoodCut) ) { PIDCounter ++; }
+
+				if (VectorCuts[i] == "_NuScore" && !( NuScore > MinimumNuScore) )  { PassedSelection = false; }
+				if (VectorCuts[i] == "_NuScore" && ( NuScore > MinimumNuScore) && (reco_Pp_ThreePlaneLogLikelihood > ProtonThreePlaneChi2LogLikelihoodCut) ) { NuScoreCounter ++; }
 
 
 			}
@@ -1450,7 +1468,9 @@ void myRecoAnalysis::Loop() {
 					// 2D Analysis
 				
 					CC1pRecoCosThetaMuPmuPlot->Fill(reco_Pmu_cos_theta,reco_Pmu_mcs,weight);
-					CC1pRecoCosThetaPPpPlot->Fill(reco_Pp_cos_theta,reco_Pp,weight);				
+					CC1pRecoCosThetaPPpPlot->Fill(reco_Pp_cos_theta,reco_Pp,weight);
+
+					CC1pRecoMuonMomentumVsLengthPlot->Fill(l_muCandidate,reco_Pmu_mcs,weight);				
 
 					// --------------------------------------------------------------------------------------------------
 					// --------------------------------------------------------------------------------------------------
@@ -1504,15 +1524,15 @@ void myRecoAnalysis::Loop() {
 
 					// Playground for CC1p true momenta (longitudinal & perpendicular) ratios
 
-					TVector TrueCandidateMuon(1,1,1);
+					TVector3 TrueCandidateMuon(1,1,1);
 					TrueCandidateMuon.SetMag(True_CandidateMu_P->at(0));
 					TrueCandidateMuon.SetPhi(True_CandidateMu_Phi->at(0));
-					TrueCandidateMuon.SetCosTheta(True_CandidateMu_CosTheta->at(0));
+					TrueCandidateMuon.SetTheta(TMath::ACos(True_CandidateMu_CosTheta->at(0)));
 
-					TVector TrueCandidateProton(1,1,1);
+					TVector3 TrueCandidateProton(1,1,1);
 					TrueCandidateProton.SetMag(True_CandidateP_P->at(0));
 					TrueCandidateProton.SetPhi(True_CandidateP_Phi->at(0));
-					TrueCandidateProton.SetCosTheta(True_CandidateP_CosTheta->at(0));
+					TrueCandidateProton.SetTheta(TMath::ACos(True_CandidateP_CosTheta->at(0)));
 
 					CC1pRecoMuonTrueMomentumLongitudinalRatio->Fill(TrueCandidateMuon.Z() / TrueCandidateMuon.Mag(),weight);
 					CC1pRecoMuonTrueMomentumTransverseRatio->Fill(TrueCandidateMuon.Pt() / TrueCandidateMuon.Mag(),weight);
@@ -1684,7 +1704,9 @@ void myRecoAnalysis::Loop() {
 					// 2D Analysis
 				
 					NonCC1pRecoCosThetaMuPmuPlot->Fill(reco_Pmu_cos_theta,reco_Pmu_mcs,weight);
-					NonCC1pRecoCosThetaPPpPlot->Fill(reco_Pp_cos_theta,reco_Pp,weight);				
+					NonCC1pRecoCosThetaPPpPlot->Fill(reco_Pp_cos_theta,reco_Pp,weight);	
+
+					NonCC1pRecoMuonMomentumVsLengthPlot->Fill(l_muCandidate,reco_Pmu_mcs,weight);							
 
 				}
 
@@ -2053,6 +2075,10 @@ void myRecoAnalysis::Loop() {
 		<< NEventsPassingSelectionCutsError
 		<< " (POT normalized: " << NEventsPassingSelectionCuts*POTScale << " +/- " 
 		<< NEventsPassingSelectionCutsError*POTScale << ")" << std::endl;
+
+		if (string(fWhichSample).find("Overlay") != std::string::npos) { std::cout << std::endl << "POTCount = " << POTCount << std::endl << std::endl; }
+
+		std::cout << "Txt file loceted under " << TxtName << std::endl;
 		
 		// -------------------------------------------------------------------------------------------------------------------------	
 
@@ -2296,10 +2322,13 @@ void myRecoAnalysis::Loop() {
 		// To be saved in the txt file
 
 		myTxtFile << "\n\nStarting with " << TotalCounter << " preselected events (" << int(100.*double(TotalCounter)/double(TotalCounter)) << " %)" << std::endl << std::endl;
-		myTxtFile << "\n\n" << ContainmentCounter << " events passing containment requirement (" << int(100.*double(ContainmentCounter)/double(TotalCounter)) << " %)" << std::endl << std::endl;
+		myTxtFile << "\n\n" << ContainmentCounter << " events passing proton full containment requirement (" << int(100.*double(ContainmentCounter)/double(TotalCounter)) << " %)" << std::endl << std::endl;
 		myTxtFile << "\n\n" << ContainedVertexCounter << " events passing contained vertex requirement (" << int(100.*double(ContainedVertexCounter)/double(TotalCounter)) << " %)" << std::endl << std::endl;
-		myTxtFile << "\n\n" << NEventsPassingSelectionCuts << " events passing selection cuts (" << int(100.*double(NEventsPassingSelectionCuts)/double(TotalCounter)) << " %)" << std::endl << std::endl;
+		myTxtFile << "\n\n" << PIDCounter << " events passing PID selection cut (" << int(100.*double(PIDCounter)/double(TotalCounter)) << " %)" << std::endl << std::endl;
+		myTxtFile << "\n\n" << NuScoreCounter << " events passing NuScore selection cut (" << int(100.*double(NuScoreCounter)/double(TotalCounter)) << " %)" << std::endl << std::endl;
 		myTxtFile << "\n\n" << KinematicsCounter << " events passing common kinematic ranges (" << int(100.*double(KinematicsCounter)/double(TotalCounter)) << " %)" << std::endl << std::endl;
+
+		if (string(fWhichSample).find("Overlay") != std::string::npos) { myTxtFile << std::endl << std::endl << "POTCount = " << POTCount << std::endl << std::endl; }
 
 		// -------------------------------------------------------------------------------------------------------------------------
 
@@ -2340,6 +2369,7 @@ void myRecoAnalysis::Loop() {
 		file->cd();
 		file->Write();
 		file->Close();
+		myTxtFile.close();
 
 		// -------------------------------------------------------------------------------------------------------------------------	
 

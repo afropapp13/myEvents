@@ -67,6 +67,7 @@ void Create1DPlotsTHStack_TopologicalBreakDown() {
 	PlotNames.push_back("RecodMuonVertexDistancePlot");
 	PlotNames.push_back("RecodProtonVertexDistancePlot");
 	PlotNames.push_back("RecoVertexActivityPlot");
+	PlotNames.push_back("RecoNonZeroVertexActivityPlot");
 
 	PlotNames.push_back("RecoVertexXPlot");
 	PlotNames.push_back("RecoVertexYPlot");
@@ -103,7 +104,7 @@ void Create1DPlotsTHStack_TopologicalBreakDown() {
 	vector<TString> Runs;
 	Runs.push_back("Run1");
 //	Runs.push_back("Run2");
-//	Runs.push_back("Run3");
+	Runs.push_back("Run3");
 //	Runs.push_back("Run4");
 //	Runs.push_back("Run5");
 
@@ -113,6 +114,8 @@ void Create1DPlotsTHStack_TopologicalBreakDown() {
 	// -----------------------------------------------------------------------------------------------------------------------------------------
 
 	for (int WhichRun = 0; WhichRun < NRuns; WhichRun++) {
+
+		Cuts = "_NoCuts";
 
 		for (int i = 0; i < NCuts; i++) {
 
@@ -393,7 +396,7 @@ void Create1DPlotsTHStack_TopologicalBreakDown() {
 				// --------------------------------------------------------------------------------------
 
 				TString CanvasPath = "./myPlots/pdf/1D/"+UBCodeVersion+"/"+Cuts+"/TopologicalBreakDown/";
-				TString CanvasName = "THStack_BreakDown_"+PlotNames[WhichPlot]+"_"+UBCodeVersion+Cuts+".pdf";
+				TString CanvasName = "THStack_BreakDown_"+PlotNames[WhichPlot]+"_"+Runs[WhichRun]+"_"+UBCodeVersion+Cuts+".pdf";
 				PlotCanvas[WhichPlot]->SaveAs(CanvasPath+CanvasName);
 				delete PlotCanvas[WhichPlot];
 

@@ -7,6 +7,7 @@ export Cuts=_NoCuts_PID_NuScore
 export OutPutDir=/uboone/data/users/$UserID/myEvents/OutputFiles/$UBCode
 
 declare -a arrRun=("Run1" "Run3")
+#declare -a arrRun=("Run3")
 declare -a arrCuts=("_NoCuts" "_PID" "_NuScore")
 
 # Loop over the run numbers

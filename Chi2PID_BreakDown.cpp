@@ -55,7 +55,7 @@ void Chi2PID_BreakDown() {
 	vector<TString> Runs;
 	Runs.push_back("Run1");
 //	Runs.push_back("Run2");
-//	Runs.push_back("Run3");
+	Runs.push_back("Run3");
 //	Runs.push_back("Run4");
 //	Runs.push_back("Run5");
 
@@ -200,13 +200,13 @@ void Chi2PID_BreakDown() {
 					Plots[WhichSample][WhichPlot]->GetXaxis()->CenterTitle();
 					Plots[WhichSample][WhichPlot]->GetXaxis()->SetTitleFont(FontStyle);
 					Plots[WhichSample][WhichPlot]->GetXaxis()->SetLabelFont(FontStyle);
-					Plots[WhichSample][WhichPlot]->GetXaxis()->SetNdivisions(6);
+					Plots[WhichSample][WhichPlot]->GetXaxis()->SetNdivisions(10);
 					Plots[WhichSample][WhichPlot]->GetXaxis()->SetLabelSize(0);
 
 					Plots[WhichSample][WhichPlot]->GetYaxis()->CenterTitle();
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitleFont(FontStyle);
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetLabelFont(FontStyle);
-					Plots[WhichSample][WhichPlot]->GetYaxis()->SetNdivisions(5);
+					Plots[WhichSample][WhichPlot]->GetYaxis()->SetNdivisions(6);
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetLabelSize(0.06);
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitle("# events");
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitleSize(0.08);
@@ -307,13 +307,13 @@ void Chi2PID_BreakDown() {
 				hratio[0][WhichPlot]->GetXaxis()->SetTitleSize(0.13);
 				hratio[0][WhichPlot]->GetXaxis()->SetLabelSize(0.12);
 				hratio[0][WhichPlot]->GetXaxis()->SetTitleOffset(0.88);
-				hratio[0][WhichPlot]->GetXaxis()->SetNdivisions(5);
+				hratio[0][WhichPlot]->GetXaxis()->SetNdivisions(10);
 
 				hratio[0][WhichPlot]->GetYaxis()->CenterTitle();
 				hratio[0][WhichPlot]->GetYaxis()->SetTitleFont(FontStyle);
 				hratio[0][WhichPlot]->GetYaxis()->SetLabelFont(FontStyle);
 				hratio[0][WhichPlot]->GetYaxis()->SetRangeUser(0.9*hratio[0][WhichPlot]->GetMinimum(),1.1*hratio[0][WhichPlot]->GetMaximum());
-				hratio[0][WhichPlot]->GetYaxis()->SetNdivisions(4);
+				hratio[0][WhichPlot]->GetYaxis()->SetNdivisions(6);
 				hratio[0][WhichPlot]->GetYaxis()->SetTitleOffset(0.35);
 				hratio[0][WhichPlot]->GetYaxis()->SetTitleSize(0.1);
 				hratio[0][WhichPlot]->GetYaxis()->SetLabelSize(0.11);
@@ -337,7 +337,7 @@ void Chi2PID_BreakDown() {
 				leg[WhichPlot]->Draw();
 
 				TString CanvasPath = "./myPlots/pdf/1D/"+UBCodeVersion+"/"+Cuts+"/";
-				TString CanvasName = "PID_BreakDown_"+PlotNames[WhichPlot]+Cuts+"_"+UBCodeVersion+".pdf";
+				TString CanvasName = "PID_BreakDown_"+PlotNames[WhichPlot]+Cuts+"_"+Runs[WhichRun]+"_"+UBCodeVersion+".pdf";
 				PlotCanvas[WhichPlot]->SaveAs(CanvasPath+CanvasName);
 				//delete PlotCanvas[WhichPlot];
 

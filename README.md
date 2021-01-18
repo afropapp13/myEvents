@@ -10,6 +10,8 @@
 
 root -l script_EventSelection_CV.C
 
+./DownloadEventSelectionFiles.sh
+
 # Detector variations
 
 root -l script_EventSelection_Detector_Systematics.C

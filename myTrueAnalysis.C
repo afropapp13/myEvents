@@ -474,15 +474,15 @@ void myTrueAnalysis::Loop() {
 
 					// Playground for CC1p true momenta (longitudinal & perpendicular) ratios
 
-					TVector TrueCandidateMuon(1,1,1);
+					TVector3 TrueCandidateMuon(1,1,1);
 					TrueCandidateMuon.SetMag(TrueMuonMomentum_GeV);
 					TrueCandidateMuon.SetPhi(TrueMuonPhi);
-					TrueCandidateMuon.SetCosTheta(TrueMuonCosTheta);
+					TrueCandidateMuon.SetTheta(TMath::ACos(TrueMuonCosTheta));
 
-					TVector TrueCandidateProton(1,1,1);
+					TVector3 TrueCandidateProton(1,1,1);
 					TrueCandidateProton.SetMag(TrueProtonMomentum_GeV);
 					TrueCandidateProton.SetPhi(TrueProtonPhi);
-					TrueCandidateProton.SetCosTheta(TrueProtonCosTheta);	
+					TrueCandidateProton.SetTheta(TMath::ACos(TrueProtonCosTheta));	
 
 					TrueMuonTrueMomentumLongitudinalRatio->Fill(TrueCandidateMuon.Z() / TrueCandidateMuon.Mag(),weight);
 					TrueMuonTrueMomentumTransverseRatio->Fill(TrueCandidateMuon.Pt() / TrueCandidateMuon.Mag(),weight);
