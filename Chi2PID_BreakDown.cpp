@@ -164,7 +164,8 @@ void Chi2PID_BreakDown() {
 
 			for (int WhichPlot = 0; WhichPlot < N1DPlots; WhichPlot ++) {
 	
-				PlotCanvas.push_back(new TCanvas(PlotNames[WhichPlot]+Cuts,PlotNames[WhichPlot]+Cuts,205,34,1024,768));
+				TString CanvasNameString = PlotNames[WhichPlot]+Cuts + "_" + Runs[WhichRun];
+				PlotCanvas.push_back(new TCanvas(CanvasNameString,CanvasNameString,205,34,1024,768));
 				PlotCanvas[WhichPlot]->cd();
 
 				THStacks.push_back(new THStack(PlotNames[WhichPlot],""));

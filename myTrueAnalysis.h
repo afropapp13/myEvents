@@ -16,6 +16,7 @@ using namespace Constants;
 class myTrueAnalysis {
 
 private:
+   TString fPathToFile;
    TString fWhichSample;
    TString fEventWeightLabel;
    int     fUniverseIndex;   
@@ -235,12 +236,12 @@ myTrueAnalysis::myTrueAnalysis(TString WhichSample, TString WhichEventWeightLabe
    fEventWeightLabel = WhichEventWeightLabel;
    fUniverseIndex = UniverseIndex;   
 
-   TString PathToFile = "/pnfs/uboone/persistent/users/apapadop/mySamples/"+UBCodeVersion+"/PreTruthSelection_"+fWhichSample+"_"+UBCodeVersion+".root";
+   fPathToFile = "/pnfs/uboone/persistent/users/apapadop/mySamples/"+UBCodeVersion+"/PreTruthSelection_"+fWhichSample+"_"+UBCodeVersion+".root";
 
    if (tree == 0) {
-      TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject(PathToFile);
+      TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject(fPathToFile);
       if (!f || !f->IsOpen()) {
-         f = new TFile(PathToFile);
+         f = new TFile(fPathToFile);
       }
       f->GetObject("myPreTruthSelection",tree);
 

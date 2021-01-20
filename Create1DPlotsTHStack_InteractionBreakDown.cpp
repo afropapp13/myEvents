@@ -77,6 +77,11 @@ void Create1DPlotsTHStack_InteractionBreakDown() {
 
 	PlotNames.push_back("RecoEvPlot");
 
+	PlotNames.push_back("RecoContainedMuonMomentumPlot");
+	PlotNames.push_back("RecoUncontainedMuonMomentumPlot");
+	PlotNames.push_back("RecoContainedMuonLengthPlot");
+	PlotNames.push_back("RecoUncontainedMuonLengthPlot");
+
 	const int N1DPlots = PlotNames.size();
 	cout << "Number of 1D Plots = " << N1DPlots << endl;
 

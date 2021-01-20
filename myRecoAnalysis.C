@@ -66,6 +66,7 @@ void myRecoAnalysis::Loop() {
 	int CandidateProton_MCParticle_OutFV = 0;
 	int MultipleVertices = 0;
 	int InTimeCosmics = 0;
+	int NCEvents = 0;
 		
 	TString Cuts = "_NoCuts";
 
@@ -157,9 +158,15 @@ void myRecoAnalysis::Loop() {
 		TH1D* RecodMuonTracksScorePlot = new TH1D("RecodMuonTracksScorePlot",RecoLabelXAxisMuonTrackScore,NBinsTrackScore,MinTrackScore,MaxTrackScore);	
 		TH1D* RecodMuonVertexDistancePlot = new TH1D("RecodMuonVertexDistancePlot",RecoLabelXAxisMuonVertexDistanceTrackScore,NBinsMuonVertexDistance,MinMuonVertexDistance,MaxMuonVertexDistance);
 
+		TH1D* RecoContainedMuonLengthPlot = new TH1D("RecoContainedMuonLengthPlot",RecoLabelXAxisMuonLength,NBinsMuonLength,MinMuonLength,MaxMuonLength);
+		TH1D* RecoUncontainedMuonLengthPlot = new TH1D("RecoUncontainedMuonLengthPlot",RecoLabelXAxisMuonLength,NBinsMuonLength,MinMuonLength,MaxMuonLength);
+
 		TH1D* RecoMuonMomentumPlot = new TH1D("RecoMuonMomentumPlot",LabelXAxisMuonMomentum,NBinsMuonMomentum,ArrayNBinsMuonMomentum);
 		TH1D* RecoMuonCosThetaPlot = new TH1D("RecoMuonCosThetaPlot",LabelXAxisMuonCosTheta,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta);
 		TH1D* RecoMuonPhiPlot = new TH1D("RecoMuonPhiPlot",LabelXAxisMuonPhi,NBinsMuonPhi,ArrayNBinsMuonPhi);
+
+		TH1D* RecoContainedMuonMomentumPlot = new TH1D("RecoContainedMuonMomentumPlot",LabelXAxisMuonMomentum,NBinsMuonMomentum,ArrayNBinsMuonMomentum);
+		TH1D* RecoUncontainedMuonMomentumPlot = new TH1D("RecoUncontainedMuonMomentumPlot",LabelXAxisMuonMomentum,NBinsMuonMomentum,ArrayNBinsMuonMomentum);
 
 		TH1D* RecoProtonLengthPlot = new TH1D("RecoProtonLengthPlot",RecoLabelXAxisProtonLength,NBinsProtonLength,MinProtonLength,MaxProtonLength);
 		TH1D* RecodProtonTracksScorePlot = new TH1D("RecodProtonTracksScorePlot",RecoLabelXAxisProtonTrackScore,NBinsTrackScore,MinTrackScore,MaxTrackScore);	
@@ -205,6 +212,8 @@ void myRecoAnalysis::Loop() {
 		// Momentum vs Length
 
 		TH2D* RecoMuonMomentumVsLengthPlot = new TH2D("RecoMuonMomentumVsLengthPlot",";l_{#mu} [cm];P_{#mu} [GeV/cm]",100,0,100,50,0,0.5);
+		TH2D* RecoContainedMuonMomentumVsLengthPlot = new TH2D("RecoContainedMuonMomentumVsLengthPlot",";l_{#mu} [cm];P_{#mu} [GeV/cm]",100,0,100,50,0,0.5);
+		TH2D* RecoUncontainedMuonMomentumVsLengthPlot = new TH2D("RecoUncontainedMuonMomentumVsLengthPlot",";l_{#mu} [cm];P_{#mu} [GeV/cm]",100,0,100,50,0,0.5);
 
 		// -------------------------------------------------------------------------------------------------------------------------------
 
@@ -238,9 +247,15 @@ void myRecoAnalysis::Loop() {
 		TH1D* CC1pRecodMuonTracksScorePlot = new TH1D("CC1pRecodMuonTracksScorePlot",RecoLabelXAxisMuonTrackScore,NBinsTrackScore,MinTrackScore,MaxTrackScore);
 		TH1D* CC1pRecodMuonVertexDistancePlot = new TH1D("CC1pRecodMuonVertexDistancePlot",RecoLabelXAxisMuonVertexDistanceTrackScore,NBinsMuonVertexDistance,MinMuonVertexDistance,MaxMuonVertexDistance);	
 
+		TH1D* CC1pRecoContainedMuonLengthPlot = new TH1D("CC1pRecoContainedMuonLengthPlot",RecoLabelXAxisMuonLength,NBinsMuonLength,MinMuonLength,MaxMuonLength);
+		TH1D* CC1pRecoUncontainedMuonLengthPlot = new TH1D("CC1pRecoUncontainedMuonLengthPlot",RecoLabelXAxisMuonLength,NBinsMuonLength,MinMuonLength,MaxMuonLength);
+
 		TH1D* CC1pRecoMuonMomentumPlot = new TH1D("CC1pRecoMuonMomentumPlot",LabelXAxisMuonMomentum,NBinsMuonMomentum,ArrayNBinsMuonMomentum);
 		TH1D* CC1pRecoMuonCosThetaPlot = new TH1D("CC1pRecoMuonCosThetaPlot",LabelXAxisMuonCosTheta,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta);
 		TH1D* CC1pRecoMuonPhiPlot = new TH1D("CC1pRecoMuonPhiPlot",LabelXAxisMuonPhi,NBinsMuonPhi,ArrayNBinsMuonPhi);
+
+		TH1D* CC1pRecoContainedMuonMomentumPlot = new TH1D("CC1pRecoContainedMuonMomentumPlot",LabelXAxisMuonMomentum,NBinsMuonMomentum,ArrayNBinsMuonMomentum);
+		TH1D* CC1pRecoUncontainedMuonMomentumPlot = new TH1D("CC1pRecoUncontainedMuonMomentumPlot",LabelXAxisMuonMomentum,NBinsMuonMomentum,ArrayNBinsMuonMomentum);
 
 		TH1D* CC1pRecoProtonLengthPlot = new TH1D("CC1pRecoProtonLengthPlot",RecoLabelXAxisProtonLength,NBinsProtonLength,MinProtonLength,MaxProtonLength);
 		TH1D* CC1pRecodProtonTracksScorePlot = new TH1D("CC1pRecodProtonTracksScorePlot",RecoLabelXAxisProtonTrackScore,NBinsTrackScore,MinTrackScore,MaxTrackScore);
@@ -307,6 +322,8 @@ void myRecoAnalysis::Loop() {
 		TH2D* CC1pRecoQ2Plot2D = new TH2D("CC1pRecoQ2Plot2D",LabelXAxisQ22D,NBinsQ2,ArrayNBinsQ2,NBinsQ2,ArrayNBinsQ2);
 
 		TH2D* CC1pRecoMuonMomentumVsLengthPlot = new TH2D("CC1pRecoMuonMomentumVsLengthPlot",";l_{#mu} [cm];P_{#mu} [GeV/cm]",100,0,100,50,0,0.5);
+		TH2D* CC1pRecoContainedMuonMomentumVsLengthPlot = new TH2D("CC1pRecoContainedMuonMomentumVsLengthPlot",";l_{#mu} [cm];P_{#mu} [GeV/cm]",100,0,100,50,0,0.5);
+		TH2D* CC1pRecoUncontainedMuonMomentumVsLengthPlot = new TH2D("CC1pRecoUncontainedMuonMomentumVsLengthPlot",";l_{#mu} [cm];P_{#mu} [GeV/cm]",100,0,100,50,0,0.5);
 
 		// -------------------------------------------------------------------------------------------------------------------------------------
 
@@ -341,10 +358,16 @@ void myRecoAnalysis::Loop() {
 		TH1D* NonCC1pRecodMuonTracksScorePlot = new TH1D("NonCC1pRecodMuonTracksScorePlot",RecoLabelXAxisMuonTrackScore,NBinsTrackScore,MinTrackScore,MaxTrackScore);
 		TH1D* NonCC1pRecodMuonVertexDistancePlot = new TH1D("NonCC1pRecodMuonVertexDistancePlot",RecoLabelXAxisMuonVertexDistanceTrackScore,NBinsMuonVertexDistance,MinMuonVertexDistance,MaxMuonVertexDistance);
 
+		TH1D* NonCC1pRecoContainedMuonLengthPlot = new TH1D("NonCC1pRecoContainedMuonLengthPlot",RecoLabelXAxisMuonLength,NBinsMuonLength,MinMuonLength,MaxMuonLength);
+		TH1D* NonCC1pRecoUncontainedMuonLengthPlot = new TH1D("NonCC1pRecoUncontainedMuonLengthPlot",RecoLabelXAxisMuonLength,NBinsMuonLength,MinMuonLength,MaxMuonLength);
+
 		TH1D* NonCC1pRecoMuonMomentumPlot = new TH1D("NonCC1pRecoMuonMomentumPlot",LabelXAxisMuonMomentum,
 			NBinsMuonMomentum,ArrayNBinsMuonMomentum); // GeV/c
 		TH1D* NonCC1pRecoMuonCosThetaPlot = new TH1D("NonCC1pRecoMuonCosThetaPlot",LabelXAxisMuonCosTheta,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta);
-		TH1D* NonCC1pRecoMuonPhiPlot = new TH1D("NonCC1pRecoMuonPhiPlot",LabelXAxisMuonPhi,NBinsMuonPhi,ArrayNBinsMuonPhi);	
+		TH1D* NonCC1pRecoMuonPhiPlot = new TH1D("NonCC1pRecoMuonPhiPlot",LabelXAxisMuonPhi,NBinsMuonPhi,ArrayNBinsMuonPhi);
+
+		TH1D* NonCC1pRecoContainedMuonMomentumPlot = new TH1D("NonCC1pRecoContainedMuonMomentumPlot",LabelXAxisMuonMomentum,NBinsMuonMomentum,ArrayNBinsMuonMomentum);
+		TH1D* NonCC1pRecoUncontainedMuonMomentumPlot = new TH1D("NonCC1pRecoUncontainedMuonMomentumPlot",LabelXAxisMuonMomentum,NBinsMuonMomentum,ArrayNBinsMuonMomentum);	
 
 		TH1D* NonCC1pRecoProtonLengthPlot = new TH1D("NonCC1pRecoProtonLengthPlot",RecoLabelXAxisProtonLength,NBinsProtonLength,MinProtonLength,MaxProtonLength);
 		TH1D* NonCC1pRecodProtonTracksScorePlot = new TH1D("NonCC1pRecodProtonTracksScorePlot",RecoLabelXAxisProtonTrackScore,NBinsTrackScore,MinTrackScore,MaxTrackScore);
@@ -382,7 +405,9 @@ void myRecoAnalysis::Loop() {
 			,NBinsProtonCosTheta,ArrayNBinsProtonCosTheta[0],ArrayNBinsProtonCosTheta[NBinsProtonCosTheta]
 			,NBinsProtonMomentum,ArrayNBinsProtonMomentum[0],ArrayNBinsProtonMomentum[NBinsProtonMomentum]);
 
-		TH2D* NonCC1pRecoMuonMomentumVsLengthPlot = new TH2D("NonCC1pRecoMuonMomentumVsLengthPlot",";l_{#mu} [cm];P_{#mu} [GeV/cm]",100,0,100,50,0,0.5);		
+		TH2D* NonCC1pRecoMuonMomentumVsLengthPlot = new TH2D("NonCC1pRecoMuonMomentumVsLengthPlot",";l_{#mu} [cm];P_{#mu} [GeV/cm]",100,0,100,50,0,0.5);
+		TH2D* NonCC1pRecoContainedMuonMomentumVsLengthPlot = new TH2D("NonCC1pRecoContainedMuonMomentumVsLengthPlot",";l_{#mu} [cm];P_{#mu} [GeV/cm]",100,0,100,50,0,0.5);
+		TH2D* NonCC1pRecoUncontainedMuonMomentumVsLengthPlot = new TH2D("NonCC1pRecoUncontainedMuonMomentumVsLengthPlot",";l_{#mu} [cm];P_{#mu} [GeV/cm]",100,0,100,50,0,0.5);		
 
 		// ---------------------------------------------------------------------------------------------------------------------------------
 		// --------------------------------------------------------------------------------------------------------------------------------
@@ -417,9 +442,15 @@ void myRecoAnalysis::Loop() {
 		TH1D* CCQERecodMuonTracksScorePlot = new TH1D("CCQERecodMuonTracksScorePlot",RecoLabelXAxisMuonTrackScore,NBinsTrackScore,MinTrackScore,MaxTrackScore);	
 		TH1D* CCQERecodMuonVertexDistancePlot = new TH1D("CCQERecodMuonVertexDistancePlot",RecoLabelXAxisMuonVertexDistanceTrackScore,NBinsMuonVertexDistance,MinMuonVertexDistance,MaxMuonVertexDistance);
 
+		TH1D* CCQERecoContainedMuonLengthPlot = new TH1D("CCQERecoContainedMuonLengthPlot",RecoLabelXAxisMuonLength,NBinsMuonLength,MinMuonLength,MaxMuonLength);
+		TH1D* CCQERecoUncontainedMuonLengthPlot = new TH1D("CCQERecoUncontainedMuonLengthPlot",RecoLabelXAxisMuonLength,NBinsMuonLength,MinMuonLength,MaxMuonLength);
+
 		TH1D* CCQERecoMuonMomentumPlot = new TH1D("CCQERecoMuonMomentumPlot",LabelXAxisMuonMomentum,NBinsMuonMomentum,ArrayNBinsMuonMomentum);
 		TH1D* CCQERecoMuonCosThetaPlot = new TH1D("CCQERecoMuonCosThetaPlot",LabelXAxisMuonCosTheta,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta);
 		TH1D* CCQERecoMuonPhiPlot = new TH1D("CCQERecoMuonPhiPlot",LabelXAxisMuonPhi,NBinsMuonPhi,ArrayNBinsMuonPhi);
+
+		TH1D* CCQERecoContainedMuonMomentumPlot = new TH1D("CCQERecoContainedMuonMomentumPlot",LabelXAxisMuonMomentum,NBinsMuonMomentum,ArrayNBinsMuonMomentum);
+		TH1D* CCQERecoUncontainedMuonMomentumPlot = new TH1D("CCQERecoUncontainedMuonMomentumPlot",LabelXAxisMuonMomentum,NBinsMuonMomentum,ArrayNBinsMuonMomentum);
 
 		TH1D* CCQERecoProtonLengthPlot = new TH1D("CCQERecoProtonLengthPlot",RecoLabelXAxisProtonLength,NBinsProtonLength,MinProtonLength,MaxProtonLength);
 		TH1D* CCQERecodProtonTracksScorePlot = new TH1D("CCQERecodProtonTracksScorePlot",RecoLabelXAxisProtonTrackScore,NBinsTrackScore,MinTrackScore,MaxTrackScore);	
@@ -488,9 +519,15 @@ void myRecoAnalysis::Loop() {
 		TH1D* CCMECRecodMuonTracksScorePlot = new TH1D("CCMECRecodMuonTracksScorePlot",RecoLabelXAxisMuonTrackScore,NBinsTrackScore,MinTrackScore,MaxTrackScore);
 		TH1D* CCMECRecodMuonVertexDistancePlot = new TH1D("CCMECRecodMuonVertexDistancePlot",RecoLabelXAxisMuonVertexDistanceTrackScore,NBinsMuonVertexDistance,MinMuonVertexDistance,MaxMuonVertexDistance);
 
+		TH1D* CCMECRecoContainedMuonLengthPlot = new TH1D("CCMECRecoContainedMuonLengthPlot",RecoLabelXAxisMuonLength,NBinsMuonLength,MinMuonLength,MaxMuonLength);
+		TH1D* CCMECRecoUncontainedMuonLengthPlot = new TH1D("CCMECRecoUncontainedMuonLengthPlot",RecoLabelXAxisMuonLength,NBinsMuonLength,MinMuonLength,MaxMuonLength);
+
 		TH1D* CCMECRecoMuonMomentumPlot = new TH1D("CCMECRecoMuonMomentumPlot",LabelXAxisMuonMomentum,NBinsMuonMomentum,ArrayNBinsMuonMomentum);
 		TH1D* CCMECRecoMuonCosThetaPlot = new TH1D("CCMECRecoMuonCosThetaPlot",LabelXAxisMuonCosTheta,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta);
 		TH1D* CCMECRecoMuonPhiPlot = new TH1D("CCMECRecoMuonPhiPlot",LabelXAxisMuonPhi,NBinsMuonPhi,ArrayNBinsMuonPhi);
+
+		TH1D* CCMECRecoContainedMuonMomentumPlot = new TH1D("CCMECRecoContainedMuonMomentumPlot",LabelXAxisMuonMomentum,NBinsMuonMomentum,ArrayNBinsMuonMomentum);
+		TH1D* CCMECRecoUncontainedMuonMomentumPlot = new TH1D("CCMECRecoUncontainedMuonMomentumPlot",LabelXAxisMuonMomentum,NBinsMuonMomentum,ArrayNBinsMuonMomentum);
 
 		TH1D* CCMECRecoProtonLengthPlot = new TH1D("CCMECRecoProtonLengthPlot",RecoLabelXAxisProtonLength,NBinsProtonLength,MinProtonLength,MaxProtonLength);	
 		TH1D* CCMECRecodProtonTracksScorePlot = new TH1D("CCMECRecodProtonTracksScorePlot",RecoLabelXAxisProtonTrackScore,NBinsTrackScore,MinTrackScore,MaxTrackScore);	
@@ -559,9 +596,15 @@ void myRecoAnalysis::Loop() {
 		TH1D* CCRESRecodMuonTracksScorePlot = new TH1D("CCRESRecodMuonTracksScorePlot",RecoLabelXAxisMuonTrackScore,NBinsTrackScore,MinTrackScore,MaxTrackScore);
 		TH1D* CCRESRecodMuonVertexDistancePlot = new TH1D("CCRESRecodMuonVertexDistancePlot",RecoLabelXAxisMuonVertexDistanceTrackScore,NBinsMuonVertexDistance,MinMuonVertexDistance,MaxMuonVertexDistance);
 
+		TH1D* CCRESRecoContainedMuonLengthPlot = new TH1D("CCRESRecoContainedMuonLengthPlot",RecoLabelXAxisMuonLength,NBinsMuonLength,MinMuonLength,MaxMuonLength);
+		TH1D* CCRESRecoUncontainedMuonLengthPlot = new TH1D("CCRESRecoUncontainedMuonLengthPlot",RecoLabelXAxisMuonLength,NBinsMuonLength,MinMuonLength,MaxMuonLength);
+
 		TH1D* CCRESRecoMuonMomentumPlot = new TH1D("CCRESRecoMuonMomentumPlot",LabelXAxisMuonMomentum,NBinsMuonMomentum,ArrayNBinsMuonMomentum);
 		TH1D* CCRESRecoMuonCosThetaPlot = new TH1D("CCRESRecoMuonCosThetaPlot",LabelXAxisMuonCosTheta,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta);
 		TH1D* CCRESRecoMuonPhiPlot = new TH1D("CCRESRecoMuonPhiPlot",LabelXAxisMuonPhi,NBinsMuonPhi,ArrayNBinsMuonPhi);	
+
+		TH1D* CCRESRecoContainedMuonMomentumPlot = new TH1D("CCRESRecoContainedMuonMomentumPlot",LabelXAxisMuonMomentum,NBinsMuonMomentum,ArrayNBinsMuonMomentum);
+		TH1D* CCRESRecoUncontainedMuonMomentumPlot = new TH1D("CCRESRecoUncontainedMuonMomentumPlot",LabelXAxisMuonMomentum,NBinsMuonMomentum,ArrayNBinsMuonMomentum);
 
 		TH1D* CCRESRecodProtonTracksScorePlot = new TH1D("CCRESRecodProtonTracksScorePlot",RecoLabelXAxisProtonTrackScore,NBinsTrackScore,MinTrackScore,MaxTrackScore);	
 		TH1D* CCRESRecoProtonLengthPlot = new TH1D("CCRESRecoProtonLengthPlot",RecoLabelXAxisProtonLength,NBinsProtonLength,MinProtonLength,MaxProtonLength);
@@ -630,9 +673,15 @@ void myRecoAnalysis::Loop() {
 		TH1D* CCDISRecodMuonTracksScorePlot = new TH1D("CCDISRecodMuonTracksScorePlot",RecoLabelXAxisMuonTrackScore,NBinsTrackScore,MinTrackScore,MaxTrackScore);
 		TH1D* CCDISRecodMuonVertexDistancePlot = new TH1D("CCDISRecodMuonVertexDistancePlot",RecoLabelXAxisMuonVertexDistanceTrackScore,NBinsMuonVertexDistance,MinMuonVertexDistance,MaxMuonVertexDistance);
 
+		TH1D* CCDISRecoContainedMuonLengthPlot = new TH1D("CCDISRecoContainedMuonLengthPlot",RecoLabelXAxisMuonLength,NBinsMuonLength,MinMuonLength,MaxMuonLength);
+		TH1D* CCDISRecoUncontainedMuonLengthPlot = new TH1D("CCDISRecoUncontainedMuonLengthPlot",RecoLabelXAxisMuonLength,NBinsMuonLength,MinMuonLength,MaxMuonLength);
+
 		TH1D* CCDISRecoMuonMomentumPlot = new TH1D("CCDISRecoMuonMomentumPlot",LabelXAxisMuonMomentum,NBinsMuonMomentum,ArrayNBinsMuonMomentum);
 		TH1D* CCDISRecoMuonCosThetaPlot = new TH1D("CCDISRecoMuonCosThetaPlot",LabelXAxisMuonCosTheta,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta);
 		TH1D* CCDISRecoMuonPhiPlot = new TH1D("CCDISRecoMuonPhiPlot",LabelXAxisMuonPhi,NBinsMuonPhi,ArrayNBinsMuonPhi);
+
+		TH1D* CCDISRecoContainedMuonMomentumPlot = new TH1D("CCDISRecoContainedMuonMomentumPlot",LabelXAxisMuonMomentum,NBinsMuonMomentum,ArrayNBinsMuonMomentum);
+		TH1D* CCDISRecoUncontainedMuonMomentumPlot = new TH1D("CCDISRecoUncontainedMuonMomentumPlot",LabelXAxisMuonMomentum,NBinsMuonMomentum,ArrayNBinsMuonMomentum);
 
 		TH1D* CCDISRecoProtonLengthPlot = new TH1D("CCDISRecoProtonLengthPlot",RecoLabelXAxisProtonLength,NBinsProtonLength,MinProtonLength,MaxProtonLength);	
 		TH1D* CCDISRecodProtonTracksScorePlot = new TH1D("CCDISRecodProtonTracksScorePlot",RecoLabelXAxisProtonTrackScore,NBinsTrackScore,MinTrackScore,MaxTrackScore);	
@@ -766,9 +815,15 @@ void myRecoAnalysis::Loop() {
 
 		int NBinsCC1pSTVReso = 200; double MinCC1pSTV = -100.,MaxCC1pSTV = 100.;
 
+		TString LabelMuonMomentumResolution = ";P_{#mu} resolution (%)";
 		TString LabelDeltaPTResolution = ";#deltaP_{T} resolution (%)";
 		TString LabelDeltaAlphaTResolution = ";#delta#alpha_{T} resolution (%)";
 		TString LabelDeltaPhiTResolution = ";#delta#phi_{T} resolution (%)";
+
+		TH1D* Playground_CC1pRecoMuonMomentumPlot_FullyContainedMuon = new TH1D("Playground_CC1pRecoMuonMomentumPlot_FullyContainedMuon",LabelMuonMomentumResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
+		TH1D* Playground_CC1pRecoMuonMomentumPlot_ExitingShortMuon = new TH1D("Playground_CC1pRecoMuonMomentumPlot_ExitingShortMuon",LabelMuonMomentumResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
+		TH1D* Playground_CC1pRecoMuonMomentumPlot_ExitingMediumMuon = new TH1D("Playground_CC1pRecoMuonMomentumPlot_ExitingMediumMuon",LabelMuonMomentumResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
+		TH1D* Playground_CC1pRecoMuonMomentumPlot_ExitingLongMuon = new TH1D("Playground_CC1pRecoMuonMomentumPlot_ExitingLongMuon",LabelMuonMomentumResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
 
 		TH1D* Playground_CC1pRecoDeltaPTPlot_FullyContainedMuon = new TH1D("Playground_CC1pRecoDeltaPTPlot_FullyContainedMuon",LabelDeltaPTResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
 		TH1D* Playground_CC1pRecoDeltaPTPlot_ExitingShortMuon = new TH1D("Playground_CC1pRecoDeltaPTPlot_ExitingShortMuon",LabelDeltaPTResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
@@ -1284,6 +1339,9 @@ void myRecoAnalysis::Loop() {
 			RecodMuonTracksScorePlot->Fill(MuonTrackScore,weight);
 			RecodMuonVertexDistancePlot->Fill(MuonVertexDistance,weight);
 
+			if (CandidateMu_EndContainment->at(0) == 1) { RecoContainedMuonLengthPlot->Fill(l_muCandidate,weight); }
+			if (CandidateMu_EndContainment->at(0) == 0) { RecoUncontainedMuonLengthPlot->Fill(l_muCandidate,weight); }
+
 			RecoMuonMomentumPlot->Fill(reco_Pmu_mcs,weight);
 			RecoMuonCosThetaPlot->Fill(reco_Pmu_cos_theta,weight);
 			RecoMuonPhiPlot->Fill(reco_Pmu_phi*180./TMath::Pi(),weight);
@@ -1291,6 +1349,9 @@ void myRecoAnalysis::Loop() {
 			RecoProtonLengthPlot->Fill(l_pCandidate,weight);
 			RecodProtonTracksScorePlot->Fill(ProtonTrackScore,weight);
 			RecodProtonVertexDistancePlot->Fill(ProtonVertexDistance,weight);
+
+			if (CandidateMu_EndContainment->at(0) == 1) { RecoContainedMuonMomentumPlot->Fill(reco_Pmu_mcs,weight); }
+			if (CandidateMu_EndContainment->at(0) == 0) { RecoUncontainedMuonMomentumPlot->Fill(reco_Pmu_mcs,weight); }
 
 			RecoProtonMomentumPlot->Fill(reco_Pp,weight);
 			RecoProtonCosThetaPlot->Fill(reco_Pp_cos_theta,weight);
@@ -1312,6 +1373,8 @@ void myRecoAnalysis::Loop() {
 			RecoQ2Plot->Fill(reco_Q2,weight);
 
 			RecoMuonMomentumVsLengthPlot->Fill(l_muCandidate,reco_Pmu_mcs,weight);
+			if (CandidateMu_EndContainment->at(0) == 1) { RecoContainedMuonMomentumVsLengthPlot->Fill(l_muCandidate,reco_Pmu_mcs,weight); }
+			if (CandidateMu_EndContainment->at(0) == 0) { RecoUncontainedMuonMomentumVsLengthPlot->Fill(l_muCandidate,reco_Pmu_mcs,weight); }
 			
 			// 2D Analysis
 		
@@ -1436,7 +1499,14 @@ void myRecoAnalysis::Loop() {
 					CC1pRecodMuonTracksScorePlot->Fill(MuonTrackScore,weight);
 					CC1pRecodMuonVertexDistancePlot->Fill(MuonVertexDistance,weight);
 
+					if (CandidateMu_EndContainment->at(0) == 1) { CC1pRecoContainedMuonLengthPlot->Fill(l_muCandidate,weight); }
+					if (CandidateMu_EndContainment->at(0) == 0) { CC1pRecoUncontainedMuonLengthPlot->Fill(l_muCandidate,weight); }
+
 					CC1pRecoMuonMomentumPlot->Fill(reco_Pmu_mcs,weight);
+					CC1pRecoProtonMomentumPlot->Fill(reco_Pp,weight);
+
+					if (CandidateMu_EndContainment->at(0) == 1) { CC1pRecoContainedMuonMomentumPlot->Fill(reco_Pmu_mcs,weight); }
+					if (CandidateMu_EndContainment->at(0) == 0) { CC1pRecoUncontainedMuonMomentumPlot->Fill(reco_Pmu_mcs,weight); }
 
 					CC1pRecoProtonLengthPlot->Fill(l_pCandidate,weight);
 					CC1pRecodProtonTracksScorePlot->Fill(ProtonTrackScore,weight);
@@ -1444,8 +1514,6 @@ void myRecoAnalysis::Loop() {
 
 					CC1pRecoDeltaThetaPlot->Fill(DeltaThetaProtonMuon_Deg,weight);
 					CC1pRecoDeltaPhiPlot->Fill(DeltaPhiProtonMuon_Deg,weight);
-
-					CC1pRecoProtonMomentumPlot->Fill(reco_Pp,weight);
 
 					CC1pRecoMuonCosThetaPlot->Fill(reco_Pmu_cos_theta,weight);
 					CC1pRecoProtonCosThetaPlot->Fill(reco_Pp_cos_theta,weight);
@@ -1470,7 +1538,9 @@ void myRecoAnalysis::Loop() {
 					CC1pRecoCosThetaMuPmuPlot->Fill(reco_Pmu_cos_theta,reco_Pmu_mcs,weight);
 					CC1pRecoCosThetaPPpPlot->Fill(reco_Pp_cos_theta,reco_Pp,weight);
 
-					CC1pRecoMuonMomentumVsLengthPlot->Fill(l_muCandidate,reco_Pmu_mcs,weight);				
+					CC1pRecoMuonMomentumVsLengthPlot->Fill(l_muCandidate,reco_Pmu_mcs,weight);
+					if (CandidateMu_EndContainment->at(0) == 1) { CC1pRecoContainedMuonMomentumVsLengthPlot->Fill(l_muCandidate,reco_Pmu_mcs,weight); }
+					if (CandidateMu_EndContainment->at(0) == 0) { CC1pRecoUncontainedMuonMomentumVsLengthPlot->Fill(l_muCandidate,reco_Pmu_mcs,weight); }			
 
 					// --------------------------------------------------------------------------------------------------
 					// --------------------------------------------------------------------------------------------------
@@ -1516,9 +1586,10 @@ void myRecoAnalysis::Loop() {
 
 					// Playground for CC1p STV resolution plots
 
-					double CC1pDeltaPTReso = ( TransMissMomentum - true_TransMissMomentum) / true_TransMissMomentum*100.;
-					double CC1pDeltaAlphaTReso = ( DeltaAlphaT - true_DeltaAlphaT) / true_DeltaAlphaT*100.;
-					double CC1pDeltaPhiTReso = ( DeltaPhiT - true_DeltaPhiT) / true_DeltaPhiT*100.;
+					double CC1pMuonMomentumReso = ( reco_Pmu_mcs - True_CandidateMu_P->at(0) ) / True_CandidateMu_P->at(0) * 100.;
+					double CC1pDeltaPTReso = ( TransMissMomentum - true_TransMissMomentum ) / true_TransMissMomentum * 100.;
+					double CC1pDeltaAlphaTReso = ( DeltaAlphaT - true_DeltaAlphaT ) / true_DeltaAlphaT * 100.;
+					double CC1pDeltaPhiTReso = ( DeltaPhiT - true_DeltaPhiT ) / true_DeltaPhiT * 100.;
 
 					// -------------------------------------------------------------------------------------------------------------------------
 
@@ -1561,6 +1632,7 @@ void myRecoAnalysis::Loop() {
 
 					if (CandidateMu_EndContainment->at(0) == 1) {
 
+						Playground_CC1pRecoMuonMomentumPlot_FullyContainedMuon->Fill(CC1pMuonMomentumReso,weight);
 						Playground_CC1pRecoDeltaPTPlot_FullyContainedMuon->Fill(CC1pDeltaPTReso,weight);
 						Playground_CC1pRecoDeltaAlphaTPlot_FullyContainedMuon->Fill(CC1pDeltaAlphaTReso,weight);
 						Playground_CC1pRecoDeltaPhiTPlot_FullyContainedMuon->Fill(CC1pDeltaPhiTReso,weight);
@@ -1575,6 +1647,7 @@ void myRecoAnalysis::Loop() {
 
 						if ( CandidateMu_Length->at(0) < 200 ) { // cm
 
+							Playground_CC1pRecoMuonMomentumPlot_ExitingShortMuon->Fill(CC1pMuonMomentumReso,weight);
 							Playground_CC1pRecoDeltaPTPlot_ExitingShortMuon->Fill(CC1pDeltaPTReso,weight);
 							Playground_CC1pRecoDeltaAlphaTPlot_ExitingShortMuon->Fill(CC1pDeltaAlphaTReso,weight);
 							Playground_CC1pRecoDeltaPhiTPlot_ExitingShortMuon->Fill(CC1pDeltaPhiTReso,weight);
@@ -1587,6 +1660,7 @@ void myRecoAnalysis::Loop() {
 
 						if ( CandidateMu_Length->at(0) > 200 && CandidateMu_Length->at(0) < 500 ) { // cm
 
+							Playground_CC1pRecoMuonMomentumPlot_ExitingMediumMuon->Fill(CC1pMuonMomentumReso,weight);
 							Playground_CC1pRecoDeltaPTPlot_ExitingMediumMuon->Fill(CC1pDeltaPTReso,weight);
 							Playground_CC1pRecoDeltaAlphaTPlot_ExitingMediumMuon->Fill(CC1pDeltaAlphaTReso,weight);
 							Playground_CC1pRecoDeltaPhiTPlot_ExitingMediumMuon->Fill(CC1pDeltaPhiTReso,weight);
@@ -1600,6 +1674,7 @@ void myRecoAnalysis::Loop() {
 
 						if ( CandidateMu_Length->at(0) > 500) { // cm
 
+							Playground_CC1pRecoMuonMomentumPlot_ExitingLongMuon->Fill(CC1pMuonMomentumReso,weight);
 							Playground_CC1pRecoDeltaPTPlot_ExitingLongMuon->Fill(CC1pDeltaPTReso,weight);
 							Playground_CC1pRecoDeltaAlphaTPlot_ExitingLongMuon->Fill(CC1pDeltaAlphaTReso,weight);
 							Playground_CC1pRecoDeltaPhiTPlot_ExitingLongMuon->Fill(CC1pDeltaPhiTReso,weight);
@@ -1644,6 +1719,7 @@ void myRecoAnalysis::Loop() {
 						else if ( True_CandidateMu_StartContainment->at(0) == 0 ) { CandidateMuon_MCParticle_OutFV++; }
 //						else if ( True_CandidateP_StartContainment->at(0) == 0 || True_CandidateP_EndContainment->at(0) == 0) { CandidateProton_MCParticle_OutFV++; }
 						else if ( CandidateMu_MCParticle_Pdg->at(0) == -99. || CandidateP_MCParticle_Pdg->at(0) == -99.) { InTimeCosmics++; }
+						else if ( NC == 1) { NCEvents++; }
 						else if ( True_CandidateMu_StartX->at(0) != True_CandidateP_StartX->at(0) 
 						|| True_CandidateMu_StartY->at(0) != True_CandidateP_StartY->at(0)
 						|| True_CandidateMu_StartZ->at(0) != True_CandidateP_StartZ->at(0) ) { MultipleVertices++; }
@@ -1674,9 +1750,15 @@ void myRecoAnalysis::Loop() {
 					NonCC1pRecodMuonTracksScorePlot->Fill(MuonTrackScore,weight);
 					NonCC1pRecodMuonVertexDistancePlot->Fill(MuonVertexDistance,weight);
 
+					if (CandidateMu_EndContainment->at(0) == 1) { NonCC1pRecoContainedMuonLengthPlot->Fill(l_muCandidate,weight); }
+					if (CandidateMu_EndContainment->at(0) == 0) { NonCC1pRecoUncontainedMuonLengthPlot->Fill(l_muCandidate,weight); }
+
 					NonCC1pRecoMuonMomentumPlot->Fill(reco_Pmu_mcs,weight);
 					NonCC1pRecoMuonCosThetaPlot->Fill(reco_Pmu_cos_theta,weight);
 					NonCC1pRecoMuonPhiPlot->Fill(reco_Pmu_phi*180./TMath::Pi(),weight);
+
+					if (CandidateMu_EndContainment->at(0) == 1) { NonCC1pRecoContainedMuonMomentumPlot->Fill(reco_Pmu_mcs,weight); }
+					if (CandidateMu_EndContainment->at(0) == 0) { NonCC1pRecoUncontainedMuonMomentumPlot->Fill(reco_Pmu_mcs,weight); }
 
 					NonCC1pRecoProtonLengthPlot->Fill(l_pCandidate,weight);
 					NonCC1pRecodProtonTracksScorePlot->Fill(ProtonTrackScore,weight);
@@ -1706,7 +1788,9 @@ void myRecoAnalysis::Loop() {
 					NonCC1pRecoCosThetaMuPmuPlot->Fill(reco_Pmu_cos_theta,reco_Pmu_mcs,weight);
 					NonCC1pRecoCosThetaPPpPlot->Fill(reco_Pp_cos_theta,reco_Pp,weight);	
 
-					NonCC1pRecoMuonMomentumVsLengthPlot->Fill(l_muCandidate,reco_Pmu_mcs,weight);							
+					NonCC1pRecoMuonMomentumVsLengthPlot->Fill(l_muCandidate,reco_Pmu_mcs,weight);
+					if (CandidateMu_EndContainment->at(0) == 1) { NonCC1pRecoContainedMuonMomentumVsLengthPlot->Fill(l_muCandidate,reco_Pmu_mcs,weight); }
+					if (CandidateMu_EndContainment->at(0) == 0) { NonCC1pRecoUncontainedMuonMomentumVsLengthPlot->Fill(l_muCandidate,reco_Pmu_mcs,weight); }
 
 				}
 
@@ -1741,9 +1825,15 @@ void myRecoAnalysis::Loop() {
 					CCQERecodMuonTracksScorePlot->Fill(MuonTrackScore,weight);
 					CCQERecodMuonVertexDistancePlot->Fill(MuonVertexDistance,weight);
 
+					if (CandidateMu_EndContainment->at(0) == 1) { CCQERecoContainedMuonLengthPlot->Fill(l_muCandidate,weight); }
+					if (CandidateMu_EndContainment->at(0) == 0) { CCQERecoUncontainedMuonLengthPlot->Fill(l_muCandidate,weight); }
+
 					CCQERecoMuonMomentumPlot->Fill(reco_Pmu_mcs,weight);
 					CCQERecoMuonCosThetaPlot->Fill(reco_Pmu_cos_theta,weight);
 					CCQERecoMuonPhiPlot->Fill(reco_Pmu_phi*180./TMath::Pi(),weight);
+
+					if (CandidateMu_EndContainment->at(0) == 1) { CCQERecoContainedMuonMomentumPlot->Fill(reco_Pmu_mcs,weight); }
+					if (CandidateMu_EndContainment->at(0) == 0) { CCQERecoUncontainedMuonMomentumPlot->Fill(reco_Pmu_mcs,weight); }
 
 					CCQERecoProtonLengthPlot->Fill(l_pCandidate,weight);
 					CCQERecodProtonTracksScorePlot->Fill(ProtonTrackScore,weight);
@@ -1805,6 +1895,9 @@ void myRecoAnalysis::Loop() {
 					CCMECRecodMuonTracksScorePlot->Fill(MuonTrackScore,weight);
 					CCMECRecodMuonVertexDistancePlot->Fill(MuonVertexDistance,weight);
 
+					if (CandidateMu_EndContainment->at(0) == 1) { CCMECRecoContainedMuonLengthPlot->Fill(l_muCandidate,weight); }
+					if (CandidateMu_EndContainment->at(0) == 0) { CCMECRecoUncontainedMuonLengthPlot->Fill(l_muCandidate,weight); }
+
 					CCMECRecoProtonLengthPlot->Fill(l_pCandidate,weight);
 					CCMECRecodProtonTracksScorePlot->Fill(ProtonTrackScore,weight);
 					CCMECRecodProtonVertexDistancePlot->Fill(ProtonVertexDistance,weight);
@@ -1812,6 +1905,9 @@ void myRecoAnalysis::Loop() {
 					CCMECRecoMuonMomentumPlot->Fill(reco_Pmu_mcs,weight);
 					CCMECRecoMuonCosThetaPlot->Fill(reco_Pmu_cos_theta,weight);
 					CCMECRecoMuonPhiPlot->Fill(reco_Pmu_phi*180./TMath::Pi(),weight);
+
+					if (CandidateMu_EndContainment->at(0) == 1) { CCQERecoContainedMuonMomentumPlot->Fill(reco_Pmu_mcs,weight); }
+					if (CandidateMu_EndContainment->at(0) == 0) { CCQERecoUncontainedMuonMomentumPlot->Fill(reco_Pmu_mcs,weight); }
 
 					CCMECRecoProtonMomentumPlot->Fill(reco_Pp,weight);
 					CCMECRecoProtonCosThetaPlot->Fill(reco_Pp_cos_theta,weight);
@@ -1869,6 +1965,9 @@ void myRecoAnalysis::Loop() {
 					CCRESRecodMuonTracksScorePlot->Fill(MuonTrackScore,weight);
 					CCRESRecodMuonVertexDistancePlot->Fill(MuonVertexDistance,weight);
 
+					if (CandidateMu_EndContainment->at(0) == 1) { CCRESRecoContainedMuonLengthPlot->Fill(l_muCandidate,weight); }
+					if (CandidateMu_EndContainment->at(0) == 0) { CCRESRecoUncontainedMuonLengthPlot->Fill(l_muCandidate,weight); }
+
 					CCRESRecoProtonLengthPlot->Fill(l_pCandidate,weight);
 					CCRESRecodProtonTracksScorePlot->Fill(ProtonTrackScore,weight);
 					CCRESRecodProtonVertexDistancePlot->Fill(ProtonVertexDistance,weight);
@@ -1876,6 +1975,9 @@ void myRecoAnalysis::Loop() {
 					CCRESRecoMuonMomentumPlot->Fill(reco_Pmu_mcs,weight);
 					CCRESRecoMuonCosThetaPlot->Fill(reco_Pmu_cos_theta,weight);
 					CCRESRecoMuonPhiPlot->Fill(reco_Pmu_phi*180./TMath::Pi(),weight);
+
+					if (CandidateMu_EndContainment->at(0) == 1) { CCRESRecoContainedMuonMomentumPlot->Fill(reco_Pmu_mcs,weight); }
+					if (CandidateMu_EndContainment->at(0) == 0) { CCRESRecoUncontainedMuonMomentumPlot->Fill(reco_Pmu_mcs,weight); }
 
 					CCRESRecoProtonMomentumPlot->Fill(reco_Pp,weight);
 					CCRESRecoProtonCosThetaPlot->Fill(reco_Pp_cos_theta,weight);
@@ -1932,6 +2034,9 @@ void myRecoAnalysis::Loop() {
 					CCDISRecoMuonLengthPlot->Fill(l_muCandidate,weight);
 					CCDISRecodMuonTracksScorePlot->Fill(MuonTrackScore,weight);
 					CCDISRecodMuonVertexDistancePlot->Fill(MuonVertexDistance,weight);
+
+					if (CandidateMu_EndContainment->at(0) == 1) { CCDISRecoContainedMuonLengthPlot->Fill(l_muCandidate,weight); }
+					if (CandidateMu_EndContainment->at(0) == 0) { CCDISRecoUncontainedMuonLengthPlot->Fill(l_muCandidate,weight); }
 
 					CCDISRecoMuonMomentumPlot->Fill(reco_Pmu_mcs,weight);
 					CCDISRecoMuonCosThetaPlot->Fill(reco_Pmu_cos_theta,weight);
@@ -2078,7 +2183,7 @@ void myRecoAnalysis::Loop() {
 
 		if (string(fWhichSample).find("Overlay") != std::string::npos) { std::cout << std::endl << "POTCount = " << POTCount << std::endl << std::endl; }
 
-		std::cout << "Txt file loceted under " << TxtName << std::endl;
+		std::cout << "Txt info file located under " << TxtName << std::endl;
 		
 		// -------------------------------------------------------------------------------------------------------------------------	
 
@@ -2102,6 +2207,7 @@ void myRecoAnalysis::Loop() {
 		double CandidateProton_MCParticle_OutFVError = 0;
 		double MultipleVerticesError = 0;
 		double InTimeCosmicsError = 0;
+		double NCEventsError = 0;
 
 		if ( (fWhichSample == "Overlay9_Run1" || fWhichSample == "Overlay9_Run2" || fWhichSample == "Overlay9_Run3" || fWhichSample == "Overlay9_Run4" || fWhichSample == "Overlay9_Run5")
 			&& fUniverseIndex == -1) {
@@ -2304,6 +2410,17 @@ void myRecoAnalysis::Loop() {
 
 			// -------------------------------------------------------------------------------------------------------------------------	
 
+			// In-time cosmics
+
+			NCEventsError = sqrt(NCEvents);
+
+			std::cout << "NC Events & " << NCEvents << " $\\pm$ " 
+			<< NCEventsError
+			<< " & " << NCEvents*POTScale << " $\\pm$ " 
+			<< NCEventsError*POTScale << " \\tabularnewline \n\\hline" << std::endl;	
+
+			// -------------------------------------------------------------------------------------------------------------------------	
+
 			// Multiple Vertices
 
 			MultipleVerticesError = sqrt(MultipleVertices);
@@ -2319,14 +2436,28 @@ void myRecoAnalysis::Loop() {
 
 		// -------------------------------------------------------------------------------------------------------------------------
 
+		// Samdef events
+
+		TH1D* SamdefEventsPlot = (TH1D*)(fPathToFile->Get("SamdefEventPlot"));
+		double SamdefEvents = SamdefEventsPlot->GetBinContent(1);
+
+		// -------------------------------------------------------------------------------------------------------------------------
+
 		// To be saved in the txt file
 
-		myTxtFile << "\n\nStarting with " << TotalCounter << " preselected events (" << int(100.*double(TotalCounter)/double(TotalCounter)) << " %)" << std::endl << std::endl;
-		myTxtFile << "\n\n" << ContainmentCounter << " events passing proton full containment requirement (" << int(100.*double(ContainmentCounter)/double(TotalCounter)) << " %)" << std::endl << std::endl;
-		myTxtFile << "\n\n" << ContainedVertexCounter << " events passing contained vertex requirement (" << int(100.*double(ContainedVertexCounter)/double(TotalCounter)) << " %)" << std::endl << std::endl;
-		myTxtFile << "\n\n" << PIDCounter << " events passing PID selection cut (" << int(100.*double(PIDCounter)/double(TotalCounter)) << " %)" << std::endl << std::endl;
-		myTxtFile << "\n\n" << NuScoreCounter << " events passing NuScore selection cut (" << int(100.*double(NuScoreCounter)/double(TotalCounter)) << " %)" << std::endl << std::endl;
-		myTxtFile << "\n\n" << KinematicsCounter << " events passing common kinematic ranges (" << int(100.*double(KinematicsCounter)/double(TotalCounter)) << " %)" << std::endl << std::endl;
+		myTxtFile << "\n\nSamdef events = " << SamdefEvents << int(100.*double(SamdefEvents)/double(SamdefEvents)) << " %)" << std::endl << std::endl;
+
+		myTxtFile << "\n\nStarting with " << TotalCounter << " preselected events (" << int(100.*double(TotalCounter)/double(SamdefEvents)) << "% / " << int(100.*double(TotalCounter)/double(TotalCounter)) << "%)" << std::endl << std::endl;
+
+		myTxtFile << "\n\n" << ContainmentCounter << " events passing proton full containment requirement (" << int(100.*double(ContainmentCounter)/double(SamdefEvents)) << "% / " << int(100.*double(ContainmentCounter)/double(TotalCounter)) << " %)" << std::endl << std::endl;
+
+		myTxtFile << "\n\n" << ContainedVertexCounter << " events passing contained vertex requirement (" << int(100.*double(ContainmentCounter)/double(SamdefEvents)) << "% / " << int(100.*double(ContainedVertexCounter)/double(SamdefEvents)) << "% / " << int(100.*double(ContainedVertexCounter)/double(TotalCounter)) << " %)" << std::endl << std::endl;
+
+		myTxtFile << "\n\n" << PIDCounter << " events passing PID selection cut (" << int(100.*double(ContainmentCounter)/double(SamdefEvents)) << "% / " << int(100.*double(PIDCounter)/double(TotalCounter)) << " %)" << std::endl << std::endl;
+
+		myTxtFile << "\n\n" << NuScoreCounter << " events passing NuScore selection cut (" << int(100.*double(ContainmentCounter)/double(SamdefEvents)) << "% / " << int(100.*double(NuScoreCounter)/double(TotalCounter)) << " %)" << std::endl << std::endl;
+
+		myTxtFile << "\n\n" << KinematicsCounter << " events passing common kinematic ranges (" << int(100.*double(ContainmentCounter)/double(SamdefEvents)) << "% / " << int(100.*double(KinematicsCounter)/double(TotalCounter)) << " %)" << std::endl << std::endl;
 
 		if (string(fWhichSample).find("Overlay") != std::string::npos) { myTxtFile << std::endl << std::endl << "POTCount = " << POTCount << std::endl << std::endl; }
 

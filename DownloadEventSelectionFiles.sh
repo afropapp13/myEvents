@@ -19,7 +19,7 @@ do
 
 	# Truth level info
 
-	scp $UserID@uboonegpvm05.fnal.gov:$OutPutDir/TruthSTVAnalysis_Overlay9_${RunNumber}_${UBCode}.root ./OutputFiles/$UBCode/TruthSTVAnalysis_Overlay9_${RunNumber}_${UBCode}.root
+	scp $UserID@$UBgpvm:$OutPutDir/TruthSTVAnalysis_Overlay9_${RunNumber}_${UBCode}.root ./OutputFiles/$UBCode/TruthSTVAnalysis_Overlay9_${RunNumber}_${UBCode}.root
 
 	##############################################################################
 
@@ -34,16 +34,16 @@ do
 
 		# Reco level info # All cuts applied
 
-		scp $UserID@uboonegpvm05.fnal.gov:$OutPutDir/$AppliedCuts/STVStudies_Overlay9_$RunNumber$AppliedCuts.root \
+		scp $UserID@$UBgpvm:$OutPutDir/$AppliedCuts/STVStudies_Overlay9_$RunNumber$AppliedCuts.root \
 			./OutputFiles/$UBCode/$AppliedCuts/STVStudies_Overlay9_$RunNumber$AppliedCuts.root
 
-		scp $UserID@uboonegpvm05.fnal.gov:$OutPutDir/$AppliedCuts/STVStudies_OverlayDirt9_$RunNumber$AppliedCuts.root \
+		scp $UserID@$UBgpvm:$OutPutDir/$AppliedCuts/STVStudies_OverlayDirt9_$RunNumber$AppliedCuts.root \
 			./OutputFiles/$UBCode/$AppliedCuts/STVStudies_OverlayDirt9_$RunNumber$AppliedCuts.root
 
-		scp $UserID@uboonegpvm05.fnal.gov:$OutPutDir/$AppliedCuts/STVStudies_BeamOn9_$RunNumber$AppliedCuts.root \
+		scp $UserID@$UBgpvm:$OutPutDir/$AppliedCuts/STVStudies_BeamOn9_$RunNumber$AppliedCuts.root \
 			./OutputFiles/$UBCode/$AppliedCuts/STVStudies_BeamOn9_$RunNumber$AppliedCuts.root
 
-		scp $UserID@uboonegpvm05.fnal.gov:$OutPutDir/$AppliedCuts/STVStudies_ExtBNB9_$RunNumber$AppliedCuts.root \
+		scp $UserID@$UBgpvm:$OutPutDir/$AppliedCuts/STVStudies_ExtBNB9_$RunNumber$AppliedCuts.root \
 			./OutputFiles/$UBCode/$AppliedCuts/STVStudies_ExtBNB9_$RunNumber$AppliedCuts.root
 
 	done
