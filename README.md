@@ -2,8 +2,8 @@
 
 # Nominal/CV predictions 
 # To be done iteractively on the uboone gpvm's
-# The preselected files are located under "/uboone/data/users/apapadop/myEvents/mySamples/"+UBCodeVersion+"/PreSelection_"+fWhichSample+"_"+UBCodeVersion+".root";
-# The POT files are located under "/uboone/data/users/apapadop/myEvents/mySamples/"+UBCodeVersion+"/PreSelection_"+fWhichSample+"_"+UBCodeVersion+"_POT.root"
+# The preselected files are located under "/pnfs/uboone/persistent/users/apapadop/mySamples/"+UBCodeVersion+"/PreSelection_"+fWhichSample+"_"+UBCodeVersion+".root";
+# The POT files are located under "/pnfs/uboone/persistent/users/apapadop/mySamples/"+UBCodeVersion+"/PreSelection_"+fWhichSample+"_"+UBCodeVersion+"_POT.root"
 # The output files will be placed under "/uboone/data/users/apapadop/myEvents/OutputFiles/"+UBCodeVersion+"/"+Cuts+"/STVStudies_"+fWhichSample+Extension+Cuts+".root"
 
 ###########################################################################################################################################################################
@@ -11,6 +11,10 @@
 root -l script_EventSelection_CV.C
 
 ./DownloadEventSelectionFiles.sh
+
+# Purity & Efficiency
+
+root -l CC1pPurityEfficiency.cpp
 
 # Detector variations
 

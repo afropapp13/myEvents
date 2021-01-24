@@ -21,6 +21,22 @@
 using namespace std;
 using namespace Constants;
 
+   // Quadratic background function
+   Double_t background(Double_t *x, Double_t *par) {
+      return par[0] + par[1]*x[0] + par[2]*x[0]*x[0];
+   }
+
+   // Lorentzian Peak function
+   Double_t lorentzianPeak(Double_t *x, Double_t *par) {
+      return (0.5*par[0]*par[1]/TMath::Pi()) / TMath::Max(1.e-10,
+      (x[0]-par[2])*(x[0]-par[2])+ .25*par[1]*par[1]);
+   }
+
+   // Sum of background and peak function
+   Double_t fitFunction(Double_t *x, Double_t *par) {
+      return background(x,par) + lorentzianPeak(x,&par[3]);
+   }
+
 // ----------------------------------------------------------------------------------------------------------------
 
 void STVResoStudies() {
@@ -67,22 +83,21 @@ void STVResoStudies() {
 
 	// ------------------------------------------------------------------------
 
-//	TString PlotName = "Playground_CC1pRecoMuonMomentumPlot"; 
+	TString PlotName = "Playground_CC1pRecoMuonMomentumPlot"; 
 
 //	TString PlotName = "Playground_CC1pRecoDeltaPTPlot"; 
-//	TString PlotName = "Playground_CC1pRecoDeltaAlphaTPlot"; 
-	TString PlotName = "Playground_CC1pRecoDeltaPhiTPlot";
-
 //	TString PlotName = "Playground_CC1pRecoDeltaPTPlot_Slice_1"; 
-//	TString PlotName = "Playground_CC1pRecoDeltaAlphaTPlot_Slice_1"; 
-//	TString PlotName = "Playground_CC1pRecoDeltaPhiTPlot_Slice_1";
-
 //	TString PlotName = "Playground_CC1pRecoDeltaPTPlot_Slice_2"; 
-//	TString PlotName = "Playground_CC1pRecoDeltaAlphaTPlot_Slice_2"; 
-//	TString PlotName = "Playground_CC1pRecoDeltaPhiTPlot_Slice_2";
-
 //	TString PlotName = "Playground_CC1pRecoDeltaPTPlot_Slice_3"; 
+
+//	TString PlotName = "Playground_CC1pRecoDeltaAlphaTPlot"; 
+//	TString PlotName = "Playground_CC1pRecoDeltaAlphaTPlot_Slice_1"; 
+//	TString PlotName = "Playground_CC1pRecoDeltaAlphaTPlot_Slice_2";
 //	TString PlotName = "Playground_CC1pRecoDeltaAlphaTPlot_Slice_3"; 
+
+//	TString PlotName = "Playground_CC1pRecoDeltaPhiTPlot";
+//	TString PlotName = "Playground_CC1pRecoDeltaPhiTPlot_Slice_1"; 
+//	TString PlotName = "Playground_CC1pRecoDeltaPhiTPlot_Slice_2";
 //	TString PlotName = "Playground_CC1pRecoDeltaPhiTPlot_Slice_3"; 
 
 	// ------------------------------------------------------------------------
@@ -96,7 +111,7 @@ void STVResoStudies() {
 	Discriminator.push_back("FullyContainedMuon"); LegendLabel.push_back("Contained");
 	Discriminator.push_back("ExitingShortMuon"); LegendLabel.push_back("Exit Short");
 	Discriminator.push_back("ExitingMediumMuon"); LegendLabel.push_back("Exit Med");
-//	Discriminator.push_back("ExitingLongMuon"); LegendLabel.push_back("Exit Long");
+	Discriminator.push_back("ExitingLongMuon"); LegendLabel.push_back("Exit Long");
 
 	// ------------------------------------------------------------------------
 
@@ -128,35 +143,24 @@ void STVResoStudies() {
 		Plots[WhichDiscriminator]->GetYaxis()->SetNdivisions(10);
 		Plots[WhichDiscriminator]->GetYaxis()->SetTitleFont(FontStyle);
 		Plots[WhichDiscriminator]->GetYaxis()->SetLabelFont(FontStyle);
-		Plots[WhichDiscriminator]->GetYaxis()->SetTitle("# Events");
-		Plots[WhichDiscriminator]->GetYaxis()->SetRangeUser(0,1.1*Plots[0]->GetMaximum());
+		Plots[WhichDiscriminator]->GetYaxis()->SetTitle("Arbitrary Units");
 
-		double SF = Plots[0]->Integral() / Plots[WhichDiscriminator]->Integral();
+		double SF = 1. / Plots[WhichDiscriminator]->GetMaximum();
 		Plots[WhichDiscriminator]->Scale(SF);
+
+		Plots[WhichDiscriminator]->GetYaxis()->SetRangeUser(0,1.1*Plots[0]->GetMaximum());
 
 		Plots[WhichDiscriminator]->SetLineColor(WhichDiscriminator+1);
 		Plots[WhichDiscriminator]->SetLineWidth(3);
 		Plots[WhichDiscriminator]->Draw("e same");
 
-//		TF1* f = new TF1("f","gaus",-100,100);
-		TF1* f = new TF1("f","landau",0,100);
-//		TF1* f = new TF1("f","[0]*TMath::Poisson(x,[1])",-100,100);
-//TF1 *f = new TF1("f1","[0]*TMath::Power(([1]/[2]),(x/[2]))*(TMath::Exp(-([1]/[2])))/TMath::Gamma((x/[2])+1.)", -100, 100);
-f->SetParameters(1, 1, 1);
+		TF1* f = new TF1("f","gaus",-15,15);
 
 		f->SetLineColor(WhichDiscriminator+1);
-//		Plots[WhichDiscriminator]->Fit(f,"","",-15,15);
-		Plots[WhichDiscriminator]->Fit(f,"R");
-		f->Draw("same");
+		Plots[WhichDiscriminator]->Fit(f,"R0");
+		//f->Draw("same");
 
-		TF1* f2 = new TF1("f2","landau",-60,0);
-		f2->SetLineColor(WhichDiscriminator+1);
-		Plots[WhichDiscriminator]->Fit(f2,"R");
-		f2->Draw("same");
-
-//		Plots[WhichDiscriminator]->Fit("pois","","",-15,15);
-
-//		leg->AddEntry(Plots[WhichDiscriminator],LegendLabel[WhichDiscriminator] + ", #mu = " + ToString(round(f->GetParameter(1),1)) + ", #sigma = " + ToString(round(f->GetParameter(2),1)),"l");
+		leg->AddEntry(Plots[WhichDiscriminator],LegendLabel[WhichDiscriminator] + ", #mu = " + ToString(round(f->GetParameter(1),1)) + ", #sigma = " + ToString(round(f->GetParameter(2),1)),"l");
 		
 
 	}	

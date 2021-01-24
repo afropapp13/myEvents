@@ -75,6 +75,8 @@ public :
    int             CC3p;
    int             CC3p1pi;
    int             CC3p2pi;   
+   int             CC3p3pi;   
+   int             CC4p0pi;   
    Int_t           NumberMCParticles;
 
    vector<double>  *Muon_MCParticle_StartX;   
@@ -169,6 +171,8 @@ public :
    TBranch        *b_CC3p;   //!
    TBranch        *b_CC3p1pi;   //!
    TBranch        *b_CC3p2pi;   //!
+   TBranch        *b_CC3p3pi;   //!
+   TBranch        *b_CC4p0pi;   //!
    TBranch        *b_NumberMCParticles;   //!
 
    TBranch        *b_Muon_MCParticle_StartX;   //!
@@ -406,6 +410,8 @@ void myTrueAnalysis::Init(TTree *tree)
    fChain->SetBranchAddress("CC3p", &CC3p, &b_CC3p);
    fChain->SetBranchAddress("CC3p1pi", &CC3p1pi, &b_CC3p1pi);
    fChain->SetBranchAddress("CC3p2pi", &CC3p2pi, &b_CC3p2pi);
+   fChain->SetBranchAddress("CC3p3pi", &CC3p3pi, &b_CC3p3pi);
+   fChain->SetBranchAddress("CC4p0pi", &CC4p0pi, &b_CC4p0pi);
    fChain->SetBranchAddress("NumberMCParticles", &NumberMCParticles, &b_NumberMCParticles);
 
    fChain->SetBranchAddress("Muon_MCParticle_StartX", &Muon_MCParticle_StartX, &b_Muon_MCParticle_StartX);

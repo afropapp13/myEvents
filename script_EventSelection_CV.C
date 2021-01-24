@@ -45,15 +45,15 @@
 	gROOT->ProcessLine(".L ../../myClasses/STV_Tools.cxx++");	
 
 	gROOT->ProcessLine(".L myRecoAnalysis.C+");
-//	gROOT->ProcessLine(".L myTrueAnalysis.C+");
+	gROOT->ProcessLine(".L myTrueAnalysis.C+");
 
 
 	for (int i = 0;i < (int)(WhichSampleArray.size()); i++) {
 
 		gROOT->ProcessLine("myRecoAnalysis(\""+WhichSampleArray[i]+"\").Loop()");
 
-		//if (string(WhichSampleArray[i]).find("Overlay9") != std::string::npos) 
-		//  { gROOT->ProcessLine("myTrueAnalysis(\""+WhichSampleArray[i]+"\").Loop()"); } 
+		if (string(WhichSampleArray[i]).find("Overlay9") != std::string::npos) 
+		  { gROOT->ProcessLine("myTrueAnalysis(\""+WhichSampleArray[i]+"\").Loop()"); } 
 
 	}
 

@@ -55,12 +55,6 @@ void DetermineMaxPurityEfficiency1D() {
 
 	// ----------------------------------------------------------------------------------------------------------------------------------------
 
-	//TString UserID = "apapadop";
-
-	//TString PlotsPath = "/uboone/data/users/"+UserID+"/mySTVAnalysis/myPlots/"+UBCodeVersion+"/Overlay9/"; 
-
-	// ----------------------------------------------------------------------------------------------------------------------------------------
-
 	TString RunNumber = "Run1";
 
 	TString CutName = "LLP";
@@ -90,7 +84,7 @@ void DetermineMaxPurityEfficiency1D() {
 
 	if (CutName == "LLP") {
 
-		NBins = 20;
+		NBins = 50;
 		Min = -5., Max = 5.;
 
 	}
@@ -208,8 +202,8 @@ void DetermineMaxPurityEfficiency1D() {
 
 	ProductGraph->GetYaxis()->SetRangeUser(0,0.25);
 	ProductGraph->GetYaxis()->SetNdivisions(6);
-	ProductGraph->GetYaxis()->SetTitle("Purity*Efficiency");
-	ProductGraph->GetYaxis()->SetTitleOffset(0.95);
+	ProductGraph->GetYaxis()->SetTitle("Purity x Efficiency");
+	ProductGraph->GetYaxis()->SetTitleOffset(1.05);
 	ProductGraph->GetYaxis()->SetTitleFont(TextFont);
 	ProductGraph->GetYaxis()->SetTitleSize(TextSize);
 	ProductGraph->GetYaxis()->SetLabelFont(TextFont);
@@ -225,34 +219,34 @@ void DetermineMaxPurityEfficiency1D() {
 	TLatex* latProduct = new TLatex();
 	latProduct->SetTextFont(TextFont);
 	latProduct->SetTextSize(TextSize);
-	latProduct->DrawLatexNDC(0.2,0.82,"Max at "+CutName+" > "+ToString(SelectedThres));
+	latProduct->DrawLatexNDC(0.2,0.82,RunNumber + " Max at "+CutName+" > "+ToString(SelectedThres));
 
 	// ----------------------------------------------------------------------------------------------------------------------------------------
 	
 	// Beam On events that we would have with the candidate set of cuts
 	
-	TString BeamOnPlotThres = "RecoMuonCosThetaPlot_"+CutName+"Thres_"+TString(std::to_string(GlobalThresBin));
-	TH1D* hRecoBeamOn = (TH1D*)(RecoBeamOnFile->Get(BeamOnPlotThres));
+	TString PlotThres = "RecoMuonCosThetaPlot_"+CutName+"Thres_"+TString(std::to_string(GlobalThresBin));
+	TH1D* hRecoBeamOn = (TH1D*)(RecoBeamOnFile->Get(PlotThres));
 	
 	TLatex* latBeamOn = new TLatex();
 	latBeamOn->SetTextFont(TextFont);
 	latBeamOn->SetTextSize(TextSize);
-	latBeamOn->DrawLatexNDC(0.2,0.75,"Beam On Events = "+ToString(hRecoBeamOn->GetEntries()));
+	latBeamOn->DrawLatexNDC(0.2,0.75,"Beam On Events = "+ToString(hRecoBeamOn->Integral()));
 
 	// ----------------------------------------------------------------------------------------------------------------------------------------
-	
-	// Cosmic contamination fraction that we would have with the candidate set of cuts
 
-	TString ExtBNBPlotThres = "RecoMuonCosThetaPlot_"+CutName+"Thres_"+TString(std::to_string(GlobalThresBin));
-	TH1D* hRecoExtBNB = (TH1D*)(RecoExtBNBFile->Get(ExtBNBPlotThres));
-	TH1D* hRecoExtBNBDefault = (TH1D*)(RecoExtBNBFile->Get("RecoMuonCosThetaPlot"));
+	TH1D* hRecoExtBNB = (TH1D*)(RecoExtBNBFile->Get(PlotThres));
+	TH1D* hRecoOverlay = (TH1D*)(RecoOverlayFile->Get(PlotThres));
+	TH1D* hRecoDirt = (TH1D*)(RecoOverlayDirtFile->Get(PlotThres));
+
+	// ----------------------------------------------------------------------------------------------------------------------------------------
 	
 	TLatex* latExtBNB = new TLatex();
 	latExtBNB->SetTextFont(TextFont);
 	latExtBNB->SetTextSize(TextSize);
-	latExtBNB->DrawLatexNDC(0.2,0.7,"Cosmic Frac = "+ToString(hRecoExtBNB->GetEntries() / hRecoExtBNBDefault->GetEntries()));
+	latExtBNB->DrawLatexNDC(0.2,0.68,"Cosmics = "+ToString(int(hRecoExtBNB->Integral() / ( hRecoExtBNB->Integral() + hRecoOverlay->Integral() + hRecoDirt->Integral() )*100.)) + "%");
 
-//	ProductCanvas->SaveAs(PlotsPath+CutName+"_TwoDScanProduct.pdf");
+	ProductCanvas->SaveAs(PlotPath+CutName+"_TwoDScanProduct.pdf");
 
 	// ----------------------------------------------------------------------------------------------------------------------------------------
 
@@ -290,9 +284,9 @@ void DetermineMaxPurityEfficiency1D() {
 	TLatex* latPurity = new TLatex();
 	latPurity->SetTextFont(TextFont);
 	latPurity->SetTextSize(TextSize);
-	latPurity->DrawLatexNDC(0.2,0.82,"Purity at max = "+ToString(PurityArray[GlobalThresBin]));
+	latPurity->DrawLatexNDC(0.2,0.82,RunNumber + " Purity at max = "+ToString(int(PurityArray[GlobalThresBin]*100.)) + "%");
 
-//	NuScorePurityCanvas->SaveAs(PlotsPath+CutName"_OneDScanPurity.pdf");
+	PurityCanvas->SaveAs(PlotPath+CutName+"_OneDScanPurity.pdf");
 
 	// ----------------------------------------------------------------------------------------------------------------------------------------
 
@@ -330,9 +324,9 @@ void DetermineMaxPurityEfficiency1D() {
 	TLatex* latEfficiency = new TLatex();
 	latEfficiency->SetTextFont(TextFont);
 	latEfficiency->SetTextSize(TextSize);
-	latEfficiency->DrawLatexNDC(0.2,0.82,"Efficiency at max = "+ToString(EfficiencyArray[GlobalThresBin]));
+	latEfficiency->DrawLatexNDC(0.2,0.82,RunNumber + " Efficiency at max = "+ToString(int(EfficiencyArray[GlobalThresBin]*100.)) + "%");
 
-	//EfficiencyCanvas->SaveAs(PlotsPath+CutName+"_OneDScanEfficiency.pdf");	
+	EfficiencyCanvas->SaveAs(PlotPath+CutName+"_OneDScanEfficiency.pdf");	
 
 	// ----------------------------------------------------------------------------------------------------------------------------------------
 

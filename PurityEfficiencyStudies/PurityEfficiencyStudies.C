@@ -73,7 +73,7 @@ void PurityEfficiencyStudies::Loop() {
 		double MinNuScore = 0., MaxNuScore = 1.;
 		double NuScoreStep = (MaxNuScore - MinNuScore) / double(NBinsNuScore);
 
-		int NBinsLLP = 20;
+		int NBinsLLP = 50;
 		double MinLLP = -5., MaxLLP = 5.;
 		double LLPStep = (MaxLLP - MinLLP) / double(NBinsLLP);
 
@@ -373,8 +373,8 @@ void PurityEfficiencyStudies::Loop() {
 
 			if (string(fWhichSample).find("Overlay") != std::string::npos) { 
 			
-				if (Weight < 0 || Weight > 10) { continue; }
-				if (T2KWeight < 0 || T2KWeight > 10) { continue; }				
+				if (Weight < 0 || Weight > 30) { continue; }
+				if (T2KWeight < 0 || T2KWeight > 30) { continue; }				
 				weight = ( tor860_wcut / POTCount) * Weight * T2KWeight * ROOTinoWeight; 
 				
 			}
@@ -382,13 +382,6 @@ void PurityEfficiencyStudies::Loop() {
 			// -----------------------------------------------------------------------------------------------------------------------
 
 			if ( fabs(weight) != weight) { continue; } // Securing against infinities
-
-			// -----------------------------------------------------------------------------------------------------------------------
-
-			// hard coded limit because something still looks weird in the dirt sample at low nu-score
-			// COH interaction & infinite weight
-			
-//			if (NuScore < 0.04) { continue; }
 
 			// -----------------------------------------------------------------------------------------------------------------------------
 
@@ -474,39 +467,33 @@ void PurityEfficiencyStudies::Loop() {
 
 			// Make sure that the same events fill the same plots
 
+			bool PassingCommonRange = true;
+
 			if (reco_Pmu_mcs < ArrayNBinsMuonMomentum[0]) { continue; }
-//			if (reco_Pmu_cos_theta < ArrayNBinsMuonCosTheta[0]) { continue; }
-//			if (reco_Pmu_phi < ArrayNBinsMuonPhi[0]) { continue; }
+			if (reco_Pmu_cos_theta < ArrayNBinsMuonCosTheta[0]) { PassingCommonRange = false; }
+			if (reco_Pmu_phi < ArrayNBinsMuonPhi[0]) { PassingCommonRange = false; }
 
 			if (reco_Pp < ArrayNBinsProtonMomentum[0]) { continue; }
-//			if (reco_Pp_cos_theta < ArrayNBinsProtonCosTheta[0]) { continue; }
-//			if (reco_Pp_phi < ArrayNBinsProtonPhi[0]) { continue; }
+			if (reco_Pp_cos_theta < ArrayNBinsProtonCosTheta[0]) { PassingCommonRange = false; }
+			if (reco_Pp_phi < ArrayNBinsProtonPhi[0]) { PassingCommonRange = false; }
 
-//			if (TransMissMomentum < ArrayNBinsDeltaPT[0]) { continue; }
-//			if (DeltaAlphaT < ArrayNBinsDeltaAlphaT[0]) { continue; }
-//			if (DeltaPhiT < ArrayNBinsDeltaPhiT[0]) { continue; }
+			if (TransMissMomentum < ArrayNBinsDeltaPT[0]) { PassingCommonRange = false; }
+			if (DeltaAlphaT < ArrayNBinsDeltaAlphaT[0]) { PassingCommonRange = false; }
+			if (DeltaPhiT < ArrayNBinsDeltaPhiT[0]) { PassingCommonRange = false; }
 
-//			if (ECal < ArrayNBinsECal[0]) { continue; }
-//			if (EQE < ArrayNBinsEQE[0]) { continue; }
-//			if (reco_Q2 < ArrayNBinsQ2[0]) { continue; }
+			 --------------------------------------------------------------------------------------------------------------------
 
-			// --------------------------------------------------------------------------------------------------------------------
+			if (reco_Pmu_mcs > ArrayNBinsMuonMomentum[NBinsMuonMomentum]) { PassingCommonRange = false; }
+			if (reco_Pmu_cos_theta > ArrayNBinsMuonCosTheta[NBinsMuonCosTheta]) { PassingCommonRange = false; }
+			if (reco_Pmu_phi > ArrayNBinsMuonPhi[NBinsMuonPhi]) { PassingCommonRange = false; }
 
-//			if (reco_Pmu_mcs > ArrayNBinsMuonMomentum[NBinsMuonMomentum]) { continue; }
-//			if (reco_Pmu_cos_theta > ArrayNBinsMuonCosTheta[NBinsMuonCosTheta]) { continue; }
-//			if (reco_Pmu_phi > ArrayNBinsMuonPhi[NBinsMuonPhi]) { continue; }
+			if (reco_Pp > ArrayNBinsProtonMomentum[NBinsProtonMomentum]) { PassingCommonRange = false; }
+			if (reco_Pp_cos_theta > ArrayNBinsProtonCosTheta[NBinsProtonCosTheta]) { PassingCommonRange = false; }
+			if (reco_Pp_phi > ArrayNBinsProtonPhi[NBinsProtonPhi]) { PassingCommonRange = false; }
 
-//			if (reco_Pp > ArrayNBinsProtonMomentum[NBinsProtonMomentum]) { continue; }
-//			if (reco_Pp_cos_theta > ArrayNBinsProtonCosTheta[NBinsProtonCosTheta]) { continue; }
-//			if (reco_Pp_phi > ArrayNBinsProtonPhi[NBinsProtonPhi]) { continue; }
-
-//			if (TransMissMomentum > ArrayNBinsDeltaPT[NBinsDeltaPT]) { continue; }
-//			if (DeltaAlphaT > ArrayNBinsDeltaAlphaT[NBinsDeltaAlphaT]) { continue; }
-//			if (DeltaPhiT > ArrayNBinsDeltaPhiT[NBinsDeltaPhiT]) { continue; }
-
-//			if (ECal > ArrayNBinsECal[NBinsECal]) { continue; }
-//			if (EQE > ArrayNBinsEQE[NBinsEQE]) { continue; }
-//			if (reco_Q2 > ArrayNBinsQ2[NBinsQ2]) { continue; }
+			if (TransMissMomentum > ArrayNBinsDeltaPT[NBinsDeltaPT]) { PassingCommonRange = false; }
+			if (DeltaAlphaT > ArrayNBinsDeltaAlphaT[NBinsDeltaAlphaT]) { PassingCommonRange = false; }
+			if (DeltaPhiT > ArrayNBinsDeltaPhiT[NBinsDeltaPhiT]) { PassingCommonRange = false; }
 
 			// --------------------------------------------------------------------------------------------------------------------
 
@@ -526,8 +513,10 @@ void PurityEfficiencyStudies::Loop() {
 
 			// Studies for selection cuts
 
-//			if (reco_Pp_ThreePlaneLogLikelihood < 0.) { continue; }
-//			if (NuScore < 0.4) { continue; }
+//			if (reco_Pp_ThreePlaneLogLikelihood < -0.4) { continue; }
+//			if (NuScore < 0.1) { continue; }
+//			if (!PassingCommonRange) { continue; }
+
 //			if (LengthDiff < 0) { continue; }
 //			if (kMiss > 0.6) { continue; }
 //			if (PMissMinus < 0.6) { continue; }
@@ -549,6 +538,9 @@ void PurityEfficiencyStudies::Loop() {
 			TVector3 BeamFlash(0,BeamFlashes_YCenter->at(0),BeamFlashes_ZCenter->at(0));
 			TVector3 RecoVertex(Vertex_X->at(0),Vertex_Y->at(0),Vertex_Z->at(0));
 			double dYZ = (BeamFlash - RecoVertex).Mag();
+
+			// Contained Reconstructed Vertex
+			if ( !tools.inFVVector(RecoVertex) ) { continue; }
 
 			double distance = CandidateMuP_Distance->at(0);	
 

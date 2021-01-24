@@ -155,8 +155,8 @@ void TruePurityEfficiciencyStudies::Loop() {
 
 //		double weight = 1.;
 //		double T2Kweight = 1.;
-		if (Weight <= 0 || Weight > 10) { continue; }
-		if (T2KWeight <= 0 || T2KWeight > 10) { continue; }		
+		if (Weight <= 0 || Weight > 30) { continue; }
+		if (T2KWeight <= 0 || T2KWeight > 30) { continue; }		
 		// Weight from v3.0.4 to v.3.0.6 * weight from application of T2K tune
 		POTScalingFactor = tor860_wcut / POTCount;
 		double weight = POTScalingFactor * Weight * T2KWeight * ROOTinoWeight;

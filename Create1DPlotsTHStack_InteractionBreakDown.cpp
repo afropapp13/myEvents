@@ -394,18 +394,21 @@ void Create1DPlotsTHStack_InteractionBreakDown() {
 
 				// --------------------------------------------------------------------------------------
 
+				// Sum of NonBeamOn Samples
+
+				TH1D* SumNonBeamOn = (TH1D*)Plots[1][WhichPlot]->Clone(); // ExtBNB
+				SumNonBeamOn->Add(Plots[2][WhichPlot]); // Overlay
+				SumNonBeamOn->Add(Plots[3][WhichPlot]); // Dirt
+
 				// CCQE Purity 
 
-				TH1D* SumNonBeamOn = (TH1D*)hratio[1][N1DPlots-1]->Clone(); 
-				SumNonBeamOn->Add(hratio[2][N1DPlots-1]);
-				SumNonBeamOn->Add(hratio[3][N1DPlots-1]);
 				int CCQEPurity = CCQEPlots[1][WhichPlot]->Integral() / SumNonBeamOn->Integral() * 1000.;
 
 				midPad->cd();
 				TLatex* latexPurity = new TLatex();
 				latexPurity->SetTextFont(FontStyle);
 				latexPurity->SetTextSize(0.09);
-				TString LabelPurity = "CCQE Purity = " + ToString(CCQEPurity/10.) + " %";
+				TString LabelPurity = "CCQE = " + ToString(CCQEPurity/10.) + " %";
 				latexPurity->DrawLatexNDC(0.54,0.9, LabelPurity);
 
 				// --------------------------------------------------------------------------------------

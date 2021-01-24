@@ -148,11 +148,14 @@ void Create1DPlotsTHStack_TopologicalBreakDown() {
 
 			vector<TString> LabelsOfSamples;
 			vector<TString> NameOfSamples;
+
+			// 0: BeamOn
+			// 1: Overlay
+			// 2: ExtBNB
+			// 3: Dirt
 		
 			NameOfSamples.push_back("STVStudies_BeamOn9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("BeamOn");
-
-			NameOfSamples.push_back("STVStudies_Overlay9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("Overlay"); // CV
-
+			NameOfSamples.push_back("STVStudies_Overlay9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("Overlay");
 			NameOfSamples.push_back("STVStudies_ExtBNB9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("ExtBNB");
 			NameOfSamples.push_back("STVStudies_OverlayDirt9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("Dirt");
 
@@ -370,9 +373,9 @@ void Create1DPlotsTHStack_TopologicalBreakDown() {
 
 				// Sum of NonBeamOn Samples
 
-				TH1D* SumNonBeamOn = (TH1D*)hratio[1][N1DPlots-1]->Clone(); 
-				SumNonBeamOn->Add(hratio[2][N1DPlots-1]);
-				SumNonBeamOn->Add(hratio[3][N1DPlots-1]);
+				TH1D* SumNonBeamOn = (TH1D*)Plots[1][WhichPlot]->Clone(); // ExtBNB
+				SumNonBeamOn->Add(Plots[2][WhichPlot]); // Overlay
+				SumNonBeamOn->Add(Plots[3][WhichPlot]); // Dirt
 
 				// CC1p Purity 
 
@@ -382,8 +385,8 @@ void Create1DPlotsTHStack_TopologicalBreakDown() {
 				TLatex latexPurity;
 				latexPurity.SetTextFont(FontStyle);
 				latexPurity.SetTextSize(0.09);
-				TString LabelPurity = "CC1p Purity = " + ToString(CC1pPurity/10.) + " %";
-				latexPurity.DrawLatexNDC(0.56,0.9, LabelPurity);
+				TString LabelPurity = "CC1p = " + ToString(CC1pPurity/10.) + " %";
+				latexPurity.DrawLatexNDC(0.59,0.9, LabelPurity);
 
 				// --------------------------------------------------------------------------------------
 

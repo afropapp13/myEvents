@@ -47,17 +47,21 @@ void myRecoAnalysis::Loop() {
 
 	int NEventsPassingSelectionCuts = 0;
 	int CC1pEventsPassingSelectionCuts = 0;
+	int NonCC1pEventsPassingSelectionCuts = 0;
 	int CC1p1piEventsPassingSelectionCuts = 0;
 	int CC2pEventsPassingSelectionCuts = 0;
 	int CC2p1piEventsPassingSelectionCuts = 0;
 	int CC3pEventsPassingSelectionCuts = 0;
 	int CC3p1piEventsPassingSelectionCuts = 0;
 	int CC3p2piEventsPassingSelectionCuts = 0;
+	int CC3p3piEventsPassingSelectionCuts = 0;
+	int CC4p0piEventsPassingSelectionCuts = 0;
 	int MisIndetifiedMuonAsPion = 0;
 	int MisIndetifiedMuonAsProton = 0;
 	int MisIndetifiedMuonAsAntiMuon = 0;
 	int MisIndetifiedProtonAsPion = 0;
 	int MisIndetifiedProtonAsDeuterium = 0;
+	int MisIndetifiedMuonAsDeuterium = 0;
 	int MisIndetifiedProtonAsElectron = 0;
 	int MisIndetifiedMuPToElectronElectron = 0;
 	int MisIndetifiedMuPToMuMu = 0;
@@ -66,6 +70,7 @@ void myRecoAnalysis::Loop() {
 	int CandidateProton_MCParticle_OutFV = 0;
 	int MultipleVertices = 0;
 	int InTimeCosmics = 0;
+	int NeutronPairCounter = 0;
 	int NCEvents = 0;
 		
 	TString Cuts = "_NoCuts";
@@ -807,6 +812,8 @@ void myRecoAnalysis::Loop() {
 		TH1D* NCC3pPlot = new TH1D("NCC3pPlot","",1,0,1);
 		TH1D* NCC3p1piPlot = new TH1D("NCC3p1piPlot","",1,0,1);
 		TH1D* NCC3p2piPlot = new TH1D("NCC3p2piPlot","",1,0,1);
+		TH1D* NCC3p3piPlot = new TH1D("NCC3p3piPlot","",1,0,1);
+		TH1D* NCC4p0piPlot = new TH1D("NCC4p0piPlot","",1,0,1);
 
 		// --------------------------------------------------------------------------------------------------------------------------------
 		// --------------------------------------------------------------------------------------------------------------------------------
@@ -819,6 +826,10 @@ void myRecoAnalysis::Loop() {
 		TString LabelDeltaPTResolution = ";#deltaP_{T} resolution (%)";
 		TString LabelDeltaAlphaTResolution = ";#delta#alpha_{T} resolution (%)";
 		TString LabelDeltaPhiTResolution = ";#delta#phi_{T} resolution (%)";
+
+		TH2D* Playground_CC1pRecoMuonMomentumResoVsMuonMomentumPlot = new TH2D("Playground_CC1pRecoMuonMomentumResoVsMuonMomentumPlot",LabelMuonMomentumResolution+LabelXAxisMuonMomentum,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV,200,0.1,2.);
+
+		TH2D* Playground_CC1pRecoMuonMomentumResoVsDeltaThetaPlot = new TH2D("Playground_CC1pRecoMuonMomentumResoVsDeltaThetaPlot",LabelMuonMomentumResolution+RecoLabelXAxisDeltaTheta,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV,NBinsDeltaTheta,MinDeltaTheta,MaxDeltaTheta);
 
 		TH1D* Playground_CC1pRecoMuonMomentumPlot_FullyContainedMuon = new TH1D("Playground_CC1pRecoMuonMomentumPlot_FullyContainedMuon",LabelMuonMomentumResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
 		TH1D* Playground_CC1pRecoMuonMomentumPlot_ExitingShortMuon = new TH1D("Playground_CC1pRecoMuonMomentumPlot_ExitingShortMuon",LabelMuonMomentumResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
@@ -859,20 +870,20 @@ void myRecoAnalysis::Loop() {
 
 		for (int WhichSlice = 0; WhichSlice < NSlices; WhichSlice++) {
 
-			Playground_CC1pRecoDeltaPTPlot_FullyContainedMuon_Slice[WhichSlice] = new TH1D("Playground_CC1pRecoDeltaPTPlot_FullyContainedMuon_Slice_"+ToStringInt(WhichSlice+1),LabelDeltaPTResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
-			Playground_CC1pRecoDeltaPTPlot_ExitingShortMuon_Slice[WhichSlice] = new TH1D("Playground_CC1pRecoDeltaPTPlot_ExitingShortMuon_Slice_"+ToStringInt(WhichSlice+1),LabelDeltaPTResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
-			Playground_CC1pRecoDeltaPTPlot_ExitingMediumMuon_Slice[WhichSlice] = new TH1D("Playground_CC1pRecoDeltaPTPlot_ExitingMediumMuon_Slice_"+ToStringInt(WhichSlice+1),LabelDeltaPTResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
-			Playground_CC1pRecoDeltaPTPlot_ExitingLongMuon_Slice[WhichSlice] = new TH1D("Playground_CC1pRecoDeltaPTPlot_ExitingLongMuon_Slice_"+ToStringInt(WhichSlice+1),LabelDeltaPTResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
+			Playground_CC1pRecoDeltaPTPlot_FullyContainedMuon_Slice[WhichSlice] = new TH1D("Playground_CC1pRecoDeltaPTPlot_Slice_"+ToStringInt(WhichSlice+1)+"_FullyContainedMuon",LabelDeltaPTResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
+			Playground_CC1pRecoDeltaPTPlot_ExitingShortMuon_Slice[WhichSlice] = new TH1D("Playground_CC1pRecoDeltaPTPlot_Slice_"+ToStringInt(WhichSlice+1)+"_ExitingShortMuon",LabelDeltaPTResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
+			Playground_CC1pRecoDeltaPTPlot_ExitingMediumMuon_Slice[WhichSlice] = new TH1D("Playground_CC1pRecoDeltaPTPlot_Slice_"+ToStringInt(WhichSlice+1)+"_ExitingMediumMuon",LabelDeltaPTResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
+			Playground_CC1pRecoDeltaPTPlot_ExitingLongMuon_Slice[WhichSlice] = new TH1D("Playground_CC1pRecoDeltaPTPlot_Slice_"+ToStringInt(WhichSlice+1)+"_ExitingLongMuon",LabelDeltaPTResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
 
-			Playground_CC1pRecoDeltaAlphaTPlot_FullyContainedMuon_Slice[WhichSlice] = new TH1D("Playground_CC1pRecoDeltaAlphaTPlot_FullyContainedMuon_Slice_"+ToStringInt(WhichSlice+1),LabelDeltaAlphaTResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
-			Playground_CC1pRecoDeltaAlphaTPlot_ExitingShortMuon_Slice[WhichSlice] = new TH1D("Playground_CC1pRecoDeltaAlphaTPlot_ExitingShortMuon_Slice_"+ToStringInt(WhichSlice+1),LabelDeltaAlphaTResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
-			Playground_CC1pRecoDeltaAlphaTPlot_ExitingMediumMuon_Slice[WhichSlice] = new TH1D("Playground_CC1pRecoDeltaAlphaTPlot_ExitingMediumMuon_Slice_"+ToStringInt(WhichSlice+1),LabelDeltaAlphaTResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
-			Playground_CC1pRecoDeltaAlphaTPlot_ExitingLongMuon_Slice[WhichSlice] = new TH1D("Playground_CC1pRecoDeltaAlphaTPlot_ExitingLongMuon_Slice_"+ToStringInt(WhichSlice+1),LabelDeltaAlphaTResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
+			Playground_CC1pRecoDeltaAlphaTPlot_FullyContainedMuon_Slice[WhichSlice] = new TH1D("Playground_CC1pRecoDeltaAlphaTPlot_Slice_"+ToStringInt(WhichSlice+1)+"_FullyContainedMuon",LabelDeltaAlphaTResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
+			Playground_CC1pRecoDeltaAlphaTPlot_ExitingShortMuon_Slice[WhichSlice] = new TH1D("Playground_CC1pRecoDeltaAlphaTPlot_Slice_"+ToStringInt(WhichSlice+1)+"_ExitingShortMuon",LabelDeltaAlphaTResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
+			Playground_CC1pRecoDeltaAlphaTPlot_ExitingMediumMuon_Slice[WhichSlice] = new TH1D("Playground_CC1pRecoDeltaAlphaTPlot_Slice_"+ToStringInt(WhichSlice+1)+"_ExitingMediumMuon",LabelDeltaAlphaTResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
+			Playground_CC1pRecoDeltaAlphaTPlot_ExitingLongMuon_Slice[WhichSlice] = new TH1D("Playground_CC1pRecoDeltaAlphaTPlot_Slice_"+ToStringInt(WhichSlice+1)+"_ExitingLongMuon",LabelDeltaAlphaTResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
 
-			Playground_CC1pRecoDeltaPhiTPlot_FullyContainedMuon_Slice[WhichSlice] = new TH1D("Playground_CC1pRecoDeltaPhiTPlot_FullyContainedMuon_Slice_"+ToStringInt(WhichSlice+1),LabelDeltaPhiTResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
-			Playground_CC1pRecoDeltaPhiTPlot_ExitingShortMuon_Slice[WhichSlice] = new TH1D("Playground_CC1pRecoDeltaPhiTPlot_ExitingShortMuon_Slice_"+ToStringInt(WhichSlice+1),LabelDeltaPhiTResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
-			Playground_CC1pRecoDeltaPhiTPlot_ExitingMediumMuon_Slice[WhichSlice] = new TH1D("Playground_CC1pRecoDeltaPhiTPlot_ExitingMediumMuon_Slice_"+ToStringInt(WhichSlice+1),LabelDeltaPhiTResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
-			Playground_CC1pRecoDeltaPhiTPlot_ExitingLongMuon_Slice[WhichSlice] = new TH1D("Playground_CC1pRecoDeltaPhiTPlot_ExitingLongMuon_Slice_"+ToStringInt(WhichSlice+1),LabelDeltaPhiTResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
+			Playground_CC1pRecoDeltaPhiTPlot_FullyContainedMuon_Slice[WhichSlice] = new TH1D("Playground_CC1pRecoDeltaPhiTPlot_Slice_"+ToStringInt(WhichSlice+1)+"_FullyContainedMuon",LabelDeltaPhiTResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
+			Playground_CC1pRecoDeltaPhiTPlot_ExitingShortMuon_Slice[WhichSlice] = new TH1D("Playground_CC1pRecoDeltaPhiTPlot_Slice_"+ToStringInt(WhichSlice+1)+"_ExitingShortMuon",LabelDeltaPhiTResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
+			Playground_CC1pRecoDeltaPhiTPlot_ExitingMediumMuon_Slice[WhichSlice] = new TH1D("Playground_CC1pRecoDeltaPhiTPlot_Slice_"+ToStringInt(WhichSlice+1)+"_ExitingMediumMuon",LabelDeltaPhiTResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
+			Playground_CC1pRecoDeltaPhiTPlot_ExitingLongMuon_Slice[WhichSlice] = new TH1D("Playground_CC1pRecoDeltaPhiTPlot_Slice_"+ToStringInt(WhichSlice+1)+"_ExitingLongMuon",LabelDeltaPhiTResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
 
 		}		
 
@@ -1064,13 +1075,6 @@ void myRecoAnalysis::Loop() {
 			// -----------------------------------------------------------------------------------------------------------------------
 
 			if ( fabs(weight) != weight) { continue; } // Securing against infinities
-
-			// -----------------------------------------------------------------------------------------------------------------------
-
-			// hard coded limit because something still looks weird in the dirt sample at low nu-score
-			// COH interaction & infinite weight
-			
-			//if (NuScore < 0.04) { continue; }
 
 			// -----------------------------------------------------------------------------------------------------------------------------
 
@@ -1451,7 +1455,19 @@ void myRecoAnalysis::Loop() {
 
 			// CC3p2pi Background
 			
-			if (CC3p2pi == 1) { CC3p2piEventsPassingSelectionCuts++; }					
+			if (CC3p2pi == 1) { CC3p2piEventsPassingSelectionCuts++; }
+
+			// ---------------------------------------------------------------------------------------------------------------------------
+
+			// CC3p3pi Background
+			
+			if (CC3p3pi == 1) { CC3p3piEventsPassingSelectionCuts++; }
+
+			// ---------------------------------------------------------------------------------------------------------------------------
+
+			// CC4p0pi Background
+			
+			if (CC4p0pi == 1) { CC4p0piEventsPassingSelectionCuts++; }					
 
 			// ---------------------------------------------------------------------------------------------------------------------------
 
@@ -1581,7 +1597,6 @@ void myRecoAnalysis::Loop() {
 					CC1pRecoLLPvsLLMu2D->Fill(reco_Pmu_ThreePlaneLogLikelihood,reco_Pp_ThreePlaneLogLikelihood,weight);
 					CC1pRecoLengthPvsLengthMu2D->Fill(l_muCandidate,l_pCandidate,weight);
 
-
 					// -------------------------------------------------------------------------------------------------------------------------
 
 					// Playground for CC1p STV resolution plots
@@ -1590,6 +1605,9 @@ void myRecoAnalysis::Loop() {
 					double CC1pDeltaPTReso = ( TransMissMomentum - true_TransMissMomentum ) / true_TransMissMomentum * 100.;
 					double CC1pDeltaAlphaTReso = ( DeltaAlphaT - true_DeltaAlphaT ) / true_DeltaAlphaT * 100.;
 					double CC1pDeltaPhiTReso = ( DeltaPhiT - true_DeltaPhiT ) / true_DeltaPhiT * 100.;
+
+					Playground_CC1pRecoMuonMomentumResoVsDeltaThetaPlot->Fill(CC1pMuonMomentumReso,DeltaThetaProtonMuon_Deg,weight);
+					Playground_CC1pRecoMuonMomentumResoVsMuonMomentumPlot->Fill(CC1pMuonMomentumReso,reco_Pmu_mcs,weight);
 
 					// -------------------------------------------------------------------------------------------------------------------------
 
@@ -1624,9 +1642,9 @@ void myRecoAnalysis::Loop() {
 					if (DeltaAlphaT > 120) { DeltaAlphaTSlice = 2; }
 
 					int DeltaPhiTSlice = -1;
-					if (DeltaPhiT < 60) { DeltaPhiTSlice = 0; }  
-					if (DeltaPhiT > 60 && DeltaPhiT < 120) { DeltaPhiTSlice = 1; }  
-					if (DeltaPhiT > 120) { DeltaPhiTSlice = 2; }
+					if (DeltaPhiT < 30) { DeltaPhiTSlice = 0; }  
+					if (DeltaPhiT > 30 && DeltaPhiT < 60) { DeltaPhiTSlice = 1; }  
+					if (DeltaPhiT > 60) { DeltaPhiTSlice = 2; }
 
 					// Contained Muon  
 
@@ -1645,7 +1663,7 @@ void myRecoAnalysis::Loop() {
 
 						// Exitting Muon
 
-						if ( CandidateMu_Length->at(0) < 200 ) { // cm
+						if ( CandidateMu_Length->at(0) < 100 ) { // cm
 
 							Playground_CC1pRecoMuonMomentumPlot_ExitingShortMuon->Fill(CC1pMuonMomentumReso,weight);
 							Playground_CC1pRecoDeltaPTPlot_ExitingShortMuon->Fill(CC1pDeltaPTReso,weight);
@@ -1658,7 +1676,7 @@ void myRecoAnalysis::Loop() {
 
 						}
 
-						if ( CandidateMu_Length->at(0) > 200 && CandidateMu_Length->at(0) < 500 ) { // cm
+						if ( CandidateMu_Length->at(0) > 100 && CandidateMu_Length->at(0) < 200 ) { // cm
 
 							Playground_CC1pRecoMuonMomentumPlot_ExitingMediumMuon->Fill(CC1pMuonMomentumReso,weight);
 							Playground_CC1pRecoDeltaPTPlot_ExitingMediumMuon->Fill(CC1pDeltaPTReso,weight);
@@ -1672,7 +1690,7 @@ void myRecoAnalysis::Loop() {
 						}
 
 
-						if ( CandidateMu_Length->at(0) > 500) { // cm
+						if ( CandidateMu_Length->at(0) > 200) { // cm
 
 							Playground_CC1pRecoMuonMomentumPlot_ExitingLongMuon->Fill(CC1pMuonMomentumReso,weight);
 							Playground_CC1pRecoDeltaPTPlot_ExitingLongMuon->Fill(CC1pDeltaPTReso,weight);
@@ -1699,13 +1717,21 @@ void myRecoAnalysis::Loop() {
 	//			if (CC1p != 1) {
 				else {
 
-					if (CC1p1pi != 1 && CC2p != 1 && CC2p1pi != 1 && CC3p != 1 && CC3p1pi != 1 && CC3p2pi != 1) {
+					NonCC1pEventsPassingSelectionCuts++;
+
+					if (CC1p1pi != 1 && CC2p != 1 && CC2p1pi != 1 && CC3p != 1 && CC3p1pi != 1 && CC3p2pi != 1 && CC3p3pi != 1 && CC4p0pi != 1) {
 
 						if ( TMath::Abs(CandidateMu_MCParticle_Pdg->at(0)) == AbsChargedPionPdg && CandidateP_MCParticle_Pdg->at(0) == ProtonPdg) 
 							{ MisIndetifiedMuonAsPion++;  }
-						else if ( TMath::Abs(CandidateP_MCParticle_Pdg->at(0)) == AbsChargedPionPdg && CandidateMu_MCParticle_Pdg->at(0) == MuonPdg) 
+						else if ( 
+							(TMath::Abs(CandidateP_MCParticle_Pdg->at(0)) == AbsChargedPionPdg && CandidateMu_MCParticle_Pdg->at(0) == MuonPdg) ||
+							(TMath::Abs(CandidateP_MCParticle_Pdg->at(0)) == MuonPdg && CandidateMu_MCParticle_Pdg->at(0) == AbsChargedPionPdg)
+							) 
 							{ MisIndetifiedProtonAsPion++;  }
-						else if ( CandidateP_MCParticle_Pdg->at(0) == DeuteriumPdg && CandidateMu_MCParticle_Pdg->at(0) == MuonPdg) { MisIndetifiedProtonAsDeuterium++;  }
+						else if ( CandidateP_MCParticle_Pdg->at(0) == DeuteriumPdg && CandidateMu_MCParticle_Pdg->at(0) == MuonPdg) 
+							{ MisIndetifiedProtonAsDeuterium++;  }
+						else if ( CandidateMu_MCParticle_Pdg->at(0) == DeuteriumPdg && CandidateP_MCParticle_Pdg->at(0) == ProtonPdg) 
+							{ MisIndetifiedMuonAsDeuterium++;  }
 						else if ( TMath::Abs(CandidateP_MCParticle_Pdg->at(0)) == ElectronPdg && CandidateMu_MCParticle_Pdg->at(0) == MuonPdg) 				
 							{ MisIndetifiedProtonAsElectron++;  }
 						else if ( TMath::Abs(CandidateP_MCParticle_Pdg->at(0)) == ElectronPdg && TMath::Abs(CandidateMu_MCParticle_Pdg->at(0)) == ElectronPdg) 
@@ -1714,15 +1740,27 @@ void myRecoAnalysis::Loop() {
 							{ MisIndetifiedMuPToMuMu++;  }
 						else if ( TMath::Abs(CandidateP_MCParticle_Pdg->at(0)) == AbsChargedPionPdg && TMath::Abs(CandidateMu_MCParticle_Pdg->at(0)) == AbsChargedPionPdg) 
 							{ MisIndetifiedMuPToPiPi++;  }
-						else if ( CandidateMu_MCParticle_Pdg->at(0) == ProtonPdg && CandidateP_MCParticle_Pdg->at(0) == ProtonPdg) { MisIndetifiedMuonAsProton++;  }
-						else if ( CandidateMu_MCParticle_Pdg->at(0) == -MuonPdg && CandidateP_MCParticle_Pdg->at(0) == ProtonPdg) { MisIndetifiedMuonAsAntiMuon++;  }
-						else if ( True_CandidateMu_StartContainment->at(0) == 0 ) { CandidateMuon_MCParticle_OutFV++; }
-//						else if ( True_CandidateP_StartContainment->at(0) == 0 || True_CandidateP_EndContainment->at(0) == 0) { CandidateProton_MCParticle_OutFV++; }
-						else if ( CandidateMu_MCParticle_Pdg->at(0) == -99. || CandidateP_MCParticle_Pdg->at(0) == -99.) { InTimeCosmics++; }
+						else if ( CandidateMu_MCParticle_Pdg->at(0) == ProtonPdg && CandidateP_MCParticle_Pdg->at(0) == ProtonPdg) 
+							{ MisIndetifiedMuonAsProton++;  }
+						else if ( CandidateMu_MCParticle_Pdg->at(0) == -MuonPdg && CandidateP_MCParticle_Pdg->at(0) == ProtonPdg) 
+							{ MisIndetifiedMuonAsAntiMuon++;  }
+						else if ( True_CandidateMu_StartContainment->at(0) == 0 ) 
+							{ CandidateMuon_MCParticle_OutFV++; }
+						else if ( CandidateMu_MCParticle_Pdg->at(0) == -99. || CandidateP_MCParticle_Pdg->at(0) == -99.) 
+							{ InTimeCosmics++; }
+						else if ( CandidateMu_MCParticle_Pdg->at(0) == NeutronPdg || CandidateP_MCParticle_Pdg->at(0) == NeutronPdg) 
+							{ NeutronPairCounter++; }
 						else if ( NC == 1) { NCEvents++; }
 						else if ( True_CandidateMu_StartX->at(0) != True_CandidateP_StartX->at(0) 
 						|| True_CandidateMu_StartY->at(0) != True_CandidateP_StartY->at(0)
 						|| True_CandidateMu_StartZ->at(0) != True_CandidateP_StartZ->at(0) ) { MultipleVertices++; }
+
+						else { 
+							std::cout << "new MC background topology";
+							std::cout << " CandidateMu_MCParticle_Pdg = " << CandidateMu_MCParticle_Pdg->at(0);
+							std::cout << " CandidateP_MCParticle_Pdg = " << CandidateP_MCParticle_Pdg->at(0) << endl; 
+				
+						}
 
 					}
 
@@ -2160,33 +2198,25 @@ void myRecoAnalysis::Loop() {
 
 		} // End of the loop over the events
 
-		std::cout << std::endl << "Created a new file: " << FileName << std::endl << std::endl << std::endl;
+		std::cout << std::endl << "Created file: " << FileName << std::endl << std::endl;
+		std::cout << "Txt info file: " << TxtName << std::endl << std::endl;
+
 		std::cout << "---------------------------------------------------------------------" << std::endl << std::endl;
 
 		// -------------------------------------------------------------------------------------------------------------------------
 		
-		double nentriesError = sqrt(nentries);		
-		
-//		std::cout << std::endl << "Number of " << fWhichSample << " initial entries = " << nentries << " +/- " << nentriesError 
-//		<< " (POT normalized: " << nentries*POTScale << " +/- " << nentriesError*POTScale << ")" << std::endl;		
+		double nentriesError = sqrt(nentries);			
 		
 		// -------------------------------------------------------------------------------------------------------------------------	
 
 		// All reconstructed events passing the selection criteria
 
-		double NEventsPassingSelectionCutsError = sqrt(NEventsPassingSelectionCuts);
-
-		std::cout << std::endl << "Number of events passing our selection criteria = " << NEventsPassingSelectionCuts << " +/- " 
-		<< NEventsPassingSelectionCutsError
-		<< " (POT normalized: " << NEventsPassingSelectionCuts*POTScale << " +/- " 
-		<< NEventsPassingSelectionCutsError*POTScale << ")" << std::endl;
-
-		if (string(fWhichSample).find("Overlay") != std::string::npos) { std::cout << std::endl << "POTCount = " << POTCount << std::endl << std::endl; }
-
-		std::cout << "Txt info file located under " << TxtName << std::endl;
+		double NEventsPassingSelectionCutsError = TMath::Sqrt(NEventsPassingSelectionCuts);
+		double KinematicsCounterError = TMath::Sqrt(KinematicsCounter);
 		
 		// -------------------------------------------------------------------------------------------------------------------------	
 
+		double NonCC1pEventsPassingSelectionCutsError = 0;
 		double CC1pEventsPassingSelectionCutsError = 0;
 		double CC1p1piEventsPassingSelectionCutsError = 0;
 		double CC2pEventsPassingSelectionCutsError = 0;
@@ -2194,9 +2224,12 @@ void myRecoAnalysis::Loop() {
 		double CC3pEventsPassingSelectionCutsError = 0;
 		double CC3p1piEventsPassingSelectionCutsError = 0;
 		double CC3p2piEventsPassingSelectionCutsError = 0;
+		double CC3p3piEventsPassingSelectionCutsError = 0;
+		double CC4p0piEventsPassingSelectionCutsError = 0;
 		double MisIndetifiedMuonAsPionError = 0;
 		double MisIndetifiedProtonAsPionError = 0;
 		double MisIndetifiedProtonAsDeuteriumError = 0;
+		double MisIndetifiedMuonAsDeuteriumError = 0;
 		double MisIndetifiedProtonAsElectronError = 0;
 		double MisIndetifiedMuPToElectronElectronError = 0;
 		double MisIndetifiedMuPToMuMuError = 0;
@@ -2207,7 +2240,46 @@ void myRecoAnalysis::Loop() {
 		double CandidateProton_MCParticle_OutFVError = 0;
 		double MultipleVerticesError = 0;
 		double InTimeCosmicsError = 0;
+		double NeutronPairCounterError = 0;
 		double NCEventsError = 0;
+
+		cout << endl;
+
+		// -------------------------------------------------------------------------------------------------------------------------
+
+		// Samdef events
+
+		TFile* fFile = new TFile(fPathToFile);
+		TH1D* SamdefEventsPlot = (TH1D*)(fFile->Get("SamdefEventPlot"));
+		double SamdefEvents = SamdefEventsPlot->GetBinContent(1);
+
+		// -------------------------------------------------------------------------------------------------------------------------
+
+		// To be saved in the txt file
+
+		myTxtFile << std::fixed << std::setprecision(2);
+
+		myTxtFile << fWhichSample;
+
+		myTxtFile << "\n\nSamdef events = " << SamdefEvents << " ("<< int(100.*double(SamdefEvents)/double(SamdefEvents)) << " %)" ;
+
+		myTxtFile << "\n\nStarting with " << TotalCounter << " preselected events (" << int(100.*double(TotalCounter)/double(SamdefEvents)) << "% / " << int(100.*double(TotalCounter)/double(TotalCounter)) << "%)";
+
+		myTxtFile << "\n\n" << ContainmentCounter << " events passing proton full containment requirement (" << int(100.*double(ContainmentCounter)/double(SamdefEvents)) << "% / " << int(100.*double(ContainmentCounter)/double(TotalCounter)) << " %)";
+
+		myTxtFile << "\n\n" << ContainedVertexCounter << " events passing contained vertex requirement (" << int(100.*double(ContainedVertexCounter)/double(SamdefEvents)) << "% / " << int(100.*double(ContainedVertexCounter)/double(TotalCounter)) << " %)";
+
+		myTxtFile << "\n\n" << PIDCounter << " events passing PID selection cut (" << int(100.*double(PIDCounter)/double(SamdefEvents)) << "% / " << int(100.*double(PIDCounter)/double(TotalCounter)) << " %)";
+
+		myTxtFile << "\n\n" << NuScoreCounter << " events passing NuScore selection cut (" << int(100.*double(NuScoreCounter)/double(SamdefEvents)) << "% / " << int(100.*double(NuScoreCounter)/double(TotalCounter)) << " %)";
+
+		myTxtFile << "\n\n" << KinematicsCounter << " events passing common kinematic ranges (" << int(100.*double(KinematicsCounter)/double(SamdefEvents)) << "% / " << int(100.*double(KinematicsCounter)/double(TotalCounter)) << " %)";
+
+
+		myTxtFile << "\n\n" << KinematicsCounter << " $\\pm$ " 
+		<< KinematicsCounterError
+		<< " & " << KinematicsCounter*POTScale << " $\\pm$ " 
+		<< KinematicsCounterError*POTScale << " \\tabularnewline" << std::endl;
 
 		if ( (fWhichSample == "Overlay9_Run1" || fWhichSample == "Overlay9_Run2" || fWhichSample == "Overlay9_Run3" || fWhichSample == "Overlay9_Run4" || fWhichSample == "Overlay9_Run5")
 			&& fUniverseIndex == -1) {
@@ -2216,87 +2288,21 @@ void myRecoAnalysis::Loop() {
 
 			CC1pEventsPassingSelectionCutsError = sqrt(CC1pEventsPassingSelectionCuts);
 
-			std::cout << std::endl << "CC1p & " << CC1pEventsPassingSelectionCuts << " $\\pm$ " 
+			myTxtFile << std::endl << "CC1p & " << CC1pEventsPassingSelectionCuts << " $\\pm$ " 
 			<< CC1pEventsPassingSelectionCutsError
 			<< " & " << CC1pEventsPassingSelectionCuts*POTScale << " $\\pm$ " 
-			<< CC1pEventsPassingSelectionCutsError*POTScale << " \\tabularnewline \n\\hline" << std::endl;
-			
-			// -------------------------------------------------------------------------------------------------------------------------	
+			<< CC1pEventsPassingSelectionCutsError*POTScale << " \\tabularnewline" << std::endl << std::endl << std::endl;
 
-			// All reconstructed CC1p1pi events passing the selection criteria
-
-			CC1p1piEventsPassingSelectionCutsError = sqrt(CC1p1piEventsPassingSelectionCuts);
-
-			std::cout << std::endl << std::endl << "CC1p1$\\pi$ & " << CC1p1piEventsPassingSelectionCuts << " $\\pm$ " 
-			<< CC1p1piEventsPassingSelectionCutsError
-			<< " & " << CC1p1piEventsPassingSelectionCuts*POTScale << " $\\pm$ " 
-			<< CC1p1piEventsPassingSelectionCutsError*POTScale << " \\tabularnewline \n\\hline" << std::endl;
-			
 			// -------------------------------------------------------------------------------------------------------------------------	
 
 			// All reconstructed CC2p events passing the selection criteria
 
 			CC2pEventsPassingSelectionCutsError = sqrt(CC2pEventsPassingSelectionCuts);
 
-			std::cout << "CC2p & " << CC2pEventsPassingSelectionCuts << " $\\pm$ " 
+			myTxtFile << "CC2p & " << CC2pEventsPassingSelectionCuts << " $\\pm$ " 
 			<< CC2pEventsPassingSelectionCutsError
 			<< " & " << CC2pEventsPassingSelectionCuts*POTScale << " $\\pm$ " 
-			<< CC2pEventsPassingSelectionCutsError*POTScale << " \\tabularnewline \n\\hline" << std::endl;
-
-			// -------------------------------------------------------------------------------------------------------------------------	
-
-			// All reconstructed CC2p1pi events passing the selection criteria
-
-			CC2p1piEventsPassingSelectionCutsError = sqrt(CC2p1piEventsPassingSelectionCuts);
-
-			std::cout << "CC2p1$\\pi$ & " << CC2p1piEventsPassingSelectionCuts << " $\\pm$ " 
-			<< CC2p1piEventsPassingSelectionCutsError
-			<< " & " << CC2p1piEventsPassingSelectionCuts*POTScale << " $\\pm$ " 
-			<< CC2p1piEventsPassingSelectionCutsError*POTScale << " \\tabularnewline \n\\hline" << std::endl;						
-
-			// -------------------------------------------------------------------------------------------------------------------------	
-
-			// All reconstructed CC3p events passing the selection criteria
-
-			CC3pEventsPassingSelectionCutsError = sqrt(CC3pEventsPassingSelectionCuts);
-
-			std::cout << "CC3p & " << CC3pEventsPassingSelectionCuts << " $\\pm$ " 
-			<< CC3pEventsPassingSelectionCutsError
-			<< " & " << CC3pEventsPassingSelectionCuts*POTScale << " $\\pm$ " 
-			<< CC3pEventsPassingSelectionCutsError*POTScale << " \\tabularnewline \n\\hline" << std::endl;
-
-			// -------------------------------------------------------------------------------------------------------------------------	
-
-			// All reconstructed CC3p1pi events passing the selection criteria
-
-			CC3p1piEventsPassingSelectionCutsError = sqrt(CC3p1piEventsPassingSelectionCuts);
-
-			std::cout << "CC3p1$\\pi$ & " << CC3p1piEventsPassingSelectionCuts << " $\\pm$ " 
-			<< CC3p1piEventsPassingSelectionCutsError
-			<< " & " << CC3p1piEventsPassingSelectionCuts*POTScale << " $\\pm$ " 
-			<< CC3p1piEventsPassingSelectionCutsError*POTScale << " \\tabularnewline \n\\hline" << std::endl;
-
-			// -------------------------------------------------------------------------------------------------------------------------	
-
-			// All reconstructed CC3p2pi events passing the selection criteria
-
-			CC3p2piEventsPassingSelectionCutsError = sqrt(CC3p2piEventsPassingSelectionCuts);
-
-			std::cout << "CC3p2$\\pi$ & " << CC3p2piEventsPassingSelectionCuts << " $\\pm$ " 
-			<< CC3p2piEventsPassingSelectionCutsError
-			<< " & " << CC3p2piEventsPassingSelectionCuts*POTScale << " $\\pm$ " 
-			<< CC3p2piEventsPassingSelectionCutsError*POTScale << " \\tabularnewline \n\\hline" << std::endl;
-
-			// -------------------------------------------------------------------------------------------------------------------------	
-
-			// Mis-identified muon-pion events passing the selection criteria
-
-			MisIndetifiedMuonAsPionError = sqrt(MisIndetifiedMuonAsPion);
-
-			std::cout << "$\\pi$-p & " << MisIndetifiedMuonAsPion << " $\\pm$ " 
-			<< MisIndetifiedMuonAsPionError
-			<< " & " << MisIndetifiedMuonAsPion*POTScale << " $\\pm$ " 
-			<< MisIndetifiedMuonAsPionError*POTScale << " \\tabularnewline \n\\hline" << std::endl;	
+			<< CC2pEventsPassingSelectionCutsError*POTScale << " \\tabularnewline \\hline" << std::endl;
 
 			// -------------------------------------------------------------------------------------------------------------------------	
 
@@ -2304,120 +2310,32 @@ void myRecoAnalysis::Loop() {
 
 			MisIndetifiedMuonAsProtonError = sqrt(MisIndetifiedMuonAsProton);
 
-			std::cout << "p-p & " << MisIndetifiedMuonAsProton << " $\\pm$ " 
+			myTxtFile << "p-p & " << MisIndetifiedMuonAsProton << " $\\pm$ " 
 			<< MisIndetifiedMuonAsProtonError
 			<< " & " << MisIndetifiedMuonAsProton*POTScale << " $\\pm$ " 
-			<< MisIndetifiedMuonAsProtonError*POTScale << " \\tabularnewline \n\\hline" << std::endl;	
-
-			// -------------------------------------------------------------------------------------------------------------------------	
-
-			// Mis-identified muon- anti-muon events passing the selection criteria
-
-			MisIndetifiedMuonAsAntiMuonError = sqrt(MisIndetifiedMuonAsAntiMuon);
-
-			std::cout << "$\\mu^{+}$ - p & " << MisIndetifiedMuonAsAntiMuon << " $\\pm$ " 
-			<< MisIndetifiedMuonAsAntiMuonError
-			<< " & " << MisIndetifiedMuonAsAntiMuon*POTScale << " $\\pm$ " 
-			<< MisIndetifiedMuonAsAntiMuonError*POTScale <<" \\tabularnewline \n\\hline" << std::endl;
+			<< MisIndetifiedMuonAsProtonError*POTScale << " \\tabularnewline \\hline" << std::endl;
 
 			// -------------------------------------------------------------------------------------------------------------------------	
 
 			// Mis-identified muon-pion events passing the selection criteria
 
-			MisIndetifiedProtonAsPionError = sqrt(MisIndetifiedProtonAsPion);
+			MisIndetifiedMuonAsPionError = sqrt(MisIndetifiedMuonAsPion);
 
-			std::cout << "$\\mu$-$\\pi$ & " << MisIndetifiedProtonAsPion << " $\\pm$ " 
-			<< MisIndetifiedProtonAsPionError
-			<< " & " << MisIndetifiedProtonAsPion*POTScale << " $\\pm$ " 
-			<< MisIndetifiedProtonAsPionError*POTScale << " \\tabularnewline \n\\hline" << std::endl;
-
-			// -------------------------------------------------------------------------------------------------------------------------	
-
-			// Mis-identified muon-pion events passing the selection criteria
-
-			MisIndetifiedProtonAsDeuteriumError = sqrt(MisIndetifiedProtonAsDeuterium);
-
-			std::cout << "$\\mu$-D & " << MisIndetifiedProtonAsDeuterium << " $\\pm$ " 
-			<< MisIndetifiedProtonAsDeuteriumError
-			<< " & " << MisIndetifiedProtonAsDeuterium*POTScale << " $\\pm$ " 
-			<< MisIndetifiedProtonAsDeuteriumError*POTScale << " \\tabularnewline \n\\hline" << std::endl;
+			myTxtFile << "$\\pi$-p & " << MisIndetifiedMuonAsPion << " $\\pm$ " 
+			<< MisIndetifiedMuonAsPionError
+			<< " & " << MisIndetifiedMuonAsPion*POTScale << " $\\pm$ " 
+			<< MisIndetifiedMuonAsPionError*POTScale << " \\tabularnewline \\hline" << std::endl;	
 
 			// -------------------------------------------------------------------------------------------------------------------------	
 
-			// Mis-identified muon-pion events passing the selection criteria
+			// All reconstructed CC3p events passing the selection criteria
 
-			MisIndetifiedProtonAsElectronError = sqrt(MisIndetifiedProtonAsElectron);
+			CC3pEventsPassingSelectionCutsError = sqrt(CC3pEventsPassingSelectionCuts);
 
-			std::cout << "$\\mu$-e & " << MisIndetifiedProtonAsElectron << " $\\pm$ " 
-			<< MisIndetifiedProtonAsElectronError
-			<< " & " << MisIndetifiedProtonAsElectron*POTScale << " $\\pm$ " 
-			<< MisIndetifiedProtonAsElectronError*POTScale << " \\tabularnewline \n\\hline" << std::endl;
-
-			// -------------------------------------------------------------------------------------------------------------------------	
-
-			// Mis-identified e-e events passing the selection criteria
-
-			MisIndetifiedMuPToElectronElectronError = sqrt(MisIndetifiedMuPToElectronElectron);
-
-			std::cout << "e-e & " << MisIndetifiedMuPToElectronElectron << " $\\pm$ " 
-			<< MisIndetifiedMuPToElectronElectronError
-			<< " & " << MisIndetifiedMuPToElectronElectron*POTScale << " $\\pm$ " 
-			<< MisIndetifiedMuPToElectronElectronError*POTScale << " \\tabularnewline \n\\hline" << std::endl;
-
-			// -------------------------------------------------------------------------------------------------------------------------	
-
-			// Mis-identified mu-mu events passing the selection criteria
-
-			MisIndetifiedMuPToMuMuError = sqrt(MisIndetifiedMuPToMuMu);
-
-			std::cout << "$\\mu$-$\\mu$ & " << MisIndetifiedMuPToMuMu << " $\\pm$ " 
-			<< MisIndetifiedMuPToMuMuError
-			<< " & " << MisIndetifiedMuPToMuMu*POTScale << " $\\pm$ " 
-			<< MisIndetifiedMuPToMuMuError*POTScale << " \\tabularnewline \n\\hline" << std::endl;
-
-			// -------------------------------------------------------------------------------------------------------------------------	
-
-			// Mis-identified pi-pi events passing the selection criteria
-
-			MisIndetifiedMuPToPiPiError = sqrt(MisIndetifiedMuPToPiPi);
-
-			std::cout << "$\\pi$-$\\pi$ & " << MisIndetifiedMuPToPiPi << " $\\pm$ " 
-			<< MisIndetifiedMuPToPiPiError
-			<< " & " << MisIndetifiedMuPToPiPi*POTScale << " $\\pm$ " 
-			<< MisIndetifiedMuPToPiPiError*POTScale << " \\tabularnewline \n\\hline" << std::endl;
-
-			// -------------------------------------------------------------------------------------------------------------------------	
-
-			// Muon Candidate MC Particle outside FV
-
-			CandidateMuon_MCParticle_OutFVError = sqrt(CandidateMuon_MCParticle_OutFV);
-
-			std::cout << "True vertex outside FV & " << CandidateMuon_MCParticle_OutFV << " $\\pm$ " 
-			<< CandidateMuon_MCParticle_OutFVError
-			<< " & " << CandidateMuon_MCParticle_OutFV*POTScale << " $\\pm$ " 
-			<< CandidateMuon_MCParticle_OutFVError*POTScale << " \\tabularnewline \n\\hline" << std::endl;	
-
-			// -------------------------------------------------------------------------------------------------------------------------	
-
-			// In-time cosmics
-
-			InTimeCosmicsError = sqrt(InTimeCosmics);
-
-			std::cout << "In-time cosmics & " << InTimeCosmics << " $\\pm$ " 
-			<< InTimeCosmicsError
-			<< " & " << InTimeCosmics*POTScale << " $\\pm$ " 
-			<< InTimeCosmicsError*POTScale << " \\tabularnewline \n\\hline" << std::endl;	
-
-			// -------------------------------------------------------------------------------------------------------------------------	
-
-			// In-time cosmics
-
-			NCEventsError = sqrt(NCEvents);
-
-			std::cout << "NC Events & " << NCEvents << " $\\pm$ " 
-			<< NCEventsError
-			<< " & " << NCEvents*POTScale << " $\\pm$ " 
-			<< NCEventsError*POTScale << " \\tabularnewline \n\\hline" << std::endl;	
+			myTxtFile << "CC3p & " << CC3pEventsPassingSelectionCuts << " $\\pm$ " 
+			<< CC3pEventsPassingSelectionCutsError
+			<< " & " << CC3pEventsPassingSelectionCuts*POTScale << " $\\pm$ " 
+			<< CC3pEventsPassingSelectionCutsError*POTScale << " \\tabularnewline \\hline" << std::endl;	
 
 			// -------------------------------------------------------------------------------------------------------------------------	
 
@@ -2425,41 +2343,228 @@ void myRecoAnalysis::Loop() {
 
 			MultipleVerticesError = sqrt(MultipleVertices);
 
-			std::cout << "Multiple vertices & " << MultipleVertices << " $\\pm$ " 
+			myTxtFile << "Multiple vertices & " << MultipleVertices << " $\\pm$ " 
 			<< MultipleVerticesError
 			<< " & " << MultipleVertices*POTScale << " $\\pm$ " 
-			<< MultipleVerticesError*POTScale << " \\tabularnewline \n\\hline" << std::endl;
+			<< MultipleVerticesError*POTScale << " \\tabularnewline \\hline" << std::endl;
+			
+			// -------------------------------------------------------------------------------------------------------------------------	
+
+			// All reconstructed CC1p1pi events passing the selection criteria
+
+			CC1p1piEventsPassingSelectionCutsError = sqrt(CC1p1piEventsPassingSelectionCuts);
+
+			myTxtFile <<  "CC1p1$\\pi$ & " << CC1p1piEventsPassingSelectionCuts << " $\\pm$ " 
+			<< CC1p1piEventsPassingSelectionCutsError
+			<< " & " << CC1p1piEventsPassingSelectionCuts*POTScale << " $\\pm$ " 
+			<< CC1p1piEventsPassingSelectionCutsError*POTScale << " \\tabularnewline \\hline" << std::endl;
+
+			// -------------------------------------------------------------------------------------------------------------------------	
+
+			// Muon Candidate MC Particle outside FV
+
+			CandidateMuon_MCParticle_OutFVError = sqrt(CandidateMuon_MCParticle_OutFV);
+
+			myTxtFile << "True vertex outside FV & " << CandidateMuon_MCParticle_OutFV << " $\\pm$ " 
+			<< CandidateMuon_MCParticle_OutFVError
+			<< " & " << CandidateMuon_MCParticle_OutFV*POTScale << " $\\pm$ " 
+			<< CandidateMuon_MCParticle_OutFVError*POTScale << " \\tabularnewline \\hline" << std::endl;	
+
+			// -------------------------------------------------------------------------------------------------------------------------	
+
+			// Mis-identified mu-mu events passing the selection criteria
+
+			MisIndetifiedMuPToMuMuError = sqrt(MisIndetifiedMuPToMuMu);
+
+			myTxtFile << "$\\mu$-$\\mu$ & " << MisIndetifiedMuPToMuMu << " $\\pm$ " 
+			<< MisIndetifiedMuPToMuMuError
+			<< " & " << MisIndetifiedMuPToMuMu*POTScale << " $\\pm$ " 
+			<< MisIndetifiedMuPToMuMuError*POTScale << " \\tabularnewline \\hline" << std::endl;
+
+			// -------------------------------------------------------------------------------------------------------------------------	
+
+			// NC events
+
+			NCEventsError = sqrt(NCEvents);
+
+			myTxtFile << "NC Events & " << NCEvents << " $\\pm$ " 
+			<< NCEventsError
+			<< " & " << NCEvents*POTScale << " $\\pm$ " 
+			<< NCEventsError*POTScale << " \\tabularnewline \\hline" << std::endl;
+
+			// -------------------------------------------------------------------------------------------------------------------------	
+
+			// All reconstructed CC2p1pi events passing the selection criteria
+
+			CC2p1piEventsPassingSelectionCutsError = sqrt(CC2p1piEventsPassingSelectionCuts);
+
+			myTxtFile << "CC2p1$\\pi$ & " << CC2p1piEventsPassingSelectionCuts << " $\\pm$ " 
+			<< CC2p1piEventsPassingSelectionCutsError
+			<< " & " << CC2p1piEventsPassingSelectionCuts*POTScale << " $\\pm$ " 
+			<< CC2p1piEventsPassingSelectionCutsError*POTScale << " \\tabularnewline \\hline" << std::endl;
+
+			// -------------------------------------------------------------------------------------------------------------------------	
+
+			// In-time cosmics
+
+			InTimeCosmicsError = sqrt(InTimeCosmics);
+
+			myTxtFile << "In-time cosmics & " << InTimeCosmics << " $\\pm$ " 
+			<< InTimeCosmicsError
+			<< " & " << InTimeCosmics*POTScale << " $\\pm$ " 
+			<< InTimeCosmicsError*POTScale << " \\tabularnewline \\hline" << std::endl;	
+
+			// -------------------------------------------------------------------------------------------------------------------------	
+
+			// Mis-identified muon- anti-muon events passing the selection criteria
+
+			MisIndetifiedMuonAsAntiMuonError = sqrt(MisIndetifiedMuonAsAntiMuon);
+
+			myTxtFile << "$\\mu^{+}$ - p & " << MisIndetifiedMuonAsAntiMuon << " $\\pm$ " 
+			<< MisIndetifiedMuonAsAntiMuonError
+			<< " & " << MisIndetifiedMuonAsAntiMuon*POTScale << " $\\pm$ " 
+			<< MisIndetifiedMuonAsAntiMuonError*POTScale <<" \\tabularnewline \\hline" << std::endl;
+
+			// -------------------------------------------------------------------------------------------------------------------------	
+
+			// Mis-identified muon-pion events passing the selection criteria
+
+			MisIndetifiedProtonAsElectronError = sqrt(MisIndetifiedProtonAsElectron);
+
+			myTxtFile << "$\\mu$-e & " << MisIndetifiedProtonAsElectron << " $\\pm$ " 
+			<< MisIndetifiedProtonAsElectronError
+			<< " & " << MisIndetifiedProtonAsElectron*POTScale << " $\\pm$ " 
+			<< MisIndetifiedProtonAsElectronError*POTScale << " \\tabularnewline \\hline" << std::endl;	
+
+			// -------------------------------------------------------------------------------------------------------------------------	
+
+			// Mis-identified muon-pion events passing the selection criteria
+
+			MisIndetifiedProtonAsPionError = sqrt(MisIndetifiedProtonAsPion);
+
+			myTxtFile << "$\\mu$-$\\pi$ & " << MisIndetifiedProtonAsPion << " $\\pm$ " 
+			<< MisIndetifiedProtonAsPionError
+			<< " & " << MisIndetifiedProtonAsPion*POTScale << " $\\pm$ " 
+			<< MisIndetifiedProtonAsPionError*POTScale << " \\tabularnewline \\hline" << std::endl;				
+
+			// -------------------------------------------------------------------------------------------------------------------------	
+
+			// All reconstructed CC3p1pi events passing the selection criteria
+
+			CC3p1piEventsPassingSelectionCutsError = sqrt(CC3p1piEventsPassingSelectionCuts);
+
+			myTxtFile << "CC3p1$\\pi$ & " << CC3p1piEventsPassingSelectionCuts << " $\\pm$ " 
+			<< CC3p1piEventsPassingSelectionCutsError
+			<< " & " << CC3p1piEventsPassingSelectionCuts*POTScale << " $\\pm$ " 
+			<< CC3p1piEventsPassingSelectionCutsError*POTScale << " \\tabularnewline \\hline" << std::endl;
+
+			// -------------------------------------------------------------------------------------------------------------------------	
+
+			// Mis-identified pi-pi events passing the selection criteria
+
+			MisIndetifiedMuPToPiPiError = sqrt(MisIndetifiedMuPToPiPi);
+
+			myTxtFile << "$\\pi$-$\\pi$ & " << MisIndetifiedMuPToPiPi << " $\\pm$ " 
+			<< MisIndetifiedMuPToPiPiError
+			<< " & " << MisIndetifiedMuPToPiPi*POTScale << " $\\pm$ " 
+			<< MisIndetifiedMuPToPiPiError*POTScale << " \\tabularnewline \\hline" << std::endl;	
+
+			// -------------------------------------------------------------------------------------------------------------------------	
+
+			// Mis-identified muon-pion events passing the selection criteria
+
+			MisIndetifiedProtonAsDeuteriumError = sqrt(MisIndetifiedProtonAsDeuterium);
+
+			myTxtFile << "$\\mu$-D & " << MisIndetifiedProtonAsDeuterium << " $\\pm$ " 
+			<< MisIndetifiedProtonAsDeuteriumError
+			<< " & " << MisIndetifiedProtonAsDeuterium*POTScale << " $\\pm$ " 
+			<< MisIndetifiedProtonAsDeuteriumError*POTScale << " \\tabularnewline \\hline" << std::endl;
+
+			// -------------------------------------------------------------------------------------------------------------------------	
+
+			// n-n events passing the selection criteria
+
+			NeutronPairCounterError = sqrt(NeutronPairCounter);
+
+			myTxtFile << "n--n & " << NeutronPairCounter << " $\\pm$ " 
+			<< NeutronPairCounterError
+			<< " & " << NeutronPairCounter*POTScale << " $\\pm$ " 
+			<< NeutronPairCounterError*POTScale << " \\tabularnewline \\hline" << std::endl;
+
+			// -------------------------------------------------------------------------------------------------------------------------	
+
+			// Mis-identified e-e events passing the selection criteria
+
+			MisIndetifiedMuPToElectronElectronError = sqrt(MisIndetifiedMuPToElectronElectron);
+
+			myTxtFile << "e-e & " << MisIndetifiedMuPToElectronElectron << " $\\pm$ " 
+			<< MisIndetifiedMuPToElectronElectronError
+			<< " & " << MisIndetifiedMuPToElectronElectron*POTScale << " $\\pm$ " 
+			<< MisIndetifiedMuPToElectronElectronError*POTScale << " \\tabularnewline \\hline" << std::endl;	
+
+			// -------------------------------------------------------------------------------------------------------------------------	
+
+			// All reconstructed CC3p2pi events passing the selection criteria
+
+			CC3p2piEventsPassingSelectionCutsError = sqrt(CC3p2piEventsPassingSelectionCuts);
+
+			myTxtFile << "CC3p2$\\pi$ & " << CC3p2piEventsPassingSelectionCuts << " $\\pm$ " 
+			<< CC3p2piEventsPassingSelectionCutsError
+			<< " & " << CC3p2piEventsPassingSelectionCuts*POTScale << " $\\pm$ " 
+			<< CC3p2piEventsPassingSelectionCutsError*POTScale << " \\tabularnewline \\hline" << std::endl;
+
+			// -------------------------------------------------------------------------------------------------------------------------	
+
+			// All reconstructed CC3p3pi events passing the selection criteria
+
+			CC3p3piEventsPassingSelectionCutsError = sqrt(CC3p3piEventsPassingSelectionCuts);
+
+			myTxtFile << "CC3p3$\\pi$ & " << CC3p3piEventsPassingSelectionCuts << " $\\pm$ " 
+			<< CC3p3piEventsPassingSelectionCutsError
+			<< " & " << CC3p3piEventsPassingSelectionCuts*POTScale << " $\\pm$ " 
+			<< CC3p3piEventsPassingSelectionCutsError*POTScale << " \\tabularnewline \\hline" << std::endl;
+
+			// -------------------------------------------------------------------------------------------------------------------------	
+
+			// All reconstructed CC4p0pi events passing the selection criteria
+
+			CC4p0piEventsPassingSelectionCutsError = sqrt(CC4p0piEventsPassingSelectionCuts);
+
+			myTxtFile << "CC4p0$\\pi$ & " << CC4p0piEventsPassingSelectionCuts << " $\\pm$ " 
+			<< CC4p0piEventsPassingSelectionCutsError
+			<< " & " << CC4p0piEventsPassingSelectionCuts*POTScale << " $\\pm$ " 
+			<< CC4p0piEventsPassingSelectionCutsError*POTScale << " \\tabularnewline \\hline" << std::endl;
+
+			// -------------------------------------------------------------------------------------------------------------------------	
+
+			// Mis-identified muon-D events passing the selection criteria
+
+			MisIndetifiedMuonAsDeuteriumError = sqrt(MisIndetifiedMuonAsDeuterium);
+
+			myTxtFile << "p-D & " << MisIndetifiedMuonAsDeuterium << " $\\pm$ " 
+			<< MisIndetifiedMuonAsDeuteriumError
+			<< " & " << MisIndetifiedMuonAsDeuterium*POTScale << " $\\pm$ " 
+			<< MisIndetifiedMuonAsDeuteriumError*POTScale << " \\tabularnewline \\hline" << std::endl;
+
+			// -------------------------------------------------------------------------------------------------------------------------	
+
+			// All NonCC1p events passing the selection criteria
+
+			NonCC1pEventsPassingSelectionCutsError = sqrt(NonCC1pEventsPassingSelectionCuts);
+
+			myTxtFile << " \\hline Total non--CC1p0$\\pi$ & " << NonCC1pEventsPassingSelectionCuts << " $\\pm$ " 
+			<< NonCC1pEventsPassingSelectionCutsError
+			<< " & " << NonCC1pEventsPassingSelectionCuts*POTScale << " $\\pm$ " 
+			<< NonCC1pEventsPassingSelectionCutsError*POTScale << " \\tabularnewline \\hline" << std::endl;
 
 		}
 
-		cout << endl;
+		if (string(fWhichSample).find("Overlay") != std::string::npos) { 
 
-		// -------------------------------------------------------------------------------------------------------------------------
+			myTxtFile << std::endl << std::endl << std::scientific << "POTCount = " << POTCount << std::endl << std::endl; 
 
-		// Samdef events
 
-		TH1D* SamdefEventsPlot = (TH1D*)(fPathToFile->Get("SamdefEventPlot"));
-		double SamdefEvents = SamdefEventsPlot->GetBinContent(1);
-
-		// -------------------------------------------------------------------------------------------------------------------------
-
-		// To be saved in the txt file
-
-		myTxtFile << "\n\nSamdef events = " << SamdefEvents << int(100.*double(SamdefEvents)/double(SamdefEvents)) << " %)" << std::endl << std::endl;
-
-		myTxtFile << "\n\nStarting with " << TotalCounter << " preselected events (" << int(100.*double(TotalCounter)/double(SamdefEvents)) << "% / " << int(100.*double(TotalCounter)/double(TotalCounter)) << "%)" << std::endl << std::endl;
-
-		myTxtFile << "\n\n" << ContainmentCounter << " events passing proton full containment requirement (" << int(100.*double(ContainmentCounter)/double(SamdefEvents)) << "% / " << int(100.*double(ContainmentCounter)/double(TotalCounter)) << " %)" << std::endl << std::endl;
-
-		myTxtFile << "\n\n" << ContainedVertexCounter << " events passing contained vertex requirement (" << int(100.*double(ContainmentCounter)/double(SamdefEvents)) << "% / " << int(100.*double(ContainedVertexCounter)/double(SamdefEvents)) << "% / " << int(100.*double(ContainedVertexCounter)/double(TotalCounter)) << " %)" << std::endl << std::endl;
-
-		myTxtFile << "\n\n" << PIDCounter << " events passing PID selection cut (" << int(100.*double(ContainmentCounter)/double(SamdefEvents)) << "% / " << int(100.*double(PIDCounter)/double(TotalCounter)) << " %)" << std::endl << std::endl;
-
-		myTxtFile << "\n\n" << NuScoreCounter << " events passing NuScore selection cut (" << int(100.*double(ContainmentCounter)/double(SamdefEvents)) << "% / " << int(100.*double(NuScoreCounter)/double(TotalCounter)) << " %)" << std::endl << std::endl;
-
-		myTxtFile << "\n\n" << KinematicsCounter << " events passing common kinematic ranges (" << int(100.*double(ContainmentCounter)/double(SamdefEvents)) << "% / " << int(100.*double(KinematicsCounter)/double(TotalCounter)) << " %)" << std::endl << std::endl;
-
-		if (string(fWhichSample).find("Overlay") != std::string::npos) { myTxtFile << std::endl << std::endl << "POTCount = " << POTCount << std::endl << std::endl; }
+		}
 
 		// -------------------------------------------------------------------------------------------------------------------------
 
@@ -2494,6 +2599,9 @@ void myRecoAnalysis::Loop() {
 
 		NCC3p2piPlot->SetBinContent(1,CC3p2piEventsPassingSelectionCuts);
 		NCC3p2piPlot->SetBinError(1,CC3p2piEventsPassingSelectionCutsError);
+
+		NCC3p3piPlot->SetBinContent(1,CC3p3piEventsPassingSelectionCuts);
+		NCC3p3piPlot->SetBinError(1,CC3p3piEventsPassingSelectionCutsError);
 
 		// -------------------------------------------------------------------------------------------------------------------------	
 

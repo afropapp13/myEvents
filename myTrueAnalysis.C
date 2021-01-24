@@ -515,7 +515,8 @@ void myTrueAnalysis::Loop() {
 
 	// Samdef events
 
-	TH1D* SamdefEventsPlot = (TH1D*)(fPathToFile->Get("SamdefEventPlot"));
+	TFile* fFile = new TFile(fPathToFile);
+	TH1D* SamdefEventsPlot = (TH1D*)(fFile->Get("SamdefEventPlot"));
 	double SamdefEvents = SamdefEventsPlot->GetBinContent(1);
 
 	// -------------------------------------------------------------------------------------------------------------------------
