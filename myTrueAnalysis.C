@@ -515,19 +515,19 @@ void myTrueAnalysis::Loop() {
 
 	// Samdef events
 
-	TFile* fFile = new TFile(fPathToFile);
-	TH1D* SamdefEventsPlot = (TH1D*)(fFile->Get("SamdefEventPlot"));
-	double SamdefEvents = SamdefEventsPlot->GetBinContent(1);
+//	TFile* fFile = new TFile(fPathToFile);
+//	TH1D* SamdefEventsPlot = (TH1D*)(fFile->Get("SamdefEventPlot"));
+//	double SamdefEvents = SamdefEventsPlot->GetBinContent(1);
 
 	// -------------------------------------------------------------------------------------------------------------------------
 
 	if ( string(fWhichSample).find("Overlay9") != std::string::npos ) {
 
-		std::cout << std::endl << "Samdef events = " << SamdefEvents << std::endl;
+		//std::cout << std::endl << "Samdef events = " << SamdefEvents << std::endl;
 		std::cout << std::endl << "True CC1p events = " << TrueCC1pCounter << std::endl;
 
-		TxtFile << "Samdef events = " << SamdefEvents << std::endl;
-		TxtFile << std::endl << "True CC1p events = " << TrueCC1pCounter << std::endl;
+		//myTxtFile << "Samdef events = " << SamdefEvents << std::endl;
+		myTxtFile << std::endl << "True CC1p events = " << TrueCC1pCounter << std::endl;
 
 	}
 	
@@ -550,5 +550,6 @@ void myTrueAnalysis::Loop() {
 	OutputFile->cd();
 	OutputFile->Write();
 	OutputFile->Close();
+	myTxtFile.close();
 
 } // End of the program

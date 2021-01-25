@@ -68,6 +68,9 @@ public :
 
    int NumberPi0;
    int NumberNeutrons;
+   int NumberProtons;
+   int NumberChargedPions;
+   int NumberMuons;
 
    int             NC;   
    int             CC1p;
@@ -243,6 +246,9 @@ public :
 
    TBranch        *b_NumberPi0;   //!
    TBranch        *b_NumberNeutrons;   //!
+   TBranch        *b_NumberProtons;   //!
+   TBranch        *b_NumberChargedPions;   //!
+   TBranch        *b_NumberMuons;   //!
 
    TBranch        *b_NC;   //!  
    TBranch        *b_CC1p;   //!
@@ -634,6 +640,9 @@ void myRecoAnalysis::Init(TTree *tree)
 
    fChain->SetBranchAddress("NumberPi0", &NumberPi0, &b_NumberPi0);
    fChain->SetBranchAddress("NumberNeutrons", &NumberNeutrons, &b_NumberNeutrons);
+   fChain->SetBranchAddress("NumberProtons", &NumberProtons, &b_NumberProtons);
+   fChain->SetBranchAddress("NumberChargedPions", &NumberChargedPions, &b_NumberChargedPions);
+   fChain->SetBranchAddress("NumberMuons", &NumberMuons, &b_NumberMuons);
 
    fChain->SetBranchAddress("NC", &NC, &b_NC);      
    fChain->SetBranchAddress("CC1p", &CC1p, &b_CC1p);

@@ -47,7 +47,7 @@ void CC1pPurityEfficiency() {
 	vector<TString> Runs;
 	Runs.push_back("Run1");
 //	Runs.push_back("Run2");
-//	Runs.push_back("Run3");
+	Runs.push_back("Run3");
 //	Runs.push_back("Run4");
 //	Runs.push_back("Run5");
 
