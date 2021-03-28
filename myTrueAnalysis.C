@@ -62,6 +62,14 @@ void myTrueAnalysis::Loop() {
 	ofstream myTxtFile;
 	myTxtFile.open(TxtName);
 
+	// Txt file to keep track of the run/subrun/event of the candidate events
+
+	TString RunTxtName = "/uboone/data/users/apapadop/myEvents/myTxtFiles/"+UBCodeVersion+"/TxtmyTrueRunSubRunEvents_"+fWhichSample+"_"+UBCodeVersion+".txt";
+	ofstream myRunTxtFile;
+	myRunTxtFile.open(RunTxtName);
+	myRunTxtFile << std::fixed << std::setprecision(2);
+	myRunTxtFile << fWhichSample;
+
 	// --------------------------------------------------------------------------------------------------------------------------------------------
 
 	// 1D True Variables
@@ -502,6 +510,12 @@ void myTrueAnalysis::Loop() {
 			} // End of the angle selection cuts && the demand that we fill the plots with the same events
 
 		} // End of signal definition: 1 mu (Pmu > 100 MeV / c), 1p (Pp > 200 MeV / c) & pi+/- (Ppi > 70 MeV / c)
+
+		// -------------------------------------------------------------------------------------------------------------------------
+
+		// Storing the run/subrun/event of the candidate events 
+
+		myRunTxtFile << "Run = " << Run << ", SubRun = " << SubRun << ", Event = " << Event ;
 
 	} // End of the loop over the events
 

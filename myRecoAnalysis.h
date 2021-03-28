@@ -31,6 +31,10 @@ public :
    double           T2KWeight;
    double           ROOTinoWeight;
 
+   int           Run;
+   int           SubRun;
+   int           Event;
+
    vector<double>  *All_UBGenie;
    vector<double>  *AxFFCCQEshape_UBGenie;
    vector<double>  *DecayAngMEC_UBGenie;
@@ -208,6 +212,10 @@ public :
    TBranch        *b_Weight;   //!
    TBranch        *b_T2KWeight;   //!
    TBranch        *b_ROOTinoWeight;   //! 
+
+   TBranch        *b_Run;   //!
+   TBranch        *b_SubRun;   //!
+   TBranch        *b_Event;   //! 
 
    TBranch        *b_All_UBGenie;   //!                           
    TBranch        *b_AxFFCCQEshape_UBGenie;   //!                 
@@ -602,6 +610,10 @@ void myRecoAnalysis::Init(TTree *tree)
    fChain->SetBranchAddress("Weight", &Weight, &b_Weight);
    fChain->SetBranchAddress("T2KWeight", &T2KWeight, &b_T2KWeight);
    fChain->SetBranchAddress("ROOTinoWeight", &ROOTinoWeight, &b_ROOTinoWeight);
+
+   fChain->SetBranchAddress("Run", &Run, &b_Run);
+   fChain->SetBranchAddress("SubRun", &SubRun, &b_SubRun);
+   fChain->SetBranchAddress("Event", &Event, &b_Event);
    
    fChain->SetBranchAddress("All_UBGenie", &All_UBGenie, &b_All_UBGenie);
    fChain->SetBranchAddress("AxFFCCQEshape_UBGenie", &AxFFCCQEshape_UBGenie, &b_AxFFCCQEshape_UBGenie);
