@@ -33,6 +33,13 @@ TString ToStringInt(int num) {
 
 void myRecoAnalysis::Loop() {
 
+	// ---------------------------------------------------------------------------------------------------------------------------------------------
+
+	// Determine if CCQELike or STV analysis
+
+	TString Extention = "";
+	if (CCQElike) { Extention = "CCQE_"; }
+
 	// ---------------------------------------------------------------------------------------------------------------------------------------
 
 	int TotalCounter = 0;
@@ -131,7 +138,7 @@ void myRecoAnalysis::Loop() {
 
 		}
 
-		TString FileName = PathToFiles+Cuts+"/STVStudies_"+fWhichSample+Extension+Cuts+".root";
+		TString FileName = PathToFiles+Cuts+"/"+Extention+"STVStudies_"+fWhichSample+Extension+Cuts+".root";
 		TFile* file = new TFile(FileName,"recreate");
 		std::cout << std::endl << "Creating a new file: " << FileName << std::endl << std::endl << std::endl;
 
@@ -139,17 +146,17 @@ void myRecoAnalysis::Loop() {
 
 		// Txt file to keep track of the event reduction at each stage
 
-		TString TxtName = "/uboone/data/users/apapadop/myEvents/myTxtFiles/"+UBCodeVersion+"/TxtmyRecoEvents_"+fWhichSample+"_"+UBCodeVersion+".txt";
+		TString TxtName = "/uboone/data/users/apapadop/myEvents/myTxtFiles/"+UBCodeVersion+"/"+Extention+"TxtmyRecoEvents_"+fWhichSample+"_"+UBCodeVersion+".txt";
 		ofstream myTxtFile;
 		myTxtFile.open(TxtName);
 
 		// Txt file to keep track of the run/subrun/event of the candidate events
 
-		TString RunTxtName = "/uboone/data/users/apapadop/myEvents/myTxtFiles/"+UBCodeVersion+"/TxtmyRunSubRunEvents_"+fWhichSample+"_"+UBCodeVersion+".txt";
+		TString RunTxtName = "/uboone/data/users/apapadop/myEvents/myTxtFiles/"+UBCodeVersion+"/"+Extention+"TxtmyRunSubRunEvents_"+fWhichSample+"_"+UBCodeVersion+".txt";
 		ofstream myRunTxtFile;
 		myRunTxtFile.open(RunTxtName);
 		myRunTxtFile << std::fixed << std::setprecision(2);
-		myRunTxtFile << fWhichSample;
+		myRunTxtFile << fWhichSample << endl << endl;
 
 		// --------------------------------------------------------------------------------------------------------------------------------
 
@@ -242,6 +249,32 @@ void myRecoAnalysis::Loop() {
 		TH2D* RecoMuonMomentumVsLengthPlot = new TH2D("RecoMuonMomentumVsLengthPlot",";l_{#mu} [cm];P_{#mu} [GeV/cm]",100,0,100,50,0,0.5);
 		TH2D* RecoContainedMuonMomentumVsLengthPlot = new TH2D("RecoContainedMuonMomentumVsLengthPlot",";l_{#mu} [cm];P_{#mu} [GeV/cm]",100,0,100,50,0,0.5);
 		TH2D* RecoUncontainedMuonMomentumVsLengthPlot = new TH2D("RecoUncontainedMuonMomentumVsLengthPlot",";l_{#mu} [cm];P_{#mu} [GeV/cm]",100,0,100,50,0,0.5);
+
+		// -------------------------------------------------------------------------------------------------------------------------------
+
+		// 1D True Level Plots for Signal CC1p reconstructed candidates
+
+		TH1D* CC1pTrueNuPlot = new TH1D("CC1pTrueNuPlot",RecoLabelXAxisNu,NBinsNu,MinNu,MaxNu);
+		TH1D* CC1pTrueEvPlot = new TH1D("CC1pTrueEvPlot",RecoLabelXAxisEv,NBinsEv,MinEv,MaxEv);
+		TH1D* CC1pTrueVertexXPlot = new TH1D("CC1pTrueVertexXPlot",RecoLabelXAxisVertexX,NBinsVertexX,MinVertexX,MaxVertexX);
+		TH1D* CC1pTrueVertexYPlot = new TH1D("CC1pTrueVertexYPlot",RecoLabelXAxisVertexY,NBinsVertexY,MinVertexY,MaxVertexY);
+		TH1D* CC1pTrueVertexZPlot = new TH1D("CC1pTrueVertexZPlot",RecoLabelXAxisVertexZ,NBinsVertexZ,MinVertexZ,MaxVertexZ);
+
+		TH1D* CC1pTrueMuonMomentumPlot = new TH1D("CC1pTrueMuonMomentumPlot",LabelXAxisMuonMomentum,NBinsMuonMomentum,ArrayNBinsMuonMomentum);
+		TH1D* CC1pTrueMuonCosThetaPlot = new TH1D("CC1pTrueMuonCosThetaPlot",LabelXAxisMuonCosTheta,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta);
+		TH1D* CC1pTrueMuonPhiPlot = new TH1D("CC1pTrueMuonPhiPlot",LabelXAxisMuonPhi,NBinsMuonPhi,ArrayNBinsMuonPhi);
+
+		TH1D* CC1pTrueProtonMomentumPlot = new TH1D("CC1pTrueProtonMomentumPlot",LabelXAxisProtonMomentum, NBinsProtonMomentum,ArrayNBinsProtonMomentum);
+		TH1D* CC1pTrueProtonCosThetaPlot = new TH1D("CC1pTrueProtonCosThetaPlot",LabelXAxisProtonCosTheta, NBinsProtonCosTheta,ArrayNBinsProtonCosTheta);
+		TH1D* CC1pTrueProtonPhiPlot = new TH1D("CC1pTrueProtonPhiPlot",LabelXAxisProtonPhi,NBinsProtonPhi,ArrayNBinsProtonPhi);
+
+		TH1D* CC1pTrueDeltaPTPlot = new TH1D("CC1pTrueDeltaPTPlot",LabelXAxisDeltaPT,NBinsDeltaPT,ArrayNBinsDeltaPT);
+		TH1D* CC1pTrueDeltaAlphaTPlot = new TH1D("CC1pTrueDeltaAlphaTPlot",LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);
+		TH1D* CC1pTrueDeltaPhiTPlot = new TH1D("CC1pTrueDeltaPhiTPlot",LabelXAxisDeltaPhiT,NBinsDeltaPhiT,ArrayNBinsDeltaPhiT);
+
+		TH1D* CC1pTrueECalPlot = new TH1D("CC1pTrueECalPlot",LabelXAxisECal,NBinsECal,ArrayNBinsECal);
+		TH1D* CC1pTrueEQEPlot = new TH1D("CC1pTrueEQEPlot",LabelXAxisEQE,NBinsEQE,ArrayNBinsEQE);
+		TH1D* CC1pTrueQ2Plot = new TH1D("CC1pTrueQ2Plot",LabelXAxisQ2,NBinsQ2,ArrayNBinsQ2);
 
 		// -------------------------------------------------------------------------------------------------------------------------------
 
@@ -1240,7 +1273,8 @@ void myRecoAnalysis::Loop() {
 			if (CCQElike) {
 			
 				if ( !(TMath::Abs(DeltaPhiProtonMuon_Deg - 180.) < 35.) ) { continue; }
-				if ( !(TMath::Abs(DeltaThetaProtonMuon_Deg - 90.) < 55.) ) { continue; }			
+				if ( !(TMath::Abs(DeltaThetaProtonMuon_Deg - 90.) < 55.) ) { continue; }
+				if ( NumberPi0 != 0 ) { continue; }			
 				if ( !(TransMissMomentum < 0.35) ) { continue; }							
 			
 			}			
@@ -1364,7 +1398,7 @@ void myRecoAnalysis::Loop() {
 				true_DeltaPhiT = True_DeltaPhiT->at(0);
 				true_ECal = True_ECal->at(0);
 				true_EQE = True_EQE->at(0);
-				true_Q2 = True_Q2->at(0);				
+				true_Q2 = True_Q2->at(0);			
 				
 			}
 
@@ -1479,23 +1513,72 @@ void myRecoAnalysis::Loop() {
 
 			if (string(fWhichSample).find("Overlay") != std::string::npos) { 
 
-			TVector3 True_CandidateMuonVertex(True_CandidateMu_StartX->at(0),True_CandidateMu_StartY->at(0),True_CandidateMu_StartZ->at(0));
-			TVector3 True_CandidateProtonVertex(True_CandidateP_StartX->at(0),True_CandidateP_StartY->at(0),True_CandidateP_StartZ->at(0));
-
-			bool CommonTrueVertex = true;
-
-//			if ( TMath::Abs(True_CandidateMuonVertex.X() - True_CandidateProtonVertex.X() ) < 1. 
-//			  && True_CandidateMuonVertex.Y() == True_CandidateProtonVertex.Y() 
-//			  && True_CandidateMuonVertex.Z() == True_CandidateProtonVertex.Z() ) { CommonTrueVertex = true; }
+//				TVector3 True_CandidateMuonVertex(True_CandidateMu_StartX->at(0),True_CandidateMu_StartY->at(0),True_CandidateMu_StartZ->at(0));
+//				TVector3 True_CandidateProtonVertex(True_CandidateP_StartX->at(0),True_CandidateP_StartY->at(0),True_CandidateP_StartZ->at(0));
 
 				// CC1p Signal
 
 				if ( CC1p == 1 && CandidateMu_MCParticle_Pdg->at(0) == MuonPdg && CandidateP_MCParticle_Pdg->at(0) == ProtonPdg 
-				     && True_CandidateMu_StartContainment->at(0) == 1 && CommonTrueVertex ) {
+				     && True_CandidateMu_StartContainment->at(0) == 1
+ 
+				     && True_CandidateMu_P->at(0) > ArrayNBinsMuonMomentum[0] 
+				     && True_CandidateP_P->at(0) > ArrayNBinsProtonMomentum[0]
+				     && True_CandidateMu_CosTheta->at(0) > ArrayNBinsMuonCosTheta[0] 
+                                     && True_CandidateP_CosTheta->at(0) > ArrayNBinsProtonCosTheta[0]
+				     && True_CandidateMu_Phi->at(0) > ArrayNBinsMuonPhi[0] 
+				     && True_CandidateP_Phi->at(0) > ArrayNBinsProtonPhi[0]
+				     && true_TransMissMomentum > ArrayNBinsDeltaPT[0]
+				     && true_DeltaAlphaT > ArrayNBinsDeltaAlphaT[0]
+				     && true_DeltaPhiT > ArrayNBinsDeltaPhiT[0]
+
+				     && True_CandidateMu_P->at(0) < ArrayNBinsMuonMomentum[NBinsMuonMomentum] 
+				     && True_CandidateP_P->at(0) < ArrayNBinsProtonMomentum[NBinsProtonMomentum]
+				     && True_CandidateMu_CosTheta->at(0) < ArrayNBinsMuonCosTheta[NBinsMuonCosTheta] 
+				     && True_CandidateP_CosTheta->at(0) < ArrayNBinsProtonCosTheta[NBinsProtonCosTheta]
+				     && True_CandidateMu_Phi->at(0) < ArrayNBinsMuonPhi[NBinsMuonPhi] 
+				     && True_CandidateP_Phi->at(0) < ArrayNBinsProtonPhi[NBinsProtonPhi]
+				     && true_TransMissMomentum < ArrayNBinsDeltaPT[NBinsDeltaPT]
+				     && true_DeltaAlphaT < ArrayNBinsDeltaAlphaT[NBinsDeltaAlphaT]
+				     && true_DeltaPhiT < ArrayNBinsDeltaPhiT[NBinsDeltaPhiT]
+
+				) {
 				
 					CC1pEventsPassingSelectionCuts++;
 
-					// 1D Plots
+					// --------------------------------------------------------------------------------------------------
+					// --------------------------------------------------------------------------------------------------
+
+					// 1D Plots using True level info for selected CC1p events  
+
+					double true_MuonEnergy = TMath::Sqrt( TMath::Power(MuonMass_GeV,2.) + TMath::Power(True_CandidateMu_P->at(0),2.) );
+					double true_Nu = True_Ev - true_MuonEnergy;
+
+					CC1pTrueNuPlot->Fill(true_Nu,weight);
+					CC1pTrueEvPlot->Fill(True_Ev,weight);
+					CC1pTrueVertexXPlot->Fill(Vertex_X->at(0),weight);
+					CC1pTrueVertexYPlot->Fill(Vertex_Y->at(0),weight);
+					CC1pTrueVertexZPlot->Fill(Vertex_Z->at(0),weight);
+
+					CC1pTrueMuonMomentumPlot->Fill(True_CandidateMu_P->at(0),weight);
+					CC1pTrueMuonCosThetaPlot->Fill(True_CandidateMu_CosTheta->at(0),weight);
+					CC1pTrueMuonPhiPlot->Fill(True_CandidateMu_Phi->at(0),weight);
+
+					CC1pTrueProtonMomentumPlot->Fill(True_CandidateP_P->at(0),weight);
+					CC1pTrueProtonCosThetaPlot->Fill(True_CandidateP_CosTheta->at(0),weight);
+					CC1pTrueProtonPhiPlot->Fill(True_CandidateP_Phi->at(0),weight);
+
+					CC1pTrueDeltaPTPlot->Fill(true_TransMissMomentum,weight);
+					CC1pTrueDeltaAlphaTPlot->Fill(true_DeltaAlphaT,weight);
+					CC1pTrueDeltaPhiTPlot->Fill(true_DeltaPhiT,weight);
+
+					CC1pTrueECalPlot->Fill(true_ECal,weight);
+					CC1pTrueEQEPlot->Fill(true_EQE,weight);
+					CC1pTrueQ2Plot->Fill(true_Q2,weight);
+
+					// --------------------------------------------------------------------------------------------------
+					// --------------------------------------------------------------------------------------------------
+
+					// 1D Reco Plots for the selected CC1p events 
 
 					CC1pRecoEvPlot->Fill(True_Ev,weight);
 					CC1pRecoNuScorePlot->Fill(NuScore,weight);
@@ -1731,11 +1814,11 @@ void myRecoAnalysis::Loop() {
 
 					// -------------------------------------------------------------------------------------------------------------------------
 
-				}
+				} // End of the CC1p signal
 
 				// -------------------------------------------------------------------------------------------------------------
 
-				// Non-CC1p 
+				// Non-CC1p beam related background or EXT BNB
 
 				else {
 
@@ -1766,7 +1849,7 @@ void myRecoAnalysis::Loop() {
 						{ MisIndetifiedProtonAsDeuterium++;  ManualNonCC1pEventsPassingSelectionCuts++; }
 					else if ( 
 						(CandidateMu_MCParticle_Pdg->at(0) == DeuteriumPdg && TMath::Abs(CandidateP_MCParticle_Pdg->at(0)) == ProtonPdg )  ||
-						(CandidateMu_MCParticle_Pdg->at(0) == ProtonPdg && TMath::Abs(CandidateP_MCParticle_Pdg->at(0)) == DeuteriumPdg ) )				
+						(CandidateMu_MCParticle_Pdg->at(0) == ProtonPdg && TMath::Abs(CandidateP_MCParticle_Pdg->at(0)) == DeuteriumPdg ) )			
 						{ MisIndetifiedMuonAsDeuterium++; ManualNonCC1pEventsPassingSelectionCuts++; }
 					else if ( 
 						( TMath::Abs(CandidateMu_MCParticle_Pdg->at(0)) == DeuteriumPdg && TMath::Abs(CandidateP_MCParticle_Pdg->at(0)) == AbsChargedPionPdg ) ||
@@ -1780,7 +1863,7 @@ void myRecoAnalysis::Loop() {
 						(CandidateMu_MCParticle_Pdg->at(0) == ProtonPdg && CandidateP_MCParticle_Pdg->at(0) == HeliumPdg)
 						) 
 						{ MisIndetifiedMuonAsHelium++; ManualNonCC1pEventsPassingSelectionCuts++;  }
-					else if ( TMath::Abs(CandidateP_MCParticle_Pdg->at(0)) == ElectronPdg && CandidateMu_MCParticle_Pdg->at(0) == MuonPdg) 				
+					else if ( TMath::Abs(CandidateP_MCParticle_Pdg->at(0)) == ElectronPdg && CandidateMu_MCParticle_Pdg->at(0) == MuonPdg) 			
 						{ MisIndetifiedProtonAsElectron++;  ManualNonCC1pEventsPassingSelectionCuts++; }
 					else if ( TMath::Abs(CandidateP_MCParticle_Pdg->at(0)) == ElectronPdg && TMath::Abs(CandidateMu_MCParticle_Pdg->at(0)) == ElectronPdg) 
 						{ MisIndetifiedMuPToElectronElectron++;  ManualNonCC1pEventsPassingSelectionCuts++; }
@@ -1903,7 +1986,7 @@ void myRecoAnalysis::Loop() {
 					if (CandidateMu_EndContainment->at(0) == 1) { NonCC1pRecoContainedMuonMomentumVsLengthPlot->Fill(l_muCandidate,reco_Pmu_mcs,weight); }
 					if (CandidateMu_EndContainment->at(0) == 0) { NonCC1pRecoUncontainedMuonMomentumVsLengthPlot->Fill(l_muCandidate,reco_Pmu_mcs,weight); }
 
-				}
+				} // End of the Non-CC1p beam related background
 
 				// -------------------------------------------------------------------------------------------------------------------------
 				// ------------------------------------------------------------------------------------------------------------------------
@@ -1972,7 +2055,7 @@ void myRecoAnalysis::Loop() {
 					// 2D Analysis
 				
 					CCQERecoCosThetaMuPmuPlot->Fill(reco_Pmu_cos_theta,reco_Pmu_mcs,weight);
-					CCQERecoCosThetaPPpPlot->Fill(reco_Pp_cos_theta,reco_Pp,weight);				
+					CCQERecoCosThetaPPpPlot->Fill(reco_Pp_cos_theta,reco_Pp,weight);			
 
 				}
 
@@ -1990,7 +2073,7 @@ void myRecoAnalysis::Loop() {
 					CCMECRecodYZPlot->Fill(dYZ,weight);
 					CCMECRecoNPEPlot->Fill(NPE,weight);
 					CCMECRecoVertexActivityPlot->Fill(VertexActivity,weight);
-					if (VertexActivity > 0) { CCMECRecoNonZeroVertexActivityPlot->Fill(VertexActivity,weight); }				
+					if (VertexActivity > 0) { CCMECRecoNonZeroVertexActivityPlot->Fill(VertexActivity,weight); }			
 
 					CCMECRecoVertexXPlot->Fill(Vertex_X->at(0),weight);
 					CCMECRecoVertexYPlot->Fill(Vertex_Y->at(0),weight);
@@ -2042,7 +2125,7 @@ void myRecoAnalysis::Loop() {
 					// 2D Analysis
 				
 					CCMECRecoCosThetaMuPmuPlot->Fill(reco_Pmu_cos_theta,reco_Pmu_mcs,weight);
-					CCMECRecoCosThetaPPpPlot->Fill(reco_Pp_cos_theta,reco_Pp,weight);				
+					CCMECRecoCosThetaPPpPlot->Fill(reco_Pp_cos_theta,reco_Pp,weight);			
 
 				}
 
@@ -2060,7 +2143,7 @@ void myRecoAnalysis::Loop() {
 					CCRESRecodYZPlot->Fill(dYZ,weight);
 					CCRESRecoNPEPlot->Fill(NPE,weight);
 					CCRESRecoVertexActivityPlot->Fill(VertexActivity,weight);
-					if (VertexActivity > 0) { CCRESRecoNonZeroVertexActivityPlot->Fill(VertexActivity,weight); }				
+					if (VertexActivity > 0) { CCRESRecoNonZeroVertexActivityPlot->Fill(VertexActivity,weight); }			
 
 					CCRESRecoVertexXPlot->Fill(Vertex_X->at(0),weight);
 					CCRESRecoVertexYPlot->Fill(Vertex_Y->at(0),weight);
@@ -2112,7 +2195,7 @@ void myRecoAnalysis::Loop() {
 					// 2D Analysis
 				
 					CCRESRecoCosThetaMuPmuPlot->Fill(reco_Pmu_cos_theta,reco_Pmu_mcs,weight);
-					CCRESRecoCosThetaPPpPlot->Fill(reco_Pp_cos_theta,reco_Pp,weight);				
+					CCRESRecoCosThetaPPpPlot->Fill(reco_Pp_cos_theta,reco_Pp,weight);			
 
 				}
 
@@ -2130,7 +2213,7 @@ void myRecoAnalysis::Loop() {
 					CCDISRecodYZPlot->Fill(dYZ,weight);
 					CCDISRecoNPEPlot->Fill(NPE,weight);
 					CCDISRecoVertexActivityPlot->Fill(VertexActivity,weight);
-					if (VertexActivity > 0) { CCDISRecoNonZeroVertexActivityPlot->Fill(VertexActivity,weight); }				
+					if (VertexActivity > 0) { CCDISRecoNonZeroVertexActivityPlot->Fill(VertexActivity,weight); }			
 
 					CCDISRecoVertexXPlot->Fill(Vertex_X->at(0),weight);
 					CCDISRecoVertexYPlot->Fill(Vertex_Y->at(0),weight);
@@ -2179,13 +2262,13 @@ void myRecoAnalysis::Loop() {
 					// 2D Analysis
 				
 					CCDISRecoCosThetaMuPmuPlot->Fill(reco_Pmu_cos_theta,reco_Pmu_mcs,weight);
-					CCDISRecoCosThetaPPpPlot->Fill(reco_Pp_cos_theta,reco_Pp,weight);				
+					CCDISRecoCosThetaPPpPlot->Fill(reco_Pp_cos_theta,reco_Pp,weight);			
 
 				}
 
 				// --------------------------------------------------------------------------------------------------------------------------
 
-				// Overlay particle breakdown using the Backtracker
+				// Overlay particle breakdown using the Backtracker for PID studies
 
 				if (CandidateMu_MCParticle_Pdg->size() > 0 && CandidateP_MCParticle_Pdg->size() > 0 ) {
 
@@ -2271,7 +2354,11 @@ void myRecoAnalysis::Loop() {
 
 			// Storing the run/subrun/event of the candidate events 
 
-			myRunTxtFile << "Run = " << Run << ", SubRun = " << SubRun << ", Event = " << Event ;
+			myRunTxtFile << "Candidate #" << NEventsPassingSelectionCuts << " Run = " << Run << ", SubRun = " << SubRun << ", Event = " << Event;
+
+			// To quickly locate the candidate events in the event displays, we need Z & X
+
+			myRunTxtFile << " Vertex X = " << Vertex_X->at(0) << ", Y = " << Vertex_Y->at(0) << ", Z = " << Vertex_Z->at(0) << endl; 
 
 			// -------------------------------------------------------------------------------------------------------------------------
 

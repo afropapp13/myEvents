@@ -38,6 +38,13 @@ void myTrueAnalysis::Loop() {
 
 	// ---------------------------------------------------------------------------------------------------------------------------------------------
 
+	// Determine if CCQELike or STV analysis
+
+	TString Extention = "";
+	if (CCQElike) { Extention = "CCQE_"; }
+
+	// ---------------------------------------------------------------------------------------------------------------------------------------------
+
 	TString Extension = "";
 
 	// For overlays only for genie, flux and reinteraction uncertainties
@@ -50,7 +57,7 @@ void myTrueAnalysis::Loop() {
 
 	// Output Files
 
-	TString FileName = PathToFiles+"TruthSTVAnalysis_"+fWhichSample+Extension+"_"+UBCodeVersion+".root";	
+	TString FileName = PathToFiles+Extention+"TruthSTVAnalysis_"+fWhichSample+Extension+"_"+UBCodeVersion+".root";	
 	TFile* OutputFile = new TFile(FileName,"recreate");
 	std::cout << std::endl << "File " << FileName << " to be created"<< std::endl << std::endl;
 
@@ -58,13 +65,13 @@ void myTrueAnalysis::Loop() {
 
 	// Txt file to keep track of the event reduction at each stage
 
-	TString TxtName = "/uboone/data/users/apapadop/myEvents/myTxtFiles/"+UBCodeVersion+"/TxtmyTrueEvents_"+fWhichSample+"_"+UBCodeVersion+".txt";
+	TString TxtName = "/uboone/data/users/apapadop/myEvents/myTxtFiles/"+UBCodeVersion+"/"+Extention+"TxtmyTrueEvents_"+fWhichSample+"_"+UBCodeVersion+".txt";
 	ofstream myTxtFile;
 	myTxtFile.open(TxtName);
 
 	// Txt file to keep track of the run/subrun/event of the candidate events
 
-	TString RunTxtName = "/uboone/data/users/apapadop/myEvents/myTxtFiles/"+UBCodeVersion+"/TxtmyTrueRunSubRunEvents_"+fWhichSample+"_"+UBCodeVersion+".txt";
+	TString RunTxtName = "/uboone/data/users/apapadop/myEvents/myTxtFiles/"+UBCodeVersion+"/"+Extention+"TxtmyTrueRunSubRunEvents_"+fWhichSample+"_"+UBCodeVersion+".txt";
 	ofstream myRunTxtFile;
 	myRunTxtFile.open(RunTxtName);
 	myRunTxtFile << std::fixed << std::setprecision(2);
@@ -102,6 +109,7 @@ void myTrueAnalysis::Loop() {
 	TH1D* TrueVertexZPlot = new TH1D("TrueVertexZPlot",RecoLabelXAxisVertexZ,NBinsVertexZ,MinVertexZ,MaxVertexZ);
 
 	TH1D* TrueEvPlot = new TH1D("TrueEvPlot",RecoLabelXAxisEv,NBinsEv,MinEv,MaxEv);
+	TH1D* TrueNuPlot = new TH1D("TrueNuPlot",RecoLabelXAxisNu,NBinsNu,MinNu,MaxNu);
 	
 	// 2D Analysis
 
@@ -383,7 +391,8 @@ void myTrueAnalysis::Loop() {
 			if (CCQElike) {
 			
 				if ( !(TMath::Abs(TrueDeltaPhiProtonMuon_Deg - 180.) < 35.) ) { continue; }
-				if ( !(TMath::Abs(TrueDeltaThetaProtonMuon_Deg - 90.) < 55.) ) { continue; }			
+				if ( !(TMath::Abs(TrueDeltaThetaProtonMuon_Deg - 90.) < 55.) ) { continue; }	
+				if ( NumberPi0 != 0 ) { continue; }					
 				if ( !(TrueTransMissMomentum < 0.35) ) { continue; }							
 			
 			}	
@@ -479,6 +488,10 @@ void myTrueAnalysis::Loop() {
 					// True Energy
 
 					TrueEvPlot->Fill(True_Ev,weight);
+
+					double true_MuonEnergy = TMath::Sqrt( TMath::Power(MuonMass_GeV,2.) + TMath::Power(TrueMuonMomentum_GeV,2.) );
+					double true_Nu = True_Ev - true_MuonEnergy;
+					TrueNuPlot->Fill(True_Nu,weight);
 					
 					// 2D Analysis
 		
