@@ -491,7 +491,7 @@ void myTrueAnalysis::Loop() {
 
 					double true_MuonEnergy = TMath::Sqrt( TMath::Power(MuonMass_GeV,2.) + TMath::Power(TrueMuonMomentum_GeV,2.) );
 					double true_Nu = True_Ev - true_MuonEnergy;
-					TrueNuPlot->Fill(True_Nu,weight);
+					TrueNuPlot->Fill(true_Nu,weight);
 					
 					// 2D Analysis
 		
