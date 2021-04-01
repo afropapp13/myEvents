@@ -280,6 +280,7 @@ void myRecoAnalysis::Loop() {
 
 		// 1D Reco Level Plots for Signal CC1p
 
+		TH1D* CC1pRecoNuPlot = new TH1D("CC1pRecoNuPlot",RecoLabelXAxisNu,NBinsNu,MinNu,MaxNu);
 		TH1D* CC1pRecoEvPlot = new TH1D("CC1pRecoEvPlot",RecoLabelXAxisEv,NBinsEv,MinEv,MaxEv);
 		TH1D* CC1pRecoNuScorePlot = new TH1D("CC1pRecoNuScorePlot",RecoLabelXAxisNuScore,NBinsNuScore,MinNuScore,MaxNuScore);
 		TH1D* CC1pRecoFlashScorePlot = new TH1D("CC1pRecoFlashScorePlot",RecoLabelXAxisFlashScore,NBinsFlashScore,MinFlashScore,MaxFlashScore);
@@ -981,7 +982,13 @@ void myRecoAnalysis::Loop() {
 		TH1D* CC1pRecoProtonTrueMomentumLongitudinalRatio = new TH1D("CC1pRecoProtonTrueMomentumLongitudinalRatio",";P^{true}_{p,||}/P^{true}_{p}",25,0.,1.);
 
 		TH1D* CC1pRecoMuonTrueMomentumTransverseRatio = new TH1D("CC1pRecoMuonTrueMomentumTransverseRatio",";P^{true}_{#mu,T}/P^{true}_{#mu}",25,0.,1.);		
-		TH1D* CC1pRecoProtonTrueMomentumTransverseRatio = new TH1D("CC1pRecoProtonTrueMomentumTransverseRatio",";P^{true}_{p,T}/P^{true}_{p}",25,0.,1.);		
+		TH1D* CC1pRecoProtonTrueMomentumTransverseRatio = new TH1D("CC1pRecoProtonTrueMomentumTransverseRatio",";P^{true}_{p,T}/P^{true}_{p}",25,0.,1.);
+
+		TH1D* CC1pTrueMuonTrueMomentumLongitudinalRatio = new TH1D("CC1pTrueMuonTrueMomentumLongitudinalRatio",";P^{true}_{#mu,||}/P^{true}_{#mu}",25,0.,1.);		
+		TH1D* CC1pTrueProtonTrueMomentumLongitudinalRatio = new TH1D("CC1pTrueProtonTrueMomentumLongitudinalRatio",";P^{true}_{p,||}/P^{true}_{p}",25,0.,1.);
+
+		TH1D* CC1pTrueMuonTrueMomentumTransverseRatio = new TH1D("CC1pTrueMuonTrueMomentumTransverseRatio",";P^{true}_{#mu,T}/P^{true}_{#mu}",25,0.,1.);		
+		TH1D* CC1pTrueProtonTrueMomentumTransverseRatio = new TH1D("CC1pTrueProtonTrueMomentumTransverseRatio",";P^{true}_{p,T}/P^{true}_{p}",25,0.,1.);		
 
 		// --------------------------------------------------------------------------------------------------------------------------------
 		// --------------------------------------------------------------------------------------------------------------------------------
@@ -1580,6 +1587,7 @@ void myRecoAnalysis::Loop() {
 
 					// 1D Reco Plots for the selected CC1p events 
 
+					CC1pRecoNuPlot->Fill(true_Nu,weight);
 					CC1pRecoEvPlot->Fill(True_Ev,weight);
 					CC1pRecoNuScorePlot->Fill(NuScore,weight);
 					CC1pRecoFlashScorePlot->Fill(FlashScore,weight);
@@ -1729,11 +1737,17 @@ void myRecoAnalysis::Loop() {
 					TrueCandidateProton.SetPhi(True_CandidateP_Phi->at(0));
 					TrueCandidateProton.SetTheta(TMath::ACos(True_CandidateP_CosTheta->at(0)));
 
-					CC1pRecoMuonTrueMomentumLongitudinalRatio->Fill(TrueCandidateMuon.Z() / TrueCandidateMuon.Mag(),weight);
-					CC1pRecoMuonTrueMomentumTransverseRatio->Fill(TrueCandidateMuon.Pt() / TrueCandidateMuon.Mag(),weight);
+					CC1pRecoMuonTrueMomentumLongitudinalRatio->Fill(TVector3CandidateMuon.Z() / TVector3CandidateMuon.Mag(),weight);
+					CC1pRecoMuonTrueMomentumTransverseRatio->Fill(TVector3CandidateMuon.Pt() / TVector3CandidateMuon.Mag(),weight);
 
-					CC1pRecoProtonTrueMomentumLongitudinalRatio->Fill(TrueCandidateProton.Z() / TrueCandidateProton.Mag(),weight);
-					CC1pRecoProtonTrueMomentumTransverseRatio->Fill(TrueCandidateProton.Pt() / TrueCandidateProton.Mag(),weight);
+					CC1pRecoProtonTrueMomentumLongitudinalRatio->Fill(TVector3CandidateProton.Z() / TVector3CandidateProton.Mag(),weight);
+					CC1pRecoProtonTrueMomentumTransverseRatio->Fill(TVector3CandidateProton.Pt() / TVector3CandidateProton.Mag(),weight);
+
+					CC1pTrueMuonTrueMomentumLongitudinalRatio->Fill(TrueCandidateMuon.Z() / TrueCandidateMuon.Mag(),weight);
+					CC1pTrueMuonTrueMomentumTransverseRatio->Fill(TrueCandidateMuon.Pt() / TrueCandidateMuon.Mag(),weight);
+
+					CC1pTrueProtonTrueMomentumLongitudinalRatio->Fill(TrueCandidateProton.Z() / TrueCandidateProton.Mag(),weight);
+					CC1pTrueProtonTrueMomentumTransverseRatio->Fill(TrueCandidateProton.Pt() / TrueCandidateProton.Mag(),weight);
 
 					// -------------------------------------------------------------------------------------------------------------------------
 

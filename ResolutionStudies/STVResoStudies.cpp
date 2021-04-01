@@ -83,22 +83,22 @@ void STVResoStudies() {
 
 	// ------------------------------------------------------------------------
 
-	TString PlotName = "Playground_CC1pRecoMuonMomentumPlot"; 
+//	TString PlotName = "Playground_CC1pRecoMuonMomentumPlot"; 
 
-//	TString PlotName = "Playground_CC1pRecoDeltaPTPlot"; 
-//	TString PlotName = "Playground_CC1pRecoDeltaPTPlot_Slice_1"; 
-//	TString PlotName = "Playground_CC1pRecoDeltaPTPlot_Slice_2"; 
-//	TString PlotName = "Playground_CC1pRecoDeltaPTPlot_Slice_3"; 
+	TString PlotName = "Playground_CC1pRecoDeltaPTPlot"; TString Label = "All #delta P_{T}";
+//	TString PlotName = "Playground_CC1pRecoDeltaPTPlot_Slice_1"; TString Label = "#delta P_{T} < 0.3 GeV/c";
+//	TString PlotName = "Playground_CC1pRecoDeltaPTPlot_Slice_2"; TString Label = "0.3 < #delta P_{T} < 0.6 GeV/c"; 
+//	TString PlotName = "Playground_CC1pRecoDeltaPTPlot_Slice_3"; TString Label = "#delta P_{T} > 0.6 GeV/c"; 
 
-//	TString PlotName = "Playground_CC1pRecoDeltaAlphaTPlot"; 
-//	TString PlotName = "Playground_CC1pRecoDeltaAlphaTPlot_Slice_1"; 
-//	TString PlotName = "Playground_CC1pRecoDeltaAlphaTPlot_Slice_2";
-//	TString PlotName = "Playground_CC1pRecoDeltaAlphaTPlot_Slice_3"; 
+//	TString PlotName = "Playground_CC1pRecoDeltaAlphaTPlot"; TString Label = "All #delta#alpha_{T}";
+//	TString PlotName = "Playground_CC1pRecoDeltaAlphaTPlot_Slice_1"; TString Label = "#delta#alpha_{T} < 60 deg";
+//	TString PlotName = "Playground_CC1pRecoDeltaAlphaTPlot_Slice_2"; TString Label = "60 < #delta#alpha_{T} < 120 deg";
+//	TString PlotName = "Playground_CC1pRecoDeltaAlphaTPlot_Slice_3"; TString Label = "#delta#alpha_{T} > 120 deg"; 
 
-//	TString PlotName = "Playground_CC1pRecoDeltaPhiTPlot";
-//	TString PlotName = "Playground_CC1pRecoDeltaPhiTPlot_Slice_1"; 
-//	TString PlotName = "Playground_CC1pRecoDeltaPhiTPlot_Slice_2";
-//	TString PlotName = "Playground_CC1pRecoDeltaPhiTPlot_Slice_3"; 
+//	TString PlotName = "Playground_CC1pRecoDeltaPhiTPlot"; TString Label = "All #delta#phi_{T}";
+//	TString PlotName = "Playground_CC1pRecoDeltaPhiTPlot_Slice_1"; TString Label = "#delta#phi_{T} < 30 deg"; 
+//	TString PlotName = "Playground_CC1pRecoDeltaPhiTPlot_Slice_2"; TString Label = "30 < #delta#phi_{T} < 60 deg";
+//	TString PlotName = "Playground_CC1pRecoDeltaPhiTPlot_Slice_3"; TString Label = "#delta#phi_{T} > 60 deg"; 
 
 	// ------------------------------------------------------------------------
 
@@ -124,7 +124,9 @@ void STVResoStudies() {
 
 	// ------------------------------------------------------------------------
 
-	TLegend* leg = new TLegend(0.55,0.8,0.85,0.95);
+	TLegend* leg = new TLegend(0.12,0.91,0.9,0.99);
+	leg->SetNColumns(2);
+	leg->SetMargin(0.1);
 
 	// ------------------------------------------------------------------------
 
@@ -150,17 +152,20 @@ void STVResoStudies() {
 
 		Plots[WhichDiscriminator]->GetYaxis()->SetRangeUser(0,1.1*Plots[0]->GetMaximum());
 
+		Plots[WhichDiscriminator]->SetMarkerSize(2.);
+		Plots[WhichDiscriminator]->SetMarkerStyle(20);
+		Plots[WhichDiscriminator]->SetMarkerColor(WhichDiscriminator+1);
 		Plots[WhichDiscriminator]->SetLineColor(WhichDiscriminator+1);
 		Plots[WhichDiscriminator]->SetLineWidth(3);
-		Plots[WhichDiscriminator]->Draw("e same");
+		Plots[WhichDiscriminator]->Draw("p hist same");
 
 		TF1* f = new TF1("f","gaus",-15,15);
 
 		f->SetLineColor(WhichDiscriminator+1);
-		Plots[WhichDiscriminator]->Fit(f,"R0");
+		Plots[WhichDiscriminator]->Fit(f,"R0Q");
 		//f->Draw("same");
 
-		leg->AddEntry(Plots[WhichDiscriminator],LegendLabel[WhichDiscriminator] + ", #mu = " + ToString(round(f->GetParameter(1),1)) + ", #sigma = " + ToString(round(f->GetParameter(2),1)),"l");
+		leg->AddEntry(Plots[WhichDiscriminator],LegendLabel[WhichDiscriminator] + ", #mu = " + ToString(round(f->GetParameter(1),1)) + ", #sigma = " + ToString(round(f->GetParameter(2),1)),"p");
 		
 
 	}	
@@ -170,6 +175,14 @@ void STVResoStudies() {
 	leg->SetTextFont(FontStyle);
 	leg->SetBorderSize(0);
 	leg->Draw();
+
+	TLatex* lat = new TLatex(0.2,0.4,Label);
+	lat->SetTextFont(FontStyle);
+	lat->SetTextSize(0.04);
+	lat->DrawLatexNDC(0.15,0.8,Label);
+
+
+	can->SaveAs("myResoPlots/"+UBCodeVersion+"/"+PlotName+".pdf");
 
 	// ------------------------------------------------------------------------
 
