@@ -21,6 +21,7 @@
 using namespace std;
 
 #include "ubana/myClasses/Tools.h"
+#include "ubana/myClasses/Constants.h"
 
 TString ToStringInt(int num) {
 
@@ -43,6 +44,8 @@ void PurityEfficiencyStudies::Loop() {
 
 	vector<TString> VectorCuts; VectorCuts.clear();
 	VectorCuts.push_back("");
+	VectorCuts.push_back("_PID");
+	VectorCuts.push_back("_NuScore");
 
 	int NCuts = (int)(VectorCuts.size());	
 
@@ -481,7 +484,7 @@ void PurityEfficiencyStudies::Loop() {
 			if (DeltaAlphaT < ArrayNBinsDeltaAlphaT[0]) { PassingCommonRange = false; }
 			if (DeltaPhiT < ArrayNBinsDeltaPhiT[0]) { PassingCommonRange = false; }
 
-			 --------------------------------------------------------------------------------------------------------------------
+			// --------------------------------------------------------------------------------------------------------------------
 
 			if (reco_Pmu_mcs > ArrayNBinsMuonMomentum[NBinsMuonMomentum]) { PassingCommonRange = false; }
 			if (reco_Pmu_cos_theta > ArrayNBinsMuonCosTheta[NBinsMuonCosTheta]) { PassingCommonRange = false; }
@@ -513,13 +516,8 @@ void PurityEfficiencyStudies::Loop() {
 
 			// Studies for selection cuts
 
-//			if (reco_Pp_ThreePlaneLogLikelihood < -0.4) { continue; }
-//			if (NuScore < 0.1) { continue; }
-//			if (!PassingCommonRange) { continue; }
-
-//			if (LengthDiff < 0) { continue; }
-//			if (kMiss > 0.6) { continue; }
-//			if (PMissMinus < 0.6) { continue; }
+			if (string(Cuts).find("PID") != std::string::npos && reco_Pp_ThreePlaneLogLikelihood < ProtonThreePlaneChi2LogLikelihoodCut) { continue; }
+			if (string(Cuts).find("NuScore") != std::string::npos && NuScore < MinimumNuScore) { continue; }
 
 			// ----------------------------------------------------------------------------------------------------------------------------
 			// ---------------------------------------------------------------------------------------------------------------------------
@@ -721,8 +719,31 @@ void PurityEfficiencyStudies::Loop() {
 
 				// CC1p Signal
 
-				if (CC1p == 1 && CandidateMu_MCParticle_Pdg->at(0) == MuonPdg && CandidateP_MCParticle_Pdg->at(0) == ProtonPdg 
-				    && True_CandidateMu_StartContainment->at(0) == 1) {
+				if (
+					CC1p == 1 && CandidateMu_MCParticle_Pdg->at(0) == MuonPdg && CandidateP_MCParticle_Pdg->at(0) == ProtonPdg && 
+					True_CandidateMu_StartContainment->at(0) == 1
+
+				     && True_CandidateMu_P->at(0) > ArrayNBinsMuonMomentum[0] 
+				     && True_CandidateP_P->at(0) > ArrayNBinsProtonMomentum[0]
+				     && True_CandidateMu_CosTheta->at(0) > ArrayNBinsMuonCosTheta[0] 
+                                     && True_CandidateP_CosTheta->at(0) > ArrayNBinsProtonCosTheta[0]
+				     && True_CandidateMu_Phi->at(0) > ArrayNBinsMuonPhi[0] 
+				     && True_CandidateP_Phi->at(0) > ArrayNBinsProtonPhi[0]
+				     && true_TransMissMomentum > ArrayNBinsDeltaPT[0]
+				     && true_DeltaAlphaT > ArrayNBinsDeltaAlphaT[0]
+				     && true_DeltaPhiT > ArrayNBinsDeltaPhiT[0]
+
+				     && True_CandidateMu_P->at(0) < ArrayNBinsMuonMomentum[NBinsMuonMomentum] 
+				     && True_CandidateP_P->at(0) < ArrayNBinsProtonMomentum[NBinsProtonMomentum]
+				     && True_CandidateMu_CosTheta->at(0) < ArrayNBinsMuonCosTheta[NBinsMuonCosTheta] 
+				     && True_CandidateP_CosTheta->at(0) < ArrayNBinsProtonCosTheta[NBinsProtonCosTheta]
+				     && True_CandidateMu_Phi->at(0) < ArrayNBinsMuonPhi[NBinsMuonPhi] 
+				     && True_CandidateP_Phi->at(0) < ArrayNBinsProtonPhi[NBinsProtonPhi]
+				     && true_TransMissMomentum < ArrayNBinsDeltaPT[NBinsDeltaPT]
+				     && true_DeltaAlphaT < ArrayNBinsDeltaAlphaT[NBinsDeltaAlphaT]
+				     && true_DeltaPhiT < ArrayNBinsDeltaPhiT[NBinsDeltaPhiT]
+
+				) {
 
 					// ---------------------------------------------------------------------------------------------------------------------------
 

@@ -11,9 +11,8 @@
 #include <iostream>
 #include <vector>
 
-#include "/home/afroditi/Dropbox/PhD/Secondary_Code/myFunctions.cpp"
-
-#include "../myClasses/Constants.h"
+#include "../Secondary_Code/myFunctions.cpp"
+#include "../../myClasses/Constants.h"
 
 using namespace std;
 using namespace Constants;
@@ -72,7 +71,7 @@ void Chi2PID_BreakDown() {
 
 		//	} // If we want to run only on a specific cut combination, include this } and remove the one at the end of the program
 
-			TString PathToFiles = "OutputFiles/" + UBCodeVersion + "/" + Cuts + "/";
+			TString PathToFilesCut = PathToFiles + "/" + Cuts + "/";
 			TH1D::SetDefaultSumw2();
 
 			// --------------------------------------------------------------------------------------------------------------------------
@@ -110,7 +109,7 @@ void Chi2PID_BreakDown() {
 
 			for (int WhichSample = 0; WhichSample < NSamples; WhichSample ++) {
 
-				FileSample.push_back(TFile::Open(PathToFiles+NameOfSamples[WhichSample]));
+				FileSample.push_back(TFile::Open(PathToFilesCut+NameOfSamples[WhichSample]));
 
 				vector<TH1D*> CurrentPlots; CurrentPlots.clear();
 				vector<TH1D*> MuonCurrentPlots; MuonCurrentPlots.clear();
@@ -337,10 +336,10 @@ void Chi2PID_BreakDown() {
 				leg[WhichPlot]->SetMargin(0.6);
 				leg[WhichPlot]->Draw();
 
-				TString CanvasPath = "./myPlots/pdf/1D/"+UBCodeVersion+"/"+Cuts+"/";
+				TString CanvasPath = PlotPath + Cuts+"/";
 				TString CanvasName = "PID_BreakDown_"+PlotNames[WhichPlot]+Cuts+"_"+Runs[WhichRun]+"_"+UBCodeVersion+".pdf";
 				PlotCanvas[WhichPlot]->SaveAs(CanvasPath+CanvasName);
-				//delete PlotCanvas[WhichPlot];
+				delete PlotCanvas[WhichPlot];
 
 			} // End of the loop over the plots
 

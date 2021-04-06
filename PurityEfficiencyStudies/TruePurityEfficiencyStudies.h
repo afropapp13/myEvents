@@ -1,5 +1,5 @@
-#ifndef TruePurityEfficiciencyStudies_h
-#define TruePurityEfficiciencyStudies_h
+#ifndef TruePurityEfficiencyStudies_h
+#define TruePurityEfficiencyStudies_h
 
 #include <TROOT.h>
 #include <TChain.h>
@@ -13,7 +13,7 @@
 
 using namespace Constants;
 
-class TruePurityEfficiciencyStudies {
+class TruePurityEfficiencyStudies {
 
 private:
    TString fWhichSample;
@@ -196,8 +196,8 @@ public :
    TBranch        *b_True_EQE;   //!
    TBranch        *b_True_Q2;   //!                  
 
-   TruePurityEfficiciencyStudies(TString WhichSample="",TString WhichEventWeightLabel="", int UniverseIndex=-1,TTree *tree=0);
-   virtual ~TruePurityEfficiciencyStudies();
+   TruePurityEfficiencyStudies(TString WhichSample="",TString WhichEventWeightLabel="", int UniverseIndex=-1,TTree *tree=0);
+   virtual ~TruePurityEfficiencyStudies();
    virtual Int_t    Cut(Long64_t entry);
    virtual Int_t    GetEntry(Long64_t entry);
    virtual Long64_t LoadTree(Long64_t entry);
@@ -211,8 +211,8 @@ public :
 #endif
 
 
-#ifdef TruePurityEfficiciencyStudies_cxx
-TruePurityEfficiciencyStudies::TruePurityEfficiciencyStudies(TString WhichSample, TString WhichEventWeightLabel, int UniverseIndex, TTree *tree) : fChain(0) 
+#ifdef TruePurityEfficiencyStudies_cxx
+TruePurityEfficiencyStudies::TruePurityEfficiencyStudies(TString WhichSample, TString WhichEventWeightLabel, int UniverseIndex, TTree *tree) : fChain(0) 
 {
 
    fWhichSample = WhichSample;
@@ -232,19 +232,19 @@ TruePurityEfficiciencyStudies::TruePurityEfficiciencyStudies(TString WhichSample
    Init(tree);
 }
 
-TruePurityEfficiciencyStudies::~TruePurityEfficiciencyStudies()
+TruePurityEfficiencyStudies::~TruePurityEfficiencyStudies()
 {
    if (!fChain) return;
    delete fChain->GetCurrentFile();
 }
 
-Int_t TruePurityEfficiciencyStudies::GetEntry(Long64_t entry)
+Int_t TruePurityEfficiencyStudies::GetEntry(Long64_t entry)
 {
 // Read contents of entry.
    if (!fChain) return 0;
    return fChain->GetEntry(entry);
 }
-Long64_t TruePurityEfficiciencyStudies::LoadTree(Long64_t entry)
+Long64_t TruePurityEfficiencyStudies::LoadTree(Long64_t entry)
 {
 // Set the environment to read one entry
    if (!fChain) return -5;
@@ -257,7 +257,7 @@ Long64_t TruePurityEfficiciencyStudies::LoadTree(Long64_t entry)
    return centry;
 }
 
-void TruePurityEfficiciencyStudies::Init(TTree *tree)
+void TruePurityEfficiencyStudies::Init(TTree *tree)
 {
 
    // Set object pointer
@@ -428,18 +428,18 @@ void TruePurityEfficiciencyStudies::Init(TTree *tree)
    Notify();
 }
 
-Bool_t TruePurityEfficiciencyStudies::Notify()
+Bool_t TruePurityEfficiencyStudies::Notify()
 {
    return kTRUE;
 }
 
-void TruePurityEfficiciencyStudies::Show(Long64_t entry)
+void TruePurityEfficiencyStudies::Show(Long64_t entry)
 {
    if (!fChain) return;
    fChain->Show(entry);
 }
-Int_t TruePurityEfficiciencyStudies::Cut(Long64_t entry)
+Int_t TruePurityEfficiencyStudies::Cut(Long64_t entry)
 {
    return 1;
 }
-#endif // #ifdef TruePurityEfficiciencyStudies_cxx
+#endif // #ifdef TruePurityEfficiencyStudies_cxx

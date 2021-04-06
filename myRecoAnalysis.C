@@ -165,6 +165,7 @@ void myRecoAnalysis::Loop() {
 		TH1D* RecoPi0Plot = new TH1D("RecoPi0Plot",";# #pi^{0}",4,-0.5,3.5);
 		TH1D* RecoNeutronPlot = new TH1D("RecoNeutronPlot",";# neutrons",6,-0.5,5.5);
 
+		TH1D* RecoNuPlot = new TH1D("RecoNuPlot",RecoLabelXAxisNu,NBinsNu,MinNu,MaxNu);
 		TH1D* RecoEvPlot = new TH1D("RecoEvPlot",RecoLabelXAxisEv,NBinsEv,MinEv,MaxEv);
 		TH1D* RecoNuScorePlot = new TH1D("RecoNuScorePlot",RecoLabelXAxisNuScore,NBinsNuScore,MinNuScore,MaxNuScore);
 		TH1D* RecoFlashScorePlot = new TH1D("RecoFlashScorePlot",RecoLabelXAxisFlashScore,NBinsFlashScore,MinFlashScore,MaxFlashScore);
@@ -423,6 +424,7 @@ void myRecoAnalysis::Loop() {
 
 		// 1D Reco Level Plots for non-CC1p
 
+		TH1D* NonCC1pRecoNuPlot = new TH1D("NonCC1pRecoNuPlot",RecoLabelXAxisNu,NBinsNu,MinNu,MaxNu);
 		TH1D* NonCC1pRecoEvPlot = new TH1D("NonCC1pRecoEvPlot",RecoLabelXAxisEv,NBinsEv,MinEv,MaxEv);
 		TH1D* NonCC1pRecoNuScorePlot = new TH1D("NonCC1pRecoNuScorePlot",RecoLabelXAxisNuScore,NBinsNuScore,MinNuScore,MaxNuScore);
 		TH1D* NonCC1pRecoFlashScorePlot = new TH1D("NonCC1pRecoFlashScorePlot",RecoLabelXAxisFlashScore,
@@ -508,6 +510,7 @@ void myRecoAnalysis::Loop() {
 
 		// 1D Reco Level Plots for CCQE
 
+		TH1D* CCQERecoNuPlot = new TH1D("CCQERecoNuPlot",RecoLabelXAxisNu,NBinsNu,MinNu,MaxNu);
 		TH1D* CCQERecoEvPlot = new TH1D("CCQERecoEvPlot",RecoLabelXAxisEv,NBinsEv,MinEv,MaxEv);
 		TH1D* CCQERecoNuScorePlot = new TH1D("CCQERecoNuScorePlot",RecoLabelXAxisNuScore,NBinsNuScore,MinNuScore,MaxNuScore);
 		TH1D* CCQERecoFlashScorePlot = new TH1D("CCQERecoFlashScorePlot",RecoLabelXAxisFlashScore,NBinsFlashScore,MinFlashScore,MaxFlashScore);
@@ -585,6 +588,7 @@ void myRecoAnalysis::Loop() {
 
 		// 1D Reco Level Plots for CCMEC
 
+		TH1D* CCMECRecoNuPlot = new TH1D("CCMECRecoNuPlot",RecoLabelXAxisNu,NBinsNu,MinNu,MaxNu);
 		TH1D* CCMECRecoEvPlot = new TH1D("CCMECRecoEvPlot",RecoLabelXAxisEv,NBinsEv,MinEv,MaxEv);
 		TH1D* CCMECRecoNuScorePlot = new TH1D("CCMECRecoNuScorePlot",RecoLabelXAxisNuScore,NBinsNuScore,MinNuScore,MaxNuScore);
 		TH1D* CCMECRecoFlashScorePlot = new TH1D("CCMECRecoFlashScorePlot",RecoLabelXAxisFlashScore,NBinsFlashScore,MinFlashScore,MaxFlashScore);
@@ -662,6 +666,7 @@ void myRecoAnalysis::Loop() {
 
 		// 1D Reco Level Plots for CCRES
 
+		TH1D* CCRESRecoNuPlot = new TH1D("CCRESRecoNuPlot",RecoLabelXAxisNu,NBinsNu,MinNu,MaxNu);
 		TH1D* CCRESRecoEvPlot = new TH1D("CCRESRecoEvPlot",RecoLabelXAxisEv,NBinsEv,MinEv,MaxEv);
 		TH1D* CCRESRecoNuScorePlot = new TH1D("CCRESRecoNuScorePlot",RecoLabelXAxisNuScore,NBinsNuScore,MinNuScore,MaxNuScore);
 		TH1D* CCRESRecoFlashScorePlot = new TH1D("CCRESRecoFlashScorePlot",RecoLabelXAxisFlashScore,NBinsFlashScore,MinFlashScore,MaxFlashScore);
@@ -739,6 +744,7 @@ void myRecoAnalysis::Loop() {
 
 		// 1D Reco Level Plots for CCDIS
 
+		TH1D* CCDISRecoNuPlot = new TH1D("CCDISRecoNuPlot",RecoLabelXAxisNu,NBinsNu,MinNu,MaxNu);
 		TH1D* CCDISRecoEvPlot = new TH1D("CCDISRecoEvPlot",RecoLabelXAxisEv,NBinsEv,MinEv,MaxEv);
 		TH1D* CCDISRecoNuScorePlot = new TH1D("CCDISRecoNuScorePlot",RecoLabelXAxisNuScore,NBinsNuScore,MinNuScore,MaxNuScore);
 		TH1D* CCDISRecoFlashScorePlot = new TH1D("CCDISRecoFlashScorePlot",RecoLabelXAxisFlashScore,NBinsFlashScore,MinFlashScore,MaxFlashScore);
@@ -1390,6 +1396,7 @@ void myRecoAnalysis::Loop() {
 			double true_ECal = -1;
 			double true_EQE = -1;
 			double true_Q2 = -1;			
+			double true_nu = -1;			
 			
 			if (
 				string(fWhichSample).find("Overlay9") != std::string::npos 
@@ -1406,6 +1413,7 @@ void myRecoAnalysis::Loop() {
 				true_ECal = True_ECal->at(0);
 				true_EQE = True_EQE->at(0);
 				true_Q2 = True_Q2->at(0);			
+				true_nu = True_Ev - True_CandidateMu_P->at(0);			
 				
 			}
 
@@ -1415,6 +1423,7 @@ void myRecoAnalysis::Loop() {
 			RecoPi0Plot->Fill(NumberPi0); 
 			RecoNeutronPlot->Fill(NumberNeutrons); 
 
+			RecoNuPlot->Fill(true_nu,weight);
 			RecoEvPlot->Fill(True_Ev,weight);
 			RecoNuScorePlot->Fill(NuScore,weight);
 			RecoFlashScorePlot->Fill(FlashScore,weight);
@@ -1587,7 +1596,7 @@ void myRecoAnalysis::Loop() {
 
 					// 1D Reco Plots for the selected CC1p events 
 
-					CC1pRecoNuPlot->Fill(true_Nu,weight);
+					CC1pRecoNuPlot->Fill(true_nu,weight);
 					CC1pRecoEvPlot->Fill(True_Ev,weight);
 					CC1pRecoNuScorePlot->Fill(NuScore,weight);
 					CC1pRecoFlashScorePlot->Fill(FlashScore,weight);
@@ -1934,6 +1943,7 @@ void myRecoAnalysis::Loop() {
 				
 					}
 
+					NonCC1pRecoNuPlot->Fill(true_nu,weight);
 					NonCC1pRecoEvPlot->Fill(True_Ev,weight);
 					NonCC1pRecoNuScorePlot->Fill(NuScore,weight);
 					NonCC1pRecoFlashScorePlot->Fill(FlashScore,weight);
@@ -2009,6 +2019,7 @@ void myRecoAnalysis::Loop() {
 
 				if (genie_mode == 0) {
 
+					CCQERecoNuPlot->Fill(true_nu,weight);
 					CCQERecoEvPlot->Fill(True_Ev,weight);
 					CCQERecoNuScorePlot->Fill(NuScore,weight);
 					CCQERecoFlashScorePlot->Fill(FlashScore,weight);
@@ -2079,6 +2090,7 @@ void myRecoAnalysis::Loop() {
 
 				if (genie_mode == 10) {
 
+					CCMECRecoNuPlot->Fill(true_nu,weight);
 					CCMECRecoEvPlot->Fill(True_Ev,weight);
 					CCMECRecoNuScorePlot->Fill(NuScore,weight);
 					CCMECRecoFlashScorePlot->Fill(FlashScore,weight);
@@ -2149,6 +2161,7 @@ void myRecoAnalysis::Loop() {
 
 				if (genie_mode == 1) {
 
+					CCRESRecoNuPlot->Fill(true_nu,weight);
 					CCRESRecoEvPlot->Fill(True_Ev,weight);
 					CCRESRecoNuScorePlot->Fill(NuScore,weight);
 					CCRESRecoFlashScorePlot->Fill(FlashScore,weight);
@@ -2219,6 +2232,7 @@ void myRecoAnalysis::Loop() {
 
 				if (genie_mode == 2) {
 
+					CCDISRecoNuPlot->Fill(true_nu,weight);
 					CCDISRecoEvPlot->Fill(True_Ev,weight);
 					CCDISRecoNuScorePlot->Fill(NuScore,weight);
 					CCDISRecoFlashScorePlot->Fill(FlashScore,weight);

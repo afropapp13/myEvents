@@ -11,9 +11,8 @@
 #include <iostream>
 #include <vector>
 
-#include "/home/afroditi/Dropbox/PhD/Secondary_Code/myFunctions.cpp"
-
-#include "../myClasses/Constants.h"
+#include "../Secondary_Code/myFunctions.cpp"
+#include "../../myClasses/Constants.h"
 
 using namespace std;
 using namespace Constants;
@@ -23,16 +22,15 @@ void Create1DPlotsTHStack_InteractionBreakDown() {
 	// ----------------------------------------------------------------------------------------------------------------------------------------
 
 	TH1D::SetDefaultSumw2();
-	vector<TString> PlotNames; PlotNames.clear();
-
-	TString StorePath = "myPlots/";
 	gStyle->SetOptStat(0);	
 
 	// ----------------------------------------------------------------------------------------------------------------------------------------
 
-	PlotNames.push_back("RecoPMissMinusPlot");
-	PlotNames.push_back("RecoPMissPlot");
-	PlotNames.push_back("RecokMissPlot");
+	vector<TString> PlotNames; PlotNames.clear();
+
+//	PlotNames.push_back("RecoPMissMinusPlot");
+//	PlotNames.push_back("RecoPMissPlot");
+//	PlotNames.push_back("RecokMissPlot");
 
 	PlotNames.push_back("RecoNuScorePlot");
 	PlotNames.push_back("RecoFlashScorePlot");
@@ -44,11 +42,11 @@ void Create1DPlotsTHStack_InteractionBreakDown() {
 	PlotNames.push_back("RecoDeltaPhiPlot");
 	PlotNames.push_back("RecoDeltaThetaPlot");
 
-	PlotNames.push_back("RecoThreePlaneChi2LogLikelihoodCandidateMuonPlot");
-	PlotNames.push_back("RecoThreePlaneChi2LogLikelihoodCandidateProtonPlot");
+//	PlotNames.push_back("RecoThreePlaneChi2LogLikelihoodCandidateMuonPlot");
+//	PlotNames.push_back("RecoThreePlaneChi2LogLikelihoodCandidateProtonPlot");
 
-	PlotNames.push_back("RecoMuonLLRPIDPlot");
-	PlotNames.push_back("RecoProtonLLRPIDPlot");
+//	PlotNames.push_back("RecoMuonLLRPIDPlot");
+//	PlotNames.push_back("RecoProtonLLRPIDPlot");
 
 	PlotNames.push_back("RecoMuonMomentumPlot");
 	PlotNames.push_back("RecoProtonMomentumPlot");
@@ -67,8 +65,8 @@ void Create1DPlotsTHStack_InteractionBreakDown() {
 	PlotNames.push_back("RecoProtonLengthPlot");
 	PlotNames.push_back("RecodMuonTracksScorePlot");
 	PlotNames.push_back("RecodProtonTracksScorePlot");
-	PlotNames.push_back("RecodMuonVertexDistancePlot");
-	PlotNames.push_back("RecodProtonVertexDistancePlot");
+//	PlotNames.push_back("RecodMuonVertexDistancePlot");
+//	PlotNames.push_back("RecodProtonVertexDistancePlot");
 	PlotNames.push_back("RecoVertexActivityPlot");
 
 	PlotNames.push_back("RecoVertexXPlot");
@@ -97,14 +95,6 @@ void Create1DPlotsTHStack_InteractionBreakDown() {
 	VectorCuts.push_back("_PID");
 	VectorCuts.push_back("_NuScore");
 
-	/*
-	// up to v43
-	VectorCuts.push_back("");
-	VectorCuts.push_back("_NuScore");
-	VectorCuts.push_back("_ThreePlaneLogChi2");
-	VectorCuts.push_back("_Collinearity");
-	*/
-
 	int NCuts = (int)(VectorCuts.size());	
 
 	// ------------------------------------------------------------------------------------------------------------------------------------------
@@ -131,7 +121,7 @@ void Create1DPlotsTHStack_InteractionBreakDown() {
 
 //		} // If we want to run only on a specific cut combination, include this } and remove the one at the end of the program
 
-			TString PathToFiles = "OutputFiles/"+UBCodeVersion+"/"+Cuts+"/";
+			TString PathToFilesCut = PathToFiles + "/"+Cuts+"/";
 
 			// ---------------------------------------------------------------------------------------------------------------------------
 
@@ -170,7 +160,7 @@ void Create1DPlotsTHStack_InteractionBreakDown() {
 
 			for (int WhichSample = 0; WhichSample < NSamples; WhichSample ++) {
 
-				FileSample.push_back(TFile::Open(PathToFiles+NameOfSamples[WhichSample]));
+				FileSample.push_back(TFile::Open(PathToFilesCut+NameOfSamples[WhichSample]));
 
 				vector<TH1D*> CurrentPlots; CurrentPlots.clear();
 				vector<TH1D*> CCQECurrentPlots; CCQECurrentPlots.clear();
@@ -427,7 +417,7 @@ void Create1DPlotsTHStack_InteractionBreakDown() {
 
 				// --------------------------------------------------------------------------------------
 
-				TString CanvasPath = "./myPlots/pdf/1D/"+UBCodeVersion+"/"+Cuts+"/InteractionBreakDown/";
+				TString CanvasPath = PlotPath + Cuts + "/InteractionBreakDown/";
 				TString CanvasName = "THStack_BreakDown_"+PlotNames[WhichPlot]+"_"+Runs[WhichRun]+"_"+UBCodeVersion+Cuts+".pdf";
 				PlotCanvas[WhichPlot]->SaveAs(CanvasPath+CanvasName);
 				delete PlotCanvas[WhichPlot];

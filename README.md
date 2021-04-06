@@ -8,13 +8,23 @@
 
 ###########################################################################################################################################################################
 
-root -l script_EventSelection_CV.C
+# switch between series of cuts
 
-./DownloadEventSelectionFiles.sh
+root -l script_EventSelection_CV.C 
 
-# Purity & Efficiency
+# switch between PID info / topological breakdown / interaction breakdown
 
-root -l CC1pPurityEfficiency.cpp
+root -l ProduceValidationPlots.cpp
+
+./DownloadEventRatePlots.sh
+
+###########################################################################################################################################################################
+
+# Purity & Efficiency Studies
+
+cd PurityEfficiencyStudies
+root -l script_PurityEfficiencyStudies.C
+root -l DetermineMaxPurityEfficiency1D.cpp
 
 # Detector variations
 
@@ -44,6 +54,3 @@ gROOT->ProcessLine(".L Create1DPlotsTHStack_TopologicalBreakDown.cpp++"); gROOT-
 
 # Interaction break down
 gROOT->ProcessLine(".L Create1DPlotsTHStack_InteractionBreakDown.cpp++"); gROOT->ProcessLine("Create1DPlotsTHStack_InteractionBreakDown()");
-
-# 2D plots # Raw output, not normalized rows to 1 # For that, take a look at mySTVAnalysis/MigrationMatrices.cpp
-gROOT->ProcessLine(".L Create2DPlots.cpp++"); gROOT->ProcessLine("Create2DPlots()");

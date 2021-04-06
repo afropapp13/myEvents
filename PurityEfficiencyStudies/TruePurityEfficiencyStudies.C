@@ -1,5 +1,5 @@
-#define TruePurityEfficiciencyStudies_cxx
-#include "TruePurityEfficiciencyStudies.h"
+#define TruePurityEfficiencyStudies_cxx
+#include "TruePurityEfficiencyStudies.h"
 #include <TH2.h>
 #include <TStyle.h>
 #include <TCanvas.h>
@@ -31,7 +31,7 @@ TString TrueToStringInt(int num) {
 }
 
 
-void TruePurityEfficiciencyStudies::Loop() {
+void TruePurityEfficiencyStudies::Loop() {
 
 	// -----------------------------------------------------------------------------------------------------------------------------
 
@@ -59,7 +59,7 @@ void TruePurityEfficiciencyStudies::Loop() {
 
 	// Output Files
 
-	TString FileName = "OutputFiles/TruthPurityEfficiencyStudies_Overlay9_Run1"+Extension+Cuts+".root";
+	TString FileName = "OutputFiles/TruthPurityEfficiencyStudies_"+fWhichSample+Extension+Cuts+".root";
 	TFile* OutputFile = new TFile(FileName,"recreate");
 	std::cout << std::endl << "File " << FileName << " to be created"<< std::endl << std::endl;
 
@@ -176,7 +176,25 @@ void TruePurityEfficiciencyStudies::Loop() {
 
 		// Signal definition: 1 mu (Pmu > 100 MeV / c), 1p (Pp > 200 MeV / c) & 0 pi+/- (Ppi > 70 MeV / c)
 
-		if (CC1p == 1) {
+		if (
+			CC1p == 1 && 
+			Muon_MCParticle_Mom->at(0) > ArrayNBinsMuonMomentum[0] && Proton_MCParticle_Mom->at(0) > ArrayNBinsProtonMomentum[0] &&
+			True_Pt->at(0) > ArrayNBinsDeltaPT[0]  &&
+			True_Pt->at(0) < ArrayNBinsDeltaPT[NBinsDeltaPT] &&
+			True_DeltaAlphaT->at(0) > ArrayNBinsDeltaAlphaT[0]  &&
+			True_DeltaAlphaT->at(0) < ArrayNBinsDeltaAlphaT[NBinsDeltaAlphaT] &&
+			True_DeltaPhiT->at(0) > ArrayNBinsDeltaPhiT[0]  &&
+			True_DeltaPhiT->at(0) < ArrayNBinsDeltaPhiT[NBinsDeltaPhiT] &&
+				    
+			Muon_MCParticle_Mom->at(0) < ArrayNBinsMuonMomentum[NBinsMuonMomentum] &&
+			Proton_MCParticle_Mom->at(0) < ArrayNBinsProtonMomentum[NBinsProtonMomentum] &&
+				    
+			Muon_MCParticle_CosTheta->at(0) > ArrayNBinsMuonCosTheta[0] &&
+			Muon_MCParticle_CosTheta->at(0) < ArrayNBinsMuonCosTheta[NBinsMuonCosTheta] &&
+			Proton_MCParticle_CosTheta->at(0) > ArrayNBinsProtonCosTheta[0] &&
+			Proton_MCParticle_CosTheta->at(0) < ArrayNBinsProtonCosTheta[NBinsProtonCosTheta]
+
+		) {
 		
 			// --------------------------------------------------------------------------------------------------------------------		
 			
