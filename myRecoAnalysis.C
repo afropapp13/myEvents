@@ -215,9 +215,9 @@ void myRecoAnalysis::Loop() {
 		TH1D* RecoDeltaThetaPlot = new TH1D("RecoDeltaThetaPlot",RecoLabelXAxisDeltaTheta,NBinsDeltaTheta,MinDeltaTheta,MaxDeltaTheta);
 		TH1D* RecoDeltaPhiPlot = new TH1D("RecoDeltaPhiPlot",RecoLabelXAxisDeltaPhi,NBinsDeltaPhi,MinDeltaPhi,MaxDeltaPhi);
 
-		TH1D* RecokMissPlot = new TH1D("RecokMissPlot",LabelXAxiskMiss,NBinskMiss,ArrayNBinskMiss);
-		TH1D* RecoPMissMinusPlot = new TH1D("RecoPMissMinusPlot",LabelXAxisPMissMinus,NBinsPMissMinus,ArrayNBinsPMissMinus);
-		TH1D* RecoPMissPlot = new TH1D("RecoPMissPlot",LabelXAxisPMiss,NBinsPMiss,ArrayNBinsPMiss);
+//		TH1D* RecokMissPlot = new TH1D("RecokMissPlot",LabelXAxiskMiss,NBinskMiss,ArrayNBinskMiss);
+//		TH1D* RecoPMissMinusPlot = new TH1D("RecoPMissMinusPlot",LabelXAxisPMissMinus,NBinsPMissMinus,ArrayNBinsPMissMinus);
+//		TH1D* RecoPMissPlot = new TH1D("RecoPMissPlot",LabelXAxisPMiss,NBinsPMiss,ArrayNBinsPMiss);
 
 		TH1D* RecoDeltaPTPlot = new TH1D("RecoDeltaPTPlot",LabelXAxisDeltaPT,NBinsDeltaPT,ArrayNBinsDeltaPT);
 		TH1D* RecoDeltaAlphaTPlot = new TH1D("RecoDeltaAlphaTPlot",LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);
@@ -334,9 +334,9 @@ void myRecoAnalysis::Loop() {
 		TH1D* CC1pRecoDeltaThetaPlot = new TH1D("CC1pRecoDeltaThetaPlot",RecoLabelXAxisDeltaTheta,NBinsDeltaTheta,MinDeltaTheta,MaxDeltaTheta);
 		TH1D* CC1pRecoDeltaPhiPlot = new TH1D("CC1pRecoDeltaPhiPlot",RecoLabelXAxisDeltaPhi,NBinsDeltaPhi,MinDeltaPhi,MaxDeltaPhi);
 
-		TH1D* CC1pRecokMissPlot = new TH1D("CC1pRecokMissPlot",LabelXAxiskMiss,NBinskMiss,ArrayNBinskMiss);
-		TH1D* CC1pRecoPMissMinusPlot = new TH1D("CC1pRecoPMissMinusPlot",LabelXAxisPMissMinus,NBinsPMissMinus,ArrayNBinsPMissMinus);
-		TH1D* CC1pRecoPMissPlot = new TH1D("CC1pRecoPMissPlot",LabelXAxisPMiss,NBinsPMiss,ArrayNBinsPMiss);
+//		TH1D* CC1pRecokMissPlot = new TH1D("CC1pRecokMissPlot",LabelXAxiskMiss,NBinskMiss,ArrayNBinskMiss);
+//		TH1D* CC1pRecoPMissMinusPlot = new TH1D("CC1pRecoPMissMinusPlot",LabelXAxisPMissMinus,NBinsPMissMinus,ArrayNBinsPMissMinus);
+//		TH1D* CC1pRecoPMissPlot = new TH1D("CC1pRecoPMissPlot",LabelXAxisPMiss,NBinsPMiss,ArrayNBinsPMiss);
 
 		TH1D* CC1pRecoDeltaPTPlot = new TH1D("CC1pRecoDeltaPTPlot",LabelXAxisDeltaPT,NBinsDeltaPT,ArrayNBinsDeltaPT);
 		TH1D* CC1pRecoDeltaAlphaTPlot = new TH1D("CC1pRecoDeltaAlphaTPlot",LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);
@@ -479,9 +479,9 @@ void myRecoAnalysis::Loop() {
 			NBinsDeltaTheta,MinDeltaTheta,MaxDeltaTheta);
 		TH1D* NonCC1pRecoDeltaPhiPlot = new TH1D("NonCC1pRecoDeltaPhiPlot",RecoLabelXAxisDeltaPhi,NBinsDeltaPhi,MinDeltaPhi,MaxDeltaPhi);
 
-		TH1D* NonCC1pRecokMissPlot = new TH1D("NonCC1pRecokMissPlot",LabelXAxiskMiss,NBinskMiss,ArrayNBinskMiss);
-		TH1D* NonCC1pRecoPMissMinusPlot = new TH1D("NonCC1pRecoPMissMinusPlot",LabelXAxisPMissMinus,NBinsPMissMinus,ArrayNBinsPMissMinus);
-		TH1D* NonCC1pRecoPMissPlot = new TH1D("NonCC1pRecoPMissPlot",LabelXAxisPMiss,NBinsPMiss,ArrayNBinsPMiss);
+//		TH1D* NonCC1pRecokMissPlot = new TH1D("NonCC1pRecokMissPlot",LabelXAxiskMiss,NBinskMiss,ArrayNBinskMiss);
+//		TH1D* NonCC1pRecoPMissMinusPlot = new TH1D("NonCC1pRecoPMissMinusPlot",LabelXAxisPMissMinus,NBinsPMissMinus,ArrayNBinsPMissMinus);
+//		TH1D* NonCC1pRecoPMissPlot = new TH1D("NonCC1pRecoPMissPlot",LabelXAxisPMiss,NBinsPMiss,ArrayNBinsPMiss);
 
 		TH1D* NonCC1pRecoDeltaPTPlot = new TH1D("NonCC1pRecoDeltaPTPlot",LabelXAxisDeltaPT,NBinsDeltaPT,ArrayNBinsDeltaPT);
 		TH1D* NonCC1pRecoDeltaAlphaTPlot = new TH1D("NonCC1pRecoDeltaAlphaTPlot",LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);
@@ -562,9 +562,9 @@ void myRecoAnalysis::Loop() {
 		TH1D* CCQERecoDeltaThetaPlot = new TH1D("CCQERecoDeltaThetaPlot",RecoLabelXAxisDeltaTheta,NBinsDeltaTheta,MinDeltaTheta,MaxDeltaTheta);
 		TH1D* CCQERecoDeltaPhiPlot = new TH1D("CCQERecoDeltaPhiPlot",RecoLabelXAxisDeltaPhi,NBinsDeltaPhi,MinDeltaPhi,MaxDeltaPhi);
 
-		TH1D* CCQERecokMissPlot = new TH1D("CCQERecokMissPlot",LabelXAxiskMiss,NBinskMiss,ArrayNBinskMiss);
-		TH1D* CCQERecoPMissMinusPlot = new TH1D("CCQERecoPMissMinusPlot",LabelXAxisPMissMinus,NBinsPMissMinus,ArrayNBinsPMissMinus);
-		TH1D* CCQERecoPMissPlot = new TH1D("CCQERecoPMissPlot",LabelXAxisPMiss,NBinsPMiss,ArrayNBinsPMiss);
+//		TH1D* CCQERecokMissPlot = new TH1D("CCQERecokMissPlot",LabelXAxiskMiss,NBinskMiss,ArrayNBinskMiss);
+//		TH1D* CCQERecoPMissMinusPlot = new TH1D("CCQERecoPMissMinusPlot",LabelXAxisPMissMinus,NBinsPMissMinus,ArrayNBinsPMissMinus);
+//		TH1D* CCQERecoPMissPlot = new TH1D("CCQERecoPMissPlot",LabelXAxisPMiss,NBinsPMiss,ArrayNBinsPMiss);
 
 		TH1D* CCQERecoDeltaPTPlot = new TH1D("CCQERecoDeltaPTPlot",LabelXAxisDeltaPT,NBinsDeltaPT,ArrayNBinsDeltaPT);
 		TH1D* CCQERecoDeltaAlphaTPlot = new TH1D("CCQERecoDeltaAlphaTPlot",LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);
@@ -640,9 +640,9 @@ void myRecoAnalysis::Loop() {
 		TH1D* CCMECRecoDeltaThetaPlot = new TH1D("CCMECRecoDeltaThetaPlot",RecoLabelXAxisDeltaTheta,NBinsDeltaTheta,MinDeltaTheta,MaxDeltaTheta);
 		TH1D* CCMECRecoDeltaPhiPlot = new TH1D("CCMECRecoDeltaPhiPlot",RecoLabelXAxisDeltaPhi,NBinsDeltaPhi,MinDeltaPhi,MaxDeltaPhi);
 
-		TH1D* CCMECRecokMissPlot = new TH1D("CCMECRecokMissPlot",LabelXAxiskMiss,NBinskMiss,ArrayNBinskMiss);
-		TH1D* CCMECRecoPMissMinusPlot = new TH1D("CCMECRecoPMissMinusPlot",LabelXAxisPMissMinus,NBinsPMissMinus,ArrayNBinsPMissMinus);
-		TH1D* CCMECRecoPMissPlot = new TH1D("CCMECRecoPMissPlot",LabelXAxisPMiss,NBinsPMiss,ArrayNBinsPMiss);
+//		TH1D* CCMECRecokMissPlot = new TH1D("CCMECRecokMissPlot",LabelXAxiskMiss,NBinskMiss,ArrayNBinskMiss);
+//		TH1D* CCMECRecoPMissMinusPlot = new TH1D("CCMECRecoPMissMinusPlot",LabelXAxisPMissMinus,NBinsPMissMinus,ArrayNBinsPMissMinus);
+//		TH1D* CCMECRecoPMissPlot = new TH1D("CCMECRecoPMissPlot",LabelXAxisPMiss,NBinsPMiss,ArrayNBinsPMiss);
 
 		TH1D* CCMECRecoDeltaPTPlot = new TH1D("CCMECRecoDeltaPTPlot",LabelXAxisDeltaPT,NBinsDeltaPT,ArrayNBinsDeltaPT);
 		TH1D* CCMECRecoDeltaAlphaTPlot = new TH1D("CCMECRecoDeltaAlphaTPlot",LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);
@@ -718,9 +718,9 @@ void myRecoAnalysis::Loop() {
 		TH1D* CCRESRecoDeltaThetaPlot = new TH1D("CCRESRecoDeltaThetaPlot",RecoLabelXAxisDeltaTheta,NBinsDeltaTheta,MinDeltaTheta,MaxDeltaTheta);
 		TH1D* CCRESRecoDeltaPhiPlot = new TH1D("CCRESRecoDeltaPhiPlot",RecoLabelXAxisDeltaPhi,NBinsDeltaPhi,MinDeltaPhi,MaxDeltaPhi);
 
-		TH1D* CCRESRecokMissPlot = new TH1D("CCRESRecokMissPlot",LabelXAxiskMiss,NBinskMiss,ArrayNBinskMiss);
-		TH1D* CCRESRecoPMissMinusPlot = new TH1D("CCRESRecoPMissMinusPlot",LabelXAxisPMissMinus,NBinsPMissMinus,ArrayNBinsPMissMinus);
-		TH1D* CCRESRecoPMissPlot = new TH1D("CCRESRecoPMissPlot",LabelXAxisPMiss,NBinsPMiss,ArrayNBinsPMiss);
+//		TH1D* CCRESRecokMissPlot = new TH1D("CCRESRecokMissPlot",LabelXAxiskMiss,NBinskMiss,ArrayNBinskMiss);
+//		TH1D* CCRESRecoPMissMinusPlot = new TH1D("CCRESRecoPMissMinusPlot",LabelXAxisPMissMinus,NBinsPMissMinus,ArrayNBinsPMissMinus);
+//		TH1D* CCRESRecoPMissPlot = new TH1D("CCRESRecoPMissPlot",LabelXAxisPMiss,NBinsPMiss,ArrayNBinsPMiss);
 
 		TH1D* CCRESRecoDeltaPTPlot = new TH1D("CCRESRecoDeltaPTPlot",LabelXAxisDeltaPT,NBinsDeltaPT,ArrayNBinsDeltaPT);
 		TH1D* CCRESRecoDeltaAlphaTPlot = new TH1D("CCRESRecoDeltaAlphaTPlot",LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);
@@ -796,9 +796,9 @@ void myRecoAnalysis::Loop() {
 		TH1D* CCDISRecoDeltaThetaPlot = new TH1D("CCDISRecoDeltaThetaPlot",RecoLabelXAxisDeltaTheta,NBinsDeltaTheta,MinDeltaTheta,MaxDeltaTheta);
 		TH1D* CCDISRecoDeltaPhiPlot = new TH1D("CCDISRecoDeltaPhiPlot",RecoLabelXAxisDeltaPhi,NBinsDeltaPhi,MinDeltaPhi,MaxDeltaPhi);
 
-		TH1D* CCDISRecokMissPlot = new TH1D("CCDISRecokMissPlot",LabelXAxiskMiss,NBinskMiss,ArrayNBinskMiss);
-		TH1D* CCDISRecoPMissMinusPlot = new TH1D("CCDISRecoPMissMinusPlot",LabelXAxisPMissMinus,NBinsPMissMinus,ArrayNBinsPMissMinus);
-		TH1D* CCDISRecoPMissPlot = new TH1D("CCDISRecoPMissPlot",LabelXAxisPMiss,NBinsPMiss,ArrayNBinsPMiss);
+//		TH1D* CCDISRecokMissPlot = new TH1D("CCDISRecokMissPlot",LabelXAxiskMiss,NBinskMiss,ArrayNBinskMiss);
+//		TH1D* CCDISRecoPMissMinusPlot = new TH1D("CCDISRecoPMissMinusPlot",LabelXAxisPMissMinus,NBinsPMissMinus,ArrayNBinsPMissMinus);
+//		TH1D* CCDISRecoPMissPlot = new TH1D("CCDISRecoPMissPlot",LabelXAxisPMiss,NBinsPMiss,ArrayNBinsPMiss);
 
 		TH1D* CCDISRecoDeltaPTPlot = new TH1D("CCDISRecoDeltaPTPlot",LabelXAxisDeltaPT,NBinsDeltaPT,ArrayNBinsDeltaPT);
 		TH1D* CCDISRecoDeltaAlphaTPlot = new TH1D("CCDISRecoDeltaAlphaTPlot",LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);
@@ -995,6 +995,65 @@ void myRecoAnalysis::Loop() {
 
 		TH1D* CC1pTrueMuonTrueMomentumTransverseRatio = new TH1D("CC1pTrueMuonTrueMomentumTransverseRatio",";P^{true}_{#mu,T}/P^{true}_{#mu}",25,0.,1.);		
 		TH1D* CC1pTrueProtonTrueMomentumTransverseRatio = new TH1D("CC1pTrueProtonTrueMomentumTransverseRatio",";P^{true}_{p,T}/P^{true}_{p}",25,0.,1.);		
+		
+		// ------------------------------------------------------------------------------------------------------------------------------
+
+		TH1D* RecoMuonCosThetaPlotLLPOnlyStudy[NBinsThreePlaneChi2LogLikelihood];
+		TH1D* CC1pRecoMuonCosThetaPlotLLPOnlyStudy[NBinsThreePlaneChi2LogLikelihood];
+
+		for (int WhichBin = 0; WhichBin < NBinsThreePlaneChi2LogLikelihood; WhichBin++) {
+
+				TString PlotLLPOnlyThres = "RecoMuonCosThetaPlot_LLPThres_"+TString(std::to_string(WhichBin));
+
+				RecoMuonCosThetaPlotLLPOnlyStudy[WhichBin] = new TH1D(PlotLLPOnlyThres,LabelXAxisMuonCosTheta,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta);
+
+				TString CC1pPlotLLPOnlyThres = "CC1pRecoMuonCosThetaPlot_LLPThres_"+TString(std::to_string(WhichBin));
+
+				CC1pRecoMuonCosThetaPlotLLPOnlyStudy[WhichBin] = new TH1D(CC1pPlotLLPOnlyThres,LabelXAxisMuonCosTheta,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta);
+
+		}
+
+		// --------------------------------------------------------------------------------------------------------------------------------
+
+		// NuScore Only Study
+
+		TH1D* RecoMuonCosThetaPlotNuScoreOnlyStudy[NBinsNuScore];
+		TH1D* CC1pRecoMuonCosThetaPlotNuScoreOnlyStudy[NBinsNuScore];
+
+		for (int WhichBin = 0; WhichBin < NBinsNuScore; WhichBin++) {
+
+				TString PlotNuScoreOnlyThres = "RecoMuonCosThetaPlot_NuScoreThres_"+TString(std::to_string(WhichBin));
+
+				RecoMuonCosThetaPlotNuScoreOnlyStudy[WhichBin] = new TH1D(PlotNuScoreOnlyThres,LabelXAxisMuonCosTheta,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta);
+
+				TString CC1pPlotNuScoreOnlyThres = "CC1pRecoMuonCosThetaPlot_NuScoreThres_"+TString(std::to_string(WhichBin));
+
+				CC1pRecoMuonCosThetaPlotNuScoreOnlyStudy[WhichBin] = new TH1D(CC1pPlotNuScoreOnlyThres,LabelXAxisMuonCosTheta,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta);
+
+		}
+
+		// --------------------------------------------------------------------------------------------------------------------------------
+
+		// Length Only Study
+
+		TH1D* RecoMuonCosThetaPlotLengthOnlyStudy[NBinsMuonLength];
+		TH1D* CC1pRecoMuonCosThetaPlotLengthOnlyStudy[NBinsMuonLength];
+
+		for (int WhichBin = 0; WhichBin < NBinsMuonLength; WhichBin++) {
+
+				TString PlotLengthOnlyThres = "RecoMuonCosThetaPlot_LengthThres_"+TString(std::to_string(WhichBin));
+
+				RecoMuonCosThetaPlotLengthOnlyStudy[WhichBin] = new TH1D(PlotLengthOnlyThres,LabelXAxisMuonCosTheta,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta);
+
+				TString CC1pPlotLengthOnlyThres = "CC1pRecoMuonCosThetaPlot_LengthThres_"+TString(std::to_string(WhichBin));
+
+				CC1pRecoMuonCosThetaPlotLengthOnlyStudy[WhichBin] = new TH1D(CC1pPlotLengthOnlyThres,LabelXAxisMuonCosTheta,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta);
+
+		}
+
+		// --------------------------------------------------------------------------------------------------------------------------------
+
+		Tools tools;
 
 		// --------------------------------------------------------------------------------------------------------------------------------
 		// --------------------------------------------------------------------------------------------------------------------------------
@@ -1012,10 +1071,6 @@ void myRecoAnalysis::Loop() {
 				POTCount = POTCountHist->GetBinContent(1);
 				POTFile->Close();
 		}
-		
-		// ------------------------------------------------------------------------------------------------------------------------------
-
-		Tools tools;
 		
 		// ------------------------------------------------------------------------------------------------------------------
 
@@ -1419,6 +1474,54 @@ void myRecoAnalysis::Loop() {
 
 			// ----------------------------------------------------------------------------------------------------------------------
 
+			// 1D LLP Only Study // Purity & Efficiency Study
+
+			for (int WhichBin = 0; WhichBin < NBinsThreePlaneChi2LogLikelihood; WhichBin++) {
+
+				double LocalThres = MinThreePlaneChi2LogLikelihood + LLPStep * WhichBin;
+
+				if (reco_Pp_ThreePlaneLogLikelihood > LocalThres) {
+					
+					RecoMuonCosThetaPlotLLPOnlyStudy[WhichBin]->Fill(reco_Pmu_cos_theta,weight);
+
+				}
+
+			}
+
+			// ----------------------------------------------------------------------------------------------------------------------
+
+			// 1D NuScore Only Study
+
+			for (int WhichBin = 0; WhichBin < NBinsNuScore; WhichBin++) {
+
+				double LocalThres = MinNuScore + NuScoreStep * WhichBin;
+
+				if (NuScore > LocalThres) {
+					
+					RecoMuonCosThetaPlotNuScoreOnlyStudy[WhichBin]->Fill(reco_Pmu_cos_theta,weight);
+
+				}
+
+			}
+
+			// ----------------------------------------------------------------------------------------------------------------------
+
+			// 1D Length Only Study
+
+			for (int WhichBin = 0; WhichBin < NBinsMuonLength; WhichBin++) {
+
+				double LocalThres = MinMuonLength + MuonLengthStep * WhichBin;
+
+				if (l_muCandidate > LocalThres) {
+					
+					RecoMuonCosThetaPlotLengthOnlyStudy[WhichBin]->Fill(reco_Pmu_cos_theta,weight);
+
+				}
+
+			}
+
+			// ----------------------------------------------------------------------------------------------------------------------
+
 			// No weight to be applied in the multiplicity plots
 			RecoPi0Plot->Fill(NumberPi0); 
 			RecoNeutronPlot->Fill(NumberNeutrons); 
@@ -1469,9 +1572,9 @@ void myRecoAnalysis::Loop() {
 			RecoDeltaThetaPlot->Fill(DeltaThetaProtonMuon_Deg,weight);
 			RecoDeltaPhiPlot->Fill(DeltaPhiProtonMuon_Deg,weight);
 
-			RecokMissPlot->Fill(kMiss,weight);
-			RecoPMissMinusPlot->Fill(PMissMinus,weight);
-			RecoPMissPlot->Fill(MissMomentum,weight);
+//			RecokMissPlot->Fill(kMiss,weight);
+//			RecoPMissMinusPlot->Fill(PMissMinus,weight);
+//			RecoPMissPlot->Fill(MissMomentum,weight);
 
 			RecoDeltaPTPlot->Fill(TransMissMomentum,weight);
 			RecoDeltaAlphaTPlot->Fill(DeltaAlphaT,weight);
@@ -1534,7 +1637,7 @@ void myRecoAnalysis::Loop() {
 
 				// CC1p Signal
 
-				if ( CC1p == 1 && CandidateMu_MCParticle_Pdg->at(0) == MuonPdg && CandidateP_MCParticle_Pdg->at(0) == ProtonPdg 
+				if ( CC1p == 1 && NumberPi0 == 0 && CandidateMu_MCParticle_Pdg->at(0) == MuonPdg && CandidateP_MCParticle_Pdg->at(0) == ProtonPdg 
 				     && True_CandidateMu_StartContainment->at(0) == 1
  
 				     && True_CandidateMu_P->at(0) > ArrayNBinsMuonMomentum[0] 
@@ -1558,8 +1661,59 @@ void myRecoAnalysis::Loop() {
 				     && true_DeltaPhiT < ArrayNBinsDeltaPhiT[NBinsDeltaPhiT]
 
 				) {
+
+					// --------------------------------------------------------------------------------------------------
 				
 					CC1pEventsPassingSelectionCuts++;
+
+					// ---------------------------------------------------------------------------------------------------------------------------
+					// ---------------------------------------------------------------------------------------------------------------------------
+
+					// 1D LLP only study
+
+					for (int WhichBin = 0; WhichBin < NBinsThreePlaneChi2LogLikelihood; WhichBin++) {
+
+						double LocalThres = MinThreePlaneChi2LogLikelihood + LLPStep * WhichBin;
+
+						if (reco_Pp_ThreePlaneLogLikelihood > LocalThres) {
+							
+							CC1pRecoMuonCosThetaPlotLLPOnlyStudy[WhichBin]->Fill(reco_Pmu_cos_theta,weight);
+
+						}
+
+					}
+
+					// ---------------------------------------------------------------------------------------------------------------------------
+
+					// 1D NuScore only study
+
+					for (int WhichBin = 0; WhichBin < NBinsNuScore; WhichBin++) {
+
+						double LocalThres = MinNuScore + NuScoreStep * WhichBin;
+
+						if (NuScore > LocalThres) {
+							
+							CC1pRecoMuonCosThetaPlotNuScoreOnlyStudy[WhichBin]->Fill(reco_Pmu_cos_theta,weight);
+
+						}
+
+					}
+
+					// ---------------------------------------------------------------------------------------------------------------------------
+
+					// 1D Length only study
+
+					for (int WhichBin = 0; WhichBin < NBinsMuonLength; WhichBin++) {
+
+						double LocalThres = MinMuonLength + MuonLengthStep * WhichBin;
+
+						if (l_muCandidate > LocalThres) {
+							
+							CC1pRecoMuonCosThetaPlotLengthOnlyStudy[WhichBin]->Fill(reco_Pmu_cos_theta,weight);
+
+						}
+
+					}
 
 					// --------------------------------------------------------------------------------------------------
 					// --------------------------------------------------------------------------------------------------
@@ -1643,9 +1797,9 @@ void myRecoAnalysis::Loop() {
 					CC1pRecoMuonPhiPlot->Fill(reco_Pmu_phi*180./TMath::Pi(),weight);
 					CC1pRecoProtonPhiPlot->Fill(reco_Pp_phi*180./TMath::Pi(),weight);
 
-					CC1pRecokMissPlot->Fill(kMiss,weight);
-					CC1pRecoPMissMinusPlot->Fill(PMissMinus,weight);
-					CC1pRecoPMissPlot->Fill(MissMomentum,weight);
+//					CC1pRecokMissPlot->Fill(kMiss,weight);
+//					CC1pRecoPMissMinusPlot->Fill(PMissMinus,weight);
+//					CC1pRecoPMissPlot->Fill(MissMomentum,weight);
 
 					CC1pRecoDeltaPTPlot->Fill(TransMissMomentum,weight);
 					CC1pRecoDeltaAlphaTPlot->Fill(DeltaAlphaT,weight);
@@ -1989,9 +2143,9 @@ void myRecoAnalysis::Loop() {
 					NonCC1pRecoDeltaThetaPlot->Fill(DeltaThetaProtonMuon_Deg,weight);
 					NonCC1pRecoDeltaPhiPlot->Fill(DeltaPhiProtonMuon_Deg,weight);
 
-					NonCC1pRecokMissPlot->Fill(kMiss,weight);
-					NonCC1pRecoPMissMinusPlot->Fill(PMissMinus,weight);
-					NonCC1pRecoPMissPlot->Fill(MissMomentum,weight);
+//					NonCC1pRecokMissPlot->Fill(kMiss,weight);
+//					NonCC1pRecoPMissMinusPlot->Fill(PMissMinus,weight);
+//					NonCC1pRecoPMissPlot->Fill(MissMomentum,weight);
 
 					NonCC1pRecoDeltaPTPlot->Fill(TransMissMomentum,weight);
 					NonCC1pRecoDeltaAlphaTPlot->Fill(DeltaAlphaT,weight);
@@ -2065,9 +2219,9 @@ void myRecoAnalysis::Loop() {
 					CCQERecoDeltaThetaPlot->Fill(DeltaThetaProtonMuon_Deg,weight);
 					CCQERecoDeltaPhiPlot->Fill(DeltaPhiProtonMuon_Deg,weight);
 
-					CCQERecokMissPlot->Fill(kMiss,weight);
-					CCQERecoPMissMinusPlot->Fill(PMissMinus,weight);
-					CCQERecoPMissPlot->Fill(MissMomentum,weight);
+//					CCQERecokMissPlot->Fill(kMiss,weight);
+//					CCQERecoPMissMinusPlot->Fill(PMissMinus,weight);
+//					CCQERecoPMissPlot->Fill(MissMomentum,weight);
 
 					CCQERecoDeltaPTPlot->Fill(TransMissMomentum,weight);
 					CCQERecoDeltaAlphaTPlot->Fill(DeltaAlphaT,weight);
@@ -2136,9 +2290,9 @@ void myRecoAnalysis::Loop() {
 					CCMECRecoDeltaThetaPlot->Fill(DeltaThetaProtonMuon_Deg,weight);
 					CCMECRecoDeltaPhiPlot->Fill(DeltaPhiProtonMuon_Deg,weight);
 
-					CCMECRecokMissPlot->Fill(kMiss,weight);
-					CCMECRecoPMissMinusPlot->Fill(PMissMinus,weight);
-					CCMECRecoPMissPlot->Fill(MissMomentum,weight);
+//					CCMECRecokMissPlot->Fill(kMiss,weight);
+//					CCMECRecoPMissMinusPlot->Fill(PMissMinus,weight);
+//					CCMECRecoPMissPlot->Fill(MissMomentum,weight);
 
 					CCMECRecoDeltaPTPlot->Fill(TransMissMomentum,weight);
 					CCMECRecoDeltaAlphaTPlot->Fill(DeltaAlphaT,weight);
@@ -2207,9 +2361,9 @@ void myRecoAnalysis::Loop() {
 					CCRESRecoDeltaThetaPlot->Fill(DeltaThetaProtonMuon_Deg,weight);
 					CCRESRecoDeltaPhiPlot->Fill(DeltaPhiProtonMuon_Deg,weight);
 
-					CCRESRecokMissPlot->Fill(kMiss,weight);
-					CCRESRecoPMissMinusPlot->Fill(PMissMinus,weight);
-					CCRESRecoPMissPlot->Fill(MissMomentum,weight);
+//					CCRESRecokMissPlot->Fill(kMiss,weight);
+//					CCRESRecoPMissMinusPlot->Fill(PMissMinus,weight);
+//					CCRESRecoPMissPlot->Fill(MissMomentum,weight);
 
 					CCRESRecoDeltaPTPlot->Fill(TransMissMomentum,weight);
 					CCRESRecoDeltaAlphaTPlot->Fill(DeltaAlphaT,weight);
@@ -2275,9 +2429,9 @@ void myRecoAnalysis::Loop() {
 					CCDISRecoDeltaThetaPlot->Fill(DeltaThetaProtonMuon_Deg,weight);
 					CCDISRecoDeltaPhiPlot->Fill(DeltaPhiProtonMuon_Deg,weight);
 
-					CCDISRecokMissPlot->Fill(kMiss,weight);
-					CCDISRecoPMissMinusPlot->Fill(PMissMinus,weight);
-					CCDISRecoPMissPlot->Fill(MissMomentum,weight);
+//					CCDISRecokMissPlot->Fill(kMiss,weight);
+//					CCDISRecoPMissMinusPlot->Fill(PMissMinus,weight);
+//					CCDISRecoPMissPlot->Fill(MissMomentum,weight);
 
 					CCDISRecoDeltaPTPlot->Fill(TransMissMomentum,weight);
 					CCDISRecoDeltaAlphaTPlot->Fill(DeltaAlphaT,weight);

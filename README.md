@@ -8,23 +8,31 @@
 
 ###########################################################################################################################################################################
 
+# Purity & Efficiency Studies
+
+cd PurityEfficiencyStudies
+
+root -l script_PurityEfficiencyStudies.C
+
+root -l DetermineMaxPurityEfficiency1D.cpp
+
+###########################################################################################################################################################################
+
 # switch between series of cuts
 
 root -l script_EventSelection_CV.C 
 
 # switch between PID info / topological breakdown / interaction breakdown
 
-root -l ProduceValidationPlots.cpp
+root -l Chi2PID_BreakDown.cpp
+
+root -l Create1DPlotsTHStack_TopologicalBreakDown.cpp.cpp
+
+root -l Create1DPlotsTHStack_InteractionBreakDown.cpp.cpp
 
 ./DownloadEventRatePlots.sh
 
 ###########################################################################################################################################################################
-
-# Purity & Efficiency Studies
-
-cd PurityEfficiencyStudies
-root -l script_PurityEfficiencyStudies.C
-root -l DetermineMaxPurityEfficiency1D.cpp
 
 # Detector variations
 
@@ -43,14 +51,3 @@ root -l script_EventSelection_Genie_Systematics.C
 root -l script_EventSelection_Flux_Systematics.C
 
 ###########################################################################################################################################################################
-
-# Plotting code in ProduceValidationPlots.cpp locally
-
-# 3 plane log likelihood particle breakdown 
-gROOT->ProcessLine(".L Chi2PID_BreakDown.cpp++"); gROOT->ProcessLine("Chi2PID_BreakDown()");
-
-# Topological break down
-gROOT->ProcessLine(".L Create1DPlotsTHStack_TopologicalBreakDown.cpp++"); gROOT->ProcessLine("Create1DPlotsTHStack_TopologicalBreakDown()");
-
-# Interaction break down
-gROOT->ProcessLine(".L Create1DPlotsTHStack_InteractionBreakDown.cpp++"); gROOT->ProcessLine("Create1DPlotsTHStack_InteractionBreakDown()");

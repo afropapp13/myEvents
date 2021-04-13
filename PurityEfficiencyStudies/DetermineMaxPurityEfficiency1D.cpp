@@ -7,6 +7,7 @@
 #include <TLegend.h>
 #include <TLine.h>
 #include <TLatex.h>
+#include <TMath.h>
 
 #include <iostream>
 #include <vector>
@@ -14,6 +15,7 @@
 #include <cmath>
 
 #include "../../../myClasses/Constants.h"
+#include "../../Secondary_Code/myFunctions.cpp"
 
 using namespace std;
 using namespace Constants;
@@ -33,15 +35,6 @@ std::vector<double> GetMax(double Array[], int SizeArray){
 	
 	return MaxQuantities;
 	
-}
-
-TString ToString(double num) {
-
-	std::ostringstream start;
-	start << num;
-	string start1 = start.str();
-	return start1;
-
 }
 
 void DetermineMaxPurityEfficiency1D() {
@@ -80,67 +73,52 @@ void DetermineMaxPurityEfficiency1D() {
 
 			if (CutName[WhichCut] == "LLP") {
 
-				NBins = 50;
-				Min = -5., Max = 5.;
-
-			}
-
-			if (CutName[WhichCut] == "LLMu") {
-
-				NBins = 20;
-				Min = -5., Max = 5.;
+				NBins = NBinsThreePlaneChi2LogLikelihood;
+				Min = MinThreePlaneChi2LogLikelihood, Max = MaxThreePlaneChi2LogLikelihood;
 
 			}
 
 			if (CutName[WhichCut] == "NuScore") {
 
-				NBins = 20;
-				Min = 0., Max = 1.;
+				NBins = NBinsNuScore;
+				Min = MinNuScore, Max = MaxNuScore;
 
 			}
 
 			if (CutName[WhichCut] == "Length") {
 
-				NBins = 20;
-				Min = -150., Max = 500.;
+				NBins = NBinsMuonLength;
+				Min = MinMuonLength, Max = MaxMuonLength;
 
 			}
 
-			if (CutName[WhichCut] == "PMissMinus") {
-
-				NBins = 20;
-				Min = 0., Max = 1.50;
-
-			}
-
-			if (CutName[WhichCut] == "kMiss") {
-
-				NBins = 20;
-				Min = 0., Max = 1.05;
-
-			}
-
-			if (CutName[WhichCut] == "DeltaTheta") {
-
-				NBins = 19;
-				Min = 5., Max = 90.;
-
-			}
 
 			double Step = (Max - Min) / double(NBins);
 
 			// ----------------------------------------------------------------------------------------------------------------------------------------
 
-			TFile* TruthCC1pFile = TFile::Open("OutputFiles/TruthPurityEfficiencyStudies_Overlay9_"+RunNumber[WhichRun]+Cuts[0]+".root");
+			TFile* TruthCC1pFile = TFile::Open(PathToFiles+"TruthSTVAnalysis_Overlay9_"+RunNumber[WhichRun]+"_"+UBCodeVersion+".root");
 			TH1D* hTruthCC1pOverlay = (TH1D*)(TruthCC1pFile->Get("TrueMuonCosThetaPlot"));
 			double NTruthCC1pOverlay = hTruthCC1pOverlay->Integral();
 
 			// ----------------------------------------------------------------------------------------------------------------------------------------
 
-			TFile* RecoOverlayFile = TFile::Open("OutputFiles/PurityEfficiencyStudies_Overlay9_"+RunNumber[WhichRun]+Cuts[WhichCut]+".root");
-			TFile* RecoOverlayDirtFile = TFile::Open("OutputFiles/PurityEfficiencyStudies_OverlayDirt9_"+RunNumber[WhichRun]+Cuts[WhichCut]+".root");
-			TFile* RecoBeamOnFile = TFile::Open("OutputFiles/PurityEfficiencyStudies_BeamOn9_"+RunNumber[WhichRun]+Cuts[WhichCut]+".root");
-			TFile* RecoExtBNBFile = TFile::Open("OutputFiles/PurityEfficiencyStudies_ExtBNB9_"+RunNumber[WhichRun]+Cuts[WhichCut]+".root");
+			TFile* RecoOverlayFile = TFile::Open(PathToFiles+Cuts[WhichCut]+"/"+"STVStudies_Overlay9_"+RunNumber[WhichRun]+Cuts[WhichCut]+".root");
+			TFile* RecoOverlayDirtFile = TFile::Open(PathToFiles+Cuts[WhichCut]+"/"+"STVStudies_OverlayDirt9_"+RunNumber[WhichRun]+Cuts[WhichCut]+".root");
+			TFile* RecoBeamOnFile = TFile::Open(PathToFiles+Cuts[WhichCut]+"/"+"STVStudies_BeamOn9_"+RunNumber[WhichRun]+Cuts[WhichCut]+".root");
+			TFile* RecoExtBNBFile = TFile::Open(PathToFiles+Cuts[WhichCut]+"/"+"STVStudies_ExtBNB9_"+RunNumber[WhichRun]+Cuts[WhichCut]+".root");
+
+			TH1D* hOverlayPOTScale = (TH1D*)(RecoOverlayFile->Get("POTScalePlot"));
+			TH1D* hBeamOnPOTScale = (TH1D*)(RecoBeamOnFile->Get("POTScalePlot"));
+			TH1D* hExtBNBPOTScale = (TH1D*)(RecoExtBNBFile->Get("POTScalePlot"));
+			TH1D* hOverlayDirtPOTScale = (TH1D*)(RecoOverlayDirtFile->Get("POTScalePlot"));
+
+			double OverlayPOTScale = hOverlayPOTScale->GetBinContent(1);
+			double BeamOnPOTScale = hBeamOnPOTScale->GetBinContent(1);
+			double ExtBNBPOTScale = hExtBNBPOTScale->GetBinContent(1);
+			double OverlayDirtPOTScale = hOverlayDirtPOTScale->GetBinContent(1);
+
+			double ErrorTrueCC1pOverlay = TMath::Sqrt(NTruthCC1pOverlay * OverlayPOTScale);
 
 			// ----------------------------------------------------------------------------------------------------------------------------------------
 
@@ -149,6 +127,26 @@ void DetermineMaxPurityEfficiency1D() {
 			double PurityArray[NBins];
 			double EfficiencyArray[NBins];
 			double ProductArray[NBins];
+
+			double ErrorPurityArray[NBins];
+			double ErrorEfficiencyArray[NBins];
+			double ErrorProductArray[NBins];
+
+			double BeamOn[NBins];
+			double ExtBNB[NBins];
+			double Dirt[NBins];
+			double Overlay[NBins];
+			double CC1p[NBins];
+			double NonBeamOn[NBins];
+			double CosmicFrac[NBins];
+
+			double ErrorBeamOn[NBins];
+			double ErrorExtBNB[NBins];
+			double ErrorDirt[NBins];
+			double ErrorOverlay[NBins];
+			double ErrorCC1p[NBins];
+			double ErrorNonBeamOn[NBins];
+			double ErrorCosmicFrac[NBins];
 
 			// ----------------------------------------------------------------------------------------------------------------------------------------
 
@@ -172,14 +170,46 @@ void DetermineMaxPurityEfficiency1D() {
 				double NRecoDirt = hRecoDirt->Integral();
 				double NRecoBeamOn = hRecoBeamOn->Integral();
 				double NRecoExtBNB = hRecoExtBNB->Integral();
+				double BinNonBeamOn = NRecoOverlay + NRecoDirt + NRecoExtBNB;
 
-				double purity = NRecoCC1pOverlay / (NRecoOverlay + NRecoDirt + NRecoExtBNB) ;
+				double BinErrorCC1pOverlay = TMath::Sqrt(NRecoCC1pOverlay * OverlayPOTScale);
+				double BinErrorOverlay = TMath::Sqrt(NRecoOverlay * OverlayPOTScale);
+				double BinErrorOverlayDirt = TMath::Sqrt(NRecoDirt * OverlayDirtPOTScale);
+				double BinErrorBeamOn = TMath::Sqrt(NRecoBeamOn * BeamOnPOTScale);
+				double BinErrorExtBNB = TMath::Sqrt(NRecoExtBNB * ExtBNBPOTScale);
+				double BinErrorNonBeamOn = TMath::Sqrt( TMath::Power(BinErrorOverlay,2.) + TMath::Power(BinErrorOverlayDirt,2.) + TMath::Power(BinErrorExtBNB,2.) );
+
+				double purity = NRecoCC1pOverlay / BinNonBeamOn ;
 				double efficiency = NRecoCC1pOverlay / NTruthCC1pOverlay;
 				double product = purity * efficiency;
+
+				double PurityError = purity * TMath::Sqrt( TMath::Power(BinErrorCC1pOverlay/NRecoCC1pOverlay,2.) + TMath::Power(BinErrorNonBeamOn/BinNonBeamOn,2.) );
+				double EfficiencyError = efficiency * TMath::Sqrt( TMath::Power(BinErrorCC1pOverlay/NRecoCC1pOverlay,2.) + TMath::Power(ErrorTrueCC1pOverlay/NTruthCC1pOverlay,2.) );
+				double ProductError = TMath::Sqrt( TMath::Power(PurityError*efficiency,2.) + TMath::Power(EfficiencyError*purity,2.) ) ;
 
 				PurityArray[WhichBin] = purity;
 				EfficiencyArray[WhichBin] = efficiency;
 				ProductArray[WhichBin] = product;
+
+				ErrorPurityArray[WhichBin] = PurityError;
+				ErrorEfficiencyArray[WhichBin] = EfficiencyError;
+				ErrorProductArray[WhichBin] = ProductError;
+
+				BeamOn[WhichBin] = NRecoBeamOn;
+				ExtBNB[WhichBin] = NRecoExtBNB;
+				Dirt[WhichBin] = NRecoDirt;
+				Overlay[WhichBin] = NRecoOverlay;
+				CC1p[WhichBin] = NRecoCC1pOverlay;
+				NonBeamOn[WhichBin] = BinNonBeamOn;
+				CosmicFrac[WhichBin] = NRecoExtBNB / BinNonBeamOn;
+
+				ErrorBeamOn[WhichBin] = BinErrorBeamOn;
+				ErrorExtBNB[WhichBin] = BinErrorExtBNB;
+				ErrorDirt[WhichBin] = BinErrorOverlayDirt;
+				ErrorOverlay[WhichBin] = BinErrorOverlay;
+				ErrorCC1p[WhichBin] = BinErrorCC1pOverlay;
+				ErrorNonBeamOn[WhichBin] = BinErrorNonBeamOn;
+				ErrorCosmicFrac[WhichBin] = CosmicFrac[WhichBin] * TMath::Sqrt( TMath::Power( BinErrorExtBNB / NRecoExtBNB,2.) + TMath::Power( BinErrorNonBeamOn / BinNonBeamOn,2.) ) ;
 
 			}
 
@@ -228,7 +258,7 @@ void DetermineMaxPurityEfficiency1D() {
 
 			TLatex* latProduct = new TLatex();
 			latProduct->SetTextFont(TextFont);
-			latProduct->SetTextSize(TextSize);
+			latProduct->SetTextSize(TextSize-0.01);
 			latProduct->DrawLatexNDC(0.2,0.82,RunNumber[WhichRun] + " Max at "+CutName[WhichCut]+" > "+ToString(SelectedThres));
 
 			// ----------------------------------------------------------------------------------------------------------------------------------------
@@ -240,8 +270,8 @@ void DetermineMaxPurityEfficiency1D() {
 			
 			TLatex* latBeamOn = new TLatex();
 			latBeamOn->SetTextFont(TextFont);
-			latBeamOn->SetTextSize(TextSize);
-			latBeamOn->DrawLatexNDC(0.2,0.75,"Beam On Events = "+ToString(hRecoBeamOn->Integral()));
+			latBeamOn->SetTextSize(TextSize-0.01);
+			latBeamOn->DrawLatexNDC(0.2,0.75,"Beam On Events = "+ToString(BeamOn[GlobalThresBin])+" #pm "+ ToString(round(ErrorBeamOn[GlobalThresBin],2)));
 
 			// ----------------------------------------------------------------------------------------------------------------------------------------
 
@@ -253,8 +283,10 @@ void DetermineMaxPurityEfficiency1D() {
 			
 			TLatex* latExtBNB = new TLatex();
 			latExtBNB->SetTextFont(TextFont);
-			latExtBNB->SetTextSize(TextSize);
-			latExtBNB->DrawLatexNDC(0.2,0.68,"Cosmics = "+ToString(int(hRecoExtBNB->Integral() / ( hRecoExtBNB->Integral() + hRecoOverlay->Integral() + hRecoDirt->Integral() )*100.)) + "%");
+			latExtBNB->SetTextSize(TextSize-0.01);
+			TString CosmicCont = ToString(round(CosmicFrac[GlobalThresBin]*100.,2.) );
+			TString ErrorCosmicCont = ToString(round(ErrorCosmicFrac[GlobalThresBin]*100.,2.) );
+			latExtBNB->DrawLatexNDC(0.2,0.68,"Cosmics = " + CosmicCont + " #pm " + ErrorCosmicCont + " %");
 
 			ProductCanvas->SaveAs(PlotPath+CutName[WhichCut]+"_TwoDScanProduct_"+RunNumber[WhichRun]+".pdf");
 			delete ProductCanvas;
@@ -295,8 +327,10 @@ void DetermineMaxPurityEfficiency1D() {
 
 			TLatex* latPurity = new TLatex();
 			latPurity->SetTextFont(TextFont);
-			latPurity->SetTextSize(TextSize);
-			latPurity->DrawLatexNDC(0.2,0.82,RunNumber[WhichRun] + " Purity at max = "+ToString(int(PurityArray[GlobalThresBin]*100.)) + "%");
+			latPurity->SetTextSize(TextSize-0.01);
+			TString Purity = ToString(round(PurityArray[GlobalThresBin]*100.,2) );
+			TString ErrorPurity = ToString(round(ErrorPurityArray[GlobalThresBin]*100.,2) );
+			latPurity->DrawLatexNDC(0.2,0.82,RunNumber[WhichRun] + " Purity at max = "+ Purity + " #pm " + ErrorPurity + " %");
 
 			PurityCanvas->SaveAs(PlotPath+CutName[WhichCut]+"_OneDScanPurity_"+RunNumber[WhichRun]+".pdf");
 			delete PurityCanvas;
@@ -337,8 +371,10 @@ void DetermineMaxPurityEfficiency1D() {
 
 			TLatex* latEfficiency = new TLatex();
 			latEfficiency->SetTextFont(TextFont);
-			latEfficiency->SetTextSize(TextSize);
-			latEfficiency->DrawLatexNDC(0.2,0.82,RunNumber[WhichRun] + " Efficiency at max = "+ToString(int(EfficiencyArray[GlobalThresBin]*100.)) + "%");
+			latEfficiency->SetTextSize(TextSize-0.01);
+			TString Efficiency = ToString(round(EfficiencyArray[GlobalThresBin]*100.,2) );
+			TString ErrorEfficiency = ToString(round(ErrorEfficiencyArray[GlobalThresBin]*100.,2) );
+			latEfficiency->DrawLatexNDC(0.2,0.82,RunNumber[WhichRun] + " Efficiency at max = " + Efficiency + " #pm " + ErrorEfficiency + " %");
 
 			EfficiencyCanvas->SaveAs(PlotPath+CutName[WhichCut]+"_OneDScanEfficiency_"+RunNumber[WhichRun]+".pdf");	
 			delete EfficiencyCanvas;

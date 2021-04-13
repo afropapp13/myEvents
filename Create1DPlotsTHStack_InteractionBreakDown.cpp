@@ -264,7 +264,7 @@ void Create1DPlotsTHStack_InteractionBreakDown() {
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetLabelFont(FontStyle);
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetNdivisions(6);
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetLabelSize(0.06);
-					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitle("# events");
+					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitle("# Events");
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitleSize(0.08);
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitleOffset(0.6);
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTickSize(0);
@@ -400,7 +400,7 @@ void Create1DPlotsTHStack_InteractionBreakDown() {
 				latexPurity->SetTextFont(FontStyle);
 				latexPurity->SetTextSize(0.09);
 				TString LabelPurity = "CCQE = " + ToString(CCQEPurity/10.) + " %";
-				latexPurity->DrawLatexNDC(0.54,0.9, LabelPurity);
+				latexPurity->DrawLatexNDC(0.57,0.9, LabelPurity);
 
 				// --------------------------------------------------------------------------------------
 
