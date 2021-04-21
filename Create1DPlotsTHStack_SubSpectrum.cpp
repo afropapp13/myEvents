@@ -7,6 +7,7 @@
 #include <TLegend.h>
 #include <TLine.h>
 #include <TLatex.h>
+#include <TMath.h>
 
 #include <iostream>
 #include <vector>
@@ -17,35 +18,18 @@
 using namespace std;
 using namespace Constants;
 
-void Create1DPlotsTHStack_TopologicalBreakDown() {
+#include "ubana/AnalysisCode/Secondary_Code/GlobalSettings.cpp"
+
+void Create1DPlotsTHStack_SubSpectrum() {
 
 	// -----------------------------------------------------------------------------------------------------------------------------------------
 
+	GlobalSettings();
 	gStyle->SetOptStat(0);
 
 	// -----------------------------------------------------------------------------------------------------------------------------------------
 
 	std::vector<TString> PlotNames; PlotNames.clear();
-
-//	PlotNames.push_back("RecoPMissMinusPlot");
-//	PlotNames.push_back("RecoPMissPlot");
-//	PlotNames.push_back("RecokMissPlot");
-
-	PlotNames.push_back("RecoNuScorePlot");
-	PlotNames.push_back("RecoFlashScorePlot");
-	PlotNames.push_back("RecoDistancePlot");
-	PlotNames.push_back("RecoLengthDifferencePlot");
-	PlotNames.push_back("RecodYZPlot");
-	PlotNames.push_back("RecoNPEPlot");
-
-	PlotNames.push_back("RecoDeltaPhiPlot");
-	PlotNames.push_back("RecoDeltaThetaPlot");
-
-//	PlotNames.push_back("RecoThreePlaneChi2LogLikelihoodCandidateMuonPlot");
-//	PlotNames.push_back("RecoThreePlaneChi2LogLikelihoodCandidateProtonPlot");
-
-//	PlotNames.push_back("RecoMuonLLRPIDPlot");
-//	PlotNames.push_back("RecoProtonLLRPIDPlot");
 
 	PlotNames.push_back("RecoMuonMomentumPlot");
 	PlotNames.push_back("RecoProtonMomentumPlot");
@@ -56,30 +40,6 @@ void Create1DPlotsTHStack_TopologicalBreakDown() {
 	PlotNames.push_back("RecoDeltaPTPlot");
 	PlotNames.push_back("RecoDeltaAlphaTPlot");
 	PlotNames.push_back("RecoDeltaPhiTPlot");
-	PlotNames.push_back("RecoECalPlot");
-	PlotNames.push_back("RecoEQEPlot");
-	PlotNames.push_back("RecoQ2Plot");
-
-	PlotNames.push_back("RecoMuonLengthPlot");
-	PlotNames.push_back("RecoProtonLengthPlot");
-	PlotNames.push_back("RecodMuonTracksScorePlot");
-	PlotNames.push_back("RecodProtonTracksScorePlot");
-//	PlotNames.push_back("RecodMuonVertexDistancePlot");
-//	PlotNames.push_back("RecodProtonVertexDistancePlot");
-	PlotNames.push_back("RecoVertexActivityPlot");
-	PlotNames.push_back("RecoNonZeroVertexActivityPlot");
-
-	PlotNames.push_back("RecoVertexXPlot");
-	PlotNames.push_back("RecoVertexYPlot");
-	PlotNames.push_back("RecoVertexZPlot");
-
-	PlotNames.push_back("RecoEvPlot");
-	PlotNames.push_back("RecoNuPlot");
-
-	PlotNames.push_back("RecoContainedMuonMomentumPlot");
-	PlotNames.push_back("RecoUncontainedMuonMomentumPlot");
-	PlotNames.push_back("RecoContainedMuonLengthPlot");
-	PlotNames.push_back("RecoUncontainedMuonLengthPlot");
 
 	const int N1DPlots = PlotNames.size();
 	cout << "Number of 1D Plots = " << N1DPlots << endl;
@@ -111,9 +71,15 @@ void Create1DPlotsTHStack_TopologicalBreakDown() {
 
 	// -----------------------------------------------------------------------------------------------------------------------------------------
 
+	TFile* FluxFile = TFile::Open("../mySTVAnalysis/MCC9_FluxHist_volTPCActive.root"); 
+	TH1D* HistoFlux = (TH1D*)(FluxFile->Get("hEnumu_cv"));	
+
+	// -----------------------------------------------------------------------------------------------------------------------------------------
+
 	for (int WhichRun = 0; WhichRun < NRuns; WhichRun++) {
 
 		double DataPOT = ReturnBeamOnRunPOT(Runs[WhichRun]);													
+		double IntegratedFlux = (HistoFlux->Integral() * DataPOT / POTPerSpill / Nominal_UB_XY_Surface) * (SoftFidSurface / Nominal_UB_XY_Surface);		
 
 		// -----------------------------------------------------------------------------------------------------------------------------------------
 
@@ -121,11 +87,11 @@ void Create1DPlotsTHStack_TopologicalBreakDown() {
 
 		for (int i = 0; i < NCuts; i++) {
 
-//		} // If we want to run only on a specific cut combination, include this } and remove the one at the end of the program
+			Cuts = Cuts + VectorCuts[i];
+
+		} // If we want to run only on a specific cut combination, include this } and remove the one at the end of the program
 
 			TString PathToFilesCut = PathToFiles+"/"+Cuts+"/";
-
-			TH1D::SetDefaultSumw2();
 
 			// ---------------------------------------------------------------------------------------------------------------------
 
@@ -138,8 +104,6 @@ void Create1DPlotsTHStack_TopologicalBreakDown() {
 			vector<vector<TH1D*> > Plots; Plots.clear();
 			vector<vector<TH1D*> > CC1pPlots; CC1pPlots.clear();
 			vector<vector<TH1D*> > NonCC1pPlots; NonCC1pPlots.clear();
-
-			vector<vector<TH1D*> > hratio;  hratio.clear();
 
 			vector<TString> LabelsOfSamples;
 			vector<TString> NameOfSamples;
@@ -170,8 +134,6 @@ void Create1DPlotsTHStack_TopologicalBreakDown() {
 				vector<TH1D*> CC1pCurrentPlots; CC1pCurrentPlots.clear();
 				vector<TH1D*> NonCC1pCurrentPlots; NonCC1pCurrentPlots.clear();
 
-				vector<TH1D*> Currenthratio;  Currenthratio.clear();
-
 				for (int WhichPlot = 0; WhichPlot < N1DPlots; WhichPlot ++){
 
 					TH1D* hist = (TH1D*)(FileSample[WhichSample]->Get(PlotNames[WhichPlot]));
@@ -192,8 +154,6 @@ void Create1DPlotsTHStack_TopologicalBreakDown() {
 					CurrentPlots.push_back(hist);
 					CC1pCurrentPlots.push_back(CC1phist);
 					NonCC1pCurrentPlots.push_back(NonCC1phist);
-
-					Currenthratio.push_back((TH1D*)hist->Clone());
 			
 				}
 
@@ -201,14 +161,12 @@ void Create1DPlotsTHStack_TopologicalBreakDown() {
 				CC1pPlots.push_back(CC1pCurrentPlots);
 				NonCC1pPlots.push_back(NonCC1pCurrentPlots);
 
-				hratio.push_back(Currenthratio);
-
 			}
 
 			// Loop over the plots
 
 			for (int WhichPlot = 0; WhichPlot < N1DPlots; WhichPlot ++) {
-		
+	
 				PlotCanvas.push_back(new TCanvas(PlotNames[WhichPlot]+Cuts,PlotNames[WhichPlot]+Cuts,205,34,1024,768));
 				PlotCanvas[WhichPlot]->cd();
 
@@ -222,7 +180,7 @@ void Create1DPlotsTHStack_TopologicalBreakDown() {
 				midPad->SetBottomMargin(0.03);
 				midPad->SetTopMargin(0.03);
 				botPad->SetTopMargin(0.03);
-				botPad->SetBottomMargin(0.25);
+				botPad->SetBottomMargin(0.26);
 				botPad->SetGridx();
 				botPad->SetGridy();
 				topPad->Draw();
@@ -236,6 +194,8 @@ void Create1DPlotsTHStack_TopologicalBreakDown() {
 				double max = -99.;
 
 				// Loop over the samples
+
+				TH1D* BeamOnClone = nullptr;
 
 				for (int WhichSample = 0; WhichSample < NSamples; WhichSample ++){
 
@@ -259,42 +219,26 @@ void Create1DPlotsTHStack_TopologicalBreakDown() {
 
 					double localmax = Plots[WhichSample][WhichPlot]->GetMaximum();
 					if (localmax > max) { max = localmax; }
-					Plots[0][WhichPlot]->GetYaxis()->SetRangeUser(0.,1.3*max);
+					if (WhichSample == 0) { BeamOnClone = (TH1D*)Plots[0][WhichPlot]->Clone(); }
 
 					if (LabelsOfSamples[WhichSample] == "BeamOn") { 
 
 						gStyle->SetErrorX(0); // Removing the horizontal errors
-						Plots[WhichSample][WhichPlot]->Draw("e1 same"); 
-						leg[WhichPlot]->AddEntry(Plots[WhichSample][WhichPlot],LabelsOfSamples[WhichSample],"ep");
+						BeamOnClone->SetLineColor(kWhite);
+						BeamOnClone->SetMarkerColor(kWhite);
+						BeamOnClone->Draw("e1 same"); 
+						leg[WhichPlot]->AddEntry(Plots[WhichSample][WhichPlot],LabelsOfSamples[WhichSample]+" (Stat + Syst)","ep");
 
 					}
 
 					if (LabelsOfSamples[WhichSample] == "ExtBNB") {
 
-							Plots[WhichSample][WhichPlot]->SetLineColor(Colors[WhichSample]);
-							Plots[WhichSample][WhichPlot]->SetFillColor(Colors[WhichSample]);
-							Plots[WhichSample][WhichPlot]->SetFillStyle(3004);
-							Plots[WhichSample][WhichPlot]->SetLineWidth(1);
-
-							THStacks[WhichPlot]->Add(Plots[WhichSample][WhichPlot],"hist");
-							leg[WhichPlot]->AddEntry(Plots[WhichSample][WhichPlot],LabelsOfSamples[WhichSample],"f");
-							THStacks[WhichPlot]->Draw("same");
-
+							BeamOnClone->Add(Plots[WhichSample][WhichPlot],-1);
 					}
 
 					if (LabelsOfSamples[WhichSample] == "Dirt") {
 
-							CC1pPlots[WhichSample][WhichPlot]->SetLineColor(ColorsOverlay[2]);
-							CC1pPlots[WhichSample][WhichPlot]->SetFillColor(ColorsOverlay[2]);
-							THStacks[WhichPlot]->Add(CC1pPlots[WhichSample][WhichPlot],"hist");
-							leg[WhichPlot]->AddEntry(CC1pPlots[WhichSample][WhichPlot],LabelsOfSamples[WhichSample] + " CC1p","f");
-							THStacks[WhichPlot]->Draw("same");
-
-							NonCC1pPlots[WhichSample][WhichPlot]->SetLineColor(ColorsOverlay[3]);
-							NonCC1pPlots[WhichSample][WhichPlot]->SetFillColor(ColorsOverlay[3]);
-							THStacks[WhichPlot]->Add(NonCC1pPlots[WhichSample][WhichPlot],"hist");
-							leg[WhichPlot]->AddEntry(NonCC1pPlots[WhichSample][WhichPlot],LabelsOfSamples[WhichSample] + " NonCC1p","f");
-							THStacks[WhichPlot]->Draw("same");
+							BeamOnClone->Add(Plots[WhichSample][WhichPlot],-1);
 
 					}
 
@@ -306,18 +250,37 @@ void Create1DPlotsTHStack_TopologicalBreakDown() {
 							leg[WhichPlot]->AddEntry(CC1pPlots[WhichSample][WhichPlot],LabelsOfSamples[WhichSample] + " CC1p","f");
 							THStacks[WhichPlot]->Draw("same");
 
-							NonCC1pPlots[WhichSample][WhichPlot]->SetLineColor(ColorsOverlay[1]);
-							NonCC1pPlots[WhichSample][WhichPlot]->SetFillColor(ColorsOverlay[1]);
-							THStacks[WhichPlot]->Add(NonCC1pPlots[WhichSample][WhichPlot],"hist");
-							leg[WhichPlot]->AddEntry(NonCC1pPlots[WhichSample][WhichPlot],LabelsOfSamples[WhichSample] + " NonCC1p","f");
-							THStacks[WhichPlot]->Draw("same");
+							BeamOnClone->Add(NonCC1pPlots[WhichSample][WhichPlot],-1);
 
 					}
 					
 
 				} // End of the loop over the samples
 
-				Plots[0][WhichPlot]->Draw("e1 same"); 
+				BeamOnClone->GetYaxis()->SetRangeUser(0.,0.9*max);
+				PlotCanvas[WhichPlot]->Update();
+				BeamOnClone->SetLineColor(kBlack);
+				BeamOnClone->SetMarkerColor(kBlack);
+				BeamOnClone->Draw("e1 same"); 
+
+				TString NameExtractedXSec = MigrationMatrixPath+"WienerSVD_Total_CovarianceMatrices_Overlay9_"\
+					+Runs[WhichRun]+"_"+UBCodeVersion+".root";
+				TFile* CovFile = new TFile(NameExtractedXSec,"readonly");
+
+				TString CopyPlotName = PlotNames[WhichPlot];
+				TString ReducedPlotName = CopyPlotName.ReplaceAll("Reco","");
+				TH2D* CovMatrix = (TH2D*)(CovFile->Get("TotalCovariance_"+ReducedPlotName));
+				// Sanity check, stat errors should be identical to the ones coming from the Stat covariances 
+				//TH2D* CovMatrix = (TH2D*)(CovFile->Get("StatCovariance_"+ReducedPlotName));				
+				CovMatrix->Scale(TMath::Power( (IntegratedFlux*NTargets)/Units ,2.));
+
+				TH1D* DataClone = (TH1D*)(BeamOnClone->Clone());
+				int n = DataClone->GetXaxis()->GetNbins();
+				for (int i = 1; i <= n;i++ ) { DataClone->SetBinError(i, TMath::Sqrt(CovMatrix->GetBinContent(i,i)) ); }
+
+				DataClone->SetLineColor(kGray);
+				DataClone->Draw("e1 same");	// Full Syst
+				BeamOnClone->Draw("e1 same"); // Stat Only					
 
 				TLatex *text = new TLatex();
 				text->SetTextFont(FontStyle);
@@ -326,32 +289,33 @@ void Create1DPlotsTHStack_TopologicalBreakDown() {
 
 				// -------------------------------------------------------------------------------------------------------------------
 
-				hratio[1][WhichPlot]->Add(hratio[2][WhichPlot]);
-				hratio[1][WhichPlot]->Add(hratio[3][WhichPlot]);
-				hratio[0][WhichPlot]->Divide(hratio[1][WhichPlot]);
+				TH1D* Ratio = (TH1D*)(DataClone->Clone());
 
-				hratio[0][WhichPlot]->GetXaxis()->SetTitleFont(FontStyle);
-				hratio[0][WhichPlot]->GetXaxis()->SetLabelFont(FontStyle);
-				hratio[0][WhichPlot]->GetYaxis()->SetTitle("#frac{BeamOn}{MC+ExtBNB}");
-				hratio[0][WhichPlot]->GetXaxis()->SetTitle(Plots[0][WhichPlot]->GetXaxis()->GetTitle());
-				hratio[0][WhichPlot]->GetXaxis()->SetTitleSize(0.13);
-				hratio[0][WhichPlot]->GetXaxis()->SetLabelSize(0.12);
-				hratio[0][WhichPlot]->GetXaxis()->SetTitleOffset(0.88);
-				hratio[0][WhichPlot]->GetXaxis()->SetNdivisions(8);
+				Ratio->Divide(CC1pPlots[1][WhichPlot]);
 
-				hratio[0][WhichPlot]->GetYaxis()->SetTitleFont(FontStyle);
-				hratio[0][WhichPlot]->GetYaxis()->SetLabelFont(FontStyle);
-				hratio[0][WhichPlot]->GetYaxis()->SetRangeUser(0.9*hratio[0][WhichPlot]->GetMinimum(),1.1*hratio[0][WhichPlot]->GetMaximum());
-				hratio[0][WhichPlot]->GetYaxis()->SetNdivisions(6);
-				hratio[0][WhichPlot]->GetYaxis()->SetTitleOffset(0.35);
-				hratio[0][WhichPlot]->GetYaxis()->SetTitleSize(0.1);
-				hratio[0][WhichPlot]->GetYaxis()->SetLabelSize(0.11);
+				Ratio->GetXaxis()->SetTitleFont(FontStyle);
+				Ratio->GetXaxis()->SetLabelFont(FontStyle);
+				Ratio->GetYaxis()->SetTitle("#frac{BeamOn}{Overlay CC1p}");
+				Ratio->GetXaxis()->SetTitle(Plots[0][WhichPlot]->GetXaxis()->GetTitle());
+				Ratio->GetXaxis()->SetTitleSize(0.13);
+				Ratio->GetXaxis()->SetLabelSize(0.12);
+				Ratio->GetXaxis()->SetTitleOffset(0.88);
+				Ratio->GetXaxis()->SetNdivisions(8);
+
+				Ratio->GetYaxis()->SetTitleFont(FontStyle);
+				Ratio->GetYaxis()->SetLabelFont(FontStyle);
+				Ratio->GetYaxis()->SetRangeUser(0.51,1.49);
+				Ratio->GetYaxis()->SetNdivisions(6);
+				Ratio->GetYaxis()->SetTitleOffset(0.35);
+				Ratio->GetYaxis()->SetTitleSize(0.1);
+				Ratio->GetYaxis()->SetLabelSize(0.11);
 
 				botPad->cd();
-				hratio[0][WhichPlot]->Draw("e1 hist same");
+				Ratio->SetLineColor(kBlack);
+				Ratio->Draw("e1 hist same");
 
-				double RatioMin = hratio[0][WhichPlot]->GetXaxis()->GetXmin();
-				double RatioMax = hratio[0][WhichPlot]->GetXaxis()->GetXmax();
+				double RatioMin = Ratio->GetXaxis()->GetXmin();
+				double RatioMax = Ratio->GetXaxis()->GetXmax();
 				double YRatioCoord = 1.2;
 				TLine* RatioLine = new TLine(RatioMin,YRatioCoord,RatioMax,YRatioCoord);
 				RatioLine->SetLineWidth(4);
@@ -366,46 +330,14 @@ void Create1DPlotsTHStack_TopologicalBreakDown() {
 
 				// --------------------------------------------------------------------------------------
 
-				// Sum of NonBeamOn Samples
-
-				TH1D* SumNonBeamOn = (TH1D*)Plots[1][WhichPlot]->Clone(); // ExtBNB
-				SumNonBeamOn->Add(Plots[2][WhichPlot]); // Overlay
-				SumNonBeamOn->Add(Plots[3][WhichPlot]); // Dirt
-
-				// CC1p Purity 
-
-				int CC1pPurity = CC1pPlots[1][WhichPlot]->Integral() / SumNonBeamOn->Integral() * 1000.;
-
-				midPad->cd();
-				TLatex latexPurity;
-				latexPurity.SetTextFont(FontStyle);
-				latexPurity.SetTextSize(0.09);
-				TString LabelPurity = "CC1p = " + ToString(CC1pPurity/10.) + " %";
-				latexPurity.DrawLatexNDC(0.59,0.9, LabelPurity);
-
-				// --------------------------------------------------------------------------------------
-
-				// Cosmic Contamination
-
-				int CosmicContamination = Plots[2][WhichPlot]->Integral() / SumNonBeamOn->Integral() * 1000.;
-
-				midPad->cd();
-				TLatex latexCosmic;
-				latexCosmic.SetTextFont(FontStyle);
-				latexCosmic.SetTextSize(0.09);
-				TString LabelCosmic = "Cosmics = " + ToString(CosmicContamination/10.) + " %";
-				latexCosmic.DrawLatexNDC(0.59,0.8, LabelCosmic);
-
-				// --------------------------------------------------------------------------------------
-
 				TString CanvasPath = PlotPath + Cuts+"/TopologicalBreakDown/";
-				TString CanvasName = "THStack_BreakDown_"+PlotNames[WhichPlot]+"_"+Runs[WhichRun]+"_"+UBCodeVersion+Cuts+".pdf";
+				TString CanvasName = "THStack_Syst_BreakDown_"+PlotNames[WhichPlot]+"_"+Runs[WhichRun]+"_"+UBCodeVersion+Cuts+".pdf";
 				PlotCanvas[WhichPlot]->SaveAs(CanvasPath+CanvasName);
 				delete PlotCanvas[WhichPlot];
 
 			} // End of the loop over the plots
 
-		} // If we want to run on all cut combinations, include this } and remove the one at the beginning of the program
+		//} // If we want to run on all cut combinations, include this } and remove the one at the beginning of the program
 
 	} // End of the loop over the runs
 
