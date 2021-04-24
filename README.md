@@ -16,6 +16,8 @@ root -l script_PurityEfficiencyStudies.C
 
 root -l DetermineMaxPurityEfficiency1D.cpp
 
+root -l DownloadPurityEfficiencyPlots.sh
+
 ###########################################################################################################################################################################
 
 # switch between series of cuts

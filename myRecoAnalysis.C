@@ -94,6 +94,7 @@ void myRecoAnalysis::Loop() {
 	int ArArEvents = 0;
 	int ProtonNeutronEvents = 0;
 	int ProtonKaonEvents = 0;
+	int pi0Included = 0;
 		
 	TString Cuts = "_NoCuts";
 
@@ -1454,7 +1455,7 @@ void myRecoAnalysis::Loop() {
 			double true_nu = -1;			
 			
 			if (
-				string(fWhichSample).find("Overlay9") != std::string::npos 
+				string(fWhichSample).find("Overlay") != std::string::npos 
 				&& MCParticle_Mode != -1 ) { 
 				
 				genie_mode = MCParticle_Mode; 
@@ -2014,6 +2015,7 @@ void myRecoAnalysis::Loop() {
 					else if (CC3p2pi == 1) { CC3p2piEventsPassingSelectionCuts++; ManualNonCC1pEventsPassingSelectionCuts++; }
 					//else if (CC3p3pi == 1) { CC3p3piEventsPassingSelectionCuts++; ManualNonCC1pEventsPassingSelectionCuts++; }
 					else if (CC4p0pi == 1) { CC4p0piEventsPassingSelectionCuts++; ManualNonCC1pEventsPassingSelectionCuts++; }
+					else if (NumberPi0 > 0) { pi0Included++; ManualNonCC1pEventsPassingSelectionCuts++; }
 					else if ( 
 						( TMath::Abs(CandidateP_MCParticle_Pdg->at(0)) == AbsChargedPionPdg && TMath::Abs(CandidateMu_MCParticle_Pdg->at(0)) == MuonPdg ) ||
 						( TMath::Abs(CandidateP_MCParticle_Pdg->at(0)) == MuonPdg && TMath::Abs(CandidateMu_MCParticle_Pdg->at(0)) == AbsChargedPionPdg )
@@ -2605,6 +2607,7 @@ void myRecoAnalysis::Loop() {
 		double ArArEventsError = 0;
 		double ProtonNeutronEventsError = 0;
 		double ProtonKaonEventsError = 0;
+		double pi0IncludedError = 0;
 
 		cout << endl;
 
@@ -3065,6 +3068,21 @@ void myRecoAnalysis::Loop() {
 				<< ProtonKaonEventsError
 				<< " & " << ProtonKaonEvents*POTScale << " $\\pm$ " 
 				<< ProtonKaonEventsError*POTScale << " \\tabularnewline \\hline" << std::endl;
+
+			}
+
+			// -------------------------------------------------------------------------------------------------------------------------	
+
+			// Events with pi0's passing the selection criteria
+
+			if (pi0Included > 0) {
+
+				pi0IncludedError = sqrt(pi0Included);
+
+				myTxtFile << "\\pi^{0} included & " << pi0Included << " $\\pm$ " 
+				<< pi0IncludedError
+				<< " & " << pi0Included*POTScale << " $\\pm$ " 
+				<< pi0IncludedError*POTScale << " \\tabularnewline \\hline" << std::endl;
 
 			}
 

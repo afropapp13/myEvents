@@ -27,7 +27,7 @@ void Chi2PID_BreakDown() {
 	// -----------------------------------------------------------------------------------------------------------------------------------------
 
 	// Keep them for historical reasons but don't plot them
-	PlotNames.push_back("RecoChi2Plot");
+//	PlotNames.push_back("RecoChi2Plot");
 //	PlotNames.push_back("RecoThreePlaneChi2Plot");
 	PlotNames.push_back("RecoThreePlaneChi2LogLikelihoodPlot");
 	PlotNames.push_back("RecoLLRPIDPlot");
@@ -62,6 +62,10 @@ void Chi2PID_BreakDown() {
 	cout << "Number of Runs = " << NRuns << endl;
 
 	for (int WhichRun = 0; WhichRun < NRuns; WhichRun++) {
+
+		// -------------------------------------------------------------------------------------------------------------------------------------
+
+		double DataPOT = ReturnBeamOnRunPOT(Runs[WhichRun]);
 
 		// -------------------------------------------------------------------------------------------------------------------------------------
 
@@ -208,7 +212,7 @@ void Chi2PID_BreakDown() {
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetLabelFont(FontStyle);
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetNdivisions(6);
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetLabelSize(0.06);
-					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitle("# events");
+					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitle("# Events / " + ToString(DataPOT));
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitleSize(0.08);
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitleOffset(0.6);
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTickSize(0);

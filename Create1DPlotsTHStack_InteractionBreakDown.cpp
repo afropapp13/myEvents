@@ -33,17 +33,17 @@ void Create1DPlotsTHStack_InteractionBreakDown() {
 //	PlotNames.push_back("RecokMissPlot");
 
 	PlotNames.push_back("RecoNuScorePlot");
-	PlotNames.push_back("RecoFlashScorePlot");
-	PlotNames.push_back("RecoDistancePlot");
-	PlotNames.push_back("RecoLengthDifferencePlot");
-	PlotNames.push_back("RecodYZPlot");
-	PlotNames.push_back("RecoNPEPlot");
+//	PlotNames.push_back("RecoFlashScorePlot");
+//	PlotNames.push_back("RecoDistancePlot");
+//	PlotNames.push_back("RecoLengthDifferencePlot");
+//	PlotNames.push_back("RecodYZPlot");
+//	PlotNames.push_back("RecoNPEPlot");
 
 	PlotNames.push_back("RecoDeltaPhiPlot");
 	PlotNames.push_back("RecoDeltaThetaPlot");
 
 //	PlotNames.push_back("RecoThreePlaneChi2LogLikelihoodCandidateMuonPlot");
-//	PlotNames.push_back("RecoThreePlaneChi2LogLikelihoodCandidateProtonPlot");
+	PlotNames.push_back("RecoThreePlaneChi2LogLikelihoodCandidateProtonPlot");
 
 //	PlotNames.push_back("RecoMuonLLRPIDPlot");
 //	PlotNames.push_back("RecoProtonLLRPIDPlot");
@@ -61,13 +61,14 @@ void Create1DPlotsTHStack_InteractionBreakDown() {
 	PlotNames.push_back("RecoEQEPlot");
 	PlotNames.push_back("RecoQ2Plot");
 
-	PlotNames.push_back("RecoMuonLengthPlot");
-	PlotNames.push_back("RecoProtonLengthPlot");
-	PlotNames.push_back("RecodMuonTracksScorePlot");
-	PlotNames.push_back("RecodProtonTracksScorePlot");
+//	PlotNames.push_back("RecoMuonLengthPlot");
+//	PlotNames.push_back("RecoProtonLengthPlot");
+//	PlotNames.push_back("RecodMuonTracksScorePlot");
+//	PlotNames.push_back("RecodProtonTracksScorePlot");
 //	PlotNames.push_back("RecodMuonVertexDistancePlot");
 //	PlotNames.push_back("RecodProtonVertexDistancePlot");
-	PlotNames.push_back("RecoVertexActivityPlot");
+//	PlotNames.push_back("RecoVertexActivityPlot");
+//	PlotNames.push_back("RecoNonZeroVertexActivityPlot");
 
 	PlotNames.push_back("RecoVertexXPlot");
 	PlotNames.push_back("RecoVertexYPlot");
@@ -76,10 +77,10 @@ void Create1DPlotsTHStack_InteractionBreakDown() {
 	PlotNames.push_back("RecoEvPlot");
 	PlotNames.push_back("RecoNuPlot");
 
-	PlotNames.push_back("RecoContainedMuonMomentumPlot");
-	PlotNames.push_back("RecoUncontainedMuonMomentumPlot");
-	PlotNames.push_back("RecoContainedMuonLengthPlot");
-	PlotNames.push_back("RecoUncontainedMuonLengthPlot");
+	// PlotNames.push_back("RecoContainedMuonMomentumPlot");
+	// PlotNames.push_back("RecoUncontainedMuonMomentumPlot");
+	// PlotNames.push_back("RecoContainedMuonLengthPlot");
+	// PlotNames.push_back("RecoUncontainedMuonLengthPlot");
 
 	const int N1DPlots = PlotNames.size();
 	cout << "Number of 1D Plots = " << N1DPlots << endl;
@@ -112,6 +113,12 @@ void Create1DPlotsTHStack_InteractionBreakDown() {
 	// -------------------------------------------------------------------------------------------------------------------------------------------
 
 	for (int WhichRun = 0; WhichRun < NRuns; WhichRun++) {
+
+		// -------------------------------------------------------------------------------------------------------------------------------------
+
+		double DataPOT = ReturnBeamOnRunPOT(Runs[WhichRun]);		
+
+		// -------------------------------------------------------------------------------------------------------------------------------------
 
 		Cuts = "_NoCuts";
 
@@ -221,7 +228,8 @@ void Create1DPlotsTHStack_InteractionBreakDown() {
 
 			for (int WhichPlot = 0; WhichPlot < N1DPlots; WhichPlot ++) {
 	
-				PlotCanvas.push_back(new TCanvas(PlotNames[WhichPlot]+Cuts,PlotNames[WhichPlot]+Cuts,205,34,1024,768));
+				TString PlotCanvasName = Runs[WhichRun]+"_"+PlotNames[WhichPlot]+Cuts;
+				PlotCanvas.push_back(new TCanvas(PlotCanvasName,PlotCanvasName,205,34,1024,768));
 				PlotCanvas[WhichPlot]->cd();
 
 				THStacks.push_back(new THStack(PlotNames[WhichPlot],""));
@@ -264,7 +272,7 @@ void Create1DPlotsTHStack_InteractionBreakDown() {
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetLabelFont(FontStyle);
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetNdivisions(6);
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetLabelSize(0.06);
-					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitle("# Events");
+					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitle("# Events / " + ToString(DataPOT));
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitleSize(0.08);
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitleOffset(0.6);
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTickSize(0);
