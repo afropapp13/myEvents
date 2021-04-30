@@ -2635,11 +2635,11 @@ void myRecoAnalysis::Loop() {
 
 		myTxtFile << "\n\n" << ContainedVertexCounter << " events passing contained vertex requirement (" << int(100.*double(ContainedVertexCounter)/double(SamdefEvents)) << "% / " << int(100.*double(ContainedVertexCounter)/double(TotalCounter)) << " %)";
 
-		myTxtFile << "\n\n" << PIDCounter << " events passing PID selection cut (" << int(100.*double(PIDCounter)/double(SamdefEvents)) << "% / " << int(100.*double(PIDCounter)/double(TotalCounter)) << " %)";
+		myTxtFile << "\n\n" << PIDCounter << " events passing PID selection cut (" << int(100.*double(PIDCounter)/double(SamdefEvents)) << "% / " << int(100.*double(PIDCounter)/double(ContainedVertexCounter)) << " %)";
 
-		myTxtFile << "\n\n" << NuScoreCounter << " events passing NuScore selection cut (" << int(100.*double(NuScoreCounter)/double(SamdefEvents)) << "% / " << int(100.*double(NuScoreCounter)/double(TotalCounter)) << " %)";
+		myTxtFile << "\n\n" << NuScoreCounter << " events passing NuScore selection cut (" << int(100.*double(NuScoreCounter)/double(SamdefEvents)) << "% / " << int(100.*double(NuScoreCounter)/double(ContainedVertexCounter)) << " %)";
 
-		myTxtFile << "\n\n" << KinematicsCounter << " events passing common kinematic ranges (" << int(100.*double(KinematicsCounter)/double(SamdefEvents)) << "% / " << int(100.*double(KinematicsCounter)/double(TotalCounter)) << " %)";
+		myTxtFile << "\n\n" << KinematicsCounter << " events passing common kinematic ranges (" << int(100.*double(KinematicsCounter)/double(SamdefEvents)) << "% / " << int(100.*double(KinematicsCounter)/double(ContainedVertexCounter)) << " %)";
 
 
 		myTxtFile << "\n\n" << KinematicsCounter << " $\\pm$ " 
@@ -2690,18 +2690,18 @@ void myRecoAnalysis::Loop() {
 			myTxtFile << "$\\pi$-p & " << MisIndetifiedMuonAsPion << " $\\pm$ " 
 			<< MisIndetifiedMuonAsPionError
 			<< " & " << MisIndetifiedMuonAsPion*POTScale << " $\\pm$ " 
-			<< MisIndetifiedMuonAsPionError*POTScale << " \\tabularnewline \\hline" << std::endl;	
+			<< MisIndetifiedMuonAsPionError*POTScale << " \\tabularnewline \\hline" << std::endl;
 
 			// -------------------------------------------------------------------------------------------------------------------------	
 
-			// All reconstructed CC3p events passing the selection criteria
+			// Multiple Vertices
 
-			CC3pEventsPassingSelectionCutsError = sqrt(CC3pEventsPassingSelectionCuts);
+			MultipleVerticesError = sqrt(MultipleVertices);
 
-			myTxtFile << "CC3p0$\\pi$ & " << CC3pEventsPassingSelectionCuts << " $\\pm$ " 
-			<< CC3pEventsPassingSelectionCutsError
-			<< " & " << CC3pEventsPassingSelectionCuts*POTScale << " $\\pm$ " 
-			<< CC3pEventsPassingSelectionCutsError*POTScale << " \\tabularnewline \\hline" << std::endl;	
+			myTxtFile << "Multiple vertices & " << MultipleVertices << " $\\pm$ " 
+			<< MultipleVerticesError
+			<< " & " << MultipleVertices*POTScale << " $\\pm$ " 
+			<< MultipleVerticesError*POTScale << " \\tabularnewline \\hline" << std::endl;		
 			
 			// -------------------------------------------------------------------------------------------------------------------------	
 
@@ -2727,6 +2727,32 @@ void myRecoAnalysis::Loop() {
 
 			// -------------------------------------------------------------------------------------------------------------------------	
 
+			// Events with pi0's passing the selection criteria
+
+			if (pi0Included > 0) {
+
+				pi0IncludedError = sqrt(pi0Included);
+
+				myTxtFile << "$\\pi^{0}$ included & " << pi0Included << " $\\pm$ " 
+				<< pi0IncludedError
+				<< " & " << pi0Included*POTScale << " $\\pm$ " 
+				<< pi0IncludedError*POTScale << " \\tabularnewline \\hline" << std::endl;
+
+			}
+
+			// -------------------------------------------------------------------------------------------------------------------------	
+
+			// All reconstructed CC3p events passing the selection criteria
+
+			CC3pEventsPassingSelectionCutsError = sqrt(CC3pEventsPassingSelectionCuts);
+
+			myTxtFile << "CC3p0$\\pi$ & " << CC3pEventsPassingSelectionCuts << " $\\pm$ " 
+			<< CC3pEventsPassingSelectionCutsError
+			<< " & " << CC3pEventsPassingSelectionCuts*POTScale << " $\\pm$ " 
+			<< CC3pEventsPassingSelectionCutsError*POTScale << " \\tabularnewline \\hline" << std::endl;
+
+			// -------------------------------------------------------------------------------------------------------------------------	
+
 			// All reconstructed CC4p0pi events passing the selection criteria
 
 			CC4p0piEventsPassingSelectionCutsError = sqrt(CC4p0piEventsPassingSelectionCuts);
@@ -2735,17 +2761,6 @@ void myRecoAnalysis::Loop() {
 			<< CC4p0piEventsPassingSelectionCutsError
 			<< " & " << CC4p0piEventsPassingSelectionCuts*POTScale << " $\\pm$ " 
 			<< CC4p0piEventsPassingSelectionCutsError*POTScale << " \\tabularnewline \\hline" << std::endl;
-
-			// -------------------------------------------------------------------------------------------------------------------------	
-
-			// Multiple Vertices
-
-			MultipleVerticesError = sqrt(MultipleVertices);
-
-			myTxtFile << "Multiple vertices & " << MultipleVertices << " $\\pm$ " 
-			<< MultipleVerticesError
-			<< " & " << MultipleVertices*POTScale << " $\\pm$ " 
-			<< MultipleVerticesError*POTScale << " \\tabularnewline \\hline" << std::endl;
 
 			// -------------------------------------------------------------------------------------------------------------------------	
 
@@ -3068,21 +3083,6 @@ void myRecoAnalysis::Loop() {
 				<< ProtonKaonEventsError
 				<< " & " << ProtonKaonEvents*POTScale << " $\\pm$ " 
 				<< ProtonKaonEventsError*POTScale << " \\tabularnewline \\hline" << std::endl;
-
-			}
-
-			// -------------------------------------------------------------------------------------------------------------------------	
-
-			// Events with pi0's passing the selection criteria
-
-			if (pi0Included > 0) {
-
-				pi0IncludedError = sqrt(pi0Included);
-
-				myTxtFile << "\\pi^{0} included & " << pi0Included << " $\\pm$ " 
-				<< pi0IncludedError
-				<< " & " << pi0Included*POTScale << " $\\pm$ " 
-				<< pi0IncludedError*POTScale << " \\tabularnewline \\hline" << std::endl;
 
 			}
 

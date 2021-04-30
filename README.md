@@ -28,9 +28,9 @@ root -l script_EventSelection_CV.C
 
 root -l Chi2PID_BreakDown.cpp
 
-root -l Create1DPlotsTHStack_TopologicalBreakDown.cpp.cpp
+root -l Create1DPlotsTHStack_TopologicalBreakDown.cpp
 
-root -l Create1DPlotsTHStack_InteractionBreakDown.cpp.cpp
+root -l Create1DPlotsTHStack_InteractionBreakDown.cpp
 
 ./DownloadEventRatePlots.sh
 

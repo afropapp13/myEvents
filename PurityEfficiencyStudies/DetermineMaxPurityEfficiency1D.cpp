@@ -288,6 +288,10 @@ void DetermineMaxPurityEfficiency1D() {
 			TString ErrorCosmicCont = ToString(round(ErrorCosmicFrac[GlobalThresBin]*100.,2.) );
 			latExtBNB->DrawLatexNDC(0.2,0.68,"Cosmics = " + CosmicCont + " #pm " + ErrorCosmicCont + " %");
 
+			TLine* line = new TLine(SelectedThres,0.,SelectedThres,0.25);
+			line->SetLineStyle(kDashed);
+			line->Draw();
+
 			ProductCanvas->SaveAs(PlotPath+CutName[WhichCut]+"_TwoDScanProduct_"+RunNumber[WhichRun]+".pdf");
 			delete ProductCanvas;
 
@@ -332,6 +336,10 @@ void DetermineMaxPurityEfficiency1D() {
 			TString ErrorPurity = ToString(round(ErrorPurityArray[GlobalThresBin]*100.,2) );
 			latPurity->DrawLatexNDC(0.2,0.82,RunNumber[WhichRun] + " Purity at max = "+ Purity + " #pm " + ErrorPurity + " %");
 
+			TLine* lineP = new TLine(SelectedThres,0.,SelectedThres,1.);
+			lineP->SetLineStyle(kDashed);
+			lineP->Draw();
+
 			PurityCanvas->SaveAs(PlotPath+CutName[WhichCut]+"_OneDScanPurity_"+RunNumber[WhichRun]+".pdf");
 			delete PurityCanvas;
 
@@ -375,6 +383,10 @@ void DetermineMaxPurityEfficiency1D() {
 			TString Efficiency = ToString(round(EfficiencyArray[GlobalThresBin]*100.,2) );
 			TString ErrorEfficiency = ToString(round(ErrorEfficiencyArray[GlobalThresBin]*100.,2) );
 			latEfficiency->DrawLatexNDC(0.2,0.82,RunNumber[WhichRun] + " Efficiency at max = " + Efficiency + " #pm " + ErrorEfficiency + " %");
+
+			TLine* lineE = new TLine(SelectedThres,0.,SelectedThres,0.5);
+			lineE->SetLineStyle(kDashed);
+			lineE->Draw();
 
 			EfficiencyCanvas->SaveAs(PlotPath+CutName[WhichCut]+"_OneDScanEfficiency_"+RunNumber[WhichRun]+".pdf");	
 			delete EfficiencyCanvas;

@@ -77,8 +77,8 @@ void Create1DPlotsTHStack_InteractionBreakDown() {
 	PlotNames.push_back("RecoEvPlot");
 	PlotNames.push_back("RecoNuPlot");
 
-	// PlotNames.push_back("RecoContainedMuonMomentumPlot");
-	// PlotNames.push_back("RecoUncontainedMuonMomentumPlot");
+	PlotNames.push_back("RecoContainedMuonMomentumPlot");
+	PlotNames.push_back("RecoUncontainedMuonMomentumPlot");
 	// PlotNames.push_back("RecoContainedMuonLengthPlot");
 	// PlotNames.push_back("RecoUncontainedMuonLengthPlot");
 

@@ -78,7 +78,7 @@ void OverlayPOTNormEventRates() {
 //	TString Cuts = "_NoCuts";
 //	TString Cuts = "_NoCuts_NuScore";
 //	TString Cuts = "_NoCuts_NuScore_ThreePlaneLogChi2";
-	TString Cuts = "_NoCuts_NuScore_ThreePlaneLogChi2_Collinearity";
+	TString Cuts = "_NoCuts_PID_NuScore";
 
 	// -----------------------------------------------------------------------------------------------------------------------------
 
