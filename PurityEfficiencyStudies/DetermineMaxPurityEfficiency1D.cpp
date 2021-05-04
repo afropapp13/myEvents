@@ -271,7 +271,7 @@ void DetermineMaxPurityEfficiency1D() {
 			TLatex* latBeamOn = new TLatex();
 			latBeamOn->SetTextFont(TextFont);
 			latBeamOn->SetTextSize(TextSize-0.01);
-			latBeamOn->DrawLatexNDC(0.2,0.75,"Beam On Events = "+ToString(BeamOn[GlobalThresBin])+" #pm "+ ToString(round(ErrorBeamOn[GlobalThresBin],2)));
+			//latBeamOn->DrawLatexNDC(0.2,0.75,"Beam On Events = "+ToString(BeamOn[GlobalThresBin])+" #pm "+ ToString(round(ErrorBeamOn[GlobalThresBin],2)));
 
 			// ----------------------------------------------------------------------------------------------------------------------------------------
 
@@ -286,7 +286,8 @@ void DetermineMaxPurityEfficiency1D() {
 			latExtBNB->SetTextSize(TextSize-0.01);
 			TString CosmicCont = ToString(round(CosmicFrac[GlobalThresBin]*100.,2.) );
 			TString ErrorCosmicCont = ToString(round(ErrorCosmicFrac[GlobalThresBin]*100.,2.) );
-			latExtBNB->DrawLatexNDC(0.2,0.68,"Cosmics = " + CosmicCont + " #pm " + ErrorCosmicCont + " %");
+			//latExtBNB->DrawLatexNDC(0.2,0.68,"Cosmics = " + CosmicCont + " #pm " + ErrorCosmicCont + " %");
+			latExtBNB->DrawLatexNDC(0.2,0.75,"Cosmics = " + CosmicCont + " #pm " + ErrorCosmicCont + " %");
 
 			TLine* line = new TLine(SelectedThres,0.,SelectedThres,0.25);
 			line->SetLineStyle(kDashed);

@@ -212,7 +212,7 @@ void Create1DPlotsTHStack_SubSpectrum() {
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetLabelFont(FontStyle);
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetNdivisions(6);
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetLabelSize(0.06);
-					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitle("# Events");
+					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitle("# Events / " + ToString(DataPOT));
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitleSize(0.08);
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitleOffset(0.6);
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTickSize(0);
@@ -263,8 +263,7 @@ void Create1DPlotsTHStack_SubSpectrum() {
 				BeamOnClone->SetMarkerColor(kBlack);
 				BeamOnClone->Draw("e1 same"); 
 
-				TString NameExtractedXSec = MigrationMatrixPath+"WienerSVD_Total_CovarianceMatrices_Overlay9_"\
-					+Runs[WhichRun]+"_"+UBCodeVersion+".root";
+				TString NameExtractedXSec = MigrationMatrixPath+"WienerSVD_Total_CovarianceMatrices_Overlay9_"+Runs[WhichRun]+"_"+UBCodeVersion+".root";
 				TFile* CovFile = new TFile(NameExtractedXSec,"readonly");
 
 				TString CopyPlotName = PlotNames[WhichPlot];
@@ -272,11 +271,17 @@ void Create1DPlotsTHStack_SubSpectrum() {
 				TH2D* CovMatrix = (TH2D*)(CovFile->Get("TotalCovariance_"+ReducedPlotName));
 				// Sanity check, stat errors should be identical to the ones coming from the Stat covariances 
 				//TH2D* CovMatrix = (TH2D*)(CovFile->Get("StatCovariance_"+ReducedPlotName));				
-				CovMatrix->Scale(TMath::Power( (IntegratedFlux*NTargets)/Units ,2.));
+				//CovMatrix->Scale(TMath::Power( (IntegratedFlux*NTargets)/Units ,2.));
 
 				TH1D* DataClone = (TH1D*)(BeamOnClone->Clone());
 				int n = DataClone->GetXaxis()->GetNbins();
-				for (int i = 1; i <= n;i++ ) { DataClone->SetBinError(i, TMath::Sqrt(CovMatrix->GetBinContent(i,i)) ); }
+
+				for (int i = 1; i <= n;i++ ) { 
+
+					double CV = DataClone->GetBinContent(i);
+					DataClone->SetBinError(i, TMath::Sqrt(CovMatrix->GetBinContent(i,i) * CV * CV) ); 
+
+				}
 
 				DataClone->SetLineColor(kGray);
 				DataClone->Draw("e1 same");	// Full Syst

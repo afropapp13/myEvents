@@ -16,7 +16,8 @@ root -l script_PurityEfficiencyStudies.C
 
 root -l DetermineMaxPurityEfficiency1D.cpp
 
-root -l DownloadPurityEfficiencyPlots.sh
+# (locally)
+./DownloadPurityEfficiencyPlots.sh
 
 ###########################################################################################################################################################################
 
@@ -53,3 +54,9 @@ root -l script_EventSelection_Genie_Systematics.C
 root -l script_EventSelection_Flux_Systematics.C
 
 ###########################################################################################################################################################################
+
+cd ResolutionStudies
+root -l STVResoStudies.cpp
+
+# (locally)
+
