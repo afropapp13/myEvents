@@ -61,8 +61,8 @@ void Create1DPlotsTHStack_InteractionBreakDown() {
 	PlotNames.push_back("RecoEQEPlot");
 	PlotNames.push_back("RecoQ2Plot");
 
-//	PlotNames.push_back("RecoMuonLengthPlot");
-//	PlotNames.push_back("RecoProtonLengthPlot");
+	PlotNames.push_back("RecoMuonLengthPlot");
+	PlotNames.push_back("RecoProtonLengthPlot");
 //	PlotNames.push_back("RecodMuonTracksScorePlot");
 //	PlotNames.push_back("RecodProtonTracksScorePlot");
 //	PlotNames.push_back("RecodMuonVertexDistancePlot");

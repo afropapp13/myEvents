@@ -38,7 +38,7 @@ using namespace Constants;
 
 // ----------------------------------------------------------------------------------------------------------------
 
-void STVResoStudies() {
+void Proton_STVResoStudies() {
 
 	// -----------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -112,10 +112,9 @@ void STVResoStudies() {
 
 	// ------------------------------------------------------------------------
 
-	Discriminator.push_back("FullyContainedMuon"); LegendLabel.push_back("Contained");
-	Discriminator.push_back("ExitingShortMuon"); LegendLabel.push_back("Exit Short");
-	Discriminator.push_back("ExitingMediumMuon"); LegendLabel.push_back("Exit Med");
-	Discriminator.push_back("ExitingLongMuon"); LegendLabel.push_back("Exit Long");
+	Discriminator.push_back("ShortProton"); LegendLabel.push_back("Short");
+	Discriminator.push_back("MediumProton"); LegendLabel.push_back("Med");
+	Discriminator.push_back("LongProton"); LegendLabel.push_back("Long");
 
 	// ------------------------------------------------------------------------
 
@@ -188,7 +187,7 @@ void STVResoStudies() {
 		lat->SetTextSize(0.04);
 		lat->DrawLatexNDC(0.15,0.8,PlotLabels[WhichPlot]);
 
-		can->SaveAs(PlotPath + PlotNames[WhichPlot] + ".pdf");
+		can->SaveAs(PlotPath + "Proton_"+PlotNames[WhichPlot] + ".pdf");
 
 		delete can;
 

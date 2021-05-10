@@ -927,6 +927,8 @@ void myRecoAnalysis::Loop() {
 
 		TH2D* Playground_CC1pRecoMuonMomentumResoVsDeltaThetaPlot = new TH2D("Playground_CC1pRecoMuonMomentumResoVsDeltaThetaPlot",LabelMuonMomentumResolution+RecoLabelXAxisDeltaTheta,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV,NBinsDeltaTheta,MinDeltaTheta,MaxDeltaTheta);
 
+		// -------------------------------------------------------------------------------------------------------------------
+
 		TH1D* Playground_CC1pRecoMuonMomentumPlot_FullyContainedMuon = new TH1D("Playground_CC1pRecoMuonMomentumPlot_FullyContainedMuon",LabelMuonMomentumResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
 		TH1D* Playground_CC1pRecoMuonMomentumPlot_ExitingShortMuon = new TH1D("Playground_CC1pRecoMuonMomentumPlot_ExitingShortMuon",LabelMuonMomentumResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
 		TH1D* Playground_CC1pRecoMuonMomentumPlot_ExitingMediumMuon = new TH1D("Playground_CC1pRecoMuonMomentumPlot_ExitingMediumMuon",LabelMuonMomentumResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
@@ -947,6 +949,22 @@ void myRecoAnalysis::Loop() {
 		TH1D* Playground_CC1pRecoDeltaPhiTPlot_ExitingMediumMuon = new TH1D("Playground_CC1pRecoDeltaPhiTPlot_ExitingMediumMuon",LabelDeltaPhiTResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
 		TH1D* Playground_CC1pRecoDeltaPhiTPlot_ExitingLongMuon = new TH1D("Playground_CC1pRecoDeltaPhiTPlot_ExitingLongMuon",LabelDeltaPhiTResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
 
+		// -------------------------------------------------------------------------------------------------------------------
+
+		TH1D* Playground_CC1pRecoDeltaPTPlot_ShortProton = new TH1D("Playground_CC1pRecoDeltaPTPlot_ShortProton",LabelDeltaPTResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
+		TH1D* Playground_CC1pRecoDeltaPTPlot_MediumProton = new TH1D("Playground_CC1pRecoDeltaPTPlot_MediumProton",LabelDeltaPTResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
+		TH1D* Playground_CC1pRecoDeltaPTPlot_LongProton = new TH1D("Playground_CC1pRecoDeltaPTPlot_LongProton",LabelDeltaPTResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
+
+		TH1D* Playground_CC1pRecoDeltaAlphaTPlot_ShortProton = new TH1D("Playground_CC1pRecoDeltaAlphaTPlot_ShortProton",LabelDeltaAlphaTResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
+		TH1D* Playground_CC1pRecoDeltaAlphaTPlot_MediumProton = new TH1D("Playground_CC1pRecoDeltaAlphaTPlot_MediumProton",LabelDeltaAlphaTResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
+		TH1D* Playground_CC1pRecoDeltaAlphaTPlot_LongProton = new TH1D("Playground_CC1pRecoDeltaAlphaTPlot_LongProton",LabelDeltaAlphaTResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
+
+		TH1D* Playground_CC1pRecoDeltaPhiTPlot_ShortProton = new TH1D("Playground_CC1pRecoDeltaPhiTPlot_ShortProton",LabelDeltaPhiTResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
+		TH1D* Playground_CC1pRecoDeltaPhiTPlot_MediumProton = new TH1D("Playground_CC1pRecoDeltaPhiTPlot_MediumProton",LabelDeltaPhiTResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
+		TH1D* Playground_CC1pRecoDeltaPhiTPlot_LongProton = new TH1D("Playground_CC1pRecoDeltaPhiTPlot_LongProton",LabelDeltaPhiTResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
+
+		// -------------------------------------------------------------------------------------------------------------------
+
 		const int NSlices = 3;
 
 		TH1D* Playground_CC1pRecoDeltaPTPlot_FullyContainedMuon_Slice[NSlices];
@@ -964,6 +982,18 @@ void myRecoAnalysis::Loop() {
 		TH1D* Playground_CC1pRecoDeltaPhiTPlot_ExitingMediumMuon_Slice[NSlices];
 		TH1D* Playground_CC1pRecoDeltaPhiTPlot_ExitingLongMuon_Slice[NSlices];
 
+		TH1D* Playground_CC1pRecoDeltaPTPlot_ShortProton_Slice[NSlices];
+		TH1D* Playground_CC1pRecoDeltaPTPlot_MediumProton_Slice[NSlices];
+		TH1D* Playground_CC1pRecoDeltaPTPlot_LongProton_Slice[NSlices];
+
+		TH1D* Playground_CC1pRecoDeltaAlphaTPlot_ShortProton_Slice[NSlices];
+		TH1D* Playground_CC1pRecoDeltaAlphaTPlot_MediumProton_Slice[NSlices];
+		TH1D* Playground_CC1pRecoDeltaAlphaTPlot_LongProton_Slice[NSlices];
+
+		TH1D* Playground_CC1pRecoDeltaPhiTPlot_ShortProton_Slice[NSlices];
+		TH1D* Playground_CC1pRecoDeltaPhiTPlot_MediumProton_Slice[NSlices];
+		TH1D* Playground_CC1pRecoDeltaPhiTPlot_LongProton_Slice[NSlices];
+
 		for (int WhichSlice = 0; WhichSlice < NSlices; WhichSlice++) {
 
 			Playground_CC1pRecoDeltaPTPlot_FullyContainedMuon_Slice[WhichSlice] = new TH1D("Playground_CC1pRecoDeltaPTPlot_Slice_"+ToStringInt(WhichSlice+1)+"_FullyContainedMuon",LabelDeltaPTResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
@@ -980,6 +1010,20 @@ void myRecoAnalysis::Loop() {
 			Playground_CC1pRecoDeltaPhiTPlot_ExitingShortMuon_Slice[WhichSlice] = new TH1D("Playground_CC1pRecoDeltaPhiTPlot_Slice_"+ToStringInt(WhichSlice+1)+"_ExitingShortMuon",LabelDeltaPhiTResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
 			Playground_CC1pRecoDeltaPhiTPlot_ExitingMediumMuon_Slice[WhichSlice] = new TH1D("Playground_CC1pRecoDeltaPhiTPlot_Slice_"+ToStringInt(WhichSlice+1)+"_ExitingMediumMuon",LabelDeltaPhiTResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
 			Playground_CC1pRecoDeltaPhiTPlot_ExitingLongMuon_Slice[WhichSlice] = new TH1D("Playground_CC1pRecoDeltaPhiTPlot_Slice_"+ToStringInt(WhichSlice+1)+"_ExitingLongMuon",LabelDeltaPhiTResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
+
+			// ----------------------------------------------------------------------------------------------------------
+
+			Playground_CC1pRecoDeltaPTPlot_ShortProton_Slice[WhichSlice] = new TH1D("Playground_CC1pRecoDeltaPTPlot_Slice_"+ToStringInt(WhichSlice+1)+"_ShortProton",LabelDeltaPTResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
+			Playground_CC1pRecoDeltaPTPlot_MediumProton_Slice[WhichSlice] = new TH1D("Playground_CC1pRecoDeltaPTPlot_Slice_"+ToStringInt(WhichSlice+1)+"_MediumProton",LabelDeltaPTResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
+			Playground_CC1pRecoDeltaPTPlot_LongProton_Slice[WhichSlice] = new TH1D("Playground_CC1pRecoDeltaPTPlot_Slice_"+ToStringInt(WhichSlice+1)+"_LongProton",LabelDeltaPTResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
+
+			Playground_CC1pRecoDeltaAlphaTPlot_ShortProton_Slice[WhichSlice] = new TH1D("Playground_CC1pRecoDeltaAlphaTPlot_Slice_"+ToStringInt(WhichSlice+1)+"_ShortProton",LabelDeltaAlphaTResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
+			Playground_CC1pRecoDeltaAlphaTPlot_MediumProton_Slice[WhichSlice] = new TH1D("Playground_CC1pRecoDeltaAlphaTPlot_Slice_"+ToStringInt(WhichSlice+1)+"_MediumProton",LabelDeltaAlphaTResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
+			Playground_CC1pRecoDeltaAlphaTPlot_LongProton_Slice[WhichSlice] = new TH1D("Playground_CC1pRecoDeltaAlphaTPlot_Slice_"+ToStringInt(WhichSlice+1)+"_LongProton",LabelDeltaAlphaTResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
+
+			Playground_CC1pRecoDeltaPhiTPlot_ShortProton_Slice[WhichSlice] = new TH1D("Playground_CC1pRecoDeltaPhiTPlot_Slice_"+ToStringInt(WhichSlice+1)+"_ShortProton",LabelDeltaPhiTResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
+			Playground_CC1pRecoDeltaPhiTPlot_MediumProton_Slice[WhichSlice] = new TH1D("Playground_CC1pRecoDeltaPhiTPlot_Slice_"+ToStringInt(WhichSlice+1)+"_MediumProton",LabelDeltaPhiTResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
+			Playground_CC1pRecoDeltaPhiTPlot_LongProton_Slice[WhichSlice] = new TH1D("Playground_CC1pRecoDeltaPhiTPlot_Slice_"+ToStringInt(WhichSlice+1)+"_LongProton",LabelDeltaPhiTResolution,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV);
 
 		}		
 
@@ -1930,6 +1974,8 @@ void myRecoAnalysis::Loop() {
 					if (DeltaPhiT > 30 && DeltaPhiT < 60) { DeltaPhiTSlice = 1; }  
 					if (DeltaPhiT > 60) { DeltaPhiTSlice = 2; }
 
+					// -----------------------------------------------------------------------------------------------------------------
+
 					// Contained Muon  
 
 					if (CandidateMu_EndContainment->at(0) == 1) {
@@ -1945,7 +1991,7 @@ void myRecoAnalysis::Loop() {
 
 					} else {
 
-						// Exitting Muon
+						// Exiting Muon
 
 						if ( CandidateMu_Length->at(0) < 100 ) { // cm
 
@@ -1987,6 +2033,46 @@ void myRecoAnalysis::Loop() {
 
 						}
 
+
+					}
+
+					// -----------------------------------------------------------------------------------------------------------------
+
+					// By definition the proton is fully contained
+
+					if ( CandidateP_Length->at(0) < 10 ) { // cm
+
+						Playground_CC1pRecoDeltaPTPlot_ShortProton->Fill(CC1pDeltaPTReso,weight);
+						Playground_CC1pRecoDeltaAlphaTPlot_ShortProton->Fill(CC1pDeltaAlphaTReso,weight);
+						Playground_CC1pRecoDeltaPhiTPlot_ShortProton->Fill(CC1pDeltaPhiTReso,weight);
+
+						Playground_CC1pRecoDeltaPTPlot_ShortProton_Slice[PTSlice]->Fill(CC1pDeltaPTReso,weight);
+						Playground_CC1pRecoDeltaAlphaTPlot_ShortProton_Slice[DeltaAlphaTSlice]->Fill(CC1pDeltaAlphaTReso,weight);
+						Playground_CC1pRecoDeltaPhiTPlot_ShortProton_Slice[DeltaPhiTSlice]->Fill(CC1pDeltaPhiTReso,weight);
+
+					}
+
+					if ( CandidateP_Length->at(0) > 10 && CandidateP_Length->at(0) < 40 ) { // cm
+
+						Playground_CC1pRecoDeltaPTPlot_MediumProton->Fill(CC1pDeltaPTReso,weight);
+						Playground_CC1pRecoDeltaAlphaTPlot_MediumProton->Fill(CC1pDeltaAlphaTReso,weight);
+						Playground_CC1pRecoDeltaPhiTPlot_MediumProton->Fill(CC1pDeltaPhiTReso,weight);
+
+						Playground_CC1pRecoDeltaPTPlot_MediumProton_Slice[PTSlice]->Fill(CC1pDeltaPTReso,weight);
+						Playground_CC1pRecoDeltaAlphaTPlot_MediumProton_Slice[DeltaAlphaTSlice]->Fill(CC1pDeltaAlphaTReso,weight);
+						Playground_CC1pRecoDeltaPhiTPlot_MediumProton_Slice[DeltaPhiTSlice]->Fill(CC1pDeltaPhiTReso,weight);
+
+					}
+
+					if ( CandidateP_Length->at(0) > 40) { // cm
+
+						Playground_CC1pRecoDeltaPTPlot_LongProton->Fill(CC1pDeltaPTReso,weight);
+						Playground_CC1pRecoDeltaAlphaTPlot_LongProton->Fill(CC1pDeltaAlphaTReso,weight);
+						Playground_CC1pRecoDeltaPhiTPlot_LongProton->Fill(CC1pDeltaPhiTReso,weight);
+
+						Playground_CC1pRecoDeltaPTPlot_LongProton_Slice[PTSlice]->Fill(CC1pDeltaPTReso,weight);
+						Playground_CC1pRecoDeltaAlphaTPlot_LongProton_Slice[DeltaAlphaTSlice]->Fill(CC1pDeltaAlphaTReso,weight);
+						Playground_CC1pRecoDeltaPhiTPlot_LongProton_Slice[DeltaPhiTSlice]->Fill(CC1pDeltaPhiTReso,weight);
 
 					}
 
