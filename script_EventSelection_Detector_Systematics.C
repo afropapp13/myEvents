@@ -19,6 +19,8 @@
 	WhichSampleArray.push_back("Overlay9_Run1_Recombination2");
 	WhichSampleArray.push_back("Overlay9_Run1_SCE");
 
+//	WhichSampleArray.push_back("Overlay9_Run1_lowE");
+
 	// Run 3 Detector Variations
 
 	WhichSampleArray.push_back("Overlay9_Run3_CV");
@@ -32,7 +34,9 @@
 	WhichSampleArray.push_back("Overlay9_Run3_WireModThetaXZ");
 	WhichSampleArray.push_back("Overlay9_Run3_dEdx");
 	WhichSampleArray.push_back("Overlay9_Run3_Recombination2");
-	WhichSampleArray.push_back("Overlay9_Run3_SCE");	
+	WhichSampleArray.push_back("Overlay9_Run3_SCE");
+
+//	WhichSampleArray.push_back("Overlay9_Run3_lowE");	
 	
 
 	// -----------------------------------------------------------------------------------------

@@ -43,9 +43,8 @@ void Chi2PID_BreakDown() {
 
 	vector<TString> VectorCuts; VectorCuts.clear();
 	VectorCuts.push_back("");
+//	VectorCuts.push_back("_PID");
 //	VectorCuts.push_back("_NuScore");
-//	VectorCuts.push_back("_ThreePlaneLogChi2");
-//	VectorCuts.push_back("_Collinearity");
 
 	int NCuts = (int)(VectorCuts.size());	
 

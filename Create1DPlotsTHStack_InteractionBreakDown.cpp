@@ -41,8 +41,10 @@ void Create1DPlotsTHStack_InteractionBreakDown() {
 
 	PlotNames.push_back("RecoDeltaPhiPlot");
 	PlotNames.push_back("RecoDeltaThetaPlot");
+//	PlotNames.push_back("RecoDeltaForwardThetaPlot");
+//	PlotNames.push_back("RecoDeltaBackwardThetaPlot");
 
-//	PlotNames.push_back("RecoThreePlaneChi2LogLikelihoodCandidateMuonPlot");
+	PlotNames.push_back("RecoThreePlaneChi2LogLikelihoodCandidateMuonPlot");
 	PlotNames.push_back("RecoThreePlaneChi2LogLikelihoodCandidateProtonPlot");
 
 //	PlotNames.push_back("RecoMuonLLRPIDPlot");
@@ -65,8 +67,8 @@ void Create1DPlotsTHStack_InteractionBreakDown() {
 	PlotNames.push_back("RecoProtonLengthPlot");
 //	PlotNames.push_back("RecodMuonTracksScorePlot");
 //	PlotNames.push_back("RecodProtonTracksScorePlot");
-//	PlotNames.push_back("RecodMuonVertexDistancePlot");
-//	PlotNames.push_back("RecodProtonVertexDistancePlot");
+	PlotNames.push_back("RecodMuonVertexDistancePlot");
+	PlotNames.push_back("RecodProtonVertexDistancePlot");
 //	PlotNames.push_back("RecoVertexActivityPlot");
 //	PlotNames.push_back("RecoNonZeroVertexActivityPlot");
 
@@ -422,6 +424,16 @@ void Create1DPlotsTHStack_InteractionBreakDown() {
 				latexCosmic.SetTextSize(0.09);
 				TString LabelCosmic = "Cosmics = " + ToString(CosmicContamination/10.) + " %";
 				latexCosmic.DrawLatexNDC(0.57,0.8, LabelCosmic);
+
+				// --------------------------------------------------------------------------------------
+
+				// Calculate the data / MC ratio
+
+				if (PlotNames[WhichPlot] == "RecoProtonMomentumPlot") {
+
+					cout << "Data / MC ratio = " << Plots[0][WhichPlot]->Integral() / SumNonBeamOn->Integral() << endl;
+
+				}
 
 				// --------------------------------------------------------------------------------------
 

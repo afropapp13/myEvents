@@ -71,6 +71,7 @@ void myRecoAnalysis::Loop() {
 	int CC7pXpiEventsPassingSelectionCuts = 0;
 	int CC8pXpiEventsPassingSelectionCuts = 0;
 	int MisIndetifiedMuonAsPion = 0;
+	int BrokenProtonTrack = 0;
 	int MisIndetifiedMuonAsProton = 0;
 	int MisIndetifiedMuonAsAntiMuon = 0;
 	int MisIndetifiedProtonAsPion = 0;
@@ -82,6 +83,7 @@ void myRecoAnalysis::Loop() {
 	int MisIndetifiedProtonAsElectron = 0;
 	int MisIndetifiedMuPToElectronElectron = 0;
 	int MisIndetifiedMuPToMuMu = 0;
+	int BrokenMuonTrack = 0;
 	int MisIndetifiedMuPToPiPi = 0;
 	int CandidateMuon_MCParticle_OutFV = 0;
 	int CandidateProton_MCParticle_OutFV = 0;
@@ -214,6 +216,8 @@ void myRecoAnalysis::Loop() {
 		TH1D* RecoProtonPhiPlot = new TH1D("RecoProtonPhiPlot",LabelXAxisProtonPhi,NBinsProtonPhi,ArrayNBinsProtonPhi);
 
 		TH1D* RecoDeltaThetaPlot = new TH1D("RecoDeltaThetaPlot",RecoLabelXAxisDeltaTheta,NBinsDeltaTheta,MinDeltaTheta,MaxDeltaTheta);
+		TH1D* RecoDeltaForwardThetaPlot = new TH1D("RecoDeltaForwardThetaPlot",RecoLabelXAxisDeltaTheta,NBinsDeltaTheta,MinDeltaTheta,MaxDeltaTheta);
+		TH1D* RecoDeltaBackwardThetaPlot = new TH1D("RecoDeltaBackwardThetaPlot",RecoLabelXAxisDeltaTheta,NBinsDeltaTheta,MinDeltaTheta,MaxDeltaTheta);
 		TH1D* RecoDeltaPhiPlot = new TH1D("RecoDeltaPhiPlot",RecoLabelXAxisDeltaPhi,NBinsDeltaPhi,MinDeltaPhi,MaxDeltaPhi);
 
 //		TH1D* RecokMissPlot = new TH1D("RecokMissPlot",LabelXAxiskMiss,NBinskMiss,ArrayNBinskMiss);
@@ -333,6 +337,8 @@ void myRecoAnalysis::Loop() {
 		TH1D* CC1pRecoProtonPhiPlot = new TH1D("CC1pRecoProtonPhiPlot",LabelXAxisProtonPhi,NBinsProtonPhi,ArrayNBinsProtonPhi);
 
 		TH1D* CC1pRecoDeltaThetaPlot = new TH1D("CC1pRecoDeltaThetaPlot",RecoLabelXAxisDeltaTheta,NBinsDeltaTheta,MinDeltaTheta,MaxDeltaTheta);
+		TH1D* CC1pRecoDeltaForwardThetaPlot = new TH1D("CC1pRecoDeltaForwardThetaPlot",RecoLabelXAxisDeltaTheta,NBinsDeltaTheta,MinDeltaTheta,MaxDeltaTheta);
+		TH1D* CC1pRecoDeltaBackwardThetaPlot = new TH1D("CC1pRecoDeltaBackwardThetaPlot",RecoLabelXAxisDeltaTheta,NBinsDeltaTheta,MinDeltaTheta,MaxDeltaTheta);
 		TH1D* CC1pRecoDeltaPhiPlot = new TH1D("CC1pRecoDeltaPhiPlot",RecoLabelXAxisDeltaPhi,NBinsDeltaPhi,MinDeltaPhi,MaxDeltaPhi);
 
 //		TH1D* CC1pRecokMissPlot = new TH1D("CC1pRecokMissPlot",LabelXAxiskMiss,NBinskMiss,ArrayNBinskMiss);
@@ -476,8 +482,9 @@ void myRecoAnalysis::Loop() {
 			NBinsProtonCosTheta,ArrayNBinsProtonCosTheta);
 		TH1D* NonCC1pRecoProtonPhiPlot = new TH1D("NonCC1pRecoProtonPhiPlot",LabelXAxisProtonPhi,NBinsProtonPhi,ArrayNBinsProtonPhi);
 
-		TH1D* NonCC1pRecoDeltaThetaPlot = new TH1D("NonCC1pRecoDeltaThetaPlot",RecoLabelXAxisDeltaTheta,
-			NBinsDeltaTheta,MinDeltaTheta,MaxDeltaTheta);
+		TH1D* NonCC1pRecoDeltaThetaPlot = new TH1D("NonCC1pRecoDeltaThetaPlot",RecoLabelXAxisDeltaTheta,NBinsDeltaTheta,MinDeltaTheta,MaxDeltaTheta);
+		TH1D* NonCC1pRecoDeltaForwardThetaPlot = new TH1D("NonCC1pRecoDeltaForwardThetaPlot",RecoLabelXAxisDeltaTheta,NBinsDeltaTheta,MinDeltaTheta,MaxDeltaTheta);
+		TH1D* NonCC1pRecoDeltaBackwardThetaPlot = new TH1D("NonCC1pRecoDeltaBackwardThetaPlot",RecoLabelXAxisDeltaTheta,NBinsDeltaTheta,MinDeltaTheta,MaxDeltaTheta);
 		TH1D* NonCC1pRecoDeltaPhiPlot = new TH1D("NonCC1pRecoDeltaPhiPlot",RecoLabelXAxisDeltaPhi,NBinsDeltaPhi,MinDeltaPhi,MaxDeltaPhi);
 
 //		TH1D* NonCC1pRecokMissPlot = new TH1D("NonCC1pRecokMissPlot",LabelXAxiskMiss,NBinskMiss,ArrayNBinskMiss);
@@ -561,6 +568,8 @@ void myRecoAnalysis::Loop() {
 		TH1D* CCQERecoProtonPhiPlot = new TH1D("CCQERecoProtonPhiPlot",LabelXAxisProtonPhi,NBinsProtonPhi,ArrayNBinsProtonPhi);
 
 		TH1D* CCQERecoDeltaThetaPlot = new TH1D("CCQERecoDeltaThetaPlot",RecoLabelXAxisDeltaTheta,NBinsDeltaTheta,MinDeltaTheta,MaxDeltaTheta);
+		TH1D* CCQERecoDeltaForwardThetaPlot = new TH1D("CCQERecoDeltaForwardThetaPlot",RecoLabelXAxisDeltaTheta,NBinsDeltaTheta,MinDeltaTheta,MaxDeltaTheta);
+		TH1D* CCQERecoDeltaBackwardThetaPlot = new TH1D("CCQERecoDeltaBackwardThetaPlot",RecoLabelXAxisDeltaTheta,NBinsDeltaTheta,MinDeltaTheta,MaxDeltaTheta);
 		TH1D* CCQERecoDeltaPhiPlot = new TH1D("CCQERecoDeltaPhiPlot",RecoLabelXAxisDeltaPhi,NBinsDeltaPhi,MinDeltaPhi,MaxDeltaPhi);
 
 //		TH1D* CCQERecokMissPlot = new TH1D("CCQERecokMissPlot",LabelXAxiskMiss,NBinskMiss,ArrayNBinskMiss);
@@ -639,6 +648,8 @@ void myRecoAnalysis::Loop() {
 		TH1D* CCMECRecoProtonPhiPlot = new TH1D("CCMECRecoProtonPhiPlot",LabelXAxisProtonPhi,NBinsProtonPhi,ArrayNBinsProtonPhi);
 
 		TH1D* CCMECRecoDeltaThetaPlot = new TH1D("CCMECRecoDeltaThetaPlot",RecoLabelXAxisDeltaTheta,NBinsDeltaTheta,MinDeltaTheta,MaxDeltaTheta);
+		TH1D* CCMECRecoDeltaForwardThetaPlot = new TH1D("CCMECRecoDeltaForwardThetaPlot",RecoLabelXAxisDeltaTheta,NBinsDeltaTheta,MinDeltaTheta,MaxDeltaTheta);
+		TH1D* CCMECRecoDeltaBackwardThetaPlot = new TH1D("CCMECRecoDeltaBackwardThetaPlot",RecoLabelXAxisDeltaTheta,NBinsDeltaTheta,MinDeltaTheta,MaxDeltaTheta);
 		TH1D* CCMECRecoDeltaPhiPlot = new TH1D("CCMECRecoDeltaPhiPlot",RecoLabelXAxisDeltaPhi,NBinsDeltaPhi,MinDeltaPhi,MaxDeltaPhi);
 
 //		TH1D* CCMECRecokMissPlot = new TH1D("CCMECRecokMissPlot",LabelXAxiskMiss,NBinskMiss,ArrayNBinskMiss);
@@ -717,6 +728,8 @@ void myRecoAnalysis::Loop() {
 		TH1D* CCRESRecoProtonPhiPlot = new TH1D("CCRESRecoProtonPhiPlot",LabelXAxisProtonPhi,NBinsProtonPhi,ArrayNBinsProtonPhi);
 
 		TH1D* CCRESRecoDeltaThetaPlot = new TH1D("CCRESRecoDeltaThetaPlot",RecoLabelXAxisDeltaTheta,NBinsDeltaTheta,MinDeltaTheta,MaxDeltaTheta);
+		TH1D* CCRESRecoDeltaForwardThetaPlot = new TH1D("CCRESRecoDeltaForwardThetaPlot",RecoLabelXAxisDeltaTheta,NBinsDeltaTheta,MinDeltaTheta,MaxDeltaTheta);
+		TH1D* CCRESRecoDeltaBackwardThetaPlot = new TH1D("CCRESRecoDeltaBackwardThetaPlot",RecoLabelXAxisDeltaTheta,NBinsDeltaTheta,MinDeltaTheta,MaxDeltaTheta);
 		TH1D* CCRESRecoDeltaPhiPlot = new TH1D("CCRESRecoDeltaPhiPlot",RecoLabelXAxisDeltaPhi,NBinsDeltaPhi,MinDeltaPhi,MaxDeltaPhi);
 
 //		TH1D* CCRESRecokMissPlot = new TH1D("CCRESRecokMissPlot",LabelXAxiskMiss,NBinskMiss,ArrayNBinskMiss);
@@ -795,6 +808,8 @@ void myRecoAnalysis::Loop() {
 		TH1D* CCDISRecoProtonPhiPlot = new TH1D("CCDISRecoProtonPhiPlot",LabelXAxisProtonPhi,NBinsProtonPhi,ArrayNBinsProtonPhi);
 
 		TH1D* CCDISRecoDeltaThetaPlot = new TH1D("CCDISRecoDeltaThetaPlot",RecoLabelXAxisDeltaTheta,NBinsDeltaTheta,MinDeltaTheta,MaxDeltaTheta);
+		TH1D* CCDISRecoDeltaForwardThetaPlot = new TH1D("CCDISRecoDeltaForwardThetaPlot",RecoLabelXAxisDeltaTheta,NBinsDeltaTheta,MinDeltaTheta,MaxDeltaTheta);
+		TH1D* CCDISRecoDeltaBackwardThetaPlot = new TH1D("CCDISRecoDeltaBackwardThetaPlot",RecoLabelXAxisDeltaTheta,NBinsDeltaTheta,MinDeltaTheta,MaxDeltaTheta);
 		TH1D* CCDISRecoDeltaPhiPlot = new TH1D("CCDISRecoDeltaPhiPlot",RecoLabelXAxisDeltaPhi,NBinsDeltaPhi,MinDeltaPhi,MaxDeltaPhi);
 
 //		TH1D* CCDISRecokMissPlot = new TH1D("CCDISRecokMissPlot",LabelXAxiskMiss,NBinskMiss,ArrayNBinskMiss);
@@ -1109,12 +1124,17 @@ void myRecoAnalysis::Loop() {
 
 		if (string(fWhichSample).find("Overlay") != std::string::npos) {
 
+			if (string(fWhichSample).find("lowE") != std::string::npos) { POTCount = 1.; }
+			else {
+	
 				TString PathToPOTFile = "/pnfs/uboone/persistent/users/apapadop/mySamples/"+UBCodeVersion+"/PreSelection_"+fWhichSample+"_"+UBCodeVersion+"_POT.root";
 
 				TFile* POTFile = TFile::Open(PathToPOTFile,"readonly");
 				TH1D* POTCountHist = (TH1D*)(POTFile->Get("POTCountHist"));
 				POTCount = POTCountHist->GetBinContent(1);
 				POTFile->Close();
+			}
+	
 		}
 		
 		// ------------------------------------------------------------------------------------------------------------------
@@ -1410,7 +1430,12 @@ void myRecoAnalysis::Loop() {
 
 			double dYZ = (BeamFlash - RecoVertex).Mag();
 			double MuonVertexDistance = (CandidateMuonStart-RecoVertex).Mag();	
-			double ProtonVertexDistance = (CandidateProtonStart-RecoVertex).Mag();	
+			double ProtonVertexDistance = (CandidateProtonStart-RecoVertex).Mag();
+
+			// Ensure that the tracks are not flipped by applying a loose max distance cut of 5 cm between the vertex and the tracks
+
+//			if (MuonVertexDistance > 5) { continue; }
+//			if (ProtonVertexDistance > 5) { continue; }  	
 
 			// -------------------------------------------------------------------------------------------------------------------------
 
@@ -1615,6 +1640,8 @@ void myRecoAnalysis::Loop() {
 			RecoProtonPhiPlot->Fill(reco_Pp_phi*180./TMath::Pi(),weight);
 
 			RecoDeltaThetaPlot->Fill(DeltaThetaProtonMuon_Deg,weight);
+			if (reco_Pmu_cos_theta > 0.9) { RecoDeltaForwardThetaPlot->Fill(DeltaThetaProtonMuon_Deg,weight); } 
+			else { RecoDeltaBackwardThetaPlot->Fill(DeltaThetaProtonMuon_Deg,weight); }
 			RecoDeltaPhiPlot->Fill(DeltaPhiProtonMuon_Deg,weight);
 
 //			RecokMissPlot->Fill(kMiss,weight);
@@ -1834,6 +1861,8 @@ void myRecoAnalysis::Loop() {
 					CC1pRecodProtonVertexDistancePlot->Fill(ProtonVertexDistance,weight);
 
 					CC1pRecoDeltaThetaPlot->Fill(DeltaThetaProtonMuon_Deg,weight);
+					if (reco_Pmu_cos_theta > 0.9) { CC1pRecoDeltaForwardThetaPlot->Fill(DeltaThetaProtonMuon_Deg,weight); } 
+					else { CC1pRecoDeltaBackwardThetaPlot->Fill(DeltaThetaProtonMuon_Deg,weight); }
 					CC1pRecoDeltaPhiPlot->Fill(DeltaPhiProtonMuon_Deg,weight);
 
 					CC1pRecoMuonCosThetaPlot->Fill(reco_Pmu_cos_theta,weight);
@@ -2133,11 +2162,20 @@ void myRecoAnalysis::Loop() {
 					else if ( TMath::Abs(CandidateP_MCParticle_Pdg->at(0)) == ElectronPdg && TMath::Abs(CandidateMu_MCParticle_Pdg->at(0)) == ElectronPdg) 
 						{ MisIndetifiedMuPToElectronElectron++;  ManualNonCC1pEventsPassingSelectionCuts++; }
 					else if ( TMath::Abs(CandidateP_MCParticle_Pdg->at(0)) == MuonPdg && TMath::Abs(CandidateMu_MCParticle_Pdg->at(0)) == MuonPdg) 
-						{ MisIndetifiedMuPToMuMu++;  ManualNonCC1pEventsPassingSelectionCuts++; }
+						{ 
+ 
+							if (True_CandidateMu_EndZ->at(0) == True_CandidateP_EndZ->at(0)) { BrokenMuonTrack++; }
+							else { MisIndetifiedMuPToMuMu++; }
+							ManualNonCC1pEventsPassingSelectionCuts++;
+					}
 					else if ( TMath::Abs(CandidateP_MCParticle_Pdg->at(0)) == AbsChargedPionPdg && TMath::Abs(CandidateMu_MCParticle_Pdg->at(0)) == AbsChargedPionPdg) 
 						{ MisIndetifiedMuPToPiPi++;  ManualNonCC1pEventsPassingSelectionCuts++; }
 					else if ( CandidateMu_MCParticle_Pdg->at(0) == ProtonPdg && CandidateP_MCParticle_Pdg->at(0) == ProtonPdg) 
-						{ MisIndetifiedMuonAsProton++;  ManualNonCC1pEventsPassingSelectionCuts++; }
+						{ 
+							if (True_CandidateMu_EndZ->at(0) == True_CandidateP_EndZ->at(0)) { BrokenProtonTrack++; }
+							else { MisIndetifiedMuonAsProton++; }  
+							ManualNonCC1pEventsPassingSelectionCuts++; 
+					}
 					else if ( CandidateMu_MCParticle_Pdg->at(0) == -MuonPdg && CandidateP_MCParticle_Pdg->at(0) == ProtonPdg) 
 						{ MisIndetifiedMuonAsAntiMuon++;  ManualNonCC1pEventsPassingSelectionCuts++; }
 					else if ( True_CandidateMu_StartContainment->at(0) == 0 ) 
@@ -2229,6 +2267,8 @@ void myRecoAnalysis::Loop() {
 					NonCC1pRecoProtonPhiPlot->Fill(reco_Pp_phi*180./TMath::Pi(),weight);
 
 					NonCC1pRecoDeltaThetaPlot->Fill(DeltaThetaProtonMuon_Deg,weight);
+					if (reco_Pmu_cos_theta > 0.9) { NonCC1pRecoDeltaForwardThetaPlot->Fill(DeltaThetaProtonMuon_Deg,weight); } 
+					else { NonCC1pRecoDeltaBackwardThetaPlot->Fill(DeltaThetaProtonMuon_Deg,weight); }
 					NonCC1pRecoDeltaPhiPlot->Fill(DeltaPhiProtonMuon_Deg,weight);
 
 //					NonCC1pRecokMissPlot->Fill(kMiss,weight);
@@ -2305,6 +2345,8 @@ void myRecoAnalysis::Loop() {
 					CCQERecoProtonPhiPlot->Fill(reco_Pp_phi*180./TMath::Pi(),weight);
 
 					CCQERecoDeltaThetaPlot->Fill(DeltaThetaProtonMuon_Deg,weight);
+					if (reco_Pmu_cos_theta > 0.9) { CCQERecoDeltaForwardThetaPlot->Fill(DeltaThetaProtonMuon_Deg,weight); } 
+					else { CCQERecoDeltaBackwardThetaPlot->Fill(DeltaThetaProtonMuon_Deg,weight); }
 					CCQERecoDeltaPhiPlot->Fill(DeltaPhiProtonMuon_Deg,weight);
 
 //					CCQERecokMissPlot->Fill(kMiss,weight);
@@ -2376,6 +2418,8 @@ void myRecoAnalysis::Loop() {
 					CCMECRecoProtonPhiPlot->Fill(reco_Pp_phi*180./TMath::Pi(),weight);
 
 					CCMECRecoDeltaThetaPlot->Fill(DeltaThetaProtonMuon_Deg,weight);
+					if (reco_Pmu_cos_theta > 0.9) { CCMECRecoDeltaForwardThetaPlot->Fill(DeltaThetaProtonMuon_Deg,weight); } 
+					else { CCMECRecoDeltaBackwardThetaPlot->Fill(DeltaThetaProtonMuon_Deg,weight); }
 					CCMECRecoDeltaPhiPlot->Fill(DeltaPhiProtonMuon_Deg,weight);
 
 //					CCMECRecokMissPlot->Fill(kMiss,weight);
@@ -2447,6 +2491,8 @@ void myRecoAnalysis::Loop() {
 					CCRESRecoProtonPhiPlot->Fill(reco_Pp_phi*180./TMath::Pi(),weight);
 
 					CCRESRecoDeltaThetaPlot->Fill(DeltaThetaProtonMuon_Deg,weight);
+					if (reco_Pmu_cos_theta > 0.9) { CCRESRecoDeltaForwardThetaPlot->Fill(DeltaThetaProtonMuon_Deg,weight); } 
+					else { CCRESRecoDeltaBackwardThetaPlot->Fill(DeltaThetaProtonMuon_Deg,weight); }
 					CCRESRecoDeltaPhiPlot->Fill(DeltaPhiProtonMuon_Deg,weight);
 
 //					CCRESRecokMissPlot->Fill(kMiss,weight);
@@ -2515,6 +2561,8 @@ void myRecoAnalysis::Loop() {
 					CCDISRecoProtonPhiPlot->Fill(reco_Pp_phi*180./TMath::Pi(),weight);
 
 					CCDISRecoDeltaThetaPlot->Fill(DeltaThetaProtonMuon_Deg,weight);
+					if (reco_Pmu_cos_theta > 0.9) { CCDISRecoDeltaForwardThetaPlot->Fill(DeltaThetaProtonMuon_Deg,weight); } 
+					else { CCDISRecoDeltaBackwardThetaPlot->Fill(DeltaThetaProtonMuon_Deg,weight); }
 					CCDISRecoDeltaPhiPlot->Fill(DeltaPhiProtonMuon_Deg,weight);
 
 //					CCDISRecokMissPlot->Fill(kMiss,weight);
@@ -2679,8 +2727,10 @@ void myRecoAnalysis::Loop() {
 		double MisIndetifiedProtonAsElectronError = 0;
 		double MisIndetifiedMuPToElectronElectronError = 0;
 		double MisIndetifiedMuPToMuMuError = 0;
+		double BrokenMuonTrackError = 0;
 		double MisIndetifiedMuPToPiPiError = 0;
 		double MisIndetifiedMuonAsProtonError = 0;
+		double BrokenProtonTrackError = 0;
 		double MisIndetifiedMuonAsAntiMuonError = 0;
 		double CandidateMuon_MCParticle_OutFVError = 0;
 		double CandidateProton_MCParticle_OutFVError = 0;
@@ -2760,12 +2810,16 @@ void myRecoAnalysis::Loop() {
 
 			// Mis-identified muon-proton events passing the selection criteria
 
-			MisIndetifiedMuonAsProtonError = sqrt(MisIndetifiedMuonAsProton);
+			if (MisIndetifiedMuonAsProton > 0) { 
 
-			myTxtFile << "p-p & " << MisIndetifiedMuonAsProton << " $\\pm$ " 
-			<< MisIndetifiedMuonAsProtonError
-			<< " & " << MisIndetifiedMuonAsProton*POTScale << " $\\pm$ " 
-			<< MisIndetifiedMuonAsProtonError*POTScale << " \\tabularnewline \\hline" << std::endl;
+				MisIndetifiedMuonAsProtonError = sqrt(MisIndetifiedMuonAsProton);
+
+				myTxtFile << "p-p & " << MisIndetifiedMuonAsProton << " $\\pm$ " 
+				<< MisIndetifiedMuonAsProtonError
+				<< " & " << MisIndetifiedMuonAsProton*POTScale << " $\\pm$ " 
+				<< MisIndetifiedMuonAsProtonError*POTScale << " \\tabularnewline \\hline" << std::endl;
+
+			}
 
 			// -------------------------------------------------------------------------------------------------------------------------	
 
@@ -2839,6 +2893,32 @@ void myRecoAnalysis::Loop() {
 
 			// -------------------------------------------------------------------------------------------------------------------------	
 
+			// Broken proton track events passing the selection criteria
+
+			if (BrokenProtonTrack > 0) { 
+
+				BrokenProtonTrackError = sqrt(BrokenProtonTrack);
+
+				myTxtFile << "Broken p track & " << BrokenProtonTrack << " $\\pm$ " 
+				<< BrokenProtonTrackError
+				<< " & " << BrokenProtonTrack*POTScale << " $\\pm$ " 
+				<< BrokenProtonTrackError*POTScale << " \\tabularnewline \\hline" << std::endl;
+
+			}
+
+			// -------------------------------------------------------------------------------------------------------------------------	
+
+			// Events with broken muon tracks passing the selection criteria
+
+			BrokenMuonTrackError = sqrt(BrokenMuonTrack);
+
+			myTxtFile << "Broken $\\mu$ tracks & " << BrokenMuonTrack << " $\\pm$ " 
+			<< BrokenMuonTrackError
+			<< " & " << BrokenMuonTrack*POTScale << " $\\pm$ " 
+			<< BrokenMuonTrackError*POTScale << " \\tabularnewline \\hline" << std::endl;
+
+			// -------------------------------------------------------------------------------------------------------------------------	
+
 			// All reconstructed CC4p0pi events passing the selection criteria
 
 			CC4p0piEventsPassingSelectionCutsError = sqrt(CC4p0piEventsPassingSelectionCuts);
@@ -2852,12 +2932,16 @@ void myRecoAnalysis::Loop() {
 
 			// Mis-identified mu-mu events passing the selection criteria
 
-			MisIndetifiedMuPToMuMuError = sqrt(MisIndetifiedMuPToMuMu);
+			if (MisIndetifiedMuPToMuMu > 0) {
 
-			myTxtFile << "$\\mu$-$\\mu$ & " << MisIndetifiedMuPToMuMu << " $\\pm$ " 
-			<< MisIndetifiedMuPToMuMuError
-			<< " & " << MisIndetifiedMuPToMuMu*POTScale << " $\\pm$ " 
-			<< MisIndetifiedMuPToMuMuError*POTScale << " \\tabularnewline \\hline" << std::endl;
+				MisIndetifiedMuPToMuMuError = sqrt(MisIndetifiedMuPToMuMu);
+
+				myTxtFile << "$\\mu$-$\\mu$ & " << MisIndetifiedMuPToMuMu << " $\\pm$ " 
+				<< MisIndetifiedMuPToMuMuError
+				<< " & " << MisIndetifiedMuPToMuMu*POTScale << " $\\pm$ " 
+				<< MisIndetifiedMuPToMuMuError*POTScale << " \\tabularnewline \\hline" << std::endl;
+
+			}
 
 			// -------------------------------------------------------------------------------------------------------------------------	
 

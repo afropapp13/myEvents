@@ -40,8 +40,10 @@ void Create1DPlotsTHStack_TopologicalBreakDown() {
 
 	PlotNames.push_back("RecoDeltaPhiPlot");
 	PlotNames.push_back("RecoDeltaThetaPlot");
+//	PlotNames.push_back("RecoDeltaForwardThetaPlot");
+//	PlotNames.push_back("RecoDeltaBackwardThetaPlot");
 
-//	PlotNames.push_back("RecoThreePlaneChi2LogLikelihoodCandidateMuonPlot");
+	PlotNames.push_back("RecoThreePlaneChi2LogLikelihoodCandidateMuonPlot");
 	PlotNames.push_back("RecoThreePlaneChi2LogLikelihoodCandidateProtonPlot");
 
 //	PlotNames.push_back("RecoMuonLLRPIDPlot");
@@ -64,8 +66,8 @@ void Create1DPlotsTHStack_TopologicalBreakDown() {
 	PlotNames.push_back("RecoProtonLengthPlot");
 //	PlotNames.push_back("RecodMuonTracksScorePlot");
 //	PlotNames.push_back("RecodProtonTracksScorePlot");
-//	PlotNames.push_back("RecodMuonVertexDistancePlot");
-//	PlotNames.push_back("RecodProtonVertexDistancePlot");
+	PlotNames.push_back("RecodMuonVertexDistancePlot");
+	PlotNames.push_back("RecodProtonVertexDistancePlot");
 //	PlotNames.push_back("RecoVertexActivityPlot");
 //	PlotNames.push_back("RecoNonZeroVertexActivityPlot");
 
