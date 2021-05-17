@@ -1302,7 +1302,33 @@ void myRecoAnalysis::Loop() {
 			// Muon info
 
 			double reco_Pmu_mcs = CandidateMu_P_Range->at(0);
-			if (CandidateMu_EndContainment->at(0) == 0) { reco_Pmu_mcs = CandidateMu_P_MCS->at(0); }
+
+			// Quality cut suggested by Anne Schukraft // May 7 2021
+			// For contained tracks, we have two methods for the muon momentum reconstruction
+			// MCS & range, we can require that the two are withing 25%
+			// to reject misreconstructed tracks 
+	
+			if (CandidateMu_EndContainment->at(0) == 1) { 
+
+				double Reso =  TMath::Abs(CandidateMu_P_MCS->at(0) - CandidateMu_P_Range->at(0) ) / CandidateMu_P_Range->at(0) ; 
+				if (Reso > 0.25) { continue; }
+
+			}
+
+			if (CandidateMu_EndContainment->at(0) == 0) { 
+
+				// Quality cut for exiting muons
+				// If the start and end points are practically at the same Z
+				// We get maximal resolution effects
+				// So We require a separation by > 50 cm
+
+//				double VerticalSeparation = TMath::Abs(CandidateMu_StartZ->at(0) - CandidateMu_EndZ->at(0));
+//				if (VerticalSeparation < 50) { continue; }
+
+				reco_Pmu_mcs = CandidateMu_P_MCS->at(0); 
+
+			}
+
 			double reco_Pmu_cos_theta = CandidateMu_CosTheta->at(0);
 			double reco_Pmu_phi = CandidateMu_Phi->at(0) * TMath::Pi() / 180.;
 			double reco_Emu = TMath::Sqrt( reco_Pmu_mcs*reco_Pmu_mcs + MuonMass_GeV*MuonMass_GeV );
