@@ -1318,12 +1318,10 @@ void myRecoAnalysis::Loop() {
 			if (CandidateMu_EndContainment->at(0) == 0) { 
 
 				// Quality cut for exiting muons
-				// If the start and end points are practically at the same Z
-				// We get maximal resolution effects
-				// So We require a separation by > 50 cm
+				// Suggested by Giuseppe Cerati May 18 2021
+				// Require a muon length of > 50 cm
 
-//				double VerticalSeparation = TMath::Abs(CandidateMu_StartZ->at(0) - CandidateMu_EndZ->at(0));
-//				if (VerticalSeparation < 50) { continue; }
+//				if (CandidateMu_Length->at(0) < 50) { continue; }
 
 				reco_Pmu_mcs = CandidateMu_P_MCS->at(0); 
 
