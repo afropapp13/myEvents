@@ -1228,6 +1228,15 @@ void myRecoAnalysis::Loop() {
 
 			// -------------------------------------------------------------------------------------------------------------------------
 
+			// Ensure that we don't have flipped tracks 
+			// by demanding that muon start - vertex distance < muon end - vertex distance
+			// and that proton start - vertex distance < proton end - vertex distance 
+
+			if (CandidateMuStartVertexDistance->at(0) > CandidateMuEndVertexDistance->at(0)) { continue; }
+			if (CandidatePStartVertexDistance->at(0) > CandidatePEndVertexDistance->at(0)) { continue; }
+
+			// -------------------------------------------------------------------------------------------------------------------------
+
 			weight = POTScale;
 
 			if (string(fWhichSample).find("Overlay") != std::string::npos) { 

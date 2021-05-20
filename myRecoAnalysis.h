@@ -108,6 +108,11 @@ public :
    vector<double>  *Vertex_Z;
    vector<double>  *VertexActivity_50x100;
 
+   vector<double>  *CandidateMuStartVertexDistance;
+   vector<double>  *CandidateMuEndVertexDistance;
+   vector<double>  *CandidatePStartVertexDistance;
+   vector<double>  *CandidatePEndVertexDistance;
+
    vector<double>  *CandidateMu_TrackScore;
    vector<double>  *CandidateMu_StartX;
    vector<double>  *CandidateMu_StartY;
@@ -289,6 +294,11 @@ public :
    TBranch        *b_Vertex_Y;   //!
    TBranch        *b_Vertex_Z;   //!
    TBranch        *b_VertexActivity_50x100;   //!
+
+   TBranch  	  *b_CandidateMuStartVertexDistance;
+   TBranch  	  *b_CandidateMuEndVertexDistance;
+   TBranch  	  *b_CandidatePStartVertexDistance;
+   TBranch  	  *b_CandidatePEndVertexDistance;
 
    TBranch        *b_CandidateMu_TrackScore;   //!
    TBranch        *b_CandidateMu_StartX;   //!
@@ -502,6 +512,11 @@ void myRecoAnalysis::Init(TTree *tree)
    Vertex_Z = 0;
    VertexActivity_50x100 = 0;
 
+   CandidateMuStartVertexDistance = 0;
+   CandidateMuEndVertexDistance = 0;
+   CandidatePStartVertexDistance = 0;
+   CandidatePEndVertexDistance = 0;
+
    CandidateMu_TrackScore = 0;
    CandidateMu_StartX = 0;
    CandidateMu_StartY = 0;
@@ -687,6 +702,11 @@ void myRecoAnalysis::Init(TTree *tree)
    fChain->SetBranchAddress("Vertex_Y", &Vertex_Y, &b_Vertex_Y);
    fChain->SetBranchAddress("Vertex_Z", &Vertex_Z, &b_Vertex_Z);
    fChain->SetBranchAddress("VertexActivity_50x100", &VertexActivity_50x100, &b_VertexActivity_50x100);
+
+   fChain->SetBranchAddress("CandidateMuStartVertexDistance", &CandidateMuStartVertexDistance, &b_CandidateMuStartVertexDistance);
+   fChain->SetBranchAddress("CandidateMuEndVertexDistance", &CandidateMuEndVertexDistance, &b_CandidateMuEndVertexDistance);
+   fChain->SetBranchAddress("CandidatePStartVertexDistance", &CandidatePStartVertexDistance, &b_CandidatePStartVertexDistance);
+   fChain->SetBranchAddress("CandidatePEndVertexDistance", &CandidatePEndVertexDistance, &b_CandidatePEndVertexDistance);
 
    fChain->SetBranchAddress("CandidateMu_TrackScore", &CandidateMu_TrackScore, &b_CandidateMu_TrackScore);
    fChain->SetBranchAddress("CandidateMu_StartX", &CandidateMu_StartX, &b_CandidateMu_StartX);
