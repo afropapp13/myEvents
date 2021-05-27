@@ -8,6 +8,12 @@
 
 ###########################################################################################################################################################################
 
+# switch between series of cuts
+
+root -l script_EventSelection_CV.C 
+
+###########################################################################################################################################################################
+
 # Purity & Efficiency Studies
 
 cd PurityEfficiencyStudies
@@ -21,17 +27,19 @@ root -l DetermineMaxPurityEfficiency1D.cpp
 
 ###########################################################################################################################################################################
 
-# switch between series of cuts
-
-root -l script_EventSelection_CV.C 
-
-# switch between PID info / topological breakdown / interaction breakdown
-
 root -l Chi2PID_BreakDown.cpp
 
 root -l Create1DPlotsTHStack_TopologicalBreakDown.cpp
 
 root -l Create1DPlotsTHStack_InteractionBreakDown.cpp
+
+# NuWro fake data (only Run 1 for now)
+
+root -l
+.L Create1DPlotsTHStack_TopologicalBreakDown.cpp
+Create1DPlotsTHStack_TopologicalBreakDown("Overlay9NuWro")
+.L Create1DPlotsTHStack_InteractionBreakDown.cpp
+Create1DPlotsTHStack_InteractionBreakDown("Overlay9NuWro")
 
 ./DownloadEventRatePlots.sh
 

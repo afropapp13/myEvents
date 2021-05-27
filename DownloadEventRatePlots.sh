@@ -20,10 +20,10 @@ do
 
 		AppliedCuts=${AppliedCuts}${Cut}
 
-		scp $UserID@$UBgpvm:$PlotPath/$AppliedCuts/TopologicalBreakDown/THStack_BreakDown_*_${RunNumber}_${UBCode}${AppliedCuts}.pdf \
+		scp $UserID@$UBgpvm:$PlotPath/$AppliedCuts/TopologicalBreakDown/*THStack_BreakDown_*_${RunNumber}_${UBCode}${AppliedCuts}.pdf \
 			./myPlots/pdf/1D/${UBCode}/${AppliedCuts}/TopologicalBreakDown
 			
-		scp $UserID@$UBgpvm:$PlotPath/$AppliedCuts/InteractionBreakDown/THStack_BreakDown_*_${RunNumber}_${UBCode}${AppliedCuts}.pdf \
+		scp $UserID@$UBgpvm:$PlotPath/$AppliedCuts/InteractionBreakDown/*THStack_BreakDown_*_${RunNumber}_${UBCode}${AppliedCuts}.pdf \
 			./myPlots/pdf/1D/${UBCode}/${AppliedCuts}/InteractionBreakDown			
 
 	done

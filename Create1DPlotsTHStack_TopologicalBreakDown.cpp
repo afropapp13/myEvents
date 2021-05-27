@@ -17,7 +17,7 @@
 using namespace std;
 using namespace Constants;
 
-void Create1DPlotsTHStack_TopologicalBreakDown() {
+void Create1DPlotsTHStack_TopologicalBreakDown(TString BaseMC = "") {
 
 	// -----------------------------------------------------------------------------------------------------------------------------------------
 
@@ -26,6 +26,18 @@ void Create1DPlotsTHStack_TopologicalBreakDown() {
 	// -----------------------------------------------------------------------------------------------------------------------------------------
 
 	std::vector<TString> PlotNames; PlotNames.clear();
+
+	PlotNames.push_back("RecoMuonMomentumPlot");
+	PlotNames.push_back("RecoProtonMomentumPlot");
+	PlotNames.push_back("RecoMuonCosThetaPlot");
+	PlotNames.push_back("RecoProtonCosThetaPlot");
+	PlotNames.push_back("RecoMuonPhiPlot");
+	PlotNames.push_back("RecoProtonPhiPlot");
+	PlotNames.push_back("RecoDeltaPTPlot");
+	PlotNames.push_back("RecoDeltaAlphaTPlot");
+	PlotNames.push_back("RecoDeltaPhiTPlot");
+
+	if (BaseMC == "") {
 
 //	PlotNames.push_back("RecoPMissMinusPlot");
 //	PlotNames.push_back("RecoPMissPlot");
@@ -49,15 +61,6 @@ void Create1DPlotsTHStack_TopologicalBreakDown() {
 //	PlotNames.push_back("RecoMuonLLRPIDPlot");
 //	PlotNames.push_back("RecoProtonLLRPIDPlot");
 
-	PlotNames.push_back("RecoMuonMomentumPlot");
-	PlotNames.push_back("RecoProtonMomentumPlot");
-	PlotNames.push_back("RecoMuonCosThetaPlot");
-	PlotNames.push_back("RecoProtonCosThetaPlot");
-	PlotNames.push_back("RecoMuonPhiPlot");
-	PlotNames.push_back("RecoProtonPhiPlot");
-	PlotNames.push_back("RecoDeltaPTPlot");
-	PlotNames.push_back("RecoDeltaAlphaTPlot");
-	PlotNames.push_back("RecoDeltaPhiTPlot");
 	PlotNames.push_back("RecoECalPlot");
 	PlotNames.push_back("RecoEQEPlot");
 	PlotNames.push_back("RecoQ2Plot");
@@ -80,8 +83,10 @@ void Create1DPlotsTHStack_TopologicalBreakDown() {
 
 	PlotNames.push_back("RecoContainedMuonMomentumPlot");
 	PlotNames.push_back("RecoUncontainedMuonMomentumPlot");
-//	PlotNames.push_back("RecoContainedMuonLengthPlot");
-//	PlotNames.push_back("RecoUncontainedMuonLengthPlot");
+	// PlotNames.push_back("RecoContainedMuonLengthPlot");
+	// PlotNames.push_back("RecoUncontainedMuonLengthPlot");
+
+	}
 
 	const int N1DPlots = PlotNames.size();
 	cout << "Number of 1D Plots = " << N1DPlots << endl;
@@ -115,6 +120,10 @@ void Create1DPlotsTHStack_TopologicalBreakDown() {
 
 	for (int WhichRun = 0; WhichRun < NRuns; WhichRun++) {
 
+		// For the alternative models for now we have only Run1
+
+		if (BaseMC != "" && Runs[WhichRun] == "Run3") { continue; }
+
 		// -----------------------------------------------------------------------------------------------------------------------------------------
 
 		double DataPOT = ReturnBeamOnRunPOT(Runs[WhichRun]);													
@@ -125,7 +134,10 @@ void Create1DPlotsTHStack_TopologicalBreakDown() {
 
 		for (int i = 0; i < NCuts; i++) {
 
-			Cuts = Cuts + VectorCuts[i];			
+			Cuts = Cuts + VectorCuts[i];
+
+			// For the alternative MC, we want the figures after the application of all cuts
+			if (BaseMC == "Overlay9NuWro" && i != NCuts-1) { continue; }			
 
 //		} // If we want to run only on a specific cut combination, include this } and remove the one at the end of the program
 
@@ -156,7 +168,10 @@ void Create1DPlotsTHStack_TopologicalBreakDown() {
 			// 3: Dirt
 		
 			NameOfSamples.push_back("STVStudies_BeamOn9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("BeamOn");
-			NameOfSamples.push_back("STVStudies_Overlay9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("Overlay");
+
+			if (BaseMC == "") { NameOfSamples.push_back("STVStudies_Overlay9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("Overlay"); }
+			else if (BaseMC == "Overlay9NuWro") { NameOfSamples.push_back("STVStudies_Overlay9NuWro_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("Overlay"); }
+
 			NameOfSamples.push_back("STVStudies_ExtBNB9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("ExtBNB");
 			NameOfSamples.push_back("STVStudies_OverlayDirt9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("Dirt");
 
@@ -406,7 +421,7 @@ void Create1DPlotsTHStack_TopologicalBreakDown() {
 				// --------------------------------------------------------------------------------------
 
 				TString CanvasPath = PlotPath + Cuts+"/TopologicalBreakDown/";
-				TString CanvasName = "THStack_BreakDown_"+PlotNames[WhichPlot]+"_"+Runs[WhichRun]+"_"+UBCodeVersion+Cuts+".pdf";
+				TString CanvasName = BaseMC + "THStack_BreakDown_"+PlotNames[WhichPlot]+"_"+Runs[WhichRun]+"_"+UBCodeVersion+Cuts+".pdf";
 				PlotCanvas[WhichPlot]->SaveAs(CanvasPath+CanvasName);
 				delete PlotCanvas[WhichPlot];
 

@@ -20,6 +20,7 @@
 	WhichSampleArray.push_back("Overlay9_Run1_SCE");
 
 //	WhichSampleArray.push_back("Overlay9_Run1_lowE");
+//	WhichSampleArray.push_back("Overlay9_Run1_altBE");
 
 	// Run 3 Detector Variations
 

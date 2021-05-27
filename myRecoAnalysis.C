@@ -929,8 +929,6 @@ void myRecoAnalysis::Loop() {
 		// --------------------------------------------------------------------------------------------------------------------------------
 		// --------------------------------------------------------------------------------------------------------------------------------
 
-		// CC1p STV Resolution Playground plots
-
 		int NBinsCC1pSTVReso = 200; double MinCC1pSTV = -100.,MaxCC1pSTV = 100.;
 
 		TString LabelMuonMomentumResolution = ";P_{#mu} resolution (%)";
@@ -1124,17 +1122,13 @@ void myRecoAnalysis::Loop() {
 
 		if (string(fWhichSample).find("Overlay") != std::string::npos) {
 
-			if (string(fWhichSample).find("lowE") != std::string::npos) { POTCount = 1.; }
-			else {
-	
-				TString PathToPOTFile = "/pnfs/uboone/persistent/users/apapadop/mySamples/"+UBCodeVersion+"/PreSelection_"+fWhichSample+"_"+UBCodeVersion+"_POT.root";
+			TString PathToPOTFile = "/pnfs/uboone/persistent/users/apapadop/mySamples/"+UBCodeVersion+"/PreSelection_"+fWhichSample+"_"+UBCodeVersion+"_POT.root";
 
-				TFile* POTFile = TFile::Open(PathToPOTFile,"readonly");
-				TH1D* POTCountHist = (TH1D*)(POTFile->Get("POTCountHist"));
-				POTCount = POTCountHist->GetBinContent(1);
-				POTFile->Close();
-			}
-	
+			TFile* POTFile = TFile::Open(PathToPOTFile,"readonly");
+			TH1D* POTCountHist = (TH1D*)(POTFile->Get("POTCountHist"));
+			POTCount = POTCountHist->GetBinContent(1);
+			POTFile->Close();
+
 		}
 		
 		// ------------------------------------------------------------------------------------------------------------------
