@@ -148,73 +148,7 @@ void myTrueAnalysis::Loop() {
 
 	TH1D* POTScalePlot = new TH1D("POTScalePlot","",1,0,1);
 	TH1D* NEventsPlot = new TH1D("NEventsPlot","",1,0,1);
-	TH1D* NSelectedPlot = new TH1D("NSelectedPlot","",1,0,1);	
-	
-	// --------------------------------------------------------------------------------------------------------------------------------
-
-	// POT Counting
-
-	double POTCount = -99.;
-
-	if (string(fWhichSample).find("Overlay") != std::string::npos) {
-
-		TString PathToPOTFile = "/pnfs/uboone/persistent/users/apapadop/mySamples/"+UBCodeVersion+"/PreSelection_"+fWhichSample+"_"+UBCodeVersion+"_POT.root";
-		TFile* POTFile = TFile::Open(PathToPOTFile,"readonly");
-		TH1D* POTCountHist = (TH1D*)(POTFile->Get("POTCountHist"));
-		POTCount = POTCountHist->GetBinContent(1);
-		POTFile->Close();
-
-	}	
-	
-	// ------------------------------------------------------------------------------------------------------------------
-
-	// POT Scaling
-
-	double POTScalingFactor = 1.;
-
-	double tor860_wcut = 1;
-	double E1DCNT_wcut = 1.;
-	double EXT = 1.;
-
-	if (string(fWhichSample).find("Run1") != std::string::npos) {
-
-		tor860_wcut = tor860_wcut_Run1;
-		E1DCNT_wcut = E1DCNT_wcut_Run1;
-		EXT = EXT_Run1;
-
-	}
-	
-	if (string(fWhichSample).find("Run2") != std::string::npos) {
-
-		tor860_wcut = tor860_wcut_Run2;
-		E1DCNT_wcut = E1DCNT_wcut_Run2;
-		EXT = EXT_Run2;
-
-	}	
-	
-	if (string(fWhichSample).find("Run3") != std::string::npos) {
-
-		tor860_wcut = tor860_wcut_Run3;
-		E1DCNT_wcut = E1DCNT_wcut_Run3;
-		EXT = EXT_Run3;
-
-	}	
-	
-	if (string(fWhichSample).find("Run4") != std::string::npos) {
-
-		tor860_wcut = tor860_wcut_Run4;
-		E1DCNT_wcut = E1DCNT_wcut_Run4;
-		EXT = EXT_Run4;
-
-	}		
-
-	if (string(fWhichSample).find("Run5") != std::string::npos) {
-
-		tor860_wcut = tor860_wcut_Run5;
-		E1DCNT_wcut = E1DCNT_wcut_Run5;
-		EXT = EXT_Run5;
-
-	}
+	TH1D* NSelectedPlot = new TH1D("NSelectedPlot","",1,0,1);
 
 	// ---------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -230,8 +164,7 @@ void myTrueAnalysis::Loop() {
 		if (Weight <= 0 || Weight > 30) { continue; }
 		if (T2KWeight <= 0 || T2KWeight > 30) { continue; }		
 		// Weight from v3.0.4 to v.3.0.6 * weight from application of T2K tune
-		POTScalingFactor = tor860_wcut / POTCount;
-		double weight = POTScalingFactor * Weight * T2KWeight * ROOTinoWeight;
+		double weight = POTWeight * Weight * T2KWeight * ROOTinoWeight;
 
 		// -------------------------------------------------------------------------------------------------------------------------------------
 
@@ -290,7 +223,7 @@ void myTrueAnalysis::Loop() {
 
 		// ---------------------------------------------------------------------------------------------------------------------------------
 
-		SumWeights += weight / POTScalingFactor;					
+		SumWeights += weight / POTWeight;					
 
 		// ---------------------------------------------------------------------------------------------------------------------------------
 
@@ -558,7 +491,7 @@ void myTrueAnalysis::Loop() {
 
 	}
 	
-	POTScalePlot->SetBinContent(1,POTScalingFactor);
+	POTScalePlot->SetBinContent(1,POTWeight);
 	POTScalePlot->SetBinError(1,0);
 
 	NEventsPlot->SetBinContent(1,nentries);

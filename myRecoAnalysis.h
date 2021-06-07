@@ -30,10 +30,55 @@ public :
    double           Weight;
    double           T2KWeight;
    double           ROOTinoWeight;
+   double           POTWeight;
 
-   int           Run;
-   int           SubRun;
-   int           Event;
+   int             Run;
+   int             SubRun;
+   int             Event;
+
+   vector<int>  *CandidateMu_Plane0_NHits;
+   vector<int>  *CandidateMu_Plane1_NHits;
+   vector<int>  *CandidateMu_Plane2_NHits;
+
+   vector<int>  *CandidateP_Plane0_NHits;
+   vector<int>  *CandidateP_Plane1_NHits;
+   vector<int>  *CandidateP_Plane2_NHits;
+
+   std::vector<std::vector<float> > *CandidateMu_Plane0_ResidualRange;
+   std::vector<std::vector<float> > *CandidateMu_Plane0_dEdx;
+   std::vector<std::vector<float> > *CandidateMu_Plane0_dQdx;
+   std::vector<std::vector<float> > *CandidateMu_Plane0_TruncdEdx;
+   std::vector<std::vector<float> > *CandidateMu_Plane0_TruncdQdx;
+
+   std::vector<std::vector<float> > *CandidateMu_Plane1_ResidualRange;
+   std::vector<std::vector<float> > *CandidateMu_Plane1_dEdx;
+   std::vector<std::vector<float> > *CandidateMu_Plane1_dQdx;
+   std::vector<std::vector<float> > *CandidateMu_Plane1_TruncdEdx;
+   std::vector<std::vector<float> > *CandidateMu_Plane1_TruncdQdx;
+
+   std::vector<std::vector<float> > *CandidateMu_Plane2_ResidualRange;
+   std::vector<std::vector<float> > *CandidateMu_Plane2_dEdx;
+   std::vector<std::vector<float> > *CandidateMu_Plane2_dQdx;
+   std::vector<std::vector<float> > *CandidateMu_Plane2_TruncdEdx;
+   std::vector<std::vector<float> > *CandidateMu_Plane2_TruncdQdx;
+
+   std::vector<std::vector<float> > *CandidateP_Plane0_ResidualRange;
+   std::vector<std::vector<float> > *CandidateP_Plane0_dEdx;
+   std::vector<std::vector<float> > *CandidateP_Plane0_dQdx;
+   std::vector<std::vector<float> > *CandidateP_Plane0_TruncdEdx;
+   std::vector<std::vector<float> > *CandidateP_Plane0_TruncdQdx;
+
+   std::vector<std::vector<float> > *CandidateP_Plane1_ResidualRange;
+   std::vector<std::vector<float> > *CandidateP_Plane1_dEdx;
+   std::vector<std::vector<float> > *CandidateP_Plane1_dQdx;
+   std::vector<std::vector<float> > *CandidateP_Plane1_TruncdEdx;
+   std::vector<std::vector<float> > *CandidateP_Plane1_TruncdQdx;
+
+   std::vector<std::vector<float> > *CandidateP_Plane2_ResidualRange;
+   std::vector<std::vector<float> > *CandidateP_Plane2_dEdx;
+   std::vector<std::vector<float> > *CandidateP_Plane2_dQdx;
+   std::vector<std::vector<float> > *CandidateP_Plane2_TruncdEdx;
+   std::vector<std::vector<float> > *CandidateP_Plane2_TruncdQdx;
 
    vector<double>  *All_UBGenie;
    vector<double>  *AxFFCCQEshape_UBGenie;
@@ -129,7 +174,9 @@ public :
    vector<double>  *True_CandidateMu_EndZ;            
 
    vector<double>  *CandidateMu_P_Range;
-   vector<double>  *CandidateMu_P_MCS;   
+   vector<double>  *CandidateMu_P_Range_Recalibrate;
+   vector<double>  *CandidateMu_P_MCS;
+   vector<double>  *CandidateMu_P_MCS_Recalibrate;
    vector<double>  *CandidateMu_Phi;
    vector<double>  *CandidateMu_CosTheta;
    vector<double>  *CandidateMu_Length;
@@ -164,6 +211,7 @@ public :
    vector<double>  *True_CandidateP_EndZ;
 
    vector<double>  *CandidateP_P_Range;
+   vector<double>  *CandidateP_P_Range_Recalibrate;
    vector<double>  *CandidateP_P_MCS;   
    vector<double>  *CandidateP_Phi;
    vector<double>  *CandidateP_CosTheta;
@@ -198,6 +246,13 @@ public :
    vector<double>  *Reco_EQE;
    vector<double>  *Reco_Q2;
 
+   vector<double>  *Reco_Pt_Recalibrate;
+   vector<double>  *Reco_DeltaAlphaT_Recalibrate;
+   vector<double>  *Reco_DeltaPhiT_Recalibrate;
+   vector<double>  *Reco_ECal_Recalibrate;
+   vector<double>  *Reco_EQE_Recalibrate;
+   vector<double>  *Reco_Q2_Recalibrate;
+
    vector<double>  *True_PMissMinus;
    vector<double>  *True_kMiss;
    vector<double>  *True_PMiss;   
@@ -216,11 +271,56 @@ public :
 //   TBranch        *b_PassedSwTrigger;   //!
    TBranch        *b_Weight;   //!
    TBranch        *b_T2KWeight;   //!
-   TBranch        *b_ROOTinoWeight;   //! 
+   TBranch        *b_ROOTinoWeight;   //!
+   TBranch        *b_POTWeight;   //! 
 
    TBranch        *b_Run;   //!
    TBranch        *b_SubRun;   //!
    TBranch        *b_Event;   //! 
+
+   TBranch        *b_CandidateMu_Plane0_NHits;   //! 
+   TBranch        *b_CandidateMu_Plane1_NHits;   //! 
+   TBranch        *b_CandidateMu_Plane2_NHits;   //!
+
+   TBranch        *b_CandidateP_Plane0_NHits;   //! 
+   TBranch        *b_CandidateP_Plane1_NHits;   //! 
+   TBranch        *b_CandidateP_Plane2_NHits;   //! 
+
+   TBranch        *b_CandidateMu_Plane0_ResidualRange;
+   TBranch        *b_CandidateMu_Plane0_dEdx;
+   TBranch        *b_CandidateMu_Plane0_dQdx;
+   TBranch        *b_CandidateMu_Plane0_TruncdEdx;
+   TBranch        *b_CandidateMu_Plane0_TruncdQdx;
+
+   TBranch        *b_CandidateMu_Plane1_ResidualRange;
+   TBranch        *b_CandidateMu_Plane1_dEdx;
+   TBranch        *b_CandidateMu_Plane1_dQdx;
+   TBranch        *b_CandidateMu_Plane1_TruncdEdx;
+   TBranch        *b_CandidateMu_Plane1_TruncdQdx;
+
+   TBranch        *b_CandidateMu_Plane2_ResidualRange;
+   TBranch        *b_CandidateMu_Plane2_dEdx;
+   TBranch        *b_CandidateMu_Plane2_dQdx;
+   TBranch        *b_CandidateMu_Plane2_TruncdEdx;
+   TBranch        *b_CandidateMu_Plane2_TruncdQdx;
+
+   TBranch        *b_CandidateP_Plane0_ResidualRange;
+   TBranch        *b_CandidateP_Plane0_dEdx;
+   TBranch        *b_CandidateP_Plane0_dQdx;
+   TBranch        *b_CandidateP_Plane0_TruncdEdx;
+   TBranch        *b_CandidateP_Plane0_TruncdQdx;
+
+   TBranch        *b_CandidateP_Plane1_ResidualRange;
+   TBranch        *b_CandidateP_Plane1_dEdx;
+   TBranch        *b_CandidateP_Plane1_dQdx;
+   TBranch        *b_CandidateP_Plane1_TruncdEdx;
+   TBranch        *b_CandidateP_Plane1_TruncdQdx;
+
+   TBranch        *b_CandidateP_Plane2_ResidualRange;
+   TBranch        *b_CandidateP_Plane2_dEdx;
+   TBranch        *b_CandidateP_Plane2_dQdx;
+   TBranch        *b_CandidateP_Plane2_TruncdEdx;
+   TBranch        *b_CandidateP_Plane2_TruncdQdx;
 
    TBranch        *b_All_UBGenie;   //!                           
    TBranch        *b_AxFFCCQEshape_UBGenie;   //!                 
@@ -316,7 +416,9 @@ public :
    TBranch        *b_True_CandidateMu_EndZ;   //! 
          
    TBranch        *b_CandidateMu_P_Range;   //!
+   TBranch        *b_CandidateMu_P_Range_Recalibrate;   //!
    TBranch        *b_CandidateMu_P_MCS;   //!   
+   TBranch        *b_CandidateMu_P_MCS_Recalibrate;   //!   
    TBranch        *b_CandidateMu_Phi;   //!
    TBranch        *b_CandidateMu_CosTheta;   //!
    TBranch        *b_CandidateMu_Length;   //!
@@ -351,6 +453,7 @@ public :
    TBranch        *b_True_CandidateP_EndZ;   //!
 
    TBranch        *b_CandidateP_P_Range;   //!
+   TBranch        *b_CandidateP_P_Range_Recalibrate;   //!
    TBranch        *b_CandidateP_P_MCS;   //!   
    TBranch        *b_CandidateP_Phi;   //!
    TBranch        *b_CandidateP_CosTheta;   //!
@@ -384,6 +487,13 @@ public :
    TBranch        *b_Reco_ECal;   //!
    TBranch        *b_Reco_EQE;   //!
    TBranch        *b_Reco_Q2;   //!
+
+   TBranch        *b_Reco_Pt_Recalibrate;   //!
+   TBranch        *b_Reco_DeltaAlphaT_Recalibrate;   //!
+   TBranch        *b_Reco_DeltaPhiT_Recalibrate;   //!
+   TBranch        *b_Reco_ECal_Recalibrate;   //!
+   TBranch        *b_Reco_EQE_Recalibrate;   //!
+   TBranch        *b_Reco_Q2_Recalibrate;   //!
 
    TBranch        *b_True_kMiss;   //!
    TBranch        *b_True_PMissMinus;   //!
@@ -465,6 +575,50 @@ void myRecoAnalysis::Init(TTree *tree)
 
    // Set object pointer
 
+   CandidateMu_Plane0_NHits = 0;
+   CandidateMu_Plane1_NHits = 0;
+   CandidateMu_Plane2_NHits = 0;
+
+   CandidateP_Plane0_NHits = 0;
+   CandidateP_Plane1_NHits = 0;
+   CandidateP_Plane2_NHits = 0;
+
+   CandidateMu_Plane0_ResidualRange = 0;
+   CandidateMu_Plane0_dEdx = 0;
+   CandidateMu_Plane0_dQdx = 0;
+   CandidateMu_Plane0_TruncdEdx = 0;
+   CandidateMu_Plane0_TruncdQdx = 0;
+
+   CandidateMu_Plane1_ResidualRange = 0;
+   CandidateMu_Plane1_dEdx = 0;
+   CandidateMu_Plane1_dQdx = 0;
+   CandidateMu_Plane1_TruncdEdx = 0;
+   CandidateMu_Plane1_TruncdQdx = 0;
+
+   CandidateMu_Plane2_ResidualRange = 0;
+   CandidateMu_Plane2_dEdx = 0;
+   CandidateMu_Plane2_dQdx = 0;
+   CandidateMu_Plane2_TruncdEdx = 0;
+   CandidateMu_Plane2_TruncdQdx = 0;
+
+   CandidateP_Plane0_ResidualRange = 0;
+   CandidateP_Plane0_dEdx = 0;
+   CandidateP_Plane0_dQdx = 0;
+   CandidateP_Plane0_TruncdEdx = 0;
+   CandidateP_Plane0_TruncdQdx = 0;
+
+   CandidateP_Plane1_ResidualRange = 0;
+   CandidateP_Plane1_dEdx = 0;
+   CandidateP_Plane1_dQdx = 0;
+   CandidateP_Plane1_TruncdEdx = 0;
+   CandidateP_Plane1_TruncdQdx = 0;
+
+   CandidateP_Plane2_ResidualRange = 0;
+   CandidateP_Plane2_dEdx = 0;
+   CandidateP_Plane2_dQdx = 0;
+   CandidateP_Plane2_TruncdEdx = 0;
+   CandidateP_Plane2_TruncdQdx = 0;
+
    All_UBGenie = 0;
    AxFFCCQEshape_UBGenie = 0;
    DecayAngMEC_UBGenie = 0;
@@ -533,7 +687,9 @@ void myRecoAnalysis::Init(TTree *tree)
    True_CandidateMu_EndZ = 0;
           
    CandidateMu_P_Range = 0;
+   CandidateMu_P_Range_Recalibrate = 0;
    CandidateMu_P_MCS = 0;   
+   CandidateMu_P_MCS_Recalibrate = 0;   
    CandidateMu_Phi = 0;
    CandidateMu_CosTheta = 0;
    CandidateMu_Length = 0;
@@ -568,6 +724,7 @@ void myRecoAnalysis::Init(TTree *tree)
    True_CandidateP_EndZ = 0;
 
    CandidateP_P_Range = 0;
+   CandidateP_P_Range_Recalibrate = 0;
    CandidateP_P_MCS = 0;   
    CandidateP_Phi = 0;
    CandidateP_CosTheta = 0;
@@ -602,6 +759,13 @@ void myRecoAnalysis::Init(TTree *tree)
    Reco_EQE = 0;
    Reco_Q2 = 0;
 
+   Reco_Pt_Recalibrate = 0;
+   Reco_DeltaAlphaT_Recalibrate = 0;
+   Reco_DeltaPhiT_Recalibrate = 0;
+   Reco_ECal_Recalibrate = 0;
+   Reco_EQE_Recalibrate = 0;
+   Reco_Q2_Recalibrate = 0;
+
    True_kMiss = 0;
    True_PMissMinus = 0;
    True_PMiss = 0;   
@@ -625,11 +789,56 @@ void myRecoAnalysis::Init(TTree *tree)
    fChain->SetBranchAddress("Weight", &Weight, &b_Weight);
    fChain->SetBranchAddress("T2KWeight", &T2KWeight, &b_T2KWeight);
    fChain->SetBranchAddress("ROOTinoWeight", &ROOTinoWeight, &b_ROOTinoWeight);
+   fChain->SetBranchAddress("POTWeight", &POTWeight, &b_POTWeight);
 
    fChain->SetBranchAddress("Run", &Run, &b_Run);
    fChain->SetBranchAddress("SubRun", &SubRun, &b_SubRun);
    fChain->SetBranchAddress("Event", &Event, &b_Event);
-   
+
+   fChain->SetBranchAddress("CandidateMu_Plane0_NHits", &CandidateMu_Plane0_NHits, &b_CandidateMu_Plane0_NHits);
+   fChain->SetBranchAddress("CandidateMu_Plane1_NHits", &CandidateMu_Plane1_NHits, &b_CandidateMu_Plane1_NHits);
+   fChain->SetBranchAddress("CandidateMu_Plane2_NHits", &CandidateMu_Plane2_NHits, &b_CandidateMu_Plane2_NHits);
+
+   fChain->SetBranchAddress("CandidateP_Plane0_NHits", &CandidateP_Plane0_NHits, &b_CandidateP_Plane0_NHits);
+   fChain->SetBranchAddress("CandidateP_Plane1_NHits", &CandidateP_Plane1_NHits, &b_CandidateP_Plane1_NHits);
+   fChain->SetBranchAddress("CandidateP_Plane2_NHits", &CandidateP_Plane2_NHits, &b_CandidateP_Plane2_NHits);
+
+   fChain->SetBranchAddress("CandidateMu_Plane0_ResidualRange", &CandidateMu_Plane0_ResidualRange, &b_CandidateMu_Plane0_ResidualRange);
+   fChain->SetBranchAddress("CandidateMu_Plane0_dEdx", &CandidateMu_Plane0_dEdx, &b_CandidateMu_Plane0_dEdx);
+   fChain->SetBranchAddress("CandidateMu_Plane0_dQdx", &CandidateMu_Plane0_dQdx, &b_CandidateMu_Plane0_dQdx);
+   fChain->SetBranchAddress("CandidateMu_Plane0_TruncdEdx", &CandidateMu_Plane0_TruncdEdx, &b_CandidateMu_Plane0_TruncdEdx);
+   fChain->SetBranchAddress("CandidateMu_Plane0_TruncdQdx", &CandidateMu_Plane0_TruncdQdx, &b_CandidateMu_Plane0_TruncdQdx);
+
+   fChain->SetBranchAddress("CandidateMu_Plane1_ResidualRange", &CandidateMu_Plane1_ResidualRange, &b_CandidateMu_Plane1_ResidualRange);
+   fChain->SetBranchAddress("CandidateMu_Plane1_dEdx", &CandidateMu_Plane1_dEdx, &b_CandidateMu_Plane1_dEdx);
+   fChain->SetBranchAddress("CandidateMu_Plane1_dQdx", &CandidateMu_Plane1_dQdx, &b_CandidateMu_Plane1_dQdx);
+   fChain->SetBranchAddress("CandidateMu_Plane1_TruncdEdx", &CandidateMu_Plane1_TruncdEdx, &b_CandidateMu_Plane1_TruncdEdx);
+   fChain->SetBranchAddress("CandidateMu_Plane1_TruncdQdx", &CandidateMu_Plane1_TruncdQdx, &b_CandidateMu_Plane1_TruncdQdx);
+
+   fChain->SetBranchAddress("CandidateMu_Plane2_ResidualRange", &CandidateMu_Plane2_ResidualRange, &b_CandidateMu_Plane2_ResidualRange);
+   fChain->SetBranchAddress("CandidateMu_Plane2_dEdx", &CandidateMu_Plane2_dEdx, &b_CandidateMu_Plane2_dEdx);
+   fChain->SetBranchAddress("CandidateMu_Plane2_dQdx", &CandidateMu_Plane2_dQdx, &b_CandidateMu_Plane2_dQdx);
+   fChain->SetBranchAddress("CandidateMu_Plane2_TruncdEdx", &CandidateMu_Plane2_TruncdEdx, &b_CandidateMu_Plane2_TruncdEdx);
+   fChain->SetBranchAddress("CandidateMu_Plane2_TruncdQdx", &CandidateMu_Plane2_TruncdQdx, &b_CandidateMu_Plane2_TruncdQdx);
+
+   fChain->SetBranchAddress("CandidateP_Plane0_ResidualRange", &CandidateP_Plane0_ResidualRange, &b_CandidateP_Plane0_ResidualRange);
+   fChain->SetBranchAddress("CandidateP_Plane0_dEdx", &CandidateP_Plane0_dEdx, &b_CandidateP_Plane0_dEdx);
+   fChain->SetBranchAddress("CandidateP_Plane0_dQdx", &CandidateP_Plane0_dQdx, &b_CandidateP_Plane0_dQdx);
+   fChain->SetBranchAddress("CandidateP_Plane0_TruncdEdx", &CandidateP_Plane0_TruncdEdx, &b_CandidateP_Plane0_TruncdEdx);
+   fChain->SetBranchAddress("CandidateP_Plane0_TruncdQdx", &CandidateP_Plane0_TruncdQdx, &b_CandidateP_Plane0_TruncdQdx);
+
+   fChain->SetBranchAddress("CandidateP_Plane1_ResidualRange", &CandidateP_Plane1_ResidualRange, &b_CandidateP_Plane1_ResidualRange);
+   fChain->SetBranchAddress("CandidateP_Plane1_dEdx", &CandidateP_Plane1_dEdx, &b_CandidateP_Plane1_dEdx);
+   fChain->SetBranchAddress("CandidateP_Plane1_dQdx", &CandidateP_Plane1_dQdx, &b_CandidateP_Plane1_dQdx);
+   fChain->SetBranchAddress("CandidateP_Plane1_TruncdEdx", &CandidateP_Plane1_TruncdEdx, &b_CandidateP_Plane1_TruncdEdx);
+   fChain->SetBranchAddress("CandidateP_Plane1_TruncdQdx", &CandidateP_Plane1_TruncdQdx, &b_CandidateP_Plane1_TruncdQdx);
+
+   fChain->SetBranchAddress("CandidateP_Plane2_ResidualRange", &CandidateP_Plane2_ResidualRange, &b_CandidateP_Plane2_ResidualRange);
+   fChain->SetBranchAddress("CandidateP_Plane2_dEdx", &CandidateP_Plane2_dEdx, &b_CandidateP_Plane2_dEdx);
+   fChain->SetBranchAddress("CandidateP_Plane2_dQdx", &CandidateP_Plane2_dQdx, &b_CandidateP_Plane2_dQdx);
+   fChain->SetBranchAddress("CandidateP_Plane2_TruncdEdx", &CandidateP_Plane2_TruncdEdx, &b_CandidateP_Plane2_TruncdEdx);
+   fChain->SetBranchAddress("CandidateP_Plane2_TruncdQdx", &CandidateP_Plane2_TruncdQdx, &b_CandidateP_Plane2_TruncdQdx);
+
    fChain->SetBranchAddress("All_UBGenie", &All_UBGenie, &b_All_UBGenie);
    fChain->SetBranchAddress("AxFFCCQEshape_UBGenie", &AxFFCCQEshape_UBGenie, &b_AxFFCCQEshape_UBGenie);
    fChain->SetBranchAddress("DecayAngMEC_UBGenie", &DecayAngMEC_UBGenie, &b_DecayAngMEC_UBGenie);
@@ -724,7 +933,9 @@ void myRecoAnalysis::Init(TTree *tree)
    fChain->SetBranchAddress("True_CandidateMu_EndZ", &True_CandidateMu_EndZ, &b_True_CandidateMu_EndZ);    
      
    fChain->SetBranchAddress("CandidateMu_P_Range", &CandidateMu_P_Range, &b_CandidateMu_P_Range);
+   fChain->SetBranchAddress("CandidateMu_P_Range_Recalibrate", &CandidateMu_P_Range_Recalibrate, &b_CandidateMu_P_Range_Recalibrate);
    fChain->SetBranchAddress("CandidateMu_P_MCS", &CandidateMu_P_MCS, &b_CandidateMu_P_MCS);   
+   fChain->SetBranchAddress("CandidateMu_P_MCS_Recalibrate", &CandidateMu_P_MCS_Recalibrate, &b_CandidateMu_P_MCS_Recalibrate);   
    fChain->SetBranchAddress("CandidateMu_Phi", &CandidateMu_Phi, &b_CandidateMu_Phi);
    fChain->SetBranchAddress("CandidateMu_CosTheta", &CandidateMu_CosTheta, &b_CandidateMu_CosTheta);
    fChain->SetBranchAddress("CandidateMu_Length", &CandidateMu_Length, &b_CandidateMu_Length);
@@ -759,6 +970,7 @@ void myRecoAnalysis::Init(TTree *tree)
    fChain->SetBranchAddress("True_CandidateP_EndZ", &True_CandidateP_EndZ, &b_True_CandidateP_EndZ);
 
    fChain->SetBranchAddress("CandidateP_P_Range", &CandidateP_P_Range, &b_CandidateP_P_Range);
+   fChain->SetBranchAddress("CandidateP_P_Range_Recalibrate", &CandidateP_P_Range_Recalibrate, &b_CandidateP_P_Range_Recalibrate);
    fChain->SetBranchAddress("CandidateP_P_MCS", &CandidateP_P_MCS, &b_CandidateP_P_MCS);   
    fChain->SetBranchAddress("CandidateP_Phi", &CandidateP_Phi, &b_CandidateP_Phi);
    fChain->SetBranchAddress("CandidateP_CosTheta", &CandidateP_CosTheta, &b_CandidateP_CosTheta);
@@ -792,6 +1004,13 @@ void myRecoAnalysis::Init(TTree *tree)
    fChain->SetBranchAddress("Reco_ECal", &Reco_ECal, &b_Reco_ECal);
    fChain->SetBranchAddress("Reco_EQE", &Reco_EQE, &b_Reco_EQE);
    fChain->SetBranchAddress("Reco_Q2", &Reco_Q2, &b_Reco_Q2);
+
+   fChain->SetBranchAddress("Reco_Pt_Recalibrate", &Reco_Pt_Recalibrate, &b_Reco_Pt_Recalibrate);
+   fChain->SetBranchAddress("Reco_DeltaAlphaT_Recalibrate", &Reco_DeltaAlphaT_Recalibrate, &b_Reco_DeltaAlphaT_Recalibrate);
+   fChain->SetBranchAddress("Reco_DeltaPhiT_Recalibrate", &Reco_DeltaPhiT_Recalibrate, &b_Reco_DeltaPhiT_Recalibrate);
+   fChain->SetBranchAddress("Reco_ECal_Recalibrate", &Reco_ECal_Recalibrate, &b_Reco_ECal_Recalibrate);
+   fChain->SetBranchAddress("Reco_EQE_Recalibrate", &Reco_EQE_Recalibrate, &b_Reco_EQE_Recalibrate);
+   fChain->SetBranchAddress("Reco_Q2_Recalibrate", &Reco_Q2_Recalibrate, &b_Reco_Q2_Recalibrate);
 
    fChain->SetBranchAddress("True_kMiss", &True_kMiss, &b_True_kMiss);
    fChain->SetBranchAddress("True_PMissMinus", &True_PMissMinus, &b_True_PMissMinus);

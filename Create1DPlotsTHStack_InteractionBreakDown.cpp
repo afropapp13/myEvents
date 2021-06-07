@@ -72,8 +72,8 @@ void Create1DPlotsTHStack_InteractionBreakDown(TString BaseMC = "") {
 //	PlotNames.push_back("RecodProtonTracksScorePlot");
 	PlotNames.push_back("RecodMuonVertexDistancePlot");
 	PlotNames.push_back("RecodProtonVertexDistancePlot");
-//	PlotNames.push_back("RecoVertexActivityPlot");
-//	PlotNames.push_back("RecoNonZeroVertexActivityPlot");
+	PlotNames.push_back("RecoVertexActivityPlot");
+	PlotNames.push_back("RecoNonZeroVertexActivityPlot");
 
 	PlotNames.push_back("RecoVertexXPlot");
 	PlotNames.push_back("RecoVertexYPlot");

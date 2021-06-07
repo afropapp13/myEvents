@@ -28,6 +28,7 @@ public :
    // Declaration of leaf types
    double          Weight;
    double          T2KWeight;
+   double          POTWeight;
    double          ROOTinoWeight; 
 
    int           Run;
@@ -128,6 +129,7 @@ public :
    // List of branches
    TBranch        *b_Weight;   //!
    TBranch        *b_T2KWeight;   //!
+   TBranch        *b_POTWeight;   //!
    TBranch        *b_ROOTinoWeight;   //! 
 
    TBranch        *b_Run;   //!
@@ -371,6 +373,7 @@ void myTrueAnalysis::Init(TTree *tree)
 
    fChain->SetBranchAddress("Weight", &Weight, &b_Weight);
    fChain->SetBranchAddress("T2KWeight", &T2KWeight, &b_T2KWeight);
+   fChain->SetBranchAddress("POTWeight", &POTWeight, &b_POTWeight);
    fChain->SetBranchAddress("ROOTinoWeight", &ROOTinoWeight, &b_ROOTinoWeight); 
 
    fChain->SetBranchAddress("Run", &Run, &b_Run);

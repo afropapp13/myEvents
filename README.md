@@ -33,6 +33,8 @@ root -l Create1DPlotsTHStack_TopologicalBreakDown.cpp
 
 root -l Create1DPlotsTHStack_InteractionBreakDown.cpp
 
+root -l PrintLatexTables.cpp
+
 # NuWro fake data (only Run 1 for now)
 
 root -l
@@ -65,6 +67,5 @@ root -l script_EventSelection_Flux_Systematics.C
 
 cd ResolutionStudies
 root -l STVResoStudies.cpp
-
-# (locally)
+root -l Proton_STVResoStudies.cpp
 
