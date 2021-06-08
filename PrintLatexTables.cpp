@@ -93,6 +93,8 @@ void PrintLatexTables(TString BaseMC = "") {
 	PlotNames.push_back("MomentumThresholdEventPlot"); PlotLabels.push_back("P threshold");
 	PlotNames.push_back("StartPointContainmentEventPlot"); PlotLabels.push_back("Start point in FV");
 	PlotNames.push_back("ProtonEndPointContainmentEventPlot"); PlotLabels.push_back("End point p in FV");
+	PlotNames.push_back("NoFlippedTrackEventPlot"); PlotLabels.push_back("No flipped track");
+	PlotNames.push_back("SumTruncdEdxTrackEventPlot"); PlotLabels.push_back("Trunc dEdx sum");
 	PlotNames.push_back("VertexContainmentEventPlot"); PlotLabels.push_back("Vertex in FV");
 	PlotNames.push_back("MuonQualityEventPlot"); PlotLabels.push_back("Muon quality cut");
 	PlotNames.push_back("PidEventPlot"); PlotLabels.push_back("Calorimetry");

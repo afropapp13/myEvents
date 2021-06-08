@@ -44,6 +44,8 @@ void myRecoAnalysis::Loop() {
 
 	int TotalCounter = 0;
 	int ContainmentCounter = 0;
+	int NoFlippedTrackCounter = 0;
+	int SumTruncdEdxTrackCounter = 0;
 	int ContainedVertexCounter = 0;
 	int MuonQualityCutCounter = 0;
 	int PIDCounter = 0;
@@ -1159,6 +1161,8 @@ void myRecoAnalysis::Loop() {
 			if (CandidateMuStartVertexDistance->at(0) > CandidateMuEndVertexDistance->at(0)) { continue; }
 			if (CandidatePStartVertexDistance->at(0) > CandidatePEndVertexDistance->at(0)) { continue; }
 
+			NoFlippedTrackCounter++;
+
 			// -------------------------------------------------------------------------------------------------------------------------
 
 			// Jun 7 2021
@@ -1182,8 +1186,10 @@ void myRecoAnalysis::Loop() {
 			if (CandidateP_Plane1_TruncdEdx[0][0].size() != 0) { PTruncdEdxEntry_Plane1 = CandidateP_Plane1_TruncdEdx[0][0][0]; }
 			if (CandidateP_Plane2_TruncdEdx[0][0].size() != 0) { PTruncdEdxEntry_Plane2 = CandidateP_Plane2_TruncdEdx[0][0][0]; }
 
-			if (MuTruncdEdxEntry_Plane0 + MuTruncdEdxEntry_Plane1 + MuTruncdEdxEntry_Plane2 < 0.5) { continue; }
-			if (PTruncdEdxEntry_Plane0 + PTruncdEdxEntry_Plane1 + PTruncdEdxEntry_Plane2 < 1.5) { continue; }
+			if (MuTruncdEdxEntry_Plane0 + MuTruncdEdxEntry_Plane1 + MuTruncdEdxEntry_Plane2 < MuMinSumHitsValue) { continue; }
+			if (PTruncdEdxEntry_Plane0 + PTruncdEdxEntry_Plane1 + PTruncdEdxEntry_Plane2 < PMinSumHitsValue) { continue; }
+
+			SumTruncdEdxTrackCounter++;
 
 			// -------------------------------------------------------------------------------------------------------------------------
 
@@ -1283,7 +1289,7 @@ void myRecoAnalysis::Loop() {
 			if (CandidateMu_EndContainment->at(0) == 1) { 
 
 				double Reso =  TMath::Abs(CandidateMu_P_MCS_Recalibrate->at(0) - CandidateMu_P_Range_Recalibrate->at(0) ) / CandidateMu_P_Range_Recalibrate->at(0) ; 
-				if (Reso > 0.25) { continue; }
+				if (Reso > MuRangeMCSAgreeValue) { continue; }
 
 			}
 
@@ -1295,7 +1301,7 @@ void myRecoAnalysis::Loop() {
 				// MCS introduces major biases below 0.25 and above 1.4 GeV/c
 				// No calibration performed there thus we must cut on uncalibrated variable
 
-				if (CandidateMu_P_MCS->at(0) < 0.25) { continue; }
+				if (CandidateMu_P_MCS->at(0) < MuMinMCSThresValue) { continue; }
 				reco_Pmu_mcs = CandidateMu_P_MCS_Recalibrate->at(0); 
 
 			}
@@ -2789,6 +2795,10 @@ void myRecoAnalysis::Loop() {
 
 		myTxtFile << "\n\n" << ContainmentCounter << " [" << ContainmentCounter*POTWeight << "] events passing proton full containment requirement (" << int(100.*double(ContainmentCounter)/double(SamdefEvents)) << "% / " << int(100.*double(ContainmentCounter)/double(TotalCounter)) << " %)";
 
+		myTxtFile << "\n\n" << NoFlippedTrackCounter << " [" << NoFlippedTrackCounter*POTWeight << "] events passing \"no flipped track\" requirement (" << int(100.*double(NoFlippedTrackCounter)/double(SamdefEvents)) << "% / " << int(100.*double(NoFlippedTrackCounter)/double(TotalCounter)) << " %)";
+
+		myTxtFile << "\n\n" << SumTruncdEdxTrackCounter << " [" << SumTruncdEdxTrackCounter*POTWeight << "] events passing \"no flipped track\" requirement (" << int(100.*double(SumTruncdEdxTrackCounter)/double(SamdefEvents)) << "% / " << int(100.*double(SumTruncdEdxTrackCounter)/double(TotalCounter)) << " %)";
+
 		myTxtFile << "\n\n" << ContainedVertexCounter << " [" << ContainedVertexCounter*POTWeight << "] events passing contained vertex requirement (" << int(100.*double(ContainedVertexCounter)/double(SamdefEvents)) << "% / " << int(100.*double(ContainedVertexCounter)/double(TotalCounter)) << " %)";
 
 		myTxtFile << "\n\n" << MuonQualityCutCounter << " [" << MuonQualityCutCounter*POTWeight << "] events passing muon quality cut (" << int(100.*double(MuonQualityCutCounter)/double(SamdefEvents)) << "% / " << int(100.*double(MuonQualityCutCounter)/double(ContainedVertexCounter)) << " %)";
@@ -3372,6 +3382,8 @@ void myRecoAnalysis::Loop() {
 		// Storing the event loss of the event selection 
 
 		TH1D* ProtonEndPointContainmentEventPlot = new TH1D("ProtonEndPointContainmentEventPlot",";Proton contained end point events",1,0,1);
+		TH1D* NoFlippedTrackEventPlot = new TH1D("NoFlippedTrackEventPlot",";No flipped events",1,0,1);
+		TH1D* SumTruncdEdxTrackEventPlot = new TH1D("SumTruncdEdxTrackEventPlot",";Min sum trunc dEdx on 3 planes events",1,0,1);
 		TH1D* VertexContainmentEventPlot = new TH1D("VertexContainmentEventPlot",";Proton contained end point events",1,0,1);
 		TH1D* MuonQualityEventPlot = new TH1D("MuonQualityEventPlot",";Muon quality events",1,0,1);
 		TH1D* PidEventPlot = new TH1D("PidEventPlot",";PID events",1,0,1);
@@ -3379,6 +3391,8 @@ void myRecoAnalysis::Loop() {
 		TH1D* CommonEventPlot = new TH1D("CommonEventPlot",";Common events",1,0,1);
 
 		ProtonEndPointContainmentEventPlot->SetBinContent(1,ContainmentCounter);
+		NoFlippedTrackEventPlot->SetBinContent(1,NoFlippedTrackCounter);
+		SumTruncdEdxTrackEventPlot->SetBinContent(1,SumTruncdEdxTrackCounter);
 		VertexContainmentEventPlot->SetBinContent(1,ContainedVertexCounter);
 		MuonQualityEventPlot->SetBinContent(1,MuonQualityCutCounter);
 		PidEventPlot->SetBinContent(1,PIDCounter);
@@ -3387,6 +3401,8 @@ void myRecoAnalysis::Loop() {
 
 		file->cd();
 		ProtonEndPointContainmentEventPlot->Write();
+		NoFlippedTrackEventPlot->Write();
+		SumTruncdEdxTrackEventPlot->Write();
 		VertexContainmentEventPlot->Write();
 		MuonQualityEventPlot->Write();
 		PidEventPlot->Write();
