@@ -150,7 +150,7 @@ void Proton_STVResoStudies() {
 			Plots[WhichDiscriminator]->GetYaxis()->SetNdivisions(10);
 			Plots[WhichDiscriminator]->GetYaxis()->SetTitleFont(FontStyle);
 			Plots[WhichDiscriminator]->GetYaxis()->SetLabelFont(FontStyle);
-			Plots[WhichDiscriminator]->GetYaxis()->SetTitle("Arbitrary Units");
+			Plots[WhichDiscriminator]->GetYaxis()->SetTitle("Peak Normalized To 1");
 
 			double SF = 1. / Plots[WhichDiscriminator]->GetMaximum();
 			Plots[WhichDiscriminator]->Scale(SF);

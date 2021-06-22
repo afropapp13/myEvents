@@ -17,7 +17,7 @@
 #include <vector>
 
 #include "/uboone/app/users/apapadop/uboonecode_v08_00_00_43/srcs/ubana/ubana/myClasses/Tools.h"
-#include "/uboone/app/users/apapadop/uboonecode_v08_00_00_43/srcs/ubana/ubana/myClasses/STV_Tools.h"
+//#include "/uboone/app/users/apapadop/uboonecode_v08_00_00_43/srcs/ubana/ubana/myClasses/STV_Tools.h"
 
 using namespace std;
 
@@ -38,13 +38,6 @@ void myTrueAnalysis::Loop() {
 
 	// ---------------------------------------------------------------------------------------------------------------------------------------------
 
-	// Determine if CCQELike or STV analysis
-
-	TString Extention = "";
-	if (CCQElike) { Extention = "CCQE_"; }
-
-	// ---------------------------------------------------------------------------------------------------------------------------------------------
-
 	TString Extension = "";
 
 	// For overlays only for genie, flux and reinteraction uncertainties
@@ -57,7 +50,7 @@ void myTrueAnalysis::Loop() {
 
 	// Output Files
 
-	TString FileName = PathToFiles+Extention+"TruthSTVAnalysis_"+fWhichSample+Extension+"_"+UBCodeVersion+".root";	
+	TString FileName = PathToFiles+"TruthSTVAnalysis_"+fWhichSample+"_"+UBCodeVersion+".root";	
 	TFile* OutputFile = new TFile(FileName,"recreate");
 	std::cout << std::endl << "File " << FileName << " to be created"<< std::endl << std::endl;
 
@@ -65,13 +58,13 @@ void myTrueAnalysis::Loop() {
 
 	// Txt file to keep track of the event reduction at each stage
 
-	TString TxtName = "/uboone/data/users/apapadop/myEvents/myTxtFiles/"+UBCodeVersion+"/"+Extention+"TxtmyTrueEvents_"+fWhichSample+"_"+UBCodeVersion+".txt";
+	TString TxtName = "/uboone/data/users/apapadop/myEvents/myTxtFiles/"+UBCodeVersion+"/TxtmyTrueEvents_"+fWhichSample+"_"+UBCodeVersion+".txt";
 	ofstream myTxtFile;
 	myTxtFile.open(TxtName);
 
 	// Txt file to keep track of the run/subrun/event of the candidate events
 
-	TString RunTxtName = "/uboone/data/users/apapadop/myEvents/myTxtFiles/"+UBCodeVersion+"/"+Extention+"TxtmyTrueRunSubRunEvents_"+fWhichSample+"_"+UBCodeVersion+".txt";
+	TString RunTxtName = "/uboone/data/users/apapadop/myEvents/myTxtFiles/"+UBCodeVersion+"/TxtmyTrueRunSubRunEvents_"+fWhichSample+"_"+UBCodeVersion+".txt";
 	ofstream myRunTxtFile;
 	myRunTxtFile.open(RunTxtName);
 	myRunTxtFile << std::fixed << std::setprecision(2);
@@ -84,9 +77,9 @@ void myTrueAnalysis::Loop() {
 	TH1D* TruePi0Plot = new TH1D("TruePi0Plot",";# #pi^{0}",4,-0.5,3.5);
 	TH1D* TrueNeutronPlot = new TH1D("TrueNeutronPlot",";# neutrons",6,-0.5,5.5);
 	
-	TH1D* TruekMissPlot = new TH1D("TruekMissPlot",LabelXAxiskMiss,NBinskMiss,ArrayNBinskMiss);
-	TH1D* TruePMissMinusPlot = new TH1D("TruePMissMinusPlot",LabelXAxisPMissMinus,NBinsPMissMinus,ArrayNBinsPMissMinus);
-	TH1D* TruePMissPlot = new TH1D("TruePMissPlot",LabelXAxisPMiss,NBinsPMiss,ArrayNBinsPMiss);	
+	// TH1D* TruekMissPlot = new TH1D("TruekMissPlot",LabelXAxiskMiss,NBinskMiss,ArrayNBinskMiss);
+	// TH1D* TruePMissMinusPlot = new TH1D("TruePMissMinusPlot",LabelXAxisPMissMinus,NBinsPMissMinus,ArrayNBinsPMissMinus);
+	// TH1D* TruePMissPlot = new TH1D("TruePMissPlot",LabelXAxisPMiss,NBinsPMiss,ArrayNBinsPMiss);	
 
 	TH1D* TrueDeltaPTPlot = new TH1D("TrueDeltaPTPlot",LabelXAxisDeltaPT,NBinsDeltaPT,ArrayNBinsDeltaPT);
 	TH1D* TrueDeltaAlphaTPlot = new TH1D("TrueDeltaAlphaTPlot",LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);
@@ -103,6 +96,17 @@ void myTrueAnalysis::Loop() {
 	TH1D* TrueECalPlot = new TH1D("TrueECalPlot",LabelXAxisECal,NBinsECal,ArrayNBinsECal);
 	TH1D* TrueEQEPlot = new TH1D("TrueEQEPlot",LabelXAxisEQE,NBinsEQE,ArrayNBinsEQE);
 	TH1D* TrueQ2Plot = new TH1D("TrueQ2Plot",LabelXAxisQ2,NBinsQ2,ArrayNBinsQ2);
+
+	TH1D* TrueCCQEMuonCosThetaPlot = new TH1D("TrueCCQEMuonCosThetaPlot",LabelXAxisMuonCosTheta,CCQENBinsMuonCosTheta,CCQEArrayNBinsMuonCosTheta);
+	TH1D* TrueCCQEMuonMomentumPlot = new TH1D("TrueCCQEMuonMomentumPlot",LabelXAxisMuonMomentum,CCQENBinsMuonMomentum,CCQEArrayNBinsMuonMomentum);
+	TH1D* TrueCCQEMuonPhiPlot = new TH1D("TrueCCQEMuonPhiPlot",LabelXAxisMuonPhi,CCQENBinsMuonPhi,CCQEArrayNBinsMuonPhi);
+
+	TH1D* TrueCCQEProtonCosThetaPlot = new TH1D("TrueCCQEProtonCosThetaPlot",LabelXAxisProtonCosTheta,CCQENBinsProtonCosTheta,CCQEArrayNBinsProtonCosTheta);
+	TH1D* TrueCCQEProtonMomentumPlot = new TH1D("TrueCCQEProtonMomentumPlot",LabelXAxisProtonMomentum,CCQENBinsProtonMomentum,CCQEArrayNBinsProtonMomentum);
+	TH1D* TrueCCQEProtonPhiPlot = new TH1D("TrueCCQEProtonPhiPlot",LabelXAxisProtonPhi,CCQENBinsProtonPhi,CCQEArrayNBinsProtonPhi);
+
+	TH1D* TrueCCQEECalPlot = new TH1D("TrueCCQEECalPlot",LabelXAxisECal,CCQENBinsECal,CCQEArrayNBinsECal);
+	TH1D* TrueCCQEQ2Plot = new TH1D("TrueCCQEQ2Plot",LabelXAxisQ2,CCQENBinsQ2,CCQEArrayNBinsQ2);	
 
 	TH1D* TrueVertexXPlot = new TH1D("TrueVertexXPlot",RecoLabelXAxisVertexX,NBinsVertexX,MinVertexX,MaxVertexX);
 	TH1D* TrueVertexYPlot = new TH1D("TrueVertexYPlot",RecoLabelXAxisVertexY,NBinsVertexY,MinVertexY,MaxVertexY);
@@ -155,7 +159,7 @@ void myTrueAnalysis::Loop() {
 	for (Long64_t jentry=0; jentry<nentries;jentry++) {
 
 		Long64_t ientry = LoadTree(jentry); if (ientry < 0) break; nb = fChain->GetEntry(jentry); nbytes += nb;
-		if (jentry%1000 == 0) std::cout << jentry/1000 << " k " << std::setprecision(3) << double(jentry)/nentries*100. << " %"<< std::endl;	
+		if (jentry%1000 == 0) std::cout << jentry/1000 << " k " << std::setprecision(2) << double(jentry)/nentries*100. << " %"<< std::endl;	
 
 		// ------------------------------------------------------------------------------------------------------------------------------
 
@@ -302,9 +306,9 @@ void myTrueAnalysis::Loop() {
 
 			// Definition of Transverse Variables
 
-			double TruekMiss = True_kMiss->at(0);
-			double TruePMissMinus = True_PMissMinus->at(0);
-			double TrueMissMomentum = True_PMiss->at(0);
+			// double TruekMiss = True_kMiss->at(0);
+			// double TruePMissMinus = True_PMissMinus->at(0);
+			// double TrueMissMomentum = True_PMiss->at(0);
 
 			double TrueTransMissMomentum = True_Pt->at(0);
 
@@ -315,20 +319,6 @@ void myTrueAnalysis::Loop() {
 
 //			TVector3 TrueVertex(Muon_MCParticle_StartX->at(0),Muon_MCParticle_StartY->at(0),Muon_MCParticle_StartZ->at(0));
 			TVector3 TrueVertex(True_Vx,True_Vy,True_Vz);
-			
-			// -----------------------------------------------------------------------------------------------------------------
-			
-			// CCQElike analysis
-			// Use the DeltaTheta, DeltaPhi & Pt cuts
-				
-			if (CCQElike) {
-			
-				if ( !(TMath::Abs(TrueDeltaPhiProtonMuon_Deg - 180.) < 35.) ) { continue; }
-				if ( !(TMath::Abs(TrueDeltaThetaProtonMuon_Deg - 90.) < 55.) ) { continue; }	
-				if ( NumberPi0 != 0 ) { continue; }					
-				if ( !(TrueTransMissMomentum < 0.35) ) { continue; }							
-			
-			}	
 				
 			// -----------------------------------------------------------------------------------------------------------------	
 
@@ -388,9 +378,9 @@ void myTrueAnalysis::Loop() {
 
 					// STV
 
-					TruekMissPlot->Fill(TruekMiss,weight);
-					TruePMissMinusPlot->Fill(TruePMissMinus,weight);
-					TruePMissPlot->Fill(TrueMissMomentum,weight);
+					// TruekMissPlot->Fill(TruekMiss,weight);
+					// TruePMissMinusPlot->Fill(TruePMissMinus,weight);
+					// TruePMissPlot->Fill(TrueMissMomentum,weight);
 
 					TrueDeltaPTPlot->Fill(TrueTransMissMomentum,weight);
 					TrueDeltaAlphaTPlot->Fill(TrueDeltaAlphaT,weight);
@@ -449,6 +439,39 @@ void myTrueAnalysis::Loop() {
 					TrueProtonTrueMomentumLongitudinalRatio->Fill(TrueCandidateProton.Z() / TrueCandidateProton.Mag(),weight);
 					TrueProtonTrueMomentumTransverseRatio->Fill(TrueCandidateProton.Pt() / TrueCandidateProton.Mag(),weight);				
 					
+					// CCQElike
+
+					if (
+						TrueTransMissMomentum < 0.35
+						&& TMath::Abs(TrueDeltaThetaProtonMuon_Deg - 90.) < 55.
+						&& TMath::Abs(TrueDeltaPhiProtonMuon_Deg - 180.) < 35.						
+
+						&& TrueMuonMomentum_GeV > ArrayNBinsMuonMomentum[0]
+						&& TrueProtonMomentum_GeV > ArrayNBinsProtonMomentum[0]						
+						&& TrueMuonMomentum_GeV < ArrayNBinsMuonMomentum[CCQENBinsMuonMomentum]
+						&& TrueProtonMomentum_GeV < ArrayNBinsProtonMomentum[CCQENBinsProtonMomentum]
+						
+						&& TrueMuonCosTheta > CCQEArrayNBinsMuonCosTheta[0]
+						&& TrueMuonCosTheta < CCQEArrayNBinsMuonCosTheta[CCQENBinsMuonCosTheta]
+						&& TrueProtonCosTheta > CCQEArrayNBinsProtonCosTheta[0]
+						&& TrueProtonCosTheta < CCQEArrayNBinsProtonCosTheta[CCQENBinsProtonCosTheta]
+						
+					) {
+
+						TrueCCQEECalPlot->Fill(TrueRecoECal,weight);
+						TrueCCQEQ2Plot->Fill(RecoTrueQ2,weight);
+
+						TrueCCQEMuonMomentumPlot->Fill(TrueMuonMomentum_GeV,weight);
+						TrueCCQEMuonPhiPlot->Fill(TrueMuonPhi_Deg,weight);
+						TrueCCQEMuonCosThetaPlot->Fill(TrueMuonCosTheta,weight);
+
+						TrueCCQEProtonMomentumPlot->Fill(TrueProtonMomentum_GeV,weight);
+						TrueCCQEProtonPhiPlot->Fill(TrueProtonPhi_Deg,weight);
+						TrueCCQEProtonCosThetaPlot->Fill(TrueProtonCosTheta,weight);
+
+					}					
+
+
 				}
 
 				// -----------------------------------------------------------------------------------------------------------------

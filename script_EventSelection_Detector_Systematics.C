@@ -44,7 +44,7 @@
 
 //	On the gpvm's'
 	gROOT->ProcessLine(".L ../../myClasses/Tools.cxx++");
-	gROOT->ProcessLine(".L ../../myClasses/STV_Tools.cxx++");		
+	//gROOT->ProcessLine(".L ../../myClasses/STV_Tools.cxx++");		
 
 	gROOT->ProcessLine(".L myRecoAnalysis.C+");
 	gROOT->ProcessLine(".L myTrueAnalysis.C+");

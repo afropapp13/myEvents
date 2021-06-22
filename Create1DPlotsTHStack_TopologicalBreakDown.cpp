@@ -7,6 +7,7 @@
 #include <TLegend.h>
 #include <TLine.h>
 #include <TLatex.h>
+#include <TPad.h>
 
 #include <iostream>
 #include <vector>
@@ -38,6 +39,13 @@ void Create1DPlotsTHStack_TopologicalBreakDown(TString BaseMC = "") {
 	PlotNames.push_back("RecoDeltaPhiTPlot");
 
 	if (BaseMC == "") {
+
+	PlotNames.push_back("RecoCCQEMuonMomentumPlot");
+	PlotNames.push_back("RecoCCQEProtonMomentumPlot"); 
+	PlotNames.push_back("RecoCCQEMuonCosThetaPlot");
+	PlotNames.push_back("RecoCCQEProtonCosThetaPlot");
+	PlotNames.push_back("RecoCCQEMuonPhiPlot");
+	PlotNames.push_back("RecoCCQEProtonPhiPlot");
 
 //	PlotNames.push_back("RecoPMissMinusPlot");
 //	PlotNames.push_back("RecoPMissPlot");
@@ -71,8 +79,8 @@ void Create1DPlotsTHStack_TopologicalBreakDown(TString BaseMC = "") {
 //	PlotNames.push_back("RecodProtonTracksScorePlot");
 	PlotNames.push_back("RecodMuonVertexDistancePlot");
 	PlotNames.push_back("RecodProtonVertexDistancePlot");
-	PlotNames.push_back("RecoVertexActivityPlot");
-	PlotNames.push_back("RecoNonZeroVertexActivityPlot");
+//	PlotNames.push_back("RecoVertexActivityPlot");
+//	PlotNames.push_back("RecoNonZeroVertexActivityPlot");
 
 	PlotNames.push_back("RecoVertexXPlot");
 	PlotNames.push_back("RecoVertexYPlot");
@@ -340,6 +348,8 @@ void Create1DPlotsTHStack_TopologicalBreakDown(TString BaseMC = "") {
 				} // End of the loop over the samples
 
 				Plots[0][WhichPlot]->Draw("e1 same"); 
+
+				gPad->RedrawAxis();
 
 				TLatex *text = new TLatex();
 				text->SetTextFont(FontStyle);

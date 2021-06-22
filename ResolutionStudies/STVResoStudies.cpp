@@ -91,9 +91,9 @@ void STVResoStudies() {
 	PlotNames.push_back("Playground_CC1pRecoDeltaPTPlot_Slice_3"); PlotLabels.push_back("#delta P_{T} > 0.6 GeV/c");
 
 	PlotNames.push_back("Playground_CC1pRecoDeltaAlphaTPlot"); PlotLabels.push_back("All #delta#alpha_{T}");
-	PlotNames.push_back("Playground_CC1pRecoDeltaAlphaTPlot_Slice_1"); PlotLabels.push_back("#delta#alpha_{T} < 60 deg");
-	PlotNames.push_back("Playground_CC1pRecoDeltaAlphaTPlot_Slice_2"); PlotLabels.push_back("60 < #delta#alpha_{T} < 120 deg");
-	PlotNames.push_back("Playground_CC1pRecoDeltaAlphaTPlot_Slice_3"); PlotLabels.push_back("#delta#alpha_{T} > 120 deg");
+	PlotNames.push_back("Playground_CC1pRecoDeltaAlphaTPlot_Slice_1"); PlotLabels.push_back("#delta#alpha_{T} < 50 deg");
+	PlotNames.push_back("Playground_CC1pRecoDeltaAlphaTPlot_Slice_2"); PlotLabels.push_back("50 < #delta#alpha_{T} < 130 deg");
+	PlotNames.push_back("Playground_CC1pRecoDeltaAlphaTPlot_Slice_3"); PlotLabels.push_back("#delta#alpha_{T} > 130 deg");
 
 	PlotNames.push_back("Playground_CC1pRecoDeltaPhiTPlot"); PlotLabels.push_back("All #delta#phi_{T}");
 	PlotNames.push_back("Playground_CC1pRecoDeltaPhiTPlot_Slice_1"); PlotLabels.push_back("#delta#phi_{T} < 30 deg");
@@ -151,7 +151,9 @@ void STVResoStudies() {
 			Plots[WhichDiscriminator]->GetYaxis()->SetNdivisions(10);
 			Plots[WhichDiscriminator]->GetYaxis()->SetTitleFont(FontStyle);
 			Plots[WhichDiscriminator]->GetYaxis()->SetLabelFont(FontStyle);
-			Plots[WhichDiscriminator]->GetYaxis()->SetTitle("Arbitrary Units");
+			Plots[WhichDiscriminator]->GetYaxis()->SetTitle("Peak Normalized To 1");
+
+			double Events = Plots[WhichDiscriminator]->Integral();
 
 			double SF = 1. / Plots[WhichDiscriminator]->GetMaximum();
 			Plots[WhichDiscriminator]->Scale(SF);
@@ -171,7 +173,7 @@ void STVResoStudies() {
 			Plots[WhichDiscriminator]->Fit(f,"R0Q");
 			//f->Draw("same");
 
-			leg->AddEntry(Plots[WhichDiscriminator],LegendLabel[WhichDiscriminator] + ", #mu = " + ToString(round(f->GetParameter(1),1)) + ", #sigma = " + ToString(round(f->GetParameter(2),1)),"p");
+			leg->AddEntry(Plots[WhichDiscriminator],LegendLabel[WhichDiscriminator] + " [" + TString(std::to_string(int(Events))) + "], #mu = " + ToString(round(f->GetParameter(1),1)) + ", #sigma = " + ToString(round(f->GetParameter(2),1)),"p");
 			
 
 		} // End of the loop over the discriminators

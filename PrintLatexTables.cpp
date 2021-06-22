@@ -18,9 +18,27 @@
 using namespace std;
 using namespace Constants;
 
-void PrintEvents(vector<TFile*> FileSample,vector<double> FilePOT,vector<double> FileSamdef,vector<double> FilePreSel, TString SelectionStage, bool PreSelection = true) {
+void PrintMCBkgEvents(TFile* FileSample,double FilePOT,double FileFinal,TString MCBkg, TString MCBkgLabel, double NonCC1pFinal) {
 
-	std::cout << std::fixed << std::setprecision(1);
+	TH1D* MCPlot = (TH1D*)(FileSample->Get(MCBkg));
+
+	double MCEvents = MCPlot->GetBinContent(1);
+	double MCEventsError = MCPlot->GetBinError(1);
+
+	if (MCBkg == "NonCC1pEventPlot") { cout << "\\hline"<< endl; }
+
+	cout << MCBkgLabel << " & " << MCEvents << " $\\pm$ " << MCEventsError << " & " << MCEvents*FilePOT << " $\\pm$ " << MCEventsError*FilePOT << " & ";
+	cout << MCEvents / FileFinal * 100. << " & " << MCEvents / NonCC1pFinal * 100.;
+
+
+	cout << " \\tabularnewline \\hline"<< endl;
+
+}
+
+// -------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+void PrintEvents(vector<TFile*> FileSample,vector<double> FilePOT,vector<double> FileSamdef,vector<double> FilePreSel, TString SelectionStage, bool PreSelection = true) {
 
 	// 0: BeamOn
 	// 1: MC Overlay
@@ -56,21 +74,21 @@ void PrintEvents(vector<TFile*> FileSample,vector<double> FilePOT,vector<double>
 
 	if (PreSelection) {
 
-		cout << BeamOnEvents << " [" << BeamOnEvents*FilePOT[0] << "] (" << BeamOnFracSamdef << "\\%) & ";
-		cout << ExtBNBEvents << " [" << ExtBNBEvents*FilePOT[2] << "] (" << ExtBNBFracSamdef << "\\%) & ";
-		cout << MCEvents << " [" << MCEvents*FilePOT[1] << "] (" << MCFracSamdef << "\\%) & ";
+		cout << BeamOnEvents << " [" << BeamOnEvents*FilePOT[0] << "] (" << BeamOnFracSamdef << "\\%)&";
+		cout << ExtBNBEvents << " [" << ExtBNBEvents*FilePOT[2] << "] (" << ExtBNBFracSamdef << "\\%)&";
+		cout << MCEvents << " [" << MCEvents*FilePOT[1] << "] (" << MCFracSamdef << "\\%)&";
 		cout << DirtEvents << " [" << DirtEvents*FilePOT[3] << "] (" << DirtFracSamdef << "\\%)";
 
 	} else {
 
-		cout << BeamOnEvents << " [" << BeamOnEvents*FilePOT[0] << "] (" << BeamOnFracSamdef << "\\%/" << BeamOnFracPreSel << "\\%) & ";
-		cout << ExtBNBEvents << " [" << ExtBNBEvents*FilePOT[2] << "] (" << ExtBNBFracSamdef << "\\%/" << ExtBNBFracPreSel << "\\%) & ";
-		cout << MCEvents << " [" << MCEvents*FilePOT[1] << "] (" << MCFracSamdef << "\\%/" << MCFracPreSel << "\\%) & ";
+		cout << BeamOnEvents << " [" << BeamOnEvents*FilePOT[0] << "] (" << BeamOnFracSamdef << "\\%/" << BeamOnFracPreSel << "\\%)&";
+		cout << ExtBNBEvents << " [" << ExtBNBEvents*FilePOT[2] << "] (" << ExtBNBFracSamdef << "\\%/" << ExtBNBFracPreSel << "\\%)&";
+		cout << MCEvents << " [" << MCEvents*FilePOT[1] << "] (" << MCFracSamdef << "\\%/" << MCFracPreSel << "\\%)&";
 		cout << DirtEvents << " [" << DirtEvents*FilePOT[3] << "] (" << DirtFracSamdef << "\\%/" << DirtFracPreSel << "\\%)";
 
 	}
 
-	cout << " \\tabularnewline \\hline"<< endl;
+	cout << endl << "\\tabularnewline \\hline"<< endl;
 
 }
 
@@ -78,6 +96,7 @@ void PrintLatexTables(TString BaseMC = "") {
 
 	// -----------------------------------------------------------------------------------------------------------------------------------------
 
+	std::cout << std::fixed << std::setprecision(2);
 	gStyle->SetOptStat(0);
 
 	// -----------------------------------------------------------------------------------------------------------------------------------------
@@ -93,16 +112,45 @@ void PrintLatexTables(TString BaseMC = "") {
 	PlotNames.push_back("MomentumThresholdEventPlot"); PlotLabels.push_back("P threshold");
 	PlotNames.push_back("StartPointContainmentEventPlot"); PlotLabels.push_back("Start point in FV");
 	PlotNames.push_back("ProtonEndPointContainmentEventPlot"); PlotLabels.push_back("End point p in FV");
-	PlotNames.push_back("NoFlippedTrackEventPlot"); PlotLabels.push_back("No flipped track");
-	PlotNames.push_back("SumTruncdEdxTrackEventPlot"); PlotLabels.push_back("Trunc dEdx sum");
 	PlotNames.push_back("VertexContainmentEventPlot"); PlotLabels.push_back("Vertex in FV");
-	PlotNames.push_back("MuonQualityEventPlot"); PlotLabels.push_back("Muon quality cut");
+	PlotNames.push_back("MuonQualityEventPlot"); PlotLabels.push_back("Contained $\\mu$ quality cut");
+	PlotNames.push_back("NoFlippedTrackEventPlot"); PlotLabels.push_back("No flipped tracks");
+	PlotNames.push_back("SumTruncdEdxTrackEventPlot"); PlotLabels.push_back("Trunc dEdx sum");
+	PlotNames.push_back("LowMCSQualityEventPlot"); PlotLabels.push_back("Exiting $\\mu$ length threshold");
 	PlotNames.push_back("PidEventPlot"); PlotLabels.push_back("Calorimetry");
 	PlotNames.push_back("NuScoreEventPlot"); PlotLabels.push_back("$\\nu$ score");
 	PlotNames.push_back("CommonEventPlot"); PlotLabels.push_back("Common events");
 
 	const int N1DPlots = PlotNames.size();
 //	cout << "Number of 1D Plots = " << N1DPlots << endl;
+
+	// -----------------------------------------------------------------------------------------------------------------------------------------
+
+	std::vector<TString> MCBkgPlotNames; MCBkgPlotNames.clear();
+	std::vector<TString> MCBkgPlotLabels; MCBkgPlotLabels.clear();
+
+	MCBkgPlotNames.push_back("CC2pEventPlot"); MCBkgPlotLabels.push_back("CC2p");
+	MCBkgPlotNames.push_back("MultipleVerticesEventPlot"); MCBkgPlotLabels.push_back("Multiple Vertices");
+	MCBkgPlotNames.push_back("PiPEventPlot"); MCBkgPlotLabels.push_back("$\\pi$-p");
+	MCBkgPlotNames.push_back("CC1p1piEventPlot"); MCBkgPlotLabels.push_back("CC1p1$\\pi$");
+	MCBkgPlotNames.push_back("PPEventPlot"); MCBkgPlotLabels.push_back("p-p");
+	MCBkgPlotNames.push_back("NeutralPiEventPlot"); MCBkgPlotLabels.push_back("$\\pi^{0}$ production");
+	MCBkgPlotNames.push_back("TrueVertexOutFVEventPlot"); MCBkgPlotLabels.push_back("True vertex outside FV");
+	MCBkgPlotNames.push_back("CC3pEventPlot"); MCBkgPlotLabels.push_back("CC3p");
+	MCBkgPlotNames.push_back("BrokenMuEventPlot"); MCBkgPlotLabels.push_back("Broken $\\mu$ track");
+	MCBkgPlotNames.push_back("BrokenPEventPlot"); MCBkgPlotLabels.push_back("Broken p track");
+	MCBkgPlotNames.push_back("CC4pEventPlot"); MCBkgPlotLabels.push_back("CC4p");
+	MCBkgPlotNames.push_back("NCEventPlot"); MCBkgPlotLabels.push_back("NC");
+	MCBkgPlotNames.push_back("CC2p1piEventPlot"); MCBkgPlotLabels.push_back("CC2p1$\\pi$");
+	MCBkgPlotNames.push_back("InTimeCosmicsEventPlot"); MCBkgPlotLabels.push_back("In-Time Cosmics");
+	MCBkgPlotNames.push_back("AntiMuPEventPlot"); MCBkgPlotLabels.push_back("$\\mu^{+}$-p");
+	MCBkgPlotNames.push_back("MuEEventPlot"); MCBkgPlotLabels.push_back("$\\mu$-e");
+	MCBkgPlotNames.push_back("MuPiEventPlot"); MCBkgPlotLabels.push_back("$\\mu$-$\\pi$");
+	MCBkgPlotNames.push_back("OtherMCBkgEventPlot"); MCBkgPlotLabels.push_back("Other");
+	MCBkgPlotNames.push_back("NonCC1pEventPlot"); MCBkgPlotLabels.push_back("Total Non-\\Signal");
+
+	const int MCBkgPlots = MCBkgPlotNames.size();
+//	cout << "Number of MCBkg 1D Plots = " << MCBkgPlots << endl;
 
 	// ----------------------------------------------------------------------------------------------------------------------------------------
 
@@ -151,12 +199,6 @@ void PrintLatexTables(TString BaseMC = "") {
 
 			// ---------------------------------------------------------------------------------------------------------------------
 
-//			vector<vector<TH1D*> > Plots; Plots.clear();
-//			vector<vector<TH1D*> > CC1pPlots; CC1pPlots.clear();
-//			vector<vector<TH1D*> > NonCC1pPlots; NonCC1pPlots.clear();
-
-//			vector<vector<TH1D*> > hratio;  hratio.clear();
-
 			vector<TString> LabelsOfSamples;
 			vector<TString> NameOfSamples;
 
@@ -168,10 +210,17 @@ void PrintLatexTables(TString BaseMC = "") {
 			NameOfSamples.push_back("STVStudies_BeamOn9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("BeamOn");
 
 			if (BaseMC == "") { NameOfSamples.push_back("STVStudies_Overlay9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("MC"); }
-			else if (BaseMC == "Overlay9NuWro") { NameOfSamples.push_back("STVStudies_Overlay9NuWro_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("NuWro"); }
+			else if (BaseMC == "Overlay9NuWro") { NameOfSamples.push_back("STVStudies_Overlay9NuWro_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("NuWro MC"); }
 
 			NameOfSamples.push_back("STVStudies_ExtBNB9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("ExtBNB");
 			NameOfSamples.push_back("STVStudies_OverlayDirt9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("Dirt");
+
+			// ---------------------------------------------------------------------------------------------------------------------
+
+			// Truth level plot for efficiency & purity 
+
+			TFile* TruthCC1pFile = TFile::Open(PathToFiles+"TruthSTVAnalysis_Overlay9_"+Runs[WhichRun]+"_"+UBCodeVersion+".root");
+			TH1D* hTruthCC1pOverlay = (TH1D*)(TruthCC1pFile->Get("TrueMuonCosThetaPlot"));
 
 			// ---------------------------------------------------------------------------------------------------------------------
 
@@ -180,10 +229,32 @@ void PrintLatexTables(TString BaseMC = "") {
 			vector<double> FilePOT; FilePOT.clear();
 			vector<double> FileSamdef; FileSamdef.clear();
 			vector<double> FilePreSel; FilePreSel.clear();
+			vector<double> FileFinal; FileFinal.clear();
+			vector<double> FileCC1p; FileCC1p.clear();
+
+			vector<TH1D*> Plots; Plots.resize(NSamples);
+			vector<TH1D*> CC1pPlots; CC1pPlots.resize(NSamples);
+			vector<TH1D*> NonCC1pPlots; NonCC1pPlots.resize(NSamples);
+			vector<TH1D*> NonCC1pPlotsEvents; NonCC1pPlotsEvents.resize(NSamples);
+
+			vector<TH1D*> CCQEPlots; CCQEPlots.resize(NSamples);
+			vector<TH1D*> CCMECPlots; CCMECPlots.resize(NSamples);
+			vector<TH1D*> CCRESPlots; CCRESPlots.resize(NSamples);
+			vector<TH1D*> CCDISPlots; CCDISPlots.resize(NSamples);
+
+			// -----------------------------------------------------------------------------------------------------------------------
+
+			// Grab the reference plots
 
 			for (int WhichSample = 0; WhichSample < NSamples; WhichSample ++) {
 
+				// --------------------------------------------------------------------------------------------
+
 				FileSample.push_back(TFile::Open(PathToFilesCut+NameOfSamples[WhichSample]));
+
+				// --------------------------------------------------------------------------------------------
+
+				// Numbers to keep track of
 
 				TH1D* POTPlot = (TH1D*)(FileSample[WhichSample]->Get("POTScalePlot"));
 				double POTCount = POTPlot->GetBinContent(1);
@@ -197,41 +268,40 @@ void PrintLatexTables(TString BaseMC = "") {
 				double PreSelCount = PreSelPlot->GetBinContent(1);
 				FilePreSel.push_back(PreSelCount);
 
-//				vector<TH1D*> CurrentPlots; CurrentPlots.clear();
-//				vector<TH1D*> CC1pCurrentPlots; CC1pCurrentPlots.clear();
-//				vector<TH1D*> NonCC1pCurrentPlots; NonCC1pCurrentPlots.clear();
+				TH1D* FinalPlot = (TH1D*)(FileSample[WhichSample]->Get("CommonEventPlot"));
+				double FinalCount = FinalPlot->GetBinContent(1);
+				FileFinal.push_back(FinalCount);
 
-//				vector<TH1D*> Currenthratio;  Currenthratio.clear();
+				TH1D* CC1pPlot = (TH1D*)(FileSample[WhichSample]->Get("NCC1pPlot"));
+				double CC1pCount = CC1pPlot->GetBinContent(1);
+				FileCC1p.push_back(CC1pCount);
 
-//				for (int WhichPlot = 0; WhichPlot < N1DPlots; WhichPlot ++) {
+				// --------------------------------------------------------------------------------------------
+	
+				Plots[WhichSample] = (TH1D*)(FileSample[WhichSample]->Get("RecoMuonCosThetaPlot"));
+				CC1pPlots[WhichSample] = (TH1D*)(FileSample[WhichSample]->Get("CC1pRecoMuonCosThetaPlot"));
+				NonCC1pPlots[WhichSample] = (TH1D*)(FileSample[WhichSample]->Get("NonCC1pRecoMuonCosThetaPlot"));
+				NonCC1pPlotsEvents[WhichSample] = (TH1D*)(FileSample[WhichSample]->Get("NonCC1pEventPlot"));
 
-//					TH1D* hist = (TH1D*)(FileSample[WhichSample]->Get(PlotNames[WhichPlot]));
-//					TH1D* CC1phist = (TH1D*)(FileSample[WhichSample]->Get("CC1p"+PlotNames[WhichPlot]));
-//					TH1D* NonCC1phist = (TH1D*)(FileSample[WhichSample]->Get("NonCC1p"+PlotNames[WhichPlot]));
+				CCQEPlots[WhichSample] = (TH1D*)(FileSample[WhichSample]->Get("CCQERecoMuonCosThetaPlot"));
+				CCMECPlots[WhichSample] = (TH1D*)(FileSample[WhichSample]->Get("CCMECRecoMuonCosThetaPlot"));
+				CCRESPlots[WhichSample] = (TH1D*)(FileSample[WhichSample]->Get("CCRESRecoMuonCosThetaPlot"));
+				CCDISPlots[WhichSample] = (TH1D*)(FileSample[WhichSample]->Get("CCDISRecoMuonCosThetaPlot"));
 
-//					CurrentPlots.push_back(hist);
-//					CC1pCurrentPlots.push_back(CC1phist);
-//					NonCC1pCurrentPlots.push_back(NonCC1phist);
-
-//					Currenthratio.push_back((TH1D*)hist->Clone());
-			
-//				}
-
-//				Plots.push_back(CurrentPlots);
-//				CC1pPlots.push_back(CC1pCurrentPlots);
-//				NonCC1pPlots.push_back(NonCC1pCurrentPlots);
-
-//				hratio.push_back(Currenthratio);
+				// --------------------------------------------------------------------------------------------
 
 			} // End of the loop over the samples
 
-			// Loop over the plots
+			// -----------------------------------------------------------------------------------------------------------------------
+			// -----------------------------------------------------------------------------------------------------------------------
+
+			// Loop over the plots for event loss at each step
 
 			for (int WhichPlot = 0; WhichPlot < N1DPlots; WhichPlot ++) {
 
 				bool PreSelection = true;
-				if (PlotLabels[WhichPlot] == "Muon quality cut" || PlotLabels[WhichPlot] == "Calorimetry" 
-				 || PlotLabels[WhichPlot] == "\\nu score" || PlotLabels[WhichPlot] == "Common events") { PreSelection = false; }
+				//if (PlotLabels[WhichPlot] == "Muon quality cut" || PlotLabels[WhichPlot] == "Calorimetry" 
+				// || PlotLabels[WhichPlot] == "\\nu score" || PlotLabels[WhichPlot] == "Common events") { PreSelection = false; }
 
 
 				cout << PlotLabels[WhichPlot] << " & ";
@@ -247,82 +317,138 @@ void PrintLatexTables(TString BaseMC = "") {
 
 				}
 		
+			} // End of the loop over the plots for event loss at each step	
 
-/*
-				// -------------------------------------------------------------------------------------------------------------------
+			cout << endl << endl;
 
-				hratio[1][WhichPlot]->Add(hratio[2][WhichPlot]);
-				hratio[1][WhichPlot]->Add(hratio[3][WhichPlot]);
-				hratio[0][WhichPlot]->Divide(hratio[1][WhichPlot]);
+			// --------------------------------------------------------------------------------------------
+			// -----------------------------------------------------------------------------------------------------------------------
 
-				hratio[0][WhichPlot]->GetXaxis()->SetTitleFont(FontStyle);
-				hratio[0][WhichPlot]->GetXaxis()->SetLabelFont(FontStyle);
-				hratio[0][WhichPlot]->GetYaxis()->SetTitle("#frac{BeamOn}{MC+ExtBNB}");
-				hratio[0][WhichPlot]->GetXaxis()->SetTitle(Plots[0][WhichPlot]->GetXaxis()->GetTitle());
-				hratio[0][WhichPlot]->GetXaxis()->SetTitleSize(0.13);
-				hratio[0][WhichPlot]->GetXaxis()->SetLabelSize(0.12);
-				hratio[0][WhichPlot]->GetXaxis()->SetTitleOffset(0.88);
-				hratio[0][WhichPlot]->GetXaxis()->SetNdivisions(8);
+			// Print summary of final number of selected events for all samples
 
-				hratio[0][WhichPlot]->GetYaxis()->SetTitleFont(FontStyle);
-				hratio[0][WhichPlot]->GetYaxis()->SetLabelFont(FontStyle);
-				hratio[0][WhichPlot]->GetYaxis()->SetRangeUser(0.9*hratio[0][WhichPlot]->GetMinimum(),1.1*hratio[0][WhichPlot]->GetMaximum());
-				hratio[0][WhichPlot]->GetYaxis()->SetNdivisions(6);
-				hratio[0][WhichPlot]->GetYaxis()->SetTitleOffset(0.35);
-				hratio[0][WhichPlot]->GetYaxis()->SetTitleSize(0.1);
-				hratio[0][WhichPlot]->GetYaxis()->SetLabelSize(0.11);
+			for (int WhichSample = 0; WhichSample < NSamples; WhichSample ++) {		
 
-				botPad->cd();
-				hratio[0][WhichPlot]->Draw("e1 hist same");
+				cout << LabelsOfSamples[WhichSample] << " & " << FileFinal[WhichSample] << " $\\pm$ " << TMath::Sqrt(FileFinal[WhichSample]);
+				cout << " & " << FileFinal[WhichSample] * FilePOT[WhichSample] << " $\\pm$ " << TMath::Sqrt(FileFinal[WhichSample] * FilePOT[WhichSample]);
+				cout << " \\tabularnewline \\hline" << endl;
 
-				double RatioMin = hratio[0][WhichPlot]->GetXaxis()->GetXmin();
-				double RatioMax = hratio[0][WhichPlot]->GetXaxis()->GetXmax();
-				double YRatioCoord = 1.2;
-				TLine* RatioLine = new TLine(RatioMin,YRatioCoord,RatioMax,YRatioCoord);
-				RatioLine->SetLineWidth(4);
-				RatioLine->SetLineColor(kPink+8);
-				RatioLine->SetLineStyle(4);
-				//RatioLine->Draw("same");
-			
-				topPad->cd();
-				leg[WhichPlot]->SetTextSize(0.5);
-				leg[WhichPlot]->SetTextFont(FontStyle);
-				leg[WhichPlot]->Draw();
+				// Special case for MC, print also the CC1p event count
 
-				// --------------------------------------------------------------------------------------
+				if (string(LabelsOfSamples[WhichSample]).find("MC") != std::string::npos) {
 
-				// Sum of NonBeamOn Samples
+					cout << "\\Signal " << LabelsOfSamples[WhichSample] << " & " << FileCC1p[WhichSample] << " $\\pm$ " << TMath::Sqrt(FileCC1p[WhichSample]);
+					cout << " & " << FileCC1p[WhichSample] * FilePOT[WhichSample] << " $\\pm$ " << TMath::Sqrt(FileCC1p[WhichSample] * FilePOT[WhichSample]);
+					cout << " \\tabularnewline \\hline" << endl;
 
-				TH1D* SumNonBeamOn = (TH1D*)Plots[1][WhichPlot]->Clone(); // ExtBNB
-				SumNonBeamOn->Add(Plots[2][WhichPlot]); // Overlay
-				SumNonBeamOn->Add(Plots[3][WhichPlot]); // Dirt
+				}
 
-				// CC1p Purity 
+			}
 
-				int CC1pPurity = CC1pPlots[1][WhichPlot]->Integral() / SumNonBeamOn->Integral() * 1000.;
+			cout << endl << endl;
 
-				midPad->cd();
-				TLatex latexPurity;
-				latexPurity.SetTextFont(FontStyle);
-				latexPurity.SetTextSize(0.09);
-				TString LabelPurity = "CC1p = " + ToString(CC1pPurity/10.) + " %";
-				latexPurity.DrawLatexNDC(0.59,0.9, LabelPurity);
+			// -----------------------------------------------------------------------------------------------------------------------
+			// -----------------------------------------------------------------------------------------------------------------------
 
-				// --------------------------------------------------------------------------------------
+			// Purity & Efficiency study
 
-				// Cosmic Contamination
+			// -----------------------------------------------------------------------------------------------------------------------
 
-				int CosmicContamination = Plots[2][WhichPlot]->Integral() / SumNonBeamOn->Integral() * 1000.;
+			// Efficiency
 
-				midPad->cd();
-				TLatex latexCosmic;
-				latexCosmic.SetTextFont(FontStyle);
-				latexCosmic.SetTextSize(0.09);
-				TString LabelCosmic = "Cosmics = " + ToString(CosmicContamination/10.) + " %";
-				latexCosmic.DrawLatexNDC(0.59,0.8, LabelCosmic);
+			// 1: Overlay
 
-*/
-			} // End of the loop over the plots
+			double CC1p = CC1pPlots[1]->Integral();
+			double CC1pError = TMath::Sqrt(CC1pPlots[1]->Integral() * FilePOT[1]);
+
+			double TrueCC1p = hTruthCC1pOverlay->Integral();
+			double TrueCC1pError = TMath::Sqrt(TrueCC1p * FilePOT[1]);
+
+			double Efficiency = CC1p / TrueCC1p * 100.;
+			double EfficiencyError = Efficiency * TMath::Sqrt( TMath::Power(CC1pError/CC1p,2.) + TMath::Power(TrueCC1pError/TrueCC1p,2.) );
+
+			// -----------------------------------------------------------------------------------------------------------------------
+
+			// Purity
+
+			TH1D* SumNonBeamOn = nullptr;
+
+			double SumErrors = 0.;
+
+			// Skip BeamOn, thus start from index = 1
+
+			for (int WhichSample = 1; WhichSample < NSamples; WhichSample ++) {		
+
+				if (WhichSample == 1) { SumNonBeamOn = (TH1D*)(Plots[WhichSample]->Clone()); }
+				else { SumNonBeamOn->Add(Plots[WhichSample]); }
+
+				SumErrors += Plots[WhichSample]->Integral() * FilePOT[WhichSample];
+
+			}
+
+			SumErrors = TMath::Sqrt(SumErrors);
+			double Sum = SumNonBeamOn->Integral();
+
+			double Purity = CC1p / Sum * 100.;
+			double PurityError = Purity * TMath::Sqrt( TMath::Power(CC1pError/CC1p,2.) + TMath::Power(SumErrors/Sum,2.) );
+
+			// -----------------------------------------------------------------------------------------------------------------------
+	
+			cout << "\\Signal & " << Purity << " $\\pm$ " << PurityError << " & " << Efficiency << " $\\pm$ " << EfficiencyError;
+			cout << " \\tabularnewline \\hline" << endl;
+			cout << endl << endl;
+		
+			// -----------------------------------------------------------------------------------------------------------------------
+			// -----------------------------------------------------------------------------------------------------------------------
+
+			// Cosmic & dirt contamination
+
+			double Cosmics = Plots[2]->Integral();
+			double CosmicsError = TMath::Sqrt(Plots[2]->Integral() * FilePOT[2]) ;
+			double CosmicsFrac = Cosmics / Sum * 100.;
+			double CosmicsFracError = CosmicsFrac * TMath::Sqrt( TMath::Power(CosmicsError/Cosmics,2.) + TMath::Power(SumErrors/Sum,2.) );
+
+			double Dirt = Plots[3]->Integral();
+			double DirtError = TMath::Sqrt(Plots[3]->Integral() * FilePOT[3]) ;
+			double DirtFrac = Dirt / Sum * 100.;
+			double DirtFracError = DirtFrac * TMath::Sqrt( TMath::Power(DirtError/Dirt,2.) + TMath::Power(SumErrors/Sum,2.) );
+
+			cout << "Cosmics & " << CosmicsFrac << " $\\pm$ " << CosmicsFracError << " \\tabularnewline \\hline" << endl;
+			cout << "Dirt & " << DirtFrac << " $\\pm$ " << DirtFracError << " \\tabularnewline \\hline" << endl;
+			cout << endl << endl;
+
+			// -----------------------------------------------------------------------------------------------------------------------
+			// -----------------------------------------------------------------------------------------------------------------------
+
+			// Interaction break down
+
+			double QE = CCQEPlots[1]->Integral() / Plots[1]->Integral() * 100.;
+			double MEC = CCMECPlots[1]->Integral() / Plots[1]->Integral() * 100.;
+			double RES = CCRESPlots[1]->Integral() / Plots[1]->Integral() * 100.;
+			double DIS = CCDISPlots[1]->Integral() / Plots[1]->Integral() * 100.;
+
+			double sum = QE + MEC + RES + DIS;
+			if (sum > 105 || sum < 95) { cout << "UNITARITY CHECKED FAILED! sum = " << sum << endl; }
+
+ 			cout << "QE & " << QE << " \\tabularnewline \\hline" << endl;
+ 			cout << "MEC & " << MEC << " \\tabularnewline \\hline" << endl;
+ 			cout << "RES & " << RES << " \\tabularnewline \\hline" << endl;
+ 			cout << "DIS & " << DIS << " \\tabularnewline \\hline" << endl;
+
+			cout << endl << endl;
+
+			// -----------------------------------------------------------------------------------------------------------------------
+			// -----------------------------------------------------------------------------------------------------------------------
+
+			// MC Background Breakdown
+
+			for (int WhichPlot = 0; WhichPlot < MCBkgPlots; WhichPlot ++) {
+
+				PrintMCBkgEvents(FileSample[1],FilePOT[1],FileFinal[1],MCBkgPlotNames[WhichPlot],MCBkgPlotLabels[WhichPlot],NonCC1pPlotsEvents[1]->GetBinContent(1));
+		
+			}
+
+			// -----------------------------------------------------------------------------------------------------------------------
+			// -----------------------------------------------------------------------------------------------------------------------
 
 		} // If we want to run on all cut combinations, include this } and remove the one at the beginning of the program
 

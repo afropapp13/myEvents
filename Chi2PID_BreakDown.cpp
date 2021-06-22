@@ -30,7 +30,7 @@ void Chi2PID_BreakDown() {
 //	PlotNames.push_back("RecoChi2Plot");
 //	PlotNames.push_back("RecoThreePlaneChi2Plot");
 	PlotNames.push_back("RecoThreePlaneChi2LogLikelihoodPlot");
-	PlotNames.push_back("RecoLLRPIDPlot");
+//	PlotNames.push_back("RecoLLRPIDPlot");
 
 	const int N1DPlots = PlotNames.size();
 	cout << "Number of 1D Plots = " << N1DPlots << endl;

@@ -16,13 +16,12 @@ root -l script_EventSelection_CV.C
 
 # Purity & Efficiency Studies
 
+# on gpvm's
 cd PurityEfficiencyStudies
-
-root -l script_PurityEfficiencyStudies.C
-
 root -l DetermineMaxPurityEfficiency1D.cpp
 
 # (locally)
+cd PurityEfficiencyStudies
 ./DownloadPurityEfficiencyPlots.sh
 
 ###########################################################################################################################################################################
