@@ -37,8 +37,9 @@
 	WhichSampleArray.push_back("Overlay9_Run3_Recombination2");
 	WhichSampleArray.push_back("Overlay9_Run3_SCE");
 
-//	WhichSampleArray.push_back("Overlay9_Run3_lowE");	
-	
+//	WhichSampleArray.push_back("Overlay9_Run3_lowE");
+
+	WhichSampleArray.push_back("Overlay9NuWro_Run1");		
 
 	// -----------------------------------------------------------------------------------------
 

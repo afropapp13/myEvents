@@ -167,6 +167,9 @@ public :
    vector<double>  *CandidatePStartVertexDistance;
    vector<double>  *CandidatePEndVertexDistance;
 
+   vector<double>  *StartToStartDistance;
+   vector<double>  *EndToEndDistance;
+
  //  vector<double>  *CandidateMu_TrackScore;
    vector<double>  *CandidateMu_StartX;
    vector<double>  *CandidateMu_StartY;
@@ -420,6 +423,9 @@ public :
    TBranch  	  *b_CandidateMuEndVertexDistance;
    TBranch  	  *b_CandidatePStartVertexDistance;
    TBranch  	  *b_CandidatePEndVertexDistance;
+
+   TBranch  	  *b_StartToStartDistance;
+   TBranch  	  *b_EndToEndDistance;
 
  //  TBranch        *b_CandidateMu_TrackScore;   //!
    TBranch        *b_CandidateMu_StartX;   //!
@@ -704,6 +710,9 @@ void myRecoAnalysis::Init(TTree *tree)
    CandidatePStartVertexDistance = 0;
    CandidatePEndVertexDistance = 0;
 
+   StartToStartDistance = 0;
+   EndToEndDistance = 0;
+
  //  CandidateMu_TrackScore = 0;
    CandidateMu_StartX = 0;
    CandidateMu_StartY = 0;
@@ -962,6 +971,9 @@ void myRecoAnalysis::Init(TTree *tree)
    fChain->SetBranchAddress("CandidateMuEndVertexDistance", &CandidateMuEndVertexDistance, &b_CandidateMuEndVertexDistance);
    fChain->SetBranchAddress("CandidatePStartVertexDistance", &CandidatePStartVertexDistance, &b_CandidatePStartVertexDistance);
    fChain->SetBranchAddress("CandidatePEndVertexDistance", &CandidatePEndVertexDistance, &b_CandidatePEndVertexDistance);
+
+   fChain->SetBranchAddress("StartToStartDistance", &StartToStartDistance, &b_StartToStartDistance);
+   fChain->SetBranchAddress("EndToEndDistance", &EndToEndDistance, &b_EndToEndDistance);
 
  //  fChain->SetBranchAddress("CandidateMu_TrackScore", &CandidateMu_TrackScore, &b_CandidateMu_TrackScore);
    fChain->SetBranchAddress("CandidateMu_StartX", &CandidateMu_StartX, &b_CandidateMu_StartX);

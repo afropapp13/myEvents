@@ -699,8 +699,8 @@ void myRecoAnalysis::Loop() {
 		TH1D* CCMECRecoMuonPhiPlot = new TH1D("CCMECRecoMuonPhiPlot",LabelXAxisMuonPhi,NBinsMuonPhi,ArrayNBinsMuonPhi);
 
 		TH1D* CCMECRecoCCQEMuonMomentumPlot = new TH1D("CCMECRecoCCQEMuonMomentumPlot",LabelXAxisMuonMomentum,CCQENBinsMuonMomentum,CCQEArrayNBinsMuonMomentum);
-		TH1D* CCMECRecoCCQEMuonCosThetaPlot = new TH1D("CCMERecoCCQEMuonCosThetaPlot",LabelXAxisMuonCosTheta,CCQENBinsMuonCosTheta,CCQEArrayNBinsMuonCosTheta);
-		TH1D* CCMECRecoCCQEMuonPhiPlot = new TH1D("CCMERecoCCCQEMuonPhiPlot",LabelXAxisMuonPhi,CCQENBinsMuonPhi,CCQEArrayNBinsMuonPhi);
+		TH1D* CCMECRecoCCQEMuonCosThetaPlot = new TH1D("CCMECRecoCCQEMuonCosThetaPlot",LabelXAxisMuonCosTheta,CCQENBinsMuonCosTheta,CCQEArrayNBinsMuonCosTheta);
+		TH1D* CCMECRecoCCQEMuonPhiPlot = new TH1D("CCMECRecoCCQEMuonPhiPlot",LabelXAxisMuonPhi,CCQENBinsMuonPhi,CCQEArrayNBinsMuonPhi);
 
 		TH1D* CCMECRecoContainedMuonMomentumPlot = new TH1D("CCMECRecoContainedMuonMomentumPlot",LabelXAxisMuonMomentum,NBinsMuonMomentum,ArrayNBinsMuonMomentum);
 		TH1D* CCMECRecoUncontainedMuonMomentumPlot = new TH1D("CCMECRecoUncontainedMuonMomentumPlot",LabelXAxisMuonMomentum,NBinsMuonMomentum,ArrayNBinsMuonMomentum);
@@ -718,7 +718,7 @@ void myRecoAnalysis::Loop() {
 		TH1D* CCMECRecoCCQEProtonMomentumPlot = new TH1D("CCMECRecoCCQEProtonMomentumPlot",LabelXAxisProtonMomentum,
 			CCQENBinsProtonMomentum,CCQEArrayNBinsProtonMomentum);
 		TH1D* CCMECRecoCCQEProtonCosThetaPlot = new TH1D("CCMECRecoCCQEProtonCosThetaPlot",LabelXAxisProtonCosTheta,
-			NBinsProtonCosTheta,ArrayNBinsProtonCosTheta);
+			CCQENBinsProtonCosTheta,CCQEArrayNBinsProtonCosTheta);
 		TH1D* CCMECRecoCCQEProtonPhiPlot = new TH1D("CCMECRecoCCQEProtonPhiPlot",LabelXAxisProtonPhi,CCQENBinsProtonPhi,CCQEArrayNBinsProtonPhi);
 
 		TH1D* CCMECRecoDeltaThetaPlot = new TH1D("CCMECRecoDeltaThetaPlot",RecoLabelXAxisDeltaTheta,NBinsDeltaTheta,MinDeltaTheta,MaxDeltaTheta);
@@ -903,7 +903,7 @@ void myRecoAnalysis::Loop() {
 
 		TH1D* CCDISRecoCCQEProtonMomentumPlot = new TH1D("CCDISRecoCCQEProtonMomentumPlot",LabelXAxisProtonMomentum,
 			CCQENBinsProtonMomentum,CCQEArrayNBinsProtonMomentum);
-		TH1D* CCDISRecoCCQEProtonCosThetaPlot = new TH1D("CCDISRecoSCCQEProtonCosThetaPlot",LabelXAxisProtonCosTheta,
+		TH1D* CCDISRecoCCQEProtonCosThetaPlot = new TH1D("CCDISRecoCCQEProtonCosThetaPlot",LabelXAxisProtonCosTheta,
 			CCQENBinsProtonCosTheta,CCQEArrayNBinsProtonCosTheta);
 		TH1D* CCDISRecoCCQEProtonPhiPlot = new TH1D("CCDISRecoCCQEProtonPhiPlot",LabelXAxisProtonPhi,CCQENBinsProtonPhi,CCQEArrayNBinsProtonPhi);
 
@@ -1373,8 +1373,8 @@ void myRecoAnalysis::Loop() {
 			TVector3 CandidateProtonStart(CandidateP_StartX->at(0),CandidateP_StartY->at(0),CandidateP_StartZ->at(0));
 			TVector3 CandidateProtonEnd(CandidateP_EndX->at(0),CandidateP_EndY->at(0),CandidateP_EndZ->at(0));
 
-			double DistanceStartPoints = (CandidateMuonStart - CandidateProtonStart).Mag();
-			double DistanceEndPoints = (CandidateMuonEnd - CandidateProtonEnd).Mag(); 
+			double DistanceStartPoints = StartToStartDistance->at(0);
+			double DistanceEndPoints = EndToEndDistance->at(0); 
 
 			if (DistanceStartPoints > DistanceEndPoints) { continue; }
 

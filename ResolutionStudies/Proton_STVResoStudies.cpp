@@ -45,6 +45,8 @@ void Proton_STVResoStudies() {
 	gStyle->SetOptStat(0);
 	TH1D::SetDefaultSumw2();
 
+	std::vector<int> Colors{kBlack,kBlue+1,kGreen+1,kOrange+7};
+
 	// -----------------------------------------------------------------------------------------------------------------------------------------------
 
 	// Selection cuts
@@ -152,6 +154,8 @@ void Proton_STVResoStudies() {
 			Plots[WhichDiscriminator]->GetYaxis()->SetLabelFont(FontStyle);
 			Plots[WhichDiscriminator]->GetYaxis()->SetTitle("Peak Normalized To 1");
 
+			double Events = Plots[WhichDiscriminator]->Integral();
+
 			double SF = 1. / Plots[WhichDiscriminator]->GetMaximum();
 			Plots[WhichDiscriminator]->Scale(SF);
 
@@ -159,18 +163,20 @@ void Proton_STVResoStudies() {
 
 			Plots[WhichDiscriminator]->SetMarkerSize(2.);
 			Plots[WhichDiscriminator]->SetMarkerStyle(20);
-			Plots[WhichDiscriminator]->SetMarkerColor(WhichDiscriminator+1);
-			Plots[WhichDiscriminator]->SetLineColor(WhichDiscriminator+1);
+			Plots[WhichDiscriminator]->SetMarkerColor(Colors[WhichDiscriminator]);
+			Plots[WhichDiscriminator]->SetLineColor(Colors[WhichDiscriminator]);
 			Plots[WhichDiscriminator]->SetLineWidth(3);
 			Plots[WhichDiscriminator]->Draw("p hist same");
 
 			TF1* f = new TF1("f","gaus",-15,15);
 
-			f->SetLineColor(WhichDiscriminator+1);
+			f->SetLineColor(Colors[WhichDiscriminator]);
 			Plots[WhichDiscriminator]->Fit(f,"R0Q");
 			//f->Draw("same");
 
-			leg->AddEntry(Plots[WhichDiscriminator],LegendLabel[WhichDiscriminator] + ", #mu = " + ToString(round(f->GetParameter(1),1)) + ", #sigma = " + ToString(round(f->GetParameter(2),1)),"p");
+//			leg->AddEntry(Plots[WhichDiscriminator],LegendLabel[WhichDiscriminator] + ", #mu = " + ToString(round(f->GetParameter(1),1)) + ", #sigma = " + ToString(round(f->GetParameter(2),1)),"p");
+
+			leg->AddEntry(Plots[WhichDiscriminator],LegendLabel[WhichDiscriminator] + " [" + TString(std::to_string(int(Events))) + "]","p");
 			
 
 		} // End of the loop over the discriminators

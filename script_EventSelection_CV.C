@@ -11,8 +11,6 @@
 	WhichSampleArray.push_back("OverlayDirt9_Run1");
 	WhichSampleArray.push_back("Overlay9_Run1");
 
-	WhichSampleArray.push_back("Overlay9NuWro_Run1");
-
 	// Run 2
 
 //	WhichSampleArray.push_back("BeamOn9_Run2");

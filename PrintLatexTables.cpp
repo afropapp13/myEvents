@@ -132,20 +132,20 @@ void PrintLatexTables(TString BaseMC = "") {
 	MCBkgPlotNames.push_back("CC2pEventPlot"); MCBkgPlotLabels.push_back("CC2p");
 	MCBkgPlotNames.push_back("MultipleVerticesEventPlot"); MCBkgPlotLabels.push_back("Multiple Vertices");
 	MCBkgPlotNames.push_back("PiPEventPlot"); MCBkgPlotLabels.push_back("$\\pi$-p");
-	MCBkgPlotNames.push_back("CC1p1piEventPlot"); MCBkgPlotLabels.push_back("CC1p1$\\pi$");
-	MCBkgPlotNames.push_back("PPEventPlot"); MCBkgPlotLabels.push_back("p-p");
 	MCBkgPlotNames.push_back("NeutralPiEventPlot"); MCBkgPlotLabels.push_back("$\\pi^{0}$ production");
-	MCBkgPlotNames.push_back("TrueVertexOutFVEventPlot"); MCBkgPlotLabels.push_back("True vertex outside FV");
+	MCBkgPlotNames.push_back("CC1p1piEventPlot"); MCBkgPlotLabels.push_back("CC1p1$\\pi$");
 	MCBkgPlotNames.push_back("CC3pEventPlot"); MCBkgPlotLabels.push_back("CC3p");
+	MCBkgPlotNames.push_back("TrueVertexOutFVEventPlot"); MCBkgPlotLabels.push_back("True vertex outside FV");
+	MCBkgPlotNames.push_back("PPEventPlot"); MCBkgPlotLabels.push_back("p-p");
 	MCBkgPlotNames.push_back("BrokenMuEventPlot"); MCBkgPlotLabels.push_back("Broken $\\mu$ track");
-	MCBkgPlotNames.push_back("BrokenPEventPlot"); MCBkgPlotLabels.push_back("Broken p track");
 	MCBkgPlotNames.push_back("CC4pEventPlot"); MCBkgPlotLabels.push_back("CC4p");
 	MCBkgPlotNames.push_back("NCEventPlot"); MCBkgPlotLabels.push_back("NC");
 	MCBkgPlotNames.push_back("CC2p1piEventPlot"); MCBkgPlotLabels.push_back("CC2p1$\\pi$");
 	MCBkgPlotNames.push_back("InTimeCosmicsEventPlot"); MCBkgPlotLabels.push_back("In-Time Cosmics");
 	MCBkgPlotNames.push_back("AntiMuPEventPlot"); MCBkgPlotLabels.push_back("$\\mu^{+}$-p");
-	MCBkgPlotNames.push_back("MuEEventPlot"); MCBkgPlotLabels.push_back("$\\mu$-e");
 	MCBkgPlotNames.push_back("MuPiEventPlot"); MCBkgPlotLabels.push_back("$\\mu$-$\\pi$");
+	MCBkgPlotNames.push_back("MuEEventPlot"); MCBkgPlotLabels.push_back("$\\mu$-e");
+	MCBkgPlotNames.push_back("BrokenPEventPlot"); MCBkgPlotLabels.push_back("Broken p track");
 	MCBkgPlotNames.push_back("OtherMCBkgEventPlot"); MCBkgPlotLabels.push_back("Other");
 	MCBkgPlotNames.push_back("NonCC1pEventPlot"); MCBkgPlotLabels.push_back("Total Non-\\Signal");
 
