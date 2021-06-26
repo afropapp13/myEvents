@@ -1044,7 +1044,7 @@ void myRecoAnalysis::Loop() {
 //		TH2D* Playground_CC1pRecoMuonMomentumResoVsDeltaThetaPlot = new TH2D("Playground_CC1pRecoMuonMomentumResoVsDeltaThetaPlot",LabelMuonMomentumResolution+RecoLabelXAxisDeltaTheta,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV,NBinsDeltaTheta,MinDeltaTheta,MaxDeltaTheta);
 
 		// -------------------------------------------------------------------------------------------------------------------
-
+/*
 		TH1D* Playground_CC1pRecoMuonMomentumPlot_FullyContainedMuon = new TH1D("Playground_CC1pRecoMuonMomentumPlot_FullyContainedMuon",LabelMuonMomentumResolution,NBinsCC1pSTVReso,MinCC1pSTVMuMom,MaxCC1pSTVMuMom);
 		TH1D* Playground_CC1pRecoMuonMomentumPlot_ExitingShortMuon = new TH1D("Playground_CC1pRecoMuonMomentumPlot_ExitingShortMuon",LabelMuonMomentumResolution,NBinsCC1pSTVReso,MinCC1pSTVMuMom,MaxCC1pSTVMuMom);
 		TH1D* Playground_CC1pRecoMuonMomentumPlot_ExitingMediumMuon = new TH1D("Playground_CC1pRecoMuonMomentumPlot_ExitingMediumMuon",LabelMuonMomentumResolution,NBinsCC1pSTVReso,MinCC1pSTVMuMom,MaxCC1pSTVMuMom);
@@ -1142,7 +1142,7 @@ void myRecoAnalysis::Loop() {
 			Playground_CC1pRecoDeltaPhiTPlot_LongProton_Slice[WhichSlice] = new TH1D("Playground_CC1pRecoDeltaPhiTPlot_Slice_"+ToStringInt(WhichSlice+1)+"_LongProton",LabelDeltaPhiTResolution,NBinsCC1pSTVReso,MinCC1pSTVDeltaPhiT,MaxCC1pSTVDeltaPhiT);
 
 		}		
-
+*/
 		// --------------------------------------------------------------------------------------------------------------------------------
 
 		TH1D* CC1pRecoMuonTrueMomentumLongitudinalRatio = new TH1D("CC1pRecoMuonTrueMomentumLongitudinalRatio",";P^{true}_{#mu,||}/P^{true}_{#mu}",25,0.,1.);		
@@ -2165,7 +2165,7 @@ void myRecoAnalysis::Loop() {
 					if (DeltaPhiT > 60) { DeltaPhiTSlice = 2; }
 
 					// -----------------------------------------------------------------------------------------------------------------
-
+/*
 					// Contained Muon  
 
 					if (CandidateMu_EndContainment->at(0) == 1) {
@@ -2265,7 +2265,7 @@ void myRecoAnalysis::Loop() {
 						Playground_CC1pRecoDeltaPhiTPlot_LongProton_Slice[DeltaPhiTSlice]->Fill(CC1pDeltaPhiTReso,weight);
 
 					}
-
+*/
 					// -------------------------------------------------------------------------------------------------------------------------
 
 					if (RecoCCQElike && TrueCCQElike) {
@@ -2408,11 +2408,6 @@ void myRecoAnalysis::Loop() {
 						( TMath::Abs(CandidateMu_MCParticle_Pdg->at(0)) == KaonPdg && TMath::Abs(CandidateP_MCParticle_Pdg->at(0)) == ProtonPdg )
 						) 
 						{ ProtonKaonEvents++; ManualNonCC1pEventsPassingSelectionCuts++; OtherMCBkg++; myRunTxtFile << endl << "p-K event" << endl; }
-					else if ( True_CandidateMu_StartX->at(0) != True_CandidateP_StartX->at(0) 
-					|| True_CandidateMu_StartY->at(0) != True_CandidateP_StartY->at(0)
-					|| True_CandidateMu_StartZ->at(0) != True_CandidateP_StartZ->at(0) ) 
-						{ MultipleVertices++; ManualNonCC1pEventsPassingSelectionCuts++; myRunTxtFile << endl << "Multiple vertices event" << endl; }
-
 					else if (
 					     !  (True_CandidateMu_P->at(0) > ArrayNBinsMuonMomentum[0] 
 					     && True_CandidateP_P->at(0) > ArrayNBinsProtonMomentum[0]
@@ -2436,9 +2431,14 @@ void myRecoAnalysis::Loop() {
 
 					) {
 
-						OutCommonRange++; ManualNonCC1pEventsPassingSelectionCuts++; OtherMCBkg++;
+						OutCommonRange++; ManualNonCC1pEventsPassingSelectionCuts++;
 						myRunTxtFile << endl << "Out of range event" << endl;
 					}
+
+					else if ( True_CandidateMu_StartX->at(0) != True_CandidateP_StartX->at(0) 
+					|| True_CandidateMu_StartY->at(0) != True_CandidateP_StartY->at(0)
+					|| True_CandidateMu_StartZ->at(0) != True_CandidateP_StartZ->at(0) ) 
+						{ MultipleVertices++; ManualNonCC1pEventsPassingSelectionCuts++; myRunTxtFile << endl << "Multiple vertices event" << endl; }
 
 					else { 
 
@@ -3042,6 +3042,15 @@ void myRecoAnalysis::Loop() {
 
 		// -------------------------------------------------------------------------------------------------------------------------	
 
+		// mu-p events out of common range at a truth level
+
+		double OutCommonRangeError = sqrt(OutCommonRange);
+		TH1D* OutCommonRangeEventPlot = new TH1D("OutCommonRangeEventPlot",";Truth out of common range",1,0,1);
+		OutCommonRangeEventPlot->SetBinContent(1,OutCommonRange);
+		OutCommonRangeEventPlot->SetBinError(1,OutCommonRangeError);
+
+		// -------------------------------------------------------------------------------------------------------------------------	
+
 		// All reconstructed CC1p1pi events passing the selection criteria
 
 		double CC1p1piEventsPassingSelectionCutsError = sqrt(CC1p1piEventsPassingSelectionCuts);
@@ -3256,6 +3265,7 @@ void myRecoAnalysis::Loop() {
 		CC1pEventPlot->Write();
 		CC2pEventPlot->Write();
 		MultipleVerticesEventPlot->Write();
+		OutCommonRangeEventPlot->Write();
 		PiPEventPlot->Write();
 		CC1p1piEventPlot->Write();
 		PPEventPlot->Write();

@@ -130,7 +130,7 @@ void PrintLatexTables(TString BaseMC = "") {
 	std::vector<TString> MCBkgPlotLabels; MCBkgPlotLabels.clear();
 
 	MCBkgPlotNames.push_back("CC2pEventPlot"); MCBkgPlotLabels.push_back("CC2p");
-	MCBkgPlotNames.push_back("MultipleVerticesEventPlot"); MCBkgPlotLabels.push_back("Multiple Vertices");
+	MCBkgPlotNames.push_back("OutCommonRangeEventPlot"); MCBkgPlotLabels.push_back("Truth out of common range");
 	MCBkgPlotNames.push_back("PiPEventPlot"); MCBkgPlotLabels.push_back("$\\pi$-p");
 	MCBkgPlotNames.push_back("NeutralPiEventPlot"); MCBkgPlotLabels.push_back("$\\pi^{0}$ production");
 	MCBkgPlotNames.push_back("CC1p1piEventPlot"); MCBkgPlotLabels.push_back("CC1p1$\\pi$");
@@ -146,6 +146,7 @@ void PrintLatexTables(TString BaseMC = "") {
 	MCBkgPlotNames.push_back("MuPiEventPlot"); MCBkgPlotLabels.push_back("$\\mu$-$\\pi$");
 	MCBkgPlotNames.push_back("MuEEventPlot"); MCBkgPlotLabels.push_back("$\\mu$-e");
 	MCBkgPlotNames.push_back("BrokenPEventPlot"); MCBkgPlotLabels.push_back("Broken p track");
+	MCBkgPlotNames.push_back("MultipleVerticesEventPlot"); MCBkgPlotLabels.push_back("Multiple vertices");
 	MCBkgPlotNames.push_back("OtherMCBkgEventPlot"); MCBkgPlotLabels.push_back("Other");
 	MCBkgPlotNames.push_back("NonCC1pEventPlot"); MCBkgPlotLabels.push_back("Total Non-\\Signal");
 
@@ -183,7 +184,8 @@ void PrintLatexTables(TString BaseMC = "") {
 
 		// -----------------------------------------------------------------------------------------------------------------------------------------
 			
-		cout << endl << endl;
+		cout << "// -------------------------------------------------" << endl << endl;
+		cout << Runs[WhichRun] << endl << endl;
 
 		Cuts = "_NoCuts";
 
@@ -307,7 +309,7 @@ void PrintLatexTables(TString BaseMC = "") {
 				cout << PlotLabels[WhichPlot] << " & ";
 				PrintEvents(FileSample,FilePOT,FileSamdef,FilePreSel,PlotNames[WhichPlot],PreSelection);
 
-				if (PlotLabels[WhichPlot] == "Initial" || PlotLabels[WhichPlot] == "Vertex in FV"  || PlotLabels[WhichPlot] == "Common events") 
+				if (PlotLabels[WhichPlot] == "Initial" || PlotLabels[WhichPlot] == "Vertex in FV"  || PlotLabels[WhichPlot] == "Common ranges") 
 					{ cout << "\\hline" << endl; }
 
 				if (WhichPlot == N1DPlots-1) {

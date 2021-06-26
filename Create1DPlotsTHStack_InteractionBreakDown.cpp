@@ -146,6 +146,7 @@ void Create1DPlotsTHStack_InteractionBreakDown(TString BaseMC = "") {
 	
 			// For the alternative MC, we want the figures after the application of all cuts
 			if (BaseMC == "Overlay9NuWro" && i != NCuts-1) { continue; }
+			if (BaseMC == "NoTuneOverlay9" && i != NCuts-1) { continue; }
 
 //		} // If we want to run only on a specific cut combination, include this } and remove the one at the end of the program
 
@@ -174,6 +175,7 @@ void Create1DPlotsTHStack_InteractionBreakDown(TString BaseMC = "") {
 
 			if (BaseMC == "") { NameOfSamples.push_back("STVStudies_Overlay9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("Overlay"); }
 			else if (BaseMC == "Overlay9NuWro") { NameOfSamples.push_back("STVStudies_Overlay9NuWro_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("Overlay"); }
+			else if (BaseMC == "NoTuneOverlay9") { NameOfSamples.push_back("STVStudies_NoTuneOverlay9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("Overlay"); }
 
 			NameOfSamples.push_back("STVStudies_ExtBNB9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("ExtBNB");
 			NameOfSamples.push_back("STVStudies_OverlayDirt9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("Dirt");

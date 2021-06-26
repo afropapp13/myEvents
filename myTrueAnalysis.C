@@ -50,7 +50,7 @@ void myTrueAnalysis::Loop() {
 
 	// Output Files
 
-	TString FileName = PathToFiles+"TruthSTVAnalysis_"+fWhichSample+"_"+UBCodeVersion+".root";	
+	TString FileName = PathToFiles+"TruthSTVAnalysis_"+fWhichSample+Extension+"_"+UBCodeVersion+".root";	
 	TFile* OutputFile = new TFile(FileName,"recreate");
 	std::cout << std::endl << "File " << FileName << " to be created"<< std::endl << std::endl;
 
@@ -131,11 +131,11 @@ void myTrueAnalysis::Loop() {
 
 	// --------------------------------------------------------------------------------------------------------------------------------
 
-	TH1D* TrueMuonTrueMomentumLongitudinalRatio = new TH1D("TrueMuonTrueMomentumLongitudinalRatio",";#frac{P^{true}_{#mu,||}}{P^{true}_{#mu}}",25,0.,1.);		
-	TH1D* TrueProtonTrueMomentumLongitudinalRatio = new TH1D("TrueProtonTrueMomentumLongitudinalRatio",";#frac{P^{true}_{p,||}}{P^{true}_{p}}",25,0.,1.);
+	TH1D* TrueMuonTrueMomentumLongitudinalRatio = new TH1D("TrueMuonTrueMomentumLongitudinalRatio",";P^{true}_{#mu,||}/P^{true}_{#mu}",25,0.,1.);		
+	TH1D* TrueProtonTrueMomentumLongitudinalRatio = new TH1D("TrueProtonTrueMomentumLongitudinalRatio",";P^{true}_{p,||}/P^{true}_{p}",25,0.,1.);
 
-	TH1D* TrueMuonTrueMomentumTransverseRatio = new TH1D("TrueMuonTrueMomentumTransverseRatio",";#frac{P^{true}_{#mu,T}}{P^{true}_{#mu}}",25,0.,1.);		
-	TH1D* TrueProtonTrueMomentumTransverseRatio = new TH1D("TrueProtonTrueMomentumTransverseRatio",";#frac{P^{true}_{p,T}}{P^{true}_{p}}",25,0.,1.);	
+	TH1D* TrueMuonTrueMomentumTransverseRatio = new TH1D("TrueMuonTrueMomentumTransverseRatio",";P^{true}_{#mu,T}/P^{true}_{#mu}",25,0.,1.);		
+	TH1D* TrueProtonTrueMomentumTransverseRatio = new TH1D("TrueProtonTrueMomentumTransverseRatio",";P^{true}_{p,T}/P^{true}_{p}",25,0.,1.);	
 
 	// ---------------------------------------------------------------------------------------------------------------------------------------------
 
