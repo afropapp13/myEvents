@@ -41,6 +41,11 @@ void Create1DPlotsTHStack_SubSpectrum() {
 	PlotNames.push_back("RecoDeltaAlphaTPlot");
 	PlotNames.push_back("RecoDeltaPhiTPlot");
 
+	PlotNames.push_back("RecoCCQEMuonMomentumPlot");
+	PlotNames.push_back("RecoCCQEProtonMomentumPlot");
+	PlotNames.push_back("RecoCCQEMuonCosThetaPlot");
+	PlotNames.push_back("RecoCCQEProtonCosThetaPlot");
+
 	const int N1DPlots = PlotNames.size();
 	cout << "Number of 1D Plots = " << N1DPlots << endl;
 

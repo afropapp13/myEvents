@@ -133,7 +133,7 @@ void myRecoAnalysis::Loop() {
 
 		}
 
-		TString FileName = PathToFiles+Cuts+"/STVStudies_"+fWhichSample+Extension+Cuts+".root";
+		TString FileName = PathToFiles+Cuts+"/"+fTune+"STVStudies_"+fWhichSample+Extension+Cuts+".root";
 		TFile* file = new TFile(FileName,"recreate");
 		std::cout << std::endl << "Creating a new file: " << FileName << std::endl << std::endl << std::endl;
 
@@ -1259,8 +1259,12 @@ void myRecoAnalysis::Loop() {
 			if (string(fWhichSample).find("Overlay") != std::string::npos) { 
 			
 				if (Weight <= 0 || Weight > 30) { continue; } // bug fix weight 
-				if (T2KWeight <= 0 || T2KWeight > 30) { continue; }	// T2K tune weight			
+				if (T2KWeight <= 0 || T2KWeight > 30) { continue; }	// T2K tune weight	
+				// For the detector variations, Weight (bug fix) = 1		
 				weight = POTWeight * Weight * T2KWeight * ROOTinoWeight; 
+
+				// Fake data studies: removing the T2K tune weight
+				if (fTune == "NoTune") { weight = POTWeight * Weight * ROOTinoWeight; }
 				
 			}
 			

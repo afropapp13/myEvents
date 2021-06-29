@@ -107,7 +107,7 @@ void PrintLatexTables(TString BaseMC = "") {
 	PlotNames.push_back("SamdefEventPlot"); PlotLabels.push_back("Initial");
 	PlotNames.push_back("SWTriggerEventPlot"); PlotLabels.push_back("SW Trigger");
 	PlotNames.push_back("OneNuMuPFParticleEventPlot"); PlotLabels.push_back("1 $\\nu_{\\mu}$ PFParticle");
-	PlotNames.push_back("MatchedTrackLikeDaughterEventPlot"); PlotLabels.push_back("2 daughters");
+	PlotNames.push_back("MatchedTrackLikeDaughterEventPlot"); PlotLabels.push_back("2 track-like daughters");
 	PlotNames.push_back("OneBeamFlashEventPlot"); PlotLabels.push_back("1 beam flash");
 	PlotNames.push_back("MomentumThresholdEventPlot"); PlotLabels.push_back("P threshold");
 	PlotNames.push_back("StartPointContainmentEventPlot"); PlotLabels.push_back("Start point in FV");

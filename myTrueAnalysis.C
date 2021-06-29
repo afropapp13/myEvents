@@ -50,7 +50,7 @@ void myTrueAnalysis::Loop() {
 
 	// Output Files
 
-	TString FileName = PathToFiles+"TruthSTVAnalysis_"+fWhichSample+Extension+"_"+UBCodeVersion+".root";	
+	TString FileName = PathToFiles+fTune+"TruthSTVAnalysis_"+fWhichSample+Extension+"_"+UBCodeVersion+".root";	
 	TFile* OutputFile = new TFile(FileName,"recreate");
 	std::cout << std::endl << "File " << FileName << " to be created"<< std::endl << std::endl;
 
@@ -169,6 +169,9 @@ void myTrueAnalysis::Loop() {
 		if (T2KWeight <= 0 || T2KWeight > 30) { continue; }		
 		// Weight from v3.0.4 to v.3.0.6 * weight from application of T2K tune
 		double weight = POTWeight * Weight * T2KWeight * ROOTinoWeight;
+
+		// Fake data studies: removing the T2K tune weight
+		if (fTune == "NoTune") { weight = POTWeight * Weight * ROOTinoWeight; }
 
 		// -------------------------------------------------------------------------------------------------------------------------------------
 

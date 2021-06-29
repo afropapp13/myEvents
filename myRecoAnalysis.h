@@ -16,6 +16,8 @@ using namespace Constants;
 class myRecoAnalysis {
 
 private:
+
+	TString fTune;
 	TString fPathToFile;
 	TString fWhichSample;
 	TString fEventWeightLabel;
@@ -541,7 +543,7 @@ public :
 //   TBranch        *b_PFParticle_NuMuDaughters;   //!
 //   TBranch        *b_PFParticle_NuMuDaughtersPdgCode;   //!
 
-   myRecoAnalysis(TString WhichSample="",TString WhichEventWeightLabel="", int UniverseIndex=-1, TTree *tree=0);
+   myRecoAnalysis(TString WhichSample="",TString Tune="",TString WhichEventWeightLabel="", int UniverseIndex=-1, TTree *tree=0);
    virtual ~myRecoAnalysis();
    virtual Int_t    Cut(Long64_t entry);
    virtual Int_t    GetEntry(Long64_t entry);
@@ -555,9 +557,10 @@ public :
 #endif
 
 #ifdef myRecoAnalysis_cxx
-myRecoAnalysis::myRecoAnalysis(TString WhichSample, TString WhichEventWeightLabel, int UniverseIndex, TTree *tree) : fChain(0) 
+myRecoAnalysis::myRecoAnalysis(TString WhichSample, TString Tune, TString WhichEventWeightLabel, int UniverseIndex, TTree *tree) : fChain(0) 
 {
 
+   fTune = Tune;
    fWhichSample = WhichSample;
 
    fEventWeightLabel = WhichEventWeightLabel;

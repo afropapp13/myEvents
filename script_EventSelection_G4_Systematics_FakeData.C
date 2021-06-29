@@ -37,10 +37,10 @@
 
 			for (int k = 0; k < Universes[j]; k++) {	
 
-				gROOT->ProcessLine("myRecoAnalysis(\""+WhichSampleArray[i]+"\",\"\",\""+EventWeightLabels[j]+"\","+TString(std::to_string(k))+").Loop()");
+				gROOT->ProcessLine("myRecoAnalysis(\""+WhichSampleArray[i]+"\",\"\",\""+EventWeightLabels[j]+"\","+TString(std::to_string(k))+",\"NoTune\").Loop()");
 
 				if (string(WhichSampleArray[i]).find("Overlay9") != std::string::npos) 
-				  { gROOT->ProcessLine("myTrueAnalysis(\""+WhichSampleArray[i]+"\",\"\",\""+EventWeightLabels[j]+"\","+TString(std::to_string(k))+").Loop()"); } 
+				  { gROOT->ProcessLine("myTrueAnalysis(\""+WhichSampleArray[i]+"\",\"\",\""+EventWeightLabels[j]+"\","+TString(std::to_string(k))+",\"NoTune\").Loop()"); } 
 
 			} // End of the loop over the universes
 			  

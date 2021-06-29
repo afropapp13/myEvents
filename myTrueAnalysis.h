@@ -16,6 +16,8 @@ using namespace Constants;
 class myTrueAnalysis {
 
 private:
+
+   TString fTune;
    TString fPathToFile;
    TString fWhichSample;
    TString fEventWeightLabel;
@@ -227,7 +229,7 @@ public :
    TBranch        *b_True_EQE;   //!
    TBranch        *b_True_Q2;   //!                  
 
-   myTrueAnalysis(TString WhichSample="",TString WhichEventWeightLabel="", int UniverseIndex=-1,TTree *tree=0);
+   myTrueAnalysis(TString WhichSample="",TString Tune="",TString WhichEventWeightLabel="", int UniverseIndex=-1,TTree *tree=0);
    virtual ~myTrueAnalysis();
    virtual Int_t    Cut(Long64_t entry);
    virtual Int_t    GetEntry(Long64_t entry);
@@ -243,9 +245,10 @@ public :
 
 
 #ifdef myTrueAnalysis_cxx
-myTrueAnalysis::myTrueAnalysis(TString WhichSample, TString WhichEventWeightLabel, int UniverseIndex, TTree *tree) : fChain(0) 
+myTrueAnalysis::myTrueAnalysis(TString WhichSample, TString Tune, TString WhichEventWeightLabel, int UniverseIndex, TTree *tree) : fChain(0) 
 {
 
+   fTune = Tune;
    fWhichSample = WhichSample;
    fEventWeightLabel = WhichEventWeightLabel;
    fUniverseIndex = UniverseIndex;   

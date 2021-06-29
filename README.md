@@ -34,14 +34,6 @@ root -l Create1DPlotsTHStack_InteractionBreakDown.cpp
 
 root -l PrintLatexTables.cpp
 
-# NuWro fake data (only Run 1 for now)
-
-root -l
-.L Create1DPlotsTHStack_TopologicalBreakDown.cpp
-Create1DPlotsTHStack_TopologicalBreakDown("Overlay9NuWro")
-.L Create1DPlotsTHStack_InteractionBreakDown.cpp
-Create1DPlotsTHStack_InteractionBreakDown("Overlay9NuWro")
-
 ./DownloadEventRatePlots.sh
 
 ###########################################################################################################################################################################
@@ -64,7 +56,25 @@ root -l script_EventSelection_Flux_Systematics.C
 
 ###########################################################################################################################################################################
 
-cd ResolutionStudies
-root -l STVResoStudies.cpp
-root -l Proton_STVResoStudies.cpp
+# NuWro fake data (only Run 1 for now)
+
+root -l
+.L Create1DPlotsTHStack_TopologicalBreakDown.cpp
+Create1DPlotsTHStack_TopologicalBreakDown("Overlay9NuWro")
+
+root -l
+.L Create1DPlotsTHStack_InteractionBreakDown.cpp
+Create1DPlotsTHStack_InteractionBreakDown("Overlay9NuWro")
+
+# NoTune GENIE Fake Data
+
+root -l script_EventSelection_CV_FakeData.C 
+
+root -l
+.L Create1DPlotsTHStack_TopologicalBreakDown.cpp
+Create1DPlotsTHStack_TopologicalBreakDown("NoTuneOverlay9")
+
+root -l
+.L Create1DPlotsTHStack_InteractionBreakDown.cpp
+Create1DPlotsTHStack_InteractionBreakDown("NoTuneOverlay9")
 
