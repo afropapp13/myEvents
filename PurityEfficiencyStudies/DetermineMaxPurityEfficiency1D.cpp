@@ -48,17 +48,17 @@ void DetermineMaxPurityEfficiency1D() {
 
 	// ----------------------------------------------------------------------------------------------------------------------------------------
 
-	vector<TString> RunNumber;
-	RunNumber.push_back("Run1");
-	RunNumber.push_back("Run3");
+	//vector<TString> RunNumber;
+	//RunNumber.push_back("Run1");
+	//RunNumber.push_back("Run3");
 
 	vector<TString> CutName; vector<TString> Cuts;
 	CutName.push_back("LLP"); Cuts.push_back("_NoCuts");
-	CutName.push_back("NuScore"); Cuts.push_back("_NoCuts_PID");
+	//CutName.push_back("NuScore"); Cuts.push_back("_NoCuts_PID");
 
 	// ----------------------------------------------------------------------------------------------------------------------------------------
 
-	int NRuns = RunNumber.size();
+	int NRuns = Runs.size();
 	int NCuts = CutName.size();
 
 	// ----------------------------------------------------------------------------------------------------------------------------------------
@@ -73,8 +73,11 @@ void DetermineMaxPurityEfficiency1D() {
 
 			if (CutName[WhichCut] == "LLP") {
 
-				NBins = NBinsThreePlaneChi2LogLikelihood;
-				Min = MinThreePlaneChi2LogLikelihood, Max = MaxThreePlaneChi2LogLikelihood;
+//				NBins = NBinsThreePlaneChi2LogLikelihood;
+//				Min = MinThreePlaneChi2LogLikelihood, Max = MaxThreePlaneChi2LogLikelihood;
+
+				NBins = NBinsLLRPID;
+				Min = MinLLRPID, Max = MaxLLRPID;
 
 			}
 
@@ -97,16 +100,16 @@ void DetermineMaxPurityEfficiency1D() {
 
 			// ----------------------------------------------------------------------------------------------------------------------------------------
 
-			TFile* TruthCC1pFile = TFile::Open(PathToFiles+"TruthSTVAnalysis_Overlay9_"+RunNumber[WhichRun]+"_"+UBCodeVersion+".root");
+			TFile* TruthCC1pFile = TFile::Open(PathToFiles+"TruthSTVAnalysis_Overlay9_"+Runs[WhichRun]+"_"+UBCodeVersion+".root");
 			TH1D* hTruthCC1pOverlay = (TH1D*)(TruthCC1pFile->Get("TrueMuonCosThetaPlot"));
 			double NTruthCC1pOverlay = hTruthCC1pOverlay->Integral();
 
 			// ----------------------------------------------------------------------------------------------------------------------------------------
 
-			TFile* RecoOverlayFile = TFile::Open(PathToFiles+Cuts[WhichCut]+"/"+"STVStudies_Overlay9_"+RunNumber[WhichRun]+Cuts[WhichCut]+".root");
-			TFile* RecoOverlayDirtFile = TFile::Open(PathToFiles+Cuts[WhichCut]+"/"+"STVStudies_OverlayDirt9_"+RunNumber[WhichRun]+Cuts[WhichCut]+".root");
-			TFile* RecoBeamOnFile = TFile::Open(PathToFiles+Cuts[WhichCut]+"/"+"STVStudies_BeamOn9_"+RunNumber[WhichRun]+Cuts[WhichCut]+".root");
-			TFile* RecoExtBNBFile = TFile::Open(PathToFiles+Cuts[WhichCut]+"/"+"STVStudies_ExtBNB9_"+RunNumber[WhichRun]+Cuts[WhichCut]+".root");
+			TFile* RecoOverlayFile = TFile::Open(PathToFiles+Cuts[WhichCut]+"/"+"STVStudies_Overlay9_"+Runs[WhichRun]+Cuts[WhichCut]+".root");
+			TFile* RecoOverlayDirtFile = TFile::Open(PathToFiles+Cuts[WhichCut]+"/"+"STVStudies_OverlayDirt9_"+Runs[WhichRun]+Cuts[WhichCut]+".root");
+			TFile* RecoBeamOnFile = TFile::Open(PathToFiles+Cuts[WhichCut]+"/"+"STVStudies_BeamOn9_"+Runs[WhichRun]+Cuts[WhichCut]+".root");
+			TFile* RecoExtBNBFile = TFile::Open(PathToFiles+Cuts[WhichCut]+"/"+"STVStudies_ExtBNB9_"+Runs[WhichRun]+Cuts[WhichCut]+".root");
 
 			TH1D* hOverlayPOTScale = (TH1D*)(RecoOverlayFile->Get("POTScalePlot"));
 			TH1D* hBeamOnPOTScale = (TH1D*)(RecoBeamOnFile->Get("POTScalePlot"));
@@ -215,7 +218,7 @@ void DetermineMaxPurityEfficiency1D() {
 
 			// ----------------------------------------------------------------------------------------------------------------------------------------
 
-			TString TStringProductCanvas = RunNumber[WhichRun]+"_"+CutName[WhichCut]+"ProductCanvas";
+			TString TStringProductCanvas = Runs[WhichRun]+"_"+CutName[WhichCut]+"ProductCanvas";
 			TCanvas* ProductCanvas = new TCanvas(TStringProductCanvas,TStringProductCanvas,205,34,1024,768);
 			ProductCanvas->SetBottomMargin(0.15);
 			ProductCanvas->SetLeftMargin(0.15);
@@ -240,7 +243,7 @@ void DetermineMaxPurityEfficiency1D() {
 			ProductGraph->GetXaxis()->SetLabelFont(TextFont);
 			ProductGraph->GetXaxis()->SetLabelSize(TextSize);
 
-			ProductGraph->GetYaxis()->SetRangeUser(0,0.25);
+			ProductGraph->GetYaxis()->SetRangeUser(0,0.09);
 			ProductGraph->GetYaxis()->SetNdivisions(6);
 			ProductGraph->GetYaxis()->SetTitle("Purity x Efficiency");
 			ProductGraph->GetYaxis()->SetTitleOffset(1.05);
@@ -259,7 +262,7 @@ void DetermineMaxPurityEfficiency1D() {
 			TLatex* latProduct = new TLatex();
 			latProduct->SetTextFont(TextFont);
 			latProduct->SetTextSize(TextSize-0.01);
-			latProduct->DrawLatexNDC(0.2,0.82,RunNumber[WhichRun] + " Max at "+CutName[WhichCut]+" > "+ToString(SelectedThres));
+			latProduct->DrawLatexNDC(0.2,0.82,Runs[WhichRun] + " Max at "+CutName[WhichCut]+" > "+ToString(SelectedThres));
 
 			// ----------------------------------------------------------------------------------------------------------------------------------------
 			
@@ -289,16 +292,16 @@ void DetermineMaxPurityEfficiency1D() {
 			//latExtBNB->DrawLatexNDC(0.2,0.68,"Cosmics = " + CosmicCont + " #pm " + ErrorCosmicCont + " %");
 			latExtBNB->DrawLatexNDC(0.2,0.75,"Cosmics = " + CosmicCont + " #pm " + ErrorCosmicCont + " %");
 
-			TLine* line = new TLine(SelectedThres,0.,SelectedThres,0.25);
+			TLine* line = new TLine(SelectedThres,0.,SelectedThres,0.09);
 			line->SetLineStyle(kDashed);
 			line->Draw();
 
-			ProductCanvas->SaveAs(PlotPath+CutName[WhichCut]+"_TwoDScanProduct_"+RunNumber[WhichRun]+".pdf");
+			ProductCanvas->SaveAs(PlotPath+CutName[WhichCut]+"_TwoDScanProduct_"+Runs[WhichRun]+".pdf");
 			delete ProductCanvas;
 
 			// ----------------------------------------------------------------------------------------------------------------------------------------
 
-			TString TStringPurityCanvas = RunNumber[WhichRun]+"_"+CutName[WhichCut]+"PurityCanvas";
+			TString TStringPurityCanvas = Runs[WhichRun]+"_"+CutName[WhichCut]+"PurityCanvas";
 			TCanvas* PurityCanvas = new TCanvas(TStringPurityCanvas,TStringPurityCanvas,205,34,1024,768);
 			PurityCanvas->SetBottomMargin(0.15);
 			PurityCanvas->SetLeftMargin(0.15);
@@ -335,18 +338,18 @@ void DetermineMaxPurityEfficiency1D() {
 			latPurity->SetTextSize(TextSize-0.01);
 			TString Purity = ToString(round(PurityArray[GlobalThresBin]*100.,2) );
 			TString ErrorPurity = ToString(round(ErrorPurityArray[GlobalThresBin]*100.,2) );
-			latPurity->DrawLatexNDC(0.2,0.82,RunNumber[WhichRun] + " Purity at max = "+ Purity + " #pm " + ErrorPurity + " %");
+			latPurity->DrawLatexNDC(0.2,0.82,Runs[WhichRun] + " Purity at max = "+ Purity + " #pm " + ErrorPurity + " %");
 
 			TLine* lineP = new TLine(SelectedThres,0.,SelectedThres,1.);
 			lineP->SetLineStyle(kDashed);
 			lineP->Draw();
 
-			PurityCanvas->SaveAs(PlotPath+CutName[WhichCut]+"_OneDScanPurity_"+RunNumber[WhichRun]+".pdf");
+			PurityCanvas->SaveAs(PlotPath+CutName[WhichCut]+"_OneDScanPurity_"+Runs[WhichRun]+".pdf");
 			delete PurityCanvas;
 
 			// ----------------------------------------------------------------------------------------------------------------------------------------
 
-			TString TStringEfficiencyCanvas = RunNumber[WhichRun]+"_"+CutName[WhichCut]+"EfficiencyCanvas";
+			TString TStringEfficiencyCanvas = Runs[WhichRun]+"_"+CutName[WhichCut]+"EfficiencyCanvas";
 			TCanvas* EfficiencyCanvas = new TCanvas(TStringEfficiencyCanvas,TStringEfficiencyCanvas,205,34,1024,768);
 			EfficiencyCanvas->SetBottomMargin(0.15);
 			EfficiencyCanvas->SetLeftMargin(0.15);
@@ -366,7 +369,7 @@ void DetermineMaxPurityEfficiency1D() {
 			EfficiencyGraph->GetXaxis()->SetLabelFont(TextFont);
 			EfficiencyGraph->GetXaxis()->SetLabelSize(TextSize);
 
-			EfficiencyGraph->GetYaxis()->SetRangeUser(0,0.5);
+			EfficiencyGraph->GetYaxis()->SetRangeUser(0,0.15);
 			EfficiencyGraph->GetYaxis()->SetNdivisions(6);
 			EfficiencyGraph->GetYaxis()->SetTitle("Efficiency");
 			EfficiencyGraph->GetYaxis()->SetTitleOffset(0.9);
@@ -383,13 +386,13 @@ void DetermineMaxPurityEfficiency1D() {
 			latEfficiency->SetTextSize(TextSize-0.01);
 			TString Efficiency = ToString(round(EfficiencyArray[GlobalThresBin]*100.,2) );
 			TString ErrorEfficiency = ToString(round(ErrorEfficiencyArray[GlobalThresBin]*100.,2) );
-			latEfficiency->DrawLatexNDC(0.2,0.82,RunNumber[WhichRun] + " Efficiency at max = " + Efficiency + " #pm " + ErrorEfficiency + " %");
+			latEfficiency->DrawLatexNDC(0.2,0.82,Runs[WhichRun] + " Efficiency at max = " + Efficiency + " #pm " + ErrorEfficiency + " %");
 
-			TLine* lineE = new TLine(SelectedThres,0.,SelectedThres,0.5);
+			TLine* lineE = new TLine(SelectedThres,0.,SelectedThres,0.15);
 			lineE->SetLineStyle(kDashed);
 			lineE->Draw();
 
-			EfficiencyCanvas->SaveAs(PlotPath+CutName[WhichCut]+"_OneDScanEfficiency_"+RunNumber[WhichRun]+".pdf");	
+			EfficiencyCanvas->SaveAs(PlotPath+CutName[WhichCut]+"_OneDScanEfficiency_"+Runs[WhichRun]+".pdf");	
 			delete EfficiencyCanvas;
 
 			// ----------------------------------------------------------------------------------------------------------------------------------------
