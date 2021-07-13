@@ -262,7 +262,7 @@ void DetermineMaxPurityEfficiency1D() {
 			TLatex* latProduct = new TLatex();
 			latProduct->SetTextFont(TextFont);
 			latProduct->SetTextSize(TextSize-0.01);
-			latProduct->DrawLatexNDC(0.2,0.82,Runs[WhichRun] + " Max at "+CutName[WhichCut]+" > "+ToString(SelectedThres));
+			latProduct->DrawLatexNDC(0.2,0.82,Runs[WhichRun] + " Max at "+CutName[WhichCut]+" < "+ToString(SelectedThres));
 
 			// ----------------------------------------------------------------------------------------------------------------------------------------
 			

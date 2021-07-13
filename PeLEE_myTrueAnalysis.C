@@ -167,6 +167,11 @@ void PeLEE_myTrueAnalysis::Loop() {
 
 //		double weight = 1.;
 //		double T2Kweight = 1.;
+
+		// For detector variations, the eventweight weights are -1., set them back to 1.
+		if (Weight == -1.) { Weight = 1.; }
+		if (T2KWeight == -1.) { T2KWeight = 1.; }
+
 		if (Weight <= 0 || Weight > 30) { continue; }
 		if (T2KWeight <= 0 || T2KWeight > 30) { continue; }		
 		// Weight from v3.0.4 to v.3.0.6 * weight from application of T2K tune
@@ -180,7 +185,9 @@ void PeLEE_myTrueAnalysis::Loop() {
 		// Genie, flux & reinteraction weights for systematics
 
 		if ( fUniverseIndex != -1 && (fWhichSample == "Overlay9_Run1" || fWhichSample == "Overlay9_Run2" || fWhichSample == "Overlay9_Run3" 
-		|| fWhichSample == "Overlay9_Run4" || fWhichSample == "Overlay9_Run5") ) {
+		|| fWhichSample == "Overlay9_Run4" || fWhichSample == "Overlay9_Run5" || fWhichSample == "Overlay9_Combined" 
+		|| fWhichSample == "OverlayDirt9_Run1" || fWhichSample == "OverlayDirt9_Run2" || fWhichSample == "OverlayDirt9_Run3" 
+		|| fWhichSample == "OverlayDirt9_Run4" || fWhichSample == "OverlayDirt9_Run5" || fWhichSample == "OverlayDirt9_Combined") ) {
 
 			// Genie weights
 
