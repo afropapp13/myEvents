@@ -50,26 +50,8 @@ public :
    vector<double>  *XSecShape_CCMEC_UBGenie;
 
    vector<double>  *fluxes;
-/*   vector<double>  *expskin_FluxUnisim;*/
-/*   vector<double>  *horncurrent_FluxUnisim;*/
-/*   vector<double>  *kminus_PrimaryHadronNormalization;*/
-/*   vector<double>  *kplus_PrimaryHadronFeynmanScaling;*/
-/*   vector<double>  *kzero_PrimaryHadronSanfordWang;*/
-/*   vector<double>  *nucleoninexsec_FluxUnisim;*/
-/*   vector<double>  *nucleonqexsec_FluxUnisim;*/
-/*   vector<double>  *nucleontotxsec_FluxUnisim;*/
-/*   vector<double>  *piminus_PrimaryHadronSWCentralSplineVariation;*/
-/*   vector<double>  *pioninexsec_FluxUnisim;*/
-/*   vector<double>  *pionqexsec_FluxUnisim;*/
-/*   vector<double>  *piontotxsec_FluxUnisim;*/
-/*   vector<double>  *piplus_PrimaryHadronSWCentralSplineVariation;*/
 
-   vector<double>  *reinteractions;
-/*   vector<double>  *reinteractions_piminus_Geant4;*/
-/*   vector<double>  *reinteractions_piplus_Geant4;*/
-/*   vector<double>  *reinteractions_proton_Geant4;*/
-//   vector<double>  *xsr_scc_Fa3_SCC;
-//   vector<double>  *xsr_scc_Fv3_SCC;   
+   vector<double>  *reinteractions; 
 
    double             True_Ev;
    double             True_Vx;
@@ -126,6 +108,11 @@ public :
    vector<double>  *True_PMiss;
    
    vector<double>  *True_Pt;
+   vector<double>  *True_PL;
+   vector<double>  *True_Pn;
+   vector<double>  *True_Ptx;
+   vector<double>  *True_Pty;
+   vector<double>  *True_A;
    vector<double>  *True_DeltaAlphaT;
    vector<double>  *True_DeltaPhiT;
    vector<double>  *True_ECal;
@@ -155,26 +142,8 @@ public :
    TBranch        *b_XSecShape_CCMEC_UBGenie;   //!  
 
    TBranch        *b_fluxes;   //!                                 
-/*   TBranch        *b_expskin_FluxUnisim;   //!                    */
-/*   TBranch        *b_horncurrent_FluxUnisim;   //!                */
-/*   TBranch        *b_kminus_PrimaryHadronNormalization;   //!     */
-/*   TBranch        *b_kplus_PrimaryHadronFeynmanScaling;   //!     */
-/*   TBranch        *b_kzero_PrimaryHadronSanfordWang;   //!        */
-/*   TBranch        *b_nucleoninexsec_FluxUnisim;   //!             */
-/*   TBranch        *b_nucleonqexsec_FluxUnisim;   //!              */
-/*   TBranch        *b_nucleontotxsec_FluxUnisim;   //!             */
-/*   TBranch        *b_piminus_PrimaryHadronSWCentralSplineVariation;   //!                                                             */
-/*   TBranch        *b_pioninexsec_FluxUnisim;   //!                */
-/*   TBranch        *b_pionqexsec_FluxUnisim;   //!                 */
-/*   TBranch        *b_piontotxsec_FluxUnisim;   //!                */
-/*   TBranch        *b_piplus_PrimaryHadronSWCentralSplineVariation;   //!   */
 
    TBranch        *b_reinteractions;   //!                                                                    
-/*   TBranch        *b_reinteractions_piminus_Geant4;   //!         */
-/*   TBranch        *b_reinteractions_piplus_Geant4;   //! */
-/*   TBranch        *b_reinteractions_proton_Geant4;   //!                                                       */
-//   TBranch        *b_xsr_scc_Fa3_SCC;   //!                                                                                                        
-//   TBranch        *b_xsr_scc_Fv3_SCC;   //!   
 
    TBranch        *b_True_Ev;   //!
    TBranch        *b_True_Vx;   //!
@@ -231,6 +200,11 @@ public :
    TBranch        *b_True_PMiss;   //!
    
    TBranch        *b_True_Pt;   //!
+   TBranch        *b_True_PL;   //!
+   TBranch        *b_True_Pn;   //!
+   TBranch        *b_True_Ptx;   //!
+   TBranch        *b_True_Pty;   //!
+   TBranch        *b_True_A;   //!
    TBranch        *b_True_DeltaAlphaT;   //!
    TBranch        *b_True_DeltaPhiT;   //!
    TBranch        *b_True_ECal;   //!
@@ -317,26 +291,8 @@ void PeLEE_myTrueAnalysis::Init(TTree *tree)
    XSecShape_CCMEC_UBGenie = 0;
 
    fluxes = 0;
-/*   expskin_FluxUnisim = 0;*/
-/*   horncurrent_FluxUnisim = 0;*/
-/*   kminus_PrimaryHadronNormalization = 0;*/
-/*   kplus_PrimaryHadronFeynmanScaling = 0;*/
-/*   kzero_PrimaryHadronSanfordWang = 0;*/
-/*   nucleoninexsec_FluxUnisim = 0;*/
-/*   nucleonqexsec_FluxUnisim = 0;*/
-/*   nucleontotxsec_FluxUnisim = 0;*/
-/*   piminus_PrimaryHadronSWCentralSplineVariation = 0;*/
-/*   pioninexsec_FluxUnisim = 0;*/
-/*   pionqexsec_FluxUnisim = 0;*/
-/*   piontotxsec_FluxUnisim = 0;*/
-/*   piplus_PrimaryHadronSWCentralSplineVariation = 0;*/
 
    reinteractions = 0;
-/*   reinteractions_piminus_Geant4 = 0;*/
-/*   reinteractions_piplus_Geant4 = 0;*/
-/*   reinteractions_proton_Geant4 = 0;*/
-//   xsr_scc_Fa3_SCC = 0;
-//   xsr_scc_Fv3_SCC = 0;   
 
    Muon_MCParticle_StartX = 0;
    Muon_MCParticle_StartY = 0;
@@ -408,27 +364,8 @@ void PeLEE_myTrueAnalysis::Init(TTree *tree)
    fChain->SetBranchAddress("XSecShape_CCMEC_UBGenie", &XSecShape_CCMEC_UBGenie, &b_XSecShape_CCMEC_UBGenie);
 
    fChain->SetBranchAddress("fluxes", &fluxes, &b_fluxes);
-/*   fChain->SetBranchAddress("expskin_FluxUnisim", &expskin_FluxUnisim, &b_expskin_FluxUnisim);*/
-/*   fChain->SetBranchAddress("horncurrent_FluxUnisim", &horncurrent_FluxUnisim, &b_horncurrent_FluxUnisim);*/
-/*   fChain->SetBranchAddress("kminus_PrimaryHadronNormalization", &kminus_PrimaryHadronNormalization, &b_kminus_PrimaryHadronNormalization);*/
-/*   fChain->SetBranchAddress("kplus_PrimaryHadronFeynmanScaling", &kplus_PrimaryHadronFeynmanScaling, &b_kplus_PrimaryHadronFeynmanScaling);*/
-/*   fChain->SetBranchAddress("kzero_PrimaryHadronSanfordWang", &kzero_PrimaryHadronSanfordWang, &b_kzero_PrimaryHadronSanfordWang);*/
-/*   fChain->SetBranchAddress("nucleoninexsec_FluxUnisim", &nucleoninexsec_FluxUnisim, &b_nucleoninexsec_FluxUnisim);*/
-/*   fChain->SetBranchAddress("nucleonqexsec_FluxUnisim", &nucleonqexsec_FluxUnisim, &b_nucleonqexsec_FluxUnisim);*/
-/*   fChain->SetBranchAddress("nucleontotxsec_FluxUnisim", &nucleontotxsec_FluxUnisim, &b_nucleontotxsec_FluxUnisim);*/
-/*   fChain->SetBranchAddress("piminus_PrimaryHadronSWCentralSplineVariation", &piminus_PrimaryHadronSWCentralSplineVariation, &b_piminus_PrimaryHadronSWCentralSplineVariation);*/
-/*   fChain->SetBranchAddress("pioninexsec_FluxUnisim", &pioninexsec_FluxUnisim, &b_pioninexsec_FluxUnisim);*/
-/*   fChain->SetBranchAddress("pionqexsec_FluxUnisim", &pionqexsec_FluxUnisim, &b_pionqexsec_FluxUnisim);*/
-/*   fChain->SetBranchAddress("piontotxsec_FluxUnisim", &piontotxsec_FluxUnisim, &b_piontotxsec_FluxUnisim);*/
-/*   fChain->SetBranchAddress("piplus_PrimaryHadronSWCentralSplineVariation", &piplus_PrimaryHadronSWCentralSplineVariation, &b_piplus_PrimaryHadronSWCentralSplineVariation);*/
 
    fChain->SetBranchAddress("reinteractions", &reinteractions, &b_reinteractions);
-/*   fChain->SetBranchAddress("reinteractions_piminus_Geant4", &reinteractions_piminus_Geant4, &b_reinteractions_piminus_Geant4);*/
-/*   fChain->SetBranchAddress("reinteractions_piplus_Geant4", &reinteractions_piplus_Geant4, &b_reinteractions_piplus_Geant4);*/
-/*   fChain->SetBranchAddress("reinteractions_proton_Geant4", &reinteractions_proton_Geant4, &b_reinteractions_proton_Geant4);*/
-
-//   fChain->SetBranchAddress("xsr_scc_Fa3_SCC", &xsr_scc_Fa3_SCC, &b_xsr_scc_Fa3_SCC);
-//   fChain->SetBranchAddress("xsr_scc_Fv3_SCC", &xsr_scc_Fv3_SCC, &b_xsr_scc_Fv3_SCC);   
 
    fChain->SetBranchAddress("True_Ev", &True_Ev, &b_True_Ev);   
    fChain->SetBranchAddress("True_Vx", &True_Vx, &b_True_Vx);   
@@ -485,6 +422,11 @@ void PeLEE_myTrueAnalysis::Init(TTree *tree)
    fChain->SetBranchAddress("True_PMiss", &True_PMiss, &b_True_PMiss);
    
    fChain->SetBranchAddress("True_Pt", &True_Pt, &b_True_Pt);
+   fChain->SetBranchAddress("True_PL", &True_PL, &b_True_PL);
+   fChain->SetBranchAddress("True_Pn", &True_Pn, &b_True_Pn);
+   fChain->SetBranchAddress("True_Ptx", &True_Ptx, &b_True_Ptx);
+   fChain->SetBranchAddress("True_Pty", &True_Pty, &b_True_Pty);
+   fChain->SetBranchAddress("True_A", &True_A, &b_True_A);
    fChain->SetBranchAddress("True_DeltaAlphaT", &True_DeltaAlphaT, &b_True_DeltaAlphaT);
    fChain->SetBranchAddress("True_DeltaPhiT", &True_DeltaPhiT, &b_True_DeltaPhiT);
    fChain->SetBranchAddress("True_ECal", &True_ECal, &b_True_ECal);

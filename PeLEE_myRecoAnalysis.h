@@ -28,7 +28,6 @@ public :
    Int_t           fCurrent; //!current Tree number in a TChain
 
    // Declaration of leaf types
-//   Int_t           PassedSwTrigger;
    double           Weight;
    double           T2KWeight;
    double           ROOTinoWeight;
@@ -38,59 +37,6 @@ public :
    int             SubRun;
    int             Event;
 
-/*   vector<float>  *CandidateMu_Plane0_LastEDep;*/
-/*   vector<float>  *CandidateMu_Plane1_LastEDep;*/
-/*   vector<float>  *CandidateMu_Plane2_LastEDep;*/
-
-/*   vector<float>  *CandidateP_Plane0_LastEDep;*/
-/*   vector<float>  *CandidateP_Plane1_LastEDep;*/
-/*   vector<float>  *CandidateP_Plane2_LastEDep;*/
-
-/*
-   vector<int>  *CandidateMu_Plane0_NHits;
-   vector<int>  *CandidateMu_Plane1_NHits;
-   vector<int>  *CandidateMu_Plane2_NHits;
-
-   vector<int>  *CandidateP_Plane0_NHits;
-   vector<int>  *CandidateP_Plane1_NHits;
-   vector<int>  *CandidateP_Plane2_NHits;
-
-   std::vector<std::vector<float> > *CandidateMu_Plane0_ResidualRange;
-   std::vector<std::vector<float> > *CandidateMu_Plane0_dEdx;
-   std::vector<std::vector<float> > *CandidateMu_Plane0_dQdx;
-   std::vector<std::vector<float> > *CandidateMu_Plane0_TruncdEdx;
-   std::vector<std::vector<float> > *CandidateMu_Plane0_TruncdQdx;
-
-   std::vector<std::vector<float> > *CandidateMu_Plane1_ResidualRange;
-   std::vector<std::vector<float> > *CandidateMu_Plane1_dEdx;
-   std::vector<std::vector<float> > *CandidateMu_Plane1_dQdx;
-   std::vector<std::vector<float> > *CandidateMu_Plane1_TruncdEdx;
-   std::vector<std::vector<float> > *CandidateMu_Plane1_TruncdQdx;
-
-   std::vector<std::vector<float> > *CandidateMu_Plane2_ResidualRange;
-   std::vector<std::vector<float> > *CandidateMu_Plane2_dEdx;
-   std::vector<std::vector<float> > *CandidateMu_Plane2_dQdx;
-   std::vector<std::vector<float> > *CandidateMu_Plane2_TruncdEdx;
-   std::vector<std::vector<float> > *CandidateMu_Plane2_TruncdQdx;
-
-   std::vector<std::vector<float> > *CandidateP_Plane0_ResidualRange;
-   std::vector<std::vector<float> > *CandidateP_Plane0_dEdx;
-   std::vector<std::vector<float> > *CandidateP_Plane0_dQdx;
-   std::vector<std::vector<float> > *CandidateP_Plane0_TruncdEdx;
-   std::vector<std::vector<float> > *CandidateP_Plane0_TruncdQdx;
-
-   std::vector<std::vector<float> > *CandidateP_Plane1_ResidualRange;
-   std::vector<std::vector<float> > *CandidateP_Plane1_dEdx;
-   std::vector<std::vector<float> > *CandidateP_Plane1_dQdx;
-   std::vector<std::vector<float> > *CandidateP_Plane1_TruncdEdx;
-   std::vector<std::vector<float> > *CandidateP_Plane1_TruncdQdx;
-
-   std::vector<std::vector<float> > *CandidateP_Plane2_ResidualRange;
-   std::vector<std::vector<float> > *CandidateP_Plane2_dEdx;
-   std::vector<std::vector<float> > *CandidateP_Plane2_dQdx;
-   std::vector<std::vector<float> > *CandidateP_Plane2_TruncdEdx;
-   std::vector<std::vector<float> > *CandidateP_Plane2_TruncdQdx;
-*/
    vector<double>  *All_UBGenie;
    vector<double>  *AxFFCCQEshape_UBGenie;
    vector<double>  *DecayAngMEC_UBGenie;
@@ -104,27 +50,8 @@ public :
    vector<double>  *XSecShape_CCMEC_UBGenie;
 
    vector<double>  *fluxes;
-/*   vector<double>  *expskin_FluxUnisim;*/
-/*   vector<double>  *horncurrent_FluxUnisim;*/
-/*   vector<double>  *kminus_PrimaryHadronNormalization;*/
-/*   vector<double>  *kplus_PrimaryHadronFeynmanScaling;*/
-/*   vector<double>  *kzero_PrimaryHadronSanfordWang;*/
-/*   vector<double>  *nucleoninexsec_FluxUnisim;*/
-/*   vector<double>  *nucleonqexsec_FluxUnisim;*/
-/*   vector<double>  *nucleontotxsec_FluxUnisim;*/
-/*   vector<double>  *piminus_PrimaryHadronSWCentralSplineVariation;*/
-/*   vector<double>  *pioninexsec_FluxUnisim;*/
-/*   vector<double>  *pionqexsec_FluxUnisim;*/
-/*   vector<double>  *piontotxsec_FluxUnisim;*/
-/*   vector<double>  *piplus_PrimaryHadronSWCentralSplineVariation;*/
 
    vector<double>  *reinteractions;
-/*   vector<double>  *reinteractions_piminus_Geant4;*/
-/*   vector<double>  *reinteractions_piplus_Geant4;*/
-/*   vector<double>  *reinteractions_proton_Geant4;*/
-
-//   vector<double>  *xsr_scc_Fa3_SCC;
-//   vector<double>  *xsr_scc_Fv3_SCC;
 
    double          True_Ev;
    double          True_Vx;
@@ -150,24 +77,10 @@ public :
    int             MCParticle_Mode;
    float          NuScore;
    double          FlashScore;
-/*   Int_t           NBeamFlashes;*/
-/*   vector<double>  *BeamFlashes_YCenter;*/
-/*   vector<double>  *BeamFlashes_ZCenter;*/
-/*   vector<double>  *BeamFlashes_TotalPE;*/
-//   Int_t           NumberMCParticles;
-//   vector<double>  *MCParticle_Mom;
-//   vector<double>  *MCParticle_Mode;
-//   vector<double>  *MCParticle_Phi;
-//   vector<double>  *MCParticle_CosTheta;
-////   vector<double>  *MCParticle_Length;
-//   vector<int>     *MCParticle_StartContainment;
-//   vector<int>     *MCParticle_EndContainment;
-//   vector<int>     *MCParticle_Pdg;
    vector<double>  *CandidateMuP_Distance;
    vector<float>  *Vertex_X;
    vector<float>  *Vertex_Y;
    vector<float>  *Vertex_Z;
-//   vector<double>  *VertexActivity_50x100;
 
    vector<double>  *CandidateMuStartVertexDistance;
    vector<double>  *CandidateMuEndVertexDistance;
@@ -193,17 +106,11 @@ public :
    vector<double>  *True_CandidateMu_EndZ;            
 
    vector<double>  *CandidateMu_P_Range;
-   vector<double>  *CandidateMu_P_Range_Recalibrate;
    vector<double>  *CandidateMu_P_MCS;
-   vector<double>  *CandidateMu_P_MCS_Recalibrate;
    vector<double>  *CandidateMu_Phi;
-   vector<double>  *CandidateMu_Phi_Recalibrate;
    vector<double>  *CandidateMu_CosTheta;
-   vector<double>  *CandidateMu_CosTheta_Recalibrate;
    vector<double>  *CandidateMu_Length;
 //   vector<double>  *CandidateMu_Chi2_YPlane;
-//   vector<double>  *CandidateMu_ThreePlaneChi2;
-//   vector<double>  *CandidateMu_ThreePlaneLogLikelihood;
    vector<double>  *CandidateMu_LLR_PID;
    vector<int>     *CandidateMu_StartContainment;
    vector<int>     *CandidateMu_EndContainment;
@@ -232,16 +139,10 @@ public :
    vector<double>  *True_CandidateP_EndZ;
 
    vector<double>  *CandidateP_P_Range;
-   vector<double>  *CandidateP_P_Range_Recalibrate;
-//   vector<double>  *CandidateP_P_MCS;   
    vector<double>  *CandidateP_Phi;
-   vector<double>  *CandidateP_Phi_Recalibrate;
    vector<double>  *CandidateP_CosTheta;
-   vector<double>  *CandidateP_CosTheta_Recalibrate;
    vector<double>  *CandidateP_Length;
 //   vector<double>  *CandidateP_Chi2_YPlane;
-//   vector<double>  *CandidateP_ThreePlaneChi2;
-//   vector<double>  *CandidateP_ThreePlaneLogLikelihood;
    vector<double>  *CandidateP_LLR_PID;
    vector<int>     *CandidateP_StartContainment;
    vector<int>     *CandidateP_EndContainment;
@@ -259,39 +160,37 @@ public :
    vector<double>  *True_DeltaPhi;
    vector<double>  *True_DeltaTheta;      
 
-//   vector<double>  *Reco_kMiss;
-//   vector<double>  *Reco_PMissMinus;
-//   vector<double>  *Reco_PMiss;
+   vector<double>  *Reco_kMiss;
+   vector<double>  *Reco_PMissMinus;
+   vector<double>  *Reco_PMiss;
    vector<double>  *Reco_Pt;
+   vector<double>  *Reco_PL;
+   vector<double>  *Reco_Pn;
+   vector<double>  *Reco_Ptx;
+   vector<double>  *Reco_Pty;
+   vector<double>  *Reco_A;
    vector<double>  *Reco_DeltaAlphaT;
    vector<double>  *Reco_DeltaPhiT;
    vector<double>  *Reco_ECal;
    vector<double>  *Reco_EQE;
    vector<double>  *Reco_Q2;
 
-   vector<double>  *Reco_Pt_Recalibrate;
-   vector<double>  *Reco_DeltaAlphaT_Recalibrate;
-   vector<double>  *Reco_DeltaPhiT_Recalibrate;
-   vector<double>  *Reco_ECal_Recalibrate;
-   vector<double>  *Reco_EQE_Recalibrate;
-   vector<double>  *Reco_Q2_Recalibrate;
-
-//   vector<double>  *True_PMissMinus;
-//   vector<double>  *True_kMiss;
-//   vector<double>  *True_PMiss;   
+   vector<double>  *True_PMissMinus;
+   vector<double>  *True_kMiss;
+   vector<double>  *True_PMiss;   
    vector<double>  *True_Pt;
+   vector<double>  *True_Pn;
+   vector<double>  *True_PL;
+   vector<double>  *True_Ptx;
+   vector<double>  *True_Pty;
+   vector<double>  *True_A;
    vector<double>  *True_DeltaAlphaT;
    vector<double>  *True_DeltaPhiT;
    vector<double>  *True_ECal;
    vector<double>  *True_EQE;
    vector<double>  *True_Q2;                     
 
-//   Int_t           NuMuPFParticles;
-//   vector<int>     *PFParticle_NuMuDaughters;
-//   vector<vector<int> > *PFParticle_NuMuDaughtersPdgCode;
-
    // List of branches
-//   TBranch        *b_PassedSwTrigger;   //!
    TBranch        *b_Weight;   //!
    TBranch        *b_T2KWeight;   //!
    TBranch        *b_ROOTinoWeight;   //!
@@ -300,58 +199,6 @@ public :
    TBranch        *b_Run;   //!
    TBranch        *b_SubRun;   //!
    TBranch        *b_Event;   //! 
-
-/*   TBranch        *b_CandidateMu_Plane0_LastEDep;   //!*/
-/*   TBranch        *b_CandidateMu_Plane1_LastEDep;   //! */
-/*   TBranch        *b_CandidateMu_Plane2_LastEDep;   //!*/
-
-/*   TBranch        *b_CandidateP_Plane0_LastEDep;   //!*/
-/*   TBranch        *b_CandidateP_Plane1_LastEDep;   //! */
-/*   TBranch        *b_CandidateP_Plane2_LastEDep;   //!*/
-
-//   TBranch        *b_CandidateMu_Plane0_NHits;   //! 
-//   TBranch        *b_CandidateMu_Plane1_NHits;   //! 
-//   TBranch        *b_CandidateMu_Plane2_NHits;   //!
-
-//   TBranch        *b_CandidateP_Plane0_NHits;   //! 
-//   TBranch        *b_CandidateP_Plane1_NHits;   //! 
-//   TBranch        *b_CandidateP_Plane2_NHits;   //! 
-
-//   TBranch        *b_CandidateMu_Plane0_ResidualRange;
-//   TBranch        *b_CandidateMu_Plane0_dEdx;
-//   TBranch        *b_CandidateMu_Plane0_dQdx;
-//   TBranch        *b_CandidateMu_Plane0_TruncdEdx;
-//   TBranch        *b_CandidateMu_Plane0_TruncdQdx;
-
-//   TBranch        *b_CandidateMu_Plane1_ResidualRange;
-//   TBranch        *b_CandidateMu_Plane1_dEdx;
-//   TBranch        *b_CandidateMu_Plane1_dQdx;
-//   TBranch        *b_CandidateMu_Plane1_TruncdEdx;
-//   TBranch        *b_CandidateMu_Plane1_TruncdQdx;
-
-//   TBranch        *b_CandidateMu_Plane2_ResidualRange;
-//   TBranch        *b_CandidateMu_Plane2_dEdx;
-//   TBranch        *b_CandidateMu_Plane2_dQdx;
-//   TBranch        *b_CandidateMu_Plane2_TruncdEdx;
-//   TBranch        *b_CandidateMu_Plane2_TruncdQdx;
-
-//   TBranch        *b_CandidateP_Plane0_ResidualRange;
-//   TBranch        *b_CandidateP_Plane0_dEdx;
-//   TBranch        *b_CandidateP_Plane0_dQdx;
-//   TBranch        *b_CandidateP_Plane0_TruncdEdx;
-//   TBranch        *b_CandidateP_Plane0_TruncdQdx;
-
-//   TBranch        *b_CandidateP_Plane1_ResidualRange;
-//   TBranch        *b_CandidateP_Plane1_dEdx;
-//   TBranch        *b_CandidateP_Plane1_dQdx;
-//   TBranch        *b_CandidateP_Plane1_TruncdEdx;
-//   TBranch        *b_CandidateP_Plane1_TruncdQdx;
-
-//   TBranch        *b_CandidateP_Plane2_ResidualRange;
-//   TBranch        *b_CandidateP_Plane2_dEdx;
-//   TBranch        *b_CandidateP_Plane2_dQdx;
-//   TBranch        *b_CandidateP_Plane2_TruncdEdx;
-//   TBranch        *b_CandidateP_Plane2_TruncdQdx;
 
    TBranch        *b_All_UBGenie;   //!                           
    TBranch        *b_AxFFCCQEshape_UBGenie;   //!                 
@@ -365,27 +212,9 @@ public :
    TBranch        *b_VecFFCCQEshape_UBGenie;   //!                
    TBranch        *b_XSecShape_CCMEC_UBGenie;   //!  
 
-   TBranch        *b_fluxes;   //!                                 
-/*   TBranch        *b_expskin_FluxUnisim;   //!                    */
-/*   TBranch        *b_horncurrent_FluxUnisim;   //!                */
-/*   TBranch        *b_kminus_PrimaryHadronNormalization;   //!     */
-/*   TBranch        *b_kplus_PrimaryHadronFeynmanScaling;   //!     */
-/*   TBranch        *b_kzero_PrimaryHadronSanfordWang;   //!        */
-/*   TBranch        *b_nucleoninexsec_FluxUnisim;   //!             */
-/*   TBranch        *b_nucleonqexsec_FluxUnisim;   //!              */
-/*   TBranch        *b_nucleontotxsec_FluxUnisim;   //!             */
-/*   TBranch        *b_piminus_PrimaryHadronSWCentralSplineVariation;   //!                                                             */
-/*   TBranch        *b_pioninexsec_FluxUnisim;   //!                */
-/*   TBranch        *b_pionqexsec_FluxUnisim;   //!                 */
-/*   TBranch        *b_piontotxsec_FluxUnisim;   //!                */
-/*   TBranch        *b_piplus_PrimaryHadronSWCentralSplineVariation;   //!    */
+   TBranch        *b_fluxes;   //! 
 
-   TBranch        *b_reinteractions;   //!                                                                   
-/*   TBranch        *b_reinteractions_piminus_Geant4;   //!         */
-/*   TBranch        *b_reinteractions_piplus_Geant4;   //! */
-/*   TBranch        *b_reinteractions_proton_Geant4;   //!                                                       */
-//   TBranch        *b_xsr_scc_Fa3_SCC;   //!                                                                                                        
-//   TBranch        *b_xsr_scc_Fv3_SCC;   //!
+   TBranch        *b_reinteractions;   //!  
 
    TBranch        *b_True_Ev;   //!
    TBranch        *b_True_Vx;   //!
@@ -411,24 +240,10 @@ public :
    TBranch        *b_MCParticle_Mode;   //!
    TBranch        *b_NuScore;   //!
    TBranch        *b_FlashScore;   //!
-/*   TBranch        *b_NBeamFlashes;   //!*/
-/*   TBranch        *b_BeamFlashes_YCenter;   //!*/
-/*   TBranch        *b_BeamFlashes_ZCenter;   //!*/
-/*   TBranch        *b_BeamFlashes_TotalPE;   //!*/
-//   TBranch        *b_NumberMCParticles;   //!
-//   TBranch        *b_MCParticle_Mom;   //!
-//   TBranch        *b_MCParticle_Mode;   //!
-//   TBranch        *b_MCParticle_Phi;   //!
-//   TBranch        *b_MCParticle_CosTheta;   //!
-////   TBranch        *b_MCParticle_Length;   //!
-//   TBranch        *b_MCParticle_StartContainment;   //!
-//   TBranch        *b_MCParticle_EndContainment;   //!
-//   TBranch        *b_MCParticle_Pdg;   //!
    TBranch        *b_CandidateMuP_Distance;   //!
    TBranch        *b_Vertex_X;   //!
    TBranch        *b_Vertex_Y;   //!
    TBranch        *b_Vertex_Z;   //!
-//   TBranch        *b_VertexActivity_50x100;   //!
 
    TBranch  	  *b_CandidateMuStartVertexDistance;
    TBranch  	  *b_CandidateMuEndVertexDistance;
@@ -454,17 +269,11 @@ public :
    TBranch        *b_True_CandidateMu_EndZ;   //! 
          
    TBranch        *b_CandidateMu_P_Range;   //!
-   TBranch        *b_CandidateMu_P_Range_Recalibrate;   //!
    TBranch        *b_CandidateMu_P_MCS;   //!   
-   TBranch        *b_CandidateMu_P_MCS_Recalibrate;   //!   
    TBranch        *b_CandidateMu_Phi;   //!
-   TBranch        *b_CandidateMu_Phi_Recalibrate;   //!
    TBranch        *b_CandidateMu_CosTheta;   //!
-   TBranch        *b_CandidateMu_CosTheta_Recalibrate;   //!
    TBranch        *b_CandidateMu_Length;   //!
 //   TBranch        *b_CandidateMu_Chi2_YPlane;   //!
-//   TBranch        *b_CandidateMu_ThreePlaneChi2;   //!
-//   TBranch        *b_CandidateMu_ThreePlaneLogLikelihood;   //!
    TBranch        *b_CandidateMu_LLR_PID;   //!
    TBranch        *b_CandidateMu_StartContainment;   //!
    TBranch        *b_CandidateMu_EndContainment;   //!
@@ -493,16 +302,10 @@ public :
    TBranch        *b_True_CandidateP_EndZ;   //!
 
    TBranch        *b_CandidateP_P_Range;   //!
-   TBranch        *b_CandidateP_P_Range_Recalibrate;   //!
-//   TBranch        *b_CandidateP_P_MCS;   //!   
    TBranch        *b_CandidateP_Phi;   //!
-   TBranch        *b_CandidateP_Phi_Recalibrate;   //!
    TBranch        *b_CandidateP_CosTheta;   //!
-   TBranch        *b_CandidateP_CosTheta_Recalibrate;   //!
    TBranch        *b_CandidateP_Length;   //!
 //   TBranch        *b_CandidateP_Chi2_YPlane;   //!
-//   TBranch        *b_CandidateP_ThreePlaneChi2;   //!
-//   TBranch        *b_CandidateP_ThreePlaneLogLikelihood;   //!
    TBranch        *b_CandidateP_LLR_PID;   //!
    TBranch        *b_CandidateP_StartContainment;   //!
    TBranch        *b_CandidateP_EndContainment;   //!
@@ -520,37 +323,35 @@ public :
    TBranch        *b_True_DeltaPhi;   //!
    TBranch        *b_True_DeltaTheta;   //!      
 
-//   TBranch        *b_Reco_kMiss;   //!
-//   TBranch        *b_Reco_PMissMinus;   //!
-//   TBranch        *b_Reco_PMiss;   //!   
+   TBranch        *b_Reco_kMiss;   //!
+   TBranch        *b_Reco_PMissMinus;   //!
+   TBranch        *b_Reco_PMiss;   //!   
    TBranch        *b_Reco_Pt;   //!
+   TBranch        *b_Reco_PL;   //!
+   TBranch        *b_Reco_Pn;   //!
+   TBranch        *b_Reco_Ptx;   //!
+   TBranch        *b_Reco_Pty;   //!
+   TBranch        *b_Reco_A;   //!
    TBranch        *b_Reco_DeltaAlphaT;   //!
    TBranch        *b_Reco_DeltaPhiT;   //!
    TBranch        *b_Reco_ECal;   //!
    TBranch        *b_Reco_EQE;   //!
    TBranch        *b_Reco_Q2;   //!
 
-   TBranch        *b_Reco_Pt_Recalibrate;   //!
-   TBranch        *b_Reco_DeltaAlphaT_Recalibrate;   //!
-   TBranch        *b_Reco_DeltaPhiT_Recalibrate;   //!
-   TBranch        *b_Reco_ECal_Recalibrate;   //!
-   TBranch        *b_Reco_EQE_Recalibrate;   //!
-   TBranch        *b_Reco_Q2_Recalibrate;   //!
-
-//   TBranch        *b_True_kMiss;   //!
-//   TBranch        *b_True_PMissMinus;   //!
-//   TBranch        *b_True_PMiss;   //!   
+   TBranch        *b_True_kMiss;   //!
+   TBranch        *b_True_PMissMinus;   //!
+   TBranch        *b_True_PMiss;   //!   
    TBranch        *b_True_Pt;   //!
+   TBranch        *b_True_PL;   //!
+   TBranch        *b_True_Pn;   //!
+   TBranch        *b_True_Ptx;   //!
+   TBranch        *b_True_Pty;   //!
+   TBranch        *b_True_A;   //!
    TBranch        *b_True_DeltaAlphaT;   //!
    TBranch        *b_True_DeltaPhiT;   //!
    TBranch        *b_True_ECal;   //!
    TBranch        *b_True_EQE;   //!
    TBranch        *b_True_Q2;   //!   
-                     
-
-//   TBranch        *b_NuMuPFParticles;   //!
-//   TBranch        *b_PFParticle_NuMuDaughters;   //!
-//   TBranch        *b_PFParticle_NuMuDaughtersPdgCode;   //!
 
    PeLEE_myRecoAnalysis(TString WhichSample="",TString Tune="",TString WhichEventWeightLabel="", int UniverseIndex=-1, TTree *tree=0);
    virtual ~PeLEE_myRecoAnalysis();
@@ -618,58 +419,6 @@ void PeLEE_myRecoAnalysis::Init(TTree *tree)
 
    // Set object pointer
 
-/*   CandidateMu_Plane0_LastEDep = 0;*/
-/*   CandidateMu_Plane1_LastEDep = 0;*/
-/*   CandidateMu_Plane2_LastEDep = 0;*/
-
-/*   CandidateP_Plane0_LastEDep = 0;*/
-/*   CandidateP_Plane1_LastEDep = 0;*/
-/*   CandidateP_Plane2_LastEDep = 0;*/
-
-//   CandidateMu_Plane0_NHits = 0;
-//   CandidateMu_Plane1_NHits = 0;
-//   CandidateMu_Plane2_NHits = 0;
-
-//   CandidateP_Plane0_NHits = 0;
-//   CandidateP_Plane1_NHits = 0;
-//   CandidateP_Plane2_NHits = 0;
-
-//   CandidateMu_Plane0_ResidualRange = 0;
-//   CandidateMu_Plane0_dEdx = 0;
-//   CandidateMu_Plane0_dQdx = 0;
-//   CandidateMu_Plane0_TruncdEdx = 0;
-//   CandidateMu_Plane0_TruncdQdx = 0;
-
-//   CandidateMu_Plane1_ResidualRange = 0;
-//   CandidateMu_Plane1_dEdx = 0;
-//   CandidateMu_Plane1_dQdx = 0;
-//   CandidateMu_Plane1_TruncdEdx = 0;
-//   CandidateMu_Plane1_TruncdQdx = 0;
-
-//   CandidateMu_Plane2_ResidualRange = 0;
-//   CandidateMu_Plane2_dEdx = 0;
-//   CandidateMu_Plane2_dQdx = 0;
-//   CandidateMu_Plane2_TruncdEdx = 0;
-//   CandidateMu_Plane2_TruncdQdx = 0;
-
-//   CandidateP_Plane0_ResidualRange = 0;
-//   CandidateP_Plane0_dEdx = 0;
-//   CandidateP_Plane0_dQdx = 0;
-//   CandidateP_Plane0_TruncdEdx = 0;
-//   CandidateP_Plane0_TruncdQdx = 0;
-
-//   CandidateP_Plane1_ResidualRange = 0;
-//   CandidateP_Plane1_dEdx = 0;
-//   CandidateP_Plane1_dQdx = 0;
-//   CandidateP_Plane1_TruncdEdx = 0;
-//   CandidateP_Plane1_TruncdQdx = 0;
-
-//   CandidateP_Plane2_ResidualRange = 0;
-//   CandidateP_Plane2_dEdx = 0;
-//   CandidateP_Plane2_dQdx = 0;
-//   CandidateP_Plane2_TruncdEdx = 0;
-//   CandidateP_Plane2_TruncdQdx = 0;
-
    All_UBGenie = 0;
    AxFFCCQEshape_UBGenie = 0;
    DecayAngMEC_UBGenie = 0;
@@ -683,43 +432,12 @@ void PeLEE_myRecoAnalysis::Init(TTree *tree)
    XSecShape_CCMEC_UBGenie = 0;
 
    fluxes = 0;
-/*   expskin_FluxUnisim = 0;*/
-/*   horncurrent_FluxUnisim = 0;*/
-/*   kminus_PrimaryHadronNormalization = 0;*/
-/*   kplus_PrimaryHadronFeynmanScaling = 0;*/
-/*   kzero_PrimaryHadronSanfordWang = 0;*/
-/*   nucleoninexsec_FluxUnisim = 0;*/
-/*   nucleonqexsec_FluxUnisim = 0;*/
-/*   nucleontotxsec_FluxUnisim = 0;*/
-/*   piminus_PrimaryHadronSWCentralSplineVariation = 0;*/
-/*   pioninexsec_FluxUnisim = 0;*/
-/*   pionqexsec_FluxUnisim = 0;*/
-/*   piontotxsec_FluxUnisim = 0;*/
-/*   piplus_PrimaryHadronSWCentralSplineVariation = 0;*/
 
    reinteractions = 0;
-/*   reinteractions_piminus_Geant4 = 0;*/
-/*   reinteractions_piplus_Geant4 = 0;*/
-/*   reinteractions_proton_Geant4 = 0;*/
-//   xsr_scc_Fa3_SCC = 0;
-//   xsr_scc_Fv3_SCC = 0;
-
-/*   BeamFlashes_YCenter = 0;*/
-/*   BeamFlashes_ZCenter = 0;*/
-/*   BeamFlashes_TotalPE = 0;*/
-//   MCParticle_Mom = 0;
-//   MCParticle_Mode = 0;
-//   MCParticle_Phi = 0;
-//   MCParticle_CosTheta = 0;
-////   MCParticle_Length = 0;
-//   MCParticle_StartContainment = 0;
-//   MCParticle_EndContainment = 0;
-//   MCParticle_Pdg = 0;
    CandidateMuP_Distance = 0;
    Vertex_X = 0;
    Vertex_Y = 0;
    Vertex_Z = 0;
-//   VertexActivity_50x100 = 0;
 
    CandidateMuStartVertexDistance = 0;
    CandidateMuEndVertexDistance = 0;
@@ -745,17 +463,11 @@ void PeLEE_myRecoAnalysis::Init(TTree *tree)
    True_CandidateMu_EndZ = 0;
           
    CandidateMu_P_Range = 0;
-   CandidateMu_P_Range_Recalibrate = 0;
    CandidateMu_P_MCS = 0;   
-   CandidateMu_P_MCS_Recalibrate = 0;   
    CandidateMu_Phi = 0;
-   CandidateMu_Phi_Recalibrate = 0;
    CandidateMu_CosTheta = 0;
-   CandidateMu_CosTheta_Recalibrate = 0;
    CandidateMu_Length = 0;
 //   CandidateMu_Chi2_YPlane = 0;
-//   CandidateMu_ThreePlaneChi2 = 0;
-//   CandidateMu_ThreePlaneLogLikelihood = 0;
    CandidateMu_LLR_PID = 0;
    CandidateMu_StartContainment = 0;
    CandidateMu_EndContainment = 0;
@@ -784,16 +496,10 @@ void PeLEE_myRecoAnalysis::Init(TTree *tree)
    True_CandidateP_EndZ = 0;
 
    CandidateP_P_Range = 0;
-   CandidateP_P_Range_Recalibrate = 0;
-//   CandidateP_P_MCS = 0;   
    CandidateP_Phi = 0;
-   CandidateP_Phi_Recalibrate = 0;
    CandidateP_CosTheta = 0;
-   CandidateP_CosTheta_Recalibrate = 0;
    CandidateP_Length = 0;
 //   CandidateP_Chi2_YPlane = 0;
-//   CandidateP_ThreePlaneChi2 = 0;
-//   CandidateP_ThreePlaneLogLikelihood = 0;
    CandidateP_LLR_PID = 0;
    CandidateP_StartContainment = 0;
    CandidateP_EndContainment = 0;
@@ -809,38 +515,37 @@ void PeLEE_myRecoAnalysis::Init(TTree *tree)
    Reco_DeltaPhi = 0;
    Reco_DeltaTheta = 0;
 
-//   Reco_PMissMinus = 0;
-//   Reco_kMiss = 0;
-//   Reco_PMiss = 0;   
+   Reco_PMissMinus = 0;
+   Reco_kMiss = 0;
+   Reco_PMiss = 0;   
    Reco_Pt = 0;
+   Reco_PL = 0;
+   Reco_Pn = 0;
+   Reco_Ptx = 0;
+   Reco_Pty = 0;
+   Reco_A = 0;
    Reco_DeltaAlphaT = 0;
    Reco_DeltaPhiT = 0;
    Reco_ECal = 0;
    Reco_EQE = 0;
    Reco_Q2 = 0;
 
-   Reco_Pt_Recalibrate = 0;
-   Reco_DeltaAlphaT_Recalibrate = 0;
-   Reco_DeltaPhiT_Recalibrate = 0;
-   Reco_ECal_Recalibrate = 0;
-   Reco_EQE_Recalibrate = 0;
-   Reco_Q2_Recalibrate = 0;
-
    True_DeltaPhi = 0;
    True_DeltaTheta = 0;
 
-//   True_kMiss = 0;
-//   True_PMissMinus = 0;
-//   True_PMiss = 0;   
+   True_kMiss = 0;
+   True_PMissMinus = 0;
+   True_PMiss = 0;   
    True_Pt = 0;
+   True_PL = 0;
+   True_Pn = 0;
+   True_Ptx = 0;
+   True_Pty = 0;
    True_DeltaAlphaT = 0;
    True_DeltaPhiT = 0;
    True_ECal = 0;
    True_EQE = 0;
    True_Q2 = 0;                     
-
-//   PFParticle_NuMuDaughters = 0;
-//   PFParticle_NuMuDaughtersPdgCode = 0;
 
    // Set branch addresses and branch pointers
    if (!tree) return;
@@ -848,7 +553,6 @@ void PeLEE_myRecoAnalysis::Init(TTree *tree)
    fCurrent = -1;
    fChain->SetMakeClass(1);
 
-//   fChain->SetBranchAddress("PassedSwTrigger", &PassedSwTrigger, &b_PassedSwTrigger);
    fChain->SetBranchAddress("Weight", &Weight, &b_Weight);
    fChain->SetBranchAddress("T2KWeight", &T2KWeight, &b_T2KWeight);
    fChain->SetBranchAddress("ROOTinoWeight", &ROOTinoWeight, &b_ROOTinoWeight);
@@ -857,58 +561,6 @@ void PeLEE_myRecoAnalysis::Init(TTree *tree)
    fChain->SetBranchAddress("Run", &Run, &b_Run);
    fChain->SetBranchAddress("SubRun", &SubRun, &b_SubRun);
    fChain->SetBranchAddress("Event", &Event, &b_Event);
-
-/*   fChain->SetBranchAddress("CandidateMu_Plane0_LastEDep", &CandidateMu_Plane0_LastEDep, &b_CandidateMu_Plane0_LastEDep);*/
-/*   fChain->SetBranchAddress("CandidateMu_Plane1_LastEDep", &CandidateMu_Plane1_LastEDep, &b_CandidateMu_Plane1_LastEDep);*/
-/*   fChain->SetBranchAddress("CandidateMu_Plane2_LastEDep", &CandidateMu_Plane2_LastEDep, &b_CandidateMu_Plane2_LastEDep);*/
-
-/*   fChain->SetBranchAddress("CandidateP_Plane0_LastEDep", &CandidateP_Plane0_LastEDep, &b_CandidateP_Plane0_LastEDep);*/
-/*   fChain->SetBranchAddress("CandidateP_Plane1_LastEDep", &CandidateP_Plane1_LastEDep, &b_CandidateP_Plane1_LastEDep);*/
-/*   fChain->SetBranchAddress("CandidateP_Plane2_LastEDep", &CandidateP_Plane2_LastEDep, &b_CandidateP_Plane2_LastEDep);*/
-
-   //fChain->SetBranchAddress("CandidateMu_Plane0_NHits", &CandidateMu_Plane0_NHits, &b_CandidateMu_Plane0_NHits);
-   //fChain->SetBranchAddress("CandidateMu_Plane1_NHits", &CandidateMu_Plane1_NHits, &b_CandidateMu_Plane1_NHits);
-   //fChain->SetBranchAddress("CandidateMu_Plane2_NHits", &CandidateMu_Plane2_NHits, &b_CandidateMu_Plane2_NHits);
-
-   //fChain->SetBranchAddress("CandidateP_Plane0_NHits", &CandidateP_Plane0_NHits, &b_CandidateP_Plane0_NHits);
-   //fChain->SetBranchAddress("CandidateP_Plane1_NHits", &CandidateP_Plane1_NHits, &b_CandidateP_Plane1_NHits);
-   //fChain->SetBranchAddress("CandidateP_Plane2_NHits", &CandidateP_Plane2_NHits, &b_CandidateP_Plane2_NHits);
-
-   //fChain->SetBranchAddress("CandidateMu_Plane0_ResidualRange", &CandidateMu_Plane0_ResidualRange, &b_CandidateMu_Plane0_ResidualRange);
-   //fChain->SetBranchAddress("CandidateMu_Plane0_dEdx", &CandidateMu_Plane0_dEdx, &b_CandidateMu_Plane0_dEdx);
-   //fChain->SetBranchAddress("CandidateMu_Plane0_dQdx", &CandidateMu_Plane0_dQdx, &b_CandidateMu_Plane0_dQdx);
-   //fChain->SetBranchAddress("CandidateMu_Plane0_TruncdEdx", &CandidateMu_Plane0_TruncdEdx, &b_CandidateMu_Plane0_TruncdEdx);
-   //fChain->SetBranchAddress("CandidateMu_Plane0_TruncdQdx", &CandidateMu_Plane0_TruncdQdx, &b_CandidateMu_Plane0_TruncdQdx);
-
-   //fChain->SetBranchAddress("CandidateMu_Plane1_ResidualRange", &CandidateMu_Plane1_ResidualRange, &b_CandidateMu_Plane1_ResidualRange);
-   //fChain->SetBranchAddress("CandidateMu_Plane1_dEdx", &CandidateMu_Plane1_dEdx, &b_CandidateMu_Plane1_dEdx);
-   //fChain->SetBranchAddress("CandidateMu_Plane1_dQdx", &CandidateMu_Plane1_dQdx, &b_CandidateMu_Plane1_dQdx);
-   //fChain->SetBranchAddress("CandidateMu_Plane1_TruncdEdx", &CandidateMu_Plane1_TruncdEdx, &b_CandidateMu_Plane1_TruncdEdx);
-   //fChain->SetBranchAddress("CandidateMu_Plane1_TruncdQdx", &CandidateMu_Plane1_TruncdQdx, &b_CandidateMu_Plane1_TruncdQdx);
-
-   //fChain->SetBranchAddress("CandidateMu_Plane2_ResidualRange", &CandidateMu_Plane2_ResidualRange, &b_CandidateMu_Plane2_ResidualRange);
-   //fChain->SetBranchAddress("CandidateMu_Plane2_dEdx", &CandidateMu_Plane2_dEdx, &b_CandidateMu_Plane2_dEdx);
-   //fChain->SetBranchAddress("CandidateMu_Plane2_dQdx", &CandidateMu_Plane2_dQdx, &b_CandidateMu_Plane2_dQdx);
-   //fChain->SetBranchAddress("CandidateMu_Plane2_TruncdEdx", &CandidateMu_Plane2_TruncdEdx, &b_CandidateMu_Plane2_TruncdEdx);
-   //fChain->SetBranchAddress("CandidateMu_Plane2_TruncdQdx", &CandidateMu_Plane2_TruncdQdx, &b_CandidateMu_Plane2_TruncdQdx);
-
-   //fChain->SetBranchAddress("CandidateP_Plane0_ResidualRange", &CandidateP_Plane0_ResidualRange, &b_CandidateP_Plane0_ResidualRange);
-   //fChain->SetBranchAddress("CandidateP_Plane0_dEdx", &CandidateP_Plane0_dEdx, &b_CandidateP_Plane0_dEdx);
-   //fChain->SetBranchAddress("CandidateP_Plane0_dQdx", &CandidateP_Plane0_dQdx, &b_CandidateP_Plane0_dQdx);
-   //fChain->SetBranchAddress("CandidateP_Plane0_TruncdEdx", &CandidateP_Plane0_TruncdEdx, &b_CandidateP_Plane0_TruncdEdx);
-   //fChain->SetBranchAddress("CandidateP_Plane0_TruncdQdx", &CandidateP_Plane0_TruncdQdx, &b_CandidateP_Plane0_TruncdQdx);
-
-   //fChain->SetBranchAddress("CandidateP_Plane1_ResidualRange", &CandidateP_Plane1_ResidualRange, &b_CandidateP_Plane1_ResidualRange);
-   //fChain->SetBranchAddress("CandidateP_Plane1_dEdx", &CandidateP_Plane1_dEdx, &b_CandidateP_Plane1_dEdx);
-   //fChain->SetBranchAddress("CandidateP_Plane1_dQdx", &CandidateP_Plane1_dQdx, &b_CandidateP_Plane1_dQdx);
-   //fChain->SetBranchAddress("CandidateP_Plane1_TruncdEdx", &CandidateP_Plane1_TruncdEdx, &b_CandidateP_Plane1_TruncdEdx);
-   //fChain->SetBranchAddress("CandidateP_Plane1_TruncdQdx", &CandidateP_Plane1_TruncdQdx, &b_CandidateP_Plane1_TruncdQdx);
-
-   //fChain->SetBranchAddress("CandidateP_Plane2_ResidualRange", &CandidateP_Plane2_ResidualRange, &b_CandidateP_Plane2_ResidualRange);
-   //fChain->SetBranchAddress("CandidateP_Plane2_dEdx", &CandidateP_Plane2_dEdx, &b_CandidateP_Plane2_dEdx);
-   //fChain->SetBranchAddress("CandidateP_Plane2_dQdx", &CandidateP_Plane2_dQdx, &b_CandidateP_Plane2_dQdx);
-   //fChain->SetBranchAddress("CandidateP_Plane2_TruncdEdx", &CandidateP_Plane2_TruncdEdx, &b_CandidateP_Plane2_TruncdEdx);
-   //fChain->SetBranchAddress("CandidateP_Plane2_TruncdQdx", &CandidateP_Plane2_TruncdQdx, &b_CandidateP_Plane2_TruncdQdx);
 
    fChain->SetBranchAddress("All_UBGenie", &All_UBGenie, &b_All_UBGenie);
    fChain->SetBranchAddress("AxFFCCQEshape_UBGenie", &AxFFCCQEshape_UBGenie, &b_AxFFCCQEshape_UBGenie);
@@ -923,26 +575,8 @@ void PeLEE_myRecoAnalysis::Init(TTree *tree)
    fChain->SetBranchAddress("XSecShape_CCMEC_UBGenie", &XSecShape_CCMEC_UBGenie, &b_XSecShape_CCMEC_UBGenie);
 
    fChain->SetBranchAddress("fluxes", &fluxes, &b_fluxes);
-/*   fChain->SetBranchAddress("expskin_FluxUnisim", &expskin_FluxUnisim, &b_expskin_FluxUnisim);*/
-/*   fChain->SetBranchAddress("horncurrent_FluxUnisim", &horncurrent_FluxUnisim, &b_horncurrent_FluxUnisim);*/
-/*   fChain->SetBranchAddress("kminus_PrimaryHadronNormalization", &kminus_PrimaryHadronNormalization, &b_kminus_PrimaryHadronNormalization);*/
-/*   fChain->SetBranchAddress("kplus_PrimaryHadronFeynmanScaling", &kplus_PrimaryHadronFeynmanScaling, &b_kplus_PrimaryHadronFeynmanScaling);*/
-/*   fChain->SetBranchAddress("kzero_PrimaryHadronSanfordWang", &kzero_PrimaryHadronSanfordWang, &b_kzero_PrimaryHadronSanfordWang);*/
-/*   fChain->SetBranchAddress("nucleoninexsec_FluxUnisim", &nucleoninexsec_FluxUnisim, &b_nucleoninexsec_FluxUnisim);*/
-/*   fChain->SetBranchAddress("nucleonqexsec_FluxUnisim", &nucleonqexsec_FluxUnisim, &b_nucleonqexsec_FluxUnisim);*/
-/*   fChain->SetBranchAddress("nucleontotxsec_FluxUnisim", &nucleontotxsec_FluxUnisim, &b_nucleontotxsec_FluxUnisim);*/
-/*   fChain->SetBranchAddress("piminus_PrimaryHadronSWCentralSplineVariation", &piminus_PrimaryHadronSWCentralSplineVariation, &b_piminus_PrimaryHadronSWCentralSplineVariation);*/
-/*   fChain->SetBranchAddress("pioninexsec_FluxUnisim", &pioninexsec_FluxUnisim, &b_pioninexsec_FluxUnisim);*/
-/*   fChain->SetBranchAddress("pionqexsec_FluxUnisim", &pionqexsec_FluxUnisim, &b_pionqexsec_FluxUnisim);*/
-/*   fChain->SetBranchAddress("piontotxsec_FluxUnisim", &piontotxsec_FluxUnisim, &b_piontotxsec_FluxUnisim);*/
-/*   fChain->SetBranchAddress("piplus_PrimaryHadronSWCentralSplineVariation", &piplus_PrimaryHadronSWCentralSplineVariation, &b_piplus_PrimaryHadronSWCentralSplineVariation);*/
 
    fChain->SetBranchAddress("reinteractions", &reinteractions, &b_reinteractions);
-/*   fChain->SetBranchAddress("reinteractions_piminus_Geant4", &reinteractions_piminus_Geant4, &b_reinteractions_piminus_Geant4);*/
-/*   fChain->SetBranchAddress("reinteractions_piplus_Geant4", &reinteractions_piplus_Geant4, &b_reinteractions_piplus_Geant4);*/
-/*   fChain->SetBranchAddress("reinteractions_proton_Geant4", &reinteractions_proton_Geant4, &b_reinteractions_proton_Geant4);*/
-//   fChain->SetBranchAddress("xsr_scc_Fa3_SCC", &xsr_scc_Fa3_SCC, &b_xsr_scc_Fa3_SCC);
-//   fChain->SetBranchAddress("xsr_scc_Fv3_SCC", &xsr_scc_Fv3_SCC, &b_xsr_scc_Fv3_SCC);
 
    fChain->SetBranchAddress("True_Ev", &True_Ev, &b_True_Ev);
    fChain->SetBranchAddress("True_Vx", &True_Vx, &b_True_Vx);
@@ -969,25 +603,10 @@ void PeLEE_myRecoAnalysis::Init(TTree *tree)
    fChain->SetBranchAddress("NuScore", &NuScore, &b_NuScore);
    fChain->SetBranchAddress("FlashScore", &FlashScore, &b_FlashScore);
 
-/*   fChain->SetBranchAddress("NBeamFlashes", &NBeamFlashes, &b_NBeamFlashes);*/
-/*   fChain->SetBranchAddress("BeamFlashes_YCenter", &BeamFlashes_YCenter, &b_BeamFlashes_YCenter);*/
-/*   fChain->SetBranchAddress("BeamFlashes_ZCenter", &BeamFlashes_ZCenter, &b_BeamFlashes_ZCenter);*/
-/*   fChain->SetBranchAddress("BeamFlashes_TotalPE", &BeamFlashes_TotalPE, &b_BeamFlashes_TotalPE);*/
-
-//   fChain->SetBranchAddress("NumberMCParticles", &NumberMCParticles, &b_NumberMCParticles);
-//   fChain->SetBranchAddress("MCParticle_Mom", &MCParticle_Mom, &b_MCParticle_Mom);
-//   fChain->SetBranchAddress("MCParticle_Mode", &MCParticle_Mode, &b_MCParticle_Mode);
-//   fChain->SetBranchAddress("MCParticle_Phi", &MCParticle_Phi, &b_MCParticle_Phi);
-//   fChain->SetBranchAddress("MCParticle_CosTheta", &MCParticle_CosTheta, &b_MCParticle_CosTheta);
-////   fChain->SetBranchAddress("MCParticle_Length", &MCParticle_Length, &b_MCParticle_Length);
-//   fChain->SetBranchAddress("MCParticle_StartContainment", &MCParticle_StartContainment, &b_MCParticle_StartContainment);
-//   fChain->SetBranchAddress("MCParticle_EndContainment", &MCParticle_EndContainment, &b_MCParticle_EndContainment);
-//   fChain->SetBranchAddress("MCParticle_Pdg", &MCParticle_Pdg, &b_MCParticle_Pdg);
    fChain->SetBranchAddress("CandidateMuP_Distance", &CandidateMuP_Distance, &b_CandidateMuP_Distance);
    fChain->SetBranchAddress("Vertex_X", &Vertex_X, &b_Vertex_X);
    fChain->SetBranchAddress("Vertex_Y", &Vertex_Y, &b_Vertex_Y);
    fChain->SetBranchAddress("Vertex_Z", &Vertex_Z, &b_Vertex_Z);
-//   fChain->SetBranchAddress("VertexActivity_50x100", &VertexActivity_50x100, &b_VertexActivity_50x100);
 
    fChain->SetBranchAddress("CandidateMuStartVertexDistance", &CandidateMuStartVertexDistance, &b_CandidateMuStartVertexDistance);
    fChain->SetBranchAddress("CandidateMuEndVertexDistance", &CandidateMuEndVertexDistance, &b_CandidateMuEndVertexDistance);
@@ -1013,17 +632,11 @@ void PeLEE_myRecoAnalysis::Init(TTree *tree)
    fChain->SetBranchAddress("True_CandidateMu_EndZ", &True_CandidateMu_EndZ, &b_True_CandidateMu_EndZ);    
      
    fChain->SetBranchAddress("CandidateMu_P_Range", &CandidateMu_P_Range, &b_CandidateMu_P_Range);
-   fChain->SetBranchAddress("CandidateMu_P_Range_Recalibrate", &CandidateMu_P_Range_Recalibrate, &b_CandidateMu_P_Range_Recalibrate);
    fChain->SetBranchAddress("CandidateMu_P_MCS", &CandidateMu_P_MCS, &b_CandidateMu_P_MCS);   
-   fChain->SetBranchAddress("CandidateMu_P_MCS_Recalibrate", &CandidateMu_P_MCS_Recalibrate, &b_CandidateMu_P_MCS_Recalibrate);   
    fChain->SetBranchAddress("CandidateMu_Phi", &CandidateMu_Phi, &b_CandidateMu_Phi);
-   fChain->SetBranchAddress("CandidateMu_Phi_Recalibrate", &CandidateMu_Phi_Recalibrate, &b_CandidateMu_Phi_Recalibrate);
    fChain->SetBranchAddress("CandidateMu_CosTheta", &CandidateMu_CosTheta, &b_CandidateMu_CosTheta);
-   fChain->SetBranchAddress("CandidateMu_CosTheta_Recalibrate", &CandidateMu_CosTheta_Recalibrate, &b_CandidateMu_CosTheta_Recalibrate);
    fChain->SetBranchAddress("CandidateMu_Length", &CandidateMu_Length, &b_CandidateMu_Length);
 //   fChain->SetBranchAddress("CandidateMu_Chi2_YPlane", &CandidateMu_Chi2_YPlane, &b_CandidateMu_Chi2_YPlane);
-//   fChain->SetBranchAddress("CandidateMu_ThreePlaneChi2", &CandidateMu_ThreePlaneChi2, &b_CandidateMu_ThreePlaneChi2);
-//   fChain->SetBranchAddress("CandidateMu_ThreePlaneLogLikelihood", &CandidateMu_ThreePlaneLogLikelihood, &b_CandidateMu_ThreePlaneLogLikelihood);
    fChain->SetBranchAddress("CandidateMu_LLR_PID", &CandidateMu_LLR_PID, &b_CandidateMu_LLR_PID);
    fChain->SetBranchAddress("CandidateMu_StartContainment", &CandidateMu_StartContainment, &b_CandidateMu_StartContainment);
    fChain->SetBranchAddress("CandidateMu_EndContainment", &CandidateMu_EndContainment, &b_CandidateMu_EndContainment);
@@ -1052,16 +665,10 @@ void PeLEE_myRecoAnalysis::Init(TTree *tree)
    fChain->SetBranchAddress("True_CandidateP_EndZ", &True_CandidateP_EndZ, &b_True_CandidateP_EndZ);
 
    fChain->SetBranchAddress("CandidateP_P_Range", &CandidateP_P_Range, &b_CandidateP_P_Range);
-   fChain->SetBranchAddress("CandidateP_P_Range_Recalibrate", &CandidateP_P_Range_Recalibrate, &b_CandidateP_P_Range_Recalibrate);
-//   fChain->SetBranchAddress("CandidateP_P_MCS", &CandidateP_P_MCS, &b_CandidateP_P_MCS);   
    fChain->SetBranchAddress("CandidateP_Phi", &CandidateP_Phi, &b_CandidateP_Phi);
-   fChain->SetBranchAddress("CandidateP_Phi_Recalibrate", &CandidateP_Phi_Recalibrate, &b_CandidateP_Phi_Recalibrate);
    fChain->SetBranchAddress("CandidateP_CosTheta", &CandidateP_CosTheta, &b_CandidateP_CosTheta);
-   fChain->SetBranchAddress("CandidateP_CosTheta_Recalibrate", &CandidateP_CosTheta_Recalibrate, &b_CandidateP_CosTheta_Recalibrate);
    fChain->SetBranchAddress("CandidateP_Length", &CandidateP_Length, &b_CandidateP_Length);
 //   fChain->SetBranchAddress("CandidateP_Chi2_YPlane", &CandidateP_Chi2_YPlane, &b_CandidateP_Chi2_YPlane);
-//   fChain->SetBranchAddress("CandidateP_ThreePlaneChi2", &CandidateP_ThreePlaneChi2, &b_CandidateP_ThreePlaneChi2);
-//   fChain->SetBranchAddress("CandidateP_ThreePlaneLogLikelihood", &CandidateP_ThreePlaneLogLikelihood, &b_CandidateP_ThreePlaneLogLikelihood);
    fChain->SetBranchAddress("CandidateP_LLR_PID", &CandidateP_LLR_PID, &b_CandidateP_LLR_PID);
    fChain->SetBranchAddress("CandidateP_StartContainment", &CandidateP_StartContainment, &b_CandidateP_StartContainment);
    fChain->SetBranchAddress("CandidateP_EndContainment", &CandidateP_EndContainment, &b_CandidateP_EndContainment);
@@ -1079,36 +686,35 @@ void PeLEE_myRecoAnalysis::Init(TTree *tree)
    fChain->SetBranchAddress("True_DeltaPhi", &True_DeltaPhi, &b_True_DeltaPhi);
    fChain->SetBranchAddress("True_DeltaTheta", &True_DeltaTheta, &b_True_DeltaTheta);      
 
-//   fChain->SetBranchAddress("Reco_kMiss", &Reco_kMiss, &b_Reco_kMiss);
-//   fChain->SetBranchAddress("Reco_PMissMinus", &Reco_PMissMinus, &b_Reco_PMissMinus);
-//   fChain->SetBranchAddress("Reco_PMiss", &Reco_PMiss, &b_Reco_PMiss);   
+   fChain->SetBranchAddress("Reco_kMiss", &Reco_kMiss, &b_Reco_kMiss);
+   fChain->SetBranchAddress("Reco_PMissMinus", &Reco_PMissMinus, &b_Reco_PMissMinus);
+   fChain->SetBranchAddress("Reco_PMiss", &Reco_PMiss, &b_Reco_PMiss);   
    fChain->SetBranchAddress("Reco_Pt", &Reco_Pt, &b_Reco_Pt);
+   fChain->SetBranchAddress("Reco_PL", &Reco_PL, &b_Reco_PL);
+   fChain->SetBranchAddress("Reco_Pn", &Reco_Pn, &b_Reco_Pn);
+   fChain->SetBranchAddress("Reco_Ptx", &Reco_Ptx, &b_Reco_Ptx);
+   fChain->SetBranchAddress("Reco_Pty", &Reco_Pty, &b_Reco_Pty);
+   fChain->SetBranchAddress("Reco_A", &Reco_A, &b_Reco_A);
    fChain->SetBranchAddress("Reco_DeltaAlphaT", &Reco_DeltaAlphaT, &b_Reco_DeltaAlphaT);
    fChain->SetBranchAddress("Reco_DeltaPhiT", &Reco_DeltaPhiT, &b_Reco_DeltaPhiT);
    fChain->SetBranchAddress("Reco_ECal", &Reco_ECal, &b_Reco_ECal);
    fChain->SetBranchAddress("Reco_EQE", &Reco_EQE, &b_Reco_EQE);
    fChain->SetBranchAddress("Reco_Q2", &Reco_Q2, &b_Reco_Q2);
 
-   fChain->SetBranchAddress("Reco_Pt_Recalibrate", &Reco_Pt_Recalibrate, &b_Reco_Pt_Recalibrate);
-   fChain->SetBranchAddress("Reco_DeltaAlphaT_Recalibrate", &Reco_DeltaAlphaT_Recalibrate, &b_Reco_DeltaAlphaT_Recalibrate);
-   fChain->SetBranchAddress("Reco_DeltaPhiT_Recalibrate", &Reco_DeltaPhiT_Recalibrate, &b_Reco_DeltaPhiT_Recalibrate);
-   fChain->SetBranchAddress("Reco_ECal_Recalibrate", &Reco_ECal_Recalibrate, &b_Reco_ECal_Recalibrate);
-   fChain->SetBranchAddress("Reco_EQE_Recalibrate", &Reco_EQE_Recalibrate, &b_Reco_EQE_Recalibrate);
-   fChain->SetBranchAddress("Reco_Q2_Recalibrate", &Reco_Q2_Recalibrate, &b_Reco_Q2_Recalibrate);
-
-//   fChain->SetBranchAddress("True_kMiss", &True_kMiss, &b_True_kMiss);
-//   fChain->SetBranchAddress("True_PMissMinus", &True_PMissMinus, &b_True_PMissMinus);
-//   fChain->SetBranchAddress("True_PMiss", &True_PMiss, &b_True_PMiss);   
+   fChain->SetBranchAddress("True_kMiss", &True_kMiss, &b_True_kMiss);
+   fChain->SetBranchAddress("True_PMissMinus", &True_PMissMinus, &b_True_PMissMinus);
+   fChain->SetBranchAddress("True_PMiss", &True_PMiss, &b_True_PMiss);   
    fChain->SetBranchAddress("True_Pt", &True_Pt, &b_True_Pt);
+   fChain->SetBranchAddress("True_PL", &True_PL, &b_True_PL);
+   fChain->SetBranchAddress("True_Pn", &True_Pn, &b_True_Pn);
+   fChain->SetBranchAddress("True_Ptx", &True_Ptx, &b_True_Ptx);
+   fChain->SetBranchAddress("True_Pty", &True_Pty, &b_True_Pty);
+   fChain->SetBranchAddress("True_A", &True_A, &b_True_A);
    fChain->SetBranchAddress("True_DeltaAlphaT", &True_DeltaAlphaT, &b_True_DeltaAlphaT);
    fChain->SetBranchAddress("True_DeltaPhiT", &True_DeltaPhiT, &b_True_DeltaPhiT);
    fChain->SetBranchAddress("True_ECal", &True_ECal, &b_True_ECal);
    fChain->SetBranchAddress("True_EQE", &True_EQE, &b_True_EQE);
    fChain->SetBranchAddress("True_Q2", &True_Q2, &b_True_Q2);                     
-
-//   fChain->SetBranchAddress("NuMuPFParticles", &NuMuPFParticles, &b_NuMuPFParticles);
-//   fChain->SetBranchAddress("PFParticle_NuMuDaughters", &PFParticle_NuMuDaughters, &b_PFParticle_NuMuDaughters);
-//   fChain->SetBranchAddress("PFParticle_NuMuDaughtersPdgCode", &PFParticle_NuMuDaughtersPdgCode, &b_PFParticle_NuMuDaughtersPdgCode);
 
    Notify();
 }

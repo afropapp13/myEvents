@@ -17,7 +17,6 @@
 #include <vector>
 
 #include "/uboone/app/users/apapadop/uboonecode_v08_00_00_43/srcs/ubana/ubana/myClasses/Tools.h"
-//#include "/uboone/app/users/apapadop/uboonecode_v08_00_00_43/srcs/ubana/ubana/myClasses/STV_Tools.h"
 
 using namespace std;
 
@@ -77,15 +76,22 @@ void PeLEE_myTrueAnalysis::Loop() {
 	TH1D* TruePi0Plot = new TH1D("TruePi0Plot",";# #pi^{0}",4,-0.5,3.5);
 	TH1D* TrueNeutronPlot = new TH1D("TrueNeutronPlot",";# neutrons",6,-0.5,5.5);
 	
-	// TH1D* TruekMissPlot = new TH1D("TruekMissPlot",LabelXAxiskMiss,NBinskMiss,ArrayNBinskMiss);
-	// TH1D* TruePMissMinusPlot = new TH1D("TruePMissMinusPlot",LabelXAxisPMissMinus,NBinsPMissMinus,ArrayNBinsPMissMinus);
-	// TH1D* TruePMissPlot = new TH1D("TruePMissPlot",LabelXAxisPMiss,NBinsPMiss,ArrayNBinsPMiss);	
+	TH1D* TruekMissPlot = new TH1D("TruekMissPlot",LabelXAxiskMiss,NBinskMiss,ArrayNBinskMiss);
+	TH1D* TruePMissMinusPlot = new TH1D("TruePMissMinusPlot",LabelXAxisPMissMinus,NBinsPMissMinus,ArrayNBinsPMissMinus);
+	TH1D* TruePMissPlot = new TH1D("TruePMissPlot",LabelXAxisPMiss,NBinsPMiss,ArrayNBinsPMiss);	
+
+	TH1D* TrueDeltaPLPlot = new TH1D("TrueDeltaPLPlot",LabelXAxisDeltaPL,NBinsDeltaPL,ArrayNBinsDeltaPL);
+	TH1D* TrueDeltaPnPlot = new TH1D("TrueDeltaPnPlot",LabelXAxisDeltaPn,NBinsDeltaPn,ArrayNBinsDeltaPn);
+	TH1D* TrueDeltaPtxPlot = new TH1D("TrueDeltaPtxPlot",LabelXAxisDeltaPtx,NBinsDeltaPtx,ArrayNBinsDeltaPtx);
+	TH1D* TrueDeltaPtyPlot = new TH1D("TrueDeltaPtyPlot",LabelXAxisDeltaPty,NBinsDeltaPty,ArrayNBinsDeltaPty);
+	TH1D* TrueAPlot = new TH1D("TrueAPlot",LabelXAxisA,NBinsA,ArrayNBinsA);
 
 	TH1D* TrueDeltaPTPlot = new TH1D("TrueDeltaPTPlot",LabelXAxisDeltaPT,NBinsDeltaPT,ArrayNBinsDeltaPT);
 	TH1D* TrueDeltaAlphaTPlot = new TH1D("TrueDeltaAlphaTPlot",LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);
 	TH1D* TrueDeltaPhiTPlot = new TH1D("TrueDeltaPhiTPlot",LabelXAxisDeltaPhiT,NBinsDeltaPhiT,ArrayNBinsDeltaPhiT);
 
 	TH1D* TrueMuonCosThetaPlot = new TH1D("TrueMuonCosThetaPlot",LabelXAxisMuonCosTheta,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta);
+	TH1D* TrueMuonCosThetaSingleBinPlot = new TH1D("TrueMuonCosThetaSingleBinPlot",LabelXAxisMuonCosTheta,1,-1.,1.);
 	TH1D* TrueMuonMomentumPlot = new TH1D("TrueMuonMomentumPlot",LabelXAxisMuonMomentum,NBinsMuonMomentum,ArrayNBinsMuonMomentum);
 	TH1D* TrueMuonPhiPlot = new TH1D("TrueMuonPhiPlot",LabelXAxisMuonPhi,NBinsMuonPhi,ArrayNBinsMuonPhi);
 
@@ -207,37 +213,9 @@ void PeLEE_myTrueAnalysis::Loop() {
 
 			if (fEventWeightLabel == "fluxes") { weight = weight*fluxes->at(fUniverseIndex); }
 
-//			if (fEventWeightLabel == "expskin_FluxUnisim") { weight = weight*expskin_FluxUnisim->at(fUniverseIndex); }
-//			if (fEventWeightLabel == "horncurrent_FluxUnisim") { weight = weight*horncurrent_FluxUnisim->at(fUniverseIndex); }
-//			if (fEventWeightLabel == "kminus_PrimaryHadronNormalization") 
-//				{ weight = weight*kminus_PrimaryHadronNormalization->at(fUniverseIndex); }
-//			if (fEventWeightLabel == "kplus_PrimaryHadronFeynmanScaling") 
-//				{ weight = weight*kplus_PrimaryHadronFeynmanScaling->at(fUniverseIndex); }
-//			if (fEventWeightLabel == "kzero_PrimaryHadronSanfordWang") 
-//				{ weight = weight*kzero_PrimaryHadronSanfordWang->at(fUniverseIndex); }
-//			if (fEventWeightLabel == "nucleoninexsec_FluxUnisim") { weight = weight*nucleoninexsec_FluxUnisim->at(fUniverseIndex); }
-//			if (fEventWeightLabel == "nucleonqexsec_FluxUnisim") { weight = weight*nucleonqexsec_FluxUnisim->at(fUniverseIndex); }
-//			if (fEventWeightLabel == "nucleontotxsec_FluxUnisim") { weight = weight*nucleontotxsec_FluxUnisim->at(fUniverseIndex); }
-//			if (fEventWeightLabel == "piminus_PrimaryHadronSWCentralSplineVariation") 
-//				{ weight = weight*piminus_PrimaryHadronSWCentralSplineVariation->at(fUniverseIndex); }
-//			if (fEventWeightLabel == "pioninexsec_FluxUnisim") { weight = weight*pioninexsec_FluxUnisim->at(fUniverseIndex); }
-//			if (fEventWeightLabel == "pionqexsec_FluxUnisim") { weight = weight*pionqexsec_FluxUnisim->at(fUniverseIndex); }
-//			if (fEventWeightLabel == "piontotxsec_FluxUnisim") { weight = weight*piontotxsec_FluxUnisim->at(fUniverseIndex); }
-//			if (fEventWeightLabel == "piplus_PrimaryHadronSWCentralSplineVariation") 
-//				{ weight = weight*piplus_PrimaryHadronSWCentralSplineVariation->at(fUniverseIndex); }
-
 			// Reinteraction weights
 
-			if (fEventWeightLabel == "reinteractions") { weight = weight*reinteractions->at(fUniverseIndex); }
-
-//			if (fEventWeightLabel == "reinteractions_piminus_Geant4") 
-//				{ weight = weight*reinteractions_piminus_Geant4->at(fUniverseIndex); }
-//			if (fEventWeightLabel == "reinteractions_piplus_Geant4") 
-//				{ weight = weight*reinteractions_piplus_Geant4->at(fUniverseIndex); }
-//			if (fEventWeightLabel == "reinteractions_proton_Geant4") 
-//				{ weight = weight*reinteractions_proton_Geant4->at(fUniverseIndex); }
-//			if (fEventWeightLabel == "xsr_scc_Fa3_SCC") { weight = weight*xsr_scc_Fa3_SCC->at(fUniverseIndex); }
-//			if (fEventWeightLabel == "xsr_scc_Fv3_SCC") { weight = weight*xsr_scc_Fv3_SCC->at(fUniverseIndex); }		
+			if (fEventWeightLabel == "reinteractions") { weight = weight*reinteractions->at(fUniverseIndex); }		
 
 		}
 
@@ -278,17 +256,7 @@ void PeLEE_myTrueAnalysis::Loop() {
 			double TrueMuonPhi_Deg = Muon_MCParticle_Phi->at(0);
 			double TrueMuonPhi = TrueMuonPhi_Deg * TMath::Pi() / 180.;
 			double TrueMuonMomentum_GeV = Muon_MCParticle_Mom->at(0); // GeV
-//			double TrueMuonMomentum_MeV = 1000. * TrueMuonMomentum_GeV; // MeV
-//			double TrueMuon_KE_MeV = tools.PToKE(MuonPdg,TrueMuonMomentum_MeV); // MeV
-//			double TrueMuon_KE_GeV = TrueMuon_KE_MeV / 1000.; // GeV
-//			double TrueMuon_E_GeV = TrueMuon_KE_GeV + MuonMass_GeV; // GeV
 			double TrueMuon_E_GeV = TMath::Sqrt( TMath::Power(TrueMuonMomentum_GeV,2.) + TMath::Power(MuonMass_GeV,2.) ); // GeV
-//			int TrueMuonStartContainment = Muon_MCParticle_StartContainment->at(0);
-//			int TrueMuonEndContainment = Muon_MCParticle_EndContainment->at(0);
-
-//			TVector3 TVector3TrueMuon;
-//			TVector3TrueMuon.SetMagThetaPhi(TrueMuonMomentum_GeV,TrueMuonTheta,TrueMuonPhi);
-//			TLorentzVector TrueMuon4V(TVector3TrueMuon,TrueMuon_E_GeV);
 
 			// True proton
 
@@ -297,17 +265,7 @@ void PeLEE_myTrueAnalysis::Loop() {
 			double TrueProtonPhi_Deg = Proton_MCParticle_Phi->at(0);
 			double TrueProtonPhi = TrueProtonPhi_Deg * TMath::Pi() / 180.;
 			double TrueProtonMomentum_GeV = Proton_MCParticle_Mom->at(0); // GeV
-//			double TrueProtonMomentum_MeV = 1000. * TrueProtonMomentum_GeV; // MeV
-//			double TrueProton_KE_MeV = tools.PToKE(ProtonPdg,TrueProtonMomentum_MeV); // MeV
-//			double TrueProton_KE_GeV = TrueProton_KE_MeV / 1000.; // GeV
-//			double TrueProton_E_GeV = TrueProton_KE_GeV + ProtonMass_GeV; // GeV
 			double TrueProton_E_GeV = TMath::Sqrt( TMath::Power(TrueProtonMomentum_GeV,2.) + TMath::Power(ProtonMass_GeV,2.) ); // GeV
-//			int TrueProtonStartContainment = Proton_MCParticle_StartContainment->at(0);
-//			int TrueProtonEndContainment = Proton_MCParticle_EndContainment->at(0);
-
-//			TVector3 TVector3TrueProton;
-//			TVector3TrueProton.SetMagThetaPhi(TrueProtonMomentum_GeV,TrueProtonTheta,TrueProtonPhi);
-//			TLorentzVector TrueProton4V(TVector3TrueProton,TrueProton_E_GeV);
 
 			double TrueDeltaPhiProtonMuon_Deg = True_DeltaPhi->at(0);
 			double TrueDeltaThetaProtonMuon_Deg = True_DeltaTheta->at(0);
@@ -320,20 +278,26 @@ void PeLEE_myTrueAnalysis::Loop() {
 
 			double TrueRecoEQE = True_EQE->at(0);
 
-			// Definition of Transverse Variables
+			// Transverse Variables
 
-			// double TruekMiss = True_kMiss->at(0);
-			// double TruePMissMinus = True_PMissMinus->at(0);
-			// double TrueMissMomentum = True_PMiss->at(0);
+			double TruekMiss = True_kMiss->at(0);
+			double TruePMissMinus = True_PMissMinus->at(0);
+			double TrueMissMomentum = True_PMiss->at(0);
 
 			double TrueTransMissMomentum = True_Pt->at(0);
-
 			double TrueDeltaAlphaT = True_DeltaAlphaT->at(0);
 			double TrueDeltaPhiT = True_DeltaPhiT->at(0);
 
+			double TruePL = True_PL->at(0);
+			double TruePn = True_Pn->at(0);
+			double TruePtx = True_Ptx->at(0);
+			double TruePty = True_Pty->at(0);
+			double TrueA = True_A->at(0);
+
+			// -----------------------------------------------------------------------------------------------------------------	
+
 			// True Vertex
 
-//			TVector3 TrueVertex(Muon_MCParticle_StartX->at(0),Muon_MCParticle_StartY->at(0),Muon_MCParticle_StartZ->at(0));
 			TVector3 TrueVertex(True_Vx,True_Vy,True_Vz);
 				
 			// -----------------------------------------------------------------------------------------------------------------	
@@ -394,13 +358,19 @@ void PeLEE_myTrueAnalysis::Loop() {
 
 					// STV
 
-					// TruekMissPlot->Fill(TruekMiss,weight);
-					// TruePMissMinusPlot->Fill(TruePMissMinus,weight);
-					// TruePMissPlot->Fill(TrueMissMomentum,weight);
+					TruekMissPlot->Fill(TruekMiss,weight);
+					TruePMissMinusPlot->Fill(TruePMissMinus,weight);
+					TruePMissPlot->Fill(TrueMissMomentum,weight);
 
 					TrueDeltaPTPlot->Fill(TrueTransMissMomentum,weight);
 					TrueDeltaAlphaTPlot->Fill(TrueDeltaAlphaT,weight);
 					TrueDeltaPhiTPlot->Fill(TrueDeltaPhiT,weight);
+
+					TrueDeltaPLPlot->Fill(TruePL,weight);
+					TrueDeltaPnPlot->Fill(TruePn,weight);
+					TrueDeltaPtxPlot->Fill(TruePtx,weight);
+					TrueDeltaPtyPlot->Fill(TruePty,weight);
+					TrueAPlot->Fill(TrueA,weight);
 
 					// Reconstructed energy & Q2
 
@@ -413,6 +383,7 @@ void PeLEE_myTrueAnalysis::Loop() {
 					TrueMuonMomentumPlot->Fill(TrueMuonMomentum_GeV,weight);
 					TrueMuonPhiPlot->Fill(TrueMuonPhi_Deg,weight);
 					TrueMuonCosThetaPlot->Fill(TrueMuonCosTheta,weight);
+					TrueMuonCosThetaSingleBinPlot->Fill(TrueMuonCosTheta,weight);
 
 					// Given that we keep only contained reco tracks, we want to also calculate the efficiency with respect to that part of the MC
 					if (Muon_MCParticle_EndContainment->at(0) == 1) { TrueContainedEndMuonCosThetaPlot->Fill(TrueMuonCosTheta,weight); }
@@ -497,7 +468,7 @@ void PeLEE_myTrueAnalysis::Loop() {
 
 			} // End of the angle selection cuts && the demand that we fill the plots with the same events
 
-		} // End of signal definition: 1 mu (Pmu > 100 MeV / c), 1p (Pp > 200 MeV / c) & pi+/- (Ppi > 70 MeV / c)
+		} // End of signal definition: 1 mu (Pmu > 100 MeV / c), 1p (Pp > 300 MeV / c) & pi+/- (Ppi > 70 MeV / c)
 
 		// -------------------------------------------------------------------------------------------------------------------------
 
@@ -512,14 +483,6 @@ void PeLEE_myTrueAnalysis::Loop() {
 	// STV-CC1p analysis summary
 
 	std::cout << std::endl;
-
-	// -------------------------------------------------------------------------------------------------------------------------
-
-	// Samdef events
-
-//	TFile* fFile = new TFile(fPathToFile);
-//	TH1D* SamdefEventsPlot = (TH1D*)(fFile->Get("SamdefEventPlot"));
-//	double SamdefEvents = SamdefEventsPlot->GetBinContent(1);
 
 	// -------------------------------------------------------------------------------------------------------------------------
 

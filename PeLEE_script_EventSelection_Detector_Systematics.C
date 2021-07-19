@@ -25,14 +25,15 @@
 	// Run 3 Detector Variations
 
 	WhichSampleArray.push_back("Overlay9_Run3_CV");
+	WhichSampleArray.push_back("Overlay9_Run3_CVextra");
         WhichSampleArray.push_back("Overlay9_Run3_LYDown");
 	WhichSampleArray.push_back("Overlay9_Run3_LYRayleigh");
 	WhichSampleArray.push_back("Overlay9_Run3_LYAttenuation");
 
 	WhichSampleArray.push_back("Overlay9_Run3_X");
 	WhichSampleArray.push_back("Overlay9_Run3_YZ");
-	WhichSampleArray.push_back("Overlay9_Run3_YZ");
-	WhichSampleArray.push_back("Overlay9_Run3_XZ");
+	WhichSampleArray.push_back("Overlay9_Run3_ThetaYZ");
+	WhichSampleArray.push_back("Overlay9_Run3_ThetaXZ");
 //	WhichSampleArray.push_back("Overlay9_Run3_dEdx"); // Not be used, covered by the recomb2 variation
 	WhichSampleArray.push_back("Overlay9_Run3_Recombination2");
 	WhichSampleArray.push_back("Overlay9_Run3_SCE");

@@ -41,6 +41,16 @@ void PeLEE_Create1DPlotsTHStack_SubSpectrum() {
 	PlotNames.push_back("RecoDeltaAlphaTPlot");
 	PlotNames.push_back("RecoDeltaPhiTPlot");
 
+	PlotNames.push_back("RecoPMissMinusPlot");
+	PlotNames.push_back("RecoPMissPlot");
+	PlotNames.push_back("RecokMissPlot");
+
+	PlotNames.push_back("RecoDeltaPLPlot");
+	PlotNames.push_back("RecoDeltaPnPlot");
+	PlotNames.push_back("RecoDeltaPtxPlot");
+	PlotNames.push_back("RecoDeltaPtyPlot");
+	PlotNames.push_back("RecoAPlot");
+
 	PlotNames.push_back("RecoCCQEMuonMomentumPlot");
 	PlotNames.push_back("RecoCCQEProtonMomentumPlot");
 	PlotNames.push_back("RecoCCQEMuonCosThetaPlot");

@@ -46,10 +46,8 @@ void PeLEE_myRecoAnalysis::Loop() {
 	int TotalCounter = 0;
 	int ContainmentCounter = 0;
 	int NoFlippedTrackCounter = 0;
-	int SumTruncdEdxTrackCounter = 0;
 	int ContainedVertexCounter = 0;
 	int MuonQualityCutCounter = 0;
-	int LowMCSQualityCutCounter = 0;
 	int PIDCounter = 0;
 	int NuScoreCounter = 0;
 	int KinematicsCounter = 0;
@@ -167,10 +165,6 @@ void PeLEE_myRecoAnalysis::Loop() {
 		TH1D* RecoFlashScorePlot = new TH1D("RecoFlashScorePlot",RecoLabelXAxisFlashScore,NBinsFlashScore,MinFlashScore,MaxFlashScore);
 		TH1D* RecoDistancePlot = new TH1D("RecoDistancePlot",RecoLabelXAxisDistance,NBinsDistance,MinDistance,MaxDistance);
 		TH1D* RecoLengthDifferencePlot = new TH1D("RecoLengthDifferencePlot",RecoLabelXAxisLengthDifference,NBinsLengthDifference,MinLengthDifference,MaxLengthDifference);
-//		TH1D* RecodYZPlot = new TH1D("RecodYZPlot",RecoLabelXAxisdYZ,NBinsdYZ,MindYZ,MaxdYZ);
-//		TH1D* RecoNPEPlot = new TH1D("RecoNPEPlot",RecoLabelXAxisNPE,NBinsNPE,MinNPE,MaxNPE);
-//		TH1D* RecoVertexActivityPlot = new TH1D("RecoVertexActivityPlot",RecoLabelXAxisVertexActivity,NBinsVertexActivity,MinVertexActivity,MaxVertexActivity);	
-//		TH1D* RecoNonZeroVertexActivityPlot = new TH1D("RecoNonZeroVertexActivityPlot",RecoLabelXAxisVertexActivity,NBinsVertexActivity,MinVertexActivity,MaxVertexActivity);	
 
 		TH1D* RecoVertexXPlot = new TH1D("RecoVertexXPlot",RecoLabelXAxisVertexX,NBinsVertexX,MinVertexX,MaxVertexX);
 		TH1D* RecoVertexYPlot = new TH1D("RecoVertexYPlot",RecoLabelXAxisVertexY,NBinsVertexY,MinVertexY,MaxVertexY);
@@ -178,13 +172,6 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 		TH1D* RecoMuonLLRPIDPlot = new TH1D("RecoMuonLLRPIDPlot",RecoLabelXAxisMuonLLRPID,NBinsLLRPID,MinLLRPID,MaxLLRPID);
 		TH1D* RecoProtonLLRPIDPlot = new TH1D("RecoProtonLLRPIDPlot",RecoLabelXAxisProtonLLRPID,NBinsLLRPID,MinLLRPID,MaxLLRPID);
-
-//		TH1D* RecoThreePlaneChi2LogLikelihoodCandidateMuonPlot = new TH1D("RecoThreePlaneChi2LogLikelihoodCandidateMuonPlot",
-//			RecoLabelXAxisThreePlaneChi2MuonCandidateLogLikelihood,NBinsThreePlaneChi2LogLikelihood,
-//			MinThreePlaneChi2LogLikelihood,MaxThreePlaneChi2LogLikelihood);
-//		TH1D* RecoThreePlaneChi2LogLikelihoodCandidateProtonPlot = new TH1D("RecoThreePlaneChi2LogLikelihoodCandidateProtonPlot",
-//			RecoLabelXAxisThreePlaneChi2ProtonCandidateLogLikelihood,NBinsThreePlaneChi2LogLikelihood,
-//			MinThreePlaneChi2LogLikelihood,MaxThreePlaneChi2LogLikelihood);
 
 		TH1D* RecoMuonLengthPlot = new TH1D("RecoMuonLengthPlot",RecoLabelXAxisMuonLength,NBinsMuonLength,MinMuonLength,MaxMuonLength);
 //		TH1D* RecodMuonTracksScorePlot = new TH1D("RecodMuonTracksScorePlot",RecoLabelXAxisMuonTrackScore,NBinsTrackScore,MinTrackScore,MaxTrackScore);	
@@ -195,6 +182,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 		TH1D* RecoMuonMomentumPlot = new TH1D("RecoMuonMomentumPlot",LabelXAxisMuonMomentum,NBinsMuonMomentum,ArrayNBinsMuonMomentum);
 		TH1D* RecoMuonCosThetaPlot = new TH1D("RecoMuonCosThetaPlot",LabelXAxisMuonCosTheta,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta);
+		TH1D* RecoMuonCosThetaSingleBinPlot = new TH1D("RecoMuonCosThetaSingleBinPlot",LabelXAxisMuonCosTheta,1,-1.,1.);
 		TH1D* RecoMuonPhiPlot = new TH1D("RecoMuonPhiPlot",LabelXAxisMuonPhi,NBinsMuonPhi,ArrayNBinsMuonPhi);
 
 		TH1D* RecoCCQEMuonMomentumPlot = new TH1D("RecoCCQEMuonMomentumPlot",LabelXAxisMuonMomentum,CCQENBinsMuonMomentum,CCQEArrayNBinsMuonMomentum);
@@ -224,6 +212,12 @@ void PeLEE_myRecoAnalysis::Loop() {
 		TH1D* RecokMissPlot = new TH1D("RecokMissPlot",LabelXAxiskMiss,NBinskMiss,ArrayNBinskMiss);
 		TH1D* RecoPMissMinusPlot = new TH1D("RecoPMissMinusPlot",LabelXAxisPMissMinus,NBinsPMissMinus,ArrayNBinsPMissMinus);
 		TH1D* RecoPMissPlot = new TH1D("RecoPMissPlot",LabelXAxisPMiss,NBinsPMiss,ArrayNBinsPMiss);
+
+		TH1D* RecoDeltaPLPlot = new TH1D("RecoDeltaPLPlot",LabelXAxisDeltaPL,NBinsDeltaPL,ArrayNBinsDeltaPL);
+		TH1D* RecoDeltaPnPlot = new TH1D("RecoDeltaPnPlot",LabelXAxisDeltaPn,NBinsDeltaPn,ArrayNBinsDeltaPn);
+		TH1D* RecoDeltaPtxPlot = new TH1D("RecoDeltaPtxPlot",LabelXAxisDeltaPtx,NBinsDeltaPtx,ArrayNBinsDeltaPtx);
+		TH1D* RecoDeltaPtyPlot = new TH1D("RecoDeltaPtyPlot",LabelXAxisDeltaPty,NBinsDeltaPty,ArrayNBinsDeltaPty);
+		TH1D* RecoAPlot = new TH1D("RecoAPlot",LabelXAxisA,NBinsA,ArrayNBinsA);
 
 		TH1D* RecoDeltaPTPlot = new TH1D("RecoDeltaPTPlot",LabelXAxisDeltaPT,NBinsDeltaPT,ArrayNBinsDeltaPT);
 		TH1D* RecoDeltaAlphaTPlot = new TH1D("RecoDeltaAlphaTPlot",LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);
@@ -307,10 +301,6 @@ void PeLEE_myRecoAnalysis::Loop() {
 		TH1D* CC1pRecoFlashScorePlot = new TH1D("CC1pRecoFlashScorePlot",RecoLabelXAxisFlashScore,NBinsFlashScore,MinFlashScore,MaxFlashScore);
 		TH1D* CC1pRecoDistancePlot = new TH1D("CC1pRecoDistancePlot",RecoLabelXAxisDistance,NBinsDistance,MinDistance,MaxDistance);
 		TH1D* CC1pRecoLengthDifferencePlot = new TH1D("CC1pRecoLengthDifferencePlot",RecoLabelXAxisLengthDifference,NBinsLengthDifference,MinLengthDifference,MaxLengthDifference);
-//		TH1D* CC1pRecodYZPlot = new TH1D("CC1pRecodYZPlot",RecoLabelXAxisdYZ,NBinsdYZ,MindYZ,MaxdYZ);
-//		TH1D* CC1pRecoNPEPlot = new TH1D("CC1pRecoNPEPlot",RecoLabelXAxisNPE,NBinsNPE,MinNPE,MaxNPE);
-//		TH1D* CC1pRecoVertexActivityPlot = new TH1D("CC1pRecoVertexActivityPlot",RecoLabelXAxisVertexActivity,NBinsVertexActivity,MinVertexActivity,MaxVertexActivity);
-//		TH1D* CC1pRecoNonZeroVertexActivityPlot = new TH1D("CC1pRecoNonZeroVertexActivityPlot",RecoLabelXAxisVertexActivity,NBinsVertexActivity,MinVertexActivity,MaxVertexActivity);
 
 		TH1D* CC1pRecoVertexXPlot = new TH1D("CC1pRecoVertexXPlot",RecoLabelXAxisVertexX,NBinsVertexX,MinVertexX,MaxVertexX);
 		TH1D* CC1pRecoVertexYPlot = new TH1D("CC1pRecoVertexYPlot",RecoLabelXAxisVertexY,NBinsVertexY,MinVertexY,MaxVertexY);
@@ -318,13 +308,6 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 		TH1D* CC1pRecoMuonLLRPIDPlot = new TH1D("CC1pRecoMuonLLRPIDPlot",RecoLabelXAxisMuonLLRPID,NBinsLLRPID,MinLLRPID,MaxLLRPID);
 		TH1D* CC1pRecoProtonLLRPIDPlot = new TH1D("CC1pRecoProtonLLRPIDPlot",RecoLabelXAxisProtonLLRPID,NBinsLLRPID,MinLLRPID,MaxLLRPID);
-
-//		TH1D* CC1pRecoThreePlaneChi2LogLikelihoodCandidateMuonPlot = new TH1D("CC1pRecoThreePlaneChi2LogLikelihoodCandidateMuonPlot",
-//			RecoLabelXAxisThreePlaneChi2MuonCandidateLogLikelihood,NBinsThreePlaneChi2LogLikelihood,
-//			MinThreePlaneChi2LogLikelihood,MaxThreePlaneChi2LogLikelihood);
-//		TH1D* CC1pRecoThreePlaneChi2LogLikelihoodCandidateProtonPlot = new TH1D("CC1pRecoThreePlaneChi2LogLikelihoodCandidateProtonPlot",
-//			RecoLabelXAxisThreePlaneChi2ProtonCandidateLogLikelihood,NBinsThreePlaneChi2LogLikelihood,
-//			MinThreePlaneChi2LogLikelihood,MaxThreePlaneChi2LogLikelihood);
 
 		TH1D* CC1pRecoMuonLengthPlot = new TH1D("CC1pRecoMuonLengthPlot",RecoLabelXAxisMuonLength,NBinsMuonLength,MinMuonLength,MaxMuonLength);
 //		TH1D* CC1pRecodMuonTracksScorePlot = new TH1D("CC1pRecodMuonTracksScorePlot",RecoLabelXAxisMuonTrackScore,NBinsTrackScore,MinTrackScore,MaxTrackScore);
@@ -335,6 +318,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 		TH1D* CC1pRecoMuonMomentumPlot = new TH1D("CC1pRecoMuonMomentumPlot",LabelXAxisMuonMomentum,NBinsMuonMomentum,ArrayNBinsMuonMomentum);
 		TH1D* CC1pRecoMuonCosThetaPlot = new TH1D("CC1pRecoMuonCosThetaPlot",LabelXAxisMuonCosTheta,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta);
+		TH1D* CC1pRecoMuonCosThetaSingleBinPlot = new TH1D("CC1pRecoMuonCosThetaSingleBinPlot",LabelXAxisMuonCosTheta,1,-1.,1.);
 		TH1D* CC1pRecoMuonPhiPlot = new TH1D("CC1pRecoMuonPhiPlot",LabelXAxisMuonPhi,NBinsMuonPhi,ArrayNBinsMuonPhi);
 
 		TH1D* CC1pRecoCCQEMuonMomentumPlot = new TH1D("CC1pRecoCCQEMuonMomentumPlot",LabelXAxisMuonMomentum,CCQENBinsMuonMomentum,CCQEArrayNBinsMuonMomentum);
@@ -369,6 +353,12 @@ void PeLEE_myRecoAnalysis::Loop() {
 		TH1D* CC1pRecokMissPlot = new TH1D("CC1pRecokMissPlot",LabelXAxiskMiss,NBinskMiss,ArrayNBinskMiss);
 		TH1D* CC1pRecoPMissMinusPlot = new TH1D("CC1pRecoPMissMinusPlot",LabelXAxisPMissMinus,NBinsPMissMinus,ArrayNBinsPMissMinus);
 		TH1D* CC1pRecoPMissPlot = new TH1D("CC1pRecoPMissPlot",LabelXAxisPMiss,NBinsPMiss,ArrayNBinsPMiss);
+
+		TH1D* CC1pRecoDeltaPLPlot = new TH1D("CC1pRecoDeltaPLPlot",LabelXAxisDeltaPL,NBinsDeltaPL,ArrayNBinsDeltaPL);
+		TH1D* CC1pRecoDeltaPnPlot = new TH1D("CC1pRecoDeltaPnPlot",LabelXAxisDeltaPn,NBinsDeltaPn,ArrayNBinsDeltaPn);
+		TH1D* CC1pRecoDeltaPtxPlot = new TH1D("CC1pRecoDeltaPtxPlot",LabelXAxisDeltaPtx,NBinsDeltaPtx,ArrayNBinsDeltaPtx);
+		TH1D* CC1pRecoDeltaPtyPlot = new TH1D("CC1pRecoDeltaPtyPlot",LabelXAxisDeltaPty,NBinsDeltaPty,ArrayNBinsDeltaPty);
+		TH1D* CC1pRecoAPlot = new TH1D("CC1pRecoAPlot",LabelXAxisA,NBinsA,ArrayNBinsA);
 
 		TH1D* CC1pRecoDeltaPTPlot = new TH1D("CC1pRecoDeltaPTPlot",LabelXAxisDeltaPT,NBinsDeltaPT,ArrayNBinsDeltaPT);
 		TH1D* CC1pRecoDeltaAlphaTPlot = new TH1D("CC1pRecoDeltaAlphaTPlot",LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);
@@ -502,10 +492,6 @@ void PeLEE_myRecoAnalysis::Loop() {
 			NBinsFlashScore,MinFlashScore,MaxFlashScore);
 		TH1D* NonCC1pRecoDistancePlot = new TH1D("NonCC1pRecoDistancePlot",RecoLabelXAxisDistance,NBinsDistance,MinDistance,MaxDistance);
 		TH1D* NonCC1pRecoLengthDifferencePlot = new TH1D("NonCC1pRecoLengthDifferencePlot",RecoLabelXAxisLengthDifference,NBinsLengthDifference,MinLengthDifference,MaxLengthDifference);
-//		TH1D* NonCC1pRecodYZPlot = new TH1D("NonCC1pRecodYZPlot",RecoLabelXAxisdYZ,NBinsdYZ,MindYZ,MaxdYZ);
-//		TH1D* NonCC1pRecoNPEPlot = new TH1D("NonCC1pRecoNPEPlot",RecoLabelXAxisNPE,NBinsNPE,MinNPE,MaxNPE);
-//		TH1D* NonCC1pRecoVertexActivityPlot = new TH1D("NonCC1pRecoVertexActivityPlot",RecoLabelXAxisVertexActivity,NBinsVertexActivity,MinVertexActivity,MaxVertexActivity);
-//		TH1D* NonCC1pRecoNonZeroVertexActivityPlot = new TH1D("NonCC1pRecoNonZeroVertexActivityPlot",RecoLabelXAxisVertexActivity,NBinsVertexActivity,MinVertexActivity,MaxVertexActivity);
 
 		TH1D* NonCC1pRecoVertexXPlot = new TH1D("NonCC1pRecoVertexXPlot",RecoLabelXAxisVertexX,NBinsVertexX,MinVertexX,MaxVertexX);
 		TH1D* NonCC1pRecoVertexYPlot = new TH1D("NonCC1pRecoVertexYPlot",RecoLabelXAxisVertexY,NBinsVertexY,MinVertexY,MaxVertexY);
@@ -513,13 +499,6 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 		TH1D* NonCC1pRecoMuonLLRPIDPlot = new TH1D("NonCC1pRecoMuonLLRPIDPlot",RecoLabelXAxisMuonLLRPID,NBinsLLRPID,MinLLRPID,MaxLLRPID);
 		TH1D* NonCC1pRecoProtonLLRPIDPlot = new TH1D("NonCC1pRecoProtonLLRPIDPlot",RecoLabelXAxisProtonLLRPID,NBinsLLRPID,MinLLRPID,MaxLLRPID);
-
-//		TH1D* NonCC1pRecoThreePlaneChi2LogLikelihoodCandidateMuonPlot = new TH1D("NonCC1pRecoThreePlaneChi2LogLikelihoodCandidateMuonPlot",
-//			RecoLabelXAxisThreePlaneChi2MuonCandidateLogLikelihood,NBinsThreePlaneChi2LogLikelihood,
-//			MinThreePlaneChi2LogLikelihood,MaxThreePlaneChi2LogLikelihood);
-//		TH1D* NonCC1pRecoThreePlaneChi2LogLikelihoodCandidateProtonPlot = new TH1D("NonCC1pRecoThreePlaneChi2LogLikelihoodCandidateProtonPlot",
-//			RecoLabelXAxisThreePlaneChi2ProtonCandidateLogLikelihood,NBinsThreePlaneChi2LogLikelihood,
-//			MinThreePlaneChi2LogLikelihood,MaxThreePlaneChi2LogLikelihood);
 
 		TH1D* NonCC1pRecoMuonLengthPlot = new TH1D("NonCC1pRecoMuonLengthPlot",RecoLabelXAxisMuonLength,NBinsMuonLength,MinMuonLength,MaxMuonLength);
 //		TH1D* NonCC1pRecodMuonTracksScorePlot = new TH1D("NonCC1pRecodMuonTracksScorePlot",RecoLabelXAxisMuonTrackScore,NBinsTrackScore,MinTrackScore,MaxTrackScore);
@@ -530,6 +509,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 		TH1D* NonCC1pRecoMuonMomentumPlot = new TH1D("NonCC1pRecoMuonMomentumPlot",LabelXAxisMuonMomentum,NBinsMuonMomentum,ArrayNBinsMuonMomentum); // GeV/c
 		TH1D* NonCC1pRecoMuonCosThetaPlot = new TH1D("NonCC1pRecoMuonCosThetaPlot",LabelXAxisMuonCosTheta,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta);
+		TH1D* NonCC1pRecoMuonCosThetaSingleBinPlot = new TH1D("NonCC1pRecoMuonCosThetaSingleBinPlot",LabelXAxisMuonCosTheta,1,-1.,1.);
 		TH1D* NonCC1pRecoMuonPhiPlot = new TH1D("NonCC1pRecoMuonPhiPlot",LabelXAxisMuonPhi,NBinsMuonPhi,ArrayNBinsMuonPhi);
 
 		TH1D* NonCC1pRecoCCQEMuonMomentumPlot = new TH1D("NonCC1pRecoCCQEMuonMomentumPlot",LabelXAxisMuonMomentum,CCQENBinsMuonMomentum,CCQEArrayNBinsMuonMomentum); // GeV/c
@@ -563,6 +543,12 @@ void PeLEE_myRecoAnalysis::Loop() {
 		TH1D* NonCC1pRecokMissPlot = new TH1D("NonCC1pRecokMissPlot",LabelXAxiskMiss,NBinskMiss,ArrayNBinskMiss);
 		TH1D* NonCC1pRecoPMissMinusPlot = new TH1D("NonCC1pRecoPMissMinusPlot",LabelXAxisPMissMinus,NBinsPMissMinus,ArrayNBinsPMissMinus);
 		TH1D* NonCC1pRecoPMissPlot = new TH1D("NonCC1pRecoPMissPlot",LabelXAxisPMiss,NBinsPMiss,ArrayNBinsPMiss);
+
+		TH1D* NonCC1pRecoDeltaPLPlot = new TH1D("NonCC1pRecoDeltaPLPlot",LabelXAxisDeltaPL,NBinsDeltaPL,ArrayNBinsDeltaPL);
+		TH1D* NonCC1pRecoDeltaPnPlot = new TH1D("NonCC1pRecoDeltaPnPlot",LabelXAxisDeltaPn,NBinsDeltaPn,ArrayNBinsDeltaPn);
+		TH1D* NonCC1pRecoDeltaPtxPlot = new TH1D("NonCC1pRecoDeltaPtxPlot",LabelXAxisDeltaPtx,NBinsDeltaPtx,ArrayNBinsDeltaPtx);
+		TH1D* NonCC1pRecoDeltaPtyPlot = new TH1D("NonCC1pRecoDeltaPtyPlot",LabelXAxisDeltaPty,NBinsDeltaPty,ArrayNBinsDeltaPty);
+		TH1D* NonCC1pRecoAPlot = new TH1D("NonCC1pRecoAPlot",LabelXAxisA,NBinsA,ArrayNBinsA);
 
 		TH1D* NonCC1pRecoDeltaPTPlot = new TH1D("NonCC1pRecoDeltaPTPlot",LabelXAxisDeltaPT,NBinsDeltaPT,ArrayNBinsDeltaPT);
 		TH1D* NonCC1pRecoDeltaAlphaTPlot = new TH1D("NonCC1pRecoDeltaAlphaTPlot",LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);
@@ -600,10 +586,6 @@ void PeLEE_myRecoAnalysis::Loop() {
 		TH1D* CCQERecoFlashScorePlot = new TH1D("CCQERecoFlashScorePlot",RecoLabelXAxisFlashScore,NBinsFlashScore,MinFlashScore,MaxFlashScore);
 		TH1D* CCQERecoDistancePlot = new TH1D("CCQERecoDistancePlot",RecoLabelXAxisDistance,NBinsDistance,MinDistance,MaxDistance);
 		TH1D* CCQERecoLengthDifferencePlot = new TH1D("CCQERecoLengthDifferencePlot",RecoLabelXAxisLengthDifference,NBinsLengthDifference,MinLengthDifference,MaxLengthDifference);
-//		TH1D* CCQERecodYZPlot = new TH1D("CCQERecodYZPlot",RecoLabelXAxisdYZ,NBinsdYZ,MindYZ,MaxdYZ);
-//		TH1D* CCQERecoNPEPlot = new TH1D("CCQERecoNPEPlot",RecoLabelXAxisNPE,NBinsNPE,MinNPE,MaxNPE);
-//		TH1D* CCQERecoVertexActivityPlot = new TH1D("CCQERecoVertexActivityPlot",RecoLabelXAxisVertexActivity,NBinsVertexActivity,MinVertexActivity,MaxVertexActivity);
-//		TH1D* CCQERecoNonZeroVertexActivityPlot = new TH1D("CCQERecoNonZeroVertexActivityPlot",RecoLabelXAxisVertexActivity,NBinsVertexActivity,MinVertexActivity,MaxVertexActivity);
 
 		TH1D* CCQERecoVertexXPlot = new TH1D("CCQERecoVertexXPlot",RecoLabelXAxisVertexX,NBinsVertexX,MinVertexX,MaxVertexX);
 		TH1D* CCQERecoVertexYPlot = new TH1D("CCQERecoVertexYPlot",RecoLabelXAxisVertexY,NBinsVertexY,MinVertexY,MaxVertexY);
@@ -611,13 +593,6 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 		TH1D* CCQERecoMuonLLRPIDPlot = new TH1D("CCQERecoMuonLLRPIDPlot",RecoLabelXAxisMuonLLRPID,NBinsLLRPID,MinLLRPID,MaxLLRPID);
 		TH1D* CCQERecoProtonLLRPIDPlot = new TH1D("CCQERecoProtonLLRPIDPlot",RecoLabelXAxisProtonLLRPID,NBinsLLRPID,MinLLRPID,MaxLLRPID);
-
-//		TH1D* CCQERecoThreePlaneChi2LogLikelihoodCandidateMuonPlot = new TH1D("CCQERecoThreePlaneChi2LogLikelihoodCandidateMuonPlot",
-//			RecoLabelXAxisThreePlaneChi2MuonCandidateLogLikelihood,NBinsThreePlaneChi2LogLikelihood,
-//			MinThreePlaneChi2LogLikelihood,MaxThreePlaneChi2LogLikelihood);
-//		TH1D* CCQERecoThreePlaneChi2LogLikelihoodCandidateProtonPlot = new TH1D("CCQERecoThreePlaneChi2LogLikelihoodCandidateProtonPlot",
-//			RecoLabelXAxisThreePlaneChi2ProtonCandidateLogLikelihood,NBinsThreePlaneChi2LogLikelihood,
-//			MinThreePlaneChi2LogLikelihood,MaxThreePlaneChi2LogLikelihood);
 
 		TH1D* CCQERecoMuonLengthPlot = new TH1D("CCQERecoMuonLengthPlot",RecoLabelXAxisMuonLength,NBinsMuonLength,MinMuonLength,MaxMuonLength);
 //		TH1D* CCQERecodMuonTracksScorePlot = new TH1D("CCQERecodMuonTracksScorePlot",RecoLabelXAxisMuonTrackScore,NBinsTrackScore,MinTrackScore,MaxTrackScore);	
@@ -628,6 +603,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 		TH1D* CCQERecoMuonMomentumPlot = new TH1D("CCQERecoMuonMomentumPlot",LabelXAxisMuonMomentum,NBinsMuonMomentum,ArrayNBinsMuonMomentum);
 		TH1D* CCQERecoMuonCosThetaPlot = new TH1D("CCQERecoMuonCosThetaPlot",LabelXAxisMuonCosTheta,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta);
+		TH1D* CCQERecoMuonCosThetaSingleBinPlot = new TH1D("CCQERecoMuonCosThetaSingleBinPlot",LabelXAxisMuonCosTheta,1,-1.,1.);
 		TH1D* CCQERecoMuonPhiPlot = new TH1D("CCQERecoMuonPhiPlot",LabelXAxisMuonPhi,NBinsMuonPhi,ArrayNBinsMuonPhi);
 
 		TH1D* CCQERecoCCQEMuonMomentumPlot = new TH1D("CCQERecoCCQEMuonMomentumPlot",LabelXAxisMuonMomentum,CCQENBinsMuonMomentum,CCQEArrayNBinsMuonMomentum);
@@ -662,6 +638,12 @@ void PeLEE_myRecoAnalysis::Loop() {
 		TH1D* CCQERecoPMissMinusPlot = new TH1D("CCQERecoPMissMinusPlot",LabelXAxisPMissMinus,NBinsPMissMinus,ArrayNBinsPMissMinus);
 		TH1D* CCQERecoPMissPlot = new TH1D("CCQERecoPMissPlot",LabelXAxisPMiss,NBinsPMiss,ArrayNBinsPMiss);
 
+		TH1D* CCQERecoDeltaPLPlot = new TH1D("CCQERecoDeltaPLPlot",LabelXAxisDeltaPL,NBinsDeltaPL,ArrayNBinsDeltaPL);
+		TH1D* CCQERecoDeltaPnPlot = new TH1D("CCQERecoDeltaPnPlot",LabelXAxisDeltaPn,NBinsDeltaPn,ArrayNBinsDeltaPn);
+		TH1D* CCQERecoDeltaPtxPlot = new TH1D("CCQERecoDeltaPtxPlot",LabelXAxisDeltaPtx,NBinsDeltaPtx,ArrayNBinsDeltaPtx);
+		TH1D* CCQERecoDeltaPtyPlot = new TH1D("CCQERecoDeltaPtyPlot",LabelXAxisDeltaPty,NBinsDeltaPty,ArrayNBinsDeltaPty);
+		TH1D* CCQERecoAPlot = new TH1D("CCQERecoAPlot",LabelXAxisA,NBinsA,ArrayNBinsA);
+
 		TH1D* CCQERecoDeltaPTPlot = new TH1D("CCQERecoDeltaPTPlot",LabelXAxisDeltaPT,NBinsDeltaPT,ArrayNBinsDeltaPT);
 		TH1D* CCQERecoDeltaAlphaTPlot = new TH1D("CCQERecoDeltaAlphaTPlot",LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);
 		TH1D* CCQERecoDeltaPhiTPlot = new TH1D("CCQERecoDeltaPhiTPlot",LabelXAxisDeltaPhiT,NBinsDeltaPhiT,ArrayNBinsDeltaPhiT);
@@ -693,10 +675,6 @@ void PeLEE_myRecoAnalysis::Loop() {
 		TH1D* CCMECRecoFlashScorePlot = new TH1D("CCMECRecoFlashScorePlot",RecoLabelXAxisFlashScore,NBinsFlashScore,MinFlashScore,MaxFlashScore);
 		TH1D* CCMECRecoDistancePlot = new TH1D("CCMECRecoDistancePlot",RecoLabelXAxisDistance,NBinsDistance,MinDistance,MaxDistance);
 		TH1D* CCMECRecoLengthDifferencePlot = new TH1D("CCMECRecoLengthDifferencePlot",RecoLabelXAxisLengthDifference,NBinsLengthDifference,MinLengthDifference,MaxLengthDifference);
-//		TH1D* CCMECRecodYZPlot = new TH1D("CCMECRecodYZPlot",RecoLabelXAxisdYZ,NBinsdYZ,MindYZ,MaxdYZ);
-//		TH1D* CCMECRecoNPEPlot = new TH1D("CCMECRecoNPEPlot",RecoLabelXAxisNPE,NBinsNPE,MinNPE,MaxNPE);
-//		TH1D* CCMECRecoVertexActivityPlot = new TH1D("CCMECRecoVertexActivityPlot",RecoLabelXAxisVertexActivity,NBinsVertexActivity,MinVertexActivity,MaxVertexActivity);
-//		TH1D* CCMECRecoNonZeroVertexActivityPlot = new TH1D("CCMECRecoNonZeroVertexActivityPlot",RecoLabelXAxisVertexActivity,NBinsVertexActivity,MinVertexActivity,MaxVertexActivity);
 
 		TH1D* CCMECRecoVertexXPlot = new TH1D("CCMECRecoVertexXPlot",RecoLabelXAxisVertexX,NBinsVertexX,MinVertexX,MaxVertexX);
 		TH1D* CCMECRecoVertexYPlot = new TH1D("CCMECRecoVertexYPlot",RecoLabelXAxisVertexY,NBinsVertexY,MinVertexY,MaxVertexY);
@@ -704,13 +682,6 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 		TH1D* CCMECRecoMuonLLRPIDPlot = new TH1D("CCMECRecoMuonLLRPIDPlot",RecoLabelXAxisMuonLLRPID,NBinsLLRPID,MinLLRPID,MaxLLRPID);
 		TH1D* CCMECRecoProtonLLRPIDPlot = new TH1D("CCMECRecoProtonLLRPIDPlot",RecoLabelXAxisProtonLLRPID,NBinsLLRPID,MinLLRPID,MaxLLRPID);
-
-//		TH1D* CCMECRecoThreePlaneChi2LogLikelihoodCandidateMuonPlot = new TH1D("CCMECRecoThreePlaneChi2LogLikelihoodCandidateMuonPlot",
-//			RecoLabelXAxisThreePlaneChi2MuonCandidateLogLikelihood,NBinsThreePlaneChi2LogLikelihood,
-//			MinThreePlaneChi2LogLikelihood,MaxThreePlaneChi2LogLikelihood);
-//		TH1D* CCMECRecoThreePlaneChi2LogLikelihoodCandidateProtonPlot = new TH1D("CCMECRecoThreePlaneChi2LogLikelihoodCandidateProtonPlot",
-//			RecoLabelXAxisThreePlaneChi2ProtonCandidateLogLikelihood,NBinsThreePlaneChi2LogLikelihood,
-//			MinThreePlaneChi2LogLikelihood,MaxThreePlaneChi2LogLikelihood);
 
 		TH1D* CCMECRecoMuonLengthPlot = new TH1D("CCMECRecoMuonLengthPlot",RecoLabelXAxisMuonLength,NBinsMuonLength,MinMuonLength,MaxMuonLength);
 //		TH1D* CCMECRecodMuonTracksScorePlot = new TH1D("CCMECRecodMuonTracksScorePlot",RecoLabelXAxisMuonTrackScore,NBinsTrackScore,MinTrackScore,MaxTrackScore);
@@ -721,6 +692,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 		TH1D* CCMECRecoMuonMomentumPlot = new TH1D("CCMECRecoMuonMomentumPlot",LabelXAxisMuonMomentum,NBinsMuonMomentum,ArrayNBinsMuonMomentum);
 		TH1D* CCMECRecoMuonCosThetaPlot = new TH1D("CCMECRecoMuonCosThetaPlot",LabelXAxisMuonCosTheta,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta);
+		TH1D* CCMECRecoMuonCosThetaSingleBinPlot = new TH1D("CCMECRecoMuonCosThetaSingleBinPlot",LabelXAxisMuonCosTheta,1,-1.,1.);
 		TH1D* CCMECRecoMuonPhiPlot = new TH1D("CCMECRecoMuonPhiPlot",LabelXAxisMuonPhi,NBinsMuonPhi,ArrayNBinsMuonPhi);
 
 		TH1D* CCMECRecoCCQEMuonMomentumPlot = new TH1D("CCMECRecoCCQEMuonMomentumPlot",LabelXAxisMuonMomentum,CCQENBinsMuonMomentum,CCQEArrayNBinsMuonMomentum);
@@ -755,6 +727,12 @@ void PeLEE_myRecoAnalysis::Loop() {
 		TH1D* CCMECRecoPMissMinusPlot = new TH1D("CCMECRecoPMissMinusPlot",LabelXAxisPMissMinus,NBinsPMissMinus,ArrayNBinsPMissMinus);
 		TH1D* CCMECRecoPMissPlot = new TH1D("CCMECRecoPMissPlot",LabelXAxisPMiss,NBinsPMiss,ArrayNBinsPMiss);
 
+		TH1D* CCMECRecoDeltaPLPlot = new TH1D("CCMECRecoDeltaPLPlot",LabelXAxisDeltaPL,NBinsDeltaPL,ArrayNBinsDeltaPL);
+		TH1D* CCMECRecoDeltaPnPlot = new TH1D("CCMECRecoDeltaPnPlot",LabelXAxisDeltaPn,NBinsDeltaPn,ArrayNBinsDeltaPn);
+		TH1D* CCMECRecoDeltaPtxPlot = new TH1D("CCMECRecoDeltaPtxPlot",LabelXAxisDeltaPtx,NBinsDeltaPtx,ArrayNBinsDeltaPtx);
+		TH1D* CCMECRecoDeltaPtyPlot = new TH1D("CCMECRecoDeltaPtyPlot",LabelXAxisDeltaPty,NBinsDeltaPty,ArrayNBinsDeltaPty);
+		TH1D* CCMECRecoAPlot = new TH1D("CCMECRecoAPlot",LabelXAxisA,NBinsA,ArrayNBinsA);
+
 		TH1D* CCMECRecoDeltaPTPlot = new TH1D("CCMECRecoDeltaPTPlot",LabelXAxisDeltaPT,NBinsDeltaPT,ArrayNBinsDeltaPT);
 		TH1D* CCMECRecoDeltaAlphaTPlot = new TH1D("CCMECRecoDeltaAlphaTPlot",LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);
 		TH1D* CCMECRecoDeltaPhiTPlot = new TH1D("CCMECRecoDeltaPhiTPlot",LabelXAxisDeltaPhiT,NBinsDeltaPhiT,ArrayNBinsDeltaPhiT);
@@ -786,10 +764,6 @@ void PeLEE_myRecoAnalysis::Loop() {
 		TH1D* CCRESRecoFlashScorePlot = new TH1D("CCRESRecoFlashScorePlot",RecoLabelXAxisFlashScore,NBinsFlashScore,MinFlashScore,MaxFlashScore);
 		TH1D* CCRESRecoDistancePlot = new TH1D("CCRESRecoDistancePlot",RecoLabelXAxisDistance,NBinsDistance,MinDistance,MaxDistance);
 		TH1D* CCRESRecoLengthDifferencePlot = new TH1D("CCRESRecoLengthDifferencePlot",RecoLabelXAxisLengthDifference,NBinsLengthDifference,MinLengthDifference,MaxLengthDifference);
-//		TH1D* CCRESRecodYZPlot = new TH1D("CCRESRecodYZPlot",RecoLabelXAxisdYZ,NBinsdYZ,MindYZ,MaxdYZ);
-//		TH1D* CCRESRecoNPEPlot = new TH1D("CCRESRecoNPEPlot",RecoLabelXAxisNPE,NBinsNPE,MinNPE,MaxNPE);
-//		TH1D* CCRESRecoVertexActivityPlot = new TH1D("CCRESRecoVertexActivityPlot",RecoLabelXAxisVertexActivity,NBinsVertexActivity,MinVertexActivity,MaxVertexActivity);
-//		TH1D* CCRESRecoNonZeroVertexActivityPlot = new TH1D("CCRESRecoNonZeroVertexActivityPlot",RecoLabelXAxisVertexActivity,NBinsVertexActivity,MinVertexActivity,MaxVertexActivity);
 
 		TH1D* CCRESRecoVertexXPlot = new TH1D("CCRESRecoVertexXPlot",RecoLabelXAxisVertexX,NBinsVertexX,MinVertexX,MaxVertexX);
 		TH1D* CCRESRecoVertexYPlot = new TH1D("CCRESRecoVertexYPlot",RecoLabelXAxisVertexY,NBinsVertexY,MinVertexY,MaxVertexY);
@@ -797,13 +771,6 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 		TH1D* CCRESRecoMuonLLRPIDPlot = new TH1D("CCRESRecoMuonLLRPIDPlot",RecoLabelXAxisMuonLLRPID,NBinsLLRPID,MinLLRPID,MaxLLRPID);
 		TH1D* CCRESRecoProtonLLRPIDPlot = new TH1D("CCRESRecoProtonLLRPIDPlot",RecoLabelXAxisProtonLLRPID,NBinsLLRPID,MinLLRPID,MaxLLRPID);
-
-//		TH1D* CCRESRecoThreePlaneChi2LogLikelihoodCandidateMuonPlot = new TH1D("CCRESRecoThreePlaneChi2LogLikelihoodCandidateMuonPlot",
-//			RecoLabelXAxisThreePlaneChi2MuonCandidateLogLikelihood,NBinsThreePlaneChi2LogLikelihood,
-//			MinThreePlaneChi2LogLikelihood,MaxThreePlaneChi2LogLikelihood);
-//		TH1D* CCRESRecoThreePlaneChi2LogLikelihoodCandidateProtonPlot = new TH1D("CCRESRecoThreePlaneChi2LogLikelihoodCandidateProtonPlot",
-//			RecoLabelXAxisThreePlaneChi2ProtonCandidateLogLikelihood,NBinsThreePlaneChi2LogLikelihood,
-//			MinThreePlaneChi2LogLikelihood,MaxThreePlaneChi2LogLikelihood);
 
 		TH1D* CCRESRecoMuonLengthPlot = new TH1D("CCRESRecoMuonLengthPlot",RecoLabelXAxisMuonLength,NBinsMuonLength,MinMuonLength,MaxMuonLength);
 //		TH1D* CCRESRecodMuonTracksScorePlot = new TH1D("CCRESRecodMuonTracksScorePlot",RecoLabelXAxisMuonTrackScore,NBinsTrackScore,MinTrackScore,MaxTrackScore);
@@ -814,6 +781,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 		TH1D* CCRESRecoMuonMomentumPlot = new TH1D("CCRESRecoMuonMomentumPlot",LabelXAxisMuonMomentum,NBinsMuonMomentum,ArrayNBinsMuonMomentum);
 		TH1D* CCRESRecoMuonCosThetaPlot = new TH1D("CCRESRecoMuonCosThetaPlot",LabelXAxisMuonCosTheta,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta);
+		TH1D* CCRESRecoMuonCosThetaSingleBinPlot = new TH1D("CCRESRecoMuonCosThetaSingleBinPlot",LabelXAxisMuonCosTheta,1,-1.,1.);
 		TH1D* CCRESRecoMuonPhiPlot = new TH1D("CCRESRecoMuonPhiPlot",LabelXAxisMuonPhi,NBinsMuonPhi,ArrayNBinsMuonPhi);
 
 		TH1D* CCRESRecoCCQEMuonMomentumPlot = new TH1D("CCRESRecoCCQEMuonMomentumPlot",LabelXAxisMuonMomentum,CCQENBinsMuonMomentum,CCQEArrayNBinsMuonMomentum);
@@ -848,6 +816,12 @@ void PeLEE_myRecoAnalysis::Loop() {
 		TH1D* CCRESRecoPMissMinusPlot = new TH1D("CCRESRecoPMissMinusPlot",LabelXAxisPMissMinus,NBinsPMissMinus,ArrayNBinsPMissMinus);
 		TH1D* CCRESRecoPMissPlot = new TH1D("CCRESRecoPMissPlot",LabelXAxisPMiss,NBinsPMiss,ArrayNBinsPMiss);
 
+		TH1D* CCRESRecoDeltaPLPlot = new TH1D("CCRESRecoDeltaPLPlot",LabelXAxisDeltaPL,NBinsDeltaPL,ArrayNBinsDeltaPL);
+		TH1D* CCRESRecoDeltaPnPlot = new TH1D("CCRESRecoDeltaPnPlot",LabelXAxisDeltaPn,NBinsDeltaPn,ArrayNBinsDeltaPn);
+		TH1D* CCRESRecoDeltaPtxPlot = new TH1D("CCRESRecoDeltaPtxPlot",LabelXAxisDeltaPtx,NBinsDeltaPtx,ArrayNBinsDeltaPtx);
+		TH1D* CCRESRecoDeltaPtyPlot = new TH1D("CCRESRecoDeltaPtyPlot",LabelXAxisDeltaPty,NBinsDeltaPty,ArrayNBinsDeltaPty);
+		TH1D* CCRESRecoAPlot = new TH1D("CCRESRecoAPlot",LabelXAxisA,NBinsA,ArrayNBinsA);
+
 		TH1D* CCRESRecoDeltaPTPlot = new TH1D("CCRESRecoDeltaPTPlot",LabelXAxisDeltaPT,NBinsDeltaPT,ArrayNBinsDeltaPT);
 		TH1D* CCRESRecoDeltaAlphaTPlot = new TH1D("CCRESRecoDeltaAlphaTPlot",LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);
 		TH1D* CCRESRecoDeltaPhiTPlot = new TH1D("CCRESRecoDeltaPhiTPlot",LabelXAxisDeltaPhiT,NBinsDeltaPhiT,ArrayNBinsDeltaPhiT);
@@ -879,10 +853,6 @@ void PeLEE_myRecoAnalysis::Loop() {
 		TH1D* CCDISRecoFlashScorePlot = new TH1D("CCDISRecoFlashScorePlot",RecoLabelXAxisFlashScore,NBinsFlashScore,MinFlashScore,MaxFlashScore);
 		TH1D* CCDISRecoDistancePlot = new TH1D("CCDISRecoDistancePlot",RecoLabelXAxisDistance,NBinsDistance,MinDistance,MaxDistance);
 		TH1D* CCDISRecoLengthDifferencePlot = new TH1D("CCDISRecoLengthDifferencePlot",RecoLabelXAxisLengthDifference,NBinsLengthDifference,MinLengthDifference,MaxLengthDifference);
-//		TH1D* CCDISRecodYZPlot = new TH1D("CCDISRecodYZPlot",RecoLabelXAxisdYZ,NBinsdYZ,MindYZ,MaxdYZ);
-//		TH1D* CCDISRecoNPEPlot = new TH1D("CCDISRecoNPEPlot",RecoLabelXAxisNPE,NBinsNPE,MinNPE,MaxNPE);
-//		TH1D* CCDISRecoVertexActivityPlot = new TH1D("CCDISRecoVertexActivityPlot",RecoLabelXAxisVertexActivity,NBinsVertexActivity,MinVertexActivity,MaxVertexActivity);
-//		TH1D* CCDISRecoNonZeroVertexActivityPlot = new TH1D("CCDISRecoNonZeroVertexActivityPlot",RecoLabelXAxisVertexActivity,NBinsVertexActivity,MinVertexActivity,MaxVertexActivity);
 
 		TH1D* CCDISRecoVertexXPlot = new TH1D("CCDISRecoVertexXPlot",RecoLabelXAxisVertexX,NBinsVertexX,MinVertexX,MaxVertexX);
 		TH1D* CCDISRecoVertexYPlot = new TH1D("CCDISRecoVertexYPlot",RecoLabelXAxisVertexY,NBinsVertexY,MinVertexY,MaxVertexY);
@@ -890,13 +860,6 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 		TH1D* CCDISRecoMuonLLRPIDPlot = new TH1D("CCDISRecoMuonLLRPIDPlot",RecoLabelXAxisMuonLLRPID,NBinsLLRPID,MinLLRPID,MaxLLRPID);
 		TH1D* CCDISRecoProtonLLRPIDPlot = new TH1D("CCDISRecoProtonLLRPIDPlot",RecoLabelXAxisProtonLLRPID,NBinsLLRPID,MinLLRPID,MaxLLRPID);
-
-//		TH1D* CCDISRecoThreePlaneChi2LogLikelihoodCandidateMuonPlot = new TH1D("CCDISRecoThreePlaneChi2LogLikelihoodCandidateMuonPlot",
-//			RecoLabelXAxisThreePlaneChi2MuonCandidateLogLikelihood,NBinsThreePlaneChi2LogLikelihood,
-//			MinThreePlaneChi2LogLikelihood,MaxThreePlaneChi2LogLikelihood);
-//		TH1D* CCDISRecoThreePlaneChi2LogLikelihoodCandidateProtonPlot = new TH1D("CCDISRecoThreePlaneChi2LogLikelihoodCandidateProtonPlot",
-//			RecoLabelXAxisThreePlaneChi2ProtonCandidateLogLikelihood,NBinsThreePlaneChi2LogLikelihood,
-//			MinThreePlaneChi2LogLikelihood,MaxThreePlaneChi2LogLikelihood);
 
 		TH1D* CCDISRecoMuonLengthPlot = new TH1D("CCDISRecoMuonLengthPlot",RecoLabelXAxisMuonLength,NBinsMuonLength,MinMuonLength,MaxMuonLength);
 //		TH1D* CCDISRecodMuonTracksScorePlot = new TH1D("CCDISRecodMuonTracksScorePlot",RecoLabelXAxisMuonTrackScore,NBinsTrackScore,MinTrackScore,MaxTrackScore);
@@ -907,6 +870,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 		TH1D* CCDISRecoMuonMomentumPlot = new TH1D("CCDISRecoMuonMomentumPlot",LabelXAxisMuonMomentum,NBinsMuonMomentum,ArrayNBinsMuonMomentum);
 		TH1D* CCDISRecoMuonCosThetaPlot = new TH1D("CCDISRecoMuonCosThetaPlot",LabelXAxisMuonCosTheta,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta);
+		TH1D* CCDISRecoMuonCosThetaSingleBinPlot = new TH1D("CCDISRecoMuonCosThetaSingleBinPlot",LabelXAxisMuonCosTheta,1,-1.,1.);
 		TH1D* CCDISRecoMuonPhiPlot = new TH1D("CCDISRecoMuonPhiPlot",LabelXAxisMuonPhi,NBinsMuonPhi,ArrayNBinsMuonPhi);
 
 		TH1D* CCDISRecoCCQEMuonMomentumPlot = new TH1D("CCDISRecoCCQEMuonMomentumPlot",LabelXAxisMuonMomentum,CCQENBinsMuonMomentum,CCQEArrayNBinsMuonMomentum);
@@ -941,6 +905,12 @@ void PeLEE_myRecoAnalysis::Loop() {
 		TH1D* CCDISRecoPMissMinusPlot = new TH1D("CCDISRecoPMissMinusPlot",LabelXAxisPMissMinus,NBinsPMissMinus,ArrayNBinsPMissMinus);
 		TH1D* CCDISRecoPMissPlot = new TH1D("CCDISRecoPMissPlot",LabelXAxisPMiss,NBinsPMiss,ArrayNBinsPMiss);
 
+		TH1D* CCDISRecoDeltaPLPlot = new TH1D("CCDISRecoDeltaPLPlot",LabelXAxisDeltaPL,NBinsDeltaPL,ArrayNBinsDeltaPL);
+		TH1D* CCDISRecoDeltaPnPlot = new TH1D("CCDISRecoDeltaPnPlot",LabelXAxisDeltaPn,NBinsDeltaPn,ArrayNBinsDeltaPn);
+		TH1D* CCDISRecoDeltaPtxPlot = new TH1D("CCDISRecoDeltaPtxPlot",LabelXAxisDeltaPtx,NBinsDeltaPtx,ArrayNBinsDeltaPtx);
+		TH1D* CCDISRecoDeltaPtyPlot = new TH1D("CCDISRecoDeltaPtyPlot",LabelXAxisDeltaPty,NBinsDeltaPty,ArrayNBinsDeltaPty);
+		TH1D* CCDISRecoAPlot = new TH1D("CCDISRecoAPlot",LabelXAxisA,NBinsA,ArrayNBinsA);
+
 		TH1D* CCDISRecoDeltaPTPlot = new TH1D("CCDISRecoDeltaPTPlot",LabelXAxisDeltaPT,NBinsDeltaPT,ArrayNBinsDeltaPT);
 		TH1D* CCDISRecoDeltaAlphaTPlot = new TH1D("CCDISRecoDeltaAlphaTPlot",LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);
 		TH1D* CCDISRecoDeltaPhiTPlot = new TH1D("CCDISRecoDeltaPhiTPlot",LabelXAxisDeltaPhiT,NBinsDeltaPhiT,ArrayNBinsDeltaPhiT);
@@ -971,68 +941,34 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 		TH1D* RecoLLRPIDPlot = new TH1D("RecoLLRPIDPlot",RecoLabelXAxisLLRPID,NBinsLLRPID,MinLLRPID,MaxLLRPID);
 //		TH1D* RecoChi2Plot = new TH1D("RecoChi2Plot",RecoLabelXAxisChi2,NBinsChi2,MinChi2,MaxChi2);
-//		TH1D* RecoThreePlaneChi2Plot = new TH1D("RecoThreePlaneChi2Plot",RecoLabelXAxisThreePlaneChi2,
-//			NBinsThreePlaneChi2,MinThreePlaneChi2,MaxThreePlaneChi2);
-//		TH1D* RecoThreePlaneChi2LogLikelihoodPlot = new TH1D("RecoThreePlaneChi2LogLikelihoodPlot",RecoLabelXAxisThreePlaneChi2LogLikelihood,
-//			NBinsThreePlaneChi2LogLikelihood,MinThreePlaneChi2LogLikelihood,MaxThreePlaneChi2LogLikelihood);
 
 		// Muon 1D Reco Level Plots
 
 		TH1D* MuonRecoLLRPIDPlot = new TH1D("MuonRecoLLRPIDPlot",RecoLabelXAxisLLRPID,NBinsLLRPID,MinLLRPID,MaxLLRPID);
 //		TH1D* MuonRecoChi2Plot = new TH1D("MuonRecoChi2Plot",RecoLabelXAxisChi2,NBinsChi2,MinChi2,MaxChi2);
-//		TH1D* MuonRecoThreePlaneChi2Plot = new TH1D("MuonRecoThreePlaneChi2Plot",RecoLabelXAxisThreePlaneChi2,
-//			NBinsThreePlaneChi2,MinThreePlaneChi2,MaxThreePlaneChi2);
-//		TH1D* MuonRecoThreePlaneChi2LogLikelihoodPlot = new TH1D("MuonRecoThreePlaneChi2LogLikelihoodPlot",
-//			RecoLabelXAxisThreePlaneChi2LogLikelihood,NBinsThreePlaneChi2LogLikelihood,
-//			MinThreePlaneChi2LogLikelihood,MaxThreePlaneChi2LogLikelihood);
 
 		// Proton 1D Reco Level Plots
 
 		TH1D* ProtonRecoLLRPIDPlot = new TH1D("ProtonRecoLLRPIDPlot",RecoLabelXAxisLLRPID,NBinsLLRPID,MinLLRPID,MaxLLRPID);
 //		TH1D* ProtonRecoChi2Plot = new TH1D("ProtonRecoChi2Plot",RecoLabelXAxisChi2,NBinsChi2,MinChi2,MaxChi2);
-//		TH1D* ProtonRecoThreePlaneChi2Plot = new TH1D("ProtonRecoThreePlaneChi2Plot",RecoLabelXAxisThreePlaneChi2,
-//			NBinsThreePlaneChi2,MinThreePlaneChi2,MaxThreePlaneChi2);
-//		TH1D* ProtonRecoThreePlaneChi2LogLikelihoodPlot = new TH1D("ProtonRecoThreePlaneChi2LogLikelihoodPlot",
-//			RecoLabelXAxisThreePlaneChi2LogLikelihood,NBinsThreePlaneChi2LogLikelihood,
-//			MinThreePlaneChi2LogLikelihood,MaxThreePlaneChi2LogLikelihood);
 
 		// Pion 1D Reco Level Plots
 
 		TH1D* PionRecoLLRPIDPlot = new TH1D("PionRecoLLRPIDPlot",RecoLabelXAxisLLRPID,NBinsLLRPID,MinLLRPID,MaxLLRPID);
 //		TH1D* PionRecoChi2Plot = new TH1D("PionRecoChi2Plot",RecoLabelXAxisChi2,NBinsChi2,MinChi2,MaxChi2);
-//		TH1D* PionRecoThreePlaneChi2Plot = new TH1D("PionRecoThreePlaneChi2Plot",RecoLabelXAxisThreePlaneChi2,
-//			NBinsThreePlaneChi2,MinThreePlaneChi2,MaxThreePlaneChi2);
-//		TH1D* PionRecoThreePlaneChi2LogLikelihoodPlot = new TH1D("PionRecoThreePlaneChi2LogLikelihoodPlot",
-//			RecoLabelXAxisThreePlaneChi2LogLikelihood,NBinsThreePlaneChi2LogLikelihood,
-//			MinThreePlaneChi2LogLikelihood,MaxThreePlaneChi2LogLikelihood);
 
 		// Cosmic 1D Reco Level Plots
 
 		TH1D* CosmicRecoLLRPIDPlot = new TH1D("CosmicRecoLLRPIDPlot",RecoLabelXAxisLLRPID,NBinsLLRPID,MinLLRPID,MaxLLRPID);
 //		TH1D* CosmicRecoChi2Plot = new TH1D("CosmicRecoChi2Plot",RecoLabelXAxisChi2,NBinsChi2,MinChi2,MaxChi2);
-//		TH1D* CosmicRecoThreePlaneChi2Plot = new TH1D("CosmicRecoThreePlaneChi2Plot",RecoLabelXAxisThreePlaneChi2,
-//			NBinsThreePlaneChi2,MinThreePlaneChi2,MaxThreePlaneChi2);
-//		TH1D* CosmicRecoThreePlaneChi2LogLikelihoodPlot = new TH1D("CosmicRecoThreePlaneChi2LogLikelihoodPlot",
-//			RecoLabelXAxisThreePlaneChi2LogLikelihood,NBinsThreePlaneChi2LogLikelihood,
-//			MinThreePlaneChi2LogLikelihood,MaxThreePlaneChi2LogLikelihood);
 
 		// --------------------------------------------------------------------------------------------------------------------------------
 		// --------------------------------------------------------------------------------------------------------------------------------
 
 		// Optical & calorimetric info (only Reco & CC1pReco) for selection cuts
 
-//		TH2D* RecodYZvsNPE2D = new TH2D("RecodYZvsNPE2D",RecoLabelXAxisNPE+RecoLabelXAxisdYZ,NBinsNPE,MinNPE,MaxNPE,NBinsdYZ,MindYZ,MaxdYZ);
-//		TH2D* CC1pRecodYZvsNPE2D = new TH2D("CC1pRecodYZvsNPE2D",RecoLabelXAxisNPE+RecoLabelXAxisdYZ,NBinsNPE,MinNPE,MaxNPE,NBinsdYZ,MindYZ,MaxdYZ);
-
 		TH2D* RecoChi2PvsChi2Mu2D = new TH2D("RecoChi2PvsChi2Mu2D",";#chi^{2}_{#mu};#chi^{2}_{p}",NBinsChi2,MinChi2,MaxChi2,NBinsChi2,MinChi2,MaxChi2);
 		TH2D* CC1pRecoChi2PvsChi2Mu2D = new TH2D("CC1pRecoChi2PvsChi2Mu2D",";#chi^{2}_{#mu};#chi^{2}_{p}",NBinsChi2,MinChi2,MaxChi2,NBinsChi2,MinChi2,MaxChi2);
-
-//		TH2D* RecoLLPvsLLMu2D = new TH2D("RecoLLPvsLLMu2D",RecoLabelXAxisThreePlaneChi2MuonCandidateLogLikelihood+RecoLabelXAxisThreePlaneChi2ProtonCandidateLogLikelihood,
-//						 2*NBinsThreePlaneChi2LogLikelihood,MinThreePlaneChi2LogLikelihood,MaxThreePlaneChi2LogLikelihood,
-//						 2*NBinsThreePlaneChi2LogLikelihood,MinThreePlaneChi2LogLikelihood,MaxThreePlaneChi2LogLikelihood);
-//		TH2D* CC1pRecoLLPvsLLMu2D = new TH2D("CC1pRecoLLPvsLLMu2D",RecoLabelXAxisThreePlaneChi2MuonCandidateLogLikelihood+RecoLabelXAxisThreePlaneChi2ProtonCandidateLogLikelihood,
-//						 2*NBinsThreePlaneChi2LogLikelihood,MinThreePlaneChi2LogLikelihood,MaxThreePlaneChi2LogLikelihood,
-//						 2*NBinsThreePlaneChi2LogLikelihood,MinThreePlaneChi2LogLikelihood,MaxThreePlaneChi2LogLikelihood);
 
 		TH2D* RecoLengthPvsLengthMu2D = new TH2D("RecoLengthPvsLengthMu2D",RecoLabelXAxisMuonLength+RecoLabelXAxisProtonLength,
 							 NBinsMuonLength,MinMuonLength,MaxMuonLength,NBinsProtonLength,MinProtonLength,MaxProtonLength);
@@ -1064,110 +1000,6 @@ void PeLEE_myRecoAnalysis::Loop() {
 		TString LabelDeltaAlphaTResolution = ";#delta#alpha_{T} (Reco - True) [deg]";
 		TString LabelDeltaPhiTResolution = ";#delta#phi_{T} (Reco - True) [deg]";
 
-//		TH2D* Playground_CC1pRecoMuonMomentumResoVsMuonMomentumPlot = new TH2D("Playground_CC1pRecoMuonMomentumResoVsMuonMomentumPlot",LabelMuonMomentumResolution+LabelXAxisMuonMomentum,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV,200,0.1,2.);
-
-//		TH2D* Playground_CC1pRecoMuonMomentumResoVsDeltaThetaPlot = new TH2D("Playground_CC1pRecoMuonMomentumResoVsDeltaThetaPlot",LabelMuonMomentumResolution+RecoLabelXAxisDeltaTheta,NBinsCC1pSTVReso,MinCC1pSTV,MaxCC1pSTV,NBinsDeltaTheta,MinDeltaTheta,MaxDeltaTheta);
-
-		// -------------------------------------------------------------------------------------------------------------------
-/*
-		TH1D* Playground_CC1pRecoMuonMomentumPlot_FullyContainedMuon = new TH1D("Playground_CC1pRecoMuonMomentumPlot_FullyContainedMuon",LabelMuonMomentumResolution,NBinsCC1pSTVReso,MinCC1pSTVMuMom,MaxCC1pSTVMuMom);
-		TH1D* Playground_CC1pRecoMuonMomentumPlot_ExitingShortMuon = new TH1D("Playground_CC1pRecoMuonMomentumPlot_ExitingShortMuon",LabelMuonMomentumResolution,NBinsCC1pSTVReso,MinCC1pSTVMuMom,MaxCC1pSTVMuMom);
-		TH1D* Playground_CC1pRecoMuonMomentumPlot_ExitingMediumMuon = new TH1D("Playground_CC1pRecoMuonMomentumPlot_ExitingMediumMuon",LabelMuonMomentumResolution,NBinsCC1pSTVReso,MinCC1pSTVMuMom,MaxCC1pSTVMuMom);
-		TH1D* Playground_CC1pRecoMuonMomentumPlot_ExitingLongMuon = new TH1D("Playground_CC1pRecoMuonMomentumPlot_ExitingLongMuon",LabelMuonMomentumResolution,NBinsCC1pSTVReso,MinCC1pSTVMuMom,MaxCC1pSTVMuMom);
-
-		TH1D* Playground_CC1pRecoDeltaPTPlot_FullyContainedMuon = new TH1D("Playground_CC1pRecoDeltaPTPlot_FullyContainedMuon",LabelDeltaPTResolution,NBinsCC1pSTVReso,MinCC1pSTVPt,MaxCC1pSTVPt);
-		TH1D* Playground_CC1pRecoDeltaPTPlot_ExitingShortMuon = new TH1D("Playground_CC1pRecoDeltaPTPlot_ExitingShortMuon",LabelDeltaPTResolution,NBinsCC1pSTVReso,MinCC1pSTVPt,MaxCC1pSTVPt);
-		TH1D* Playground_CC1pRecoDeltaPTPlot_ExitingMediumMuon = new TH1D("Playground_CC1pRecoDeltaPTPlot_ExitingMediumMuon",LabelDeltaPTResolution,NBinsCC1pSTVReso,MinCC1pSTVPt,MaxCC1pSTVPt);
-		TH1D* Playground_CC1pRecoDeltaPTPlot_ExitingLongMuon = new TH1D("Playground_CC1pRecoDeltaPTPlot_ExitingLongMuon",LabelDeltaPTResolution,NBinsCC1pSTVReso,MinCC1pSTVPt,MaxCC1pSTVPt);
-
-		TH1D* Playground_CC1pRecoDeltaAlphaTPlot_FullyContainedMuon = new TH1D("Playground_CC1pRecoDeltaAlphaTPlot_FullyContainedMuon",LabelDeltaAlphaTResolution,NBinsCC1pSTVReso,MinCC1pSTVDeltaAlphaT,MaxCC1pSTVDeltaAlphaT);
-		TH1D* Playground_CC1pRecoDeltaAlphaTPlot_ExitingShortMuon = new TH1D("Playground_CC1pRecoDeltaAlphaTPlot_ExitingShortMuon",LabelDeltaAlphaTResolution,NBinsCC1pSTVReso,MinCC1pSTVDeltaAlphaT,MaxCC1pSTVDeltaAlphaT);
-		TH1D* Playground_CC1pRecoDeltaAlphaTPlot_ExitingMediumMuon = new TH1D("Playground_CC1pRecoDeltaAlphaTPlot_ExitingMediumMuon",LabelDeltaAlphaTResolution,NBinsCC1pSTVReso,MinCC1pSTVDeltaAlphaT,MaxCC1pSTVDeltaAlphaT);
-		TH1D* Playground_CC1pRecoDeltaAlphaTPlot_ExitingLongMuon = new TH1D("Playground_CC1pRecoDeltaAlphaTPlot_ExitingLongMuon",LabelDeltaAlphaTResolution,NBinsCC1pSTVReso,MinCC1pSTVDeltaAlphaT,MaxCC1pSTVDeltaAlphaT);
-
-		TH1D* Playground_CC1pRecoDeltaPhiTPlot_FullyContainedMuon = new TH1D("Playground_CC1pRecoDeltaPhiTPlot_FullyContainedMuon",LabelDeltaPhiTResolution,NBinsCC1pSTVReso,MinCC1pSTVDeltaPhiT,MaxCC1pSTVDeltaPhiT);
-		TH1D* Playground_CC1pRecoDeltaPhiTPlot_ExitingShortMuon = new TH1D("Playground_CC1pRecoDeltaPhiTPlot_ExitingShortMuon",LabelDeltaPhiTResolution,NBinsCC1pSTVReso,MinCC1pSTVDeltaPhiT,MaxCC1pSTVDeltaPhiT);
-		TH1D* Playground_CC1pRecoDeltaPhiTPlot_ExitingMediumMuon = new TH1D("Playground_CC1pRecoDeltaPhiTPlot_ExitingMediumMuon",LabelDeltaPhiTResolution,NBinsCC1pSTVReso,MinCC1pSTVDeltaPhiT,MaxCC1pSTVDeltaPhiT);
-		TH1D* Playground_CC1pRecoDeltaPhiTPlot_ExitingLongMuon = new TH1D("Playground_CC1pRecoDeltaPhiTPlot_ExitingLongMuon",LabelDeltaPhiTResolution,NBinsCC1pSTVReso,MinCC1pSTVDeltaPhiT,MaxCC1pSTVDeltaPhiT);
-
-		// -------------------------------------------------------------------------------------------------------------------
-
-		TH1D* Playground_CC1pRecoDeltaPTPlot_ShortProton = new TH1D("Playground_CC1pRecoDeltaPTPlot_ShortProton",LabelDeltaPTResolution,NBinsCC1pSTVReso,MinCC1pSTVPt,MaxCC1pSTVPt);
-		TH1D* Playground_CC1pRecoDeltaPTPlot_MediumProton = new TH1D("Playground_CC1pRecoDeltaPTPlot_MediumProton",LabelDeltaPTResolution,NBinsCC1pSTVReso,MinCC1pSTVPt,MaxCC1pSTVPt);
-		TH1D* Playground_CC1pRecoDeltaPTPlot_LongProton = new TH1D("Playground_CC1pRecoDeltaPTPlot_LongProton",LabelDeltaPTResolution,NBinsCC1pSTVReso,MinCC1pSTVPt,MaxCC1pSTVPt);
-
-		TH1D* Playground_CC1pRecoDeltaAlphaTPlot_ShortProton = new TH1D("Playground_CC1pRecoDeltaAlphaTPlot_ShortProton",LabelDeltaAlphaTResolution,NBinsCC1pSTVReso,MinCC1pSTVDeltaAlphaT,MaxCC1pSTVDeltaAlphaT);
-		TH1D* Playground_CC1pRecoDeltaAlphaTPlot_MediumProton = new TH1D("Playground_CC1pRecoDeltaAlphaTPlot_MediumProton",LabelDeltaAlphaTResolution,NBinsCC1pSTVReso,MinCC1pSTVDeltaAlphaT,MaxCC1pSTVDeltaAlphaT);
-		TH1D* Playground_CC1pRecoDeltaAlphaTPlot_LongProton = new TH1D("Playground_CC1pRecoDeltaAlphaTPlot_LongProton",LabelDeltaAlphaTResolution,NBinsCC1pSTVReso,MinCC1pSTVDeltaAlphaT,MaxCC1pSTVDeltaAlphaT);
-
-		TH1D* Playground_CC1pRecoDeltaPhiTPlot_ShortProton = new TH1D("Playground_CC1pRecoDeltaPhiTPlot_ShortProton",LabelDeltaPhiTResolution,NBinsCC1pSTVReso,MinCC1pSTVDeltaPhiT,MaxCC1pSTVDeltaPhiT);
-		TH1D* Playground_CC1pRecoDeltaPhiTPlot_MediumProton = new TH1D("Playground_CC1pRecoDeltaPhiTPlot_MediumProton",LabelDeltaPhiTResolution,NBinsCC1pSTVReso,MinCC1pSTVDeltaPhiT,MaxCC1pSTVDeltaPhiT);
-		TH1D* Playground_CC1pRecoDeltaPhiTPlot_LongProton = new TH1D("Playground_CC1pRecoDeltaPhiTPlot_LongProton",LabelDeltaPhiTResolution,NBinsCC1pSTVReso,MinCC1pSTVDeltaPhiT,MaxCC1pSTVDeltaPhiT);
-
-		// -------------------------------------------------------------------------------------------------------------------
-
-		const int NSlices = 3;
-
-		TH1D* Playground_CC1pRecoDeltaPTPlot_FullyContainedMuon_Slice[NSlices];
-		TH1D* Playground_CC1pRecoDeltaPTPlot_ExitingShortMuon_Slice[NSlices];
-		TH1D* Playground_CC1pRecoDeltaPTPlot_ExitingMediumMuon_Slice[NSlices];
-		TH1D* Playground_CC1pRecoDeltaPTPlot_ExitingLongMuon_Slice[NSlices];
-
-		TH1D* Playground_CC1pRecoDeltaAlphaTPlot_FullyContainedMuon_Slice[NSlices];
-		TH1D* Playground_CC1pRecoDeltaAlphaTPlot_ExitingShortMuon_Slice[NSlices];
-		TH1D* Playground_CC1pRecoDeltaAlphaTPlot_ExitingMediumMuon_Slice[NSlices];
-		TH1D* Playground_CC1pRecoDeltaAlphaTPlot_ExitingLongMuon_Slice[NSlices];
-
-		TH1D* Playground_CC1pRecoDeltaPhiTPlot_FullyContainedMuon_Slice[NSlices];
-		TH1D* Playground_CC1pRecoDeltaPhiTPlot_ExitingShortMuon_Slice[NSlices];
-		TH1D* Playground_CC1pRecoDeltaPhiTPlot_ExitingMediumMuon_Slice[NSlices];
-		TH1D* Playground_CC1pRecoDeltaPhiTPlot_ExitingLongMuon_Slice[NSlices];
-
-		TH1D* Playground_CC1pRecoDeltaPTPlot_ShortProton_Slice[NSlices];
-		TH1D* Playground_CC1pRecoDeltaPTPlot_MediumProton_Slice[NSlices];
-		TH1D* Playground_CC1pRecoDeltaPTPlot_LongProton_Slice[NSlices];
-
-		TH1D* Playground_CC1pRecoDeltaAlphaTPlot_ShortProton_Slice[NSlices];
-		TH1D* Playground_CC1pRecoDeltaAlphaTPlot_MediumProton_Slice[NSlices];
-		TH1D* Playground_CC1pRecoDeltaAlphaTPlot_LongProton_Slice[NSlices];
-
-		TH1D* Playground_CC1pRecoDeltaPhiTPlot_ShortProton_Slice[NSlices];
-		TH1D* Playground_CC1pRecoDeltaPhiTPlot_MediumProton_Slice[NSlices];
-		TH1D* Playground_CC1pRecoDeltaPhiTPlot_LongProton_Slice[NSlices];
-
-		for (int WhichSlice = 0; WhichSlice < NSlices; WhichSlice++) {
-
-			Playground_CC1pRecoDeltaPTPlot_FullyContainedMuon_Slice[WhichSlice] = new TH1D("Playground_CC1pRecoDeltaPTPlot_Slice_"+ToStringInt(WhichSlice+1)+"_FullyContainedMuon",LabelDeltaPTResolution,NBinsCC1pSTVReso,MinCC1pSTVPt,MaxCC1pSTVPt);
-			Playground_CC1pRecoDeltaPTPlot_ExitingShortMuon_Slice[WhichSlice] = new TH1D("Playground_CC1pRecoDeltaPTPlot_Slice_"+ToStringInt(WhichSlice+1)+"_ExitingShortMuon",LabelDeltaPTResolution,NBinsCC1pSTVReso,MinCC1pSTVPt,MaxCC1pSTVPt);
-			Playground_CC1pRecoDeltaPTPlot_ExitingMediumMuon_Slice[WhichSlice] = new TH1D("Playground_CC1pRecoDeltaPTPlot_Slice_"+ToStringInt(WhichSlice+1)+"_ExitingMediumMuon",LabelDeltaPTResolution,NBinsCC1pSTVReso,MinCC1pSTVPt,MaxCC1pSTVPt);
-			Playground_CC1pRecoDeltaPTPlot_ExitingLongMuon_Slice[WhichSlice] = new TH1D("Playground_CC1pRecoDeltaPTPlot_Slice_"+ToStringInt(WhichSlice+1)+"_ExitingLongMuon",LabelDeltaPTResolution,NBinsCC1pSTVReso,MinCC1pSTVPt,MaxCC1pSTVPt);
-
-			Playground_CC1pRecoDeltaAlphaTPlot_FullyContainedMuon_Slice[WhichSlice] = new TH1D("Playground_CC1pRecoDeltaAlphaTPlot_Slice_"+ToStringInt(WhichSlice+1)+"_FullyContainedMuon",LabelDeltaAlphaTResolution,NBinsCC1pSTVReso,MinCC1pSTVDeltaAlphaT,MaxCC1pSTVDeltaAlphaT);
-			Playground_CC1pRecoDeltaAlphaTPlot_ExitingShortMuon_Slice[WhichSlice] = new TH1D("Playground_CC1pRecoDeltaAlphaTPlot_Slice_"+ToStringInt(WhichSlice+1)+"_ExitingShortMuon",LabelDeltaAlphaTResolution,NBinsCC1pSTVReso,MinCC1pSTVDeltaAlphaT,MaxCC1pSTVDeltaAlphaT);
-			Playground_CC1pRecoDeltaAlphaTPlot_ExitingMediumMuon_Slice[WhichSlice] = new TH1D("Playground_CC1pRecoDeltaAlphaTPlot_Slice_"+ToStringInt(WhichSlice+1)+"_ExitingMediumMuon",LabelDeltaAlphaTResolution,NBinsCC1pSTVReso,MinCC1pSTVDeltaAlphaT,MaxCC1pSTVDeltaAlphaT);
-			Playground_CC1pRecoDeltaAlphaTPlot_ExitingLongMuon_Slice[WhichSlice] = new TH1D("Playground_CC1pRecoDeltaAlphaTPlot_Slice_"+ToStringInt(WhichSlice+1)+"_ExitingLongMuon",LabelDeltaAlphaTResolution,NBinsCC1pSTVReso,MinCC1pSTVDeltaAlphaT,MaxCC1pSTVDeltaAlphaT);
-
-			Playground_CC1pRecoDeltaPhiTPlot_FullyContainedMuon_Slice[WhichSlice] = new TH1D("Playground_CC1pRecoDeltaPhiTPlot_Slice_"+ToStringInt(WhichSlice+1)+"_FullyContainedMuon",LabelDeltaPhiTResolution,NBinsCC1pSTVReso,MinCC1pSTVDeltaPhiT,MaxCC1pSTVDeltaPhiT);
-			Playground_CC1pRecoDeltaPhiTPlot_ExitingShortMuon_Slice[WhichSlice] = new TH1D("Playground_CC1pRecoDeltaPhiTPlot_Slice_"+ToStringInt(WhichSlice+1)+"_ExitingShortMuon",LabelDeltaPhiTResolution,NBinsCC1pSTVReso,MinCC1pSTVDeltaPhiT,MaxCC1pSTVDeltaPhiT);
-			Playground_CC1pRecoDeltaPhiTPlot_ExitingMediumMuon_Slice[WhichSlice] = new TH1D("Playground_CC1pRecoDeltaPhiTPlot_Slice_"+ToStringInt(WhichSlice+1)+"_ExitingMediumMuon",LabelDeltaPhiTResolution,NBinsCC1pSTVReso,MinCC1pSTVDeltaPhiT,MaxCC1pSTVDeltaPhiT);
-			Playground_CC1pRecoDeltaPhiTPlot_ExitingLongMuon_Slice[WhichSlice] = new TH1D("Playground_CC1pRecoDeltaPhiTPlot_Slice_"+ToStringInt(WhichSlice+1)+"_ExitingLongMuon",LabelDeltaPhiTResolution,NBinsCC1pSTVReso,MinCC1pSTVDeltaPhiT,MaxCC1pSTVDeltaPhiT);
-
-			// ----------------------------------------------------------------------------------------------------------
-
-			Playground_CC1pRecoDeltaPTPlot_ShortProton_Slice[WhichSlice] = new TH1D("Playground_CC1pRecoDeltaPTPlot_Slice_"+ToStringInt(WhichSlice+1)+"_ShortProton",LabelDeltaPTResolution,NBinsCC1pSTVReso,MinCC1pSTVPt,MaxCC1pSTVPt);
-			Playground_CC1pRecoDeltaPTPlot_MediumProton_Slice[WhichSlice] = new TH1D("Playground_CC1pRecoDeltaPTPlot_Slice_"+ToStringInt(WhichSlice+1)+"_MediumProton",LabelDeltaPTResolution,NBinsCC1pSTVReso,MinCC1pSTVPt,MaxCC1pSTVPt);
-			Playground_CC1pRecoDeltaPTPlot_LongProton_Slice[WhichSlice] = new TH1D("Playground_CC1pRecoDeltaPTPlot_Slice_"+ToStringInt(WhichSlice+1)+"_LongProton",LabelDeltaPTResolution,NBinsCC1pSTVReso,MinCC1pSTVPt,MaxCC1pSTVPt);
-
-			Playground_CC1pRecoDeltaAlphaTPlot_ShortProton_Slice[WhichSlice] = new TH1D("Playground_CC1pRecoDeltaAlphaTPlot_Slice_"+ToStringInt(WhichSlice+1)+"_ShortProton",LabelDeltaAlphaTResolution,NBinsCC1pSTVReso,MinCC1pSTVDeltaAlphaT,MaxCC1pSTVDeltaAlphaT);
-			Playground_CC1pRecoDeltaAlphaTPlot_MediumProton_Slice[WhichSlice] = new TH1D("Playground_CC1pRecoDeltaAlphaTPlot_Slice_"+ToStringInt(WhichSlice+1)+"_MediumProton",LabelDeltaAlphaTResolution,NBinsCC1pSTVReso,MinCC1pSTVDeltaAlphaT,MaxCC1pSTVDeltaAlphaT);
-			Playground_CC1pRecoDeltaAlphaTPlot_LongProton_Slice[WhichSlice] = new TH1D("Playground_CC1pRecoDeltaAlphaTPlot_Slice_"+ToStringInt(WhichSlice+1)+"_LongProton",LabelDeltaAlphaTResolution,NBinsCC1pSTVReso,MinCC1pSTVDeltaAlphaT,MaxCC1pSTVDeltaAlphaT);
-
-			Playground_CC1pRecoDeltaPhiTPlot_ShortProton_Slice[WhichSlice] = new TH1D("Playground_CC1pRecoDeltaPhiTPlot_Slice_"+ToStringInt(WhichSlice+1)+"_ShortProton",LabelDeltaPhiTResolution,NBinsCC1pSTVReso,MinCC1pSTVDeltaPhiT,MaxCC1pSTVDeltaPhiT);
-			Playground_CC1pRecoDeltaPhiTPlot_MediumProton_Slice[WhichSlice] = new TH1D("Playground_CC1pRecoDeltaPhiTPlot_Slice_"+ToStringInt(WhichSlice+1)+"_MediumProton",LabelDeltaPhiTResolution,NBinsCC1pSTVReso,MinCC1pSTVDeltaPhiT,MaxCC1pSTVDeltaPhiT);
-			Playground_CC1pRecoDeltaPhiTPlot_LongProton_Slice[WhichSlice] = new TH1D("Playground_CC1pRecoDeltaPhiTPlot_Slice_"+ToStringInt(WhichSlice+1)+"_LongProton",LabelDeltaPhiTResolution,NBinsCC1pSTVReso,MinCC1pSTVDeltaPhiT,MaxCC1pSTVDeltaPhiT);
-
-		}		
-*/
 		// --------------------------------------------------------------------------------------------------------------------------------
 
 		TH1D* CC1pRecoMuonTrueMomentumLongitudinalRatio = new TH1D("CC1pRecoMuonTrueMomentumLongitudinalRatio",";P^{true}_{#mu,||}/P^{true}_{#mu}",25,0.,1.);		
@@ -1267,12 +1099,13 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 			// ------------------------------------------------------------------------------------------------------------------------
 
-			// Containment Demand
-			// Fully contained proton candidates
-			// Either fully contained or semi-contained muon candidates
+			// Containment demand
+			// Fully contained muon / proton candidates
+			// Just to be sure, that has already been done at a preselection level 
 
 			if (CandidateMu_StartContainment->at(0) == 0) { continue; }
 			if (CandidateP_StartContainment->at(0) == 0) { continue; }
+			if (CandidateMu_EndContainment->at(0) == 0) { continue; }
 			if (CandidateP_EndContainment->at(0) == 0) { continue; }
 
 			ContainmentCounter++;
@@ -1326,36 +1159,9 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 				if (fEventWeightLabel == "fluxes") { weight = weight*fluxes->at(fUniverseIndex); }
 
-//				if (fEventWeightLabel == "expskin_FluxUnisim") { weight = weight*expskin_FluxUnisim->at(fUniverseIndex); }
-//				if (fEventWeightLabel == "horncurrent_FluxUnisim") { weight = weight*horncurrent_FluxUnisim->at(fUniverseIndex); }
-//				if (fEventWeightLabel == "kminus_PrimaryHadronNormalization") 
-//					{ weight = weight*kminus_PrimaryHadronNormalization->at(fUniverseIndex); }
-//				if (fEventWeightLabel == "kplus_PrimaryHadronFeynmanScaling") 
-//					{ weight = weight*kplus_PrimaryHadronFeynmanScaling->at(fUniverseIndex); }
-//				if (fEventWeightLabel == "kzero_PrimaryHadronSanfordWang") 
-//					{ weight = weight*kzero_PrimaryHadronSanfordWang->at(fUniverseIndex); }
-//				if (fEventWeightLabel == "nucleoninexsec_FluxUnisim") { weight = weight*nucleoninexsec_FluxUnisim->at(fUniverseIndex); }
-//				if (fEventWeightLabel == "nucleonqexsec_FluxUnisim") { weight = weight*nucleonqexsec_FluxUnisim->at(fUniverseIndex); }
-//				if (fEventWeightLabel == "nucleontotxsec_FluxUnisim") { weight = weight*nucleontotxsec_FluxUnisim->at(fUniverseIndex); }
-//				if (fEventWeightLabel == "piminus_PrimaryHadronSWCentralSplineVariation") 
-//					{ weight = weight*piminus_PrimaryHadronSWCentralSplineVariation->at(fUniverseIndex); }
-//				if (fEventWeightLabel == "pioninexsec_FluxUnisim") { weight = weight*pioninexsec_FluxUnisim->at(fUniverseIndex); }
-//				if (fEventWeightLabel == "pionqexsec_FluxUnisim") { weight = weight*pionqexsec_FluxUnisim->at(fUniverseIndex); }
-//				if (fEventWeightLabel == "piontotxsec_FluxUnisim") { weight = weight*piontotxsec_FluxUnisim->at(fUniverseIndex); }
-//				if (fEventWeightLabel == "piplus_PrimaryHadronSWCentralSplineVariation") 
-//					{ weight = weight*piplus_PrimaryHadronSWCentralSplineVariation->at(fUniverseIndex); }
-
 				// Reinteraction weights
 
 				if (fEventWeightLabel == "reinteractions") { weight = weight*reinteractions->at(fUniverseIndex); }
-//				if (fEventWeightLabel == "reinteractions_piminus_Geant4") 
-//					{ weight = weight*reinteractions_piminus_Geant4->at(fUniverseIndex); }
-//				if (fEventWeightLabel == "reinteractions_piplus_Geant4") 
-//					{ weight = weight*reinteractions_piplus_Geant4->at(fUniverseIndex); }
-//				if (fEventWeightLabel == "reinteractions_proton_Geant4") 
-//					{ weight = weight*reinteractions_proton_Geant4->at(fUniverseIndex); }
-//				if (fEventWeightLabel == "xsr_scc_Fa3_SCC") { weight = weight*xsr_scc_Fa3_SCC->at(fUniverseIndex); }
-//				if (fEventWeightLabel == "xsr_scc_Fv3_SCC") { weight = weight*xsr_scc_Fv3_SCC->at(fUniverseIndex); }			
 
 			}			
 
@@ -1397,7 +1203,6 @@ void PeLEE_myRecoAnalysis::Loop() {
 			// Ensure that we don't have flipped tracks 
 			// by demanding that muon start - vertex distance < muon end - vertex distance,
 			// that proton start - vertex distance < proton end - vertex distance
-			// 
 
 			if (CandidateMuStartVertexDistance->at(0) > CandidateMuEndVertexDistance->at(0)) { continue; }
 			if (CandidatePStartVertexDistance->at(0) > CandidatePEndVertexDistance->at(0)) { continue; }
@@ -1417,30 +1222,6 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 			// -------------------------------------------------------------------------------------------------------------------------
 
-			// Jun 15 2021
-			// Good reconstruction purposes on at least 2 planes
-			// Require that at least 2 planes return good quality trunc dEdx
-
-//			float MuTruncdEdxEntry_Plane0 = CandidateMu_Plane0_LastEDep->at(0);
-//			float MuTruncdEdxEntry_Plane1 = CandidateMu_Plane1_LastEDep->at(0);
-//			float MuTruncdEdxEntry_Plane2 = CandidateMu_Plane2_LastEDep->at(0);
-
-//			float PTruncdEdxEntry_Plane0 = CandidateP_Plane0_LastEDep->at(0);
-//			float PTruncdEdxEntry_Plane1 = CandidateP_Plane1_LastEDep->at(0);
-//			float PTruncdEdxEntry_Plane2 = CandidateP_Plane2_LastEDep->at(0);
-
-//			if (MuTruncdEdxEntry_Plane0 < MuMinSumHitsValue && (MuTruncdEdxEntry_Plane1 < MuMinSumHitsValue || MuTruncdEdxEntry_Plane2 < MuMinSumHitsValue) ) { continue; }
-//			if (MuTruncdEdxEntry_Plane1 < MuMinSumHitsValue && (MuTruncdEdxEntry_Plane2 < MuMinSumHitsValue || MuTruncdEdxEntry_Plane0 < MuMinSumHitsValue) ) { continue; }
-//			if (MuTruncdEdxEntry_Plane2 < MuMinSumHitsValue && (MuTruncdEdxEntry_Plane0 < MuMinSumHitsValue || MuTruncdEdxEntry_Plane1 < MuMinSumHitsValue) ) { continue; }
-
-//			if (PTruncdEdxEntry_Plane0 < PMinSumHitsValue && (PTruncdEdxEntry_Plane1 < PMinSumHitsValue || PTruncdEdxEntry_Plane2 < PMinSumHitsValue) ) { continue; }
-//			if (PTruncdEdxEntry_Plane1 < PMinSumHitsValue && (PTruncdEdxEntry_Plane2 < PMinSumHitsValue || PTruncdEdxEntry_Plane0 < PMinSumHitsValue) ) { continue; }
-//			if (PTruncdEdxEntry_Plane2 < PMinSumHitsValue && (PTruncdEdxEntry_Plane0 < PMinSumHitsValue || PTruncdEdxEntry_Plane1 < PMinSumHitsValue) ) { continue; }
-
-			SumTruncdEdxTrackCounter++;
-
-			// -------------------------------------------------------------------------------------------------------------------------
-
 			double l_muCandidate = CandidateMu_Length->at(0);
 			double l_pCandidate = CandidateP_Length->at(0);
 			double LengthDifference = l_muCandidate - l_pCandidate;
@@ -1450,20 +1231,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 			// -------------------------------------------------------------------------------------------------------------------------
 
-			if (CandidateMu_EndContainment->at(0) == 0) { 
-
-				// Quality cut for exiting muons
-				// MCS introduces major for short exiting tracks
-
-				// Quality cut based on PT reslution studies
-				// Demand that the exiting muons are at least 1m long
-
-				/*if (l_muCandidate < MuMinMCSLengthThresValue) { continue; }*/
-				reco_Pmu = CandidateMu_P_MCS->at(0); 
-
-			}
-
-			LowMCSQualityCutCounter++;
+			// Muon info
 
 			double reco_Pmu_cos_theta = CandidateMu_CosTheta->at(0);
 			double reco_Pmu_phi = CandidateMu_Phi->at(0); // deg
@@ -1481,7 +1249,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 			double reco_Pp = CandidateP_P_Range->at(0);
 			double reco_Pp_cos_theta = CandidateP_CosTheta->at(0);
 			double reco_Pp_phi = CandidateP_Phi->at(0); // deg 
-//			double reco_Ep = TMath::Sqrt( reco_Pp*reco_Pp + ProtonMass_GeV*ProtonMass_GeV );
+			double reco_Ep = TMath::Sqrt( reco_Pp*reco_Pp + ProtonMass_GeV*ProtonMass_GeV );
 //			double reco_Tp = reco_Ep - ProtonMass_GeV;
 
 			TVector3 TVector3CandidateProton(-1,-1,-1);
@@ -1493,31 +1261,28 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 			// Calorimetry
 
-			// double reco_Pmu_chi2 = CandidateMu_Chi2_YPlane->at(0);
-			// double reco_Pp_chi2 = CandidateP_Chi2_YPlane->at(0);
-
-//			double reco_Pmu_ThreePlanechi2 = CandidateMu_ThreePlaneChi2->at(0);
-//			double reco_Pp_ThreePlanechi2 = CandidateP_ThreePlaneChi2->at(0);
-
-//			double reco_Pmu_ThreePlaneLogLikelihood = CandidateMu_ThreePlaneLogLikelihood->at(0);
-//			double reco_Pp_ThreePlaneLogLikelihood = CandidateP_ThreePlaneLogLikelihood->at(0);
-
 			double reco_mu_LLR_Score = CandidateMu_LLR_PID->at(0);
 			double reco_p_LLR_Score = CandidateP_LLR_PID->at(0);
 
 			// -----------------------------------------------------------------------------------------------------------------------------
 
-			// STV quantities
+			// STV variables
 			
 			double TransMissMomentum = Reco_Pt->at(0);
 			double DeltaAlphaT = Reco_DeltaAlphaT->at(0);
 			double DeltaPhiT = Reco_DeltaPhiT->at(0);
 
-			// Miss quantities
+			// Light cone variables
+			double kMiss = Reco_kMiss->at(0);
+			double PMissMinus = Reco_PMissMinus->at(0);
+			double MissMomentum = Reco_PMiss->at(0);
+			double reco_A = Reco_A->at(0);
 
-//			double kMiss = Reco_kMiss->at(0);
-//			double PMissMinus = Reco_PMissMinus->at(0);
-//			double MissMomentum = Reco_PMiss->at(0);
+			// Minerva variables
+			double reco_PL = Reco_PL->at(0);
+			double reco_Pn = Reco_Pn->at(0);
+			double reco_Ptx = Reco_Ptx->at(0);
+			double reco_Pty = Reco_Pty->at(0);
 
 			// -------------------------------------------------------------------------------------------------------------------------
 
@@ -1537,17 +1302,24 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 				reco_Pp = ( 1.-0.01*fPP->Eval(reco_Pp) ) * reco_Pp ;
 				TVector3CandidateProton.SetMag(reco_Pp);
-				double reco_Ep = TMath::Sqrt( reco_Pp*reco_Pp + ProtonMass_GeV*ProtonMass_GeV );
-	
+				reco_Ep = TMath::Sqrt( reco_Pp*reco_Pp + ProtonMass_GeV*ProtonMass_GeV );
+
 				STV_Tools reco_stv_tool(TVector3CandidateMuon,TVector3CandidateProton,reco_Emu,reco_Ep);
+	
 				TransMissMomentum = reco_stv_tool.ReturnPt();
 				DeltaAlphaT = reco_stv_tool.ReturnDeltaAlphaT();
 				DeltaPhiT = reco_stv_tool.ReturnDeltaPhiT();
 				ECal = reco_stv_tool.ReturnECal();
 
-//				kMiss = reco_stv_tool.ReturnkMiss();
-//				PMissMinus = reco_stv_tool.ReturnPMissMinus();
-//				MissMomentum = reco_stv_tool.ReturnPMiss();
+				kMiss = reco_stv_tool.ReturnkMiss();
+				PMissMinus = reco_stv_tool.ReturnPMissMinus();
+				MissMomentum = reco_stv_tool.ReturnPMiss();
+
+				reco_PL = reco_stv_tool.ReturnPL();
+				reco_Pn = reco_stv_tool.ReturnPn();
+				reco_Ptx = reco_stv_tool.ReturnPtx();
+				reco_Pty = reco_stv_tool.ReturnPty();
+				reco_A = reco_stv_tool.ReturnA();
 
 			}
 
@@ -1561,22 +1333,8 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 			// ------------------------------------------------------------------------------------------------------------------------
 
-//			double VertexActivity = VertexActivity_50x100->at(0);
-
-			// Optical info
-
-//			double NPE = BeamFlashes_TotalPE->at(0);
-
-//			TVector3 BeamFlash(0,BeamFlashes_YCenter->at(0),BeamFlashes_ZCenter->at(0));
-
-//			double dYZ = (BeamFlash - RecoVertex).Mag();
 			double MuonVertexDistance = (CandidateMuonStart-RecoVertex).Mag();	
-			double ProtonVertexDistance = (CandidateProtonStart-RecoVertex).Mag();
-
-			// Ensure that the tracks are not flipped by applying a loose max distance cut of 5 cm between the vertex and the tracks
-
-//			if (MuonVertexDistance > 5) { continue; }
-//			if (ProtonVertexDistance > 5) { continue; }  	
+			double ProtonVertexDistance = (CandidateProtonStart-RecoVertex).Mag();	
 
 			// -------------------------------------------------------------------------------------------------------------------------
 
@@ -1653,9 +1411,15 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 			int genie_mode = -1;
 
-//			double true_kMiss = -1;
-//			double true_PMissMinus = -1;
-//			double true_PMiss = -1;	
+			double true_kMiss = -1;
+			double true_PMissMinus = -1;
+			double true_PMiss = -1;	
+
+			double true_PL = -1;
+			double true_Pn = -1;
+			double true_Ptx = -1;
+			double true_Pty = -1;
+			double true_A = -1;	
 		
 			double true_TransMissMomentum = -1;
 			double true_DeltaAlphaT = -1;
@@ -1671,9 +1435,14 @@ void PeLEE_myRecoAnalysis::Loop() {
 				
 				genie_mode = MCParticle_Mode; 
 
-//				true_kMiss = True_kMiss->at(0);
-//				true_PMissMinus = True_PMissMinus->at(0);
-//				true_PMiss = True_PMiss->at(0);	
+				true_kMiss = True_kMiss->at(0);
+				true_PMissMinus = True_PMissMinus->at(0);
+				true_PMiss = True_PMiss->at(0);	
+
+				true_PL = True_PL->at(0);
+				true_Pn = True_Pn->at(0);
+				true_Ptx = True_Ptx->at(0);
+				true_Pty = True_Pty->at(0);
 			
 				true_TransMissMomentum = True_Pt->at(0);
 				true_DeltaAlphaT = True_DeltaAlphaT->at(0);
@@ -1795,17 +1564,10 @@ void PeLEE_myRecoAnalysis::Loop() {
 			RecoFlashScorePlot->Fill(FlashScore,weight);
 			RecoDistancePlot->Fill(distance,weight);
 			RecoLengthDifferencePlot->Fill(LengthDifference,weight);
-//			RecodYZPlot->Fill(dYZ,weight);
-//			RecoNPEPlot->Fill(NPE,weight);
-//			RecoVertexActivityPlot->Fill(VertexActivity,weight);
-//			if (VertexActivity > 0) { RecoNonZeroVertexActivityPlot->Fill(VertexActivity,weight); }	
 
 			RecoVertexXPlot->Fill(Vertex_X->at(0),weight);
 			RecoVertexYPlot->Fill(Vertex_Y->at(0),weight);
 			RecoVertexZPlot->Fill(Vertex_Z->at(0),weight);
-
-			//RecoThreePlaneChi2LogLikelihoodCandidateMuonPlot->Fill(reco_Pmu_ThreePlaneLogLikelihood,weight);
-			//RecoThreePlaneChi2LogLikelihoodCandidateProtonPlot->Fill(reco_Pp_ThreePlaneLogLikelihood,weight);
 
 			RecoMuonLLRPIDPlot->Fill(reco_mu_LLR_Score,weight);
 			RecoProtonLLRPIDPlot->Fill(reco_p_LLR_Score,weight);
@@ -1819,6 +1581,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 			RecoMuonMomentumPlot->Fill(reco_Pmu,weight);
 			RecoMuonCosThetaPlot->Fill(reco_Pmu_cos_theta,weight);
+			RecoMuonCosThetaSingleBinPlot->Fill(reco_Pmu_cos_theta,weight);
 			RecoMuonPhiPlot->Fill(reco_Pmu_phi,weight);
 
 			RecoProtonLengthPlot->Fill(l_pCandidate,weight);
@@ -1837,9 +1600,15 @@ void PeLEE_myRecoAnalysis::Loop() {
 			else { RecoDeltaBackwardThetaPlot->Fill(DeltaThetaProtonMuon_Deg,weight); }
 			RecoDeltaPhiPlot->Fill(DeltaPhiProtonMuon_Deg,weight);
 
-//			RecokMissPlot->Fill(kMiss,weight);
-//			RecoPMissMinusPlot->Fill(PMissMinus,weight);
-//			RecoPMissPlot->Fill(MissMomentum,weight);
+			RecokMissPlot->Fill(kMiss,weight);
+			RecoPMissMinusPlot->Fill(PMissMinus,weight);
+			RecoPMissPlot->Fill(MissMomentum,weight);
+
+			RecoDeltaPLPlot->Fill(reco_PL,weight);
+			RecoDeltaPnPlot->Fill(reco_Pn,weight);
+			RecoDeltaPtxPlot->Fill(reco_Ptx,weight);
+			RecoDeltaPtyPlot->Fill(reco_Pty,weight);
+			RecoAPlot->Fill(reco_A,weight);
 
 			RecoDeltaPTPlot->Fill(TransMissMomentum,weight);
 			RecoDeltaAlphaTPlot->Fill(DeltaAlphaT,weight);
@@ -1858,34 +1627,14 @@ void PeLEE_myRecoAnalysis::Loop() {
 			RecoCosThetaMuPmuPlot->Fill(reco_Pmu_cos_theta,reco_Pmu,weight);
 			RecoCosThetaPPpPlot->Fill(reco_Pp_cos_theta,reco_Pp,weight);
 
-			// 2D Plot for Default Chi2 vs 3-Plane Chi2
-
-//			if (reco_Pmu_chi2 > 0 && reco_Pmu_ThreePlanechi2 > 0) 
-//				{ RecoChi2vsThreePlaneChi2TPlot->Fill(reco_Pmu_chi2,reco_Pmu_ThreePlanechi2); }
-
-
-			// 2D Optical & calorimetric info
-
-//			RecodYZvsNPE2D->Fill(NPE,dYZ,weight);
-//			RecoChi2PvsChi2Mu2D->Fill(reco_Pmu_chi2,reco_Pp_chi2,weight);
-			//RecoLLPvsLLMu2D->Fill(reco_Pmu_ThreePlaneLogLikelihood,reco_Pp_ThreePlaneLogLikelihood,weight);
 			RecoLengthPvsLengthMu2D->Fill(l_muCandidate,l_pCandidate,weight);
 
 			// -------------------------------------------------------------------------------------------------------------------------
 
 			// Chi2 PID Studies
 
-			// RecoChi2Plot->Fill(reco_Pmu_chi2,weight/2.);
-			// RecoChi2Plot->Fill(reco_Pp_chi2,weight/2.);
-
 			 RecoLLRPIDPlot->Fill(reco_mu_LLR_Score,weight/2.);
 			 RecoLLRPIDPlot->Fill(reco_p_LLR_Score,weight/2.);
-
-//			RecoThreePlaneChi2Plot->Fill(reco_Pmu_ThreePlanechi2,weight/2.);
-//			RecoThreePlaneChi2Plot->Fill(reco_Pp_ThreePlanechi2,weight/2.);
-
-			//RecoThreePlaneChi2LogLikelihoodPlot->Fill(reco_Pmu_ThreePlaneLogLikelihood,weight/2.);
-			//RecoThreePlaneChi2LogLikelihoodPlot->Fill(reco_Pp_ThreePlaneLogLikelihood,weight/2.);
 
 			if (RecoCCQElike) {
 
@@ -2037,20 +1786,13 @@ void PeLEE_myRecoAnalysis::Loop() {
 					CC1pRecoFlashScorePlot->Fill(FlashScore,weight);
 					CC1pRecoDistancePlot->Fill(distance,weight);
 					CC1pRecoLengthDifferencePlot->Fill(LengthDifference,weight);
-//					CC1pRecodYZPlot->Fill(dYZ,weight);
-//					CC1pRecoNPEPlot->Fill(NPE,weight);
-//					CC1pRecoVertexActivityPlot->Fill(VertexActivity,weight);
-//					if (VertexActivity > 0) { CC1pRecoNonZeroVertexActivityPlot->Fill(VertexActivity,weight); }		
 
 					CC1pRecoVertexXPlot->Fill(Vertex_X->at(0),weight);
 					CC1pRecoVertexYPlot->Fill(Vertex_Y->at(0),weight);
 					CC1pRecoVertexZPlot->Fill(Vertex_Z->at(0),weight);
 
-//					CC1pRecoThreePlaneChi2LogLikelihoodCandidateMuonPlot->Fill(reco_Pmu_ThreePlaneLogLikelihood,weight);
-//					CC1pRecoThreePlaneChi2LogLikelihoodCandidateProtonPlot->Fill(reco_Pp_ThreePlaneLogLikelihood,weight);
-
-					 CC1pRecoMuonLLRPIDPlot->Fill(reco_mu_LLR_Score,weight);
-					 CC1pRecoProtonLLRPIDPlot->Fill(reco_p_LLR_Score,weight);
+					CC1pRecoMuonLLRPIDPlot->Fill(reco_mu_LLR_Score,weight);
+					CC1pRecoProtonLLRPIDPlot->Fill(reco_p_LLR_Score,weight);
 
 					CC1pRecoMuonLengthPlot->Fill(l_muCandidate,weight);
 //					CC1pRecodMuonTracksScorePlot->Fill(MuonTrackScore,weight);
@@ -2075,14 +1817,21 @@ void PeLEE_myRecoAnalysis::Loop() {
 					CC1pRecoDeltaPhiPlot->Fill(DeltaPhiProtonMuon_Deg,weight);
 
 					CC1pRecoMuonCosThetaPlot->Fill(reco_Pmu_cos_theta,weight);
+					CC1pRecoMuonCosThetaSingleBinPlot->Fill(reco_Pmu_cos_theta,weight);
 					CC1pRecoProtonCosThetaPlot->Fill(reco_Pp_cos_theta,weight);
 
 					CC1pRecoMuonPhiPlot->Fill(reco_Pmu_phi,weight);
 					CC1pRecoProtonPhiPlot->Fill(reco_Pp_phi,weight);
 
-//					CC1pRecokMissPlot->Fill(kMiss,weight);
-//					CC1pRecoPMissMinusPlot->Fill(PMissMinus,weight);
-//					CC1pRecoPMissPlot->Fill(MissMomentum,weight);
+					CC1pRecokMissPlot->Fill(kMiss,weight);
+					CC1pRecoPMissMinusPlot->Fill(PMissMinus,weight);
+					CC1pRecoPMissPlot->Fill(MissMomentum,weight);
+
+					CC1pRecoDeltaPLPlot->Fill(reco_PL,weight);
+					CC1pRecoDeltaPnPlot->Fill(reco_Pn,weight);
+					CC1pRecoDeltaPtxPlot->Fill(reco_Ptx,weight);
+					CC1pRecoDeltaPtyPlot->Fill(reco_Pty,weight);
+					CC1pRecoAPlot->Fill(reco_A,weight);
 
 					CC1pRecoDeltaPTPlot->Fill(TransMissMomentum,weight);
 					CC1pRecoDeltaAlphaTPlot->Fill(DeltaAlphaT,weight);
@@ -2150,11 +1899,6 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 					// -----------------------------------------------------------------------------------------------------
 
-					// 2D Optical & calorimetric info
-
-//					CC1pRecodYZvsNPE2D->Fill(NPE,dYZ,weight);
-//					CC1pRecoChi2PvsChi2Mu2D->Fill(reco_Pmu_chi2,reco_Pp_chi2,weight);
-					//CC1pRecoLLPvsLLMu2D->Fill(reco_Pmu_ThreePlaneLogLikelihood,reco_Pp_ThreePlaneLogLikelihood,weight);
 					CC1pRecoLengthPvsLengthMu2D->Fill(l_muCandidate,l_pCandidate,weight);
 
 					// -------------------------------------------------------------------------------------------------------------------------
@@ -2166,9 +1910,6 @@ void PeLEE_myRecoAnalysis::Loop() {
 					double CC1pDeltaPTReso = ( TransMissMomentum - true_TransMissMomentum );
 					double CC1pDeltaAlphaTReso = ( DeltaAlphaT - true_DeltaAlphaT );
 					double CC1pDeltaPhiTReso = ( DeltaPhiT - true_DeltaPhiT );
-
-//					Playground_CC1pRecoMuonMomentumResoVsDeltaThetaPlot->Fill(CC1pMuonMomentumReso,DeltaThetaProtonMuon_Deg,weight);
-//					Playground_CC1pRecoMuonMomentumResoVsMuonMomentumPlot->Fill(CC1pMuonMomentumReso,reco_Pmu,weight);
 
 					// -------------------------------------------------------------------------------------------------------------------------
 
@@ -2414,20 +2155,13 @@ void PeLEE_myRecoAnalysis::Loop() {
 					NonCC1pRecoFlashScorePlot->Fill(FlashScore,weight);
 					NonCC1pRecoDistancePlot->Fill(distance,weight);
 					NonCC1pRecoLengthDifferencePlot->Fill(LengthDifference,weight);
-//					NonCC1pRecodYZPlot->Fill(dYZ,weight);
-//					NonCC1pRecoNPEPlot->Fill(NPE,weight);
-//					NonCC1pRecoVertexActivityPlot->Fill(VertexActivity,weight);	
-//					if (VertexActivity > 0) { NonCC1pRecoNonZeroVertexActivityPlot->Fill(VertexActivity,weight); }		
 
 					NonCC1pRecoVertexXPlot->Fill(Vertex_X->at(0),weight);
 					NonCC1pRecoVertexYPlot->Fill(Vertex_Y->at(0),weight);
 					NonCC1pRecoVertexZPlot->Fill(Vertex_Z->at(0),weight);
 
-//					NonCC1pRecoThreePlaneChi2LogLikelihoodCandidateMuonPlot->Fill(reco_Pmu_ThreePlaneLogLikelihood,weight);
-//					NonCC1pRecoThreePlaneChi2LogLikelihoodCandidateProtonPlot->Fill(reco_Pp_ThreePlaneLogLikelihood,weight);
-
-					 NonCC1pRecoMuonLLRPIDPlot->Fill(reco_mu_LLR_Score,weight);
-					 NonCC1pRecoProtonLLRPIDPlot->Fill(reco_p_LLR_Score,weight);
+					NonCC1pRecoMuonLLRPIDPlot->Fill(reco_mu_LLR_Score,weight);
+					NonCC1pRecoProtonLLRPIDPlot->Fill(reco_p_LLR_Score,weight);
 
 					NonCC1pRecoMuonLengthPlot->Fill(l_muCandidate,weight);
 //					NonCC1pRecodMuonTracksScorePlot->Fill(MuonTrackScore,weight);
@@ -2438,6 +2172,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 					NonCC1pRecoMuonMomentumPlot->Fill(reco_Pmu,weight);
 					NonCC1pRecoMuonCosThetaPlot->Fill(reco_Pmu_cos_theta,weight);
+					NonCC1pRecoMuonCosThetaSingleBinPlot->Fill(reco_Pmu_cos_theta,weight);
 					NonCC1pRecoMuonPhiPlot->Fill(reco_Pmu_phi,weight);
 
 					if (CandidateMu_EndContainment->at(0) == 1) { NonCC1pRecoContainedMuonMomentumPlot->Fill(reco_Pmu,weight); }
@@ -2456,9 +2191,15 @@ void PeLEE_myRecoAnalysis::Loop() {
 					else { NonCC1pRecoDeltaBackwardThetaPlot->Fill(DeltaThetaProtonMuon_Deg,weight); }
 					NonCC1pRecoDeltaPhiPlot->Fill(DeltaPhiProtonMuon_Deg,weight);
 
-//					NonCC1pRecokMissPlot->Fill(kMiss,weight);
-//					NonCC1pRecoPMissMinusPlot->Fill(PMissMinus,weight);
-//					NonCC1pRecoPMissPlot->Fill(MissMomentum,weight);
+					NonCC1pRecokMissPlot->Fill(kMiss,weight);
+					NonCC1pRecoPMissMinusPlot->Fill(PMissMinus,weight);
+					NonCC1pRecoPMissPlot->Fill(MissMomentum,weight);
+
+					NonCC1pRecoDeltaPLPlot->Fill(reco_PL,weight);
+					NonCC1pRecoDeltaPnPlot->Fill(reco_Pn,weight);
+					NonCC1pRecoDeltaPtxPlot->Fill(reco_Ptx,weight);
+					NonCC1pRecoDeltaPtyPlot->Fill(reco_Pty,weight);
+					NonCC1pRecoAPlot->Fill(reco_A,weight);
 
 					NonCC1pRecoDeltaPTPlot->Fill(TransMissMomentum,weight);
 					NonCC1pRecoDeltaAlphaTPlot->Fill(DeltaAlphaT,weight);
@@ -2507,20 +2248,13 @@ void PeLEE_myRecoAnalysis::Loop() {
 					CCQERecoFlashScorePlot->Fill(FlashScore,weight);
 					CCQERecoDistancePlot->Fill(distance,weight);
 					CCQERecoLengthDifferencePlot->Fill(LengthDifference,weight);
-//					CCQERecodYZPlot->Fill(dYZ,weight);
-//					CCQERecoNPEPlot->Fill(NPE,weight);
-//					CCQERecoVertexActivityPlot->Fill(VertexActivity,weight);
-//					if (VertexActivity > 0) { CCQERecoNonZeroVertexActivityPlot->Fill(VertexActivity,weight); }			
 
 					CCQERecoVertexXPlot->Fill(Vertex_X->at(0),weight);
 					CCQERecoVertexYPlot->Fill(Vertex_Y->at(0),weight);
 					CCQERecoVertexZPlot->Fill(Vertex_Z->at(0),weight);
 
-//					CCQERecoThreePlaneChi2LogLikelihoodCandidateMuonPlot->Fill(reco_Pmu_ThreePlaneLogLikelihood,weight);
-//					CCQERecoThreePlaneChi2LogLikelihoodCandidateProtonPlot->Fill(reco_Pp_ThreePlaneLogLikelihood,weight);
-
-					 CCQERecoMuonLLRPIDPlot->Fill(reco_mu_LLR_Score,weight);
-					 CCQERecoProtonLLRPIDPlot->Fill(reco_p_LLR_Score,weight);
+					CCQERecoMuonLLRPIDPlot->Fill(reco_mu_LLR_Score,weight);
+					CCQERecoProtonLLRPIDPlot->Fill(reco_p_LLR_Score,weight);
 
 					CCQERecoMuonLengthPlot->Fill(l_muCandidate,weight);
 //					CCQERecodMuonTracksScorePlot->Fill(MuonTrackScore,weight);
@@ -2531,6 +2265,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 					CCQERecoMuonMomentumPlot->Fill(reco_Pmu,weight);
 					CCQERecoMuonCosThetaPlot->Fill(reco_Pmu_cos_theta,weight);
+					CCQERecoMuonCosThetaSingleBinPlot->Fill(reco_Pmu_cos_theta,weight);
 					CCQERecoMuonPhiPlot->Fill(reco_Pmu_phi,weight);
 
 					if (CandidateMu_EndContainment->at(0) == 1) { CCQERecoContainedMuonMomentumPlot->Fill(reco_Pmu,weight); }
@@ -2549,9 +2284,15 @@ void PeLEE_myRecoAnalysis::Loop() {
 					else { CCQERecoDeltaBackwardThetaPlot->Fill(DeltaThetaProtonMuon_Deg,weight); }
 					CCQERecoDeltaPhiPlot->Fill(DeltaPhiProtonMuon_Deg,weight);
 
-//					CCQERecokMissPlot->Fill(kMiss,weight);
-//					CCQERecoPMissMinusPlot->Fill(PMissMinus,weight);
-//					CCQERecoPMissPlot->Fill(MissMomentum,weight);
+					CCQERecokMissPlot->Fill(kMiss,weight);
+					CCQERecoPMissMinusPlot->Fill(PMissMinus,weight);
+					CCQERecoPMissPlot->Fill(MissMomentum,weight);
+
+					CCQERecoDeltaPLPlot->Fill(reco_PL,weight);
+					CCQERecoDeltaPnPlot->Fill(reco_Pn,weight);
+					CCQERecoDeltaPtxPlot->Fill(reco_Ptx,weight);
+					CCQERecoDeltaPtyPlot->Fill(reco_Pty,weight);
+					CCQERecoAPlot->Fill(reco_A,weight);
 
 					CCQERecoDeltaPTPlot->Fill(TransMissMomentum,weight);
 					CCQERecoDeltaAlphaTPlot->Fill(DeltaAlphaT,weight);
@@ -2595,20 +2336,13 @@ void PeLEE_myRecoAnalysis::Loop() {
 					CCMECRecoFlashScorePlot->Fill(FlashScore,weight);
 					CCMECRecoDistancePlot->Fill(distance,weight);
 					CCMECRecoLengthDifferencePlot->Fill(LengthDifference,weight);
-//					CCMECRecodYZPlot->Fill(dYZ,weight);
-//					CCMECRecoNPEPlot->Fill(NPE,weight);
-//					CCMECRecoVertexActivityPlot->Fill(VertexActivity,weight);
-//					if (VertexActivity > 0) { CCMECRecoNonZeroVertexActivityPlot->Fill(VertexActivity,weight); }			
 
 					CCMECRecoVertexXPlot->Fill(Vertex_X->at(0),weight);
 					CCMECRecoVertexYPlot->Fill(Vertex_Y->at(0),weight);
 					CCMECRecoVertexZPlot->Fill(Vertex_Z->at(0),weight);
 
-//					CCMECRecoThreePlaneChi2LogLikelihoodCandidateMuonPlot->Fill(reco_Pmu_ThreePlaneLogLikelihood,weight);
-//					CCMECRecoThreePlaneChi2LogLikelihoodCandidateProtonPlot->Fill(reco_Pp_ThreePlaneLogLikelihood,weight);
-
-					 CCMECRecoMuonLLRPIDPlot->Fill(reco_mu_LLR_Score,weight);
-					 CCMECRecoProtonLLRPIDPlot->Fill(reco_p_LLR_Score,weight);
+					CCMECRecoMuonLLRPIDPlot->Fill(reco_mu_LLR_Score,weight);
+					CCMECRecoProtonLLRPIDPlot->Fill(reco_p_LLR_Score,weight);
 
 					CCMECRecoMuonLengthPlot->Fill(l_muCandidate,weight);
 //					CCMECRecodMuonTracksScorePlot->Fill(MuonTrackScore,weight);
@@ -2623,6 +2357,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 					CCMECRecoMuonMomentumPlot->Fill(reco_Pmu,weight);
 					CCMECRecoMuonCosThetaPlot->Fill(reco_Pmu_cos_theta,weight);
+					CCMECRecoMuonCosThetaSingleBinPlot->Fill(reco_Pmu_cos_theta,weight);
 					CCMECRecoMuonPhiPlot->Fill(reco_Pmu_phi,weight);
 
 					if (CandidateMu_EndContainment->at(0) == 1) { CCQERecoContainedMuonMomentumPlot->Fill(reco_Pmu,weight); }
@@ -2637,9 +2372,15 @@ void PeLEE_myRecoAnalysis::Loop() {
 					else { CCMECRecoDeltaBackwardThetaPlot->Fill(DeltaThetaProtonMuon_Deg,weight); }
 					CCMECRecoDeltaPhiPlot->Fill(DeltaPhiProtonMuon_Deg,weight);
 
-//					CCMECRecokMissPlot->Fill(kMiss,weight);
-//					CCMECRecoPMissMinusPlot->Fill(PMissMinus,weight);
-//					CCMECRecoPMissPlot->Fill(MissMomentum,weight);
+					CCMECRecokMissPlot->Fill(kMiss,weight);
+					CCMECRecoPMissMinusPlot->Fill(PMissMinus,weight);
+					CCMECRecoPMissPlot->Fill(MissMomentum,weight);
+
+					CCMECRecoDeltaPLPlot->Fill(reco_PL,weight);
+					CCMECRecoDeltaPnPlot->Fill(reco_Pn,weight);
+					CCMECRecoDeltaPtxPlot->Fill(reco_Ptx,weight);
+					CCMECRecoDeltaPtyPlot->Fill(reco_Pty,weight);
+					CCMECRecoAPlot->Fill(reco_A,weight);
 
 					CCMECRecoDeltaPTPlot->Fill(TransMissMomentum,weight);
 					CCMECRecoDeltaAlphaTPlot->Fill(DeltaAlphaT,weight);
@@ -2683,17 +2424,10 @@ void PeLEE_myRecoAnalysis::Loop() {
 					CCRESRecoFlashScorePlot->Fill(FlashScore,weight);
 					CCRESRecoDistancePlot->Fill(distance,weight);
 					CCRESRecoLengthDifferencePlot->Fill(LengthDifference,weight);
-//					CCRESRecodYZPlot->Fill(dYZ,weight);
-//					CCRESRecoNPEPlot->Fill(NPE,weight);
-//					CCRESRecoVertexActivityPlot->Fill(VertexActivity,weight);
-//					if (VertexActivity > 0) { CCRESRecoNonZeroVertexActivityPlot->Fill(VertexActivity,weight); }			
 
 					CCRESRecoVertexXPlot->Fill(Vertex_X->at(0),weight);
 					CCRESRecoVertexYPlot->Fill(Vertex_Y->at(0),weight);
 					CCRESRecoVertexZPlot->Fill(Vertex_Z->at(0),weight);
-
-//					CCRESRecoThreePlaneChi2LogLikelihoodCandidateMuonPlot->Fill(reco_Pmu_ThreePlaneLogLikelihood,weight);
-//					CCRESRecoThreePlaneChi2LogLikelihoodCandidateProtonPlot->Fill(reco_Pp_ThreePlaneLogLikelihood,weight);
 
 					CCRESRecoMuonLLRPIDPlot->Fill(reco_mu_LLR_Score,weight);
 					CCRESRecoProtonLLRPIDPlot->Fill(reco_p_LLR_Score,weight);
@@ -2711,6 +2445,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 					CCRESRecoMuonMomentumPlot->Fill(reco_Pmu,weight);
 					CCRESRecoMuonCosThetaPlot->Fill(reco_Pmu_cos_theta,weight);
+					CCRESRecoMuonCosThetaSingleBinPlot->Fill(reco_Pmu_cos_theta,weight);
 					CCRESRecoMuonPhiPlot->Fill(reco_Pmu_phi,weight);
 
 					if (CandidateMu_EndContainment->at(0) == 1) { CCRESRecoContainedMuonMomentumPlot->Fill(reco_Pmu,weight); }
@@ -2725,9 +2460,15 @@ void PeLEE_myRecoAnalysis::Loop() {
 					else { CCRESRecoDeltaBackwardThetaPlot->Fill(DeltaThetaProtonMuon_Deg,weight); }
 					CCRESRecoDeltaPhiPlot->Fill(DeltaPhiProtonMuon_Deg,weight);
 
-//					CCRESRecokMissPlot->Fill(kMiss,weight);
-//					CCRESRecoPMissMinusPlot->Fill(PMissMinus,weight);
-//					CCRESRecoPMissPlot->Fill(MissMomentum,weight);
+					CCRESRecokMissPlot->Fill(kMiss,weight);
+					CCRESRecoPMissMinusPlot->Fill(PMissMinus,weight);
+					CCRESRecoPMissPlot->Fill(MissMomentum,weight);
+
+					CCRESRecoDeltaPLPlot->Fill(reco_PL,weight);
+					CCRESRecoDeltaPnPlot->Fill(reco_Pn,weight);
+					CCRESRecoDeltaPtxPlot->Fill(reco_Ptx,weight);
+					CCRESRecoDeltaPtyPlot->Fill(reco_Pty,weight);
+					CCRESRecoAPlot->Fill(reco_A,weight);
 
 					CCRESRecoDeltaPTPlot->Fill(TransMissMomentum,weight);
 					CCRESRecoDeltaAlphaTPlot->Fill(DeltaAlphaT,weight);
@@ -2771,17 +2512,10 @@ void PeLEE_myRecoAnalysis::Loop() {
 					CCDISRecoFlashScorePlot->Fill(FlashScore,weight);
 					CCDISRecoDistancePlot->Fill(distance,weight);
 					CCDISRecoLengthDifferencePlot->Fill(LengthDifference,weight);
-//					CCDISRecodYZPlot->Fill(dYZ,weight);
-//					CCDISRecoNPEPlot->Fill(NPE,weight);
-//					CCDISRecoVertexActivityPlot->Fill(VertexActivity,weight);
-//					if (VertexActivity > 0) { CCDISRecoNonZeroVertexActivityPlot->Fill(VertexActivity,weight); }			
 
 					CCDISRecoVertexXPlot->Fill(Vertex_X->at(0),weight);
 					CCDISRecoVertexYPlot->Fill(Vertex_Y->at(0),weight);
 					CCDISRecoVertexZPlot->Fill(Vertex_Z->at(0),weight);
-
-//					CCDISRecoThreePlaneChi2LogLikelihoodCandidateMuonPlot->Fill(reco_Pmu_ThreePlaneLogLikelihood,weight);
-//					CCDISRecoThreePlaneChi2LogLikelihoodCandidateProtonPlot->Fill(reco_Pp_ThreePlaneLogLikelihood,weight);
 
 					CCDISRecoMuonLLRPIDPlot->Fill(reco_mu_LLR_Score,weight);
 					CCDISRecoProtonLLRPIDPlot->Fill(reco_p_LLR_Score,weight);
@@ -2795,6 +2529,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 					CCDISRecoMuonMomentumPlot->Fill(reco_Pmu,weight);
 					CCDISRecoMuonCosThetaPlot->Fill(reco_Pmu_cos_theta,weight);
+					CCDISRecoMuonCosThetaSingleBinPlot->Fill(reco_Pmu_cos_theta,weight);
 					CCDISRecoMuonPhiPlot->Fill(reco_Pmu_phi,weight);
 
 					CCDISRecoProtonLengthPlot->Fill(l_pCandidate,weight);
@@ -2810,9 +2545,15 @@ void PeLEE_myRecoAnalysis::Loop() {
 					else { CCDISRecoDeltaBackwardThetaPlot->Fill(DeltaThetaProtonMuon_Deg,weight); }
 					CCDISRecoDeltaPhiPlot->Fill(DeltaPhiProtonMuon_Deg,weight);
 
-//					CCDISRecokMissPlot->Fill(kMiss,weight);
-//					CCDISRecoPMissMinusPlot->Fill(PMissMinus,weight);
-//					CCDISRecoPMissPlot->Fill(MissMomentum,weight);
+					CCDISRecokMissPlot->Fill(kMiss,weight);
+					CCDISRecoPMissMinusPlot->Fill(PMissMinus,weight);
+					CCDISRecoPMissPlot->Fill(MissMomentum,weight);
+
+					CCDISRecoDeltaPLPlot->Fill(reco_PL,weight);
+					CCDISRecoDeltaPnPlot->Fill(reco_Pn,weight);
+					CCDISRecoDeltaPtxPlot->Fill(reco_Ptx,weight);
+					CCDISRecoDeltaPtyPlot->Fill(reco_Pty,weight);
+					CCDISRecoAPlot->Fill(reco_A,weight);
 
 					CCDISRecoDeltaPTPlot->Fill(TransMissMomentum,weight);
 					CCDISRecoDeltaAlphaTPlot->Fill(DeltaAlphaT,weight);
@@ -2854,8 +2595,6 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 						MuonRecoLLRPIDPlot->Fill(reco_mu_LLR_Score,weight/2.);
 //						MuonRecoChi2Plot->Fill(reco_Pmu_chi2,weight/2.);		
-//						MuonRecoThreePlaneChi2Plot->Fill(reco_Pmu_ThreePlanechi2,weight/2.);
-						//MuonRecoThreePlaneChi2LogLikelihoodPlot->Fill(reco_Pmu_ThreePlaneLogLikelihood,weight/2.);	
 
 					}
 
@@ -2863,8 +2602,6 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 						MuonRecoLLRPIDPlot->Fill(reco_p_LLR_Score,weight/2.);
 //						MuonRecoChi2Plot->Fill(reco_Pp_chi2,weight/2.);		
-//						MuonRecoThreePlaneChi2Plot->Fill(reco_Pp_ThreePlanechi2,weight/2.);
-						//MuonRecoThreePlaneChi2LogLikelihoodPlot->Fill(reco_Pp_ThreePlaneLogLikelihood,weight/2.);	
 
 					}
 
@@ -2874,8 +2611,6 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 						ProtonRecoLLRPIDPlot->Fill(reco_mu_LLR_Score,weight);
 //						ProtonRecoChi2Plot->Fill(reco_Pmu_chi2,weight);		
-//						ProtonRecoThreePlaneChi2Plot->Fill(reco_Pmu_ThreePlanechi2,weight);
-						//ProtonRecoThreePlaneChi2LogLikelihoodPlot->Fill(reco_Pmu_ThreePlaneLogLikelihood,weight/2.);	
 
 					}
 
@@ -2883,7 +2618,6 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 						ProtonRecoLLRPIDPlot->Fill(reco_p_LLR_Score,weight/2.);
 //						ProtonRecoChi2Plot->Fill(reco_Pp_chi2,weight/2.);		
-//						ProtonRecoThreePlaneChi2Plot->Fill(reco_Pp_ThreePlanechi2,weight/2.);
 						//ProtonRecoThreePlaneChi2LogLikelihoodPlot->Fill(reco_Pp_ThreePlaneLogLikelihood,weight/2.);	
 
 					}
@@ -2894,8 +2628,6 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 						PionRecoLLRPIDPlot->Fill(reco_mu_LLR_Score,weight/2.);
 //						PionRecoChi2Plot->Fill(reco_Pmu_chi2,weight/2.);		
-//						PionRecoThreePlaneChi2Plot->Fill(reco_Pmu_ThreePlanechi2,weight/2.);
-						//PionRecoThreePlaneChi2LogLikelihoodPlot->Fill(reco_Pmu_ThreePlaneLogLikelihood,weight/2.);	
 
 					}
 
@@ -2903,8 +2635,6 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 						PionRecoLLRPIDPlot->Fill(reco_p_LLR_Score,weight/2.);
 //						PionRecoChi2Plot->Fill(reco_Pp_chi2,weight/2.);		
-//						PionRecoThreePlaneChi2Plot->Fill(reco_Pp_ThreePlanechi2,weight/2.);
-						//PionRecoThreePlaneChi2LogLikelihoodPlot->Fill(reco_Pp_ThreePlaneLogLikelihood,weight/2.);	
 
 					}
 
@@ -2917,12 +2647,6 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 					// CosmicRecoChi2Plot->Fill(reco_Pmu_chi2,weight/2.);
 					// CosmicRecoChi2Plot->Fill(reco_Pp_chi2,weight/2.);
-
-//					CosmicRecoThreePlaneChi2Plot->Fill(reco_Pmu_ThreePlanechi2,weight/2.);
-//					CosmicRecoThreePlaneChi2Plot->Fill(reco_Pp_ThreePlanechi2,weight/2.);
-
-					//CosmicRecoThreePlaneChi2LogLikelihoodPlot->Fill(reco_Pmu_ThreePlaneLogLikelihood,weight/2.);
-					//CosmicRecoThreePlaneChi2LogLikelihoodPlot->Fill(reco_Pp_ThreePlaneLogLikelihood,weight/2.);
 
 				}
 
@@ -3157,7 +2881,6 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 		TFile* fFile = new TFile(fPathToFile,"readonly");
 		TH1D* SamdefEventsPlot = (TH1D*)(fFile->Get("SamdefEventPlot"));
-		//TH1D* SWTriggerEventPlot = (TH1D*)(fFile->Get("SWTriggerEventPlot"));
 		TH1D* OneNuMuPFParticleEventPlot = (TH1D*)(fFile->Get("OneNuMuPFParticleEventPlot"));
 		TH1D* TwoDaughterEventPlot = (TH1D*)(fFile->Get("TwoDaughterEventPlot"));
 		TH1D* TrackLikeDaughterEventPlot = (TH1D*)(fFile->Get("TrackLikeDaughterEventPlot"));
@@ -3166,11 +2889,10 @@ void PeLEE_myRecoAnalysis::Loop() {
 		TH1D* OneBeamFlashEventPlot = (TH1D*)(fFile->Get("OneBeamFlashEventPlot"));
 		TH1D* OnePairEventPlot = (TH1D*)(fFile->Get("OnePairEventPlot"));
 		TH1D* MomentumThresholdEventPlot = (TH1D*)(fFile->Get("MomentumThresholdEventPlot"));
-		TH1D* StartPointContainmentEventPlot = (TH1D*)(fFile->Get("StartPointContainmentEventPlot"));
+		TH1D* ContainmentEventPlot = (TH1D*)(fFile->Get("ContainmentEventPlot"));
 
 		file->cd();
 		SamdefEventsPlot->Write();
-		//SWTriggerEventPlot->Write();
 		OneNuMuPFParticleEventPlot->Write();
 		TwoDaughterEventPlot->Write();
 		TrackLikeDaughterEventPlot->Write();
@@ -3179,7 +2901,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 		OneBeamFlashEventPlot->Write();
 		OnePairEventPlot->Write();
 		MomentumThresholdEventPlot->Write();
-		StartPointContainmentEventPlot->Write();
+		ContainmentEventPlot->Write();
 
 		// -------------------------------------------------------------------------------------------------------------------------
 
@@ -3187,20 +2909,16 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 		TH1D* ProtonEndPointContainmentEventPlot = new TH1D("ProtonEndPointContainmentEventPlot",";Proton contained end point events",1,0,1);
 		TH1D* NoFlippedTrackEventPlot = new TH1D("NoFlippedTrackEventPlot",";No flipped events",1,0,1);
-		TH1D* SumTruncdEdxTrackEventPlot = new TH1D("SumTruncdEdxTrackEventPlot",";Min sum trunc dEdx on 3 planes events",1,0,1);
 		TH1D* VertexContainmentEventPlot = new TH1D("VertexContainmentEventPlot",";Proton contained end point events",1,0,1);
 		TH1D* MuonQualityEventPlot = new TH1D("MuonQualityEventPlot",";Muon quality events",1,0,1);
-		TH1D* LowMCSQualityEventPlot = new TH1D("LowMCSQualityEventPlot",";MCS muon threshold events",1,0,1);
 		TH1D* PidEventPlot = new TH1D("PidEventPlot",";PID events",1,0,1);
 		TH1D* NuScoreEventPlot = new TH1D("NuScoreEventPlot",";#nu score events",1,0,1);
 		TH1D* CommonEventPlot = new TH1D("CommonEventPlot",";Common events",1,0,1);
 
 		ProtonEndPointContainmentEventPlot->SetBinContent(1,ContainmentCounter);
 		NoFlippedTrackEventPlot->SetBinContent(1,NoFlippedTrackCounter);
-		SumTruncdEdxTrackEventPlot->SetBinContent(1,SumTruncdEdxTrackCounter);
 		VertexContainmentEventPlot->SetBinContent(1,ContainedVertexCounter);
 		MuonQualityEventPlot->SetBinContent(1,MuonQualityCutCounter);
-		LowMCSQualityEventPlot->SetBinContent(1,LowMCSQualityCutCounter);
 		PidEventPlot->SetBinContent(1,PIDCounter);
 		NuScoreEventPlot->SetBinContent(1,NuScoreCounter);
 		CommonEventPlot->SetBinContent(1,KinematicsCounter);
@@ -3208,10 +2926,8 @@ void PeLEE_myRecoAnalysis::Loop() {
 		file->cd();
 		ProtonEndPointContainmentEventPlot->Write();
 		NoFlippedTrackEventPlot->Write();
-		SumTruncdEdxTrackEventPlot->Write();
 		VertexContainmentEventPlot->Write();
 		MuonQualityEventPlot->Write();
-		LowMCSQualityEventPlot->Write();
 		PidEventPlot->Write();
 		NuScoreEventPlot->Write();
 		CommonEventPlot->Write();

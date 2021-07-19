@@ -110,7 +110,7 @@ void PeLEE_PrintLatexTables(TString BaseMC = "") {
 	PlotNames.push_back("MatchedTrackLikeDaughterEventPlot"); PlotLabels.push_back("PeLEE CC1p0$\\pi$");
 //	PlotNames.push_back("OneBeamFlashEventPlot"); PlotLabels.push_back("1 beam flash");
 	PlotNames.push_back("MomentumThresholdEventPlot"); PlotLabels.push_back("P threshold");
-	PlotNames.push_back("StartPointContainmentEventPlot"); PlotLabels.push_back("Fully contained events");
+	PlotNames.push_back("ContainmentEventPlot"); PlotLabels.push_back("Fully contained events");
 //	PlotNames.push_back("ProtonEndPointContainmentEventPlot"); PlotLabels.push_back("End point p in FV");
 //	PlotNames.push_back("VertexContainmentEventPlot"); PlotLabels.push_back("Vertex in FV");
 	PlotNames.push_back("MuonQualityEventPlot"); PlotLabels.push_back("Contained $\\mu$ quality cut");
