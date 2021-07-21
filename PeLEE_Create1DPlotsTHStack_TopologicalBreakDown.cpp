@@ -133,10 +133,6 @@ void PeLEE_Create1DPlotsTHStack_TopologicalBreakDown(TString BaseMC = "") {
 
 	for (int WhichRun = 0; WhichRun < NRuns; WhichRun++) {
 
-		// For the alternative models for now we have only Run1
-
-		if (BaseMC != "" && Runs[WhichRun] == "Run3") { continue; }
-
 		// -----------------------------------------------------------------------------------------------------------------------------------------
 
 		double DataPOT = PeLEE_ReturnBeamOnRunPOT(Runs[WhichRun]);													

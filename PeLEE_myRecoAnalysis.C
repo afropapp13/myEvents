@@ -266,6 +266,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 		TH1D* CC1pTrueMuonMomentumPlot = new TH1D("CC1pTrueMuonMomentumPlot",LabelXAxisMuonMomentum,NBinsMuonMomentum,ArrayNBinsMuonMomentum);
 		TH1D* CC1pTrueMuonCosThetaPlot = new TH1D("CC1pTrueMuonCosThetaPlot",LabelXAxisMuonCosTheta,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta);
+		TH1D* CC1pTrueMuonCosThetaSingleBinPlot = new TH1D("CC1pTrueMuonCosThetaSingleBinPlot",LabelXAxisMuonCosTheta,1,-1.,1.);
 		TH1D* CC1pTrueMuonPhiPlot = new TH1D("CC1pTrueMuonPhiPlot",LabelXAxisMuonPhi,NBinsMuonPhi,ArrayNBinsMuonPhi);
 
 		TH1D* CC1pTrueCCQEMuonMomentumPlot = new TH1D("CC1pTrueCCQEMuonMomentumPlot",LabelXAxisMuonMomentum,CCQENBinsMuonMomentum,CCQEArrayNBinsMuonMomentum);
@@ -283,6 +284,15 @@ void PeLEE_myRecoAnalysis::Loop() {
 		TH1D* CC1pTrueDeltaPTPlot = new TH1D("CC1pTrueDeltaPTPlot",LabelXAxisDeltaPT,NBinsDeltaPT,ArrayNBinsDeltaPT);
 		TH1D* CC1pTrueDeltaAlphaTPlot = new TH1D("CC1pTrueDeltaAlphaTPlot",LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);
 		TH1D* CC1pTrueDeltaPhiTPlot = new TH1D("CC1pTrueDeltaPhiTPlot",LabelXAxisDeltaPhiT,NBinsDeltaPhiT,ArrayNBinsDeltaPhiT);
+
+		TH1D* CC1pTrueDeltaPLPlot = new TH1D("CC1pTrueDeltaPLPlot",LabelXAxisDeltaPL,NBinsDeltaPL,ArrayNBinsDeltaPL);
+		TH1D* CC1pTrueDeltaPnPlot = new TH1D("CC1pTrueDeltaPnPlot",LabelXAxisDeltaPn,NBinsDeltaPn,ArrayNBinsDeltaPn);
+		TH1D* CC1pTrueDeltaPtxPlot = new TH1D("CC1pTrueDeltaPtxPlot",LabelXAxisDeltaPtx,NBinsDeltaPtx,ArrayNBinsDeltaPtx);
+		TH1D* CC1pTrueDeltaPtyPlot = new TH1D("CC1pTrueDeltaPtyPlot",LabelXAxisDeltaPty,NBinsDeltaPty,ArrayNBinsDeltaPty);
+		TH1D* CC1pTrueAPlot = new TH1D("CC1pTrueAPlot",LabelXAxisA,NBinsA,ArrayNBinsA);
+		TH1D* CC1pTruekMissPlot = new TH1D("CC1pTruekMissPlot",LabelXAxiskMiss,NBinskMiss,ArrayNBinskMiss);
+		TH1D* CC1pTruePMissPlot = new TH1D("CC1pTruePMissPlot",LabelXAxisPMiss,NBinsPMiss,ArrayNBinsPMiss);
+		TH1D* CC1pTruePMissMinusPlot = new TH1D("CC1pTruePMissMinusPlot",LabelXAxisPMissMinus,NBinsPMissMinus,ArrayNBinsPMissMinus);
 
 		TH1D* CC1pTrueECalPlot = new TH1D("CC1pTrueECalPlot",LabelXAxisECal,NBinsECal,ArrayNBinsECal);
 		TH1D* CC1pTrueEQEPlot = new TH1D("CC1pTrueEQEPlot",LabelXAxisEQE,NBinsEQE,ArrayNBinsEQE);
@@ -395,6 +405,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 		TH2D* CC1pRecoMuonCosThetaPlot2D = new TH2D("CC1pRecoMuonCosThetaPlot2D",LabelXAxisMuonCosTheta2D,NBinsMuonCosTheta,
 			ArrayNBinsMuonCosTheta,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta);
+		TH2D* CC1pRecoMuonCosThetaSingleBinPlot2D = new TH2D("CC1pRecoMuonCosThetaSingleBinPlot2D",LabelXAxisMuonCosTheta2D,1,-1.,1.,1,-1.,1.);
 		TH2D* CC1pRecoProtonCosThetaPlot2D = new TH2D("CC1pRecoProtonCosThetaPlot2D",LabelXAxisProtonCosTheta2D,NBinsProtonCosTheta,
 			ArrayNBinsProtonCosTheta,NBinsProtonCosTheta,ArrayNBinsProtonCosTheta);
 
@@ -427,6 +438,16 @@ void PeLEE_myRecoAnalysis::Loop() {
 		TH2D* CC1pRecoCCQEECalPlot2D = new TH2D("CC1pRecoCCQEECalPlot2D",LabelXAxisECal2D,CCQENBinsECal,CCQEArrayNBinsECal,CCQENBinsECal,CCQEArrayNBinsECal);
 		TH2D* CC1pRecoCCQEQ2Plot2D = new TH2D("CC1pRecoCCQEQ2Plot2D",LabelXAxisQ22D,CCQENBinsQ2,CCQEArrayNBinsQ2,CCQENBinsQ2,CCQEArrayNBinsQ2);
 
+		TH2D* CC1pRecoDeltaPLPlot2D = new TH2D("CC1pRecoDeltaPLPlot2D",LabelXAxisDeltaPL2D,NBinsDeltaPL,ArrayNBinsDeltaPL,NBinsDeltaPL,ArrayNBinsDeltaPL);
+		TH2D* CC1pRecoDeltaPnPlot2D = new TH2D("CC1pRecoDeltaPnPlot2D",LabelXAxisDeltaPn2D,NBinsDeltaPn,ArrayNBinsDeltaPn,NBinsDeltaPn,ArrayNBinsDeltaPn);
+		TH2D* CC1pRecoDeltaPtxPlot2D = new TH2D("CC1pRecoDeltaPtxPlot2D",LabelXAxisDeltaPtx2D,NBinsDeltaPtx,ArrayNBinsDeltaPtx,NBinsDeltaPtx,ArrayNBinsDeltaPtx);
+		TH2D* CC1pRecoDeltaPtyPlot2D = new TH2D("CC1pRecoDeltaPtyPlot2D",LabelXAxisDeltaPty2D,NBinsDeltaPty,ArrayNBinsDeltaPty,NBinsDeltaPty,ArrayNBinsDeltaPty);
+		TH2D* CC1pRecoAPlot2D = new TH2D("CC1pRecoAPlot2D",LabelXAxisA2D,NBinsA,ArrayNBinsA,NBinsA,ArrayNBinsA);
+
+		TH2D* CC1pRecokMissPlot2D = new TH2D("CC1pRecokMissPlot2D",LabelXAxiskMiss2D,NBinskMiss,ArrayNBinskMiss,NBinskMiss,ArrayNBinskMiss);
+		TH2D* CC1pRecoPMissPlot2D = new TH2D("CC1pRecoPMissPlot2D",LabelXAxisPMiss2D,NBinsPMiss,ArrayNBinsPMiss,NBinsPMiss,ArrayNBinsPMiss);
+		TH2D* CC1pRecoPMissMinusPlot2D = new TH2D("CC1pRecoPMissMinusPlot2D",LabelXAxisPMissMinus2D,NBinsPMissMinus,ArrayNBinsPMissMinus,NBinsPMissMinus,ArrayNBinsPMissMinus);
+
 		// -------------------------------------------------------------------------------------------------------------------------------------
 
 		// 2D Reco Level Plots for Signal CC1p, POT Scaled for response matrices
@@ -443,6 +464,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 		TH2D* POTScaledCC1pRecoMuonCosThetaPlot2D = new TH2D("POTScaledCC1pRecoMuonCosThetaPlot2D",LabelXAxisMuonCosTheta2D,NBinsMuonCosTheta,
 			ArrayNBinsMuonCosTheta,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta);
+		TH2D* POTScaledCC1pRecoMuonCosThetaSingleBinPlot2D = new TH2D("POTScaledCC1pRecoMuonCosThetaSingleBinPlot2D",LabelXAxisMuonCosTheta2D,1,-1.,1.,1,-1.,1.);
 		TH2D* POTScaledCC1pRecoProtonCosThetaPlot2D = new TH2D("POTScaledCC1pRecoProtonCosThetaPlot2D",LabelXAxisProtonCosTheta2D,NBinsProtonCosTheta,
 			ArrayNBinsProtonCosTheta,NBinsProtonCosTheta,ArrayNBinsProtonCosTheta);
 
@@ -474,6 +496,16 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 		TH2D* POTScaledCC1pRecoCCQEECalPlot2D = new TH2D("POTScaledCC1pRecoCCQEECalPlot2D",LabelXAxisECal2D,CCQENBinsECal,CCQEArrayNBinsECal,CCQENBinsECal,CCQEArrayNBinsECal);
 		TH2D* POTScaledCC1pRecoCCQEQ2Plot2D = new TH2D("POTScaledCC1pRecoCCQEQ2Plot2D",LabelXAxisQ22D,CCQENBinsQ2,CCQEArrayNBinsQ2,CCQENBinsQ2,CCQEArrayNBinsQ2);
+
+		TH2D* POTScaledCC1pRecoDeltaPLPlot2D = new TH2D("POTScaledCC1pRecoDeltaPLPlot2D",LabelXAxisDeltaPL2D,NBinsDeltaPL,ArrayNBinsDeltaPL,NBinsDeltaPL,ArrayNBinsDeltaPL);
+		TH2D* POTScaledCC1pRecoDeltaPnPlot2D = new TH2D("POTScaledCC1pRecoDeltaPnPlot2D",LabelXAxisDeltaPn2D,NBinsDeltaPn,ArrayNBinsDeltaPn,NBinsDeltaPn,ArrayNBinsDeltaPn);
+		TH2D* POTScaledCC1pRecoDeltaPtxPlot2D = new TH2D("POTScaledCC1pRecoDeltaPtxPlot2D",LabelXAxisDeltaPtx2D,NBinsDeltaPtx,ArrayNBinsDeltaPtx,NBinsDeltaPtx,ArrayNBinsDeltaPtx);
+		TH2D* POTScaledCC1pRecoDeltaPtyPlot2D = new TH2D("POTScaledCC1pRecoDeltaPtyPlot2D",LabelXAxisDeltaPty2D,NBinsDeltaPty,ArrayNBinsDeltaPty,NBinsDeltaPty,ArrayNBinsDeltaPty);
+		TH2D* POTScaledCC1pRecoAPlot2D = new TH2D("POTScaledCC1pRecoAPlot2D",LabelXAxisA2D,NBinsA,ArrayNBinsA,NBinsA,ArrayNBinsA);
+
+		TH2D* POTScaledCC1pRecokMissPlot2D = new TH2D("POTScaledCC1pRecokMissPlot2D",LabelXAxiskMiss2D,NBinskMiss,ArrayNBinskMiss,NBinskMiss,ArrayNBinskMiss);
+		TH2D* POTScaledCC1pRecoPMissPlot2D = new TH2D("POTScaledCC1pRecoPMissPlot2D",LabelXAxisPMiss2D,NBinsPMiss,ArrayNBinsPMiss,NBinsPMiss,ArrayNBinsPMiss);
+		TH2D* POTScaledCC1pRecoPMissMinusPlot2D = new TH2D("POTScaledCC1pRecoPMissMinusPlot2D",LabelXAxisPMissMinus2D,NBinsPMissMinus,ArrayNBinsPMissMinus,NBinsPMissMinus,ArrayNBinsPMissMinus);
 
 		// -------------------------------------------------------------------------------------------------------------------------------------
 
@@ -1443,6 +1475,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 				true_Pn = True_Pn->at(0);
 				true_Ptx = True_Ptx->at(0);
 				true_Pty = True_Pty->at(0);
+				true_A = True_A->at(0);
 			
 				true_TransMissMomentum = True_Pt->at(0);
 				true_DeltaAlphaT = True_DeltaAlphaT->at(0);
@@ -1761,6 +1794,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 					CC1pTrueMuonMomentumPlot->Fill(True_CandidateMu_P->at(0),weight);
 					CC1pTrueMuonCosThetaPlot->Fill(True_CandidateMu_CosTheta->at(0),weight);
+					CC1pTrueMuonCosThetaSingleBinPlot->Fill(True_CandidateMu_CosTheta->at(0),weight);
 					CC1pTrueMuonPhiPlot->Fill(True_CandidateMu_Phi->at(0),weight);
 
 					CC1pTrueProtonMomentumPlot->Fill(True_CandidateP_P->at(0),weight);
@@ -1770,6 +1804,15 @@ void PeLEE_myRecoAnalysis::Loop() {
 					CC1pTrueDeltaPTPlot->Fill(true_TransMissMomentum,weight);
 					CC1pTrueDeltaAlphaTPlot->Fill(true_DeltaAlphaT,weight);
 					CC1pTrueDeltaPhiTPlot->Fill(true_DeltaPhiT,weight);
+
+					CC1pTrueDeltaPLPlot->Fill(true_PL,weight);
+					CC1pTrueDeltaPnPlot->Fill(true_Pn,weight);
+					CC1pTrueDeltaPtxPlot->Fill(true_Ptx,weight);
+					CC1pTrueDeltaPtyPlot->Fill(true_Pty,weight);
+					CC1pTrueAPlot->Fill(true_A,weight);
+					CC1pTruekMissPlot->Fill(true_kMiss,weight);
+					CC1pTruePMissPlot->Fill(true_PMiss,weight);
+					CC1pTruePMissMinusPlot->Fill(true_PMissMinus,weight);
 
 					CC1pTrueECalPlot->Fill(true_ECal,weight);
 					CC1pTrueEQEPlot->Fill(true_EQE,weight);
@@ -1881,9 +1924,27 @@ void PeLEE_myRecoAnalysis::Loop() {
 					CC1pRecoDeltaAlphaTPlot2D->Fill(true_DeltaAlphaT,DeltaAlphaT);
 					CC1pRecoDeltaPhiTPlot2D->Fill(true_DeltaPhiT,DeltaPhiT);
 
+					CC1pRecoDeltaPLPlot2D->Fill(true_PL,reco_PL);
+					CC1pRecoDeltaPnPlot2D->Fill(true_Pn,reco_Pn);
+					CC1pRecoDeltaPtxPlot2D->Fill(true_Ptx,reco_Ptx);
+					CC1pRecoDeltaPtyPlot2D->Fill(true_Pty,reco_Pty);
+					CC1pRecoAPlot2D->Fill(true_A,reco_A);
+					CC1pRecokMissPlot2D->Fill(true_kMiss,kMiss);
+					CC1pRecoPMissPlot2D->Fill(true_PMiss,MissMomentum);
+					CC1pRecoPMissMinusPlot2D->Fill(true_PMissMinus,PMissMinus);
+
 					POTScaledCC1pRecoDeltaPTPlot2D->Fill(true_TransMissMomentum,TransMissMomentum,weight);
 					POTScaledCC1pRecoDeltaAlphaTPlot2D->Fill(true_DeltaAlphaT,DeltaAlphaT,weight);
 					POTScaledCC1pRecoDeltaPhiTPlot2D->Fill(true_DeltaPhiT,DeltaPhiT,weight);
+
+					POTScaledCC1pRecoDeltaPLPlot2D->Fill(true_PL,reco_PL,weight);
+					POTScaledCC1pRecoDeltaPnPlot2D->Fill(true_Pn,reco_Pn,weight);
+					POTScaledCC1pRecoDeltaPtxPlot2D->Fill(true_Ptx,reco_Ptx,weight);
+					POTScaledCC1pRecoDeltaPtyPlot2D->Fill(true_Pty,reco_Pty,weight);
+					POTScaledCC1pRecoAPlot2D->Fill(true_A,reco_A,weight);
+					POTScaledCC1pRecokMissPlot2D->Fill(true_kMiss,kMiss,weight);
+					POTScaledCC1pRecoPMissPlot2D->Fill(true_PMiss,MissMomentum,weight);
+					POTScaledCC1pRecoPMissMinusPlot2D->Fill(true_PMissMinus,PMissMinus,weight);
 
 					// -----------------------------------------------------------------------------------------------------
 
@@ -2881,25 +2942,15 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 		TFile* fFile = new TFile(fPathToFile,"readonly");
 		TH1D* SamdefEventsPlot = (TH1D*)(fFile->Get("SamdefEventPlot"));
-		TH1D* OneNuMuPFParticleEventPlot = (TH1D*)(fFile->Get("OneNuMuPFParticleEventPlot"));
-		TH1D* TwoDaughterEventPlot = (TH1D*)(fFile->Get("TwoDaughterEventPlot"));
 		TH1D* TrackLikeDaughterEventPlot = (TH1D*)(fFile->Get("TrackLikeDaughterEventPlot"));
 		TH1D* MatchedTrackLikeDaughterEventPlot = (TH1D*)(fFile->Get("MatchedTrackLikeDaughterEventPlot"));
-		TH1D* NuFlashScoreEventPlot = (TH1D*)(fFile->Get("NuFlashScoreEventPlot"));
-		TH1D* OneBeamFlashEventPlot = (TH1D*)(fFile->Get("OneBeamFlashEventPlot"));
-		TH1D* OnePairEventPlot = (TH1D*)(fFile->Get("OnePairEventPlot"));
 		TH1D* MomentumThresholdEventPlot = (TH1D*)(fFile->Get("MomentumThresholdEventPlot"));
 		TH1D* ContainmentEventPlot = (TH1D*)(fFile->Get("ContainmentEventPlot"));
 
 		file->cd();
 		SamdefEventsPlot->Write();
-		OneNuMuPFParticleEventPlot->Write();
-		TwoDaughterEventPlot->Write();
 		TrackLikeDaughterEventPlot->Write();
 		MatchedTrackLikeDaughterEventPlot->Write();	
-		NuFlashScoreEventPlot->Write();
-		OneBeamFlashEventPlot->Write();
-		OnePairEventPlot->Write();
 		MomentumThresholdEventPlot->Write();
 		ContainmentEventPlot->Write();
 
@@ -2985,7 +3036,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 		// -------------------------------------------------------------------------------------------------------------------------	
 
-		cout << fWhichSample << "  " << NEventsPassingSelectionCuts << " events passing selection criteria" << endl << endl;
+		cout << fWhichSample << "  " << KinematicsCounter << " events passing selection criteria" << endl << endl;
 
 		// -------------------------------------------------------------------------------------------------------------------------	
 
