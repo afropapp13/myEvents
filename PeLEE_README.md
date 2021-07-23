@@ -10,7 +10,7 @@
 
 # switch between series of cuts
 
-root -l PeLEE_script_EventSelection_CV.C 
+root -b PeLEE_script_EventSelection_CV.C 
 
 ###########################################################################################################################################################################
 
@@ -18,7 +18,7 @@ root -l PeLEE_script_EventSelection_CV.C
 
 # on gpvm's
 cd PurityEfficiencyStudies
-root -l DetermineMaxPurityEfficiency1D.cpp
+root -b DetermineMaxPurityEfficiency1D.cpp
 
 # (locally)
 cd PurityEfficiencyStudies
@@ -26,55 +26,56 @@ cd PurityEfficiencyStudies
 
 ###########################################################################################################################################################################
 
-root -l PeLEE_Chi2PID_BreakDown.cpp
+root -b PeLEE_Chi2PID_BreakDown.cpp
 
-root -l PeLEE_Create1DPlotsTHStack_TopologicalBreakDown.cpp
+root -b PeLEE_Create1DPlotsTHStack_TopologicalBreakDown.cpp
 
-root -l PeLEE_Create1DPlotsTHStack_InteractionBreakDown.cpp
+root -b PeLEE_Create1DPlotsTHStack_InteractionBreakDown.cpp
 
-root -l PeLEE_PrintLatexTables.cpp
+root -b PeLEE_PrintLatexTables.cpp
 
+# locally
 ./PeLEE_DownloadEventRatePlots.sh
 
 ###########################################################################################################################################################################
 
 # Detector variations
 
-root -l PeLEE_script_EventSelection_Detector_Systematics.C
+root -b PeLEE_script_EventSelection_Detector_Systematics.C
 
 # GEANT4 variations
 
-root -l PeLEE_script_EventSelection_G4_Systematics.C
+root -b PeLEE_script_EventSelection_G4_Systematics.C
 
 # GENIE variations
 
-root -l PeLEE_script_EventSelection_Genie_Systematics.C
+root -b PeLEE_script_EventSelection_Genie_Systematics.C
 
 # Flux variations
 
-root -l PeLEE_script_EventSelection_Flux_Systematics.C
+root -b PeLEE_script_EventSelection_Flux_Systematics.C
 
 ###########################################################################################################################################################################
 
 # NuWro fake data (only Run 1 for now)
 
-root -l
+root -b
 .L PeLEE_Create1DPlotsTHStack_TopologicalBreakDown.cpp
 PeLEE_Create1DPlotsTHStack_TopologicalBreakDown("Overlay9NuWro")
 
-root -l
+root -b
 .L PeLEE_Create1DPlotsTHStack_InteractionBreakDown.cpp
 PeLEE_Create1DPlotsTHStack_InteractionBreakDown("Overlay9NuWro")
 
 # NoTune GENIE Fake Data
 
-root -l PeLEE_script_EventSelection_CV_FakeData.C 
+root -b PeLEE_script_EventSelection_CV_FakeData.C 
 
-root -l
+root -b
 .L PeLEE_Create1DPlotsTHStack_TopologicalBreakDown.cpp
 PeLEE_Create1DPlotsTHStack_TopologicalBreakDown("NoTuneOverlay9")
 
-root -l
+root -b
 .L Create1DPlotsTHStack_InteractionBreakDown.cpp
 Create1DPlotsTHStack_InteractionBreakDown("NoTuneOverlay9")
 

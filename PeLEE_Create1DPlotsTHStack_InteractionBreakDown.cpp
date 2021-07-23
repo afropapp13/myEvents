@@ -38,15 +38,6 @@ void PeLEE_Create1DPlotsTHStack_InteractionBreakDown(TString BaseMC = "") {
 	PlotNames.push_back("RecoDeltaAlphaTPlot");
 	PlotNames.push_back("RecoDeltaPhiTPlot");
 
-	if (BaseMC == "") {
-
-	PlotNames.push_back("RecoCCQEMuonMomentumPlot");
-	PlotNames.push_back("RecoCCQEProtonMomentumPlot"); 
-	PlotNames.push_back("RecoCCQEMuonCosThetaPlot");
-	PlotNames.push_back("RecoCCQEProtonCosThetaPlot");
-	PlotNames.push_back("RecoCCQEMuonPhiPlot");
-	PlotNames.push_back("RecoCCQEProtonPhiPlot");
-
 	PlotNames.push_back("RecoPMissMinusPlot");
 	PlotNames.push_back("RecoPMissPlot");
 	PlotNames.push_back("RecokMissPlot");
@@ -56,6 +47,18 @@ void PeLEE_Create1DPlotsTHStack_InteractionBreakDown(TString BaseMC = "") {
 	PlotNames.push_back("RecoDeltaPtxPlot");
 	PlotNames.push_back("RecoDeltaPtyPlot");
 	PlotNames.push_back("RecoAPlot");
+
+	if (BaseMC == "") {
+
+	PlotNames.push_back("RecoCCQEMuonMomentumPlot");
+	PlotNames.push_back("RecoCCQEProtonMomentumPlot"); 
+	PlotNames.push_back("RecoCCQEMuonCosThetaPlot");
+	PlotNames.push_back("RecoCCQEProtonCosThetaPlot");
+	PlotNames.push_back("RecoCCQEMuonPhiPlot");
+	PlotNames.push_back("RecoCCQEProtonPhiPlot");
+	PlotNames.push_back("RecoCCQEProtonPhiPlot");
+	PlotNames.push_back("RecoCCQEECalPlot");
+	PlotNames.push_back("RecoCCQEQ2Plot");
 
 	PlotNames.push_back("RecoNuScorePlot");
 //	PlotNames.push_back("RecoFlashScorePlot");
