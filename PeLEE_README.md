@@ -57,7 +57,7 @@ root -b PeLEE_script_EventSelection_Flux_Systematics.C
 
 ###########################################################################################################################################################################
 
-# NuWro fake data (only Run 1 for now)
+# NuWro fake data
 
 root -b
 .L PeLEE_Create1DPlotsTHStack_TopologicalBreakDown.cpp
@@ -78,4 +78,8 @@ PeLEE_Create1DPlotsTHStack_TopologicalBreakDown("NoTuneOverlay9")
 root -b
 .L Create1DPlotsTHStack_InteractionBreakDown.cpp
 Create1DPlotsTHStack_InteractionBreakDown("NoTuneOverlay9")
+
+
+# locally
+./PeLEE_DownloadEventRatePlots.sh
 

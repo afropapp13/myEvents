@@ -2039,6 +2039,13 @@ void PeLEE_myRecoAnalysis::Loop() {
 						POTScaledCC1pRecoCCQEECalPlot2D->Fill(true_ECal,ECal,weight);
 						POTScaledCC1pRecoCCQEQ2Plot2D->Fill(true_Q2,reco_Q2,weight);
 
+						CC1pTrueCCQEMuonMomentumPlot->Fill(True_CandidateMu_P->at(0),weight);
+						CC1pTrueCCQEMuonCosThetaPlot->Fill(True_CandidateMu_CosTheta->at(0),weight);
+						CC1pTrueCCQEProtonMomentumPlot->Fill(True_CandidateP_P->at(0),weight);
+						CC1pTrueCCQEProtonCosThetaPlot->Fill(True_CandidateP_CosTheta->at(0),weight);
+						CC1pTrueCCQEECalPlot->Fill(true_ECal,weight);
+						CC1pTrueCCQEQ2Plot->Fill(true_Q2,weight);
+
 					} 
 					
 					if (RecoCCQElike && !TrueCCQElike) {
