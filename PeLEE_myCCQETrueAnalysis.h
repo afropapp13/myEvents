@@ -1,5 +1,5 @@
-#ifndef PeLEE_myTrueAnalysis_h
-#define PeLEE_myTrueAnalysis_h
+#ifndef PeLEE_myCCQETrueAnalysis_h
+#define PeLEE_myCCQETrueAnalysis_h
 
 #include <TROOT.h>
 #include <TChain.h>
@@ -13,7 +13,7 @@
 
 using namespace Constants;
 
-class PeLEE_myTrueAnalysis {
+class PeLEE_myCCQETrueAnalysis {
 
 private:
 
@@ -197,8 +197,8 @@ public :
    TBranch        *b_True_DeltaPhi;   //!
    TBranch        *b_True_DeltaTheta;   //!
 
-   PeLEE_myTrueAnalysis(TString WhichSample="",TString Tune="",TString WhichEventWeightLabel="", int UniverseIndex=-1,TTree *tree=0);
-   virtual ~PeLEE_myTrueAnalysis();
+   PeLEE_myCCQETrueAnalysis(TString WhichSample="",TString Tune="",TString WhichEventWeightLabel="", int UniverseIndex=-1,TTree *tree=0);
+   virtual ~PeLEE_myCCQETrueAnalysis();
    virtual Int_t    Cut(Long64_t entry);
    virtual Int_t    GetEntry(Long64_t entry);
    virtual Long64_t LoadTree(Long64_t entry);
@@ -212,8 +212,8 @@ public :
 #endif
 
 
-#ifdef PeLEE_myTrueAnalysis_cxx
-PeLEE_myTrueAnalysis::PeLEE_myTrueAnalysis(TString WhichSample, TString Tune, TString WhichEventWeightLabel, int UniverseIndex, TTree *tree) : fChain(0) 
+#ifdef PeLEE_myCCQETrueAnalysis_cxx
+PeLEE_myCCQETrueAnalysis::PeLEE_myCCQETrueAnalysis(TString WhichSample, TString Tune, TString WhichEventWeightLabel, int UniverseIndex, TTree *tree) : fChain(0) 
 {
 
    fTune = Tune;
@@ -221,7 +221,7 @@ PeLEE_myTrueAnalysis::PeLEE_myTrueAnalysis(TString WhichSample, TString Tune, TS
    fEventWeightLabel = WhichEventWeightLabel;
    fUniverseIndex = UniverseIndex;   
 
-   fPathToFile = "/pnfs/uboone/persistent/users/apapadop/mySamples/"+UBCodeVersion+"/PeLEETuples/PreTruthSelection_"+fWhichSample+"_"+UBCodeVersion+".root";
+   fPathToFile = "/pnfs/uboone/persistent/users/apapadop/mySamples/"+UBCodeVersion+"/CCQEPeLEETuples/CCQEPreTruthSelection_"+fWhichSample+"_"+UBCodeVersion+".root";
 
    if (tree == 0) {
       TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject(fPathToFile);
@@ -234,19 +234,19 @@ PeLEE_myTrueAnalysis::PeLEE_myTrueAnalysis(TString WhichSample, TString Tune, TS
    Init(tree);
 }
 
-PeLEE_myTrueAnalysis::~PeLEE_myTrueAnalysis()
+PeLEE_myCCQETrueAnalysis::~PeLEE_myCCQETrueAnalysis()
 {
    if (!fChain) return;
    delete fChain->GetCurrentFile();
 }
 
-Int_t PeLEE_myTrueAnalysis::GetEntry(Long64_t entry)
+Int_t PeLEE_myCCQETrueAnalysis::GetEntry(Long64_t entry)
 {
 // Read contents of entry.
    if (!fChain) return 0;
    return fChain->GetEntry(entry);
 }
-Long64_t PeLEE_myTrueAnalysis::LoadTree(Long64_t entry)
+Long64_t PeLEE_myCCQETrueAnalysis::LoadTree(Long64_t entry)
 {
 // Set the environment to read one entry
    if (!fChain) return -5;
@@ -259,7 +259,7 @@ Long64_t PeLEE_myTrueAnalysis::LoadTree(Long64_t entry)
    return centry;
 }
 
-void PeLEE_myTrueAnalysis::Init(TTree *tree)
+void PeLEE_myCCQETrueAnalysis::Init(TTree *tree)
 {
 
    // Set object pointer
@@ -412,18 +412,18 @@ void PeLEE_myTrueAnalysis::Init(TTree *tree)
 
 }
 
-Bool_t PeLEE_myTrueAnalysis::Notify()
+Bool_t PeLEE_myCCQETrueAnalysis::Notify()
 {
    return kTRUE;
 }
 
-void PeLEE_myTrueAnalysis::Show(Long64_t entry)
+void PeLEE_myCCQETrueAnalysis::Show(Long64_t entry)
 {
    if (!fChain) return;
    fChain->Show(entry);
 }
-Int_t PeLEE_myTrueAnalysis::Cut(Long64_t entry)
+Int_t PeLEE_myCCQETrueAnalysis::Cut(Long64_t entry)
 {
    return 1;
 }
-#endif // #ifdef PeLEE_myTrueAnalysis_cxx
+#endif // #ifdef PeLEE_myCCQETrueAnalysis_cxx

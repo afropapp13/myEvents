@@ -1,5 +1,5 @@
-#define PeLEE_myTrueAnalysis_cxx
-#include "PeLEE_myTrueAnalysis.h"
+#define PeLEE_myCCQETrueAnalysis_cxx
+#include "PeLEE_myCCQETrueAnalysis.h"
 #include <TH2.h>
 #include <TStyle.h>
 #include <TCanvas.h>
@@ -30,7 +30,7 @@ TString TrueToStringInt(int num) {
 }
 
 
-void PeLEE_myTrueAnalysis::Loop() {
+void PeLEE_myCCQETrueAnalysis::Loop() {
 
 	if (fChain == 0) return; Long64_t nentries = fChain->GetEntriesFast(); Long64_t nbytes = 0, nb = 0;
 	TH1D::SetDefaultSumw2();
@@ -49,25 +49,9 @@ void PeLEE_myTrueAnalysis::Loop() {
 
 	// Output Files
 
-	TString FileName = PathToFiles+fTune+"TruthSTVAnalysis_"+fWhichSample+Extension+"_"+UBCodeVersion+".root";	
+	TString FileName = PathToFiles+fTune+"TruthCCQEAnalysis_"+fWhichSample+Extension+"_"+UBCodeVersion+".root";	
 	TFile* OutputFile = new TFile(FileName,"recreate");
 	std::cout << std::endl << "File " << FileName << " to be created"<< std::endl << std::endl;
-
-	// ---------------------------------------------------------------------------------------------------------------------------------------
-
-	// Txt file to keep track of the event reduction at each stage
-
-	TString TxtName = "/uboone/data/users/apapadop/myEvents/myTxtFiles/"+UBCodeVersion+"/TxtmyTrueEvents_"+fWhichSample+"_"+UBCodeVersion+".txt";
-	ofstream myTxtFile;
-	myTxtFile.open(TxtName);
-
-	// Txt file to keep track of the run/subrun/event of the candidate events
-
-	TString RunTxtName = "/uboone/data/users/apapadop/myEvents/myTxtFiles/"+UBCodeVersion+"/TxtmyTrueRunSubRunEvents_"+fWhichSample+"_"+UBCodeVersion+".txt";
-	ofstream myRunTxtFile;
-	myRunTxtFile.open(RunTxtName);
-	myRunTxtFile << std::fixed << std::setprecision(2);
-	myRunTxtFile << fWhichSample;
 
 	// --------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -472,10 +456,6 @@ void PeLEE_myTrueAnalysis::Loop() {
 
 		// -------------------------------------------------------------------------------------------------------------------------
 
-		// Storing the run/subrun/event of the candidate events 
-
-		myRunTxtFile << "Run = " << Run << ", SubRun = " << SubRun << ", Event = " << Event ;
-
 	} // End of the loop over the events
 
 	// --------------------------------------------------------------------------------------------------------------------------------------------
@@ -490,9 +470,6 @@ void PeLEE_myTrueAnalysis::Loop() {
 
 		//std::cout << std::endl << "Samdef events = " << SamdefEvents << std::endl;
 		std::cout << std::endl << "True CC1p events = " << TrueCC1pCounter << std::endl;
-
-		//myTxtFile << "Samdef events = " << SamdefEvents << std::endl;
-		myTxtFile << std::endl << "True CC1p events = " << TrueCC1pCounter << std::endl;
 
 	}
 	
@@ -515,6 +492,5 @@ void PeLEE_myTrueAnalysis::Loop() {
 	OutputFile->cd();
 	OutputFile->Write();
 	OutputFile->Close();
-	myTxtFile.close();
 
 } // End of the program

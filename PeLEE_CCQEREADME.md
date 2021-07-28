@@ -1,0 +1,33 @@
+# myEvents
+
+# Nominal/CV predictions 
+# To be done iteractively on the uboone gpvm's
+# The preselected files are located under "/pnfs/uboone/persistent/users/apapadop/mySamples/"+UBCodeVersion+"/PreSelection_"+fWhichSample+"_"+UBCodeVersion+".root";
+# The POT files are located under "/pnfs/uboone/persistent/users/apapadop/mySamples/"+UBCodeVersion+"/PreSelection_"+fWhichSample+"_"+UBCodeVersion+"_POT.root"
+# The output files will be placed under "/uboone/data/users/apapadop/myEvents/OutputFiles/"+UBCodeVersion+"/"+Cuts+"/STVStudies_"+fWhichSample+Extension+Cuts+".root"
+
+###########################################################################################################################################################################
+
+# switch between series of cuts
+
+root -b PeLEE_script_CCQEEventSelection_CV.C 
+
+###########################################################################################################################################################################
+
+# Detector variations
+
+root -b PeLEE_script_CCQEEventSelection_Detector_Systematics.C
+
+# GEANT4 variations
+
+root -b PeLEE_script_CCQEEventSelection_G4_Systematics.C
+
+# GENIE variations
+
+root -b PeLEE_script_CCQEEventSelection_Genie_Systematics.C
+
+# Flux variations
+
+root -b PeLEE_script_CCQEEventSelection_Flux_Systematics.C
+
+

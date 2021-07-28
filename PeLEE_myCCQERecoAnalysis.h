@@ -1,5 +1,5 @@
-#ifndef PeLEE_myRecoAnalysis_h
-#define PeLEE_myRecoAnalysis_h
+#ifndef PeLEE_myCCQERecoAnalysis_h
+#define PeLEE_myCCQERecoAnalysis_h
 
 #include <TROOT.h>
 #include <TChain.h>
@@ -13,7 +13,7 @@
 
 using namespace Constants;
 
-class PeLEE_myRecoAnalysis {
+class PeLEE_myCCQERecoAnalysis {
 
 private:
 
@@ -322,8 +322,8 @@ public :
    TBranch        *b_StartToStartDistance;   //!
    TBranch        *b_EndToEndDistance;   //!
 
-   PeLEE_myRecoAnalysis(TString WhichSample="",TString Tune="",TString WhichEventWeightLabel="", int UniverseIndex=-1, TTree *tree=0);
-   virtual ~PeLEE_myRecoAnalysis();
+   PeLEE_myCCQERecoAnalysis(TString WhichSample="",TString Tune="",TString WhichEventWeightLabel="", int UniverseIndex=-1, TTree *tree=0);
+   virtual ~PeLEE_myCCQERecoAnalysis();
    virtual Int_t    Cut(Long64_t entry);
    virtual Int_t    GetEntry(Long64_t entry);
    virtual Long64_t LoadTree(Long64_t entry);
@@ -335,8 +335,8 @@ public :
 
 #endif
 
-#ifdef PeLEE_myRecoAnalysis_cxx
-PeLEE_myRecoAnalysis::PeLEE_myRecoAnalysis(TString WhichSample, TString Tune, TString WhichEventWeightLabel, int UniverseIndex, TTree *tree) : fChain(0) 
+#ifdef PeLEE_myCCQERecoAnalysis_cxx
+PeLEE_myCCQERecoAnalysis::PeLEE_myCCQERecoAnalysis(TString WhichSample, TString Tune, TString WhichEventWeightLabel, int UniverseIndex, TTree *tree) : fChain(0) 
 {
 
    fTune = Tune;
@@ -345,7 +345,7 @@ PeLEE_myRecoAnalysis::PeLEE_myRecoAnalysis(TString WhichSample, TString Tune, TS
    fEventWeightLabel = WhichEventWeightLabel;
    fUniverseIndex = UniverseIndex;
 
-   fPathToFile = "/pnfs/uboone/persistent/users/apapadop/mySamples/"+UBCodeVersion+"/PeLEETuples/PreSelection_"+fWhichSample+"_"+UBCodeVersion+".root";
+   fPathToFile = "/pnfs/uboone/persistent/users/apapadop/mySamples/"+UBCodeVersion+"/CCQEPeLEETuples/CCQEPreSelection_"+fWhichSample+"_"+UBCodeVersion+".root";
 
    if (tree == 0) {
       TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject(fPathToFile);
@@ -358,19 +358,19 @@ PeLEE_myRecoAnalysis::PeLEE_myRecoAnalysis(TString WhichSample, TString Tune, TS
    Init(tree);
 }
 
-PeLEE_myRecoAnalysis::~PeLEE_myRecoAnalysis()
+PeLEE_myCCQERecoAnalysis::~PeLEE_myCCQERecoAnalysis()
 {
    if (!fChain) return;
    delete fChain->GetCurrentFile();
 }
 
-Int_t PeLEE_myRecoAnalysis::GetEntry(Long64_t entry)
+Int_t PeLEE_myCCQERecoAnalysis::GetEntry(Long64_t entry)
 {
 // Read contents of entry.
    if (!fChain) return 0;
    return fChain->GetEntry(entry);
 }
-Long64_t PeLEE_myRecoAnalysis::LoadTree(Long64_t entry)
+Long64_t PeLEE_myCCQERecoAnalysis::LoadTree(Long64_t entry)
 {
 // Set the environment to read one entry
    if (!fChain) return -5;
@@ -383,7 +383,7 @@ Long64_t PeLEE_myRecoAnalysis::LoadTree(Long64_t entry)
    return centry;
 }
 
-void PeLEE_myRecoAnalysis::Init(TTree *tree)
+void PeLEE_myCCQERecoAnalysis::Init(TTree *tree)
 {
 
    All_UBGenie = 0;
@@ -656,7 +656,7 @@ void PeLEE_myRecoAnalysis::Init(TTree *tree)
    Notify();
 }
 
-Bool_t PeLEE_myRecoAnalysis::Notify()
+Bool_t PeLEE_myCCQERecoAnalysis::Notify()
 {
    // The Notify() function is called when a new file is opened. This
    // can be either for a new TTree in a TChain or when when a new TTree
@@ -667,18 +667,18 @@ Bool_t PeLEE_myRecoAnalysis::Notify()
    return kTRUE;
 }
 
-void PeLEE_myRecoAnalysis::Show(Long64_t entry)
+void PeLEE_myCCQERecoAnalysis::Show(Long64_t entry)
 {
 // Print contents of entry.
 // If entry is not specified, print current entry
    if (!fChain) return;
    fChain->Show(entry);
 }
-Int_t PeLEE_myRecoAnalysis::Cut(Long64_t entry)
+Int_t PeLEE_myCCQERecoAnalysis::Cut(Long64_t entry)
 {
 // This function may be called from Loop.
 // returns  1 if entry is accepted.
 // returns -1 otherwise.
    return 1;
 }
-#endif // #ifdef PeLEE_myRecoAnalysis_cxx
+#endif // #ifdef PeLEE_myCCQERecoAnalysis_cxx

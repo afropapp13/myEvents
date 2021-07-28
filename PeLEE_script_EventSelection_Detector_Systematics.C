@@ -48,16 +48,16 @@
 	gROOT->ProcessLine(".L ../../myClasses/Tools.cxx++");
 	gROOT->ProcessLine(".L ../../myClasses/STV_Tools.cxx++");		
 
-	gROOT->ProcessLine(".L PeLEE_myRecoAnalysis.C+");
-	gROOT->ProcessLine(".L PeLEE_myTrueAnalysis.C+");
+	gROOT->ProcessLine(".L PeLEE_myCCQERecoAnalysis.C+");
+	gROOT->ProcessLine(".L PeLEE_myCCQETrueAnalysis.C+");
 
 
 	for (int i =0;i < (int)(WhichSampleArray.size()); i++) {
 
-		gROOT->ProcessLine("PeLEE_myRecoAnalysis(\""+WhichSampleArray[i]+"\").Loop()");
+		gROOT->ProcessLine("PeLEE_myCCQERecoAnalysis(\""+WhichSampleArray[i]+"\").Loop()");
 
 		if (string(WhichSampleArray[i]).find("Overlay9") != std::string::npos) 
-		  { gROOT->ProcessLine("PeLEE_myTrueAnalysis(\""+WhichSampleArray[i]+"\").Loop()"); } 
+		  { gROOT->ProcessLine("PeLEE_myCCQETrueAnalysis(\""+WhichSampleArray[i]+"\").Loop()"); } 
 
 	}
 

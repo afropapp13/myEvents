@@ -33,8 +33,8 @@
 	gROOT->ProcessLine(".L /uboone/app/users/apapadop/uboonecode_v08_00_00_52/srcs/ubana/ubana/myClasses/Tools.cxx++");
 	gROOT->ProcessLine(".L /uboone/app/users/apapadop/uboonecode_v08_00_00_52/srcs/ubana/ubana/myClasses/STV_Tools.cxx++");	
 
-	gROOT->ProcessLine(".L PeLEE_myRecoAnalysis.C+");
-	gROOT->ProcessLine(".L PeLEE_myTrueAnalysis.C+");
+	gROOT->ProcessLine(".L PeLEE_myCCQERecoAnalysis.C+");
+	gROOT->ProcessLine(".L PeLEE_myCCQETrueAnalysis.C+");
 
 	for (int i = 0;i < (int)(WhichSampleArray.size()); i++) {
 
@@ -42,10 +42,10 @@
 
 			for (int k = 0; k < Universes[j]; k++) {	
 
-				gROOT->ProcessLine("PeLEE_myRecoAnalysis(\""+WhichSampleArray[i]+"\",\"\",\""+EventWeightLabels[j]+"\","+TString(std::to_string(k))+").Loop()");
+				gROOT->ProcessLine("PeLEE_myCCQERecoAnalysis(\""+WhichSampleArray[i]+"\",\"\",\""+EventWeightLabels[j]+"\","+TString(std::to_string(k))+").Loop()");
 
 				if (string(WhichSampleArray[i]).find("Overlay9") != std::string::npos) 
-				  { gROOT->ProcessLine("PeLEE_myTrueAnalysis(\""+WhichSampleArray[i]+"\",\"\",\""+EventWeightLabels[j]+"\","+TString(std::to_string(k))+").Loop()"); } 
+				  { gROOT->ProcessLine("PeLEE_myCCQETrueAnalysis(\""+WhichSampleArray[i]+"\",\"\",\""+EventWeightLabels[j]+"\","+TString(std::to_string(k))+").Loop()"); } 
 
 			} // End of the loop over the universes
 			  
