@@ -111,16 +111,16 @@ void PeLEE_CCQECreate1DPlotsTHStack_TopologicalBreakDown(TString BaseMC = "") {
 			// 2: ExtBNB
 			// 3: Dirt
 		
-			NameOfSamples.push_back("STVStudies_BeamOn9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("BeamOn");
+			NameOfSamples.push_back("CCQEStudies_BeamOn9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("BeamOn");
 
-			if (BaseMC == "") { NameOfSamples.push_back("STVStudies_Overlay9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("Overlay"); }
-			else if (BaseMC == "Overlay9NuWro") { NameOfSamples.push_back("STVStudies_Overlay9NuWro_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("Overlay"); }
-			else if (BaseMC == "NoTuneOverlay9") { NameOfSamples.push_back("NoTuneSTVStudies_Overlay9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("Overlay"); }
+			if (BaseMC == "") { NameOfSamples.push_back("CCQEStudies_Overlay9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("Overlay"); }
+			else if (BaseMC == "Overlay9NuWro") { NameOfSamples.push_back("CCQEStudies_Overlay9NuWro_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("Overlay"); }
+			else if (BaseMC == "NoTuneOverlay9") { NameOfSamples.push_back("NoTuneCCQEStudies_Overlay9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("Overlay"); }
 
-			NameOfSamples.push_back("STVStudies_ExtBNB9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("ExtBNB");
+			NameOfSamples.push_back("CCQEStudies_ExtBNB9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("ExtBNB");
 
-			if (BaseMC != "NoTuneOverlay9") { NameOfSamples.push_back("STVStudies_OverlayDirt9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("Dirt"); }
-			else { NameOfSamples.push_back("NoTuneSTVStudies_OverlayDirt9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("Dirt"); }
+			if (BaseMC != "NoTuneOverlay9") { NameOfSamples.push_back("CCQEStudies_OverlayDirt9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("Dirt"); }
+			else { NameOfSamples.push_back("NoTuneCCQEStudies_OverlayDirt9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("Dirt"); }
 
 			vector<int> Colors; Colors.clear(); 
 			Colors.push_back(kBlack); Colors.push_back(kRed); Colors.push_back(kGray+2); Colors.push_back(kMagenta);
@@ -369,10 +369,12 @@ void PeLEE_CCQECreate1DPlotsTHStack_TopologicalBreakDown(TString BaseMC = "") {
 
 				// --------------------------------------------------------------------------------------
 
-				TString CanvasPath = PlotPath + Cuts+"/TopologicalBreakDown/";
+				TString CanvasPath = CCQEPlotPath + Cuts+"/TopologicalBreakDown/";
 				TString CanvasName = BaseMC + "CCQETHStack_BreakDown_"+PlotNames[WhichPlot]+"_"+Runs[WhichRun]+"_"+UBCodeVersion+Cuts+".pdf";
 				PlotCanvas[WhichPlot]->SaveAs(CanvasPath+CanvasName);
 				delete PlotCanvas[WhichPlot];
+
+				// --------------------------------------------------------------------------------------
 
 			} // End of the loop over the plots
 
