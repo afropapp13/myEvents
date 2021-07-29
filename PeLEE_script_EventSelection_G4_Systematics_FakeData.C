@@ -1,0 +1,56 @@
+{
+
+	vector<TString> WhichSampleArray;
+	vector<TString> EventWeightLabels;
+	vector<int> Universes;
+//	int NG4Universes = 1000;	
+	int NG4Universes = 100;
+
+	// -----------------------------------------------------------------------------------------
+
+//	WhichSampleArray.push_back("Overlay9_Run1");
+//	WhichSampleArray.push_back("Overlay9_Run2");
+//	WhichSampleArray.push_back("Overlay9_Run3");
+//	WhichSampleArray.push_back("Overlay9_Run4");
+//	WhichSampleArray.push_back("Overlay9_Run5");
+	WhichSampleArray.push_back("Overlay9_Combined");				
+	
+	// -----------------------------------------------------------------------------------------
+
+	EventWeightLabels.push_back("reinteractions"); Universes.push_back(NG4Universes);	
+//	EventWeightLabels.push_back("reinteractions_piminus_Geant4"); Universes.push_back(NG4Universes);
+//	EventWeightLabels.push_back("reinteractions_piplus_Geant4"); Universes.push_back(NG4Universes);
+//	EventWeightLabels.push_back("reinteractions_proton_Geant4"); Universes.push_back(NG4Universes);
+//	EventWeightLabels.push_back("xsr_scc_Fa3_SCC"); Universes.push_back(10);
+//	EventWeightLabels.push_back("xsr_scc_Fv3_SCC"); Universes.push_back(10);		
+
+	// -----------------------------------------------------------------------------------------
+
+	gROOT->ProcessLine(".L ../../myClasses/Tools.cxx++");
+	gROOT->ProcessLine(".L ../../myClasses/STV_Tools.cxx++");	
+
+	gROOT->ProcessLine(".L PeLEE_myRecoAnalysis.C+");
+	gROOT->ProcessLine(".L PeLEE_myTrueAnalysis.C+");
+
+	for (int i = 0; i < (int)(WhichSampleArray.size()); i++) {
+	
+		for (int j = 0; j < (int)(EventWeightLabels.size()); j++) {
+
+			for (int k = 0; k < Universes[j]; k++) {	
+
+				gROOT->ProcessLine("PeLEE_myRecoAnalysis(\""+WhichSampleArray[i]+"\",\"\",\""+EventWeightLabels[j]+"\","+TString(std::to_string(k))+",\"NoTune\").Loop()");
+
+				if (string(WhichSampleArray[i]).find("Overlay9") != std::string::npos) 
+				  { gROOT->ProcessLine("PeLEE_myTrueAnalysis(\""+WhichSampleArray[i]+"\",\"\",\""+EventWeightLabels[j]+"\","+TString(std::to_string(k))+",\"NoTune\").Loop()"); } 
+
+			} // End of the loop over the universes
+			  
+		} // End of the loop over the reinteraction labels	  
+
+	} // End of the loop over the samples
+
+	// -----------------------------------------------------------------------------------------
+
+	//gROOT->ProcessLine(".q");
+
+}

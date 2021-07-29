@@ -6,18 +6,18 @@
 
 	// Run 1
 
-	WhichSampleArray.push_back("OverlayDirt9_Run1");
-	WhichSampleArray.push_back("Overlay9_Run1");
+//	WhichSampleArray.push_back("OverlayDirt9_Run1");
+//	WhichSampleArray.push_back("Overlay9_Run1");
 
 	// Run 2
 
-	WhichSampleArray.push_back("OverlayDirt9_Run2");
-	WhichSampleArray.push_back("Overlay9_Run2");
+//	WhichSampleArray.push_back("OverlayDirt9_Run2");
+//	WhichSampleArray.push_back("Overlay9_Run2");
 	
 	// Run 3
 
-	WhichSampleArray.push_back("OverlayDirt9_Run3");
-	WhichSampleArray.push_back("Overlay9_Run3");
+//	WhichSampleArray.push_back("OverlayDirt9_Run3");
+//	WhichSampleArray.push_back("Overlay9_Run3");
 
 	// Run 4
 
@@ -37,10 +37,10 @@
 	// -----------------------------------------------------------------------------------------
 
 	gROOT->ProcessLine(".L ../../myClasses/Tools.cxx++");
+	gROOT->ProcessLine(".L ../../myClasses/STV_Tools.cxx++");
 
 	gROOT->ProcessLine(".L PeLEE_myRecoAnalysis.C+");
 	gROOT->ProcessLine(".L PeLEE_myTrueAnalysis.C+");
-
 
 	for (int i = 0;i < (int)(WhichSampleArray.size()); i++) {
 

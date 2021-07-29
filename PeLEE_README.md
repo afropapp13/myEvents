@@ -34,9 +34,6 @@ root -b PeLEE_Create1DPlotsTHStack_InteractionBreakDown.cpp
 
 root -b PeLEE_PrintLatexTables.cpp
 
-# locally
-./PeLEE_DownloadEventRatePlots.sh
-
 ###########################################################################################################################################################################
 
 # Detector variations
@@ -57,6 +54,26 @@ root -b PeLEE_script_EventSelection_Flux_Systematics.C
 
 ###########################################################################################################################################################################
 
+# Fake Data
+
+# NuWro
+
+root -b PeLEE_script_EventSelection_FakeData.C
+
+# Untuned MC
+
+root -b PeLEE_script_EventSelection_CV_FakeData.C
+
+root -b PeLEE_script_EventSelection_Detector_Systematics_FakeData.C
+
+root -b PeLEE_script_EventSelection_G4_FakeData.C
+
+root -b PeLEE_script_EventSelection_Genie_FakeData.C
+
+root -b PeLEE_script_EventSelection_Flux_FakeData.C
+
+###########################################################################################################################################################################
+
 # NuWro fake data
 
 root -b
@@ -69,8 +86,6 @@ PeLEE_Create1DPlotsTHStack_InteractionBreakDown("Overlay9NuWro")
 
 # NoTune GENIE Fake Data
 
-root -b PeLEE_script_EventSelection_CV_FakeData.C 
-
 root -b
 .L PeLEE_Create1DPlotsTHStack_TopologicalBreakDown.cpp
 PeLEE_Create1DPlotsTHStack_TopologicalBreakDown("NoTuneOverlay9")
@@ -79,7 +94,10 @@ root -b
 .L Create1DPlotsTHStack_InteractionBreakDown.cpp
 Create1DPlotsTHStack_InteractionBreakDown("NoTuneOverlay9")
 
+###########################################################################################################################################################################
 
 # locally
 ./PeLEE_DownloadEventRatePlots.sh
+
+###########################################################################################################################################################################
 
