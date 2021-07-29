@@ -1575,10 +1575,10 @@ void PeLEE_myCCQERecoAnalysis::Loop() {
 				     && True_CandidateMu_CosTheta->at(0) > CCQEArrayNBinsMuonCosTheta[0] 
                                      && True_CandidateP_CosTheta->at(0) > CCQEArrayNBinsProtonCosTheta[0]
 
-				     && True_CandidateMu_P->at(0) < PRLCCQEArrayNBinsMuonMomentum[NBinsMuonMomentum] 
-				     && True_CandidateP_P->at(0) < PRLCCQEArrayNBinsProtonMomentum[NBinsProtonMomentum]
-				     && True_CandidateMu_CosTheta->at(0) < CCQEArrayNBinsMuonCosTheta[NBinsMuonCosTheta] 
-				     && True_CandidateP_CosTheta->at(0) < CCQEArrayNBinsProtonCosTheta[NBinsProtonCosTheta]
+				     && True_CandidateMu_P->at(0) < PRLCCQEArrayNBinsMuonMomentum[PRLCCQENBinsMuonMomentum] 
+				     && True_CandidateP_P->at(0) < PRLCCQEArrayNBinsProtonMomentum[PRLCCQENBinsProtonMomentum]
+				     && True_CandidateMu_CosTheta->at(0) < CCQEArrayNBinsMuonCosTheta[CCQENBinsMuonCosTheta] 
+				     && True_CandidateP_CosTheta->at(0) < CCQEArrayNBinsProtonCosTheta[CCQENBinsProtonCosTheta]
 				     && true_TransMissMomentum < 0.35
 				     && TMath::Abs(True_DeltaPhi->at(0) - 180.) < 35.
 				     && TMath::Abs(True_DeltaTheta->at(0) - 90.) < 55.
