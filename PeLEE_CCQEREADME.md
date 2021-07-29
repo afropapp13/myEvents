@@ -8,8 +8,6 @@
 
 ###########################################################################################################################################################################
 
-# switch between series of cuts
-
 root -b PeLEE_script_CCQEEventSelection_CV.C 
 
 root -b PeLEE_CCQECreate1DPlotsTHStack_InteractionBreakDown.cpp

@@ -90,11 +90,11 @@ void PeLEE_myCCQETrueAnalysis::Loop() {
 	TH1D* TrueQ2Plot = new TH1D("TrueQ2Plot",LabelXAxisQ2,NBinsQ2,ArrayNBinsQ2);
 
 	TH1D* TrueCCQEMuonCosThetaPlot = new TH1D("TrueCCQEMuonCosThetaPlot",LabelXAxisMuonCosTheta,CCQENBinsMuonCosTheta,CCQEArrayNBinsMuonCosTheta);
-	TH1D* TrueCCQEMuonMomentumPlot = new TH1D("TrueCCQEMuonMomentumPlot",LabelXAxisMuonMomentum,PRLCCQENBinsMuonMomentum,PRLCCQEArrayNBinsMuonMomentum);
+	TH1D* TrueCCQEMuonMomentumPlot = new TH1D("TrueCCQEMuonMomentumPlot",LabelXAxisMuonMomentum,CCQENBinsMuonMomentum,CCQEArrayNBinsMuonMomentum);
 	TH1D* TrueCCQEMuonPhiPlot = new TH1D("TrueCCQEMuonPhiPlot",LabelXAxisMuonPhi,CCQENBinsMuonPhi,CCQEArrayNBinsMuonPhi);
 
 	TH1D* TrueCCQEProtonCosThetaPlot = new TH1D("TrueCCQEProtonCosThetaPlot",LabelXAxisProtonCosTheta,CCQENBinsProtonCosTheta,CCQEArrayNBinsProtonCosTheta);
-	TH1D* TrueCCQEProtonMomentumPlot = new TH1D("TrueCCQEProtonMomentumPlot",LabelXAxisProtonMomentum,PRLCCQENBinsProtonMomentum,PRLCCQEArrayNBinsProtonMomentum);
+	TH1D* TrueCCQEProtonMomentumPlot = new TH1D("TrueCCQEProtonMomentumPlot",LabelXAxisProtonMomentum,CCQENBinsProtonMomentum,CCQEArrayNBinsProtonMomentum);
 	TH1D* TrueCCQEProtonPhiPlot = new TH1D("TrueCCQEProtonPhiPlot",LabelXAxisProtonPhi,CCQENBinsProtonPhi,CCQEArrayNBinsProtonPhi);
 
 	TH1D* TrueCCQEECalPlot = new TH1D("TrueCCQEECalPlot",LabelXAxisECal,CCQENBinsECal,CCQEArrayNBinsECal);
@@ -298,8 +298,8 @@ void PeLEE_myCCQETrueAnalysis::Loop() {
 			if (
 			    /*TrueMuonStartContainment == true 
 			    && TrueProtonStartContainment == true 
-			    &&*/ TrueMuonMomentum_GeV > PRLCCQEArrayNBinsMuonMomentum[0]
-			    && TrueProtonMomentum_GeV > PRLCCQEArrayNBinsProtonMomentum[0]
+			    &&*/ TrueMuonMomentum_GeV > CCQEArrayNBinsMuonMomentum[0]
+			    && TrueProtonMomentum_GeV > CCQEArrayNBinsProtonMomentum[0]
 			) {
 
 				// -----------------------------------------------------------------------------------------------------------------
@@ -309,8 +309,8 @@ void PeLEE_myCCQETrueAnalysis::Loop() {
 				if (
 				    TrueTransMissMomentum < 0.35
 				    
-				    && TrueMuonMomentum_GeV < PRLCCQEArrayNBinsMuonMomentum[PRLCCQENBinsMuonMomentum]
-				    && TrueProtonMomentum_GeV < PRLCCQEArrayNBinsProtonMomentum[PRLCCQENBinsProtonMomentum]
+				    && TrueMuonMomentum_GeV < CCQEArrayNBinsMuonMomentum[CCQENBinsMuonMomentum]
+				    && TrueProtonMomentum_GeV < CCQEArrayNBinsProtonMomentum[CCQENBinsProtonMomentum]
 				    
 				    && TrueMuonCosTheta > CCQEArrayNBinsMuonCosTheta[0]
 				    && TrueMuonCosTheta < CCQEArrayNBinsMuonCosTheta[CCQENBinsMuonCosTheta]

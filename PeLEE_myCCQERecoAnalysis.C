@@ -185,7 +185,7 @@ void PeLEE_myCCQERecoAnalysis::Loop() {
 		TH1D* RecoMuonCosThetaSingleBinPlot = new TH1D("RecoMuonCosThetaSingleBinPlot",LabelXAxisMuonCosTheta,1,-1.,1.);
 		TH1D* RecoMuonPhiPlot = new TH1D("RecoMuonPhiPlot",LabelXAxisMuonPhi,NBinsMuonPhi,ArrayNBinsMuonPhi);
 
-		TH1D* RecoCCQEMuonMomentumPlot = new TH1D("RecoCCQEMuonMomentumPlot",LabelXAxisMuonMomentum,PRLCCQENBinsMuonMomentum,PRLCCQEArrayNBinsMuonMomentum);
+		TH1D* RecoCCQEMuonMomentumPlot = new TH1D("RecoCCQEMuonMomentumPlot",LabelXAxisMuonMomentum,CCQENBinsMuonMomentum,CCQEArrayNBinsMuonMomentum);
 		TH1D* RecoCCQEMuonCosThetaPlot = new TH1D("RecoCCQEMuonCosThetaPlot",LabelXAxisMuonCosTheta,CCQENBinsMuonCosTheta,CCQEArrayNBinsMuonCosTheta);
 		TH1D* RecoCCQEMuonPhiPlot = new TH1D("RecoCCQEMuonPhiPlot",LabelXAxisMuonPhi,CCQENBinsMuonPhi,CCQEArrayNBinsMuonPhi);
 
@@ -200,7 +200,7 @@ void PeLEE_myCCQERecoAnalysis::Loop() {
 		TH1D* RecoProtonCosThetaPlot = new TH1D("RecoProtonCosThetaPlot",LabelXAxisProtonCosTheta,NBinsProtonCosTheta,ArrayNBinsProtonCosTheta);
 		TH1D* RecoProtonPhiPlot = new TH1D("RecoProtonPhiPlot",LabelXAxisProtonPhi,NBinsProtonPhi,ArrayNBinsProtonPhi);
 
-		TH1D* RecoCCQEProtonMomentumPlot = new TH1D("RecoCCQEProtonMomentumPlot",LabelXAxisProtonMomentum,PRLCCQENBinsProtonMomentum,PRLCCQEArrayNBinsProtonMomentum);
+		TH1D* RecoCCQEProtonMomentumPlot = new TH1D("RecoCCQEProtonMomentumPlot",LabelXAxisProtonMomentum,CCQENBinsProtonMomentum,CCQEArrayNBinsProtonMomentum);
 		TH1D* RecoCCQEProtonCosThetaPlot = new TH1D("RecoCCQEProtonCosThetaPlot",LabelXAxisProtonCosTheta,CCQENBinsProtonCosTheta,CCQEArrayNBinsProtonCosTheta);
 		TH1D* RecoCCQEProtonPhiPlot = new TH1D("RecoCCQEProtonPhiPlot",LabelXAxisProtonPhi,CCQENBinsProtonPhi,CCQEArrayNBinsProtonPhi);
 
@@ -269,7 +269,7 @@ void PeLEE_myCCQERecoAnalysis::Loop() {
 		TH1D* CC1pTrueMuonCosThetaSingleBinPlot = new TH1D("CC1pTrueMuonCosThetaSingleBinPlot",LabelXAxisMuonCosTheta,1,-1.,1.);
 		TH1D* CC1pTrueMuonPhiPlot = new TH1D("CC1pTrueMuonPhiPlot",LabelXAxisMuonPhi,NBinsMuonPhi,ArrayNBinsMuonPhi);
 
-		TH1D* CC1pTrueCCQEMuonMomentumPlot = new TH1D("CC1pTrueCCQEMuonMomentumPlot",LabelXAxisMuonMomentum,PRLCCQENBinsMuonMomentum,PRLCCQEArrayNBinsMuonMomentum);
+		TH1D* CC1pTrueCCQEMuonMomentumPlot = new TH1D("CC1pTrueCCQEMuonMomentumPlot",LabelXAxisMuonMomentum,CCQENBinsMuonMomentum,CCQEArrayNBinsMuonMomentum);
 		TH1D* CC1pTrueCCQEMuonCosThetaPlot = new TH1D("CC1pTrueCCQEMuonCosThetaPlot",LabelXAxisMuonCosTheta,CCQENBinsMuonCosTheta,CCQEArrayNBinsMuonCosTheta);
 		TH1D* CC1pTrueCCQEMuonPhiPlot = new TH1D("CC1pTrueCCQEMuonPhiPlot",LabelXAxisMuonPhi,CCQENBinsMuonPhi,CCQEArrayNBinsMuonPhi);
 
@@ -277,7 +277,7 @@ void PeLEE_myCCQERecoAnalysis::Loop() {
 		TH1D* CC1pTrueProtonCosThetaPlot = new TH1D("CC1pTrueProtonCosThetaPlot",LabelXAxisProtonCosTheta, NBinsProtonCosTheta,ArrayNBinsProtonCosTheta);
 		TH1D* CC1pTrueProtonPhiPlot = new TH1D("CC1pTrueProtonPhiPlot",LabelXAxisProtonPhi,NBinsProtonPhi,ArrayNBinsProtonPhi);
 
-		TH1D* CC1pTrueCCQEProtonMomentumPlot = new TH1D("CC1pTrueCCQEProtonMomentumPlot",LabelXAxisProtonMomentum,PRLCCQENBinsProtonMomentum,PRLCCQEArrayNBinsProtonMomentum);
+		TH1D* CC1pTrueCCQEProtonMomentumPlot = new TH1D("CC1pTrueCCQEProtonMomentumPlot",LabelXAxisProtonMomentum,CCQENBinsProtonMomentum,CCQEArrayNBinsProtonMomentum);
 		TH1D* CC1pTrueCCQEProtonCosThetaPlot = new TH1D("CC1pTrueCCQEProtonCosThetaPlot",LabelXAxisProtonCosTheta,CCQENBinsProtonCosTheta,CCQEArrayNBinsProtonCosTheta);
 		TH1D* CC1pTrueCCQEProtonPhiPlot = new TH1D("CC1pTrueCCQEProtonPhiPlot",LabelXAxisProtonPhi,CCQENBinsProtonPhi,CCQEArrayNBinsProtonPhi);
 
@@ -331,7 +331,7 @@ void PeLEE_myCCQERecoAnalysis::Loop() {
 		TH1D* CC1pRecoMuonCosThetaSingleBinPlot = new TH1D("CC1pRecoMuonCosThetaSingleBinPlot",LabelXAxisMuonCosTheta,1,-1.,1.);
 		TH1D* CC1pRecoMuonPhiPlot = new TH1D("CC1pRecoMuonPhiPlot",LabelXAxisMuonPhi,NBinsMuonPhi,ArrayNBinsMuonPhi);
 
-		TH1D* CC1pRecoCCQEMuonMomentumPlot = new TH1D("CC1pRecoCCQEMuonMomentumPlot",LabelXAxisMuonMomentum,PRLCCQENBinsMuonMomentum,PRLCCQEArrayNBinsMuonMomentum);
+		TH1D* CC1pRecoCCQEMuonMomentumPlot = new TH1D("CC1pRecoCCQEMuonMomentumPlot",LabelXAxisMuonMomentum,CCQENBinsMuonMomentum,CCQEArrayNBinsMuonMomentum);
 		TH1D* CC1pRecoCCQEMuonCosThetaPlot = new TH1D("CC1pRecoCCQEMuonCosThetaPlot",LabelXAxisMuonCosTheta,CCQENBinsMuonCosTheta,CCQEArrayNBinsMuonCosTheta);
 		TH1D* CC1pRecoCCQEMuonPhiPlot = new TH1D("CC1pRecoCCQEMuonPhiPlot",LabelXAxisMuonPhi,CCQENBinsMuonPhi,CCQEArrayNBinsMuonPhi);
 
@@ -350,7 +350,7 @@ void PeLEE_myCCQERecoAnalysis::Loop() {
 		TH1D* CC1pRecoProtonPhiPlot = new TH1D("CC1pRecoProtonPhiPlot",LabelXAxisProtonPhi,NBinsProtonPhi,ArrayNBinsProtonPhi);
 
 		TH1D* CC1pRecoCCQEProtonMomentumPlot = new TH1D("CC1pRecoCCQEProtonMomentumPlot",LabelXAxisProtonMomentum,
-			PRLCCQENBinsProtonMomentum,PRLCCQEArrayNBinsProtonMomentum);
+			CCQENBinsProtonMomentum,CCQEArrayNBinsProtonMomentum);
 		TH1D* CC1pRecoCCQEProtonCosThetaPlot = new TH1D("CC1pRecoCCQEProtonCosThetaPlot",LabelXAxisProtonCosTheta,
 			CCQENBinsProtonCosTheta,CCQEArrayNBinsProtonCosTheta);
 		TH1D* CC1pRecoCCQEProtonPhiPlot = new TH1D("CC1pRecoCCQEProtonPhiPlot",LabelXAxisProtonPhi,CCQENBinsProtonPhi,CCQEArrayNBinsProtonPhi);
@@ -398,10 +398,10 @@ void PeLEE_myCCQERecoAnalysis::Loop() {
 		TH2D* CC1pRecoProtonMomentumPlot2D = new TH2D("CC1pRecoProtonMomentumPlot2D",LabelXAxisProtonMomentum2D,NBinsProtonMomentum,
 			ArrayNBinsProtonMomentum,NBinsProtonMomentum,ArrayNBinsProtonMomentum);
 
-		TH2D* CC1pRecoCCQEMuonMomentumPlot2D = new TH2D("CC1pRecoCCQEMuonMomentumPlot2D",LabelXAxisMuonMomentum2D,PRLCCQENBinsMuonMomentum,
-			PRLCCQEArrayNBinsMuonMomentum,PRLCCQENBinsMuonMomentum,PRLCCQEArrayNBinsMuonMomentum);
-		TH2D* CC1pRecoCCQEProtonMomentumPlot2D = new TH2D("CC1pRecoCCQEProtonMomentumPlot2D",LabelXAxisProtonMomentum2D,PRLCCQENBinsProtonMomentum,
-			PRLCCQEArrayNBinsProtonMomentum,PRLCCQENBinsProtonMomentum,PRLCCQEArrayNBinsProtonMomentum);
+		TH2D* CC1pRecoCCQEMuonMomentumPlot2D = new TH2D("CC1pRecoCCQEMuonMomentumPlot2D",LabelXAxisMuonMomentum2D,CCQENBinsMuonMomentum,
+			CCQEArrayNBinsMuonMomentum,CCQENBinsMuonMomentum,CCQEArrayNBinsMuonMomentum);
+		TH2D* CC1pRecoCCQEProtonMomentumPlot2D = new TH2D("CC1pRecoCCQEProtonMomentumPlot2D",LabelXAxisProtonMomentum2D,CCQENBinsProtonMomentum,
+			CCQEArrayNBinsProtonMomentum,CCQENBinsProtonMomentum,CCQEArrayNBinsProtonMomentum);
 
 		TH2D* CC1pRecoMuonCosThetaPlot2D = new TH2D("CC1pRecoMuonCosThetaPlot2D",LabelXAxisMuonCosTheta2D,NBinsMuonCosTheta,
 			ArrayNBinsMuonCosTheta,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta);
@@ -457,10 +457,10 @@ void PeLEE_myCCQERecoAnalysis::Loop() {
 		TH2D* POTScaledCC1pRecoProtonMomentumPlot2D = new TH2D("POTScaledCC1pRecoProtonMomentumPlot2D",LabelXAxisProtonMomentum2D,NBinsProtonMomentum,
 			ArrayNBinsProtonMomentum,NBinsProtonMomentum,ArrayNBinsProtonMomentum);
 
-		TH2D* POTScaledCC1pRecoCCQEMuonMomentumPlot2D = new TH2D("POTScaledCC1pRecoCCQEMuonMomentumPlot2D",LabelXAxisMuonMomentum2D,PRLCCQENBinsMuonMomentum,
-			PRLCCQEArrayNBinsMuonMomentum,PRLCCQENBinsMuonMomentum,PRLCCQEArrayNBinsMuonMomentum);
-		TH2D* POTScaledCC1pRecoCCQEProtonMomentumPlot2D = new TH2D("POTScaledCC1pRecoCCQEProtonMomentumPlot2D",LabelXAxisProtonMomentum2D,PRLCCQENBinsProtonMomentum,
-			PRLCCQEArrayNBinsProtonMomentum,PRLCCQENBinsProtonMomentum,PRLCCQEArrayNBinsProtonMomentum);
+		TH2D* POTScaledCC1pRecoCCQEMuonMomentumPlot2D = new TH2D("POTScaledCC1pRecoCCQEMuonMomentumPlot2D",LabelXAxisMuonMomentum2D,CCQENBinsMuonMomentum,
+			CCQEArrayNBinsMuonMomentum,CCQENBinsMuonMomentum,CCQEArrayNBinsMuonMomentum);
+		TH2D* POTScaledCC1pRecoCCQEProtonMomentumPlot2D = new TH2D("POTScaledCC1pRecoCCQEProtonMomentumPlot2D",LabelXAxisProtonMomentum2D,CCQENBinsProtonMomentum,
+			CCQEArrayNBinsProtonMomentum,CCQENBinsProtonMomentum,CCQEArrayNBinsProtonMomentum);
 
 		TH2D* POTScaledCC1pRecoMuonCosThetaPlot2D = new TH2D("POTScaledCC1pRecoMuonCosThetaPlot2D",LabelXAxisMuonCosTheta2D,NBinsMuonCosTheta,
 			ArrayNBinsMuonCosTheta,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta);
@@ -544,7 +544,7 @@ void PeLEE_myCCQERecoAnalysis::Loop() {
 		TH1D* NonCC1pRecoMuonCosThetaSingleBinPlot = new TH1D("NonCC1pRecoMuonCosThetaSingleBinPlot",LabelXAxisMuonCosTheta,1,-1.,1.);
 		TH1D* NonCC1pRecoMuonPhiPlot = new TH1D("NonCC1pRecoMuonPhiPlot",LabelXAxisMuonPhi,NBinsMuonPhi,ArrayNBinsMuonPhi);
 
-		TH1D* NonCC1pRecoCCQEMuonMomentumPlot = new TH1D("NonCC1pRecoCCQEMuonMomentumPlot",LabelXAxisMuonMomentum,PRLCCQENBinsMuonMomentum,PRLCCQEArrayNBinsMuonMomentum); // GeV/c
+		TH1D* NonCC1pRecoCCQEMuonMomentumPlot = new TH1D("NonCC1pRecoCCQEMuonMomentumPlot",LabelXAxisMuonMomentum,CCQENBinsMuonMomentum,CCQEArrayNBinsMuonMomentum); // GeV/c
 		TH1D* NonCC1pRecoCCQEMuonCosThetaPlot = new TH1D("NonCC1pRecoCCQEMuonCosThetaPlot",LabelXAxisMuonCosTheta,CCQENBinsMuonCosTheta,CCQEArrayNBinsMuonCosTheta);
 		TH1D* NonCC1pRecoCCQEMuonPhiPlot = new TH1D("NonCC1pRecoCCQEMuonPhiPlot",LabelXAxisMuonPhi,CCQENBinsMuonPhi,CCQEArrayNBinsMuonPhi);
 
@@ -562,7 +562,7 @@ void PeLEE_myCCQERecoAnalysis::Loop() {
 		TH1D* NonCC1pRecoProtonPhiPlot = new TH1D("NonCC1pRecoProtonPhiPlot",LabelXAxisProtonPhi,NBinsProtonPhi,ArrayNBinsProtonPhi);
 
 		TH1D* NonCC1pRecoCCQEProtonMomentumPlot = new TH1D("NonCC1pRecoCCQEProtonMomentumPlot",LabelXAxisProtonMomentum,
-			PRLCCQENBinsProtonMomentum,PRLCCQEArrayNBinsProtonMomentum); // GeV/c
+			CCQENBinsProtonMomentum,CCQEArrayNBinsProtonMomentum); // GeV/c
 		TH1D* NonCC1pRecoCCQEProtonCosThetaPlot = new TH1D("NonCC1pRecoCCQEProtonCosThetaPlot",LabelXAxisProtonCosTheta,
 			CCQENBinsProtonCosTheta,CCQEArrayNBinsProtonCosTheta);
 		TH1D* NonCC1pRecoCCQEProtonPhiPlot = new TH1D("NonCC1pRecoCCQEProtonPhiPlot",LabelXAxisProtonPhi,CCQENBinsProtonPhi,CCQEArrayNBinsProtonPhi);
@@ -638,7 +638,7 @@ void PeLEE_myCCQERecoAnalysis::Loop() {
 		TH1D* CCQERecoMuonCosThetaSingleBinPlot = new TH1D("CCQERecoMuonCosThetaSingleBinPlot",LabelXAxisMuonCosTheta,1,-1.,1.);
 		TH1D* CCQERecoMuonPhiPlot = new TH1D("CCQERecoMuonPhiPlot",LabelXAxisMuonPhi,NBinsMuonPhi,ArrayNBinsMuonPhi);
 
-		TH1D* CCQERecoCCQEMuonMomentumPlot = new TH1D("CCQERecoCCQEMuonMomentumPlot",LabelXAxisMuonMomentum,PRLCCQENBinsMuonMomentum,PRLCCQEArrayNBinsMuonMomentum);
+		TH1D* CCQERecoCCQEMuonMomentumPlot = new TH1D("CCQERecoCCQEMuonMomentumPlot",LabelXAxisMuonMomentum,CCQENBinsMuonMomentum,CCQEArrayNBinsMuonMomentum);
 		TH1D* CCQERecoCCQEMuonCosThetaPlot = new TH1D("CCQERecoCCQEMuonCosThetaPlot",LabelXAxisMuonCosTheta,CCQENBinsMuonCosTheta,CCQEArrayNBinsMuonCosTheta);
 		TH1D* CCQERecoCCQEMuonPhiPlot = new TH1D("CCQERecoCCQEMuonPhiPlot",LabelXAxisMuonPhi,CCQENBinsMuonPhi,CCQEArrayNBinsMuonPhi);
 
@@ -656,7 +656,7 @@ void PeLEE_myCCQERecoAnalysis::Loop() {
 		TH1D* CCQERecoProtonPhiPlot = new TH1D("CCQERecoProtonPhiPlot",LabelXAxisProtonPhi,NBinsProtonPhi,ArrayNBinsProtonPhi);
 
 		TH1D* CCQERecoCCQEProtonMomentumPlot = new TH1D("CCQERecoCCQEProtonMomentumPlot",LabelXAxisProtonMomentum,
-			PRLCCQENBinsProtonMomentum,PRLCCQEArrayNBinsProtonMomentum);
+			CCQENBinsProtonMomentum,CCQEArrayNBinsProtonMomentum);
 		TH1D* CCQERecoCCQEProtonCosThetaPlot = new TH1D("CCQERecoCCQEProtonCosThetaPlot",LabelXAxisProtonCosTheta,
 			CCQENBinsProtonCosTheta,CCQEArrayNBinsProtonCosTheta);
 		TH1D* CCQERecoCCQEProtonPhiPlot = new TH1D("CCQERecoCCQEProtonPhiPlot",LabelXAxisProtonPhi,CCQENBinsProtonPhi,CCQEArrayNBinsProtonPhi);
@@ -727,7 +727,7 @@ void PeLEE_myCCQERecoAnalysis::Loop() {
 		TH1D* CCMECRecoMuonCosThetaSingleBinPlot = new TH1D("CCMECRecoMuonCosThetaSingleBinPlot",LabelXAxisMuonCosTheta,1,-1.,1.);
 		TH1D* CCMECRecoMuonPhiPlot = new TH1D("CCMECRecoMuonPhiPlot",LabelXAxisMuonPhi,NBinsMuonPhi,ArrayNBinsMuonPhi);
 
-		TH1D* CCMECRecoCCQEMuonMomentumPlot = new TH1D("CCMECRecoCCQEMuonMomentumPlot",LabelXAxisMuonMomentum,PRLCCQENBinsMuonMomentum,PRLCCQEArrayNBinsMuonMomentum);
+		TH1D* CCMECRecoCCQEMuonMomentumPlot = new TH1D("CCMECRecoCCQEMuonMomentumPlot",LabelXAxisMuonMomentum,CCQENBinsMuonMomentum,CCQEArrayNBinsMuonMomentum);
 		TH1D* CCMECRecoCCQEMuonCosThetaPlot = new TH1D("CCMECRecoCCQEMuonCosThetaPlot",LabelXAxisMuonCosTheta,CCQENBinsMuonCosTheta,CCQEArrayNBinsMuonCosTheta);
 		TH1D* CCMECRecoCCQEMuonPhiPlot = new TH1D("CCMECRecoCCQEMuonPhiPlot",LabelXAxisMuonPhi,CCQENBinsMuonPhi,CCQEArrayNBinsMuonPhi);
 
@@ -745,7 +745,7 @@ void PeLEE_myCCQERecoAnalysis::Loop() {
 		TH1D* CCMECRecoProtonPhiPlot = new TH1D("CCMECRecoProtonPhiPlot",LabelXAxisProtonPhi,NBinsProtonPhi,ArrayNBinsProtonPhi);
 
 		TH1D* CCMECRecoCCQEProtonMomentumPlot = new TH1D("CCMECRecoCCQEProtonMomentumPlot",LabelXAxisProtonMomentum,
-			PRLCCQENBinsProtonMomentum,PRLCCQEArrayNBinsProtonMomentum);
+			CCQENBinsProtonMomentum,CCQEArrayNBinsProtonMomentum);
 		TH1D* CCMECRecoCCQEProtonCosThetaPlot = new TH1D("CCMECRecoCCQEProtonCosThetaPlot",LabelXAxisProtonCosTheta,
 			CCQENBinsProtonCosTheta,CCQEArrayNBinsProtonCosTheta);
 		TH1D* CCMECRecoCCQEProtonPhiPlot = new TH1D("CCMECRecoCCQEProtonPhiPlot",LabelXAxisProtonPhi,CCQENBinsProtonPhi,CCQEArrayNBinsProtonPhi);
@@ -816,7 +816,7 @@ void PeLEE_myCCQERecoAnalysis::Loop() {
 		TH1D* CCRESRecoMuonCosThetaSingleBinPlot = new TH1D("CCRESRecoMuonCosThetaSingleBinPlot",LabelXAxisMuonCosTheta,1,-1.,1.);
 		TH1D* CCRESRecoMuonPhiPlot = new TH1D("CCRESRecoMuonPhiPlot",LabelXAxisMuonPhi,NBinsMuonPhi,ArrayNBinsMuonPhi);
 
-		TH1D* CCRESRecoCCQEMuonMomentumPlot = new TH1D("CCRESRecoCCQEMuonMomentumPlot",LabelXAxisMuonMomentum,PRLCCQENBinsMuonMomentum,PRLCCQEArrayNBinsMuonMomentum);
+		TH1D* CCRESRecoCCQEMuonMomentumPlot = new TH1D("CCRESRecoCCQEMuonMomentumPlot",LabelXAxisMuonMomentum,CCQENBinsMuonMomentum,CCQEArrayNBinsMuonMomentum);
 		TH1D* CCRESRecoCCQEMuonCosThetaPlot = new TH1D("CCRESRecoCCQEMuonCosThetaPlot",LabelXAxisMuonCosTheta,CCQENBinsMuonCosTheta,CCQEArrayNBinsMuonCosTheta);
 		TH1D* CCRESRecoCCQEMuonPhiPlot = new TH1D("CCRESRecoCCQEMuonPhiPlot",LabelXAxisMuonPhi,CCQENBinsMuonPhi,CCQEArrayNBinsMuonPhi);	
 
@@ -834,7 +834,7 @@ void PeLEE_myCCQERecoAnalysis::Loop() {
 		TH1D* CCRESRecoProtonPhiPlot = new TH1D("CCRESRecoProtonPhiPlot",LabelXAxisProtonPhi,NBinsProtonPhi,ArrayNBinsProtonPhi);
 
 		TH1D* CCRESRecoCCQEProtonMomentumPlot = new TH1D("CCRESRecoCCQEProtonMomentumPlot",LabelXAxisProtonMomentum,
-			PRLCCQENBinsProtonMomentum,PRLCCQEArrayNBinsProtonMomentum);
+			CCQENBinsProtonMomentum,CCQEArrayNBinsProtonMomentum);
 		TH1D* CCRESRecoCCQEProtonCosThetaPlot = new TH1D("CCRESRecoCCQEProtonCosThetaPlot",LabelXAxisProtonCosTheta,
 			CCQENBinsProtonCosTheta,CCQEArrayNBinsProtonCosTheta);
 		TH1D* CCRESRecoCCQEProtonPhiPlot = new TH1D("CCRESRecoCCQEProtonPhiPlot",LabelXAxisProtonPhi,CCQENBinsProtonPhi,CCQEArrayNBinsProtonPhi);
@@ -905,7 +905,7 @@ void PeLEE_myCCQERecoAnalysis::Loop() {
 		TH1D* CCDISRecoMuonCosThetaSingleBinPlot = new TH1D("CCDISRecoMuonCosThetaSingleBinPlot",LabelXAxisMuonCosTheta,1,-1.,1.);
 		TH1D* CCDISRecoMuonPhiPlot = new TH1D("CCDISRecoMuonPhiPlot",LabelXAxisMuonPhi,NBinsMuonPhi,ArrayNBinsMuonPhi);
 
-		TH1D* CCDISRecoCCQEMuonMomentumPlot = new TH1D("CCDISRecoCCQEMuonMomentumPlot",LabelXAxisMuonMomentum,PRLCCQENBinsMuonMomentum,PRLCCQEArrayNBinsMuonMomentum);
+		TH1D* CCDISRecoCCQEMuonMomentumPlot = new TH1D("CCDISRecoCCQEMuonMomentumPlot",LabelXAxisMuonMomentum,CCQENBinsMuonMomentum,CCQEArrayNBinsMuonMomentum);
 		TH1D* CCDISRecoCCQEMuonCosThetaPlot = new TH1D("CCDISRecoCCQEMuonCosThetaPlot",LabelXAxisMuonCosTheta,CCQENBinsMuonCosTheta,CCQEArrayNBinsMuonCosTheta);
 		TH1D* CCDISRecoCCQEMuonPhiPlot = new TH1D("CCDISRecoCCQEMuonPhiPlot",LabelXAxisMuonPhi,CCQENBinsMuonPhi,CCQEArrayNBinsMuonPhi);
 
@@ -923,7 +923,7 @@ void PeLEE_myCCQERecoAnalysis::Loop() {
 		TH1D* CCDISRecoProtonPhiPlot = new TH1D("CCDISRecoProtonPhiPlot",LabelXAxisProtonPhi,NBinsProtonPhi,ArrayNBinsProtonPhi);
 
 		TH1D* CCDISRecoCCQEProtonMomentumPlot = new TH1D("CCDISRecoCCQEProtonMomentumPlot",LabelXAxisProtonMomentum,
-			PRLCCQENBinsProtonMomentum,PRLCCQEArrayNBinsProtonMomentum);
+			CCQENBinsProtonMomentum,CCQEArrayNBinsProtonMomentum);
 		TH1D* CCDISRecoCCQEProtonCosThetaPlot = new TH1D("CCDISRecoCCQEProtonCosThetaPlot",LabelXAxisProtonCosTheta,
 			CCQENBinsProtonCosTheta,CCQEArrayNBinsProtonCosTheta);
 		TH1D* CCDISRecoCCQEProtonPhiPlot = new TH1D("CCDISRecoCCQEProtonPhiPlot",LabelXAxisProtonPhi,CCQENBinsProtonPhi,CCQEArrayNBinsProtonPhi);
@@ -1398,10 +1398,10 @@ void PeLEE_myCCQERecoAnalysis::Loop() {
 
 			// Make sure that the same events fill the same plots
 
-			if (reco_Pmu < PRLCCQEArrayNBinsMuonMomentum[0]) { continue; }
+			if (reco_Pmu < CCQEArrayNBinsMuonMomentum[0]) { continue; }
 			if (reco_Pmu_cos_theta < CCQEArrayNBinsMuonCosTheta[0]) { continue; }
 
-			if (reco_Pp < PRLCCQEArrayNBinsProtonMomentum[0]) { continue; }
+			if (reco_Pp < CCQEArrayNBinsProtonMomentum[0]) { continue; }
 			if (reco_Pp_cos_theta < CCQEArrayNBinsProtonCosTheta[0]) { continue; }
 
 			if (TransMissMomentum > 0.35) { continue; }
@@ -1410,10 +1410,10 @@ void PeLEE_myCCQERecoAnalysis::Loop() {
 
 			// --------------------------------------------------------------------------------------------------------------------
 
-			if (reco_Pmu > PRLCCQEArrayNBinsMuonMomentum[PRLCCQENBinsMuonMomentum]) { continue; }
+			if (reco_Pmu > CCQEArrayNBinsMuonMomentum[CCQENBinsMuonMomentum]) { continue; }
 			if (reco_Pmu_cos_theta > CCQEArrayNBinsMuonCosTheta[CCQENBinsMuonCosTheta]) { continue; }
 
-			if (reco_Pp > PRLCCQEArrayNBinsProtonMomentum[PRLCCQENBinsProtonMomentum]) { continue; }
+			if (reco_Pp > CCQEArrayNBinsProtonMomentum[CCQENBinsProtonMomentum]) { continue; }
 			if (reco_Pp_cos_theta > CCQEArrayNBinsProtonCosTheta[CCQENBinsProtonCosTheta]) { continue; }
 
 			KinematicsCounter++;				
@@ -1570,13 +1570,13 @@ void PeLEE_myCCQERecoAnalysis::Loop() {
 				if ( CC1p == 1 && NumberPi0 == 0 && CandidateMu_MCParticle_Pdg->at(0) == MuonPdg && CandidateP_MCParticle_Pdg->at(0) == ProtonPdg 
 				     && True_CandidateMu_StartContainment->at(0) == 1
  
-				     && True_CandidateMu_P->at(0) > PRLCCQEArrayNBinsMuonMomentum[0] 
-				     && True_CandidateP_P->at(0) > PRLCCQEArrayNBinsProtonMomentum[0]
+				     && True_CandidateMu_P->at(0) > CCQEArrayNBinsMuonMomentum[0] 
+				     && True_CandidateP_P->at(0) > CCQEArrayNBinsProtonMomentum[0]
 				     && True_CandidateMu_CosTheta->at(0) > CCQEArrayNBinsMuonCosTheta[0] 
                                      && True_CandidateP_CosTheta->at(0) > CCQEArrayNBinsProtonCosTheta[0]
 
-				     && True_CandidateMu_P->at(0) < PRLCCQEArrayNBinsMuonMomentum[PRLCCQENBinsMuonMomentum] 
-				     && True_CandidateP_P->at(0) < PRLCCQEArrayNBinsProtonMomentum[PRLCCQENBinsProtonMomentum]
+				     && True_CandidateMu_P->at(0) < CCQEArrayNBinsMuonMomentum[CCQENBinsMuonMomentum] 
+				     && True_CandidateP_P->at(0) < CCQEArrayNBinsProtonMomentum[CCQENBinsProtonMomentum]
 				     && True_CandidateMu_CosTheta->at(0) < CCQEArrayNBinsMuonCosTheta[CCQENBinsMuonCosTheta] 
 				     && True_CandidateP_CosTheta->at(0) < CCQEArrayNBinsProtonCosTheta[CCQENBinsProtonCosTheta]
 				     && true_TransMissMomentum < 0.35
