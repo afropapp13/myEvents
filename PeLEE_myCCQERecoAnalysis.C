@@ -1404,7 +1404,7 @@ void PeLEE_myCCQERecoAnalysis::Loop() {
 			if (reco_Pp < CCQEArrayNBinsProtonMomentum[0]) { continue; }
 			if (reco_Pp_cos_theta < CCQEArrayNBinsProtonCosTheta[0]) { continue; }
 
-			if (TransMissMomentum < 0.35) { continue; }
+			if (TransMissMomentum > 0.35) { continue; }
 			if ( TMath::Abs(DeltaThetaProtonMuon_Deg - 90 ) > 55) { continue; }
 			if ( TMath::Abs(DeltaPhiProtonMuon_Deg - 180 ) > 35) { continue; }
 
