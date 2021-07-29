@@ -12,6 +12,13 @@
 
 root -b PeLEE_script_CCQEEventSelection_CV.C 
 
+root -b PeLEE_CCQECreate1DPlotsTHStack_InteractionBreakDown.cpp
+
+root -b PeLEE_CCQECreate1DPlotsTHStack_TopologicalBreakDown.cpp
+
+# locally
+./PeLEE_CCQEDownloadEventRatePlots.sh
+
 ###########################################################################################################################################################################
 
 # Detector variations
