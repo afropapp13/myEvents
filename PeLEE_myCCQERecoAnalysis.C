@@ -1410,11 +1410,11 @@ void PeLEE_myCCQERecoAnalysis::Loop() {
 
 			// --------------------------------------------------------------------------------------------------------------------
 
-			if (reco_Pmu > CCQEArrayNBinsMuonMomentum[NBinsMuonMomentum]) { continue; }
-			if (reco_Pmu_cos_theta > CCQEArrayNBinsMuonCosTheta[NBinsMuonCosTheta]) { continue; }
+			if (reco_Pmu > CCQEArrayNBinsMuonMomentum[CCQENBinsMuonMomentum]) { continue; }
+			if (reco_Pmu_cos_theta > CCQEArrayNBinsMuonCosTheta[CCQENBinsMuonCosTheta]) { continue; }
 
-			if (reco_Pp > CCQEArrayNBinsProtonMomentum[NBinsProtonMomentum]) { continue; }
-			if (reco_Pp_cos_theta > CCQEArrayNBinsProtonCosTheta[NBinsProtonCosTheta]) { continue; }
+			if (reco_Pp > CCQEArrayNBinsProtonMomentum[CCQENBinsProtonMomentum]) { continue; }
+			if (reco_Pp_cos_theta > CCQEArrayNBinsProtonCosTheta[CCQENBinsProtonCosTheta]) { continue; }
 
 			KinematicsCounter++;				
 

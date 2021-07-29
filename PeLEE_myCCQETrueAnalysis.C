@@ -298,8 +298,8 @@ void PeLEE_myCCQETrueAnalysis::Loop() {
 			if (
 			    /*TrueMuonStartContainment == true 
 			    && TrueProtonStartContainment == true 
-			    &&*/ TrueMuonMomentum_GeV > ArrayNBinsMuonMomentum[0]
-			    && TrueProtonMomentum_GeV > ArrayNBinsProtonMomentum[0]
+			    &&*/ TrueMuonMomentum_GeV > CCQEArrayNBinsMuonMomentum[0]
+			    && TrueProtonMomentum_GeV > CCQEArrayNBinsProtonMomentum[0]
 			) {
 
 				// -----------------------------------------------------------------------------------------------------------------
@@ -307,20 +307,18 @@ void PeLEE_myCCQETrueAnalysis::Loop() {
 				// STV analysis
 
 				if (
-				    TrueTransMissMomentum > ArrayNBinsDeltaPT[0] 
-				    && TrueTransMissMomentum < ArrayNBinsDeltaPT[NBinsDeltaPT]
-				    && TrueDeltaAlphaT > ArrayNBinsDeltaAlphaT[0] 
-				    && TrueDeltaAlphaT < ArrayNBinsDeltaAlphaT[NBinsDeltaAlphaT]
-				    && TrueDeltaPhiT > ArrayNBinsDeltaPhiT[0] 
-				    && TrueDeltaPhiT < ArrayNBinsDeltaPhiT[NBinsDeltaPhiT]
+				    TrueTransMissMomentum < 0.35
 				    
-				    && TrueMuonMomentum_GeV < ArrayNBinsMuonMomentum[NBinsMuonMomentum]
-				    && TrueProtonMomentum_GeV < ArrayNBinsProtonMomentum[NBinsProtonMomentum]
+				    && TrueMuonMomentum_GeV < CCQEArrayNBinsMuonMomentum[CCQENBinsMuonMomentum]
+				    && TrueProtonMomentum_GeV < CCQEArrayNBinsProtonMomentum[CCQENBinsProtonMomentum]
 				    
-				    && TrueMuonCosTheta > ArrayNBinsMuonCosTheta[0]
-				    && TrueMuonCosTheta < ArrayNBinsMuonCosTheta[NBinsMuonCosTheta]
-				    && TrueProtonCosTheta > ArrayNBinsProtonCosTheta[0]
-				    && TrueProtonCosTheta < ArrayNBinsProtonCosTheta[NBinsProtonCosTheta]
+				    && TrueMuonCosTheta > CCQEArrayNBinsMuonCosTheta[0]
+				    && TrueMuonCosTheta < CCQEArrayNBinsMuonCosTheta[CCQENBinsMuonCosTheta]
+				    && TrueProtonCosTheta > CCQEArrayNBinsProtonCosTheta[0]
+				    && TrueProtonCosTheta < CCQEArrayNBinsProtonCosTheta[CCQENBinsProtonCosTheta]
+
+				    && TMath::Abs(TrueDeltaThetaProtonMuon_Deg - 90.) < 55.
+				    && TMath::Abs(TrueDeltaPhiProtonMuon_Deg - 180.) < 35.
 				    
 //				    && TrueRecoECal > ArrayNBinsECal[0]
 //				    && TrueRecoEQE > ArrayNBinsEQE[0]
@@ -415,36 +413,16 @@ void PeLEE_myCCQETrueAnalysis::Loop() {
 					
 					// CCQElike
 
-					if (
-						TrueTransMissMomentum < 0.35
-						&& TMath::Abs(TrueDeltaThetaProtonMuon_Deg - 90.) < 55.
-						&& TMath::Abs(TrueDeltaPhiProtonMuon_Deg - 180.) < 35.						
+					TrueCCQEECalPlot->Fill(TrueRecoECal,weight);
+					TrueCCQEQ2Plot->Fill(RecoTrueQ2,weight);
 
-						&& TrueMuonMomentum_GeV > ArrayNBinsMuonMomentum[0]
-						&& TrueProtonMomentum_GeV > ArrayNBinsProtonMomentum[0]						
-						&& TrueMuonMomentum_GeV < ArrayNBinsMuonMomentum[CCQENBinsMuonMomentum]
-						&& TrueProtonMomentum_GeV < ArrayNBinsProtonMomentum[CCQENBinsProtonMomentum]
-						
-						&& TrueMuonCosTheta > CCQEArrayNBinsMuonCosTheta[0]
-						&& TrueMuonCosTheta < CCQEArrayNBinsMuonCosTheta[CCQENBinsMuonCosTheta]
-						&& TrueProtonCosTheta > CCQEArrayNBinsProtonCosTheta[0]
-						&& TrueProtonCosTheta < CCQEArrayNBinsProtonCosTheta[CCQENBinsProtonCosTheta]
-						
-					) {
+					TrueCCQEMuonMomentumPlot->Fill(TrueMuonMomentum_GeV,weight);
+					TrueCCQEMuonPhiPlot->Fill(TrueMuonPhi_Deg,weight);
+					TrueCCQEMuonCosThetaPlot->Fill(TrueMuonCosTheta,weight);
 
-						TrueCCQEECalPlot->Fill(TrueRecoECal,weight);
-						TrueCCQEQ2Plot->Fill(RecoTrueQ2,weight);
-
-						TrueCCQEMuonMomentumPlot->Fill(TrueMuonMomentum_GeV,weight);
-						TrueCCQEMuonPhiPlot->Fill(TrueMuonPhi_Deg,weight);
-						TrueCCQEMuonCosThetaPlot->Fill(TrueMuonCosTheta,weight);
-
-						TrueCCQEProtonMomentumPlot->Fill(TrueProtonMomentum_GeV,weight);
-						TrueCCQEProtonPhiPlot->Fill(TrueProtonPhi_Deg,weight);
-						TrueCCQEProtonCosThetaPlot->Fill(TrueProtonCosTheta,weight);
-
-					}					
-
+					TrueCCQEProtonMomentumPlot->Fill(TrueProtonMomentum_GeV,weight);
+					TrueCCQEProtonPhiPlot->Fill(TrueProtonPhi_Deg,weight);
+					TrueCCQEProtonCosThetaPlot->Fill(TrueProtonCosTheta,weight);
 
 				}
 
