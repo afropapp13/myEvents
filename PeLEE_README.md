@@ -60,6 +60,16 @@ root -b PeLEE_script_EventSelection_Flux_Systematics.C
 
 root -b PeLEE_script_EventSelection_FakeData.C
 
+root -b
+.L PeLEE_Create1DPlotsTHStack_TopologicalBreakDown.cpp
+PeLEE_Create1DPlotsTHStack_TopologicalBreakDown("Overlay9NuWro")
+
+root -b
+.L PeLEE_Create1DPlotsTHStack_InteractionBreakDown.cpp
+PeLEE_Create1DPlotsTHStack_InteractionBreakDown("Overlay9NuWro")
+
+###########################################################################################################################################################################
+
 # Untuned MC
 
 root -b PeLEE_script_EventSelection_CV_FakeData.C
@@ -71,20 +81,6 @@ root -b PeLEE_script_EventSelection_G4_FakeData.C
 root -b PeLEE_script_EventSelection_Genie_FakeData.C
 
 root -b PeLEE_script_EventSelection_Flux_FakeData.C
-
-###########################################################################################################################################################################
-
-# NuWro fake data
-
-root -b
-.L PeLEE_Create1DPlotsTHStack_TopologicalBreakDown.cpp
-PeLEE_Create1DPlotsTHStack_TopologicalBreakDown("Overlay9NuWro")
-
-root -b
-.L PeLEE_Create1DPlotsTHStack_InteractionBreakDown.cpp
-PeLEE_Create1DPlotsTHStack_InteractionBreakDown("Overlay9NuWro")
-
-# NoTune GENIE Fake Data
 
 root -b
 .L PeLEE_Create1DPlotsTHStack_TopologicalBreakDown.cpp

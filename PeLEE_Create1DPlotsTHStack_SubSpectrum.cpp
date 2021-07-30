@@ -67,8 +67,7 @@ void PeLEE_Create1DPlotsTHStack_SubSpectrum() {
 
 	// v52
 	VectorCuts.push_back("");
-	VectorCuts.push_back("_PID");
-	VectorCuts.push_back("_NuScore");
+	VectorCuts.push_back("_PID_NuScore");
 
 	int NCuts = (int)(VectorCuts.size());	
 
@@ -152,9 +151,9 @@ void PeLEE_Create1DPlotsTHStack_SubSpectrum() {
 
 				for (int WhichPlot = 0; WhichPlot < N1DPlots; WhichPlot ++){
 
-					TH1D* hist = (TH1D*)(FileSample[WhichSample]->Get(PlotNames[WhichPlot]));
-					TH1D* CC1phist = (TH1D*)(FileSample[WhichSample]->Get("CC1p"+PlotNames[WhichPlot]));
-					TH1D* NonCC1phist = (TH1D*)(FileSample[WhichSample]->Get("NonCC1p"+PlotNames[WhichPlot]));
+					TH1D* hist = (TH1D*)(FileSample[WhichSample]->Get("Reco"+PlotNames[WhichPlot]));
+					TH1D* CC1phist = (TH1D*)(FileSample[WhichSample]->Get("CC1pReco"+PlotNames[WhichPlot]));
+					TH1D* NonCC1phist = (TH1D*)(FileSample[WhichSample]->Get("NonCC1pReco"+PlotNames[WhichPlot]));
 
 					hist->GetXaxis()->CenterTitle();
 					hist->GetYaxis()->CenterTitle();					
