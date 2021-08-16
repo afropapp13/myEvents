@@ -1999,14 +1999,14 @@ void PeLEE_myCCQERecoAnalysis::Loop() {
 					else { 
 
 						ManualNonCC1pEventsPassingSelectionCuts++;
-						std::cout << "new MC background topology";
-						std::cout << " CandidateMu_MCParticle_Pdg = " << CandidateMu_MCParticle_Pdg->at(0);
-						std::cout << " CandidateP_MCParticle_Pdg = " << CandidateP_MCParticle_Pdg->at(0) << endl; 
-						std::cout << " NumberProtons = " << NumberProtons << endl; 
-						std::cout << " NumberChargedPions = " << NumberChargedPions << endl; 
-						std::cout << " NumberMuons = " << NumberMuons << endl; 
-						std::cout << " NumberPi0 = " << NumberPi0 << endl; 
-						std::cout << " NumberNeutrons = " << NumberNeutrons << endl; 
+//						std::cout << "new MC background topology";
+//						std::cout << " CandidateMu_MCParticle_Pdg = " << CandidateMu_MCParticle_Pdg->at(0);
+//						std::cout << " CandidateP_MCParticle_Pdg = " << CandidateP_MCParticle_Pdg->at(0) << endl; 
+//						std::cout << " NumberProtons = " << NumberProtons << endl; 
+//						std::cout << " NumberChargedPions = " << NumberChargedPions << endl; 
+//						std::cout << " NumberMuons = " << NumberMuons << endl; 
+//						std::cout << " NumberPi0 = " << NumberPi0 << endl; 
+//						std::cout << " NumberNeutrons = " << NumberNeutrons << endl; 
 
 					}
 
