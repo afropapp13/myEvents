@@ -37,7 +37,6 @@ void PrintMCBkgEvents(TFile* FileSample,double FilePOT,double FileFinal,TString 
 
 // -------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-
 void PeLEE_PrintEvents(vector<TFile*> FileSample,vector<double> FilePOT,vector<double> FileSamdef,vector<double> FilePreSel, TString SelectionStage, bool PreSelection = true) {
 
 	// 0: BeamOn
@@ -92,7 +91,7 @@ void PeLEE_PrintEvents(vector<TFile*> FileSample,vector<double> FilePOT,vector<d
 
 }
 
-void PeLEE_PrintLatexTables(TString BaseMC = "") {
+void PeLEE_PrintLatexTables(TString BaseMC = "", bool PrintEventLoss = false, bool PrintStats = false, bool PrintPurEff = false, bool PrintCosmicCont = false, bool PrintIntBreakDown = false, bool PrintMCBkg = false) {
 
 	// -----------------------------------------------------------------------------------------------------------------------------------------
 
@@ -169,9 +168,9 @@ void PeLEE_PrintLatexTables(TString BaseMC = "") {
 	// -----------------------------------------------------------------------------------------------------------------------------------------
 
 	vector<TString> Runs;
-	//Runs.push_back("Run1");
-//	Runs.push_back("Run2");
-	//Runs.push_back("Run3");
+	Runs.push_back("Run1");
+	Runs.push_back("Run2");
+	Runs.push_back("Run3");
 //	Runs.push_back("Run4");
 //	Runs.push_back("Run5");
 	Runs.push_back("Combined");
@@ -185,8 +184,8 @@ void PeLEE_PrintLatexTables(TString BaseMC = "") {
 
 		// -----------------------------------------------------------------------------------------------------------------------------------------
 			
-		cout << "// -------------------------------------------------" << endl << endl;
-		cout << Runs[WhichRun] << endl << endl;
+		//cout << "// -------------------------------------------------" << endl << endl;
+		//cout << Runs[WhichRun] << endl << endl;
 
 		Cuts = "_NoCuts";
 
@@ -299,56 +298,64 @@ void PeLEE_PrintLatexTables(TString BaseMC = "") {
 			// -----------------------------------------------------------------------------------------------------------------------
 			// -----------------------------------------------------------------------------------------------------------------------
 
-			// Loop over the plots for event loss at each step
+			if (PrintEventLoss) {
 
-			for (int WhichPlot = 0; WhichPlot < N1DPlots; WhichPlot ++) {
+				// Loop over the plots for event loss at each step
 
-				bool PreSelection = true;
-				//if (PlotLabels[WhichPlot] == "Muon quality cut" || PlotLabels[WhichPlot] == "Calorimetry" 
-				// || PlotLabels[WhichPlot] == "\\nu score" || PlotLabels[WhichPlot] == "Common events") { PreSelection = false; }
+				for (int WhichPlot = 0; WhichPlot < N1DPlots; WhichPlot ++) {
+
+					bool PreSelection = true;
+					//if (PlotLabels[WhichPlot] == "Muon quality cut" || PlotLabels[WhichPlot] == "Calorimetry" 
+					// || PlotLabels[WhichPlot] == "\\nu score" || PlotLabels[WhichPlot] == "Common events") { PreSelection = false; }
 
 
-				cout << PlotLabels[WhichPlot] << " & ";
-				PeLEE_PrintEvents(FileSample,FilePOT,FileSamdef,FilePreSel,PlotNames[WhichPlot],PreSelection);
-
-				if (PlotLabels[WhichPlot] == "Initial" || PlotLabels[WhichPlot] == "Vertex in FV"  || PlotLabels[WhichPlot] == "Common ranges") 
-					{ cout << "\\hline" << endl; }
-
-				if (WhichPlot == N1DPlots-1) {
-
-					cout << "Final & ";
+					cout << PlotLabels[WhichPlot] << " & ";
 					PeLEE_PrintEvents(FileSample,FilePOT,FileSamdef,FilePreSel,PlotNames[WhichPlot],PreSelection);
 
-				}
-		
-			} // End of the loop over the plots for event loss at each step	
+					if (PlotLabels[WhichPlot] == "Initial" || PlotLabels[WhichPlot] == "Vertex in FV"  || PlotLabels[WhichPlot] == "Common ranges") 
+						{ cout << "\\hline" << endl; }
 
-			cout << endl << endl;
+					if (WhichPlot == N1DPlots-1) {
+
+						cout << "Final & ";
+						PeLEE_PrintEvents(FileSample,FilePOT,FileSamdef,FilePreSel,PlotNames[WhichPlot],PreSelection);
+
+					}
+			
+				} // End of the loop over the plots for event loss at each step	
+
+				cout << endl << endl;
+
+			}
 
 			// --------------------------------------------------------------------------------------------
 			// -----------------------------------------------------------------------------------------------------------------------
 
-			// Print summary of final number of selected events for all samples
+			if (PrintStats) {
 
-			for (int WhichSample = 0; WhichSample < NSamples; WhichSample ++) {		
+				// Print summary of final number of selected events for all samples & POT equivalent
 
-				cout << LabelsOfSamples[WhichSample] << " & " << FileFinal[WhichSample] << " $\\pm$ " << TMath::Sqrt(FileFinal[WhichSample]);
-				cout << " & " << FileFinal[WhichSample] * FilePOT[WhichSample] << " $\\pm$ " << TMath::Sqrt(FileFinal[WhichSample] * FilePOT[WhichSample]);
-				cout << " \\tabularnewline \\hline" << endl;
+				for (int WhichSample = 0; WhichSample < NSamples; WhichSample ++) {		
 
-				// Special case for MC, print also the CC1p event count
-
-				if (string(LabelsOfSamples[WhichSample]).find("MC") != std::string::npos) {
-
-					cout << "\\Signal " << LabelsOfSamples[WhichSample] << " & " << FileCC1p[WhichSample] << " $\\pm$ " << TMath::Sqrt(FileCC1p[WhichSample]);
-					cout << " & " << FileCC1p[WhichSample] * FilePOT[WhichSample] << " $\\pm$ " << TMath::Sqrt(FileCC1p[WhichSample] * FilePOT[WhichSample]);
+					cout << LabelsOfSamples[WhichSample] << " & " << FileFinal[WhichSample] << " $\\pm$ " << TMath::Sqrt(FileFinal[WhichSample]);
+					cout << " & " << FileFinal[WhichSample] * FilePOT[WhichSample] << " $\\pm$ " << TMath::Sqrt(FileFinal[WhichSample] * FilePOT[WhichSample]);
 					cout << " \\tabularnewline \\hline" << endl;
+
+					// Special case for MC, print also the CC1p event count
+
+					if (string(LabelsOfSamples[WhichSample]).find("MC") != std::string::npos) {
+
+						cout << "\\Signal " << LabelsOfSamples[WhichSample] << " & " << FileCC1p[WhichSample] << " $\\pm$ " << TMath::Sqrt(FileCC1p[WhichSample]);
+						cout << " & " << FileCC1p[WhichSample] * FilePOT[WhichSample] << " $\\pm$ " << TMath::Sqrt(FileCC1p[WhichSample] * FilePOT[WhichSample]);
+						cout << " \\tabularnewline \\hline" << endl;
+
+					}
 
 				}
 
-			}
+				cout << endl << endl;
 
-			cout << endl << endl;
+			}
 
 			// -----------------------------------------------------------------------------------------------------------------------
 			// -----------------------------------------------------------------------------------------------------------------------
@@ -403,11 +410,16 @@ void PeLEE_PrintLatexTables(TString BaseMC = "") {
 
 			// -----------------------------------------------------------------------------------------------------------------------
 	
-			cout << "\\Signal & " << Purity << " $\\pm$ " << PurityError << " & " << Efficiency << " $\\pm$ " << EfficiencyError  << " & ";
-			cout << EfficiencyContained << " $\\pm$ " << EfficiencyErrorContained;
-			cout << " \\tabularnewline \\hline" << endl;
-			cout << endl << endl;
+			if (PrintPurEff) {
+
+				cout << Runs[WhichRun] << " & " << Purity << " $\\pm$ " << PurityError << " & " << Efficiency << " $\\pm$ " << EfficiencyError  << " & ";
+//				cout << "\\Signal & " << Purity << " $\\pm$ " << PurityError << " & " << Efficiency << " $\\pm$ " << EfficiencyError  << " & ";
+				cout << EfficiencyContained << " $\\pm$ " << EfficiencyErrorContained;
+				cout << " \\tabularnewline \\hline" << endl;
+				//cout << endl << endl;
 		
+			}
+
 			// -----------------------------------------------------------------------------------------------------------------------
 			// -----------------------------------------------------------------------------------------------------------------------
 
@@ -423,9 +435,13 @@ void PeLEE_PrintLatexTables(TString BaseMC = "") {
 			double DirtFrac = Dirt / Sum * 100.;
 			double DirtFracError = DirtFrac * TMath::Sqrt( TMath::Power(DirtError/Dirt,2.) + TMath::Power(SumErrors/Sum,2.) );
 
-			cout << "Cosmics & " << CosmicsFrac << " $\\pm$ " << CosmicsFracError << " \\tabularnewline \\hline" << endl;
-			cout << "Dirt & " << DirtFrac << " $\\pm$ " << DirtFracError << " \\tabularnewline \\hline" << endl;
-			cout << endl << endl;
+			if (PrintCosmicCont) {
+
+				cout << Runs[WhichRun] << " & " << CosmicsFrac << " $\\pm$ " << CosmicsFracError;
+				cout << " & " << DirtFrac << " $\\pm$ " << DirtFracError << " \\tabularnewline \\hline" << endl;
+				//cout << endl << endl;
+
+			}
 
 			// -----------------------------------------------------------------------------------------------------------------------
 			// -----------------------------------------------------------------------------------------------------------------------
@@ -440,22 +456,26 @@ void PeLEE_PrintLatexTables(TString BaseMC = "") {
 			double sum = QE + MEC + RES + DIS;
 			if (sum > 105 || sum < 95) { cout << "UNITARITY CHECKED FAILED! sum = " << sum << endl; }
 
- 			cout << "QE & " << QE << " \\tabularnewline \\hline" << endl;
- 			cout << "MEC & " << MEC << " \\tabularnewline \\hline" << endl;
- 			cout << "RES & " << RES << " \\tabularnewline \\hline" << endl;
- 			cout << "DIS & " << DIS << " \\tabularnewline \\hline" << endl;
+			if (PrintIntBreakDown) {
 
-			cout << endl << endl;
+	 			cout << Runs[WhichRun] << " & " << QE << " & " << MEC << " & " << RES << " & " << DIS << " \\tabularnewline \\hline" << endl;
+				//cout << endl << endl;
+
+			}
 
 			// -----------------------------------------------------------------------------------------------------------------------
 			// -----------------------------------------------------------------------------------------------------------------------
 
-			// MC Background Breakdown
+			if (PrintMCBkg) {
 
-			for (int WhichPlot = 0; WhichPlot < MCBkgPlots; WhichPlot ++) {
+				// MC Background Breakdown
 
-				PrintMCBkgEvents(FileSample[1],FilePOT[1],FileFinal[1],MCBkgPlotNames[WhichPlot],MCBkgPlotLabels[WhichPlot],NonCC1pPlotsEvents[1]->GetBinContent(1));
-		
+				for (int WhichPlot = 0; WhichPlot < MCBkgPlots; WhichPlot ++) {
+
+					PrintMCBkgEvents(FileSample[1],FilePOT[1],FileFinal[1],MCBkgPlotNames[WhichPlot],MCBkgPlotLabels[WhichPlot],NonCC1pPlotsEvents[1]->GetBinContent(1));
+			
+				}
+
 			}
 
 			// -----------------------------------------------------------------------------------------------------------------------
@@ -463,7 +483,7 @@ void PeLEE_PrintLatexTables(TString BaseMC = "") {
 
 		} // If we want to run on all cut combinations, include this } and remove the one at the beginning of the program
 
-		cout << endl << endl;
+		if (PrintEventLoss || PrintStats || PrintMCBkg) { cout << endl << endl; }
 	
 	} // End of the loop over the runs
 

@@ -32,7 +32,14 @@ root -b PeLEE_Create1DPlotsTHStack_TopologicalBreakDown.cpp
 
 root -b PeLEE_Create1DPlotsTHStack_InteractionBreakDown.cpp
 
-root -b PeLEE_PrintLatexTables.cpp
+root -b 
+.L PeLEE_PrintLatexTables.cpp
+PeLEE_PrintLatexTables("",true)
+PeLEE_PrintLatexTables("",false,true)
+PeLEE_PrintLatexTables("",false,false,true)
+PeLEE_PrintLatexTables("",false,false,false,true)
+PeLEE_PrintLatexTables("",false,false,false,false,true)
+PeLEE_PrintLatexTables("",false,false,false,false,false,true)
 
 ###########################################################################################################################################################################
 

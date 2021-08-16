@@ -124,6 +124,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 		if (fChain == 0) return; Long64_t nentries = fChain->GetEntriesFast(); Long64_t nbytes = 0, nb = 0;
 		TH1D::SetDefaultSumw2();
+		TH2D::SetDefaultSumw2();
 		double weight = 1.;
 
 		// ---------------------------------------------------------------------------------------------------------------------------
@@ -3019,7 +3020,27 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 		// Keep track of the event counters and the POT normalization
 
+		// If Runs 1/2/3, just grab the POTWeight of the last event
 		POTScalePlot->SetBinContent(1,POTWeight);
+
+		// If combined runs, take care of the overall scaling
+		if ( string(fWhichSample).find("Combined") != std::string::npos ) {
+
+			if ( string(fWhichSample).find("BeamOn") != std::string::npos ) { POTScalePlot->SetBinContent(1,1.); }
+			else if ( string(fWhichSample).find("ExtBNB") != std::string::npos ) { POTScalePlot->SetBinContent(1,FullE1DCNT_wcut_Combined / FullEXT_Combined); }
+			else if ( string(fWhichSample).find("Overlay") != std::string::npos ) { 
+
+				TString FileName = "/pnfs/uboone/persistent/users/apapadop/mySamples/"+UBCodeVersion+"/PeLEETuples/PreSelection_"+fWhichSample+"_"+UBCodeVersion+"_POT.root";
+				TFile* POTFile = new TFile(FileName,"readonly");
+				TH1D* POTPlot = (TH1D*)(POTFile->Get("POTCountHist"));
+				double POTCount = POTPlot->GetBinContent(1);
+
+				POTScalePlot->SetBinContent(1,Fulltor860_wcut_Combined / POTCount); 
+
+			}
+
+		}
+
 		POTScalePlot->SetBinError(1,0);
 
 		NEventsPlot->SetBinContent(1,nentries);
