@@ -78,6 +78,9 @@ void PeLEE_Create1DPlotsTHStack_TopologicalBreakDown(TString BaseMC = "") {
 	PlotNames.push_back("RecoProtonLLRPIDPlot");
 
 	PlotNames.push_back("RecoECalPlot");
+	PlotNames.push_back("RecoECalLowPTPlot");
+	PlotNames.push_back("RecoECalMidPTPlot");
+	PlotNames.push_back("RecoECalHighPTPlot");
 	PlotNames.push_back("RecoEQEPlot");
 	PlotNames.push_back("RecoQ2Plot");
 
