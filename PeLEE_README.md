@@ -1,11 +1,3 @@
-# myEvents
-
-# Nominal/CV predictions 
-# To be done iteractively on the uboone gpvm's
-# The preselected files are located under "/pnfs/uboone/persistent/users/apapadop/mySamples/"+UBCodeVersion+"/PreSelection_"+fWhichSample+"_"+UBCodeVersion+".root";
-# The POT files are located under "/pnfs/uboone/persistent/users/apapadop/mySamples/"+UBCodeVersion+"/PreSelection_"+fWhichSample+"_"+UBCodeVersion+"_POT.root"
-# The output files will be placed under "/uboone/data/users/apapadop/myEvents/OutputFiles/"+UBCodeVersion+"/"+Cuts+"/STVStudies_"+fWhichSample+Extension+Cuts+".root"
-
 ###########################################################################################################################################################################
 
 # switch between series of cuts
@@ -27,9 +19,7 @@ cd PurityEfficiencyStudies
 ###########################################################################################################################################################################
 
 root -b PeLEE_Chi2PID_BreakDown.cpp
-
 root -b PeLEE_Create1DPlotsTHStack_TopologicalBreakDown.cpp
-
 root -b PeLEE_Create1DPlotsTHStack_InteractionBreakDown.cpp
 
 root -b 
@@ -44,19 +34,15 @@ PeLEE_PrintLatexTables("",false,false,false,false,false,true)
 ###########################################################################################################################################################################
 
 # Detector variations
-
 root -b PeLEE_script_EventSelection_Detector_Systematics.C
 
 # GEANT4 variations
-
 root -b PeLEE_script_EventSelection_G4_Systematics.C
 
 # GENIE variations
-
 root -b PeLEE_script_EventSelection_Genie_Systematics.C
 
 # Flux variations
-
 root -b PeLEE_script_EventSelection_Flux_Systematics.C
 
 ###########################################################################################################################################################################
@@ -64,7 +50,6 @@ root -b PeLEE_script_EventSelection_Flux_Systematics.C
 # Fake Data
 
 # NuWro
-
 root -b PeLEE_script_EventSelection_FakeData.C
 
 root -b
@@ -83,11 +68,11 @@ root -b PeLEE_script_EventSelection_CV_FakeData.C
 
 root -b PeLEE_script_EventSelection_Detector_Systematics_FakeData.C
 
-root -b PeLEE_script_EventSelection_G4_FakeData.C
+root -b PeLEE_script_EventSelection_G4_Systematics_FakeData.C
 
-root -b PeLEE_script_EventSelection_Genie_FakeData.C
+root -b PeLEE_script_EventSelection_Genie_Systematics_FakeData.C
 
-root -b PeLEE_script_EventSelection_Flux_FakeData.C
+root -b PeLEE_script_EventSelection_Flux_Systematics_FakeData.C
 
 root -b
 .L PeLEE_Create1DPlotsTHStack_TopologicalBreakDown.cpp

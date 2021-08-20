@@ -1994,13 +1994,16 @@ void PeLEE_myRecoAnalysis::Loop() {
 					// True level energy reconstruction & Q2
 
 					CC1pRecoECalPlot2D->Fill(true_ECal,ECal);
-					if (TransMissMomentum > LowPT[0] && TransMissMomentum < HighPT[0]) { CC1pRecoECalLowPTPlot2D->Fill(true_ECal,ECal,weight); }
-					if (TransMissMomentum > LowPT[1] && TransMissMomentum < HighPT[1]) { CC1pRecoECalMidPTPlot2D->Fill(true_ECal,ECal,weight); }
-					if (TransMissMomentum > LowPT[2] && TransMissMomentum < HighPT[2]) { CC1pRecoECalHighPTPlot2D->Fill(true_ECal,ECal,weight); }
+					if (TransMissMomentum > LowPT[0] && TransMissMomentum < HighPT[0]) { CC1pRecoECalLowPTPlot2D->Fill(true_ECal,ECal); }
+					if (TransMissMomentum > LowPT[1] && TransMissMomentum < HighPT[1]) { CC1pRecoECalMidPTPlot2D->Fill(true_ECal,ECal); }
+					if (TransMissMomentum > LowPT[2] && TransMissMomentum < HighPT[2]) { CC1pRecoECalHighPTPlot2D->Fill(true_ECal,ECal); }
 					CC1pRecoEQEPlot2D->Fill(true_EQE,EQE);
 					CC1pRecoQ2Plot2D->Fill(true_Q2,reco_Q2);
 
 					POTScaledCC1pRecoECalPlot2D->Fill(true_ECal,ECal,weight);
+					if (TransMissMomentum > LowPT[0] && TransMissMomentum < HighPT[0]) { POTScaledCC1pRecoECalLowPTPlot2D->Fill(true_ECal,ECal,weight); }
+					if (TransMissMomentum > LowPT[1] && TransMissMomentum < HighPT[1]) { POTScaledCC1pRecoECalMidPTPlot2D->Fill(true_ECal,ECal,weight); }
+					if (TransMissMomentum > LowPT[2] && TransMissMomentum < HighPT[2]) { POTScaledCC1pRecoECalHighPTPlot2D->Fill(true_ECal,ECal,weight); }
 					POTScaledCC1pRecoEQEPlot2D->Fill(true_EQE,EQE,weight);
 					POTScaledCC1pRecoQ2Plot2D->Fill(true_Q2,reco_Q2,weight);
 
