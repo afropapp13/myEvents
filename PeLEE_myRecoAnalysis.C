@@ -555,6 +555,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 		TH1D* NonCC1pRecoContainedMuonLengthPlot = new TH1D("NonCC1pRecoContainedMuonLengthPlot",RecoLabelXAxisMuonLength,NBinsMuonLength,MinMuonLength,MaxMuonLength);
 		TH1D* NonCC1pRecoUncontainedMuonLengthPlot = new TH1D("NonCC1pRecoUncontainedMuonLengthPlot",RecoLabelXAxisMuonLength,NBinsMuonLength,MinMuonLength,MaxMuonLength);
 
+		TH1D* NonCC1pRecoPionMomentumPlot = new TH1D("NonCC1pRecoPionMomentumPlot",";P_{#pi} [GeV/c]",20,0.1,0.6); // GeV/c
 		TH1D* NonCC1pRecoMuonMomentumPlot = new TH1D("NonCC1pRecoMuonMomentumPlot",LabelXAxisMuonMomentum,NBinsMuonMomentum,ArrayNBinsMuonMomentum); // GeV/c
 		TH1D* NonCC1pRecoMuonCosThetaPlot = new TH1D("NonCC1pRecoMuonCosThetaPlot",LabelXAxisMuonCosTheta,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta);
 		TH1D* NonCC1pRecoMuonCosThetaSingleBinPlot = new TH1D("NonCC1pRecoMuonCosThetaSingleBinPlot",LabelXAxisMuonCosTheta,1,-1.,1.);
@@ -1460,7 +1461,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 //			if (PMissMinus > ArrayNBinsPMissMinus[NBinsPMissMinus]) { continue; }
 //			if (kMiss > ArrayNBinskMiss[NBinskMiss]) { continue; }
 
-			if (TransMissMomentum > ArrayNBinsDeltaPT[NBinsDeltaPT]) { continue; }
+//			if (TransMissMomentum > ArrayNBinsDeltaPT[NBinsDeltaPT]) { continue; }
 			if (DeltaAlphaT > ArrayNBinsDeltaAlphaT[NBinsDeltaAlphaT]) { continue; }
 			if (DeltaPhiT > ArrayNBinsDeltaPhiT[NBinsDeltaPhiT]) { continue; }
 
@@ -1734,13 +1735,14 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 				// CC1p Signal
 
-				if ( CC1p == 1 && NumberPi0 == 0 && CandidateMu_MCParticle_Pdg->at(0) == MuonPdg && CandidateP_MCParticle_Pdg->at(0) == ProtonPdg 
+				if ( CC1p == 1 && NumberPi0 == 0 && CandidateMu_MCParticle_Pdg->at(0) == MuonPdg 
+					 && CandidateP_MCParticle_Pdg->at(0) == ProtonPdg 
 				     && True_CandidateMu_StartContainment->at(0) == 1
  
 				     && True_CandidateMu_P->at(0) > ArrayNBinsMuonMomentum[0] 
 				     && True_CandidateP_P->at(0) > ArrayNBinsProtonMomentum[0]
 				     && True_CandidateMu_CosTheta->at(0) > ArrayNBinsMuonCosTheta[0] 
-                                     && True_CandidateP_CosTheta->at(0) > ArrayNBinsProtonCosTheta[0]
+                     && True_CandidateP_CosTheta->at(0) > ArrayNBinsProtonCosTheta[0]
 				     && True_CandidateMu_Phi->at(0) > ArrayNBinsMuonPhi[0] 
 				     && True_CandidateP_Phi->at(0) > ArrayNBinsProtonPhi[0]
 				     && true_TransMissMomentum > ArrayNBinsDeltaPT[0]
@@ -1753,7 +1755,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 				     && True_CandidateP_CosTheta->at(0) < ArrayNBinsProtonCosTheta[NBinsProtonCosTheta]
 				     && True_CandidateMu_Phi->at(0) < ArrayNBinsMuonPhi[NBinsMuonPhi] 
 				     && True_CandidateP_Phi->at(0) < ArrayNBinsProtonPhi[NBinsProtonPhi]
-				     && true_TransMissMomentum < ArrayNBinsDeltaPT[NBinsDeltaPT]
+				     //&& true_TransMissMomentum < ArrayNBinsDeltaPT[NBinsDeltaPT]
 				     && true_DeltaAlphaT < ArrayNBinsDeltaAlphaT[NBinsDeltaAlphaT]
 				     && true_DeltaPhiT < ArrayNBinsDeltaPhiT[NBinsDeltaPhiT]
 
@@ -2125,8 +2127,12 @@ void PeLEE_myRecoAnalysis::Loop() {
 					if ( 
 						(TMath::Abs(CandidateMu_MCParticle_Pdg->at(0)) == AbsChargedPionPdg && CandidateP_MCParticle_Pdg->at(0) == ProtonPdg ) ||
 						(TMath::Abs(CandidateP_MCParticle_Pdg->at(0)) == AbsChargedPionPdg && CandidateMu_MCParticle_Pdg->at(0) == ProtonPdg )
-					) 
-						{ MisIndetifiedMuonAsPion++; ManualNonCC1pEventsPassingSelectionCuts++; myRunTxtFile << endl << "pi-p event" << endl; }
+					) { 
+							MisIndetifiedMuonAsPion++; 
+							ManualNonCC1pEventsPassingSelectionCuts++; 
+							myRunTxtFile << endl << "pi-p event" << endl; 
+							NonCC1pRecoPionMomentumPlot->Fill(reco_Pmu,weight);
+					}
 					else if (CC1p1pi == 1) { CC1p1piEventsPassingSelectionCuts++; ManualNonCC1pEventsPassingSelectionCuts++; myRunTxtFile << endl << "CC1p1pi event" << endl; }
 					else if (CC2p1pi == 1) { CC2p1piEventsPassingSelectionCuts++; ManualNonCC1pEventsPassingSelectionCuts++; myRunTxtFile << endl << "CC2p1pi event" << endl;}
 					else if (CC2p == 1) { CC2pEventsPassingSelectionCuts++; ManualNonCC1pEventsPassingSelectionCuts++; myRunTxtFile << endl << "CC2p event" << endl; }
@@ -2224,7 +2230,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 					     !  (True_CandidateMu_P->at(0) > ArrayNBinsMuonMomentum[0] 
 					     && True_CandidateP_P->at(0) > ArrayNBinsProtonMomentum[0]
 					     && True_CandidateMu_CosTheta->at(0) > ArrayNBinsMuonCosTheta[0] 
-		                             && True_CandidateP_CosTheta->at(0) > ArrayNBinsProtonCosTheta[0]
+		                 && True_CandidateP_CosTheta->at(0) > ArrayNBinsProtonCosTheta[0]
 					     && True_CandidateMu_Phi->at(0) > ArrayNBinsMuonPhi[0] 
 					     && True_CandidateP_Phi->at(0) > ArrayNBinsProtonPhi[0]
 					     && true_TransMissMomentum > ArrayNBinsDeltaPT[0]
@@ -2237,7 +2243,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 					     && True_CandidateP_CosTheta->at(0) < ArrayNBinsProtonCosTheta[NBinsProtonCosTheta]
 					     && True_CandidateMu_Phi->at(0) < ArrayNBinsMuonPhi[NBinsMuonPhi] 
 					     && True_CandidateP_Phi->at(0) < ArrayNBinsProtonPhi[NBinsProtonPhi]
-					     && true_TransMissMomentum < ArrayNBinsDeltaPT[NBinsDeltaPT]
+					     //&& true_TransMissMomentum < ArrayNBinsDeltaPT[NBinsDeltaPT]
 					     && true_DeltaAlphaT < ArrayNBinsDeltaAlphaT[NBinsDeltaAlphaT]
 					     && true_DeltaPhiT < ArrayNBinsDeltaPhiT[NBinsDeltaPhiT])
 
