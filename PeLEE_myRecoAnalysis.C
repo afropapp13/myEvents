@@ -39,7 +39,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 	// Function for proton momentum recalibration in %
 
-	TF1* fPP = new TF1("fPP","30.37*x-15.1",0.3,0.5);
+	TF1* fPP = new TF1("fPP","29.354172*x-14.674918",0.3,0.5);	
 
 	// ---------------------------------------------------------------------------------------------------------------------------------------
 
@@ -1390,6 +1390,62 @@ void PeLEE_myRecoAnalysis::Loop() {
 			// ----------------------------------------------------------------------------------------------------------------------------
 			// ---------------------------------------------------------------------------------------------------------------------------
 
+			// Overflow bins
+			// Affects
+
+			// DeltaPT
+			// DeltaPtx
+			// DeltaPty
+			// DeltaPL
+			// DeltaPn
+			// Q2
+			// ECal
+			// EQE
+			// alpha
+			// kMiss
+			// PMiss
+			// PMissMinus
+
+
+			if (TransMissMomentum > ArrayNBinsDeltaPT[NBinsDeltaPT]) { TransMissMomentum = 0.5 * (ArrayNBinsDeltaPT[NBinsDeltaPT] + ArrayNBinsDeltaPT[NBinsDeltaPT-1]); }
+			if (reco_Ptx > ArrayNBinsDeltaPtx[NBinsDeltaPtx]) { reco_Ptx = 0.5 * (ArrayNBinsDeltaPtx[NBinsDeltaPtx] + ArrayNBinsDeltaPtx[NBinsDeltaPtx-1]); }
+			if (reco_Pty > ArrayNBinsDeltaPty[NBinsDeltaPty]) { reco_Pty = 0.5 * (ArrayNBinsDeltaPty[NBinsDeltaPty] + ArrayNBinsDeltaPty[NBinsDeltaPty-1]); }
+			if (reco_PL > ArrayNBinsDeltaPL[NBinsDeltaPL]) { reco_PL = 0.5 * (ArrayNBinsDeltaPL[NBinsDeltaPL] + ArrayNBinsDeltaPL[NBinsDeltaPL-1]); }						
+			if (reco_Pn > ArrayNBinsDeltaPn[NBinsDeltaPn]) { reco_Pn = 0.5 * (ArrayNBinsDeltaPn[NBinsDeltaPn] + ArrayNBinsDeltaPn[NBinsDeltaPn-1]); }
+
+			if (ECal > ArrayNBinsECal[NBinsECal]) { ECal = 0.5 * (ArrayNBinsECal[NBinsECal] + ArrayNBinsECal[NBinsECal-1]); }
+			if (EQE > ArrayNBinsEQE[NBinsEQE]) { EQE = 0.5 * (ArrayNBinsEQE[NBinsEQE] + ArrayNBinsEQE[NBinsEQE-1]); }
+			if (reco_Q2 > ArrayNBinsQ2[NBinsQ2]) { reco_Q2 = 0.5 * (ArrayNBinsQ2[NBinsQ2] + ArrayNBinsQ2[NBinsQ2-1]); }
+
+			if (reco_A > ArrayNBinsA[NBinsA]) { reco_A = 0.5 * (ArrayNBinsA[NBinsA] + ArrayNBinsA[NBinsA-1]); }	
+			if (kMiss > ArrayNBinskMiss[NBinskMiss]) { kMiss = 0.5 * (ArrayNBinskMiss[NBinskMiss] + ArrayNBinskMiss[NBinskMiss-1]); }														
+			if (MissMomentum > ArrayNBinsPMiss[NBinsPMiss]) { MissMomentum = 0.5 * (ArrayNBinsPMiss[NBinsPMiss] + ArrayNBinsPMiss[NBinsPMiss-1]); }
+			if (PMissMinus > ArrayNBinsPMissMinus[NBinsPMissMinus]) { PMissMinus = 0.5 * (ArrayNBinsPMissMinus[NBinsPMissMinus] + ArrayNBinsPMissMinus[NBinsPMissMinus-1]); }
+
+			// ---------------------------------------------------------------------------------------------------------------------------
+
+			// Underflow bins
+			// Affects
+
+			// ECal
+			// EQE
+			// DeltaPtx
+			// DeltaPty
+			// DeltaPL
+			// alpha
+			// PMissMinus
+
+			if (ECal < ArrayNBinsECal[0]) { ECal = 0.5 * (ArrayNBinsECal[0] + ArrayNBinsECal[1]); }			
+			if (EQE < ArrayNBinsEQE[0]) { EQE = 0.5 * (ArrayNBinsEQE[0] + ArrayNBinsEQE[1]); }			
+			if (reco_Ptx < ArrayNBinsDeltaPtx[0]) { reco_Ptx = 0.5 * (ArrayNBinsDeltaPtx[0] + ArrayNBinsDeltaPtx[1]); }
+			if (reco_Pty < ArrayNBinsDeltaPty[0]) { reco_Pty = 0.5 * (ArrayNBinsDeltaPty[0] + ArrayNBinsDeltaPty[1]); }
+			if (reco_PL < ArrayNBinsDeltaPL[0]) { reco_PL = 0.5 * (ArrayNBinsDeltaPL[0] + ArrayNBinsDeltaPL[1]); }						
+			if (reco_A < ArrayNBinsA[0]) { reco_A = 0.5 * (ArrayNBinsA[0] + ArrayNBinsA[1]); }
+			if (PMissMinus < ArrayNBinsPMissMinus[0]) { PMissMinus = 0.5 * (ArrayNBinsPMissMinus[0] + ArrayNBinsPMissMinus[1]); }			
+
+			// ----------------------------------------------------------------------------------------------------------------------------
+			// ---------------------------------------------------------------------------------------------------------------------------
+
 			// Relative angles
 
 			double DeltaThetaProtonMuon_Deg = Reco_DeltaTheta->at(0);
@@ -1491,7 +1547,9 @@ void PeLEE_myRecoAnalysis::Loop() {
 			double true_ECal = -1;
 			double true_EQE = -1;
 			double true_Q2 = -1;			
-			double true_nu = -1;			
+			double true_nu = -1;
+
+			// Only for MC to obtain true vales			
 			
 			if (
 				string(fWhichSample).find("Overlay") != std::string::npos 
@@ -1515,9 +1573,68 @@ void PeLEE_myRecoAnalysis::Loop() {
 				true_ECal = True_ECal->at(0);
 				true_EQE = True_EQE->at(0);
 				true_Q2 = True_Q2->at(0);			
-				true_nu = True_Ev - True_CandidateMu_P->at(0);			
+				true_nu = True_Ev - True_CandidateMu_P->at(0);	
+
+				// ----------------------------------------------------------------------------------------------------------------------------
+				// ---------------------------------------------------------------------------------------------------------------------------
+
+				// Overflow bins
+				// Affects
+
+				// DeltaPT
+				// DeltaPtx
+				// DeltaPty
+				// DeltaPL
+				// DeltaPn
+				// Q2
+				// ECal
+				// EQE
+				// alpha
+				// kMiss
+				// PMiss
+				// PMissMinus
+
+
+				if (true_TransMissMomentum > ArrayNBinsDeltaPT[NBinsDeltaPT]) { true_TransMissMomentum = 0.5 * (ArrayNBinsDeltaPT[NBinsDeltaPT] + ArrayNBinsDeltaPT[NBinsDeltaPT-1]); }
+				if (true_Ptx > ArrayNBinsDeltaPtx[NBinsDeltaPtx]) { true_Ptx = 0.5 * (ArrayNBinsDeltaPtx[NBinsDeltaPtx] + ArrayNBinsDeltaPtx[NBinsDeltaPtx-1]); }
+				if (true_Pty > ArrayNBinsDeltaPty[NBinsDeltaPty]) { true_Pty = 0.5 * (ArrayNBinsDeltaPty[NBinsDeltaPty] + ArrayNBinsDeltaPty[NBinsDeltaPty-1]); }
+				if (true_PL > ArrayNBinsDeltaPL[NBinsDeltaPL]) { true_PL = 0.5 * (ArrayNBinsDeltaPL[NBinsDeltaPL] + ArrayNBinsDeltaPL[NBinsDeltaPL-1]); }						
+				if (true_Pn > ArrayNBinsDeltaPn[NBinsDeltaPn]) { true_Pn = 0.5 * (ArrayNBinsDeltaPn[NBinsDeltaPn] + ArrayNBinsDeltaPn[NBinsDeltaPn-1]); }
+
+				if (true_ECal > ArrayNBinsECal[NBinsECal]) { true_ECal = 0.5 * (ArrayNBinsECal[NBinsECal] + ArrayNBinsECal[NBinsECal-1]); }
+				if (true_EQE > ArrayNBinsEQE[NBinsEQE]) { true_EQE = 0.5 * (ArrayNBinsEQE[NBinsEQE] + ArrayNBinsEQE[NBinsEQE-1]); }
+				if (true_Q2 > ArrayNBinsQ2[NBinsQ2]) { true_Q2 = 0.5 * (ArrayNBinsQ2[NBinsQ2] + ArrayNBinsQ2[NBinsQ2-1]); }
+
+				if (true_A > ArrayNBinsA[NBinsA]) { true_A = 0.5 * (ArrayNBinsA[NBinsA] + ArrayNBinsA[NBinsA-1]); }	
+				if (true_kMiss > ArrayNBinskMiss[NBinskMiss]) { true_kMiss = 0.5 * (ArrayNBinskMiss[NBinskMiss] + ArrayNBinskMiss[NBinskMiss-1]); }														
+				if (true_PMiss > ArrayNBinsPMiss[NBinsPMiss]) { true_PMiss = 0.5 * (ArrayNBinsPMiss[NBinsPMiss] + ArrayNBinsPMiss[NBinsPMiss-1]); }
+				if (true_PMissMinus > ArrayNBinsPMissMinus[NBinsPMissMinus]) { true_PMissMinus = 0.5 * (ArrayNBinsPMissMinus[NBinsPMissMinus] + ArrayNBinsPMissMinus[NBinsPMissMinus-1]); }
+
+				// ---------------------------------------------------------------------------------------------------------------------------
+
+				// Underflow bins
+				// Affects
+
+				// ECal
+				// EQE
+				// DeltaPtx
+				// DeltaPty
+				// DeltaPL
+				// alpha
+				// PMissMinus
 				
-			}
+				if (true_ECal < ArrayNBinsECal[0]) { true_ECal = 0.5 * (ArrayNBinsECal[0] + ArrayNBinsECal[1]); }			
+				if (true_EQE < ArrayNBinsEQE[0]) { true_EQE = 0.5 * (ArrayNBinsEQE[0] + ArrayNBinsEQE[1]); }				
+				if (true_Ptx < ArrayNBinsDeltaPtx[0]) { true_Ptx = 0.5 * (ArrayNBinsDeltaPtx[0] + ArrayNBinsDeltaPtx[1]); }
+				if (true_Pty < ArrayNBinsDeltaPty[0]) { true_Pty = 0.5 * (ArrayNBinsDeltaPty[0] + ArrayNBinsDeltaPty[1]); }
+				if (true_PL < ArrayNBinsDeltaPL[0]) { true_PL = 0.5 * (ArrayNBinsDeltaPL[0] + ArrayNBinsDeltaPL[1]); }						
+				if (true_A < ArrayNBinsA[0]) { true_A = 0.5 * (ArrayNBinsA[0] + ArrayNBinsA[1]); }
+				if (true_PMissMinus < ArrayNBinsPMissMinus[0]) { true_PMissMinus = 0.5 * (ArrayNBinsPMissMinus[0] + ArrayNBinsPMissMinus[1]); }				
+
+				// ----------------------------------------------------------------------------------------------------------------------------
+				// ---------------------------------------------------------------------------------------------------------------------------						
+				
+			} // End of if statement: Only for MC to obtain true vales
 
 			// ------------------------------------------------------------------------------------------------------------------------
 			

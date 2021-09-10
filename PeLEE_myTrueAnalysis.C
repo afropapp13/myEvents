@@ -304,11 +304,67 @@ void PeLEE_myTrueAnalysis::Loop() {
 
 			TVector3 TrueVertex(True_Vx,True_Vy,True_Vz);
 				
-			// -----------------------------------------------------------------------------------------------------------------	
-
 			// Reconstructed q vector using true level info / MCParticles
 
 			double RecoTrueQ2 = True_Q2->at(0);
+
+			// -----------------------------------------------------------------------------------------------------------------	
+
+			// Overflow bins
+			// Affects
+
+			// DeltaPT
+			// DeltaPtx
+			// DeltaPty
+			// DeltaPL
+			// DeltaPn
+			// Q2
+			// ECal
+			// EQE
+			// alpha
+			// kMiss
+			// PMiss
+			// PMissMinus
+
+
+			if (TrueTransMissMomentum > ArrayNBinsDeltaPT[NBinsDeltaPT]) { TrueTransMissMomentum = 0.5 * (ArrayNBinsDeltaPT[NBinsDeltaPT] + ArrayNBinsDeltaPT[NBinsDeltaPT-1]); }
+			if (TruePtx > ArrayNBinsDeltaPtx[NBinsDeltaPtx]) { TruePtx = 0.5 * (ArrayNBinsDeltaPtx[NBinsDeltaPtx] + ArrayNBinsDeltaPtx[NBinsDeltaPtx-1]); }
+			if (TruePty > ArrayNBinsDeltaPty[NBinsDeltaPty]) { TruePty = 0.5 * (ArrayNBinsDeltaPty[NBinsDeltaPty] + ArrayNBinsDeltaPty[NBinsDeltaPty-1]); }
+			if (TruePL > ArrayNBinsDeltaPL[NBinsDeltaPL]) { TruePL = 0.5 * (ArrayNBinsDeltaPL[NBinsDeltaPL] + ArrayNBinsDeltaPL[NBinsDeltaPL-1]); }						
+			if (TruePn > ArrayNBinsDeltaPn[NBinsDeltaPn]) { TruePn = 0.5 * (ArrayNBinsDeltaPn[NBinsDeltaPn] + ArrayNBinsDeltaPn[NBinsDeltaPn-1]); }
+
+			if (TrueRecoECal > ArrayNBinsECal[NBinsECal]) { TrueRecoECal = 0.5 * (ArrayNBinsECal[NBinsECal] + ArrayNBinsECal[NBinsECal-1]); }
+			if (TrueRecoEQE > ArrayNBinsEQE[NBinsEQE]) { TrueRecoEQE = 0.5 * (ArrayNBinsEQE[NBinsEQE] + ArrayNBinsEQE[NBinsEQE-1]); }
+			if (RecoTrueQ2 > ArrayNBinsQ2[NBinsQ2]) { RecoTrueQ2 = 0.5 * (ArrayNBinsQ2[NBinsQ2] + ArrayNBinsQ2[NBinsQ2-1]); }
+
+			if (TrueA > ArrayNBinsA[NBinsA]) { TrueA = 0.5 * (ArrayNBinsA[NBinsA] + ArrayNBinsA[NBinsA-1]); }	
+			if (TruekMiss > ArrayNBinskMiss[NBinskMiss]) { TruekMiss = 0.5 * (ArrayNBinskMiss[NBinskMiss] + ArrayNBinskMiss[NBinskMiss-1]); }														
+			if (TrueMissMomentum > ArrayNBinsPMiss[NBinsPMiss]) { TrueMissMomentum = 0.5 * (ArrayNBinsPMiss[NBinsPMiss] + ArrayNBinsPMiss[NBinsPMiss-1]); }
+			if (TruePMissMinus > ArrayNBinsPMissMinus[NBinsPMissMinus]) { TruePMissMinus = 0.5 * (ArrayNBinsPMissMinus[NBinsPMissMinus] + ArrayNBinsPMissMinus[NBinsPMissMinus-1]); }
+
+			// ---------------------------------------------------------------------------------------------------------------------------
+
+			// Underflow bins
+			// Affects
+
+			// ECal
+			// EQE
+			// DeltaPtx
+			// DeltaPty
+			// DeltaPL
+			// alpha
+			// PMissMinus
+			
+			if (TrueRecoECal < ArrayNBinsECal[0]) { TrueRecoECal = 0.5 * (ArrayNBinsECal[0] + ArrayNBinsECal[1]); }			
+			if (TrueRecoEQE < ArrayNBinsEQE[0]) { TrueRecoEQE = 0.5 * (ArrayNBinsEQE[0] + ArrayNBinsEQE[1]); }			
+			if (TruePtx < ArrayNBinsDeltaPtx[0]) { TruePtx = 0.5 * (ArrayNBinsDeltaPtx[0] + ArrayNBinsDeltaPtx[1]); }
+			if (TruePty < ArrayNBinsDeltaPty[0]) { TruePty = 0.5 * (ArrayNBinsDeltaPty[0] + ArrayNBinsDeltaPty[1]); }
+			if (TruePL < ArrayNBinsDeltaPL[0]) { TruePL = 0.5 * (ArrayNBinsDeltaPL[0] + ArrayNBinsDeltaPL[1]); }						
+			if (TrueA < ArrayNBinsA[0]) { TrueA = 0.5 * (ArrayNBinsA[0] + ArrayNBinsA[1]); }
+			if (TruePMissMinus < ArrayNBinsPMissMinus[0]) { TruePMissMinus = 0.5 * (ArrayNBinsPMissMinus[0] + ArrayNBinsPMissMinus[1]); }			
+
+			// ----------------------------------------------------------------------------------------------------------------------------
+			// ---------------------------------------------------------------------------------------------------------------------------									
 
 			// Demand that the true muon / proton start points and the true proton end point are contained
 			// Angle selection cuts: collinearity to reject broken tracks
