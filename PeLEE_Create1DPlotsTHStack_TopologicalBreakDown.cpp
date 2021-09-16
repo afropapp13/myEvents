@@ -50,6 +50,7 @@ void PeLEE_Create1DPlotsTHStack_TopologicalBreakDown(TString BaseMC = "") {
 
 	if (BaseMC == "") {
 
+	PlotNames.push_back("RecoCandidateMuEndYPlot");
 	PlotNames.push_back("RecoCCQEMuonMomentumPlot");
 	PlotNames.push_back("RecoCCQEProtonMomentumPlot"); 
 	PlotNames.push_back("RecoCCQEMuonCosThetaPlot");
@@ -358,6 +359,19 @@ void PeLEE_Create1DPlotsTHStack_TopologicalBreakDown(TString BaseMC = "") {
 				} // End of the loop over the samples
 
 				Plots[0][WhichPlot]->Draw("e1 same"); 
+
+				// -------------------------------------------------------------------------------------------------------------------
+
+				if (PlotNames[WhichPlot] == "RecoProtonLLRPIDPlot") {
+
+					TLine* line = new TLine(ProtonLLRPIDScore,0.,ProtonLLRPIDScore,Plots[0][WhichPlot]->GetMaximum());
+					line->SetLineWidth(2);
+					line->SetLineStyle(kDashed);					
+					line->Draw();
+
+				}
+
+				// -------------------------------------------------------------------------------------------------------------------				
 
 				gPad->RedrawAxis();
 

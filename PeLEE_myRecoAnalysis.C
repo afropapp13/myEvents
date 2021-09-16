@@ -11,6 +11,7 @@
 #include <TFile.h>
 #include <TSpline.h>
 #include <TProfile.h>
+#include <TProfile2D.h>
 #include <TF1.h>
 
 #include <iostream>
@@ -170,6 +171,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 		TH1D* RecoVertexXPlot = new TH1D("RecoVertexXPlot",RecoLabelXAxisVertexX,NBinsVertexX,MinVertexX,MaxVertexX);
 		TH1D* RecoVertexYPlot = new TH1D("RecoVertexYPlot",RecoLabelXAxisVertexY,NBinsVertexY,MinVertexY,MaxVertexY);
 		TH1D* RecoVertexZPlot = new TH1D("RecoVertexZPlot",RecoLabelXAxisVertexZ,NBinsVertexZ,MinVertexZ,MaxVertexZ);
+		TH1D* RecoCandidateMuEndYPlot = new TH1D("RecoCandidateMuEndYPlot",RecoLabelXAxisVertexY,NBinsVertexY,MinVertexY,MaxVertexY);		
 
 		TH1D* RecoMuonLLRPIDPlot = new TH1D("RecoMuonLLRPIDPlot",RecoLabelXAxisMuonLLRPID,NBinsLLRPID,MinLLRPID,MaxLLRPID);
 		TH1D* RecoProtonLLRPIDPlot = new TH1D("RecoProtonLLRPIDPlot",RecoLabelXAxisProtonLLRPID,NBinsLLRPID,MinLLRPID,MaxLLRPID);
@@ -322,6 +324,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 		TH1D* CC1pRecoVertexXPlot = new TH1D("CC1pRecoVertexXPlot",RecoLabelXAxisVertexX,NBinsVertexX,MinVertexX,MaxVertexX);
 		TH1D* CC1pRecoVertexYPlot = new TH1D("CC1pRecoVertexYPlot",RecoLabelXAxisVertexY,NBinsVertexY,MinVertexY,MaxVertexY);
 		TH1D* CC1pRecoVertexZPlot = new TH1D("CC1pRecoVertexZPlot",RecoLabelXAxisVertexZ,NBinsVertexZ,MinVertexZ,MaxVertexZ);
+		TH1D* CC1pRecoCandidateMuEndYPlot = new TH1D("CC1pRecoCandidateMuEndYPlot",RecoLabelXAxisVertexY,NBinsVertexY,MinVertexY,MaxVertexY);		
 
 		TH1D* CC1pRecoMuonLLRPIDPlot = new TH1D("CC1pRecoMuonLLRPIDPlot",RecoLabelXAxisMuonLLRPID,NBinsLLRPID,MinLLRPID,MaxLLRPID);
 		TH1D* CC1pRecoProtonLLRPIDPlot = new TH1D("CC1pRecoProtonLLRPIDPlot",RecoLabelXAxisProtonLLRPID,NBinsLLRPID,MinLLRPID,MaxLLRPID);
@@ -390,7 +393,10 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 		TH1D* CC1pRecoCCQEECalPlot = new TH1D("CC1pRecoCCQEECalPlot",LabelXAxisECal,CCQENBinsECal,CCQEArrayNBinsECal);
 		TH1D* CC1pRecoCCQEQ2Plot = new TH1D("CC1pRecoCCQEQ2Plot",LabelXAxisQ2,CCQENBinsQ2,CCQEArrayNBinsQ2);
-		
+
+		TProfile2D* CC1pTProfProtonMomTheta = new TProfile2D("CC1pTProfProtonMomTheta",LabelXAxisProtonMomentum+";#theta_{p}; P_{p} Fractional Bias [%]",NBinsProtonMomentum,ArrayNBinsProtonMomentum,12,0.,180.);
+		TProfile2D* CC1pTProfProtonMomPhi = new TProfile2D("CC1pTProfProtonMomPhi",LabelXAxisProtonMomentum+";#phi_{p}; P_{p} Fractional Bias [%]",NBinsProtonMomentum,ArrayNBinsProtonMomentum,12,-180.,180.);
+
 		// 2D Analysis
 		
 		TH2D* CC1pRecoCosThetaMuPmuPlot = new TH2D("CC1pRecoCosThetaMuPmuPlot",LabelXAxisMuonCosTheta+LabelXAxisMuonMomentum
@@ -544,6 +550,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 		TH1D* NonCC1pRecoVertexXPlot = new TH1D("NonCC1pRecoVertexXPlot",RecoLabelXAxisVertexX,NBinsVertexX,MinVertexX,MaxVertexX);
 		TH1D* NonCC1pRecoVertexYPlot = new TH1D("NonCC1pRecoVertexYPlot",RecoLabelXAxisVertexY,NBinsVertexY,MinVertexY,MaxVertexY);
 		TH1D* NonCC1pRecoVertexZPlot = new TH1D("NonCC1pRecoVertexZPlot",RecoLabelXAxisVertexZ,NBinsVertexZ,MinVertexZ,MaxVertexZ);
+		TH1D* NonCC1pRecoCandidateMuEndYPlot = new TH1D("NonCC1pRecoCandidateMuEndYPlot",RecoLabelXAxisVertexY,NBinsVertexY,MinVertexY,MaxVertexY);		
 
 		TH1D* NonCC1pRecoMuonLLRPIDPlot = new TH1D("NonCC1pRecoMuonLLRPIDPlot",RecoLabelXAxisMuonLLRPID,NBinsLLRPID,MinLLRPID,MaxLLRPID);
 		TH1D* NonCC1pRecoProtonLLRPIDPlot = new TH1D("NonCC1pRecoProtonLLRPIDPlot",RecoLabelXAxisProtonLLRPID,NBinsLLRPID,MinLLRPID,MaxLLRPID);
@@ -642,6 +649,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 		TH1D* CCQERecoVertexXPlot = new TH1D("CCQERecoVertexXPlot",RecoLabelXAxisVertexX,NBinsVertexX,MinVertexX,MaxVertexX);
 		TH1D* CCQERecoVertexYPlot = new TH1D("CCQERecoVertexYPlot",RecoLabelXAxisVertexY,NBinsVertexY,MinVertexY,MaxVertexY);
 		TH1D* CCQERecoVertexZPlot = new TH1D("CCQERecoVertexZPlot",RecoLabelXAxisVertexZ,NBinsVertexZ,MinVertexZ,MaxVertexZ);
+		TH1D* CCQERecoCandidateMuEndYPlot = new TH1D("CCQERecoCandidateMuEndYPlot",RecoLabelXAxisVertexY,NBinsVertexY,MinVertexY,MaxVertexY);		
 
 		TH1D* CCQERecoMuonLLRPIDPlot = new TH1D("CCQERecoMuonLLRPIDPlot",RecoLabelXAxisMuonLLRPID,NBinsLLRPID,MinLLRPID,MaxLLRPID);
 		TH1D* CCQERecoProtonLLRPIDPlot = new TH1D("CCQERecoProtonLLRPIDPlot",RecoLabelXAxisProtonLLRPID,NBinsLLRPID,MinLLRPID,MaxLLRPID);
@@ -734,6 +742,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 		TH1D* CCMECRecoVertexXPlot = new TH1D("CCMECRecoVertexXPlot",RecoLabelXAxisVertexX,NBinsVertexX,MinVertexX,MaxVertexX);
 		TH1D* CCMECRecoVertexYPlot = new TH1D("CCMECRecoVertexYPlot",RecoLabelXAxisVertexY,NBinsVertexY,MinVertexY,MaxVertexY);
 		TH1D* CCMECRecoVertexZPlot = new TH1D("CCMECRecoVertexZPlot",RecoLabelXAxisVertexZ,NBinsVertexZ,MinVertexZ,MaxVertexZ);
+		TH1D* CCMECRecoCandidateMuEndYPlot = new TH1D("CCMECRecoCandidateMuEndYPlot",RecoLabelXAxisVertexY,NBinsVertexY,MinVertexY,MaxVertexY);		
 
 		TH1D* CCMECRecoMuonLLRPIDPlot = new TH1D("CCMECRecoMuonLLRPIDPlot",RecoLabelXAxisMuonLLRPID,NBinsLLRPID,MinLLRPID,MaxLLRPID);
 		TH1D* CCMECRecoProtonLLRPIDPlot = new TH1D("CCMECRecoProtonLLRPIDPlot",RecoLabelXAxisProtonLLRPID,NBinsLLRPID,MinLLRPID,MaxLLRPID);
@@ -826,6 +835,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 		TH1D* CCRESRecoVertexXPlot = new TH1D("CCRESRecoVertexXPlot",RecoLabelXAxisVertexX,NBinsVertexX,MinVertexX,MaxVertexX);
 		TH1D* CCRESRecoVertexYPlot = new TH1D("CCRESRecoVertexYPlot",RecoLabelXAxisVertexY,NBinsVertexY,MinVertexY,MaxVertexY);
 		TH1D* CCRESRecoVertexZPlot = new TH1D("CCRESRecoVertexZPlot",RecoLabelXAxisVertexZ,NBinsVertexZ,MinVertexZ,MaxVertexZ);
+		TH1D* CCRESRecoCandidateMuEndYPlot = new TH1D("CCRESRecoCandidateMuEndYPlot",RecoLabelXAxisVertexY,NBinsVertexY,MinVertexY,MaxVertexY);		
 
 		TH1D* CCRESRecoMuonLLRPIDPlot = new TH1D("CCRESRecoMuonLLRPIDPlot",RecoLabelXAxisMuonLLRPID,NBinsLLRPID,MinLLRPID,MaxLLRPID);
 		TH1D* CCRESRecoProtonLLRPIDPlot = new TH1D("CCRESRecoProtonLLRPIDPlot",RecoLabelXAxisProtonLLRPID,NBinsLLRPID,MinLLRPID,MaxLLRPID);
@@ -918,6 +928,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 		TH1D* CCDISRecoVertexXPlot = new TH1D("CCDISRecoVertexXPlot",RecoLabelXAxisVertexX,NBinsVertexX,MinVertexX,MaxVertexX);
 		TH1D* CCDISRecoVertexYPlot = new TH1D("CCDISRecoVertexYPlot",RecoLabelXAxisVertexY,NBinsVertexY,MinVertexY,MaxVertexY);
 		TH1D* CCDISRecoVertexZPlot = new TH1D("CCDISRecoVertexZPlot",RecoLabelXAxisVertexZ,NBinsVertexZ,MinVertexZ,MaxVertexZ);
+		TH1D* CCDISRecoCandidateMuEndYPlot = new TH1D("CCDISRecoCandidateMuEndYPlot",RecoLabelXAxisVertexY,NBinsVertexY,MinVertexY,MaxVertexY);		
 
 		TH1D* CCDISRecoMuonLLRPIDPlot = new TH1D("CCDISRecoMuonLLRPIDPlot",RecoLabelXAxisMuonLLRPID,NBinsLLRPID,MinLLRPID,MaxLLRPID);
 		TH1D* CCDISRecoProtonLLRPIDPlot = new TH1D("CCDISRecoProtonLLRPIDPlot",RecoLabelXAxisProtonLLRPID,NBinsLLRPID,MinLLRPID,MaxLLRPID);
@@ -1270,6 +1281,14 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 			if (CandidateMuStartVertexDistance->at(0) > CandidateMuEndVertexDistance->at(0)) { continue; }
 			if (CandidatePStartVertexDistance->at(0) > CandidatePEndVertexDistance->at(0)) { continue; }
+
+			// -------------------------------------------------------------------------------------------------------------------------
+
+			// Targeting the remaining muon cosmic contamination which piles up at high Y
+
+			//if (CandidateMu_EndY->at(0) > 85) { continue; } 
+
+			// -------------------------------------------------------------------------------------------------------------------------			
 
 			TVector3 CandidateMuonStart(CandidateMu_StartX->at(0),CandidateMu_StartY->at(0),CandidateMu_StartZ->at(0));
 			TVector3 CandidateMuonEnd(CandidateMu_EndX->at(0),CandidateMu_EndY->at(0),CandidateMu_EndZ->at(0));
@@ -1750,6 +1769,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 			RecoVertexXPlot->Fill(Vertex_X->at(0),weight);
 			RecoVertexYPlot->Fill(Vertex_Y->at(0),weight);
 			RecoVertexZPlot->Fill(Vertex_Z->at(0),weight);
+			RecoCandidateMuEndYPlot->Fill(CandidateMu_EndY->at(0),weight);			
 
 			RecoMuonLLRPIDPlot->Fill(reco_mu_LLR_Score,weight);
 			RecoProtonLLRPIDPlot->Fill(reco_p_LLR_Score,weight);
@@ -1990,6 +2010,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 					CC1pRecoVertexXPlot->Fill(Vertex_X->at(0),weight);
 					CC1pRecoVertexYPlot->Fill(Vertex_Y->at(0),weight);
 					CC1pRecoVertexZPlot->Fill(Vertex_Z->at(0),weight);
+					CC1pRecoCandidateMuEndYPlot->Fill(CandidateMu_EndY->at(0),weight);					
 
 					CC1pRecoMuonLLRPIDPlot->Fill(reco_mu_LLR_Score,weight);
 					CC1pRecoProtonLLRPIDPlot->Fill(reco_p_LLR_Score,weight);
@@ -2077,6 +2098,9 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 					POTScaledCC1pRecoMuonPhiPlot2D->Fill(True_CandidateMu_Phi->at(0),reco_Pmu_phi,weight);
 					POTScaledCC1pRecoProtonPhiPlot2D->Fill(True_CandidateP_Phi->at(0),reco_Pp_phi,weight);
+
+					CC1pTProfProtonMomTheta->Fill(reco_Pp,TMath::ACos(reco_Pp_cos_theta)*180./TMath::Pi(), (reco_Pp - True_CandidateP_P->at(0)) / True_CandidateP_P->at(0) * 100.);	
+					CC1pTProfProtonMomPhi->Fill(reco_Pp,reco_Pp_phi, (reco_Pp - True_CandidateP_P->at(0)) / True_CandidateP_P->at(0) * 100.);										
 
 					// -----------------------------------------------------------------------------------------------------
 
@@ -2399,6 +2423,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 					NonCC1pRecoVertexXPlot->Fill(Vertex_X->at(0),weight);
 					NonCC1pRecoVertexYPlot->Fill(Vertex_Y->at(0),weight);
 					NonCC1pRecoVertexZPlot->Fill(Vertex_Z->at(0),weight);
+					NonCC1pRecoCandidateMuEndYPlot->Fill(CandidateMu_EndY->at(0),weight);					
 
 					NonCC1pRecoMuonLLRPIDPlot->Fill(reco_mu_LLR_Score,weight);
 					NonCC1pRecoProtonLLRPIDPlot->Fill(reco_p_LLR_Score,weight);
@@ -2495,6 +2520,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 					CCQERecoVertexXPlot->Fill(Vertex_X->at(0),weight);
 					CCQERecoVertexYPlot->Fill(Vertex_Y->at(0),weight);
 					CCQERecoVertexZPlot->Fill(Vertex_Z->at(0),weight);
+					CCQERecoCandidateMuEndYPlot->Fill(CandidateMu_EndY->at(0),weight);					
 
 					CCQERecoMuonLLRPIDPlot->Fill(reco_mu_LLR_Score,weight);
 					CCQERecoProtonLLRPIDPlot->Fill(reco_p_LLR_Score,weight);
@@ -2586,6 +2612,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 					CCMECRecoVertexXPlot->Fill(Vertex_X->at(0),weight);
 					CCMECRecoVertexYPlot->Fill(Vertex_Y->at(0),weight);
 					CCMECRecoVertexZPlot->Fill(Vertex_Z->at(0),weight);
+					CCMECRecoCandidateMuEndYPlot->Fill(CandidateMu_EndY->at(0),weight);					
 
 					CCMECRecoMuonLLRPIDPlot->Fill(reco_mu_LLR_Score,weight);
 					CCMECRecoProtonLLRPIDPlot->Fill(reco_p_LLR_Score,weight);
@@ -2677,6 +2704,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 					CCRESRecoVertexXPlot->Fill(Vertex_X->at(0),weight);
 					CCRESRecoVertexYPlot->Fill(Vertex_Y->at(0),weight);
 					CCRESRecoVertexZPlot->Fill(Vertex_Z->at(0),weight);
+					CCRESRecoCandidateMuEndYPlot->Fill(CandidateMu_EndY->at(0),weight);					
 
 					CCRESRecoMuonLLRPIDPlot->Fill(reco_mu_LLR_Score,weight);
 					CCRESRecoProtonLLRPIDPlot->Fill(reco_p_LLR_Score,weight);
@@ -2768,6 +2796,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 					CCDISRecoVertexXPlot->Fill(Vertex_X->at(0),weight);
 					CCDISRecoVertexYPlot->Fill(Vertex_Y->at(0),weight);
 					CCDISRecoVertexZPlot->Fill(Vertex_Z->at(0),weight);
+					CCDISRecoCandidateMuEndYPlot->Fill(CandidateMu_EndY->at(0),weight);					
 
 					CCDISRecoMuonLLRPIDPlot->Fill(reco_mu_LLR_Score,weight);
 					CCDISRecoProtonLLRPIDPlot->Fill(reco_p_LLR_Score,weight);
