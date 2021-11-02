@@ -35,4 +35,5 @@ root -b PeLEE_script_CCQEEventSelection_Genie_Systematics.C
 
 root -b PeLEE_script_CCQEEventSelection_Flux_Systematics.C
 
-
+# MC_Stat variations
+root -b PeLEE_script_CCQEEventSelection_MC_Stat_Systematics.C

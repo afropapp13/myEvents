@@ -16,7 +16,7 @@
 #include <iomanip>
 #include <vector>
 
-#include "/uboone/app/users/apapadop/uboonecode_v08_00_00_43/srcs/ubana/ubana/myClasses/Tools.h"
+#include "ubana/myClasses/Tools.h"
 
 using namespace std;
 
@@ -194,12 +194,18 @@ void PeLEE_myCCQETrueAnalysis::Loop() {
 			if (fEventWeightLabel == "XSecShape_CCMEC_UBGenie") { weight = weight*XSecShape_CCMEC_UBGenie->at(fUniverseIndex)/ T2KWeight; }
 
 			// Flux weights
-
 			if (fEventWeightLabel == "fluxes") { weight = weight*fluxes->at(fUniverseIndex); }
 
 			// Reinteraction weights
+			if (fEventWeightLabel == "reinteractions") { weight = weight*reinteractions->at(fUniverseIndex); }	
 
-			if (fEventWeightLabel == "reinteractions") { weight = weight*reinteractions->at(fUniverseIndex); }		
+			// MC_Stat weights // bootstrapping
+			if (fEventWeightLabel == "MC_Stat") { 
+
+				int concat = tools.ConcatRunSubRunEvent(Run,SubRun,Event);
+				weight = weight*tools.PoissonRandomNumber(concat); 
+				
+			}					
 
 		}
 

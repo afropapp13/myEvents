@@ -1188,12 +1188,18 @@ void PeLEE_myCCQERecoAnalysis::Loop() {
 				if (fEventWeightLabel == "XSecShape_CCMEC_UBGenie") { weight = weight*XSecShape_CCMEC_UBGenie->at(fUniverseIndex) / T2KWeight; }
 
 				// Flux weights
-
 				if (fEventWeightLabel == "fluxes") { weight = weight*fluxes->at(fUniverseIndex); }
 
 				// Reinteraction weights
-
 				if (fEventWeightLabel == "reinteractions") { weight = weight*reinteractions->at(fUniverseIndex); }
+
+				// MC_Stat weights // bootstrapping
+				if (fEventWeightLabel == "MC_Stat") { 
+
+					int concat = tools.ConcatRunSubRunEvent(Run,SubRun,Event);
+					weight = weight*tools.PoissonRandomNumber(concat); 
+				
+				}					
 
 			}			
 
