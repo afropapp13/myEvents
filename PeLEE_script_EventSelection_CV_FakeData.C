@@ -6,13 +6,13 @@
 
 	// Run 1
 
-//	WhichSampleArray.push_back("OverlayDirt9_Run1");
-//	WhichSampleArray.push_back("Overlay9_Run1");
+	WhichSampleArray.push_back("OverlayDirt9_Run1");
+	WhichSampleArray.push_back("Overlay9_Run1");
 
 	// Run 2
 
-//	WhichSampleArray.push_back("OverlayDirt9_Run2");
-//	WhichSampleArray.push_back("Overlay9_Run2");
+	WhichSampleArray.push_back("OverlayDirt9_Run2");
+	WhichSampleArray.push_back("Overlay9_Run2");
 	
 	// Run 3
 

@@ -263,7 +263,7 @@ void PeLEE_Create1DPlotsTHStack_TopologicalBreakDown(TString BaseMC = "") {
 				midPad->SetBottomMargin(0.03);
 				midPad->SetTopMargin(0.03);
 				botPad->SetTopMargin(0.03);
-				botPad->SetBottomMargin(0.25);
+				botPad->SetBottomMargin(0.26);
 				botPad->SetGridx();
 				botPad->SetGridy();
 				topPad->Draw();

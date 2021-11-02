@@ -171,7 +171,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 		TH1D* RecoVertexXPlot = new TH1D("RecoVertexXPlot",RecoLabelXAxisVertexX,NBinsVertexX,MinVertexX,MaxVertexX);
 		TH1D* RecoVertexYPlot = new TH1D("RecoVertexYPlot",RecoLabelXAxisVertexY,NBinsVertexY,MinVertexY,MaxVertexY);
 		TH1D* RecoVertexZPlot = new TH1D("RecoVertexZPlot",RecoLabelXAxisVertexZ,NBinsVertexZ,MinVertexZ,MaxVertexZ);
-		TH1D* RecoCandidateMuEndYPlot = new TH1D("RecoCandidateMuEndYPlot",RecoLabelXAxisVertexY,NBinsVertexY,MinVertexY,MaxVertexY);		
+		TH1D* RecoCandidateMuEndYPlot = new TH1D("RecoCandidateMuEndYPlot",";Muon End Y [cm]",NBinsVertexY,MinVertexY,MaxVertexY);		
 
 		TH1D* RecoMuonLLRPIDPlot = new TH1D("RecoMuonLLRPIDPlot",RecoLabelXAxisMuonLLRPID,NBinsLLRPID,MinLLRPID,MaxLLRPID);
 		TH1D* RecoProtonLLRPIDPlot = new TH1D("RecoProtonLLRPIDPlot",RecoLabelXAxisProtonLLRPID,NBinsLLRPID,MinLLRPID,MaxLLRPID);
@@ -324,7 +324,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 		TH1D* CC1pRecoVertexXPlot = new TH1D("CC1pRecoVertexXPlot",RecoLabelXAxisVertexX,NBinsVertexX,MinVertexX,MaxVertexX);
 		TH1D* CC1pRecoVertexYPlot = new TH1D("CC1pRecoVertexYPlot",RecoLabelXAxisVertexY,NBinsVertexY,MinVertexY,MaxVertexY);
 		TH1D* CC1pRecoVertexZPlot = new TH1D("CC1pRecoVertexZPlot",RecoLabelXAxisVertexZ,NBinsVertexZ,MinVertexZ,MaxVertexZ);
-		TH1D* CC1pRecoCandidateMuEndYPlot = new TH1D("CC1pRecoCandidateMuEndYPlot",RecoLabelXAxisVertexY,NBinsVertexY,MinVertexY,MaxVertexY);		
+		TH1D* CC1pRecoCandidateMuEndYPlot = new TH1D("CC1pRecoCandidateMuEndYPlot",";Muon End Y [cm]",NBinsVertexY,MinVertexY,MaxVertexY);		
 
 		TH1D* CC1pRecoMuonLLRPIDPlot = new TH1D("CC1pRecoMuonLLRPIDPlot",RecoLabelXAxisMuonLLRPID,NBinsLLRPID,MinLLRPID,MaxLLRPID);
 		TH1D* CC1pRecoProtonLLRPIDPlot = new TH1D("CC1pRecoProtonLLRPIDPlot",RecoLabelXAxisProtonLLRPID,NBinsLLRPID,MinLLRPID,MaxLLRPID);
@@ -550,7 +550,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 		TH1D* NonCC1pRecoVertexXPlot = new TH1D("NonCC1pRecoVertexXPlot",RecoLabelXAxisVertexX,NBinsVertexX,MinVertexX,MaxVertexX);
 		TH1D* NonCC1pRecoVertexYPlot = new TH1D("NonCC1pRecoVertexYPlot",RecoLabelXAxisVertexY,NBinsVertexY,MinVertexY,MaxVertexY);
 		TH1D* NonCC1pRecoVertexZPlot = new TH1D("NonCC1pRecoVertexZPlot",RecoLabelXAxisVertexZ,NBinsVertexZ,MinVertexZ,MaxVertexZ);
-		TH1D* NonCC1pRecoCandidateMuEndYPlot = new TH1D("NonCC1pRecoCandidateMuEndYPlot",RecoLabelXAxisVertexY,NBinsVertexY,MinVertexY,MaxVertexY);		
+		TH1D* NonCC1pRecoCandidateMuEndYPlot = new TH1D("NonCC1pRecoCandidateMuEndYPlot",";Muon End Y [cm]",NBinsVertexY,MinVertexY,MaxVertexY);		
 
 		TH1D* NonCC1pRecoMuonLLRPIDPlot = new TH1D("NonCC1pRecoMuonLLRPIDPlot",RecoLabelXAxisMuonLLRPID,NBinsLLRPID,MinLLRPID,MaxLLRPID);
 		TH1D* NonCC1pRecoProtonLLRPIDPlot = new TH1D("NonCC1pRecoProtonLLRPIDPlot",RecoLabelXAxisProtonLLRPID,NBinsLLRPID,MinLLRPID,MaxLLRPID);
@@ -649,7 +649,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 		TH1D* CCQERecoVertexXPlot = new TH1D("CCQERecoVertexXPlot",RecoLabelXAxisVertexX,NBinsVertexX,MinVertexX,MaxVertexX);
 		TH1D* CCQERecoVertexYPlot = new TH1D("CCQERecoVertexYPlot",RecoLabelXAxisVertexY,NBinsVertexY,MinVertexY,MaxVertexY);
 		TH1D* CCQERecoVertexZPlot = new TH1D("CCQERecoVertexZPlot",RecoLabelXAxisVertexZ,NBinsVertexZ,MinVertexZ,MaxVertexZ);
-		TH1D* CCQERecoCandidateMuEndYPlot = new TH1D("CCQERecoCandidateMuEndYPlot",RecoLabelXAxisVertexY,NBinsVertexY,MinVertexY,MaxVertexY);		
+		TH1D* CCQERecoCandidateMuEndYPlot = new TH1D("CCQERecoCandidateMuEndYPlot",";Muon End Y [cm]",NBinsVertexY,MinVertexY,MaxVertexY);		
 
 		TH1D* CCQERecoMuonLLRPIDPlot = new TH1D("CCQERecoMuonLLRPIDPlot",RecoLabelXAxisMuonLLRPID,NBinsLLRPID,MinLLRPID,MaxLLRPID);
 		TH1D* CCQERecoProtonLLRPIDPlot = new TH1D("CCQERecoProtonLLRPIDPlot",RecoLabelXAxisProtonLLRPID,NBinsLLRPID,MinLLRPID,MaxLLRPID);
@@ -742,7 +742,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 		TH1D* CCMECRecoVertexXPlot = new TH1D("CCMECRecoVertexXPlot",RecoLabelXAxisVertexX,NBinsVertexX,MinVertexX,MaxVertexX);
 		TH1D* CCMECRecoVertexYPlot = new TH1D("CCMECRecoVertexYPlot",RecoLabelXAxisVertexY,NBinsVertexY,MinVertexY,MaxVertexY);
 		TH1D* CCMECRecoVertexZPlot = new TH1D("CCMECRecoVertexZPlot",RecoLabelXAxisVertexZ,NBinsVertexZ,MinVertexZ,MaxVertexZ);
-		TH1D* CCMECRecoCandidateMuEndYPlot = new TH1D("CCMECRecoCandidateMuEndYPlot",RecoLabelXAxisVertexY,NBinsVertexY,MinVertexY,MaxVertexY);		
+		TH1D* CCMECRecoCandidateMuEndYPlot = new TH1D("CCMECRecoCandidateMuEndYPlot",";Muon End Y [cm]",NBinsVertexY,MinVertexY,MaxVertexY);		
 
 		TH1D* CCMECRecoMuonLLRPIDPlot = new TH1D("CCMECRecoMuonLLRPIDPlot",RecoLabelXAxisMuonLLRPID,NBinsLLRPID,MinLLRPID,MaxLLRPID);
 		TH1D* CCMECRecoProtonLLRPIDPlot = new TH1D("CCMECRecoProtonLLRPIDPlot",RecoLabelXAxisProtonLLRPID,NBinsLLRPID,MinLLRPID,MaxLLRPID);
@@ -835,7 +835,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 		TH1D* CCRESRecoVertexXPlot = new TH1D("CCRESRecoVertexXPlot",RecoLabelXAxisVertexX,NBinsVertexX,MinVertexX,MaxVertexX);
 		TH1D* CCRESRecoVertexYPlot = new TH1D("CCRESRecoVertexYPlot",RecoLabelXAxisVertexY,NBinsVertexY,MinVertexY,MaxVertexY);
 		TH1D* CCRESRecoVertexZPlot = new TH1D("CCRESRecoVertexZPlot",RecoLabelXAxisVertexZ,NBinsVertexZ,MinVertexZ,MaxVertexZ);
-		TH1D* CCRESRecoCandidateMuEndYPlot = new TH1D("CCRESRecoCandidateMuEndYPlot",RecoLabelXAxisVertexY,NBinsVertexY,MinVertexY,MaxVertexY);		
+		TH1D* CCRESRecoCandidateMuEndYPlot = new TH1D("CCRESRecoCandidateMuEndYPlot",";Muon End Y [cm]",NBinsVertexY,MinVertexY,MaxVertexY);		
 
 		TH1D* CCRESRecoMuonLLRPIDPlot = new TH1D("CCRESRecoMuonLLRPIDPlot",RecoLabelXAxisMuonLLRPID,NBinsLLRPID,MinLLRPID,MaxLLRPID);
 		TH1D* CCRESRecoProtonLLRPIDPlot = new TH1D("CCRESRecoProtonLLRPIDPlot",RecoLabelXAxisProtonLLRPID,NBinsLLRPID,MinLLRPID,MaxLLRPID);
@@ -928,7 +928,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 		TH1D* CCDISRecoVertexXPlot = new TH1D("CCDISRecoVertexXPlot",RecoLabelXAxisVertexX,NBinsVertexX,MinVertexX,MaxVertexX);
 		TH1D* CCDISRecoVertexYPlot = new TH1D("CCDISRecoVertexYPlot",RecoLabelXAxisVertexY,NBinsVertexY,MinVertexY,MaxVertexY);
 		TH1D* CCDISRecoVertexZPlot = new TH1D("CCDISRecoVertexZPlot",RecoLabelXAxisVertexZ,NBinsVertexZ,MinVertexZ,MaxVertexZ);
-		TH1D* CCDISRecoCandidateMuEndYPlot = new TH1D("CCDISRecoCandidateMuEndYPlot",RecoLabelXAxisVertexY,NBinsVertexY,MinVertexY,MaxVertexY);		
+		TH1D* CCDISRecoCandidateMuEndYPlot = new TH1D("CCDISRecoCandidateMuEndYPlot",";Muon End Y [cm]",NBinsVertexY,MinVertexY,MaxVertexY);		
 
 		TH1D* CCDISRecoMuonLLRPIDPlot = new TH1D("CCDISRecoMuonLLRPIDPlot",RecoLabelXAxisMuonLLRPID,NBinsLLRPID,MinLLRPID,MaxLLRPID);
 		TH1D* CCDISRecoProtonLLRPIDPlot = new TH1D("CCDISRecoProtonLLRPIDPlot",RecoLabelXAxisProtonLLRPID,NBinsLLRPID,MinLLRPID,MaxLLRPID);
@@ -1217,7 +1217,6 @@ void PeLEE_myRecoAnalysis::Loop() {
 				// Watch out: The EventWeight weights already include the weight for the tune
 
 				// Genie weights
-
 				if (fEventWeightLabel == "All_UBGenie") { weight = weight*All_UBGenie->at(fUniverseIndex) / T2KWeight; }
 				if (fEventWeightLabel == "AxFFCCQEshape_UBGenie") { weight = weight*AxFFCCQEshape_UBGenie->at(fUniverseIndex) / T2KWeight; }
 				if (fEventWeightLabel == "DecayAngMEC_UBGenie") { weight = weight*DecayAngMEC_UBGenie->at(fUniverseIndex) / T2KWeight; }
@@ -1231,12 +1230,18 @@ void PeLEE_myRecoAnalysis::Loop() {
 				if (fEventWeightLabel == "XSecShape_CCMEC_UBGenie") { weight = weight*XSecShape_CCMEC_UBGenie->at(fUniverseIndex) / T2KWeight; }
 
 				// Flux weights
-
 				if (fEventWeightLabel == "fluxes") { weight = weight*fluxes->at(fUniverseIndex); }
 
 				// Reinteraction weights
-
 				if (fEventWeightLabel == "reinteractions") { weight = weight*reinteractions->at(fUniverseIndex); }
+
+				// MC_Stat weights // bootstrapping
+				if (fEventWeightLabel == "MC_Stat") { 
+
+					int concat = tools.ConcatRunSubRunEvent(Run,SubRun,Event);
+					weight = weight*tools.PoissonRandomNumber(concat); 
+				
+				}				
 
 			}			
 
@@ -2402,14 +2407,14 @@ void PeLEE_myRecoAnalysis::Loop() {
 					else { 
 
 						ManualNonCC1pEventsPassingSelectionCuts++;
-						std::cout << "new MC background topology";
-						std::cout << " CandidateMu_MCParticle_Pdg = " << CandidateMu_MCParticle_Pdg->at(0);
-						std::cout << " CandidateP_MCParticle_Pdg = " << CandidateP_MCParticle_Pdg->at(0) << endl; 
-						std::cout << " NumberProtons = " << NumberProtons << endl; 
-						std::cout << " NumberChargedPions = " << NumberChargedPions << endl; 
-						std::cout << " NumberMuons = " << NumberMuons << endl; 
-						std::cout << " NumberPi0 = " << NumberPi0 << endl; 
-						std::cout << " NumberNeutrons = " << NumberNeutrons << endl; 
+						//std::cout << "new MC background topology";
+						//std::cout << " CandidateMu_MCParticle_Pdg = " << CandidateMu_MCParticle_Pdg->at(0);
+						//std::cout << " CandidateP_MCParticle_Pdg = " << CandidateP_MCParticle_Pdg->at(0) << endl; 
+						//std::cout << " NumberProtons = " << NumberProtons << endl; 
+						//std::cout << " NumberChargedPions = " << NumberChargedPions << endl; 
+						//std::cout << " NumberMuons = " << NumberMuons << endl; 
+						//std::cout << " NumberPi0 = " << NumberPi0 << endl; 
+						//std::cout << " NumberNeutrons = " << NumberNeutrons << endl; 
 
 					}
 

@@ -15,10 +15,14 @@
 #include <iostream>
 #include <iomanip>
 #include <vector>
-
-#include "/uboone/app/users/apapadop/uboonecode_v08_00_00_43/srcs/ubana/ubana/myClasses/Tools.h"
+#include <string>
+#include <sstream>
 
 using namespace std;
+
+#include "ubana/myClasses/Tools.h"
+
+//--------------------------------------------------//
 
 TString TrueToStringInt(int num) {
 
@@ -29,14 +33,20 @@ TString TrueToStringInt(int num) {
 
 }
 
+//--------------------------------------------------//
 
 void PeLEE_myTrueAnalysis::Loop() {
 
-	if (fChain == 0) return; Long64_t nentries = fChain->GetEntriesFast(); Long64_t nbytes = 0, nb = 0;
+	//--------------------------------------------------//	
+
+	if (fChain == 0) return; 
+	Long64_t nentries = fChain->GetEntriesFast(); 
+	Long64_t nbytes = 0, nb = 0;
+
 	TH1D::SetDefaultSumw2();
 	TH2D::SetDefaultSumw2();
 
-	// ---------------------------------------------------------------------------------------------------------------------------------------------
+	//--------------------------------------------------//
 
 	TString Extension = "";
 
@@ -214,12 +224,18 @@ void PeLEE_myTrueAnalysis::Loop() {
 			if (fEventWeightLabel == "XSecShape_CCMEC_UBGenie") { weight = weight*XSecShape_CCMEC_UBGenie->at(fUniverseIndex)/ T2KWeight; }
 
 			// Flux weights
-
 			if (fEventWeightLabel == "fluxes") { weight = weight*fluxes->at(fUniverseIndex); }
 
 			// Reinteraction weights
-
 			if (fEventWeightLabel == "reinteractions") { weight = weight*reinteractions->at(fUniverseIndex); }		
+
+			// MC_Stat weights // bootstrapping
+			if (fEventWeightLabel == "MC_Stat") { 
+
+				int concat = tools.ConcatRunSubRunEvent(Run,SubRun,Event);
+				weight = weight*tools.PoissonRandomNumber(concat); 
+				
+			}			
 
 		}
 

@@ -130,8 +130,8 @@ void PeLEE_PrintLatexTables(TString BaseMC = "", bool PrintEventLoss = false, bo
 
 	MCBkgPlotNames.push_back("CC2pEventPlot"); MCBkgPlotLabels.push_back("CC2p");
 	MCBkgPlotNames.push_back("PiPEventPlot"); MCBkgPlotLabels.push_back("$\\pi$-p");
+	MCBkgPlotNames.push_back("BrokenMuEventPlot"); MCBkgPlotLabels.push_back("Broken $\\mu$ track");	
 	MCBkgPlotNames.push_back("TrueVertexOutFVEventPlot"); MCBkgPlotLabels.push_back("True vertex outside FV");
-	MCBkgPlotNames.push_back("BrokenMuEventPlot"); MCBkgPlotLabels.push_back("Broken $\\mu$ track");
 	MCBkgPlotNames.push_back("CC1p1piEventPlot"); MCBkgPlotLabels.push_back("CC1p1$\\pi$");
 	MCBkgPlotNames.push_back("NeutralPiEventPlot"); MCBkgPlotLabels.push_back("$\\pi^{0}$ production");
 	MCBkgPlotNames.push_back("OutCommonRangeEventPlot"); MCBkgPlotLabels.push_back("Truth out of common ranges");

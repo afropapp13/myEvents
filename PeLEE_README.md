@@ -45,6 +45,9 @@ root -b PeLEE_script_EventSelection_Genie_Systematics.C
 # Flux variations
 root -b PeLEE_script_EventSelection_Flux_Systematics.C
 
+# MC_Stat variations
+root -b PeLEE_script_EventSelection_MC_Stat_Systematics.C
+
 ###########################################################################################################################################################################
 
 # Fake Data
