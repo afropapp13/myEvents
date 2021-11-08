@@ -47,9 +47,14 @@
 		// GENIE w/o T2K tune
 	
 		gROOT->ProcessLine("PeLEE_myRecoAnalysis(\""+WhichSampleArray[i]+"\",\"NoTune\").Loop()");
+		gROOT->ProcessLine("PeLEE_myRecoAnalysis(\""+WhichSampleArray[i]+"\",\"TwiceMEC\").Loop()");		
 
-		if (string(WhichSampleArray[i]).find("Overlay9") != std::string::npos) 
-		  { gROOT->ProcessLine("PeLEE_myTrueAnalysis(\""+WhichSampleArray[i]+"\",\"NoTune\").Loop()"); } 
+		if (string(WhichSampleArray[i]).find("Overlay9") != std::string::npos) { 
+
+			gROOT->ProcessLine("PeLEE_myTrueAnalysis(\""+WhichSampleArray[i]+"\",\"NoTune\").Loop()"); 
+		  	gROOT->ProcessLine("PeLEE_myTrueAnalysis(\""+WhichSampleArray[i]+"\",\"TwiceMEC\").Loop()"); 
+
+		}		   
 
 	}
 

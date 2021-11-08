@@ -178,6 +178,8 @@ void PeLEE_myTrueAnalysis::Loop() {
 
 	// ---------------------------------------------------------------------------------------------------------------------------------------------
 
+	// Loop over the events
+
 	for (Long64_t jentry=0; jentry<nentries;jentry++) {
 
 		Long64_t ientry = LoadTree(jentry); if (ientry < 0) break; nb = fChain->GetEntry(jentry); nbytes += nb;
@@ -199,6 +201,9 @@ void PeLEE_myTrueAnalysis::Loop() {
 
 		// Fake data studies: removing the T2K tune weight
 		if (fTune == "NoTune") { weight = POTWeight * Weight * ROOTinoWeight; }
+		// Double the MEC weight  (mode = 10)
+		if (fTune == "TwiceMEC" && Muon_MCParticle_Mode->at(0) == 10) { weight = 2 * POTWeight * Weight * T2KWeight * ROOTinoWeight; }
+		if (fTune == "TwiceMEC" && Muon_MCParticle_Mode->at(0) != 10) { weight = POTWeight * Weight * T2KWeight * ROOTinoWeight; }		
 
 		// -------------------------------------------------------------------------------------------------------------------------------------
 
