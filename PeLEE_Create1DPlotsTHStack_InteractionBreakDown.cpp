@@ -106,6 +106,23 @@ void PeLEE_Create1DPlotsTHStack_InteractionBreakDown(TString BaseMC = "") {
 	// PlotNames.push_back("RecoContainedMuonLengthPlot");
 	// PlotNames.push_back("RecoUncontainedMuonLengthPlot");
 
+    //PlotNames.push_back("RecoECal_DeltaPT_0_00To0_20_DeltaAlphaT_0_00To45_00Plot");
+    //PlotNames.push_back("RecoECal_DeltaPT_0_00To0_20_DeltaAlphaT_45_00To90_00Plot");
+    //PlotNames.push_back("RecoECal_DeltaPT_0_00To0_20_DeltaAlphaT_90_00To135_00Plot");
+    //PlotNames.push_back("RecoECal_DeltaPT_0_00To0_20_DeltaAlphaT_135_00To180_00Plot");
+    //PlotNames.push_back("RecoECal_DeltaPT_0_20To0_40_DeltaAlphaT_0_00To45_00Plot");
+    //PlotNames.push_back("RecoECal_DeltaPT_0_20To0_40_DeltaAlphaT_45_00To90_00Plot");
+    //PlotNames.push_back("RecoECal_DeltaPT_0_20To0_40_DeltaAlphaT_90_00To135_00Plot");
+    //PlotNames.push_back("RecoECal_DeltaPT_0_20To0_40_DeltaAlphaT_135_00To180_00Plot");
+    //PlotNames.push_back("RecoECal_DeltaPT_0_40To1_00_DeltaAlphaT_0_00To45_00Plot");
+    //PlotNames.push_back("RecoECal_DeltaPT_0_40To1_00_DeltaAlphaT_45_00To90_00Plot");
+    //PlotNames.push_back("RecoECal_DeltaPT_0_40To1_00_DeltaAlphaT_90_00To135_00Plot");
+    //PlotNames.push_back("RecoECal_DeltaPT_0_40To1_00_DeltaAlphaT_135_00To180_00Plot");
+
+    PlotNames.push_back("RecoDeltaAlphaT_DeltaPT_0_00To0_20Plot");
+    PlotNames.push_back("RecoDeltaAlphaT_DeltaPT_0_20To0_40Plot");
+    PlotNames.push_back("RecoDeltaAlphaT_DeltaPT_0_40To1_00Plot");				
+
 	}
 
 	const int N1DPlots = PlotNames.size();

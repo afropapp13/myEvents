@@ -25,6 +25,8 @@ using namespace std;
 #include "ubana/myClasses/Tools.h"
 #include "ubana/myClasses/STV_Tools.h"
 
+//----------------------------------------//
+
 TString ToStringInt(int num) {
 
 	std::ostringstream start;
@@ -34,15 +36,17 @@ TString ToStringInt(int num) {
 
 }
 
+//----------------------------------------//
+
 void PeLEE_myRecoAnalysis::Loop() {
 
-	// ---------------------------------------------------------------------------------------------------------------------------------------
+	//----------------------------------------//
 
 	// Function for proton momentum recalibration in %
 
 	TF1* fPP = new TF1("fPP","29.354172*x-14.674918",0.3,0.5);	
 
-	// ---------------------------------------------------------------------------------------------------------------------------------------
+	//----------------------------------------//
 
 	int TotalCounter = 0;
 	int ContainmentCounter = 0;
@@ -53,7 +57,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 	int NuScoreCounter = 0;
 	int KinematicsCounter = 0;
 
-	// ---------------------------------------------------------------------------------------------------------------------------------------
+	//----------------------------------------//
 
 	int NEventsPassingSelectionCuts = 0;
 	int CC1pEventsPassingSelectionCuts = 0;
@@ -103,7 +107,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 	int OutCommonRange = 0;
 	int OtherMCBkg = 0;
 
-	// --------------------------------------------------------------------------------------------------------------------------------------------------
+	//----------------------------------------//
 		
 	TString Cuts = "_NoCuts";
 
@@ -121,14 +125,14 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 		} // If we want to run only on a specific cut combination, include this } and remove the one at the end of the program
 
-		// -----------------------------------------------------------------------------------------------------------------------------
+		//----------------------------------------//
 
 		if (fChain == 0) return; Long64_t nentries = fChain->GetEntriesFast(); Long64_t nbytes = 0, nb = 0;
 		TH1D::SetDefaultSumw2();
 		TH2D::SetDefaultSumw2();
 		double weight = 1.;
 
-		// ---------------------------------------------------------------------------------------------------------------------------
+		//----------------------------------------//
 
 		TString Extension = "";
 
@@ -144,7 +148,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 		TFile* file = new TFile(FileName,"recreate");
 		std::cout << std::endl << "Creating a new file: " << FileName << std::endl << std::endl << std::endl;
 
-		// ---------------------------------------------------------------------------------------------------------------------------------------
+		//----------------------------------------//
 
 		// Txt file to keep track of the run/subrun/event of the candidate events
 
@@ -154,7 +158,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 		myRunTxtFile << std::fixed << std::setprecision(2);
 		myRunTxtFile << fWhichSample << endl << endl;
 
-		// --------------------------------------------------------------------------------------------------------------------------------
+		//----------------------------------------//
 
 		// 1D Reco Level Plots
 
@@ -1089,7 +1093,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 		TH1D* CC1pTrueMuonTrueMomentumTransverseRatio = new TH1D("CC1pTrueMuonTrueMomentumTransverseRatio",";P^{true}_{#mu,T}/P^{true}_{#mu}",25,0.,1.);		
 		TH1D* CC1pTrueProtonTrueMomentumTransverseRatio = new TH1D("CC1pTrueProtonTrueMomentumTransverseRatio",";P^{true}_{p,T}/P^{true}_{p}",25,0.,1.);		
 		
-		// ------------------------------------------------------------------------------------------------------------------------------
+		//----------------------------------------//
 
 		TH1D* RecoMuonCosThetaPlotLLPOnlyStudy[NBinsLLRPID];
 		TH1D* CC1pRecoMuonCosThetaPlotLLPOnlyStudy[NBinsLLRPID];
@@ -1106,7 +1110,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 		}
 
-		// --------------------------------------------------------------------------------------------------------------------------------
+		//----------------------------------------//
 
 		// NuScore Only Study
 
@@ -1125,7 +1129,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 		}
 
-		// --------------------------------------------------------------------------------------------------------------------------------
+		//----------------------------------------//
 
 		// Length Only Study
 
@@ -1144,12 +1148,83 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 		}
 
-		// --------------------------------------------------------------------------------------------------------------------------------
+		//----------------------------------------//
 
-		Tools tools;
+		Tools tools;		
 
-		// --------------------------------------------------------------------------------------------------------------------------------
-		// --------------------------------------------------------------------------------------------------------------------------------
+		//----------------------------------------//
+
+		// Now let's get serious with the 2D analysis
+		// Ecal in DeltaPT and DeltaAlphaT bins		
+
+		TH1D* RecoECalTwoDPlot[TwoDNBinsDeltaPT][TwoDNBinsDeltaAlphaT];
+		TH1D* CC1pRecoECalTwoDPlot[TwoDNBinsDeltaPT][TwoDNBinsDeltaAlphaT];
+		TH1D* CC1pTrueECalTwoDPlot[TwoDNBinsDeltaPT][TwoDNBinsDeltaAlphaT];				
+		TH1D* NonCC1pRecoECalTwoDPlot[TwoDNBinsDeltaPT][TwoDNBinsDeltaAlphaT];		
+		TH1D* CCQERecoECalTwoDPlot[TwoDNBinsDeltaPT][TwoDNBinsDeltaAlphaT];
+		TH1D* CCMECRecoECalTwoDPlot[TwoDNBinsDeltaPT][TwoDNBinsDeltaAlphaT];
+		TH1D* CCRESRecoECalTwoDPlot[TwoDNBinsDeltaPT][TwoDNBinsDeltaAlphaT];
+		TH1D* CCDISRecoECalTwoDPlot[TwoDNBinsDeltaPT][TwoDNBinsDeltaAlphaT];
+		TH2D* CC1pRecoECalTwoDPlot2D[TwoDNBinsDeltaPT][TwoDNBinsDeltaAlphaT];	
+		TH2D* POTScaledCC1pRecoECalTwoDPlot2D[TwoDNBinsDeltaPT][TwoDNBinsDeltaAlphaT];	
+
+		//----------------------------------------//
+
+		TH1D* RecoDeltaAlphaTTwoDPlot[TwoDNBinsDeltaPT];
+		TH1D* CC1pRecoDeltaAlphaTTwoDPlot[TwoDNBinsDeltaPT];
+		TH1D* CC1pTrueDeltaAlphaTTwoDPlot[TwoDNBinsDeltaPT];				
+		TH1D* NonCC1pRecoDeltaAlphaTTwoDPlot[TwoDNBinsDeltaPT];		
+		TH1D* CCQERecoDeltaAlphaTTwoDPlot[TwoDNBinsDeltaPT];
+		TH1D* CCMECRecoDeltaAlphaTTwoDPlot[TwoDNBinsDeltaPT];
+		TH1D* CCRESRecoDeltaAlphaTTwoDPlot[TwoDNBinsDeltaPT];
+		TH1D* CCDISRecoDeltaAlphaTTwoDPlot[TwoDNBinsDeltaPT];
+		TH2D* CC1pRecoDeltaAlphaTTwoDPlot2D[TwoDNBinsDeltaPT];	
+		TH2D* POTScaledCC1pRecoDeltaAlphaTTwoDPlot2D[TwoDNBinsDeltaPT];
+
+		//----------------------------------------//			
+
+		for (int WhichDeltaPT = 0; WhichDeltaPT < TwoDNBinsDeltaPT; WhichDeltaPT++) {
+
+			//------------------------------//
+
+			// DeltaAlphaT in DeltaPT slices
+
+			TString DeltaAlphaTTwoDInDeltaPTLabel = "DeltaAlphaT_DeltaPT_"+tools.ConvertToString(TwoDArrayNBinsDeltaPT[WhichDeltaPT])+"To"+tools.ConvertToString(TwoDArrayNBinsDeltaPT[WhichDeltaPT+1])+"Plot";			
+
+			RecoDeltaAlphaTTwoDPlot[WhichDeltaPT] = new TH1D("Reco"+DeltaAlphaTTwoDInDeltaPTLabel,LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);
+			CC1pRecoDeltaAlphaTTwoDPlot[WhichDeltaPT] = new TH1D("CC1pReco"+DeltaAlphaTTwoDInDeltaPTLabel,LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);
+			CC1pTrueDeltaAlphaTTwoDPlot[WhichDeltaPT] = new TH1D("CC1pTrue"+DeltaAlphaTTwoDInDeltaPTLabel,LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);					
+			NonCC1pRecoDeltaAlphaTTwoDPlot[WhichDeltaPT] = new TH1D("NonCC1pReco"+DeltaAlphaTTwoDInDeltaPTLabel,LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);
+			CCQERecoDeltaAlphaTTwoDPlot[WhichDeltaPT] = new TH1D("CCQEReco"+DeltaAlphaTTwoDInDeltaPTLabel,LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);
+			CCMECRecoDeltaAlphaTTwoDPlot[WhichDeltaPT] = new TH1D("CCMECReco"+DeltaAlphaTTwoDInDeltaPTLabel,LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);
+			CCRESRecoDeltaAlphaTTwoDPlot[WhichDeltaPT] = new TH1D("CCRESReco"+DeltaAlphaTTwoDInDeltaPTLabel,LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);
+			CCDISRecoDeltaAlphaTTwoDPlot[WhichDeltaPT] = new TH1D("CCDISReco"+DeltaAlphaTTwoDInDeltaPTLabel,LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);	
+			CC1pRecoDeltaAlphaTTwoDPlot2D[WhichDeltaPT] = new TH2D("CC1pReco"+DeltaAlphaTTwoDInDeltaPTLabel+"2D",LabelXAxisDeltaAlphaT2D,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);	
+			POTScaledCC1pRecoDeltaAlphaTTwoDPlot2D[WhichDeltaPT] = new TH2D("POTScaledCC1pReco"+DeltaAlphaTTwoDInDeltaPTLabel+"2D",LabelXAxisDeltaAlphaT2D,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);																									
+
+			//------------------------------//
+
+			for (int WhichDeltaAlphaT = 0; WhichDeltaAlphaT < TwoDNBinsDeltaAlphaT; WhichDeltaAlphaT++) {	
+
+				TString ECalTwoDInDeltaPTDeltaAlphaTLabel = "ECal_DeltaPT_"+tools.ConvertToString(TwoDArrayNBinsDeltaPT[WhichDeltaPT])+"To"+tools.ConvertToString(TwoDArrayNBinsDeltaPT[WhichDeltaPT+1])+"_DeltaAlphaT_"+tools.ConvertToString(TwoDArrayNBinsDeltaAlphaT[WhichDeltaAlphaT])+"To"+tools.ConvertToString(TwoDArrayNBinsDeltaAlphaT[WhichDeltaAlphaT+1])+"Plot";
+		
+				RecoECalTwoDPlot[WhichDeltaPT][WhichDeltaAlphaT] = new TH1D("Reco"+ECalTwoDInDeltaPTDeltaAlphaTLabel,LabelXAxisECal,NBinsECal,ArrayNBinsECal);
+				CC1pRecoECalTwoDPlot[WhichDeltaPT][WhichDeltaAlphaT] = new TH1D("CC1pReco"+ECalTwoDInDeltaPTDeltaAlphaTLabel,LabelXAxisECal,NBinsECal,ArrayNBinsECal);
+				CC1pTrueECalTwoDPlot[WhichDeltaPT][WhichDeltaAlphaT] = new TH1D("CC1pTrue"+ECalTwoDInDeltaPTDeltaAlphaTLabel,LabelXAxisECal,NBinsECal,ArrayNBinsECal);					
+				NonCC1pRecoECalTwoDPlot[WhichDeltaPT][WhichDeltaAlphaT] = new TH1D("NonCC1pReco"+ECalTwoDInDeltaPTDeltaAlphaTLabel,LabelXAxisECal,NBinsECal,ArrayNBinsECal);
+				CCQERecoECalTwoDPlot[WhichDeltaPT][WhichDeltaAlphaT] = new TH1D("CCQEReco"+ECalTwoDInDeltaPTDeltaAlphaTLabel,LabelXAxisECal,NBinsECal,ArrayNBinsECal);
+				CCMECRecoECalTwoDPlot[WhichDeltaPT][WhichDeltaAlphaT] = new TH1D("CCMECReco"+ECalTwoDInDeltaPTDeltaAlphaTLabel,LabelXAxisECal,NBinsECal,ArrayNBinsECal);
+				CCRESRecoECalTwoDPlot[WhichDeltaPT][WhichDeltaAlphaT] = new TH1D("CCRESReco"+ECalTwoDInDeltaPTDeltaAlphaTLabel,LabelXAxisECal,NBinsECal,ArrayNBinsECal);
+				CCDISRecoECalTwoDPlot[WhichDeltaPT][WhichDeltaAlphaT] = new TH1D("CCDISReco"+ECalTwoDInDeltaPTDeltaAlphaTLabel,LabelXAxisECal,NBinsECal,ArrayNBinsECal);	
+				CC1pRecoECalTwoDPlot2D[WhichDeltaPT][WhichDeltaAlphaT] = new TH2D("CC1pReco"+ECalTwoDInDeltaPTDeltaAlphaTLabel+"2D",LabelXAxisECal2D,NBinsECal,ArrayNBinsECal,NBinsECal,ArrayNBinsECal);	
+				POTScaledCC1pRecoECalTwoDPlot2D[WhichDeltaPT][WhichDeltaAlphaT] = new TH2D("POTScaledCC1pReco"+ECalTwoDInDeltaPTDeltaAlphaTLabel+"2D",LabelXAxisECal2D,NBinsECal,ArrayNBinsECal,NBinsECal,ArrayNBinsECal);																									
+
+			} // End of the loop over the 2D DeltaAlphaT bins
+
+		} // End of the loop over the 2D DeltaPT bins
+
+		//----------------------------------------//
+		//----------------------------------------//
 
 		// Loop over the events
 
@@ -1432,7 +1507,6 @@ void PeLEE_myRecoAnalysis::Loop() {
 			// kMiss
 			// PMiss
 			// PMissMinus
-
 
 			if (TransMissMomentum > ArrayNBinsDeltaPT[NBinsDeltaPT]) { TransMissMomentum = 0.5 * (ArrayNBinsDeltaPT[NBinsDeltaPT] + ArrayNBinsDeltaPT[NBinsDeltaPT-1]); }
 			if (reco_Ptx > ArrayNBinsDeltaPtx[NBinsDeltaPtx]) { reco_Ptx = 0.5 * (ArrayNBinsDeltaPtx[NBinsDeltaPtx] + ArrayNBinsDeltaPtx[NBinsDeltaPtx-1]); }
@@ -1745,7 +1819,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 			}
 
-			// ----------------------------------------------------------------------------------------------------------------------
+			//----------------------------------------//
 
 			// 1D Length Only Study
 
@@ -1761,7 +1835,14 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 			}
 
-			// ----------------------------------------------------------------------------------------------------------------------
+			//----------------------------------------//
+
+			// Indices for 2D analysis
+
+			int DeltaPTTwoDIndex = tools.ReturnIndex(TransMissMomentum, TwoDArrayNBinsDeltaPT);
+			int DeltaAlphaTTwoDIndex = tools.ReturnIndex(DeltaAlphaT, TwoDArrayNBinsDeltaAlphaT);
+
+			//----------------------------------------//
 
 			// No weight to be applied in the multiplicity plots
 			RecoPi0Plot->Fill(NumberPi0); 
@@ -1842,6 +1923,16 @@ void PeLEE_myRecoAnalysis::Loop() {
 			RecoCosThetaPPpPlot->Fill(reco_Pp_cos_theta,reco_Pp,weight);
 
 			RecoLengthPvsLengthMu2D->Fill(l_muCandidate,l_pCandidate,weight);
+
+			//------------------------------//
+
+			// Ecal in DeltaPT & DeltaAlphaT bins
+
+			RecoECalTwoDPlot[DeltaPTTwoDIndex][DeltaAlphaTTwoDIndex]->Fill(ECal,weight);	
+
+			// 2D DeltaAlphaT in DeltaPT bins
+
+			RecoDeltaAlphaTTwoDPlot[DeltaPTTwoDIndex]->Fill(DeltaAlphaT,weight);		
 
 			// -------------------------------------------------------------------------------------------------------------------------
 
@@ -2003,6 +2094,16 @@ void PeLEE_myRecoAnalysis::Loop() {
 					CC1pTrueEQEPlot->Fill(true_EQE,weight);
 					CC1pTrueQ2Plot->Fill(true_Q2,weight);
 
+					//------------------------------//
+
+					// Ecal in DeltaPT & DeltaAlphaT bins
+
+					CC1pTrueECalTwoDPlot[DeltaPTTwoDIndex][DeltaAlphaTTwoDIndex]->Fill(true_ECal,weight);	
+
+					// 2D DeltaAlphaT in DeltaPT bins
+					
+					CC1pTrueDeltaAlphaTTwoDPlot[DeltaPTTwoDIndex]->Fill(true_DeltaAlphaT,weight);										
+
 					// --------------------------------------------------------------------------------------------------
 					// --------------------------------------------------------------------------------------------------
 
@@ -2080,7 +2181,17 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 					CC1pRecoMuonMomentumVsLengthPlot->Fill(l_muCandidate,reco_Pmu,weight);
 					if (CandidateMu_EndContainment->at(0) == 1) { CC1pRecoContainedMuonMomentumVsLengthPlot->Fill(l_muCandidate,reco_Pmu,weight); }
-					if (CandidateMu_EndContainment->at(0) == 0) { CC1pRecoUncontainedMuonMomentumVsLengthPlot->Fill(l_muCandidate,reco_Pmu,weight); }			
+					if (CandidateMu_EndContainment->at(0) == 0) { CC1pRecoUncontainedMuonMomentumVsLengthPlot->Fill(l_muCandidate,reco_Pmu,weight); }
+
+					//------------------------------//
+
+					// Ecal in DeltaPT & DeltaAlphaT bins
+
+					CC1pRecoECalTwoDPlot[DeltaPTTwoDIndex][DeltaAlphaTTwoDIndex]->Fill(ECal,weight);		
+
+					// 2D DeltaAlphaT in DeltaPT bins
+					
+					CC1pRecoDeltaAlphaTTwoDPlot[DeltaPTTwoDIndex]->Fill(DeltaAlphaT,weight);													
 
 					// --------------------------------------------------------------------------------------------------
 					// --------------------------------------------------------------------------------------------------
@@ -2157,6 +2268,18 @@ void PeLEE_myRecoAnalysis::Loop() {
 					if (TransMissMomentum > LowPT[2] && TransMissMomentum < HighPT[2]) { POTScaledCC1pRecoECalHighPTPlot2D->Fill(true_ECal,ECal,weight); }
 					POTScaledCC1pRecoEQEPlot2D->Fill(true_EQE,EQE,weight);
 					POTScaledCC1pRecoQ2Plot2D->Fill(true_Q2,reco_Q2,weight);
+
+					//------------------------------//
+
+					// Ecal in DeltaPT & DeltaAlphaT bins
+
+					CC1pRecoECalTwoDPlot2D[DeltaPTTwoDIndex][DeltaAlphaTTwoDIndex]->Fill(true_ECal,ECal);
+					POTScaledCC1pRecoECalTwoDPlot2D[DeltaPTTwoDIndex][DeltaAlphaTTwoDIndex]->Fill(true_ECal,ECal,weight);					
+
+					// 2D DeltaAlphaT in DeltaPT bins
+					
+					CC1pRecoDeltaAlphaTTwoDPlot2D[DeltaPTTwoDIndex]->Fill(true_DeltaAlphaT,DeltaAlphaT);
+					POTScaledCC1pRecoDeltaAlphaTTwoDPlot2D[DeltaPTTwoDIndex]->Fill(true_DeltaAlphaT,DeltaAlphaT,weight);																
 
 					// -----------------------------------------------------------------------------------------------------
 
@@ -2484,6 +2607,16 @@ void PeLEE_myRecoAnalysis::Loop() {
 					if (TransMissMomentum > LowPT[2] && TransMissMomentum < HighPT[2]) { NonCC1pRecoECalHighPTPlot->Fill(ECal,weight); }
 					NonCC1pRecoEQEPlot->Fill(EQE,weight);
 					NonCC1pRecoQ2Plot->Fill(reco_Q2,weight);
+
+					//------------------------------//
+
+					// Ecal in DeltaPT & DeltaAlphaT bins
+
+					NonCC1pRecoECalTwoDPlot[DeltaPTTwoDIndex][DeltaAlphaTTwoDIndex]->Fill(ECal,weight);	
+
+					// 2D DeltaAlphaT in DeltaPT bins
+					
+					NonCC1pRecoDeltaAlphaTTwoDPlot[DeltaPTTwoDIndex]->Fill(DeltaAlphaT,weight);										
 					
 					// 2D Analysis
 				
@@ -2581,6 +2714,16 @@ void PeLEE_myRecoAnalysis::Loop() {
 					if (TransMissMomentum > LowPT[2] && TransMissMomentum < HighPT[2]) { CCQERecoECalHighPTPlot->Fill(ECal,weight); }
 					CCQERecoEQEPlot->Fill(EQE,weight);
 					CCQERecoQ2Plot->Fill(reco_Q2,weight);
+
+					//------------------------------//
+
+					// Ecal in DeltaPT & DeltaAlphaT bins
+
+					CCQERecoECalTwoDPlot[DeltaPTTwoDIndex][DeltaAlphaTTwoDIndex]->Fill(ECal,weight);		
+
+					// 2D DeltaAlphaT in DeltaPT bins
+					
+					CCQERecoDeltaAlphaTTwoDPlot[DeltaPTTwoDIndex]->Fill(DeltaAlphaT,weight);										
 					
 					// 2D Analysis
 				
@@ -2673,6 +2816,16 @@ void PeLEE_myRecoAnalysis::Loop() {
 					if (TransMissMomentum > LowPT[2] && TransMissMomentum < HighPT[2]) { CCMECRecoECalHighPTPlot->Fill(ECal,weight); }
 					CCMECRecoEQEPlot->Fill(EQE,weight);
 					CCMECRecoQ2Plot->Fill(reco_Q2,weight);
+
+					//----------------------------------------//
+
+					// Ecal in DeltaPT & DeltaAlphaT bins
+
+					CCMECRecoECalTwoDPlot[DeltaPTTwoDIndex][DeltaAlphaTTwoDIndex]->Fill(ECal,weight);
+
+					// 2D DeltaAlphaT in DeltaPT bins
+					
+					CCMECRecoDeltaAlphaTTwoDPlot[DeltaPTTwoDIndex]->Fill(DeltaAlphaT,weight);											
 					
 					// 2D Analysis
 				
@@ -2765,6 +2918,16 @@ void PeLEE_myRecoAnalysis::Loop() {
 					if (TransMissMomentum > LowPT[2] && TransMissMomentum < HighPT[2]) { CCRESRecoECalHighPTPlot->Fill(ECal,weight); }
 					CCRESRecoEQEPlot->Fill(EQE,weight);
 					CCRESRecoQ2Plot->Fill(reco_Q2,weight);
+
+					//----------------------------------------//
+
+					// Ecal in DeltaPT & DeltaAlphaT bins
+
+					CCRESRecoECalTwoDPlot[DeltaPTTwoDIndex][DeltaAlphaTTwoDIndex]->Fill(ECal,weight);	
+
+					// 2D DeltaAlphaT in DeltaPT bins
+					
+					CCRESRecoDeltaAlphaTTwoDPlot[DeltaPTTwoDIndex]->Fill(DeltaAlphaT,weight);											
 					
 					// 2D Analysis
 				
@@ -2854,6 +3017,16 @@ void PeLEE_myRecoAnalysis::Loop() {
 					if (TransMissMomentum > LowPT[2] && TransMissMomentum < HighPT[2]) { CCDISRecoECalHighPTPlot->Fill(ECal,weight); }
 					CCDISRecoEQEPlot->Fill(EQE,weight);
 					CCDISRecoQ2Plot->Fill(reco_Q2,weight);
+
+					//----------------------------------------//
+
+					// Ecal in DeltaPT & DeltaAlphaT bins
+
+					CCDISRecoECalTwoDPlot[DeltaPTTwoDIndex][DeltaAlphaTTwoDIndex]->Fill(ECal,weight);		
+
+					// 2D DeltaAlphaT in DeltaPT bins
+					
+					CCDISRecoDeltaAlphaTTwoDPlot[DeltaPTTwoDIndex]->Fill(DeltaAlphaT,weight);										
 					
 					// 2D Analysis
 				

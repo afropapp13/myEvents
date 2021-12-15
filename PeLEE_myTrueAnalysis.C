@@ -64,7 +64,7 @@ void PeLEE_myTrueAnalysis::Loop() {
 	TFile* OutputFile = new TFile(FileName,"recreate");
 	std::cout << std::endl << "File " << FileName << " to be created"<< std::endl << std::endl;
 
-	// ---------------------------------------------------------------------------------------------------------------------------------------
+	//--------------------------------------------------//
 
 	// Txt file to keep track of the event reduction at each stage
 
@@ -80,7 +80,7 @@ void PeLEE_myTrueAnalysis::Loop() {
 	myRunTxtFile << std::fixed << std::setprecision(2);
 	myRunTxtFile << fWhichSample;
 
-	// --------------------------------------------------------------------------------------------------------------------------------------------
+	//--------------------------------------------------//
 
 	// 1D True Variables
 
@@ -136,6 +136,48 @@ void PeLEE_myTrueAnalysis::Loop() {
 
 	TH1D* TrueEvPlot = new TH1D("TrueEvPlot",RecoLabelXAxisEv,NBinsEv,MinEv,MaxEv);
 	TH1D* TrueNuPlot = new TH1D("TrueNuPlot",RecoLabelXAxisNu,NBinsNu,MinNu,MaxNu);
+
+	//--------------------------------------------------//
+
+	Tools tools;	
+
+	//--------------------------------------------------//
+
+	// Now let's get serious with the 2D analysis
+
+	// Ecal in DeltaPT and DeltaAlphaT bins		
+
+	TH1D* TrueECalTwoDPlot[TwoDNBinsDeltaPT][TwoDNBinsDeltaAlphaT];	
+
+	//--------------------------------------------------//
+
+	TH1D* TrueDeltaAlphaTTwoDPlot[TwoDNBinsDeltaPT];	
+
+	//--------------------------------------------------//	
+
+	for (int WhichDeltaPT = 0; WhichDeltaPT < TwoDNBinsDeltaPT; WhichDeltaPT++) {
+
+		//------------------------------//
+
+		// DeltaAlphaT in DeltaPT slices
+
+		TString DeltaAlphaTTwoDInDeltaPTLabel = "DeltaAlphaT_DeltaPT_"+tools.ConvertToString(TwoDArrayNBinsDeltaPT[WhichDeltaPT])+"To"+tools.ConvertToString(TwoDArrayNBinsDeltaPT[WhichDeltaPT+1])+"Plot";			
+
+		TrueDeltaAlphaTTwoDPlot[WhichDeltaPT] = new TH1D("True"+DeltaAlphaTTwoDInDeltaPTLabel,LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);	
+
+		//------------------------------//
+
+		for (int WhichDeltaAlphaT = 0; WhichDeltaAlphaT < TwoDNBinsDeltaAlphaT; WhichDeltaAlphaT++) {	
+
+			TString ECalTwoDInDeltaPTDeltaAlphaTLabel = "ECal_DeltaPT_"+tools.ConvertToString(TwoDArrayNBinsDeltaPT[WhichDeltaPT])+"To"+tools.ConvertToString(TwoDArrayNBinsDeltaPT[WhichDeltaPT+1])+"_DeltaAlphaT_"+tools.ConvertToString(TwoDArrayNBinsDeltaAlphaT[WhichDeltaAlphaT])+"To"+tools.ConvertToString(TwoDArrayNBinsDeltaAlphaT[WhichDeltaAlphaT+1])+"Plot";
+		
+			TrueECalTwoDPlot[WhichDeltaPT][WhichDeltaAlphaT] = new TH1D("True"+ECalTwoDInDeltaPTDeltaAlphaTLabel,LabelXAxisECal,NBinsECal,ArrayNBinsECal);
+
+		}
+
+	}
+
+	//--------------------------------------------------//	
 	
 	// 2D Analysis
 
@@ -150,8 +192,7 @@ void PeLEE_myTrueAnalysis::Loop() {
 			,NBins2DAnalysis,ArrayNBinsProtonCosTheta[0],ArrayNBinsProtonCosTheta[NBinsProtonCosTheta]
 			,NBins2DAnalysis,ArrayNBinsProtonMomentum[0],ArrayNBinsProtonMomentum[NBinsProtonMomentum]);
 
-
-	// --------------------------------------------------------------------------------------------------------------------------------
+	//--------------------------------------------------//
 
 	TH1D* TrueMuonTrueMomentumLongitudinalRatio = new TH1D("TrueMuonTrueMomentumLongitudinalRatio",";P^{true}_{#mu,||}/P^{true}_{#mu}",25,0.,1.);		
 	TH1D* TrueProtonTrueMomentumLongitudinalRatio = new TH1D("TrueProtonTrueMomentumLongitudinalRatio",";P^{true}_{p,||}/P^{true}_{p}",25,0.,1.);
@@ -159,33 +200,31 @@ void PeLEE_myTrueAnalysis::Loop() {
 	TH1D* TrueMuonTrueMomentumTransverseRatio = new TH1D("TrueMuonTrueMomentumTransverseRatio",";P^{true}_{#mu,T}/P^{true}_{#mu}",25,0.,1.);		
 	TH1D* TrueProtonTrueMomentumTransverseRatio = new TH1D("TrueProtonTrueMomentumTransverseRatio",";P^{true}_{p,T}/P^{true}_{p}",25,0.,1.);	
 
-	// ---------------------------------------------------------------------------------------------------------------------------------------------
-
-	Tools tools;
-
-	// -------------------------------------------------------------------------------------------------------------------------------------------
+	//--------------------------------------------------//
 
 	int TrueCC1pCounter = 0;
 	int TrueCCQElikeCounter = 0;
 	
 	double SumWeights = 0.;
 	
-	// --------------------------------------------------------------------------------------------------------------------------------
+	//--------------------------------------------------//
 
 	TH1D* POTScalePlot = new TH1D("POTScalePlot","",1,0,1);
 	TH1D* NEventsPlot = new TH1D("NEventsPlot","",1,0,1);
 	TH1D* NSelectedPlot = new TH1D("NSelectedPlot","",1,0,1);
 
-	// ---------------------------------------------------------------------------------------------------------------------------------------------
+	//--------------------------------------------------//
 
 	// Loop over the events
 
 	for (Long64_t jentry=0; jentry<nentries;jentry++) {
 
+		//--------------------------------------------------//
+
 		Long64_t ientry = LoadTree(jentry); if (ientry < 0) break; nb = fChain->GetEntry(jentry); nbytes += nb;
 		if (jentry%1000 == 0) std::cout << jentry/1000 << " k " << std::setprecision(2) << double(jentry)/nentries*100. << " %"<< std::endl;	
 
-		// ------------------------------------------------------------------------------------------------------------------------------
+		//--------------------------------------------------//
 
 //		double weight = 1.;
 //		double T2Kweight = 1.;
@@ -426,6 +465,23 @@ void PeLEE_myTrueAnalysis::Loop() {
 //				    && TrueRecoEQE < ArrayNBinsEQE[NBinsEQE]
 //				    && RecoTrueQ2 < ArrayNBinsQ2[NBinsQ2]
 				) {
+
+					//----------------------------------------//
+
+					// Indices for 2D analysis
+
+					int DeltaPTTwoDIndex = tools.ReturnIndex(TrueTransMissMomentum, TwoDArrayNBinsDeltaPT);
+					int DeltaAlphaTTwoDIndex = tools.ReturnIndex(TrueDeltaAlphaT, TwoDArrayNBinsDeltaAlphaT);	
+
+					//----------------------------------------//
+
+					// 2D analysis	
+
+					TrueECalTwoDPlot[DeltaPTTwoDIndex][DeltaAlphaTTwoDIndex]->Fill(TrueRecoECal,weight);
+
+					TrueDeltaAlphaTTwoDPlot[DeltaPTTwoDIndex]->Fill(TrueDeltaAlphaT,weight);														
+
+					//----------------------------------------//									
 
 					// No weight to be applied in the multiplicity plots
 
