@@ -119,9 +119,29 @@ void PeLEE_Create1DPlotsTHStack_InteractionBreakDown(TString BaseMC = "") {
     //PlotNames.push_back("RecoECal_DeltaPT_0_40To1_00_DeltaAlphaT_90_00To135_00Plot");
     //PlotNames.push_back("RecoECal_DeltaPT_0_40To1_00_DeltaAlphaT_135_00To180_00Plot");
 
-    PlotNames.push_back("RecoDeltaAlphaT_DeltaPT_0_00To0_20Plot");
-    PlotNames.push_back("RecoDeltaAlphaT_DeltaPT_0_20To0_40Plot");
-    PlotNames.push_back("RecoDeltaAlphaT_DeltaPT_0_40To1_00Plot");				
+    //PlotNames.push_back("RecoDeltaAlphaT_DeltaPT_0_00To0_20Plot");
+    //PlotNames.push_back("RecoDeltaAlphaT_DeltaPT_0_20To0_40Plot");
+    //PlotNames.push_back("RecoDeltaAlphaT_DeltaPT_0_40To1_00Plot");
+
+    PlotNames.push_back("RecoDeltaAlphaT_MuonCosTheta_Minus1_00To0_00Plot");
+    PlotNames.push_back("RecoDeltaAlphaT_MuonCosTheta_0_00To0_50Plot");
+	PlotNames.push_back("RecoDeltaAlphaT_MuonCosTheta_0_50To0_75Plot");	   
+	PlotNames.push_back("RecoDeltaAlphaT_MuonCosTheta_0_75To1_00Plot");
+
+    PlotNames.push_back("RecoDeltaPT_MuonCosTheta_Minus1_00To0_00Plot");
+    PlotNames.push_back("RecoDeltaPT_MuonCosTheta_0_00To0_50Plot");
+	PlotNames.push_back("RecoDeltaPT_MuonCosTheta_0_50To0_75Plot");	   
+	PlotNames.push_back("RecoDeltaPT_MuonCosTheta_0_75To1_00Plot");
+
+    PlotNames.push_back("RecoMuonMomentum_MuonCosTheta_Minus1_00To0_00Plot");
+    PlotNames.push_back("RecoMuonMomentum_MuonCosTheta_0_00To0_50Plot");
+	PlotNames.push_back("RecoMuonMomentum_MuonCosTheta_0_50To0_75Plot");	   
+	PlotNames.push_back("RecoMuonMomentum_MuonCosTheta_0_75To1_00Plot");
+	
+    PlotNames.push_back("RecoProtonMomentum_ProtonCosTheta_Minus1_00To0_00Plot");
+    PlotNames.push_back("RecoProtonMomentum_ProtonCosTheta_0_00To0_50Plot");
+	PlotNames.push_back("RecoProtonMomentum_ProtonCosTheta_0_50To0_75Plot");	   
+	PlotNames.push_back("RecoProtonMomentum_ProtonCosTheta_0_75To1_00Plot");		
 
 	}
 
