@@ -1181,6 +1181,32 @@ void PeLEE_myRecoAnalysis::Loop() {
 		TH2D* CC1pRecoDeltaAlphaT_InDeltaPTTwoDPlot2D[TwoDNBinsDeltaPT];	
 		TH2D* POTScaledCC1pRecoDeltaAlphaT_InDeltaPTTwoDPlot2D[TwoDNBinsDeltaPT];
 
+		//----------------------------------------//
+
+		TH1D* RecoDeltaPhiT_InDeltaPTTwoDPlot[TwoDNBinsDeltaPT];
+		TH1D* CC1pRecoDeltaPhiT_InDeltaPTTwoDPlot[TwoDNBinsDeltaPT];
+		TH1D* CC1pTrueDeltaPhiT_InDeltaPTTwoDPlot[TwoDNBinsDeltaPT];				
+		TH1D* NonCC1pRecoDeltaPhiT_InDeltaPTTwoDPlot[TwoDNBinsDeltaPT];		
+		TH1D* CCQERecoDeltaPhiT_InDeltaPTTwoDPlot[TwoDNBinsDeltaPT];
+		TH1D* CCMECRecoDeltaPhiT_InDeltaPTTwoDPlot[TwoDNBinsDeltaPT];
+		TH1D* CCRESRecoDeltaPhiT_InDeltaPTTwoDPlot[TwoDNBinsDeltaPT];
+		TH1D* CCDISRecoDeltaPhiT_InDeltaPTTwoDPlot[TwoDNBinsDeltaPT];
+		TH2D* CC1pRecoDeltaPhiT_InDeltaPTTwoDPlot2D[TwoDNBinsDeltaPT];	
+		TH2D* POTScaledCC1pRecoDeltaPhiT_InDeltaPTTwoDPlot2D[TwoDNBinsDeltaPT];		
+
+		//----------------------------------------//
+
+		TH1D* RecoDeltaPn_InDeltaPTTwoDPlot[TwoDNBinsDeltaPT];
+		TH1D* CC1pRecoDeltaPn_InDeltaPTTwoDPlot[TwoDNBinsDeltaPT];
+		TH1D* CC1pTrueDeltaPn_InDeltaPTTwoDPlot[TwoDNBinsDeltaPT];				
+		TH1D* NonCC1pRecoDeltaPn_InDeltaPTTwoDPlot[TwoDNBinsDeltaPT];		
+		TH1D* CCQERecoDeltaPn_InDeltaPTTwoDPlot[TwoDNBinsDeltaPT];
+		TH1D* CCMECRecoDeltaPn_InDeltaPTTwoDPlot[TwoDNBinsDeltaPT];
+		TH1D* CCRESRecoDeltaPn_InDeltaPTTwoDPlot[TwoDNBinsDeltaPT];
+		TH1D* CCDISRecoDeltaPn_InDeltaPTTwoDPlot[TwoDNBinsDeltaPT];
+		TH2D* CC1pRecoDeltaPn_InDeltaPTTwoDPlot2D[TwoDNBinsDeltaPT];	
+		TH2D* POTScaledCC1pRecoDeltaPn_InDeltaPTTwoDPlot2D[TwoDNBinsDeltaPT];			
+
 		//----------------------------------------//			
 
 		for (int WhichDeltaPT = 0; WhichDeltaPT < TwoDNBinsDeltaPT; WhichDeltaPT++) {
@@ -1191,16 +1217,50 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 			TString DeltaAlphaTTwoDInDeltaPTLabel = "DeltaAlphaT_DeltaPT_"+tools.ConvertToString(TwoDArrayNBinsDeltaPT[WhichDeltaPT])+"To"+tools.ConvertToString(TwoDArrayNBinsDeltaPT[WhichDeltaPT+1])+"Plot";			
 
-			RecoDeltaAlphaT_InDeltaPTTwoDPlot[WhichDeltaPT] = new TH1D("Reco"+DeltaAlphaTTwoDInDeltaPTLabel,LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);
-			CC1pRecoDeltaAlphaT_InDeltaPTTwoDPlot[WhichDeltaPT] = new TH1D("CC1pReco"+DeltaAlphaTTwoDInDeltaPTLabel,LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);
-			CC1pTrueDeltaAlphaT_InDeltaPTTwoDPlot[WhichDeltaPT] = new TH1D("CC1pTrue"+DeltaAlphaTTwoDInDeltaPTLabel,LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);					
-			NonCC1pRecoDeltaAlphaT_InDeltaPTTwoDPlot[WhichDeltaPT] = new TH1D("NonCC1pReco"+DeltaAlphaTTwoDInDeltaPTLabel,LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);
-			CCQERecoDeltaAlphaT_InDeltaPTTwoDPlot[WhichDeltaPT] = new TH1D("CCQEReco"+DeltaAlphaTTwoDInDeltaPTLabel,LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);
-			CCMECRecoDeltaAlphaT_InDeltaPTTwoDPlot[WhichDeltaPT] = new TH1D("CCMECReco"+DeltaAlphaTTwoDInDeltaPTLabel,LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);
-			CCRESRecoDeltaAlphaT_InDeltaPTTwoDPlot[WhichDeltaPT] = new TH1D("CCRESReco"+DeltaAlphaTTwoDInDeltaPTLabel,LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);
-			CCDISRecoDeltaAlphaT_InDeltaPTTwoDPlot[WhichDeltaPT] = new TH1D("CCDISReco"+DeltaAlphaTTwoDInDeltaPTLabel,LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);	
-			CC1pRecoDeltaAlphaT_InDeltaPTTwoDPlot2D[WhichDeltaPT] = new TH2D("CC1pReco"+DeltaAlphaTTwoDInDeltaPTLabel+"2D",LabelXAxisDeltaAlphaT2D,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);	
-			POTScaledCC1pRecoDeltaAlphaT_InDeltaPTTwoDPlot2D[WhichDeltaPT] = new TH2D("POTScaledCC1pReco"+DeltaAlphaTTwoDInDeltaPTLabel+"2D",LabelXAxisDeltaAlphaT2D,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);																									
+			RecoDeltaAlphaT_InDeltaPTTwoDPlot[WhichDeltaPT] = new TH1D("Reco"+DeltaAlphaTTwoDInDeltaPTLabel,LabelXAxisDeltaAlphaT,TwoDArrayNBinsDeltaAlphaTInDeltaPTSlices[WhichDeltaPT].size()-1,&TwoDArrayNBinsDeltaAlphaTInDeltaPTSlices[WhichDeltaPT][0]);
+			CC1pRecoDeltaAlphaT_InDeltaPTTwoDPlot[WhichDeltaPT] = new TH1D("CC1pReco"+DeltaAlphaTTwoDInDeltaPTLabel,LabelXAxisDeltaAlphaT,TwoDArrayNBinsDeltaAlphaTInDeltaPTSlices[WhichDeltaPT].size()-1,&TwoDArrayNBinsDeltaAlphaTInDeltaPTSlices[WhichDeltaPT][0]);
+			CC1pTrueDeltaAlphaT_InDeltaPTTwoDPlot[WhichDeltaPT] = new TH1D("CC1pTrue"+DeltaAlphaTTwoDInDeltaPTLabel,LabelXAxisDeltaAlphaT,TwoDArrayNBinsDeltaAlphaTInDeltaPTSlices[WhichDeltaPT].size()-1,&TwoDArrayNBinsDeltaAlphaTInDeltaPTSlices[WhichDeltaPT][0]);					
+			NonCC1pRecoDeltaAlphaT_InDeltaPTTwoDPlot[WhichDeltaPT] = new TH1D("NonCC1pReco"+DeltaAlphaTTwoDInDeltaPTLabel,LabelXAxisDeltaAlphaT,TwoDArrayNBinsDeltaAlphaTInDeltaPTSlices[WhichDeltaPT].size()-1,&TwoDArrayNBinsDeltaAlphaTInDeltaPTSlices[WhichDeltaPT][0]);
+			CCQERecoDeltaAlphaT_InDeltaPTTwoDPlot[WhichDeltaPT] = new TH1D("CCQEReco"+DeltaAlphaTTwoDInDeltaPTLabel,LabelXAxisDeltaAlphaT,TwoDArrayNBinsDeltaAlphaTInDeltaPTSlices[WhichDeltaPT].size()-1,&TwoDArrayNBinsDeltaAlphaTInDeltaPTSlices[WhichDeltaPT][0]);
+			CCMECRecoDeltaAlphaT_InDeltaPTTwoDPlot[WhichDeltaPT] = new TH1D("CCMECReco"+DeltaAlphaTTwoDInDeltaPTLabel,LabelXAxisDeltaAlphaT,TwoDArrayNBinsDeltaAlphaTInDeltaPTSlices[WhichDeltaPT].size()-1,&TwoDArrayNBinsDeltaAlphaTInDeltaPTSlices[WhichDeltaPT][0]);
+			CCRESRecoDeltaAlphaT_InDeltaPTTwoDPlot[WhichDeltaPT] = new TH1D("CCRESReco"+DeltaAlphaTTwoDInDeltaPTLabel,LabelXAxisDeltaAlphaT,TwoDArrayNBinsDeltaAlphaTInDeltaPTSlices[WhichDeltaPT].size()-1,&TwoDArrayNBinsDeltaAlphaTInDeltaPTSlices[WhichDeltaPT][0]);
+			CCDISRecoDeltaAlphaT_InDeltaPTTwoDPlot[WhichDeltaPT] = new TH1D("CCDISReco"+DeltaAlphaTTwoDInDeltaPTLabel,LabelXAxisDeltaAlphaT,TwoDArrayNBinsDeltaAlphaTInDeltaPTSlices[WhichDeltaPT].size()-1,&TwoDArrayNBinsDeltaAlphaTInDeltaPTSlices[WhichDeltaPT][0]);	
+			CC1pRecoDeltaAlphaT_InDeltaPTTwoDPlot2D[WhichDeltaPT] = new TH2D("CC1pReco"+DeltaAlphaTTwoDInDeltaPTLabel+"2D",LabelXAxisDeltaAlphaT2D,TwoDArrayNBinsDeltaAlphaTInDeltaPTSlices[WhichDeltaPT].size()-1,&TwoDArrayNBinsDeltaAlphaTInDeltaPTSlices[WhichDeltaPT][0],TwoDArrayNBinsDeltaAlphaTInDeltaPTSlices[WhichDeltaPT].size()-1,&TwoDArrayNBinsDeltaAlphaTInDeltaPTSlices[WhichDeltaPT][0]);	
+			POTScaledCC1pRecoDeltaAlphaT_InDeltaPTTwoDPlot2D[WhichDeltaPT] = new TH2D("POTScaledCC1pReco"+DeltaAlphaTTwoDInDeltaPTLabel+"2D",LabelXAxisDeltaAlphaT2D,TwoDArrayNBinsDeltaAlphaTInDeltaPTSlices[WhichDeltaPT].size()-1,&TwoDArrayNBinsDeltaAlphaTInDeltaPTSlices[WhichDeltaPT][0],TwoDArrayNBinsDeltaAlphaTInDeltaPTSlices[WhichDeltaPT].size()-1,&TwoDArrayNBinsDeltaAlphaTInDeltaPTSlices[WhichDeltaPT][0]);																									
+
+			//------------------------------//
+
+			// DeltaPhiT in DeltaPT slices
+
+			TString DeltaPhiTTwoDInDeltaPTLabel = "DeltaPhiT_DeltaPT_"+tools.ConvertToString(TwoDArrayNBinsDeltaPT[WhichDeltaPT])+"To"+tools.ConvertToString(TwoDArrayNBinsDeltaPT[WhichDeltaPT+1])+"Plot";			
+
+			RecoDeltaPhiT_InDeltaPTTwoDPlot[WhichDeltaPT] = new TH1D("Reco"+DeltaPhiTTwoDInDeltaPTLabel,LabelXAxisDeltaPhiT,TwoDArrayNBinsDeltaPhiTInDeltaPTSlices[WhichDeltaPT].size()-1,&TwoDArrayNBinsDeltaPhiTInDeltaPTSlices[WhichDeltaPT][0]);
+			CC1pRecoDeltaPhiT_InDeltaPTTwoDPlot[WhichDeltaPT] = new TH1D("CC1pReco"+DeltaPhiTTwoDInDeltaPTLabel,LabelXAxisDeltaPhiT,TwoDArrayNBinsDeltaPhiTInDeltaPTSlices[WhichDeltaPT].size()-1,&TwoDArrayNBinsDeltaPhiTInDeltaPTSlices[WhichDeltaPT][0]);
+			CC1pTrueDeltaPhiT_InDeltaPTTwoDPlot[WhichDeltaPT] = new TH1D("CC1pTrue"+DeltaPhiTTwoDInDeltaPTLabel,LabelXAxisDeltaPhiT,TwoDArrayNBinsDeltaPhiTInDeltaPTSlices[WhichDeltaPT].size()-1,&TwoDArrayNBinsDeltaPhiTInDeltaPTSlices[WhichDeltaPT][0]);					
+			NonCC1pRecoDeltaPhiT_InDeltaPTTwoDPlot[WhichDeltaPT] = new TH1D("NonCC1pReco"+DeltaPhiTTwoDInDeltaPTLabel,LabelXAxisDeltaPhiT,TwoDArrayNBinsDeltaPhiTInDeltaPTSlices[WhichDeltaPT].size()-1,&TwoDArrayNBinsDeltaPhiTInDeltaPTSlices[WhichDeltaPT][0]);
+			CCQERecoDeltaPhiT_InDeltaPTTwoDPlot[WhichDeltaPT] = new TH1D("CCQEReco"+DeltaPhiTTwoDInDeltaPTLabel,LabelXAxisDeltaPhiT,TwoDArrayNBinsDeltaPhiTInDeltaPTSlices[WhichDeltaPT].size()-1,&TwoDArrayNBinsDeltaPhiTInDeltaPTSlices[WhichDeltaPT][0]);
+			CCMECRecoDeltaPhiT_InDeltaPTTwoDPlot[WhichDeltaPT] = new TH1D("CCMECReco"+DeltaPhiTTwoDInDeltaPTLabel,LabelXAxisDeltaPhiT,TwoDArrayNBinsDeltaPhiTInDeltaPTSlices[WhichDeltaPT].size()-1,&TwoDArrayNBinsDeltaPhiTInDeltaPTSlices[WhichDeltaPT][0]);
+			CCRESRecoDeltaPhiT_InDeltaPTTwoDPlot[WhichDeltaPT] = new TH1D("CCRESReco"+DeltaPhiTTwoDInDeltaPTLabel,LabelXAxisDeltaPhiT,TwoDArrayNBinsDeltaPhiTInDeltaPTSlices[WhichDeltaPT].size()-1,&TwoDArrayNBinsDeltaPhiTInDeltaPTSlices[WhichDeltaPT][0]);
+			CCDISRecoDeltaPhiT_InDeltaPTTwoDPlot[WhichDeltaPT] = new TH1D("CCDISReco"+DeltaPhiTTwoDInDeltaPTLabel,LabelXAxisDeltaPhiT,TwoDArrayNBinsDeltaPhiTInDeltaPTSlices[WhichDeltaPT].size()-1,&TwoDArrayNBinsDeltaPhiTInDeltaPTSlices[WhichDeltaPT][0]);	
+			CC1pRecoDeltaPhiT_InDeltaPTTwoDPlot2D[WhichDeltaPT] = new TH2D("CC1pReco"+DeltaPhiTTwoDInDeltaPTLabel+"2D",LabelXAxisDeltaPhiT2D,TwoDArrayNBinsDeltaPhiTInDeltaPTSlices[WhichDeltaPT].size()-1,&TwoDArrayNBinsDeltaPhiTInDeltaPTSlices[WhichDeltaPT][0],TwoDArrayNBinsDeltaPhiTInDeltaPTSlices[WhichDeltaPT].size()-1,&TwoDArrayNBinsDeltaPhiTInDeltaPTSlices[WhichDeltaPT][0]);	
+			POTScaledCC1pRecoDeltaPhiT_InDeltaPTTwoDPlot2D[WhichDeltaPT] = new TH2D("POTScaledCC1pReco"+DeltaPhiTTwoDInDeltaPTLabel+"2D",LabelXAxisDeltaPhiT2D,TwoDArrayNBinsDeltaPhiTInDeltaPTSlices[WhichDeltaPT].size()-1,&TwoDArrayNBinsDeltaPhiTInDeltaPTSlices[WhichDeltaPT][0],TwoDArrayNBinsDeltaPhiTInDeltaPTSlices[WhichDeltaPT].size()-1,&TwoDArrayNBinsDeltaPhiTInDeltaPTSlices[WhichDeltaPT][0]);																									
+
+			//------------------------------//
+
+			// DeltaPn in DeltaPT slices
+
+			TString DeltaPnTwoDInDeltaPTLabel = "DeltaPn_DeltaPT_"+tools.ConvertToString(TwoDArrayNBinsDeltaPT[WhichDeltaPT])+"To"+tools.ConvertToString(TwoDArrayNBinsDeltaPT[WhichDeltaPT+1])+"Plot";			
+
+			RecoDeltaPn_InDeltaPTTwoDPlot[WhichDeltaPT] = new TH1D("Reco"+DeltaPnTwoDInDeltaPTLabel,LabelXAxisDeltaPn,TwoDArrayNBinsDeltaPnInDeltaPTSlices[WhichDeltaPT].size()-1,&TwoDArrayNBinsDeltaPnInDeltaPTSlices[WhichDeltaPT][0]);
+			CC1pRecoDeltaPn_InDeltaPTTwoDPlot[WhichDeltaPT] = new TH1D("CC1pReco"+DeltaPnTwoDInDeltaPTLabel,LabelXAxisDeltaPn,TwoDArrayNBinsDeltaPnInDeltaPTSlices[WhichDeltaPT].size()-1,&TwoDArrayNBinsDeltaPnInDeltaPTSlices[WhichDeltaPT][0]);
+			CC1pTrueDeltaPn_InDeltaPTTwoDPlot[WhichDeltaPT] = new TH1D("CC1pTrue"+DeltaPnTwoDInDeltaPTLabel,LabelXAxisDeltaPn,TwoDArrayNBinsDeltaPnInDeltaPTSlices[WhichDeltaPT].size()-1,&TwoDArrayNBinsDeltaPnInDeltaPTSlices[WhichDeltaPT][0]);					
+			NonCC1pRecoDeltaPn_InDeltaPTTwoDPlot[WhichDeltaPT] = new TH1D("NonCC1pReco"+DeltaPnTwoDInDeltaPTLabel,LabelXAxisDeltaPn,TwoDArrayNBinsDeltaPnInDeltaPTSlices[WhichDeltaPT].size()-1,&TwoDArrayNBinsDeltaPnInDeltaPTSlices[WhichDeltaPT][0]);
+			CCQERecoDeltaPn_InDeltaPTTwoDPlot[WhichDeltaPT] = new TH1D("CCQEReco"+DeltaPnTwoDInDeltaPTLabel,LabelXAxisDeltaPn,TwoDArrayNBinsDeltaPnInDeltaPTSlices[WhichDeltaPT].size()-1,&TwoDArrayNBinsDeltaPnInDeltaPTSlices[WhichDeltaPT][0]);
+			CCMECRecoDeltaPn_InDeltaPTTwoDPlot[WhichDeltaPT] = new TH1D("CCMECReco"+DeltaPnTwoDInDeltaPTLabel,LabelXAxisDeltaPn,TwoDArrayNBinsDeltaPnInDeltaPTSlices[WhichDeltaPT].size()-1,&TwoDArrayNBinsDeltaPnInDeltaPTSlices[WhichDeltaPT][0]);
+			CCRESRecoDeltaPn_InDeltaPTTwoDPlot[WhichDeltaPT] = new TH1D("CCRESReco"+DeltaPnTwoDInDeltaPTLabel,LabelXAxisDeltaPn,TwoDArrayNBinsDeltaPnInDeltaPTSlices[WhichDeltaPT].size()-1,&TwoDArrayNBinsDeltaPnInDeltaPTSlices[WhichDeltaPT][0]);
+			CCDISRecoDeltaPn_InDeltaPTTwoDPlot[WhichDeltaPT] = new TH1D("CCDISReco"+DeltaPnTwoDInDeltaPTLabel,LabelXAxisDeltaPn,TwoDArrayNBinsDeltaPnInDeltaPTSlices[WhichDeltaPT].size()-1,&TwoDArrayNBinsDeltaPnInDeltaPTSlices[WhichDeltaPT][0]);	
+			CC1pRecoDeltaPn_InDeltaPTTwoDPlot2D[WhichDeltaPT] = new TH2D("CC1pReco"+DeltaPnTwoDInDeltaPTLabel+"2D",LabelXAxisDeltaPn2D,TwoDArrayNBinsDeltaPnInDeltaPTSlices[WhichDeltaPT].size()-1,&TwoDArrayNBinsDeltaPnInDeltaPTSlices[WhichDeltaPT][0],TwoDArrayNBinsDeltaPnInDeltaPTSlices[WhichDeltaPT].size()-1,&TwoDArrayNBinsDeltaPnInDeltaPTSlices[WhichDeltaPT][0]);	
+			POTScaledCC1pRecoDeltaPn_InDeltaPTTwoDPlot2D[WhichDeltaPT] = new TH2D("POTScaledCC1pReco"+DeltaPnTwoDInDeltaPTLabel+"2D",LabelXAxisDeltaPn2D,TwoDArrayNBinsDeltaPnInDeltaPTSlices[WhichDeltaPT].size()-1,&TwoDArrayNBinsDeltaPnInDeltaPTSlices[WhichDeltaPT][0],TwoDArrayNBinsDeltaPnInDeltaPTSlices[WhichDeltaPT].size()-1,&TwoDArrayNBinsDeltaPnInDeltaPTSlices[WhichDeltaPT][0]);																									
 
 			//------------------------------//
 
@@ -1208,16 +1268,16 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 				TString ECalTwoDInDeltaPTDeltaAlphaTLabel = "ECal_DeltaPT_"+tools.ConvertToString(TwoDArrayNBinsDeltaPT[WhichDeltaPT])+"To"+tools.ConvertToString(TwoDArrayNBinsDeltaPT[WhichDeltaPT+1])+"_DeltaAlphaT_"+tools.ConvertToString(TwoDArrayNBinsDeltaAlphaT[WhichDeltaAlphaT])+"To"+tools.ConvertToString(TwoDArrayNBinsDeltaAlphaT[WhichDeltaAlphaT+1])+"Plot";
 		
-				RecoECal_InDeltaPTDeltaAlphaTTwoDPlot[WhichDeltaPT][WhichDeltaAlphaT] = new TH1D("Reco"+ECalTwoDInDeltaPTDeltaAlphaTLabel,LabelXAxisECal,NBinsECal,ArrayNBinsECal);
-				CC1pRecoECal_InDeltaPTDeltaAlphaTTwoDPlot[WhichDeltaPT][WhichDeltaAlphaT] = new TH1D("CC1pReco"+ECalTwoDInDeltaPTDeltaAlphaTLabel,LabelXAxisECal,NBinsECal,ArrayNBinsECal);
-				CC1pTrueECal_InDeltaPTDeltaAlphaTTwoDPlot[WhichDeltaPT][WhichDeltaAlphaT] = new TH1D("CC1pTrue"+ECalTwoDInDeltaPTDeltaAlphaTLabel,LabelXAxisECal,NBinsECal,ArrayNBinsECal);					
-				NonCC1pRecoECal_InDeltaPTDeltaAlphaTTwoDPlot[WhichDeltaPT][WhichDeltaAlphaT] = new TH1D("NonCC1pReco"+ECalTwoDInDeltaPTDeltaAlphaTLabel,LabelXAxisECal,NBinsECal,ArrayNBinsECal);
-				CCQERecoECal_InDeltaPTDeltaAlphaTTwoDPlot[WhichDeltaPT][WhichDeltaAlphaT] = new TH1D("CCQEReco"+ECalTwoDInDeltaPTDeltaAlphaTLabel,LabelXAxisECal,NBinsECal,ArrayNBinsECal);
-				CCMECRecoECal_InDeltaPTDeltaAlphaTTwoDPlot[WhichDeltaPT][WhichDeltaAlphaT] = new TH1D("CCMECReco"+ECalTwoDInDeltaPTDeltaAlphaTLabel,LabelXAxisECal,NBinsECal,ArrayNBinsECal);
-				CCRESRecoECal_InDeltaPTDeltaAlphaTTwoDPlot[WhichDeltaPT][WhichDeltaAlphaT] = new TH1D("CCRESReco"+ECalTwoDInDeltaPTDeltaAlphaTLabel,LabelXAxisECal,NBinsECal,ArrayNBinsECal);
-				CCDISRecoECal_InDeltaPTDeltaAlphaTTwoDPlot[WhichDeltaPT][WhichDeltaAlphaT] = new TH1D("CCDISReco"+ECalTwoDInDeltaPTDeltaAlphaTLabel,LabelXAxisECal,NBinsECal,ArrayNBinsECal);	
-				CC1pRecoECal_InDeltaPTDeltaAlphaTTwoDPlot2D[WhichDeltaPT][WhichDeltaAlphaT] = new TH2D("CC1pReco"+ECalTwoDInDeltaPTDeltaAlphaTLabel+"2D",LabelXAxisECal2D,NBinsECal,ArrayNBinsECal,NBinsECal,ArrayNBinsECal);	
-				POTScaledCC1pRecoECal_InDeltaPTDeltaAlphaTTwoDPlot2D[WhichDeltaPT][WhichDeltaAlphaT] = new TH2D("POTScaledCC1pReco"+ECalTwoDInDeltaPTDeltaAlphaTLabel+"2D",LabelXAxisECal2D,NBinsECal,ArrayNBinsECal,NBinsECal,ArrayNBinsECal);																									
+				RecoECal_InDeltaPTDeltaAlphaTTwoDPlot[WhichDeltaPT][WhichDeltaAlphaT] = new TH1D("Reco"+ECalTwoDInDeltaPTDeltaAlphaTLabel,LabelXAxisECal,TwoDArrayNBinsECalInDeltaPTDeltaAlphaTSlices[WhichDeltaPT][WhichDeltaAlphaT].size()-1,&TwoDArrayNBinsECalInDeltaPTDeltaAlphaTSlices[WhichDeltaPT][WhichDeltaAlphaT][0]);
+				CC1pRecoECal_InDeltaPTDeltaAlphaTTwoDPlot[WhichDeltaPT][WhichDeltaAlphaT] = new TH1D("CC1pReco"+ECalTwoDInDeltaPTDeltaAlphaTLabel,LabelXAxisECal,TwoDArrayNBinsECalInDeltaPTDeltaAlphaTSlices[WhichDeltaPT][WhichDeltaAlphaT].size()-1,&TwoDArrayNBinsECalInDeltaPTDeltaAlphaTSlices[WhichDeltaPT][WhichDeltaAlphaT][0]);
+				CC1pTrueECal_InDeltaPTDeltaAlphaTTwoDPlot[WhichDeltaPT][WhichDeltaAlphaT] = new TH1D("CC1pTrue"+ECalTwoDInDeltaPTDeltaAlphaTLabel,LabelXAxisECal,TwoDArrayNBinsECalInDeltaPTDeltaAlphaTSlices[WhichDeltaPT][WhichDeltaAlphaT].size()-1,&TwoDArrayNBinsECalInDeltaPTDeltaAlphaTSlices[WhichDeltaPT][WhichDeltaAlphaT][0]);					
+				NonCC1pRecoECal_InDeltaPTDeltaAlphaTTwoDPlot[WhichDeltaPT][WhichDeltaAlphaT] = new TH1D("NonCC1pReco"+ECalTwoDInDeltaPTDeltaAlphaTLabel,LabelXAxisECal,TwoDArrayNBinsECalInDeltaPTDeltaAlphaTSlices[WhichDeltaPT][WhichDeltaAlphaT].size()-1,&TwoDArrayNBinsECalInDeltaPTDeltaAlphaTSlices[WhichDeltaPT][WhichDeltaAlphaT][0]);
+				CCQERecoECal_InDeltaPTDeltaAlphaTTwoDPlot[WhichDeltaPT][WhichDeltaAlphaT] = new TH1D("CCQEReco"+ECalTwoDInDeltaPTDeltaAlphaTLabel,LabelXAxisECal,TwoDArrayNBinsECalInDeltaPTDeltaAlphaTSlices[WhichDeltaPT][WhichDeltaAlphaT].size()-1,&TwoDArrayNBinsECalInDeltaPTDeltaAlphaTSlices[WhichDeltaPT][WhichDeltaAlphaT][0]);
+				CCMECRecoECal_InDeltaPTDeltaAlphaTTwoDPlot[WhichDeltaPT][WhichDeltaAlphaT] = new TH1D("CCMECReco"+ECalTwoDInDeltaPTDeltaAlphaTLabel,LabelXAxisECal,TwoDArrayNBinsECalInDeltaPTDeltaAlphaTSlices[WhichDeltaPT][WhichDeltaAlphaT].size()-1,&TwoDArrayNBinsECalInDeltaPTDeltaAlphaTSlices[WhichDeltaPT][WhichDeltaAlphaT][0]);
+				CCRESRecoECal_InDeltaPTDeltaAlphaTTwoDPlot[WhichDeltaPT][WhichDeltaAlphaT] = new TH1D("CCRESReco"+ECalTwoDInDeltaPTDeltaAlphaTLabel,LabelXAxisECal,TwoDArrayNBinsECalInDeltaPTDeltaAlphaTSlices[WhichDeltaPT][WhichDeltaAlphaT].size()-1,&TwoDArrayNBinsECalInDeltaPTDeltaAlphaTSlices[WhichDeltaPT][WhichDeltaAlphaT][0]);
+				CCDISRecoECal_InDeltaPTDeltaAlphaTTwoDPlot[WhichDeltaPT][WhichDeltaAlphaT] = new TH1D("CCDISReco"+ECalTwoDInDeltaPTDeltaAlphaTLabel,LabelXAxisECal,TwoDArrayNBinsECalInDeltaPTDeltaAlphaTSlices[WhichDeltaPT][WhichDeltaAlphaT].size()-1,&TwoDArrayNBinsECalInDeltaPTDeltaAlphaTSlices[WhichDeltaPT][WhichDeltaAlphaT][0]);	
+				CC1pRecoECal_InDeltaPTDeltaAlphaTTwoDPlot2D[WhichDeltaPT][WhichDeltaAlphaT] = new TH2D("CC1pReco"+ECalTwoDInDeltaPTDeltaAlphaTLabel+"2D",LabelXAxisECal2D,TwoDArrayNBinsECalInDeltaPTDeltaAlphaTSlices[WhichDeltaPT][WhichDeltaAlphaT].size()-1,&TwoDArrayNBinsECalInDeltaPTDeltaAlphaTSlices[WhichDeltaPT][WhichDeltaAlphaT][0],TwoDArrayNBinsECalInDeltaPTDeltaAlphaTSlices[WhichDeltaPT][WhichDeltaAlphaT].size()-1,&TwoDArrayNBinsECalInDeltaPTDeltaAlphaTSlices[WhichDeltaPT][WhichDeltaAlphaT][0]);	
+				POTScaledCC1pRecoECal_InDeltaPTDeltaAlphaTTwoDPlot2D[WhichDeltaPT][WhichDeltaAlphaT] = new TH2D("POTScaledCC1pReco"+ECalTwoDInDeltaPTDeltaAlphaTLabel+"2D",LabelXAxisECal2D,TwoDArrayNBinsECalInDeltaPTDeltaAlphaTSlices[WhichDeltaPT][WhichDeltaAlphaT].size()-1,&TwoDArrayNBinsECalInDeltaPTDeltaAlphaTSlices[WhichDeltaPT][WhichDeltaAlphaT][0],TwoDArrayNBinsECalInDeltaPTDeltaAlphaTSlices[WhichDeltaPT][WhichDeltaAlphaT].size()-1,&TwoDArrayNBinsECalInDeltaPTDeltaAlphaTSlices[WhichDeltaPT][WhichDeltaAlphaT][0]);																									
 
 			} // End of the loop over the 2D DeltaAlphaT bins
 
@@ -1274,43 +1334,42 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 			TString DeltaAlphaTTwoDInMuonCosThetaLabel = "DeltaAlphaT_MuonCosTheta_"+tools.ConvertToString(TwoDArrayNBinsMuonCosTheta[WhichMuonCosTheta])+"To"+tools.ConvertToString(TwoDArrayNBinsMuonCosTheta[WhichMuonCosTheta+1])+"Plot";			
 
-			RecoDeltaAlphaT_InMuonCosThetaTwoDPlot[WhichMuonCosTheta] = new TH1D("Reco"+DeltaAlphaTTwoDInMuonCosThetaLabel,LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);
-			CC1pRecoDeltaAlphaT_InMuonCosThetaTwoDPlot[WhichMuonCosTheta] = new TH1D("CC1pReco"+DeltaAlphaTTwoDInMuonCosThetaLabel,LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);
-			CC1pTrueDeltaAlphaT_InMuonCosThetaTwoDPlot[WhichMuonCosTheta] = new TH1D("CC1pTrue"+DeltaAlphaTTwoDInMuonCosThetaLabel,LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);					
-			NonCC1pRecoDeltaAlphaT_InMuonCosThetaTwoDPlot[WhichMuonCosTheta] = new TH1D("NonCC1pReco"+DeltaAlphaTTwoDInMuonCosThetaLabel,LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);
-			CCQERecoDeltaAlphaT_InMuonCosThetaTwoDPlot[WhichMuonCosTheta] = new TH1D("CCQEReco"+DeltaAlphaTTwoDInMuonCosThetaLabel,LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);
-			CCMECRecoDeltaAlphaT_InMuonCosThetaTwoDPlot[WhichMuonCosTheta] = new TH1D("CCMECReco"+DeltaAlphaTTwoDInMuonCosThetaLabel,LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);
-			CCRESRecoDeltaAlphaT_InMuonCosThetaTwoDPlot[WhichMuonCosTheta] = new TH1D("CCRESReco"+DeltaAlphaTTwoDInMuonCosThetaLabel,LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);
-			CCDISRecoDeltaAlphaT_InMuonCosThetaTwoDPlot[WhichMuonCosTheta] = new TH1D("CCDISReco"+DeltaAlphaTTwoDInMuonCosThetaLabel,LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);	
-			CC1pRecoDeltaAlphaT_InMuonCosThetaTwoDPlot2D[WhichMuonCosTheta] = new TH2D("CC1pReco"+DeltaAlphaTTwoDInMuonCosThetaLabel+"2D",LabelXAxisDeltaAlphaT2D,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);	
-			POTScaledCC1pRecoDeltaAlphaT_InMuonCosThetaTwoDPlot2D[WhichMuonCosTheta] = new TH2D("POTScaledCC1pReco"+DeltaAlphaTTwoDInMuonCosThetaLabel+"2D",LabelXAxisDeltaAlphaT2D,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);																									
+			RecoDeltaAlphaT_InMuonCosThetaTwoDPlot[WhichMuonCosTheta] = new TH1D("Reco"+DeltaAlphaTTwoDInMuonCosThetaLabel,LabelXAxisDeltaAlphaT,TwoDArrayNBinsDeltaAlphaTInMuonCosThetaSlices[WhichMuonCosTheta].size()-1,&TwoDArrayNBinsDeltaAlphaTInMuonCosThetaSlices[WhichMuonCosTheta][0]);
+			CC1pRecoDeltaAlphaT_InMuonCosThetaTwoDPlot[WhichMuonCosTheta] = new TH1D("CC1pReco"+DeltaAlphaTTwoDInMuonCosThetaLabel,LabelXAxisDeltaAlphaT,TwoDArrayNBinsDeltaAlphaTInMuonCosThetaSlices[WhichMuonCosTheta].size()-1,&TwoDArrayNBinsDeltaAlphaTInMuonCosThetaSlices[WhichMuonCosTheta][0]);
+			CC1pTrueDeltaAlphaT_InMuonCosThetaTwoDPlot[WhichMuonCosTheta] = new TH1D("CC1pTrue"+DeltaAlphaTTwoDInMuonCosThetaLabel,LabelXAxisDeltaAlphaT,TwoDArrayNBinsDeltaAlphaTInMuonCosThetaSlices[WhichMuonCosTheta].size()-1,&TwoDArrayNBinsDeltaAlphaTInMuonCosThetaSlices[WhichMuonCosTheta][0]);					
+			NonCC1pRecoDeltaAlphaT_InMuonCosThetaTwoDPlot[WhichMuonCosTheta] = new TH1D("NonCC1pReco"+DeltaAlphaTTwoDInMuonCosThetaLabel,LabelXAxisDeltaAlphaT,TwoDArrayNBinsDeltaAlphaTInMuonCosThetaSlices[WhichMuonCosTheta].size()-1,&TwoDArrayNBinsDeltaAlphaTInMuonCosThetaSlices[WhichMuonCosTheta][0]);
+			CCQERecoDeltaAlphaT_InMuonCosThetaTwoDPlot[WhichMuonCosTheta] = new TH1D("CCQEReco"+DeltaAlphaTTwoDInMuonCosThetaLabel,LabelXAxisDeltaAlphaT,TwoDArrayNBinsDeltaAlphaTInMuonCosThetaSlices[WhichMuonCosTheta].size()-1,&TwoDArrayNBinsDeltaAlphaTInMuonCosThetaSlices[WhichMuonCosTheta][0]);
+			CCMECRecoDeltaAlphaT_InMuonCosThetaTwoDPlot[WhichMuonCosTheta] = new TH1D("CCMECReco"+DeltaAlphaTTwoDInMuonCosThetaLabel,LabelXAxisDeltaAlphaT,TwoDArrayNBinsDeltaAlphaTInMuonCosThetaSlices[WhichMuonCosTheta].size()-1,&TwoDArrayNBinsDeltaAlphaTInMuonCosThetaSlices[WhichMuonCosTheta][0]);
+			CCRESRecoDeltaAlphaT_InMuonCosThetaTwoDPlot[WhichMuonCosTheta] = new TH1D("CCRESReco"+DeltaAlphaTTwoDInMuonCosThetaLabel,LabelXAxisDeltaAlphaT,TwoDArrayNBinsDeltaAlphaTInMuonCosThetaSlices[WhichMuonCosTheta].size()-1,&TwoDArrayNBinsDeltaAlphaTInMuonCosThetaSlices[WhichMuonCosTheta][0]);
+			CCDISRecoDeltaAlphaT_InMuonCosThetaTwoDPlot[WhichMuonCosTheta] = new TH1D("CCDISReco"+DeltaAlphaTTwoDInMuonCosThetaLabel,LabelXAxisDeltaAlphaT,TwoDArrayNBinsDeltaAlphaTInMuonCosThetaSlices[WhichMuonCosTheta].size()-1,&TwoDArrayNBinsDeltaAlphaTInMuonCosThetaSlices[WhichMuonCosTheta][0]);	
+			CC1pRecoDeltaAlphaT_InMuonCosThetaTwoDPlot2D[WhichMuonCosTheta] = new TH2D("CC1pReco"+DeltaAlphaTTwoDInMuonCosThetaLabel+"2D",LabelXAxisDeltaAlphaT2D,TwoDArrayNBinsDeltaAlphaTInMuonCosThetaSlices[WhichMuonCosTheta].size()-1,&TwoDArrayNBinsDeltaAlphaTInMuonCosThetaSlices[WhichMuonCosTheta][0],TwoDArrayNBinsDeltaAlphaTInMuonCosThetaSlices[WhichMuonCosTheta].size()-1,&TwoDArrayNBinsDeltaAlphaTInMuonCosThetaSlices[WhichMuonCosTheta][0]);	
+			POTScaledCC1pRecoDeltaAlphaT_InMuonCosThetaTwoDPlot2D[WhichMuonCosTheta] = new TH2D("POTScaledCC1pReco"+DeltaAlphaTTwoDInMuonCosThetaLabel+"2D",LabelXAxisDeltaAlphaT2D,TwoDArrayNBinsDeltaAlphaTInMuonCosThetaSlices[WhichMuonCosTheta].size()-1,&TwoDArrayNBinsDeltaAlphaTInMuonCosThetaSlices[WhichMuonCosTheta][0],TwoDArrayNBinsDeltaAlphaTInMuonCosThetaSlices[WhichMuonCosTheta].size()-1,&TwoDArrayNBinsDeltaAlphaTInMuonCosThetaSlices[WhichMuonCosTheta][0]);																									
 
 			TString DeltaPTTwoDInMuonCosThetaLabel = "DeltaPT_MuonCosTheta_"+tools.ConvertToString(TwoDArrayNBinsMuonCosTheta[WhichMuonCosTheta])+"To"+tools.ConvertToString(TwoDArrayNBinsMuonCosTheta[WhichMuonCosTheta+1])+"Plot";			
 
-			RecoDeltaPT_InMuonCosThetaTwoDPlot[WhichMuonCosTheta] = new TH1D("Reco"+DeltaPTTwoDInMuonCosThetaLabel,LabelXAxisDeltaPT,NBinsDeltaPT,ArrayNBinsDeltaPT);
-			CC1pRecoDeltaPT_InMuonCosThetaTwoDPlot[WhichMuonCosTheta] = new TH1D("CC1pReco"+DeltaPTTwoDInMuonCosThetaLabel,LabelXAxisDeltaPT,NBinsDeltaPT,ArrayNBinsDeltaPT);
-			CC1pTrueDeltaPT_InMuonCosThetaTwoDPlot[WhichMuonCosTheta] = new TH1D("CC1pTrue"+DeltaPTTwoDInMuonCosThetaLabel,LabelXAxisDeltaPT,NBinsDeltaPT,ArrayNBinsDeltaPT);					
-			NonCC1pRecoDeltaPT_InMuonCosThetaTwoDPlot[WhichMuonCosTheta] = new TH1D("NonCC1pReco"+DeltaPTTwoDInMuonCosThetaLabel,LabelXAxisDeltaPT,NBinsDeltaPT,ArrayNBinsDeltaPT);
-			CCQERecoDeltaPT_InMuonCosThetaTwoDPlot[WhichMuonCosTheta] = new TH1D("CCQEReco"+DeltaPTTwoDInMuonCosThetaLabel,LabelXAxisDeltaPT,NBinsDeltaPT,ArrayNBinsDeltaPT);
-			CCMECRecoDeltaPT_InMuonCosThetaTwoDPlot[WhichMuonCosTheta] = new TH1D("CCMECReco"+DeltaPTTwoDInMuonCosThetaLabel,LabelXAxisDeltaPT,NBinsDeltaPT,ArrayNBinsDeltaPT);
-			CCRESRecoDeltaPT_InMuonCosThetaTwoDPlot[WhichMuonCosTheta] = new TH1D("CCRESReco"+DeltaPTTwoDInMuonCosThetaLabel,LabelXAxisDeltaPT,NBinsDeltaPT,ArrayNBinsDeltaPT);
-			CCDISRecoDeltaPT_InMuonCosThetaTwoDPlot[WhichMuonCosTheta] = new TH1D("CCDISReco"+DeltaPTTwoDInMuonCosThetaLabel,LabelXAxisDeltaPT,NBinsDeltaPT,ArrayNBinsDeltaPT);	
-			CC1pRecoDeltaPT_InMuonCosThetaTwoDPlot2D[WhichMuonCosTheta] = new TH2D("CC1pReco"+DeltaPTTwoDInMuonCosThetaLabel+"2D",LabelXAxisDeltaPT2D,NBinsDeltaPT,ArrayNBinsDeltaPT,NBinsDeltaPT,ArrayNBinsDeltaPT);	
-			POTScaledCC1pRecoDeltaPT_InMuonCosThetaTwoDPlot2D[WhichMuonCosTheta] = new TH2D("POTScaledCC1pReco"+DeltaPTTwoDInMuonCosThetaLabel+"2D",LabelXAxisDeltaPT2D,NBinsDeltaPT,ArrayNBinsDeltaPT,NBinsDeltaPT,ArrayNBinsDeltaPT);																									
+			RecoDeltaPT_InMuonCosThetaTwoDPlot[WhichMuonCosTheta] = new TH1D("Reco"+DeltaPTTwoDInMuonCosThetaLabel,LabelXAxisDeltaPT,TwoDArrayNBinsDeltaPTInMuonCosThetaSlices[WhichMuonCosTheta].size()-1,&TwoDArrayNBinsDeltaPTInMuonCosThetaSlices[WhichMuonCosTheta][0]);
+			CC1pRecoDeltaPT_InMuonCosThetaTwoDPlot[WhichMuonCosTheta] = new TH1D("CC1pReco"+DeltaPTTwoDInMuonCosThetaLabel,LabelXAxisDeltaPT,TwoDArrayNBinsDeltaPTInMuonCosThetaSlices[WhichMuonCosTheta].size()-1,&TwoDArrayNBinsDeltaPTInMuonCosThetaSlices[WhichMuonCosTheta][0]);
+			CC1pTrueDeltaPT_InMuonCosThetaTwoDPlot[WhichMuonCosTheta] = new TH1D("CC1pTrue"+DeltaPTTwoDInMuonCosThetaLabel,LabelXAxisDeltaPT,TwoDArrayNBinsDeltaPTInMuonCosThetaSlices[WhichMuonCosTheta].size()-1,&TwoDArrayNBinsDeltaPTInMuonCosThetaSlices[WhichMuonCosTheta][0]);					
+			NonCC1pRecoDeltaPT_InMuonCosThetaTwoDPlot[WhichMuonCosTheta] = new TH1D("NonCC1pReco"+DeltaPTTwoDInMuonCosThetaLabel,LabelXAxisDeltaPT,TwoDArrayNBinsDeltaPTInMuonCosThetaSlices[WhichMuonCosTheta].size()-1,&TwoDArrayNBinsDeltaPTInMuonCosThetaSlices[WhichMuonCosTheta][0]);
+			CCQERecoDeltaPT_InMuonCosThetaTwoDPlot[WhichMuonCosTheta] = new TH1D("CCQEReco"+DeltaPTTwoDInMuonCosThetaLabel,LabelXAxisDeltaPT,TwoDArrayNBinsDeltaPTInMuonCosThetaSlices[WhichMuonCosTheta].size()-1,&TwoDArrayNBinsDeltaPTInMuonCosThetaSlices[WhichMuonCosTheta][0]);
+			CCMECRecoDeltaPT_InMuonCosThetaTwoDPlot[WhichMuonCosTheta] = new TH1D("CCMECReco"+DeltaPTTwoDInMuonCosThetaLabel,LabelXAxisDeltaPT,TwoDArrayNBinsDeltaPTInMuonCosThetaSlices[WhichMuonCosTheta].size()-1,&TwoDArrayNBinsDeltaPTInMuonCosThetaSlices[WhichMuonCosTheta][0]);
+			CCRESRecoDeltaPT_InMuonCosThetaTwoDPlot[WhichMuonCosTheta] = new TH1D("CCRESReco"+DeltaPTTwoDInMuonCosThetaLabel,LabelXAxisDeltaPT,TwoDArrayNBinsDeltaPTInMuonCosThetaSlices[WhichMuonCosTheta].size()-1,&TwoDArrayNBinsDeltaPTInMuonCosThetaSlices[WhichMuonCosTheta][0]);
+			CCDISRecoDeltaPT_InMuonCosThetaTwoDPlot[WhichMuonCosTheta] = new TH1D("CCDISReco"+DeltaPTTwoDInMuonCosThetaLabel,LabelXAxisDeltaPT,TwoDArrayNBinsDeltaPTInMuonCosThetaSlices[WhichMuonCosTheta].size()-1,&TwoDArrayNBinsDeltaPTInMuonCosThetaSlices[WhichMuonCosTheta][0]);	
+			CC1pRecoDeltaPT_InMuonCosThetaTwoDPlot2D[WhichMuonCosTheta] = new TH2D("CC1pReco"+DeltaPTTwoDInMuonCosThetaLabel+"2D",LabelXAxisDeltaPT2D,TwoDArrayNBinsDeltaPTInMuonCosThetaSlices[WhichMuonCosTheta].size()-1,&TwoDArrayNBinsDeltaPTInMuonCosThetaSlices[WhichMuonCosTheta][0],TwoDArrayNBinsDeltaPTInMuonCosThetaSlices[WhichMuonCosTheta].size()-1,&TwoDArrayNBinsDeltaPTInMuonCosThetaSlices[WhichMuonCosTheta][0]);	
+			POTScaledCC1pRecoDeltaPT_InMuonCosThetaTwoDPlot2D[WhichMuonCosTheta] = new TH2D("POTScaledCC1pReco"+DeltaPTTwoDInMuonCosThetaLabel+"2D",LabelXAxisDeltaPT2D,TwoDArrayNBinsDeltaPTInMuonCosThetaSlices[WhichMuonCosTheta].size()-1,&TwoDArrayNBinsDeltaPTInMuonCosThetaSlices[WhichMuonCosTheta][0],TwoDArrayNBinsDeltaPTInMuonCosThetaSlices[WhichMuonCosTheta].size()-1,&TwoDArrayNBinsDeltaPTInMuonCosThetaSlices[WhichMuonCosTheta][0]);																									
 
 			TString MuonMomentumTwoDInMuonCosThetaLabel = "MuonMomentum_MuonCosTheta_"+tools.ConvertToString(TwoDArrayNBinsMuonCosTheta[WhichMuonCosTheta])+"To"+tools.ConvertToString(TwoDArrayNBinsMuonCosTheta[WhichMuonCosTheta+1])+"Plot";			
 
-			RecoMuonMomentum_InMuonCosThetaTwoDPlot[WhichMuonCosTheta] = new TH1D("Reco"+MuonMomentumTwoDInMuonCosThetaLabel,LabelXAxisMuonMomentum,NBinsMuonMomentum,ArrayNBinsMuonMomentum);
-			CC1pRecoMuonMomentum_InMuonCosThetaTwoDPlot[WhichMuonCosTheta] = new TH1D("CC1pReco"+MuonMomentumTwoDInMuonCosThetaLabel,LabelXAxisMuonMomentum,NBinsMuonMomentum,ArrayNBinsMuonMomentum);
-			CC1pTrueMuonMomentum_InMuonCosThetaTwoDPlot[WhichMuonCosTheta] = new TH1D("CC1pTrue"+MuonMomentumTwoDInMuonCosThetaLabel,LabelXAxisMuonMomentum,NBinsMuonMomentum,ArrayNBinsMuonMomentum);					
-			NonCC1pRecoMuonMomentum_InMuonCosThetaTwoDPlot[WhichMuonCosTheta] = new TH1D("NonCC1pReco"+MuonMomentumTwoDInMuonCosThetaLabel,LabelXAxisMuonMomentum,NBinsMuonMomentum,ArrayNBinsMuonMomentum);
-			CCQERecoMuonMomentum_InMuonCosThetaTwoDPlot[WhichMuonCosTheta] = new TH1D("CCQEReco"+MuonMomentumTwoDInMuonCosThetaLabel,LabelXAxisMuonMomentum,NBinsMuonMomentum,ArrayNBinsMuonMomentum);
-			CCMECRecoMuonMomentum_InMuonCosThetaTwoDPlot[WhichMuonCosTheta] = new TH1D("CCMECReco"+MuonMomentumTwoDInMuonCosThetaLabel,LabelXAxisMuonMomentum,NBinsMuonMomentum,ArrayNBinsMuonMomentum);
-			CCRESRecoMuonMomentum_InMuonCosThetaTwoDPlot[WhichMuonCosTheta] = new TH1D("CCRESReco"+MuonMomentumTwoDInMuonCosThetaLabel,LabelXAxisMuonMomentum,NBinsMuonMomentum,ArrayNBinsMuonMomentum);
-			CCDISRecoMuonMomentum_InMuonCosThetaTwoDPlot[WhichMuonCosTheta] = new TH1D("CCDISReco"+MuonMomentumTwoDInMuonCosThetaLabel,LabelXAxisMuonMomentum,NBinsMuonMomentum,ArrayNBinsMuonMomentum);	
-			CC1pRecoMuonMomentum_InMuonCosThetaTwoDPlot2D[WhichMuonCosTheta] = new TH2D("CC1pReco"+MuonMomentumTwoDInMuonCosThetaLabel+"2D",LabelXAxisMuonMomentum2D,NBinsMuonMomentum,ArrayNBinsMuonMomentum,NBinsMuonMomentum,ArrayNBinsMuonMomentum);	
-			POTScaledCC1pRecoMuonMomentum_InMuonCosThetaTwoDPlot2D[WhichMuonCosTheta] = new TH2D("POTScaledCC1pReco"+MuonMomentumTwoDInMuonCosThetaLabel+"2D",LabelXAxisMuonMomentum2D,NBinsMuonMomentum,ArrayNBinsMuonMomentum,NBinsMuonMomentum,ArrayNBinsMuonMomentum);																									
-
+			RecoMuonMomentum_InMuonCosThetaTwoDPlot[WhichMuonCosTheta] = new TH1D("Reco"+MuonMomentumTwoDInMuonCosThetaLabel,LabelXAxisMuonMomentum,TwoDArrayNBinsMuonMomentumInMuonCosThetaSlices[WhichMuonCosTheta].size()-1,&TwoDArrayNBinsMuonMomentumInMuonCosThetaSlices[WhichMuonCosTheta][0]);
+			CC1pRecoMuonMomentum_InMuonCosThetaTwoDPlot[WhichMuonCosTheta] = new TH1D("CC1pReco"+MuonMomentumTwoDInMuonCosThetaLabel,LabelXAxisMuonMomentum,TwoDArrayNBinsMuonMomentumInMuonCosThetaSlices[WhichMuonCosTheta].size()-1,&TwoDArrayNBinsMuonMomentumInMuonCosThetaSlices[WhichMuonCosTheta][0]);
+			CC1pTrueMuonMomentum_InMuonCosThetaTwoDPlot[WhichMuonCosTheta] = new TH1D("CC1pTrue"+MuonMomentumTwoDInMuonCosThetaLabel,LabelXAxisMuonMomentum,TwoDArrayNBinsMuonMomentumInMuonCosThetaSlices[WhichMuonCosTheta].size()-1,&TwoDArrayNBinsMuonMomentumInMuonCosThetaSlices[WhichMuonCosTheta][0]);					
+			NonCC1pRecoMuonMomentum_InMuonCosThetaTwoDPlot[WhichMuonCosTheta] = new TH1D("NonCC1pReco"+MuonMomentumTwoDInMuonCosThetaLabel,LabelXAxisMuonMomentum,TwoDArrayNBinsMuonMomentumInMuonCosThetaSlices[WhichMuonCosTheta].size()-1,&TwoDArrayNBinsMuonMomentumInMuonCosThetaSlices[WhichMuonCosTheta][0]);
+			CCQERecoMuonMomentum_InMuonCosThetaTwoDPlot[WhichMuonCosTheta] = new TH1D("CCQEReco"+MuonMomentumTwoDInMuonCosThetaLabel,LabelXAxisMuonMomentum,TwoDArrayNBinsMuonMomentumInMuonCosThetaSlices[WhichMuonCosTheta].size()-1,&TwoDArrayNBinsMuonMomentumInMuonCosThetaSlices[WhichMuonCosTheta][0]);
+			CCMECRecoMuonMomentum_InMuonCosThetaTwoDPlot[WhichMuonCosTheta] = new TH1D("CCMECReco"+MuonMomentumTwoDInMuonCosThetaLabel,LabelXAxisMuonMomentum,TwoDArrayNBinsMuonMomentumInMuonCosThetaSlices[WhichMuonCosTheta].size()-1,&TwoDArrayNBinsMuonMomentumInMuonCosThetaSlices[WhichMuonCosTheta][0]);
+			CCRESRecoMuonMomentum_InMuonCosThetaTwoDPlot[WhichMuonCosTheta] = new TH1D("CCRESReco"+MuonMomentumTwoDInMuonCosThetaLabel,LabelXAxisMuonMomentum,TwoDArrayNBinsMuonMomentumInMuonCosThetaSlices[WhichMuonCosTheta].size()-1,&TwoDArrayNBinsMuonMomentumInMuonCosThetaSlices[WhichMuonCosTheta][0]);
+			CCDISRecoMuonMomentum_InMuonCosThetaTwoDPlot[WhichMuonCosTheta] = new TH1D("CCDISReco"+MuonMomentumTwoDInMuonCosThetaLabel,LabelXAxisMuonMomentum,TwoDArrayNBinsMuonMomentumInMuonCosThetaSlices[WhichMuonCosTheta].size()-1,&TwoDArrayNBinsMuonMomentumInMuonCosThetaSlices[WhichMuonCosTheta][0]);	
+			CC1pRecoMuonMomentum_InMuonCosThetaTwoDPlot2D[WhichMuonCosTheta] = new TH2D("CC1pReco"+MuonMomentumTwoDInMuonCosThetaLabel+"2D",LabelXAxisMuonMomentum2D,TwoDArrayNBinsMuonMomentumInMuonCosThetaSlices[WhichMuonCosTheta].size()-1,&TwoDArrayNBinsMuonMomentumInMuonCosThetaSlices[WhichMuonCosTheta][0],TwoDArrayNBinsMuonMomentumInMuonCosThetaSlices[WhichMuonCosTheta].size()-1,&TwoDArrayNBinsMuonMomentumInMuonCosThetaSlices[WhichMuonCosTheta][0]);	
+			POTScaledCC1pRecoMuonMomentum_InMuonCosThetaTwoDPlot2D[WhichMuonCosTheta] = new TH2D("POTScaledCC1pReco"+MuonMomentumTwoDInMuonCosThetaLabel+"2D",LabelXAxisMuonMomentum2D,TwoDArrayNBinsMuonMomentumInMuonCosThetaSlices[WhichMuonCosTheta].size()-1,&TwoDArrayNBinsMuonMomentumInMuonCosThetaSlices[WhichMuonCosTheta][0],TwoDArrayNBinsMuonMomentumInMuonCosThetaSlices[WhichMuonCosTheta].size()-1,&TwoDArrayNBinsMuonMomentumInMuonCosThetaSlices[WhichMuonCosTheta][0]);																									
 
 		}	
 
@@ -1335,18 +1394,52 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 			TString ProtonMomentumTwoDInProtonCosThetaLabel = "ProtonMomentum_ProtonCosTheta_"+tools.ConvertToString(TwoDArrayNBinsProtonCosTheta[WhichProtonCosTheta])+"To"+tools.ConvertToString(TwoDArrayNBinsProtonCosTheta[WhichProtonCosTheta+1])+"Plot";			
 
-			RecoProtonMomentum_InProtonCosThetaTwoDPlot[WhichProtonCosTheta] = new TH1D("Reco"+ProtonMomentumTwoDInProtonCosThetaLabel,LabelXAxisProtonMomentum,NBinsProtonMomentum,ArrayNBinsProtonMomentum);
-			CC1pRecoProtonMomentum_InProtonCosThetaTwoDPlot[WhichProtonCosTheta] = new TH1D("CC1pReco"+ProtonMomentumTwoDInProtonCosThetaLabel,LabelXAxisProtonMomentum,NBinsProtonMomentum,ArrayNBinsProtonMomentum);
-			CC1pTrueProtonMomentum_InProtonCosThetaTwoDPlot[WhichProtonCosTheta] = new TH1D("CC1pTrue"+ProtonMomentumTwoDInProtonCosThetaLabel,LabelXAxisProtonMomentum,NBinsProtonMomentum,ArrayNBinsProtonMomentum);					
-			NonCC1pRecoProtonMomentum_InProtonCosThetaTwoDPlot[WhichProtonCosTheta] = new TH1D("NonCC1pReco"+ProtonMomentumTwoDInProtonCosThetaLabel,LabelXAxisProtonMomentum,NBinsProtonMomentum,ArrayNBinsProtonMomentum);
-			CCQERecoProtonMomentum_InProtonCosThetaTwoDPlot[WhichProtonCosTheta] = new TH1D("CCQEReco"+ProtonMomentumTwoDInProtonCosThetaLabel,LabelXAxisProtonMomentum,NBinsProtonMomentum,ArrayNBinsProtonMomentum);
-			CCMECRecoProtonMomentum_InProtonCosThetaTwoDPlot[WhichProtonCosTheta] = new TH1D("CCMECReco"+ProtonMomentumTwoDInProtonCosThetaLabel,LabelXAxisProtonMomentum,NBinsProtonMomentum,ArrayNBinsProtonMomentum);
-			CCRESRecoProtonMomentum_InProtonCosThetaTwoDPlot[WhichProtonCosTheta] = new TH1D("CCRESReco"+ProtonMomentumTwoDInProtonCosThetaLabel,LabelXAxisProtonMomentum,NBinsProtonMomentum,ArrayNBinsProtonMomentum);
-			CCDISRecoProtonMomentum_InProtonCosThetaTwoDPlot[WhichProtonCosTheta] = new TH1D("CCDISReco"+ProtonMomentumTwoDInProtonCosThetaLabel,LabelXAxisProtonMomentum,NBinsProtonMomentum,ArrayNBinsProtonMomentum);	
-			CC1pRecoProtonMomentum_InProtonCosThetaTwoDPlot2D[WhichProtonCosTheta] = new TH2D("CC1pReco"+ProtonMomentumTwoDInProtonCosThetaLabel+"2D",LabelXAxisProtonMomentum2D,NBinsProtonMomentum,ArrayNBinsProtonMomentum,NBinsProtonMomentum,ArrayNBinsProtonMomentum);	
-			POTScaledCC1pRecoProtonMomentum_InProtonCosThetaTwoDPlot2D[WhichProtonCosTheta] = new TH2D("POTScaledCC1pReco"+ProtonMomentumTwoDInProtonCosThetaLabel+"2D",LabelXAxisProtonMomentum2D,NBinsProtonMomentum,ArrayNBinsProtonMomentum,NBinsProtonMomentum,ArrayNBinsProtonMomentum);																									
+			RecoProtonMomentum_InProtonCosThetaTwoDPlot[WhichProtonCosTheta] = new TH1D("Reco"+ProtonMomentumTwoDInProtonCosThetaLabel,LabelXAxisProtonMomentum,TwoDArrayNBinsProtonMomentumInProtonCosThetaSlices[WhichProtonCosTheta].size()-1,&TwoDArrayNBinsProtonMomentumInProtonCosThetaSlices[WhichProtonCosTheta][0]);
+			CC1pRecoProtonMomentum_InProtonCosThetaTwoDPlot[WhichProtonCosTheta] = new TH1D("CC1pReco"+ProtonMomentumTwoDInProtonCosThetaLabel,LabelXAxisProtonMomentum,TwoDArrayNBinsProtonMomentumInProtonCosThetaSlices[WhichProtonCosTheta].size()-1,&TwoDArrayNBinsProtonMomentumInProtonCosThetaSlices[WhichProtonCosTheta][0]);
+			CC1pTrueProtonMomentum_InProtonCosThetaTwoDPlot[WhichProtonCosTheta] = new TH1D("CC1pTrue"+ProtonMomentumTwoDInProtonCosThetaLabel,LabelXAxisProtonMomentum,TwoDArrayNBinsProtonMomentumInProtonCosThetaSlices[WhichProtonCosTheta].size()-1,&TwoDArrayNBinsProtonMomentumInProtonCosThetaSlices[WhichProtonCosTheta][0]);					
+			NonCC1pRecoProtonMomentum_InProtonCosThetaTwoDPlot[WhichProtonCosTheta] = new TH1D("NonCC1pReco"+ProtonMomentumTwoDInProtonCosThetaLabel,LabelXAxisProtonMomentum,TwoDArrayNBinsProtonMomentumInProtonCosThetaSlices[WhichProtonCosTheta].size()-1,&TwoDArrayNBinsProtonMomentumInProtonCosThetaSlices[WhichProtonCosTheta][0]);
+			CCQERecoProtonMomentum_InProtonCosThetaTwoDPlot[WhichProtonCosTheta] = new TH1D("CCQEReco"+ProtonMomentumTwoDInProtonCosThetaLabel,LabelXAxisProtonMomentum,TwoDArrayNBinsProtonMomentumInProtonCosThetaSlices[WhichProtonCosTheta].size()-1,&TwoDArrayNBinsProtonMomentumInProtonCosThetaSlices[WhichProtonCosTheta][0]);
+			CCMECRecoProtonMomentum_InProtonCosThetaTwoDPlot[WhichProtonCosTheta] = new TH1D("CCMECReco"+ProtonMomentumTwoDInProtonCosThetaLabel,LabelXAxisProtonMomentum,TwoDArrayNBinsProtonMomentumInProtonCosThetaSlices[WhichProtonCosTheta].size()-1,&TwoDArrayNBinsProtonMomentumInProtonCosThetaSlices[WhichProtonCosTheta][0]);
+			CCRESRecoProtonMomentum_InProtonCosThetaTwoDPlot[WhichProtonCosTheta] = new TH1D("CCRESReco"+ProtonMomentumTwoDInProtonCosThetaLabel,LabelXAxisProtonMomentum,TwoDArrayNBinsProtonMomentumInProtonCosThetaSlices[WhichProtonCosTheta].size()-1,&TwoDArrayNBinsProtonMomentumInProtonCosThetaSlices[WhichProtonCosTheta][0]);
+			CCDISRecoProtonMomentum_InProtonCosThetaTwoDPlot[WhichProtonCosTheta] = new TH1D("CCDISReco"+ProtonMomentumTwoDInProtonCosThetaLabel,LabelXAxisProtonMomentum,TwoDArrayNBinsProtonMomentumInProtonCosThetaSlices[WhichProtonCosTheta].size()-1,&TwoDArrayNBinsProtonMomentumInProtonCosThetaSlices[WhichProtonCosTheta][0]);	
+			CC1pRecoProtonMomentum_InProtonCosThetaTwoDPlot2D[WhichProtonCosTheta] = new TH2D("CC1pReco"+ProtonMomentumTwoDInProtonCosThetaLabel+"2D",LabelXAxisProtonMomentum2D,TwoDArrayNBinsProtonMomentumInProtonCosThetaSlices[WhichProtonCosTheta].size()-1,&TwoDArrayNBinsProtonMomentumInProtonCosThetaSlices[WhichProtonCosTheta][0],TwoDArrayNBinsProtonMomentumInProtonCosThetaSlices[WhichProtonCosTheta].size()-1,&TwoDArrayNBinsProtonMomentumInProtonCosThetaSlices[WhichProtonCosTheta][0]);	
+			POTScaledCC1pRecoProtonMomentum_InProtonCosThetaTwoDPlot2D[WhichProtonCosTheta] = new TH2D("POTScaledCC1pReco"+ProtonMomentumTwoDInProtonCosThetaLabel+"2D",LabelXAxisProtonMomentum2D,TwoDArrayNBinsProtonMomentumInProtonCosThetaSlices[WhichProtonCosTheta].size()-1,&TwoDArrayNBinsProtonMomentumInProtonCosThetaSlices[WhichProtonCosTheta][0],TwoDArrayNBinsProtonMomentumInProtonCosThetaSlices[WhichProtonCosTheta].size()-1,&TwoDArrayNBinsProtonMomentumInProtonCosThetaSlices[WhichProtonCosTheta][0]);																									
 
-		}		
+		}	
+
+		//----------------------------------------//
+
+		// DeltaPty in DeltaPtx slices
+
+		TH1D* RecoDeltaPty_InDeltaPtxTwoDPlot[TwoDNBinsDeltaPtx];
+		TH1D* CC1pRecoDeltaPty_InDeltaPtxTwoDPlot[TwoDNBinsDeltaPtx];
+		TH1D* CC1pTrueDeltaPty_InDeltaPtxTwoDPlot[TwoDNBinsDeltaPtx];				
+		TH1D* NonCC1pRecoDeltaPty_InDeltaPtxTwoDPlot[TwoDNBinsDeltaPtx];		
+		TH1D* CCQERecoDeltaPty_InDeltaPtxTwoDPlot[TwoDNBinsDeltaPtx];
+		TH1D* CCMECRecoDeltaPty_InDeltaPtxTwoDPlot[TwoDNBinsDeltaPtx];
+		TH1D* CCRESRecoDeltaPty_InDeltaPtxTwoDPlot[TwoDNBinsDeltaPtx];
+		TH1D* CCDISRecoDeltaPty_InDeltaPtxTwoDPlot[TwoDNBinsDeltaPtx];
+		TH2D* CC1pRecoDeltaPty_InDeltaPtxTwoDPlot2D[TwoDNBinsDeltaPtx];	
+		TH2D* POTScaledCC1pRecoDeltaPty_InDeltaPtxTwoDPlot2D[TwoDNBinsDeltaPtx];				
+
+		//----------------------------------------//			
+
+		for (int WhichDeltaPtx = 0; WhichDeltaPtx < TwoDNBinsDeltaPtx; WhichDeltaPtx++) {	
+
+			TString DeltaPtyTwoDDeltaPtxLabel = "DeltaPty_DeltaPtx_"+tools.ConvertToString(TwoDArrayNBinsDeltaPtx[WhichDeltaPtx])+"To"+tools.ConvertToString(TwoDArrayNBinsDeltaPtx[WhichDeltaPtx+1])+"Plot";			
+
+			RecoDeltaPty_InDeltaPtxTwoDPlot[WhichDeltaPtx] = new TH1D("Reco"+DeltaPtyTwoDDeltaPtxLabel,LabelXAxisDeltaPty,TwoDArrayNBinsDeltaPtyInDeltaPtxSlices[WhichDeltaPtx].size()-1,&TwoDArrayNBinsDeltaPtyInDeltaPtxSlices[WhichDeltaPtx][0]);
+			CC1pRecoDeltaPty_InDeltaPtxTwoDPlot[WhichDeltaPtx] = new TH1D("CC1pReco"+DeltaPtyTwoDDeltaPtxLabel,LabelXAxisDeltaPty,TwoDArrayNBinsDeltaPtyInDeltaPtxSlices[WhichDeltaPtx].size()-1,&TwoDArrayNBinsDeltaPtyInDeltaPtxSlices[WhichDeltaPtx][0]);
+			CC1pTrueDeltaPty_InDeltaPtxTwoDPlot[WhichDeltaPtx] = new TH1D("CC1pTrue"+DeltaPtyTwoDDeltaPtxLabel,LabelXAxisDeltaPty,TwoDArrayNBinsDeltaPtyInDeltaPtxSlices[WhichDeltaPtx].size()-1,&TwoDArrayNBinsDeltaPtyInDeltaPtxSlices[WhichDeltaPtx][0]);					
+			NonCC1pRecoDeltaPty_InDeltaPtxTwoDPlot[WhichDeltaPtx] = new TH1D("NonCC1pReco"+DeltaPtyTwoDDeltaPtxLabel,LabelXAxisDeltaPty,TwoDArrayNBinsDeltaPtyInDeltaPtxSlices[WhichDeltaPtx].size()-1,&TwoDArrayNBinsDeltaPtyInDeltaPtxSlices[WhichDeltaPtx][0]);
+			CCQERecoDeltaPty_InDeltaPtxTwoDPlot[WhichDeltaPtx] = new TH1D("CCQEReco"+DeltaPtyTwoDDeltaPtxLabel,LabelXAxisDeltaPty,TwoDArrayNBinsDeltaPtyInDeltaPtxSlices[WhichDeltaPtx].size()-1,&TwoDArrayNBinsDeltaPtyInDeltaPtxSlices[WhichDeltaPtx][0]);
+			CCMECRecoDeltaPty_InDeltaPtxTwoDPlot[WhichDeltaPtx] = new TH1D("CCMECReco"+DeltaPtyTwoDDeltaPtxLabel,LabelXAxisDeltaPty,TwoDArrayNBinsDeltaPtyInDeltaPtxSlices[WhichDeltaPtx].size()-1,&TwoDArrayNBinsDeltaPtyInDeltaPtxSlices[WhichDeltaPtx][0]);
+			CCRESRecoDeltaPty_InDeltaPtxTwoDPlot[WhichDeltaPtx] = new TH1D("CCRESReco"+DeltaPtyTwoDDeltaPtxLabel,LabelXAxisDeltaPty,TwoDArrayNBinsDeltaPtyInDeltaPtxSlices[WhichDeltaPtx].size()-1,&TwoDArrayNBinsDeltaPtyInDeltaPtxSlices[WhichDeltaPtx][0]);
+			CCDISRecoDeltaPty_InDeltaPtxTwoDPlot[WhichDeltaPtx] = new TH1D("CCDISReco"+DeltaPtyTwoDDeltaPtxLabel,LabelXAxisDeltaPty,TwoDArrayNBinsDeltaPtyInDeltaPtxSlices[WhichDeltaPtx].size()-1,&TwoDArrayNBinsDeltaPtyInDeltaPtxSlices[WhichDeltaPtx][0]);	
+			CC1pRecoDeltaPty_InDeltaPtxTwoDPlot2D[WhichDeltaPtx] = new TH2D("CC1pReco"+DeltaPtyTwoDDeltaPtxLabel+"2D",LabelXAxisDeltaPty2D,TwoDArrayNBinsDeltaPtyInDeltaPtxSlices[WhichDeltaPtx].size()-1,&TwoDArrayNBinsDeltaPtyInDeltaPtxSlices[WhichDeltaPtx][0],TwoDArrayNBinsDeltaPtyInDeltaPtxSlices[WhichDeltaPtx].size()-1,&TwoDArrayNBinsDeltaPtyInDeltaPtxSlices[WhichDeltaPtx][0]);	
+			POTScaledCC1pRecoDeltaPty_InDeltaPtxTwoDPlot2D[WhichDeltaPtx] = new TH2D("POTScaledCC1pReco"+DeltaPtyTwoDDeltaPtxLabel+"2D",LabelXAxisDeltaPty2D,TwoDArrayNBinsDeltaPtyInDeltaPtxSlices[WhichDeltaPtx].size()-1,&TwoDArrayNBinsDeltaPtyInDeltaPtxSlices[WhichDeltaPtx][0],TwoDArrayNBinsDeltaPtyInDeltaPtxSlices[WhichDeltaPtx].size()-1,&TwoDArrayNBinsDeltaPtyInDeltaPtxSlices[WhichDeltaPtx][0]);																									
+
+		}				
 
 		//----------------------------------------//
 		//----------------------------------------//
@@ -1967,7 +2060,8 @@ void PeLEE_myRecoAnalysis::Loop() {
 			int DeltaPTTwoDIndex = tools.ReturnIndex(TransMissMomentum, TwoDArrayNBinsDeltaPT);
 			int DeltaAlphaTTwoDIndex = tools.ReturnIndex(DeltaAlphaT, TwoDArrayNBinsDeltaAlphaT);
 			int MuonCosThetaTwoDIndex = tools.ReturnIndex(reco_Pmu_cos_theta, TwoDArrayNBinsMuonCosTheta);
-			int ProtonCosThetaTwoDIndex = tools.ReturnIndex(reco_Pp_cos_theta, TwoDArrayNBinsProtonCosTheta);						
+			int ProtonCosThetaTwoDIndex = tools.ReturnIndex(reco_Pp_cos_theta, TwoDArrayNBinsProtonCosTheta);
+			int DeltaPtxTwoDIndex = tools.ReturnIndex(reco_Ptx, TwoDArrayNBinsDeltaPtx);									
 
 			//----------------------------------------//
 
@@ -2064,6 +2158,9 @@ void PeLEE_myRecoAnalysis::Loop() {
 			RecoDeltaPT_InMuonCosThetaTwoDPlot[MuonCosThetaTwoDIndex]->Fill(TransMissMomentum,weight);
 			RecoMuonMomentum_InMuonCosThetaTwoDPlot[MuonCosThetaTwoDIndex]->Fill(reco_Pmu,weight);
 			RecoProtonMomentum_InProtonCosThetaTwoDPlot[ProtonCosThetaTwoDIndex]->Fill(reco_Pp,weight);														
+			RecoDeltaPhiT_InDeltaPTTwoDPlot[DeltaPTTwoDIndex]->Fill(DeltaPhiT,weight);
+			RecoDeltaPn_InDeltaPTTwoDPlot[DeltaPTTwoDIndex]->Fill(reco_Pn,weight);	
+			RecoDeltaPty_InDeltaPtxTwoDPlot[DeltaPtxTwoDIndex]->Fill(reco_Pty,weight);					
 
 			// -------------------------------------------------------------------------------------------------------------------------
 
@@ -2237,7 +2334,10 @@ void PeLEE_myRecoAnalysis::Loop() {
 					CC1pTrueDeltaAlphaT_InMuonCosThetaTwoDPlot[MuonCosThetaTwoDIndex]->Fill(true_DeltaAlphaT,weight);	
 					CC1pTrueDeltaPT_InMuonCosThetaTwoDPlot[MuonCosThetaTwoDIndex]->Fill(true_TransMissMomentum,weight);		
 					CC1pTrueMuonMomentum_InMuonCosThetaTwoDPlot[MuonCosThetaTwoDIndex]->Fill(True_CandidateMu_P->at(0),weight);	
-					CC1pTrueProtonMomentum_InProtonCosThetaTwoDPlot[ProtonCosThetaTwoDIndex]->Fill(True_CandidateP_P->at(0),weight);																	
+					CC1pTrueProtonMomentum_InProtonCosThetaTwoDPlot[ProtonCosThetaTwoDIndex]->Fill(True_CandidateP_P->at(0),weight);
+					CC1pTrueDeltaPhiT_InDeltaPTTwoDPlot[DeltaPTTwoDIndex]->Fill(true_DeltaPhiT,weight);	
+					CC1pTrueDeltaPn_InDeltaPTTwoDPlot[DeltaPTTwoDIndex]->Fill(true_Pn,weight);	
+					CC1pTrueDeltaPty_InDeltaPtxTwoDPlot[DeltaPtxTwoDIndex]->Fill(reco_Pty,weight);																									
 
 					// --------------------------------------------------------------------------------------------------
 					// --------------------------------------------------------------------------------------------------
@@ -2330,7 +2430,10 @@ void PeLEE_myRecoAnalysis::Loop() {
 					CC1pRecoDeltaAlphaT_InMuonCosThetaTwoDPlot[MuonCosThetaTwoDIndex]->Fill(DeltaAlphaT,weight);
 					CC1pRecoDeltaPT_InMuonCosThetaTwoDPlot[MuonCosThetaTwoDIndex]->Fill(TransMissMomentum,weight);
 					CC1pRecoMuonMomentum_InMuonCosThetaTwoDPlot[MuonCosThetaTwoDIndex]->Fill(reco_Pmu,weight);
-					CC1pRecoProtonMomentum_InProtonCosThetaTwoDPlot[ProtonCosThetaTwoDIndex]->Fill(reco_Pp,weight);																																
+					CC1pRecoProtonMomentum_InProtonCosThetaTwoDPlot[ProtonCosThetaTwoDIndex]->Fill(reco_Pp,weight);	
+					CC1pRecoDeltaPhiT_InDeltaPTTwoDPlot[DeltaPTTwoDIndex]->Fill(DeltaPhiT,weight);
+					CC1pRecoDeltaPn_InDeltaPTTwoDPlot[DeltaPTTwoDIndex]->Fill(reco_Pn,weight);	
+					CC1pRecoDeltaPty_InDeltaPtxTwoDPlot[DeltaPtxTwoDIndex]->Fill(reco_Pty,weight);																																			
 
 					// --------------------------------------------------------------------------------------------------
 					// --------------------------------------------------------------------------------------------------
@@ -2431,6 +2534,15 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 					CC1pRecoProtonMomentum_InProtonCosThetaTwoDPlot2D[ProtonCosThetaTwoDIndex]->Fill(True_CandidateP_P->at(0),reco_Pp);					
 					POTScaledCC1pRecoProtonMomentum_InProtonCosThetaTwoDPlot2D[ProtonCosThetaTwoDIndex]->Fill(True_CandidateP_P->at(0),reco_Pp,weight);
+
+					CC1pRecoDeltaPhiT_InDeltaPTTwoDPlot2D[DeltaPTTwoDIndex]->Fill(true_DeltaPhiT,DeltaPhiT);
+					POTScaledCC1pRecoDeltaPhiT_InDeltaPTTwoDPlot2D[DeltaPTTwoDIndex]->Fill(true_DeltaPhiT,DeltaPhiT,weight);
+
+					CC1pRecoDeltaPn_InDeltaPTTwoDPlot2D[DeltaPTTwoDIndex]->Fill(true_Pn,reco_Pn);
+					POTScaledCC1pRecoDeltaPn_InDeltaPTTwoDPlot2D[DeltaPTTwoDIndex]->Fill(true_Pn,reco_Pn,weight);	
+
+					CC1pRecoDeltaPty_InDeltaPtxTwoDPlot2D[DeltaPtxTwoDIndex]->Fill(true_Pty,reco_Pty);	
+					POTScaledCC1pRecoDeltaPty_InDeltaPtxTwoDPlot2D[DeltaPtxTwoDIndex]->Fill(true_Pty,reco_Pty,weight);								
 
 					// -----------------------------------------------------------------------------------------------------
 
@@ -2771,7 +2883,10 @@ void PeLEE_myRecoAnalysis::Loop() {
 					NonCC1pRecoDeltaAlphaT_InMuonCosThetaTwoDPlot[MuonCosThetaTwoDIndex]->Fill(DeltaAlphaT,weight);	
 					NonCC1pRecoDeltaPT_InMuonCosThetaTwoDPlot[MuonCosThetaTwoDIndex]->Fill(TransMissMomentum,weight);	
 					NonCC1pRecoMuonMomentum_InMuonCosThetaTwoDPlot[MuonCosThetaTwoDIndex]->Fill(reco_Pmu,weight);	
-					NonCC1pRecoProtonMomentum_InProtonCosThetaTwoDPlot[ProtonCosThetaTwoDIndex]->Fill(reco_Pp,weight);																										
+					NonCC1pRecoProtonMomentum_InProtonCosThetaTwoDPlot[ProtonCosThetaTwoDIndex]->Fill(reco_Pp,weight);	
+					NonCC1pRecoDeltaPhiT_InDeltaPTTwoDPlot[DeltaPTTwoDIndex]->Fill(DeltaPhiT,weight);	
+					NonCC1pRecoDeltaPn_InDeltaPTTwoDPlot[DeltaPTTwoDIndex]->Fill(reco_Pn,weight);	
+					NonCC1pRecoDeltaPty_InDeltaPtxTwoDPlot[DeltaPtxTwoDIndex]->Fill(reco_Pty,weight);																																	
 					
 					// 2D Analysis
 				
@@ -2883,6 +2998,9 @@ void PeLEE_myRecoAnalysis::Loop() {
 					CCQERecoDeltaPT_InMuonCosThetaTwoDPlot[MuonCosThetaTwoDIndex]->Fill(TransMissMomentum,weight);					
 					CCQERecoMuonMomentum_InMuonCosThetaTwoDPlot[MuonCosThetaTwoDIndex]->Fill(reco_Pmu,weight);
 					CCQERecoProtonMomentum_InProtonCosThetaTwoDPlot[ProtonCosThetaTwoDIndex]->Fill(reco_Pp,weight);
+					CCQERecoDeltaPhiT_InDeltaPTTwoDPlot[DeltaPTTwoDIndex]->Fill(DeltaPhiT,weight);	
+					CCQERecoDeltaPn_InDeltaPTTwoDPlot[DeltaPTTwoDIndex]->Fill(reco_Pn,weight);				
+					CCQERecoDeltaPty_InDeltaPtxTwoDPlot[DeltaPtxTwoDIndex]->Fill(reco_Pty,weight);
 
 					// 2D Analysis
 				
@@ -2989,6 +3107,9 @@ void PeLEE_myRecoAnalysis::Loop() {
 					CCMECRecoDeltaPT_InMuonCosThetaTwoDPlot[MuonCosThetaTwoDIndex]->Fill(TransMissMomentum,weight);
 					CCMECRecoMuonMomentum_InMuonCosThetaTwoDPlot[MuonCosThetaTwoDIndex]->Fill(reco_Pmu,weight);
 					CCMECRecoProtonMomentum_InProtonCosThetaTwoDPlot[ProtonCosThetaTwoDIndex]->Fill(reco_Pp,weight);
+					CCMECRecoDeltaPhiT_InDeltaPTTwoDPlot[DeltaPTTwoDIndex]->Fill(DeltaPhiT,weight);
+					CCMECRecoDeltaPn_InDeltaPTTwoDPlot[DeltaPTTwoDIndex]->Fill(reco_Pn,weight);
+					CCMECRecoDeltaPty_InDeltaPtxTwoDPlot[DeltaPtxTwoDIndex]->Fill(reco_Pty,weight);
 
 					// 2D Analysis
 				
@@ -3095,6 +3216,9 @@ void PeLEE_myRecoAnalysis::Loop() {
 					CCRESRecoDeltaPT_InMuonCosThetaTwoDPlot[MuonCosThetaTwoDIndex]->Fill(TransMissMomentum,weight);					
 					CCRESRecoMuonMomentum_InMuonCosThetaTwoDPlot[MuonCosThetaTwoDIndex]->Fill(reco_Pmu,weight);
 					CCRESRecoProtonMomentum_InProtonCosThetaTwoDPlot[ProtonCosThetaTwoDIndex]->Fill(reco_Pp,weight);
+					CCRESRecoDeltaPhiT_InDeltaPTTwoDPlot[DeltaPTTwoDIndex]->Fill(DeltaPhiT,weight);
+					CCRESRecoDeltaPn_InDeltaPTTwoDPlot[DeltaPTTwoDIndex]->Fill(reco_Pn,weight);
+					CCRESRecoDeltaPty_InDeltaPtxTwoDPlot[DeltaPtxTwoDIndex]->Fill(reco_Pty,weight);
 
 					// 2D Analysis
 				
@@ -3198,6 +3322,9 @@ void PeLEE_myRecoAnalysis::Loop() {
 					CCDISRecoDeltaPT_InMuonCosThetaTwoDPlot[MuonCosThetaTwoDIndex]->Fill(TransMissMomentum,weight);
 					CCDISRecoMuonMomentum_InMuonCosThetaTwoDPlot[MuonCosThetaTwoDIndex]->Fill(reco_Pmu,weight);
 					CCDISRecoProtonMomentum_InProtonCosThetaTwoDPlot[ProtonCosThetaTwoDIndex]->Fill(reco_Pp,weight);
+					CCDISRecoDeltaPhiT_InDeltaPTTwoDPlot[DeltaPTTwoDIndex]->Fill(DeltaPhiT,weight);
+					CCDISRecoDeltaPn_InDeltaPTTwoDPlot[DeltaPTTwoDIndex]->Fill(reco_Pn,weight);
+					CCDISRecoDeltaPty_InDeltaPtxTwoDPlot[DeltaPtxTwoDIndex]->Fill(reco_Pty,weight);
 
 					// 2D Analysis
 				

@@ -106,22 +106,22 @@ void PeLEE_Create1DPlotsTHStack_TopologicalBreakDown(TString BaseMC = "") {
 	// PlotNames.push_back("RecoContainedMuonLengthPlot");
 	// PlotNames.push_back("RecoUncontainedMuonLengthPlot");
 
-    //PlotNames.push_back("RecoECal_DeltaPT_0_00To0_20_DeltaAlphaT_0_00To45_00Plot");
-    //PlotNames.push_back("RecoECal_DeltaPT_0_00To0_20_DeltaAlphaT_45_00To90_00Plot");
-    //PlotNames.push_back("RecoECal_DeltaPT_0_00To0_20_DeltaAlphaT_90_00To135_00Plot");
-    //PlotNames.push_back("RecoECal_DeltaPT_0_00To0_20_DeltaAlphaT_135_00To180_00Plot");
-    //PlotNames.push_back("RecoECal_DeltaPT_0_20To0_40_DeltaAlphaT_0_00To45_00Plot");
-    //PlotNames.push_back("RecoECal_DeltaPT_0_20To0_40_DeltaAlphaT_45_00To90_00Plot");
-    //PlotNames.push_back("RecoECal_DeltaPT_0_20To0_40_DeltaAlphaT_90_00To135_00Plot");
-    //PlotNames.push_back("RecoECal_DeltaPT_0_20To0_40_DeltaAlphaT_135_00To180_00Plot");
-    //PlotNames.push_back("RecoECal_DeltaPT_0_40To1_00_DeltaAlphaT_0_00To45_00Plot");
-    //PlotNames.push_back("RecoECal_DeltaPT_0_40To1_00_DeltaAlphaT_45_00To90_00Plot");
-    //PlotNames.push_back("RecoECal_DeltaPT_0_40To1_00_DeltaAlphaT_90_00To135_00Plot");
-    //PlotNames.push_back("RecoECal_DeltaPT_0_40To1_00_DeltaAlphaT_135_00To180_00Plot");
+    PlotNames.push_back("RecoECal_DeltaPT_0_00To0_20_DeltaAlphaT_0_00To45_00Plot");
+    PlotNames.push_back("RecoECal_DeltaPT_0_00To0_20_DeltaAlphaT_45_00To90_00Plot");
+    PlotNames.push_back("RecoECal_DeltaPT_0_00To0_20_DeltaAlphaT_90_00To135_00Plot");
+    PlotNames.push_back("RecoECal_DeltaPT_0_00To0_20_DeltaAlphaT_135_00To180_00Plot");
+    PlotNames.push_back("RecoECal_DeltaPT_0_20To0_40_DeltaAlphaT_0_00To45_00Plot");
+    PlotNames.push_back("RecoECal_DeltaPT_0_20To0_40_DeltaAlphaT_45_00To90_00Plot");
+    PlotNames.push_back("RecoECal_DeltaPT_0_20To0_40_DeltaAlphaT_90_00To135_00Plot");
+    PlotNames.push_back("RecoECal_DeltaPT_0_20To0_40_DeltaAlphaT_135_00To180_00Plot");
+    PlotNames.push_back("RecoECal_DeltaPT_0_40To1_00_DeltaAlphaT_0_00To45_00Plot");
+    PlotNames.push_back("RecoECal_DeltaPT_0_40To1_00_DeltaAlphaT_45_00To90_00Plot");
+    PlotNames.push_back("RecoECal_DeltaPT_0_40To1_00_DeltaAlphaT_90_00To135_00Plot");
+    PlotNames.push_back("RecoECal_DeltaPT_0_40To1_00_DeltaAlphaT_135_00To180_00Plot");
 
-//    PlotNames.push_back("RecoDeltaAlphaT_DeltaPT_0_00To0_20Plot");
-//    PlotNames.push_back("RecoDeltaAlphaT_DeltaPT_0_20To0_40Plot");
-//    PlotNames.push_back("RecoDeltaAlphaT_DeltaPT_0_40To1_00Plot");	
+    PlotNames.push_back("RecoDeltaAlphaT_DeltaPT_0_00To0_20Plot");
+    PlotNames.push_back("RecoDeltaAlphaT_DeltaPT_0_20To0_40Plot");
+    PlotNames.push_back("RecoDeltaAlphaT_DeltaPT_0_40To1_00Plot");	
 
     PlotNames.push_back("RecoDeltaAlphaT_MuonCosTheta_Minus1_00To0_00Plot");
     PlotNames.push_back("RecoDeltaAlphaT_MuonCosTheta_0_00To0_50Plot");
@@ -142,6 +142,18 @@ void PeLEE_Create1DPlotsTHStack_TopologicalBreakDown(TString BaseMC = "") {
     PlotNames.push_back("RecoProtonMomentum_ProtonCosTheta_0_00To0_50Plot");
 	PlotNames.push_back("RecoProtonMomentum_ProtonCosTheta_0_50To0_75Plot");	   
 	PlotNames.push_back("RecoProtonMomentum_ProtonCosTheta_0_75To1_00Plot");
+
+    PlotNames.push_back("RecoDeltaPhiT_DeltaPT_0_00To0_20Plot");
+    PlotNames.push_back("RecoDeltaPhiT_DeltaPT_0_20To0_40Plot");
+    PlotNames.push_back("RecoDeltaPhiT_DeltaPT_0_40To1_00Plot");
+
+    PlotNames.push_back("RecoDeltaPn_DeltaPT_0_00To0_20Plot");
+    PlotNames.push_back("RecoDeltaPn_DeltaPT_0_20To0_40Plot");
+    PlotNames.push_back("RecoDeltaPn_DeltaPT_0_40To1_00Plot");
+
+    PlotNames.push_back("RecoDeltaPty_DeltaPtx_Minus0_55ToMinus0_15Plot");
+    PlotNames.push_back("RecoDeltaPty_DeltaPtx_Minus0_15To0_15Plot");
+    PlotNames.push_back("RecoDeltaPty_DeltaPtx_0_15To0_55Plot");	
 
 	}
 
@@ -350,7 +362,8 @@ void PeLEE_Create1DPlotsTHStack_TopologicalBreakDown(TString BaseMC = "") {
 
 						gStyle->SetErrorX(0); // Removing the horizontal errors
 						Plots[WhichSample][WhichPlot]->Draw("e1 same"); 
-						leg[WhichPlot]->AddEntry(Plots[WhichSample][WhichPlot],LabelsOfSamples[WhichSample],"ep");
+						TString NBeamOnEvents = ToString(Plots[WhichSample][WhichPlot]->GetEntries());
+						leg[WhichPlot]->AddEntry(Plots[WhichSample][WhichPlot],LabelsOfSamples[WhichSample] + " ("+NBeamOnEvents+")","ep");
 
 					}
 
@@ -422,15 +435,14 @@ void PeLEE_Create1DPlotsTHStack_TopologicalBreakDown(TString BaseMC = "") {
 				TLatex *text = new TLatex();
 				text->SetTextFont(FontStyle);
 				text->SetTextSize(0.09);
-				text->DrawTextNDC(0.14, 0.87, Runs[WhichRun]);
+				text->DrawTextNDC(0.14, 0.9, Runs[WhichRun]);
 
 				TLatex *textSlice = new TLatex();
 				textSlice->SetTextFont(FontStyle);
 				textSlice->SetTextSize(0.09);
-				textSlice->DrawTextNDC(0.14, 0.87, Runs[WhichRun]);	
 				TString PlotNameDuplicate = PlotNames[WhichPlot];
 				TString ReducedPlotName = PlotNameDuplicate.ReplaceAll("Reco","") ;
-				textSlice->DrawLatexNDC(0.14, 0.77, LatexLabel[ReducedPlotName]);				
+				textSlice->DrawLatexNDC(0.14, 0.8, LatexLabel[ReducedPlotName]);				
 
 				// -------------------------------------------------------------------------------------------------------------------
 
