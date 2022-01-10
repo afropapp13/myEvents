@@ -11,7 +11,7 @@
 	WhichSampleArray.push_back("Overlay9NuWro_Run3");
 	WhichSampleArray.push_back("Overlay9NuWro_Combined");
 
-	WhichSampleArray.push_back("GENIEv2Overlay9_Combined");	
+	//WhichSampleArray.push_back("GENIEv2Overlay9_Combined");	
 
 	// -----------------------------------------------------------------------------------------
 
