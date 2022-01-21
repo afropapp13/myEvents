@@ -77,6 +77,8 @@ root -b PeLEE_script_EventSelection_Genie_Systematics_FakeData.C
 
 root -b PeLEE_script_EventSelection_Flux_Systematics_FakeData.C
 
+root -b PeLEE_script_EventSelection_MC_Stat_Systematics_FakeData.C
+
 root -b
 .L PeLEE_Create1DPlotsTHStack_TopologicalBreakDown.cpp
 PeLEE_Create1DPlotsTHStack_TopologicalBreakDown("NoTuneOverlay9")

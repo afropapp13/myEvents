@@ -22,6 +22,7 @@ private:
 	TString fWhichSample;
 	TString fEventWeightLabel;
 	int     fUniverseIndex;
+	TFile* fFile;
 
 public :
    TTree          *fChain;   //!pointer to the analyzed TTree or TChain
@@ -345,7 +346,8 @@ PeLEE_myRecoAnalysis::PeLEE_myRecoAnalysis(TString WhichSample, TString Tune, TS
    fEventWeightLabel = WhichEventWeightLabel;
    fUniverseIndex = UniverseIndex;
 
-   fPathToFile = "/pnfs/uboone/persistent/users/apapadop/mySamples/"+UBCodeVersion+"/PeLEETuples/PreSelection_"+fWhichSample+"_"+UBCodeVersion+".root";
+//   fPathToFile = "/pnfs/uboone/persistent/users/apapadop/mySamples/"+UBCodeVersion+"/PeLEETuples/PreSelection_"+fWhichSample+"_"+UBCodeVersion+".root";
+	fPathToFile = "/uboone/data/users/apapadop/PeLEETuples/PreSelection_"+fWhichSample+"_"+UBCodeVersion+".root";
 
    if (tree == 0) {
       TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject(fPathToFile);
@@ -353,6 +355,7 @@ PeLEE_myRecoAnalysis::PeLEE_myRecoAnalysis(TString WhichSample, TString Tune, TS
          f = new TFile(fPathToFile);
       }
       f->GetObject("myPreSelection",tree);
+      fFile = f;
 
    }
    Init(tree);

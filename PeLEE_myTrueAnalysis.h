@@ -21,7 +21,8 @@ private:
    TString fPathToFile;
    TString fWhichSample;
    TString fEventWeightLabel;
-   int     fUniverseIndex;   
+   int     fUniverseIndex;  
+   TFile* fFile; 
 
 public :
    TTree          *fChain;   //!pointer to the analyzed TTree or TChain
@@ -221,14 +222,16 @@ PeLEE_myTrueAnalysis::PeLEE_myTrueAnalysis(TString WhichSample, TString Tune, TS
    fEventWeightLabel = WhichEventWeightLabel;
    fUniverseIndex = UniverseIndex;   
 
-   fPathToFile = "/pnfs/uboone/persistent/users/apapadop/mySamples/"+UBCodeVersion+"/PeLEETuples/PreTruthSelection_"+fWhichSample+"_"+UBCodeVersion+".root";
-
+//   fPathToFile = "/pnfs/uboone/persistent/users/apapadop/mySamples/"+UBCodeVersion+"/PeLEETuples/PreTruthSelection_"+fWhichSample+"_"+UBCodeVersion+".root";
+	fPathToFile = "/uboone/data/users/apapadop/PeLEETuples/PreTruthSelection_"+fWhichSample+"_"+UBCodeVersion+".root";   
+  
    if (tree == 0) {
       TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject(fPathToFile);
       if (!f || !f->IsOpen()) {
          f = new TFile(fPathToFile);
       }
       f->GetObject("myPreTruthSelection",tree);
+      fFile = f;
 
    }
    Init(tree);

@@ -193,7 +193,21 @@ void PeLEE_Create1DPlotsTHStack_TopologicalBreakDown(TString BaseMC = "") {
     PlotNames.push_back("RecoECal_ProtonCosTheta_Minus1_00To0_00_ProtonMomentum_0_70To1_00Plot");
     PlotNames.push_back("RecoECal_ProtonCosTheta_0_00To0_50_ProtonMomentum_0_70To1_00Plot");
     PlotNames.push_back("RecoECal_ProtonCosTheta_0_50To0_75_ProtonMomentum_0_70To1_00Plot");
-    PlotNames.push_back("RecoECal_ProtonCosTheta_0_75To1_00_ProtonMomentum_0_70To1_00Plot");		
+    PlotNames.push_back("RecoECal_ProtonCosTheta_0_75To1_00_ProtonMomentum_0_70To1_00Plot");
+
+    PlotNames.push_back("RecoSerialDeltaPT_MuonCosThetaPlot");
+    PlotNames.push_back("RecoSerialDeltaPT_ProtonCosThetaPlot");
+    PlotNames.push_back("RecoSerialMuonMomentum_MuonCosThetaPlot");
+    PlotNames.push_back("RecoSerialProtonMomentum_ProtonCosThetaPlot");
+    PlotNames.push_back("RecoSerialDeltaAlphaT_MuonCosThetaPlot");
+    PlotNames.push_back("RecoSerialDeltaAlphaT_ProtonCosThetaPlot");
+    PlotNames.push_back("RecoSerialDeltaAlphaT_DeltaPTPlot");
+    PlotNames.push_back("RecoSerialDeltaPhiT_DeltaPTPlot");
+    PlotNames.push_back("RecoSerialDeltaPn_DeltaPTPlot");
+    PlotNames.push_back("RecoSerialECal_DeltaPTPlot");
+    PlotNames.push_back("RecoSerialProtonCosTheta_MuonCosThetaPlot");
+    PlotNames.push_back("RecoSerialDeltaPty_DeltaPtxPlot");
+    PlotNames.push_back("RecoSerialDeltaPtx_DeltaPtyPlot");			
 
 	}
 
