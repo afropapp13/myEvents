@@ -333,7 +333,23 @@ void PeLEE_Create1DPlotsTHStack_InteractionBreakDown(TString BaseMC = "") {
 //					TH1D* CCCosmichist = (TH1D*)(FileSample[WhichSample]->Get("Cosmic"+PlotNames[WhichPlot]));
 
 					hist->GetXaxis()->CenterTitle();
-					hist->GetYaxis()->CenterTitle();					
+					hist->GetYaxis()->CenterTitle();
+
+					//------------------------------//
+
+					// The N-dimensional analysis has been developed based on the bin number, not the actual range
+
+					if (string(PlotNames[WhichPlot]).find("Serial") != std::string::npos) {	
+
+						TString XaxisTitle = hist->GetXaxis()->GetTitle();
+						XaxisTitle.ReplaceAll("deg","bin #");
+						XaxisTitle.ReplaceAll("GeV/c","bin #");
+						XaxisTitle.ReplaceAll("GeV","bin #");				
+						hist->GetXaxis()->SetTitle(XaxisTitle);
+
+					}								
+
+					//------------------------------//				
 
 					hist->SetLineColor(Colors[WhichSample]);
 
