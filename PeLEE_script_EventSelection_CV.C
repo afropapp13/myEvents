@@ -30,7 +30,14 @@
 //	WhichSampleArray.push_back("BeamOn9_Run4");
 //	WhichSampleArray.push_back("ExtBNB9_Run4");
 //	WhichSampleArray.push_back("OverlayDirt9_Run4");
-//	WhichSampleArray.push_back("Overlay9_Run4");	
+//	WhichSampleArray.push_back("Overlay9_Run4");
+
+	// Run 4a
+
+	WhichSampleArray.push_back("BeamOn9_Run4a");
+	WhichSampleArray.push_back("ExtBNB9_Run4a");
+	WhichSampleArray.push_back("OverlayDirt9_Run4a");
+	WhichSampleArray.push_back("Overlay9_Run4a");
 
 	// Run 5
 
