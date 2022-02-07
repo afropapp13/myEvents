@@ -113,9 +113,6 @@ void PeLEE_myTrueAnalysis::Loop() {
 	TH1D* TrueProtonPhiPlot = new TH1D("TrueProtonPhiPlot",LabelXAxisProtonPhi,NBinsProtonPhi,ArrayNBinsProtonPhi);
 
 	TH1D* TrueECalPlot = new TH1D("TrueECalPlot",LabelXAxisECal,NBinsECal,ArrayNBinsECal);
-	TH1D* TrueECalLowPTPlot = new TH1D("TrueECalLowPTPlot",LabelXAxisECal,NBinsECal,ArrayNBinsECal);
-	TH1D* TrueECalMidPTPlot = new TH1D("TrueECalMidPTPlot",LabelXAxisECal,NBinsECal,ArrayNBinsECal);
-	TH1D* TrueECalHighPTPlot = new TH1D("TrueECalHighPTPlot",LabelXAxisECal,NBinsECal,ArrayNBinsECal);
 	TH1D* TrueEQEPlot = new TH1D("TrueEQEPlot",LabelXAxisEQE,NBinsEQE,ArrayNBinsEQE);
 	TH1D* TrueQ2Plot = new TH1D("TrueQ2Plot",LabelXAxisQ2,NBinsQ2,ArrayNBinsQ2);
 
@@ -157,6 +154,12 @@ void PeLEE_myTrueAnalysis::Loop() {
 
 	//--------------------------------------------------//
 
+	// ECal in DeltaPT slices
+
+	TH1D* TrueECal_InDeltaPTTwoDPlot[TwoDNBinsDeltaPT];	
+
+	//--------------------------------------------------//
+
 	// DeltaPhiT in DeltaPT slices
 
 	TH1D* TrueDeltaPhiT_InDeltaPTTwoDPlot[TwoDNBinsDeltaPT];	
@@ -177,6 +180,13 @@ void PeLEE_myTrueAnalysis::Loop() {
 
 		TString DeltaAlphaTTwoDInDeltaPTLabel = "DeltaAlphaT_DeltaPT_"+tools.ConvertToString(TwoDArrayNBinsDeltaPT[WhichDeltaPT])+"To"+tools.ConvertToString(TwoDArrayNBinsDeltaPT[WhichDeltaPT+1])+"Plot";			
 		TrueDeltaAlphaT_InDeltaPTTwoDPlot[WhichDeltaPT] = new TH1D("True"+DeltaAlphaTTwoDInDeltaPTLabel,LabelXAxisDeltaAlphaT,TwoDArrayNBinsDeltaAlphaTInDeltaPTSlices[WhichDeltaPT].size()-1,&TwoDArrayNBinsDeltaAlphaTInDeltaPTSlices[WhichDeltaPT][0]);
+
+		//------------------------------//
+
+		// ECal in DeltaPT slices
+
+		TString ECalTwoDInDeltaPTLabel = "ECal_DeltaPT_"+tools.ConvertToString(TwoDArrayNBinsDeltaPT[WhichDeltaPT])+"To"+tools.ConvertToString(TwoDArrayNBinsDeltaPT[WhichDeltaPT+1])+"Plot";			
+		TrueECal_InDeltaPTTwoDPlot[WhichDeltaPT] = new TH1D("True"+ECalTwoDInDeltaPTLabel,LabelXAxisECal,TwoDArrayNBinsECalInDeltaPTSlices[WhichDeltaPT].size()-1,&TwoDArrayNBinsECalInDeltaPTSlices[WhichDeltaPT][0]);		
 
 		//------------------------------//
 
@@ -738,7 +748,8 @@ void PeLEE_myTrueAnalysis::Loop() {
 					TrueDeltaPty_InDeltaPtxTwoDPlot[DeltaPtxTwoDIndex]->Fill(TruePty,weight);
 					TrueDeltaPtx_InDeltaPtyTwoDPlot[DeltaPtyTwoDIndex]->Fill(TruePtx,weight);	
 					TrueDeltaPT_InDeltaAlphaTTwoDPlot[DeltaAlphaTTwoDIndex]->Fill(TrueTransMissMomentum,weight);
-					TrueECal_InDeltaAlphaTTwoDPlot[DeltaAlphaTTwoDIndex]->Fill(TrueRecoECal,weight);										
+					TrueECal_InDeltaAlphaTTwoDPlot[DeltaAlphaTTwoDIndex]->Fill(TrueRecoECal,weight);
+					TrueECal_InDeltaPTTwoDPlot[DeltaPTTwoDIndex]->Fill(TrueRecoECal,weight);															
 
 					// 2D analysis in 1D grid
 
@@ -799,9 +810,6 @@ void PeLEE_myTrueAnalysis::Loop() {
 					// Reconstructed energy & Q2
 
 					TrueECalPlot->Fill(TrueRecoECal,weight);
-					if (TrueTransMissMomentum > LowPT[0] && TrueTransMissMomentum < HighPT[0]) { TrueECalLowPTPlot->Fill(TrueRecoECal,weight); }
-					if (TrueTransMissMomentum > LowPT[1] && TrueTransMissMomentum < HighPT[1]) { TrueECalMidPTPlot->Fill(TrueRecoECal,weight); }
-					if (TrueTransMissMomentum > LowPT[2] && TrueTransMissMomentum < HighPT[2]) { TrueECalHighPTPlot->Fill(TrueRecoECal,weight); }
 					TrueEQEPlot->Fill(TrueRecoEQE,weight);
 					TrueQ2Plot->Fill(RecoTrueQ2,weight);
 

@@ -172,6 +172,7 @@ void PeLEE_PrintLatexTables(TString BaseMC = "", bool PrintEventLoss = false, bo
 	Runs.push_back("Run2");
 	Runs.push_back("Run3");
 //	Runs.push_back("Run4");
+	Runs.push_back("Run4a");
 //	Runs.push_back("Run5");
 	Runs.push_back("Combined");
 

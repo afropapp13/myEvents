@@ -79,9 +79,6 @@ void PeLEE_Create1DPlotsTHStack_InteractionBreakDown(TString BaseMC = "") {
 	PlotNames.push_back("RecoProtonLLRPIDPlot");
 
 	PlotNames.push_back("RecoECalPlot");
-	PlotNames.push_back("RecoECalLowPTPlot");
-	PlotNames.push_back("RecoECalMidPTPlot");
-	PlotNames.push_back("RecoECalHighPTPlot");
 	PlotNames.push_back("RecoEQEPlot");
 	PlotNames.push_back("RecoQ2Plot");
 
@@ -118,6 +115,10 @@ void PeLEE_Create1DPlotsTHStack_InteractionBreakDown(TString BaseMC = "") {
     PlotNames.push_back("RecoECal_DeltaPT_0_40To1_00_DeltaAlphaT_45_00To90_00Plot");
     PlotNames.push_back("RecoECal_DeltaPT_0_40To1_00_DeltaAlphaT_90_00To135_00Plot");
     PlotNames.push_back("RecoECal_DeltaPT_0_40To1_00_DeltaAlphaT_135_00To180_00Plot");
+
+	PlotNames.push_back("RecoECal_DeltaPT_0_00To0_20Plot");
+	PlotNames.push_back("RecoECal_DeltaPT_0_20To0_40Plot");
+	PlotNames.push_back("RecoECal_DeltaPT_0_40To1_00Plot");
 
     PlotNames.push_back("RecoECal_DeltaAlphaT_0_00To45_00Plot");
     PlotNames.push_back("RecoECal_DeltaAlphaT_45_00To90_00Plot");
@@ -260,6 +261,7 @@ void PeLEE_Create1DPlotsTHStack_InteractionBreakDown(TString BaseMC = "") {
 	//Runs.push_back("Run3");
 //	Runs.push_back("Run4");
 //	Runs.push_back("Run5");
+//	Runs.push_back("Combined");
 
 	int NRuns = (int)(Runs.size());
 	cout << "Number of Runs = " << NRuns << endl;
