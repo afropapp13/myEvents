@@ -154,6 +154,11 @@ void PeLEE_Create1DPlotsTHStack_InteractionBreakDown(TString BaseMC = "") {
 	PlotNames.push_back("RecoDeltaPT_DeltaAlphaT_90_00To135_00Plot");	   
 	PlotNames.push_back("RecoDeltaPT_DeltaAlphaT_135_00To180_00Plot");
 
+    PlotNames.push_back("RecoDeltaPn_DeltaAlphaT_0_00To45_00Plot");
+    PlotNames.push_back("RecoDeltaPn_DeltaAlphaT_45_00To90_00Plot");
+	PlotNames.push_back("RecoDeltaPn_DeltaAlphaT_90_00To135_00Plot");	   
+	PlotNames.push_back("RecoDeltaPn_DeltaAlphaT_135_00To180_00Plot");	
+
     PlotNames.push_back("RecoECal_DeltaAlphaT_0_00To45_00Plot");
     PlotNames.push_back("RecoECal_DeltaAlphaT_45_00To90_00Plot");
 	PlotNames.push_back("RecoECal_DeltaAlphaT_90_00To135_00Plot");	   
@@ -217,7 +222,8 @@ void PeLEE_Create1DPlotsTHStack_InteractionBreakDown(TString BaseMC = "") {
     PlotNames.push_back("RecoECal_ProtonCosTheta_0_75To1_00_ProtonMomentum_0_70To1_00Plot");
 
     PlotNames.push_back("RecoSerialDeltaPT_MuonCosThetaPlot");
-    PlotNames.push_back("RecoSerialDeltaPT_DeltaAlphaTPlot");	
+    PlotNames.push_back("RecoSerialDeltaPT_DeltaAlphaTPlot");
+    PlotNames.push_back("RecoSerialDeltaPn_DeltaAlphaTPlot");		
     PlotNames.push_back("RecoSerialDeltaPT_ProtonCosThetaPlot");
     PlotNames.push_back("RecoSerialMuonMomentum_MuonCosThetaPlot");
     PlotNames.push_back("RecoSerialProtonMomentum_ProtonCosThetaPlot");
@@ -434,7 +440,7 @@ void PeLEE_Create1DPlotsTHStack_InteractionBreakDown(TString BaseMC = "") {
 				midPad->Draw();
 				botPad->Draw();
 
-				leg.push_back(new TLegend(0.1,0.005,0.9,0.995));
+				leg.push_back(new TLegend(0.07,0.005,0.93,0.995));
 				leg[WhichPlot]->SetBorderSize(0);
 				leg[WhichPlot]->SetNColumns(3);
 
@@ -470,7 +476,7 @@ void PeLEE_Create1DPlotsTHStack_InteractionBreakDown(TString BaseMC = "") {
 
 						gStyle->SetErrorX(0); // Removing the horizontal errors
 						Plots[WhichSample][WhichPlot]->Draw("e1 same"); 
-						TString NBeamOnEvents = ToString(Plots[WhichSample][WhichPlot]->GetEntries());
+						TString NBeamOnEvents = ToString((int)(Plots[WhichSample][WhichPlot]->GetEntries()));
 						leg[WhichPlot]->AddEntry(Plots[WhichSample][WhichPlot],LabelsOfSamples[WhichSample] + " ("+NBeamOnEvents+")","ep");
 
 					}
@@ -517,11 +523,17 @@ void PeLEE_Create1DPlotsTHStack_InteractionBreakDown(TString BaseMC = "") {
 							THStacks[WhichPlot]->Add(CCDISPlots[WhichSample][WhichPlot],"hist");
 							THStacks[WhichPlot]->Add(CCDISPlots[WhichSample+2][WhichPlot],"hist");
 
-							leg[WhichPlot]->AddEntry(CCQEPlots[WhichSample][WhichPlot],"CCQE","f"); 
-							leg[WhichPlot]->AddEntry(CCMECPlots[WhichSample][WhichPlot],"CCMEC","f"); 
-							leg[WhichPlot]->AddEntry(Plots[2][WhichPlot],LabelsOfSamples[2],"f");
-							leg[WhichPlot]->AddEntry(CCRESPlots[WhichSample][WhichPlot],"CCRES","f"); 
-							leg[WhichPlot]->AddEntry(CCDISPlots[WhichSample][WhichPlot],"CCDIS","f"); 
+							TString NCCQEEvents = ToString((int)(CCQEPlots[WhichSample][WhichPlot]->Integral()));
+							TString NCCMECEvents = ToString((int)(CCMECPlots[WhichSample][WhichPlot]->Integral()));	
+							TString NCCRESEvents = ToString((int)(CCRESPlots[WhichSample][WhichPlot]->Integral()));	
+							TString NCCDISEvents = ToString((int)(CCDISPlots[WhichSample][WhichPlot]->Integral()));	
+							TString NExtBNBEvents = ToString((int)(Plots[2][WhichPlot]->Integral()));																						
+
+							leg[WhichPlot]->AddEntry(CCQEPlots[WhichSample][WhichPlot],"CCQE (" + NCCQEEvents + ")","f"); 
+							leg[WhichPlot]->AddEntry(CCMECPlots[WhichSample][WhichPlot],"CCMEC (" + NCCMECEvents + ")","f"); 
+							leg[WhichPlot]->AddEntry(Plots[2][WhichPlot],LabelsOfSamples[2] + " (" + NExtBNBEvents + ")","f"); // ExtBNB
+							leg[WhichPlot]->AddEntry(CCRESPlots[WhichSample][WhichPlot],"CCRES (" + NCCRESEvents + ")","f"); 
+							leg[WhichPlot]->AddEntry(CCDISPlots[WhichSample][WhichPlot],"CCDIS (" + NCCDISEvents + ")","f"); 
 
 							THStacks[WhichPlot]->Draw("same");
 					
