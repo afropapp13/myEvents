@@ -3228,7 +3228,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 					POTScaledCC1pRecoECal_InDeltaPTDeltaAlphaTTwoDPlot2D[DeltaPTTwoDIndex][DeltaAlphaTTwoDIndex]->Fill(true_ECal,ECal,weight);
 
 					CC1pRecoECal_InMuonCosThetaMuonMomentumTwoDPlot2D[MuonCosThetaTwoDIndex][MuonMomentumTwoDIndex]->Fill(true_ECal,ECal);
-					POTScaledCC1pRecoECal_InMuonCosThetaMuonMomentumTwoDPlot2D[MuonCosThetaTwoDIndex][MuonMomentumTwoDIndex]->Fill(true_ECal,ECal);
+					POTScaledCC1pRecoECal_InMuonCosThetaMuonMomentumTwoDPlot2D[MuonCosThetaTwoDIndex][MuonMomentumTwoDIndex]->Fill(true_ECal,ECal,weight);
 										
 					CC1pRecoECal_InProtonCosThetaProtonMomentumTwoDPlot2D[ProtonCosThetaTwoDIndex][ProtonMomentumTwoDIndex]->Fill(true_ECal,ECal);	
 					POTScaledCC1pRecoECal_InProtonCosThetaProtonMomentumTwoDPlot2D[ProtonCosThetaTwoDIndex][ProtonMomentumTwoDIndex]->Fill(true_ECal,ECal,weight);														
