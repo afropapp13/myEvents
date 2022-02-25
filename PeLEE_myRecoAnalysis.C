@@ -3246,8 +3246,8 @@ void PeLEE_myRecoAnalysis::Loop() {
 					SerialCC1pRecoDeltaPhiT_InDeltaPTPlot2D->Fill(TrueSerialDeltaPhiTInDeltaPTIndex,SerialDeltaPhiTInDeltaPTIndex);
 					SerialCC1pRecoDeltaPn_InDeltaPTPlot2D->Fill(TrueSerialDeltaPnInDeltaPTIndex,SerialDeltaPnInDeltaPTIndex);	
 					SerialCC1pRecoECal_InDeltaPTPlot2D->Fill(TrueSerialECalInDeltaPTIndex,SerialECalInDeltaPTIndex);
-					SerialCC1pRecoECal_InDeltaPtxPlot2D->Fill(TrueSerialECal_DeltaPtxIndex,SerialECalInDeltaPtxIndex);
-					SerialCC1pRecoECal_InDeltaPtyPlot2D->Fill(TrueSerialECal_DeltaPtyIndex,SerialECalInDeltaPtyIndex);																												
+					SerialCC1pRecoECal_InDeltaPtxPlot2D->Fill(TrueSerialECalInDeltaPtxIndex,SerialECalInDeltaPtxIndex);
+					SerialCC1pRecoECal_InDeltaPtyPlot2D->Fill(TrueSerialECalInDeltaPtyIndex,SerialECalInDeltaPtyIndex);																												
 					SerialCC1pRecoProtonCosTheta_InMuonCosThetaPlot2D->Fill(TrueSerialProtonCosThetaInMuonCosThetaIndex,SerialProtonCosThetaInMuonCosThetaIndex);
 					SerialCC1pRecoDeltaPty_InDeltaPtxPlot2D->Fill(TrueSerialDeltaPtyInDeltaPtxIndex,SerialDeltaPtyInDeltaPtxIndex);
 					SerialCC1pRecoDeltaPtx_InDeltaPtyPlot2D->Fill(TrueSerialDeltaPtxInDeltaPtyIndex,SerialDeltaPtxInDeltaPtyIndex);	
@@ -3266,7 +3266,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 					SerialPOTScaledCC1pRecoDeltaPn_InDeltaPTPlot2D->Fill(TrueSerialDeltaPnInDeltaPTIndex,SerialDeltaPnInDeltaPTIndex,weight);	
 					SerialPOTScaledCC1pRecoECal_InDeltaPTPlot2D->Fill(TrueSerialECalInDeltaPTIndex,SerialECalInDeltaPTIndex,weight);	
 					SerialPOTScaledCC1pRecoECal_InDeltaPtxPlot2D->Fill(TrueSerialECalInDeltaPtxIndex,SerialECalInDeltaPtxIndex,weight);
-					SerialPOTScaledCC1pRecoECal_InDeltaPtyPlot2D->Fill(TrueSerialECalInDeltaPyIndex,SerialECalInDeltaPtyIndex,weight);																											
+					SerialPOTScaledCC1pRecoECal_InDeltaPtyPlot2D->Fill(TrueSerialECalInDeltaPtyIndex,SerialECalInDeltaPtyIndex,weight);																											
 					SerialPOTScaledCC1pRecoProtonCosTheta_InMuonCosThetaPlot2D->Fill(TrueSerialProtonCosThetaInMuonCosThetaIndex,SerialProtonCosThetaInMuonCosThetaIndex,weight);
 					SerialPOTScaledCC1pRecoDeltaPty_InDeltaPtxPlot2D->Fill(TrueSerialDeltaPtyInDeltaPtxIndex,SerialDeltaPtyInDeltaPtxIndex,weight);
 					SerialPOTScaledCC1pRecoDeltaPtx_InDeltaPtyPlot2D->Fill(TrueSerialDeltaPtxInDeltaPtyIndex,SerialDeltaPtxInDeltaPtyIndex,weight);	
