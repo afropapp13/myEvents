@@ -69,16 +69,6 @@ PeLEE_Create1DPlotsTHStack_InteractionBreakDown("Overlay9NuWro")
 
 root -b PeLEE_script_EventSelection_CV_FakeData.C
 
-root -b PeLEE_script_EventSelection_Detector_Systematics_FakeData.C
-
-root -b PeLEE_script_EventSelection_G4_Systematics_FakeData.C
-
-root -b PeLEE_script_EventSelection_Genie_Systematics_FakeData.C
-
-root -b PeLEE_script_EventSelection_Flux_Systematics_FakeData.C
-
-root -b PeLEE_script_EventSelection_MC_Stat_Systematics_FakeData.C
-
 root -b
 .L PeLEE_Create1DPlotsTHStack_TopologicalBreakDown.cpp
 PeLEE_Create1DPlotsTHStack_TopologicalBreakDown("NoTuneOverlay9")
@@ -88,6 +78,16 @@ root -b
 .L PeLEE_Create1DPlotsTHStack_InteractionBreakDown.cpp
 PeLEE_Create1DPlotsTHStack_InteractionBreakDown("NoTuneOverlay9")
 PeLEE_Create1DPlotsTHStack_InteractionBreakDown("TwiceMECOverlay9")
+
+root -b PeLEE_script_EventSelection_Detector_Systematics_FakeData.C
+
+root -b PeLEE_script_EventSelection_G4_Systematics_FakeData.C
+
+root -b PeLEE_script_EventSelection_Genie_Systematics_FakeData.C
+
+root -b PeLEE_script_EventSelection_Flux_Systematics_FakeData.C
+
+root -b PeLEE_script_EventSelection_MC_Stat_Systematics_FakeData.C
 
 ###########################################################################################################################################################################
 

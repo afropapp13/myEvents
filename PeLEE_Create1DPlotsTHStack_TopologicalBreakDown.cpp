@@ -38,27 +38,27 @@ void PeLEE_Create1DPlotsTHStack_TopologicalBreakDown(TString BaseMC = "") {
 	PlotNames.push_back("RecoDeltaAlphaTPlot");
 	PlotNames.push_back("RecoDeltaPhiTPlot");
 
-	PlotNames.push_back("RecoPMissMinusPlot");
-	PlotNames.push_back("RecoPMissPlot");
-	PlotNames.push_back("RecokMissPlot");
+	//PlotNames.push_back("RecoPMissMinusPlot");
+	//PlotNames.push_back("RecoPMissPlot");
+	//PlotNames.push_back("RecokMissPlot");
 
-	PlotNames.push_back("RecoDeltaPLPlot");
+	//PlotNames.push_back("RecoDeltaPLPlot");
 	PlotNames.push_back("RecoDeltaPnPlot");
 	PlotNames.push_back("RecoDeltaPtxPlot");
 	PlotNames.push_back("RecoDeltaPtyPlot");
-	PlotNames.push_back("RecoAPlot");
+	//PlotNames.push_back("RecoAPlot");
 
 	if (BaseMC == "") {
 
-	PlotNames.push_back("RecoCandidateMuEndYPlot");
-	PlotNames.push_back("RecoCCQEMuonMomentumPlot");
-	PlotNames.push_back("RecoCCQEProtonMomentumPlot"); 
-	PlotNames.push_back("RecoCCQEMuonCosThetaPlot");
-	PlotNames.push_back("RecoCCQEProtonCosThetaPlot");
-	PlotNames.push_back("RecoCCQEMuonPhiPlot");
-	PlotNames.push_back("RecoCCQEProtonPhiPlot");
-	PlotNames.push_back("RecoCCQEECalPlot");
-	PlotNames.push_back("RecoCCQEQ2Plot");
+	//PlotNames.push_back("RecoCandidateMuEndYPlot");
+	//PlotNames.push_back("RecoCCQEMuonMomentumPlot");
+	//PlotNames.push_back("RecoCCQEProtonMomentumPlot"); 
+	//PlotNames.push_back("RecoCCQEMuonCosThetaPlot");
+	//PlotNames.push_back("RecoCCQEProtonCosThetaPlot");
+	//PlotNames.push_back("RecoCCQEMuonPhiPlot");
+	//PlotNames.push_back("RecoCCQEProtonPhiPlot");
+	//PlotNames.push_back("RecoCCQEECalPlot");
+	//PlotNames.push_back("RecoCCQEQ2Plot");
 
 	PlotNames.push_back("RecoNuScorePlot");
 //	PlotNames.push_back("RecoFlashScorePlot");
@@ -119,6 +119,14 @@ void PeLEE_Create1DPlotsTHStack_TopologicalBreakDown(TString BaseMC = "") {
 	PlotNames.push_back("RecoECal_DeltaPT_0_00To0_20Plot");
 	PlotNames.push_back("RecoECal_DeltaPT_0_20To0_40Plot");
 	PlotNames.push_back("RecoECal_DeltaPT_0_40To1_00Plot");	
+
+	PlotNames.push_back("RecoECal_DeltaPtx_Minus0_55ToMinus0_15Plot");
+	PlotNames.push_back("RecoECal_DeltaPtx_Minus0_15To0_15Plot");
+	PlotNames.push_back("RecoECal_DeltaPtx_0_15To0_55Plot");
+
+	PlotNames.push_back("RecoECal_DeltaPty_Minus0_75ToMinus0_15Plot");
+	PlotNames.push_back("RecoECal_DeltaPty_Minus0_15To0_15Plot");
+	PlotNames.push_back("RecoECal_DeltaPty_0_15To0_45Plot");	
 
     PlotNames.push_back("RecoECal_DeltaAlphaT_0_00To45_00Plot");
     PlotNames.push_back("RecoECal_DeltaAlphaT_45_00To90_00Plot");
@@ -199,14 +207,14 @@ void PeLEE_Create1DPlotsTHStack_TopologicalBreakDown(TString BaseMC = "") {
     PlotNames.push_back("RecoECal_MuonCosTheta_0_00To0_50_MuonMomentum_0_10To0_40Plot");
     PlotNames.push_back("RecoECal_MuonCosTheta_0_50To0_75_MuonMomentum_0_10To0_40Plot");
     PlotNames.push_back("RecoECal_MuonCosTheta_0_75To1_00_MuonMomentum_0_10To0_40Plot");
-    PlotNames.push_back("RecoECal_MuonCosTheta_Minus1_00To0_00_MuonMomentum_0_40To0_64Plot");
-    PlotNames.push_back("RecoECal_MuonCosTheta_0_00To0_50_MuonMomentum_0_40To0_64Plot");
-    PlotNames.push_back("RecoECal_MuonCosTheta_0_50To0_75_MuonMomentum_0_40To0_64Plot");
-    PlotNames.push_back("RecoECal_MuonCosTheta_0_75To1_00_MuonMomentum_0_40To0_64Plot");
-    PlotNames.push_back("RecoECal_MuonCosTheta_Minus1_00To0_00_MuonMomentum_0_64To1_20Plot");
-    PlotNames.push_back("RecoECal_MuonCosTheta_0_00To0_50_MuonMomentum_0_64To1_20Plot");
-    PlotNames.push_back("RecoECal_MuonCosTheta_0_50To0_75_MuonMomentum_0_64To1_20Plot");
-    PlotNames.push_back("RecoECal_MuonCosTheta_0_75To1_00_MuonMomentum_0_64To1_20Plot");		
+    PlotNames.push_back("RecoECal_MuonCosTheta_Minus1_00To0_00_MuonMomentum_0_40To0_60Plot");
+    PlotNames.push_back("RecoECal_MuonCosTheta_0_00To0_50_MuonMomentum_0_40To0_60Plot");
+    PlotNames.push_back("RecoECal_MuonCosTheta_0_50To0_75_MuonMomentum_0_40To0_60Plot");
+    PlotNames.push_back("RecoECal_MuonCosTheta_0_75To1_00_MuonMomentum_0_40To0_60Plot");
+    PlotNames.push_back("RecoECal_MuonCosTheta_Minus1_00To0_00_MuonMomentum_0_60To1_20Plot");
+    PlotNames.push_back("RecoECal_MuonCosTheta_0_00To0_50_MuonMomentum_0_60To1_20Plot");
+    PlotNames.push_back("RecoECal_MuonCosTheta_0_50To0_75_MuonMomentum_0_60To1_20Plot");
+    PlotNames.push_back("RecoECal_MuonCosTheta_0_75To1_00_MuonMomentum_0_60To1_20Plot");		
 
     PlotNames.push_back("RecoECal_ProtonCosTheta_Minus1_00To0_00_ProtonMomentum_0_30To0_50Plot");
     PlotNames.push_back("RecoECal_ProtonCosTheta_0_00To0_50_ProtonMomentum_0_30To0_50Plot");
@@ -233,6 +241,8 @@ void PeLEE_Create1DPlotsTHStack_TopologicalBreakDown(TString BaseMC = "") {
     PlotNames.push_back("RecoSerialDeltaPhiT_DeltaPTPlot");
     PlotNames.push_back("RecoSerialDeltaPn_DeltaPTPlot");
     PlotNames.push_back("RecoSerialECal_DeltaPTPlot");
+    PlotNames.push_back("RecoSerialECal_DeltaPtxPlot");
+    PlotNames.push_back("RecoSerialECal_DeltaPtyPlot");	
     PlotNames.push_back("RecoSerialECal_DeltaAlphaTPlot");	
     PlotNames.push_back("RecoSerialProtonCosTheta_MuonCosThetaPlot");
     PlotNames.push_back("RecoSerialDeltaPty_DeltaPtxPlot");
@@ -295,7 +305,12 @@ void PeLEE_Create1DPlotsTHStack_TopologicalBreakDown(TString BaseMC = "") {
 			if (BaseMC == "TwiceMECOverlay9" && i != NCuts-1) { continue; }		
 
 			// GENIE v2 has only combined run
-			if (BaseMC == "GENIEv2Overlay9" && Runs[WhichRun] != "Combined") { continue; }				
+			if (BaseMC == "GENIEv2Overlay9" && Runs[WhichRun] != "Combined") { continue; }	
+
+			// NuWro/Tweaked GENIE don't have Run 4a
+			if (BaseMC == "Overlay9NuWro" && Runs[WhichRun] == "Run4a") { continue; }
+			if (BaseMC == "NoTuneOverlay9" && Runs[WhichRun] == "Run4a") { continue; }
+			if (BaseMC == "TwiceMECOverlay9" && Runs[WhichRun] == "Run4a") { continue; }												
 
 //		} // If we want to run only on a specific cut combination, include this } and remove the one at the end of the program
 
@@ -491,7 +506,7 @@ void PeLEE_Create1DPlotsTHStack_TopologicalBreakDown(TString BaseMC = "") {
 							CC1pPlots[WhichSample][WhichPlot]->SetLineColor(ColorsOverlay[2]);
 							CC1pPlots[WhichSample][WhichPlot]->SetFillColor(ColorsOverlay[2]);
 							THStacks[WhichPlot]->Add(CC1pPlots[WhichSample][WhichPlot],"hist");
-							leg[WhichPlot]->AddEntry(CC1pPlots[WhichSample][WhichPlot],LabelsOfSamples[WhichSample] + " CC1p ("+NCC1pEvents+")","f");
+							leg[WhichPlot]->AddEntry(CC1pPlots[WhichSample][WhichPlot],LabelsOfSamples[WhichSample] + " CC1p0#pi ("+NCC1pEvents+")","f");
 							THStacks[WhichPlot]->Draw("same");
 
 							TString NNonCC1pEvents = ToString( (int)(NonCC1pPlots[WhichSample][WhichPlot]->Integral() ) );
