@@ -116,6 +116,16 @@ void PeLEE_Create1DPlotsTHStack_TopologicalBreakDown(TString BaseMC = "") {
     PlotNames.push_back("RecoECal_DeltaPT_0_40To1_00_DeltaAlphaT_90_00To135_00Plot");
     PlotNames.push_back("RecoECal_DeltaPT_0_40To1_00_DeltaAlphaT_135_00To180_00Plot");
 
+    PlotNames.push_back("RecoECal_DeltaPtx_Minus0_55ToMinus0_15_DeltaPty_Minus0_75ToMinus0_15Plot");
+    PlotNames.push_back("RecoECal_DeltaPtx_Minus0_55ToMinus0_15_DeltaPty_Minus0_15To0_15Plot");
+    PlotNames.push_back("RecoECal_DeltaPtx_Minus0_55ToMinus0_15_DeltaPty_0_15To0_45Plot");			
+    PlotNames.push_back("RecoECal_DeltaPtx_Minus0_15To0_15_DeltaPty_Minus0_75ToMinus0_15Plot");
+    PlotNames.push_back("RecoECal_DeltaPtx_Minus0_15To0_15_DeltaPty_Minus0_15To0_15Plot");
+    PlotNames.push_back("RecoECal_DeltaPtx_Minus0_15To0_15_DeltaPty_0_15To0_45Plot");		
+    PlotNames.push_back("RecoECal_DeltaPtx_0_15To0_55_DeltaPty_Minus0_75ToMinus0_15Plot");
+    PlotNames.push_back("RecoECal_DeltaPtx_0_15To0_55_DeltaPty_Minus0_15To0_15Plot");
+    PlotNames.push_back("RecoECal_DeltaPtx_0_15To0_55_DeltaPty_0_15To0_45Plot");	
+
 	PlotNames.push_back("RecoECal_DeltaPT_0_00To0_20Plot");
 	PlotNames.push_back("RecoECal_DeltaPT_0_20To0_40Plot");
 	PlotNames.push_back("RecoECal_DeltaPT_0_40To1_00Plot");	
@@ -445,7 +455,7 @@ void PeLEE_Create1DPlotsTHStack_TopologicalBreakDown(TString BaseMC = "") {
 				midPad->Draw();
 				botPad->Draw();
 
-				leg.push_back(new TLegend(0.07,0.005,0.93,0.995));
+				leg.push_back(new TLegend(0.05,0.005,0.95,0.995));
 				leg[WhichPlot]->SetBorderSize(0);
 				leg[WhichPlot]->SetNColumns(3);
 
@@ -513,7 +523,7 @@ void PeLEE_Create1DPlotsTHStack_TopologicalBreakDown(TString BaseMC = "") {
 							NonCC1pPlots[WhichSample][WhichPlot]->SetLineColor(ColorsOverlay[3]);
 							NonCC1pPlots[WhichSample][WhichPlot]->SetFillColor(ColorsOverlay[3]);
 							THStacks[WhichPlot]->Add(NonCC1pPlots[WhichSample][WhichPlot],"hist");
-							leg[WhichPlot]->AddEntry(NonCC1pPlots[WhichSample][WhichPlot],LabelsOfSamples[WhichSample] + " NonCC1p ("+NNonCC1pEvents+")","f");
+							leg[WhichPlot]->AddEntry(NonCC1pPlots[WhichSample][WhichPlot],LabelsOfSamples[WhichSample] + " NonCC1p0#pi ("+NNonCC1pEvents+")","f");
 							THStacks[WhichPlot]->Draw("same");
 
 					}
@@ -524,14 +534,14 @@ void PeLEE_Create1DPlotsTHStack_TopologicalBreakDown(TString BaseMC = "") {
 							CC1pPlots[WhichSample][WhichPlot]->SetLineColor(ColorsOverlay[0]);
 							CC1pPlots[WhichSample][WhichPlot]->SetFillColor(ColorsOverlay[0]);
 							THStacks[WhichPlot]->Add(CC1pPlots[WhichSample][WhichPlot],"hist");
-							leg[WhichPlot]->AddEntry(CC1pPlots[WhichSample][WhichPlot],LabelsOfSamples[WhichSample] + " CC1p ("+NCC1pEvents+")","f");
+							leg[WhichPlot]->AddEntry(CC1pPlots[WhichSample][WhichPlot],LabelsOfSamples[WhichSample] + " CC1p0#pi ("+NCC1pEvents+")","f");
 							THStacks[WhichPlot]->Draw("same");
 
 							TString NNonCC1pEvents = ToString( (int)(NonCC1pPlots[WhichSample][WhichPlot]->Integral() ) );
 							NonCC1pPlots[WhichSample][WhichPlot]->SetLineColor(ColorsOverlay[1]);
 							NonCC1pPlots[WhichSample][WhichPlot]->SetFillColor(ColorsOverlay[1]);
 							THStacks[WhichPlot]->Add(NonCC1pPlots[WhichSample][WhichPlot],"hist");
-							leg[WhichPlot]->AddEntry(NonCC1pPlots[WhichSample][WhichPlot],LabelsOfSamples[WhichSample] + " NonCC1p ("+NNonCC1pEvents+")","f");
+							leg[WhichPlot]->AddEntry(NonCC1pPlots[WhichSample][WhichPlot],LabelsOfSamples[WhichSample] + " NonCC1p0#pi ("+NNonCC1pEvents+")","f");
 							THStacks[WhichPlot]->Draw("same");
 
 					}
