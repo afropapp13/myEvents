@@ -1569,15 +1569,15 @@ void PeLEE_myRecoAnalysis::Loop() {
 		// 2D analysis
 		// Ecal in DeltaPT and DeltaAlphaT bins		
 
-		TH1D* RecoECal_InDeltaPtxDeltaPtyTwoDPlot[TwoDNBinsDeltaPtx][TwoDNBinsDeltaAlphaty];
-		TH1D* CC1pRecoECal_InDeltaPtxDeltaPtyTwoDPlot[TwoDNBinsDeltaPtx][TwoDNBinsDeltaAlphaty];
-		TH1D* CC1pTrueECal_InDeltaPtxDeltaPtyTwoDPlot[TwoDNBinsDeltaPtx][TwoDNBinsDeltaAlphaty];				
-		TH1D* NonCC1pRecoECal_InDeltaPtxDeltaPtyTwoDPlot[TwoDNBinsDeltaPtx][TwoDNBinsDeltaAlphaty];		
-		TH1D* CCQERecoECal_InDeltaPtxDeltaPtyTwoDPlot[TwoDNBinsDeltaPtx][TwoDNBinsDeltaAlphaty];
-		TH1D* CCMECRecoECal_InDeltaPtxDeltaPtyTwoDPlot[TwoDNBinsDeltaPtx][TwoDNBinsDeltaAlphaty];
-		TH1D* CCRESRecoECal_InDeltaPtxDeltaPtyTwoDPlot[TwoDNBinsDeltaPtx][TwoDNBinsDeltaAlphaty];
-		TH1D* CCDISRecoECal_InDeltaPtxDeltaPtyTwoDPlot[TwoDNBinsDeltaPtx][TwoDNBinsDeltaAlphaty];
-		TH2D* CC1pRecoECal_InDeltaPtxDeltaPtyTwoDPlot2D[TwoDNBinsDeltaPtx][TwoDNBinsDeltaAlphaty];	
+		TH1D* RecoECal_InDeltaPtxDeltaPtyTwoDPlot[TwoDNBinsDeltaPtx][TwoDNBinsDeltaPty];
+		TH1D* CC1pRecoECal_InDeltaPtxDeltaPtyTwoDPlot[TwoDNBinsDeltaPtx][TwoDNBinsDeltaPty];
+		TH1D* CC1pTrueECal_InDeltaPtxDeltaPtyTwoDPlot[TwoDNBinsDeltaPtx][TwoDNBinsDeltaPty];				
+		TH1D* NonCC1pRecoECal_InDeltaPtxDeltaPtyTwoDPlot[TwoDNBinsDeltaPtx][TwoDNBinsDeltaPty];		
+		TH1D* CCQERecoECal_InDeltaPtxDeltaPtyTwoDPlot[TwoDNBinsDeltaPtx][TwoDNBinsDeltaPty];
+		TH1D* CCMECRecoECal_InDeltaPtxDeltaPtyTwoDPlot[TwoDNBinsDeltaPtx][TwoDNBinsDeltaPty];
+		TH1D* CCRESRecoECal_InDeltaPtxDeltaPtyTwoDPlot[TwoDNBinsDeltaPtx][TwoDNBinsDeltaPty];
+		TH1D* CCDISRecoECal_InDeltaPtxDeltaPtyTwoDPlot[TwoDNBinsDeltaPtx][TwoDNBinsDeltaPty];
+		TH2D* CC1pRecoECal_InDeltaPtxDeltaPtyTwoDPlot2D[TwoDNBinsDeltaPtx][TwoDNBinsDeltaPty];	
 		TH2D* POTScaledCC1pRecoECal_InDeltaPtxDeltaPtyTwoDPlot2D[TwoDNBinsDeltaPtx][TwoDNBinsDeltaPty];			
 
 		//----------------------------------------//
