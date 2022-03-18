@@ -30,15 +30,15 @@ void PeLEE_Create1DPlotsTHStack_SubSpectrum() {
 
 	// -----------------------------------------------------------------------------------------------------------------------------------------
 
-	std::vector<TString> PlotNames; PlotNames.clear();
+//	std::vector<TString> PlotNames; PlotNames.clear();
 
 //	PlotNames.push_back("RecoMuonMomentumPlot");
 //	PlotNames.push_back("RecoProtonMomentumPlot");
-	PlotNames.push_back("RecoMuonCosThetaPlot");
+//	PlotNames.push_back("RecoMuonCosThetaPlot");
 //	PlotNames.push_back("RecoProtonCosThetaPlot");
 //	PlotNames.push_back("RecoMuonPhiPlot");
 //	PlotNames.push_back("RecoProtonPhiPlot");
-	PlotNames.push_back("RecoDeltaPTPlot");
+//	PlotNames.push_back("RecoDeltaPTPlot");
 //	PlotNames.push_back("RecoDeltaAlphaTPlot");
 //	PlotNames.push_back("RecoDeltaPhiTPlot");
 
