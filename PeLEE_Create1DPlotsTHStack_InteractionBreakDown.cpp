@@ -32,8 +32,6 @@ void PeLEE_Create1DPlotsTHStack_InteractionBreakDown(TString BaseMC = "") {
 	PlotNames.push_back("RecoProtonMomentumPlot");
 	PlotNames.push_back("RecoMuonCosThetaPlot");
 	PlotNames.push_back("RecoProtonCosThetaPlot");
-	PlotNames.push_back("RecoMuonPhiPlot");
-	PlotNames.push_back("RecoProtonPhiPlot");
 	PlotNames.push_back("RecoDeltaPTPlot");
 	PlotNames.push_back("RecoDeltaAlphaTPlot");
 	PlotNames.push_back("RecoDeltaPhiTPlot");
@@ -42,7 +40,7 @@ void PeLEE_Create1DPlotsTHStack_InteractionBreakDown(TString BaseMC = "") {
 	//PlotNames.push_back("RecoPMissPlot");
 	//PlotNames.push_back("RecokMissPlot");
 
-	PlotNames.push_back("RecoDeltaPLPlot");
+	//PlotNames.push_back("RecoDeltaPLPlot");
 	PlotNames.push_back("RecoDeltaPnPlot");
 	PlotNames.push_back("RecoDeltaPtxPlot");
 	PlotNames.push_back("RecoDeltaPtyPlot");
@@ -75,19 +73,22 @@ void PeLEE_Create1DPlotsTHStack_InteractionBreakDown(TString BaseMC = "") {
 //	PlotNames.push_back("RecoThreePlaneChi2LogLikelihoodCandidateMuonPlot");
 //	PlotNames.push_back("RecoThreePlaneChi2LogLikelihoodCandidateProtonPlot");
 
-	PlotNames.push_back("RecoMuonLLRPIDPlot");
+	PlotNames.push_back("RecoMuonPhiPlot");
+	PlotNames.push_back("RecoProtonPhiPlot");
+
+//	PlotNames.push_back("RecoMuonLLRPIDPlot");
 	PlotNames.push_back("RecoProtonLLRPIDPlot");
 
 	PlotNames.push_back("RecoECalPlot");
 	PlotNames.push_back("RecoEQEPlot");
 	PlotNames.push_back("RecoQ2Plot");
 
-	PlotNames.push_back("RecoMuonLengthPlot");
-	PlotNames.push_back("RecoProtonLengthPlot");
+//	PlotNames.push_back("RecoMuonLengthPlot");
+//	PlotNames.push_back("RecoProtonLengthPlot");
 //	PlotNames.push_back("RecodMuonTracksScorePlot");
 //	PlotNames.push_back("RecodProtonTracksScorePlot");
-	PlotNames.push_back("RecodMuonVertexDistancePlot");
-	PlotNames.push_back("RecodProtonVertexDistancePlot");
+//	PlotNames.push_back("RecodMuonVertexDistancePlot");
+//	PlotNames.push_back("RecodProtonVertexDistancePlot");
 //	PlotNames.push_back("RecoVertexActivityPlot");
 //	PlotNames.push_back("RecoNonZeroVertexActivityPlot");
 
@@ -95,8 +96,8 @@ void PeLEE_Create1DPlotsTHStack_InteractionBreakDown(TString BaseMC = "") {
 	PlotNames.push_back("RecoVertexYPlot");
 	PlotNames.push_back("RecoVertexZPlot");
 
-	PlotNames.push_back("RecoEvPlot");
-	PlotNames.push_back("RecoNuPlot");
+//	PlotNames.push_back("RecoEvPlot");
+//	PlotNames.push_back("RecoNuPlot");
 
 	//PlotNames.push_back("RecoContainedMuonMomentumPlot");
 	//PlotNames.push_back("RecoUncontainedMuonMomentumPlot");

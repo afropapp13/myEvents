@@ -26,18 +26,19 @@ void PeLEE_Create1DPlotsTHStack_SubSpectrum() {
 
 	GlobalSettings();
 	gStyle->SetOptStat(0);
+	gStyle->SetEndErrorSize(6);	
 
 	// -----------------------------------------------------------------------------------------------------------------------------------------
 
-//	std::vector<TString> PlotNames; PlotNames.clear();
+	std::vector<TString> PlotNames; PlotNames.clear();
 
 //	PlotNames.push_back("RecoMuonMomentumPlot");
 //	PlotNames.push_back("RecoProtonMomentumPlot");
-//	PlotNames.push_back("RecoMuonCosThetaPlot");
+	PlotNames.push_back("RecoMuonCosThetaPlot");
 //	PlotNames.push_back("RecoProtonCosThetaPlot");
 //	PlotNames.push_back("RecoMuonPhiPlot");
 //	PlotNames.push_back("RecoProtonPhiPlot");
-//	PlotNames.push_back("RecoDeltaPTPlot");
+	PlotNames.push_back("RecoDeltaPTPlot");
 //	PlotNames.push_back("RecoDeltaAlphaTPlot");
 //	PlotNames.push_back("RecoDeltaPhiTPlot");
 
@@ -93,7 +94,7 @@ void PeLEE_Create1DPlotsTHStack_SubSpectrum() {
 
 	for (int WhichRun = 0; WhichRun < NRuns; WhichRun++) {
 
-		double DataPOT = ReturnBeamOnRunPOT(Runs[WhichRun]);													
+		double DataPOT = PeLEE_ReturnBeamOnRunPOT(Runs[WhichRun]);		
 		double IntegratedFlux = (HistoFlux->Integral() * DataPOT / POTPerSpill / Nominal_UB_XY_Surface) * (SoftFidSurface / Nominal_UB_XY_Surface);		
 
 		// -----------------------------------------------------------------------------------------------------------------------------------------
@@ -151,9 +152,9 @@ void PeLEE_Create1DPlotsTHStack_SubSpectrum() {
 
 				for (int WhichPlot = 0; WhichPlot < N1DPlots; WhichPlot ++){
 
-					TH1D* hist = (TH1D*)(FileSample[WhichSample]->Get("Reco"+PlotNames[WhichPlot]));
-					TH1D* CC1phist = (TH1D*)(FileSample[WhichSample]->Get("CC1pReco"+PlotNames[WhichPlot]));
-					TH1D* NonCC1phist = (TH1D*)(FileSample[WhichSample]->Get("NonCC1pReco"+PlotNames[WhichPlot]));
+					TH1D* hist = (TH1D*)(FileSample[WhichSample]->Get(PlotNames[WhichPlot]));
+					TH1D* CC1phist = (TH1D*)(FileSample[WhichSample]->Get("CC1p"+PlotNames[WhichPlot]));
+					TH1D* NonCC1phist = (TH1D*)(FileSample[WhichSample]->Get("NonCC1p"+PlotNames[WhichPlot]));
 
 					hist->GetXaxis()->CenterTitle();
 					hist->GetYaxis()->CenterTitle();					
@@ -163,7 +164,7 @@ void PeLEE_Create1DPlotsTHStack_SubSpectrum() {
 					if (LabelsOfSamples[WhichSample] == "BeamOn") { 
 				
 						hist->SetMarkerStyle(20);
-						hist->SetMarkerSize(2.); 
+						hist->SetMarkerSize(1.); 
 					}
 
 					CurrentPlots.push_back(hist);
@@ -216,7 +217,7 @@ void PeLEE_Create1DPlotsTHStack_SubSpectrum() {
 
 					midPad->cd();
 					Plots[WhichSample][WhichPlot]->SetTitle("");
-					Plots[WhichSample][WhichPlot]->SetLineWidth(4);
+					Plots[WhichSample][WhichPlot]->SetLineWidth(1);
 
 					Plots[WhichSample][WhichPlot]->GetXaxis()->SetTitleFont(FontStyle);
 					Plots[WhichSample][WhichPlot]->GetXaxis()->SetLabelFont(FontStyle);
@@ -238,11 +239,11 @@ void PeLEE_Create1DPlotsTHStack_SubSpectrum() {
 
 					if (LabelsOfSamples[WhichSample] == "BeamOn") { 
 
-						gStyle->SetErrorX(0); // Removing the horizontal errors
+						//gStyle->SetErrorX(0); // Removing the horizontal errors
 						BeamOnClone->SetLineColor(kWhite);
 						BeamOnClone->SetMarkerColor(kWhite);
 						BeamOnClone->Draw("e1 same"); 
-						leg[WhichPlot]->AddEntry(Plots[WhichSample][WhichPlot],LabelsOfSamples[WhichSample]+" (Stat + Syst)","ep");
+						leg[WhichPlot]->AddEntry(Plots[WhichSample][WhichPlot],LabelsOfSamples[WhichSample]+" (Stat Unc)","ep");
 
 					}
 
@@ -284,6 +285,8 @@ void PeLEE_Create1DPlotsTHStack_SubSpectrum() {
 				TString CopyPlotName = PlotNames[WhichPlot];
 				TString ReducedPlotName = CopyPlotName.ReplaceAll("Reco","");
 				TH2D* CovMatrix = (TH2D*)(CovFile->Get("TotalCovariance_"+ReducedPlotName));
+				TH2D* StatCovMatrix = (TH2D*)(CovFile->Get("StatCovariance_"+ReducedPlotName));		
+				CovMatrix->Add(StatCovMatrix,-1);		
 				// Sanity check, stat errors should be identical to the ones coming from the Stat covariances 
 				//TH2D* CovMatrix = (TH2D*)(CovFile->Get("StatCovariance_"+ReducedPlotName));				
 				//CovMatrix->Scale(TMath::Power( (IntegratedFlux*NTargets)/Units ,2.));
@@ -293,23 +296,33 @@ void PeLEE_Create1DPlotsTHStack_SubSpectrum() {
 
 				for (int i = 1; i <= n;i++ ) { 
 
-					double CV = DataClone->GetBinContent(i);
-					DataClone->SetBinError(i, TMath::Sqrt(CovMatrix->GetBinContent(i,i) * CV * CV) ); 
+					double MCCV = CC1pPlots[1][WhichPlot]->GetBinContent(i); // 1 = Overlay samples
 
+					DataClone->SetBinContent(i,MCCV);
+					DataClone->SetBinError(i, TMath::Sqrt( CovMatrix->GetBinContent(i,i) ) * (IntegratedFlux*NTargets)/Units);
 				}
 
-				DataClone->SetLineColor(kGray);
-				DataClone->Draw("e1 same");	// Full Syst
-				BeamOnClone->Draw("e1 same"); // Stat Only					
+				BeamOnClone->Draw("e1 same"); // Data Stat Only			
+
+				DataClone->SetMarkerSize(0.);
+				DataClone->SetMarkerColor(ColorsOverlay[0]);				
+				DataClone->SetLineColor(ColorsOverlay[0]);
+				DataClone->SetFillColor(kOrange+7);
+				DataClone->SetFillStyle(3004);								
+				DataClone->Draw("e2 same");	// Full Syst	
+
+				BeamOnClone->Draw("e1 same"); // Data Stat Only, draw again to be on top	
+
+				leg[WhichPlot]->AddEntry(DataClone,"Syst Unc","f");												
 
 				TLatex *text = new TLatex();
 				text->SetTextFont(FontStyle);
 				text->SetTextSize(0.09);
-				text->DrawTextNDC(0.14, 0.87, Runs[WhichRun]);
+				text->DrawTextNDC(0.14, 0.9, Runs[WhichRun]);
 
 				// -------------------------------------------------------------------------------------------------------------------
 
-				TH1D* Ratio = (TH1D*)(DataClone->Clone());
+				TH1D* Ratio = (TH1D*)(BeamOnClone->Clone());
 
 				Ratio->Divide(CC1pPlots[1][WhichPlot]);
 
