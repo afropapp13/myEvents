@@ -32,30 +32,30 @@ void PeLEE_Create1DPlotsTHStack_SubSpectrum() {
 
 //	std::vector<TString> PlotNames; PlotNames.clear();
 
-//	PlotNames.push_back("RecoMuonMomentumPlot");
-//	PlotNames.push_back("RecoProtonMomentumPlot");
-//	PlotNames.push_back("RecoMuonCosThetaPlot");
-//	PlotNames.push_back("RecoProtonCosThetaPlot");
-//	PlotNames.push_back("RecoMuonPhiPlot");
-//	PlotNames.push_back("RecoProtonPhiPlot");
-//	PlotNames.push_back("RecoDeltaPTPlot");
-//	PlotNames.push_back("RecoDeltaAlphaTPlot");
-//	PlotNames.push_back("RecoDeltaPhiTPlot");
+//	PlotNames.push_back("MuonMomentumPlot");
+//	PlotNames.push_back("ProtonMomentumPlot");
+//	PlotNames.push_back("MuonCosThetaPlot");
+//	PlotNames.push_back("ProtonCosThetaPlot");
+//	PlotNames.push_back("MuonPhiPlot");
+//	PlotNames.push_back("ProtonPhiPlot");
+//	PlotNames.push_back("DeltaPTPlot");
+//	PlotNames.push_back("DeltaAlphaTPlot");
+//	PlotNames.push_back("DeltaPhiTPlot");
 
-//	PlotNames.push_back("RecoPMissMinusPlot");
-//	PlotNames.push_back("RecoPMissPlot");
-//	PlotNames.push_back("RecokMissPlot");
+//	PlotNames.push_back("PMissMinusPlot");
+//	PlotNames.push_back("PMissPlot");
+//	PlotNames.push_back("kMissPlot");
 
-//	PlotNames.push_back("RecoDeltaPLPlot");
-//	PlotNames.push_back("RecoDeltaPnPlot");
-//	PlotNames.push_back("RecoDeltaPtxPlot");
-//	PlotNames.push_back("RecoDeltaPtyPlot");
-//	PlotNames.push_back("RecoAPlot");
+//	PlotNames.push_back("DeltaPLPlot");
+//	PlotNames.push_back("DeltaPnPlot");
+//	PlotNames.push_back("DeltaPtxPlot");
+//	PlotNames.push_back("DeltaPtyPlot");
+//	PlotNames.push_back("APlot");
 
-//	PlotNames.push_back("RecoCCQEMuonMomentumPlot");
-//	PlotNames.push_back("RecoCCQEProtonMomentumPlot");
-//	PlotNames.push_back("RecoCCQEMuonCosThetaPlot");
-//	PlotNames.push_back("RecoCCQEProtonCosThetaPlot");
+//	PlotNames.push_back("CCQEMuonMomentumPlot");
+//	PlotNames.push_back("CCQEProtonMomentumPlot");
+//	PlotNames.push_back("CCQEMuonCosThetaPlot");
+//	PlotNames.push_back("CCQEProtonCosThetaPlot");
 
 	const int N1DPlots = PlotNames.size();
 	cout << "Number of 1D Plots = " << N1DPlots << endl;
@@ -152,9 +152,9 @@ void PeLEE_Create1DPlotsTHStack_SubSpectrum() {
 
 				for (int WhichPlot = 0; WhichPlot < N1DPlots; WhichPlot ++){
 
-					TH1D* hist = (TH1D*)(FileSample[WhichSample]->Get(PlotNames[WhichPlot]));
-					TH1D* CC1phist = (TH1D*)(FileSample[WhichSample]->Get("CC1p"+PlotNames[WhichPlot]));
-					TH1D* NonCC1phist = (TH1D*)(FileSample[WhichSample]->Get("NonCC1p"+PlotNames[WhichPlot]));
+					TH1D* hist = (TH1D*)(FileSample[WhichSample]->Get("Reco"+PlotNames[WhichPlot]));
+					TH1D* CC1phist = (TH1D*)(FileSample[WhichSample]->Get("CC1pReco"+PlotNames[WhichPlot]));
+					TH1D* NonCC1phist = (TH1D*)(FileSample[WhichSample]->Get("NonCC1pReco"+PlotNames[WhichPlot]));
 
 					hist->GetXaxis()->CenterTitle();
 					hist->GetYaxis()->CenterTitle();					
