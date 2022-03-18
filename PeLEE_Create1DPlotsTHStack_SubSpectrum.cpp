@@ -306,7 +306,7 @@ void PeLEE_Create1DPlotsTHStack_SubSpectrum() {
 
 				DataClone->SetMarkerSize(0.);
 				DataClone->SetMarkerColor(ColorsOverlay[0]);				
-				DataClone->SetLineColor(ColorsOverlay[0]);
+				DataClone->SetLineColor(kWhite);
 				DataClone->SetFillColor(kOrange+7);
 				DataClone->SetFillStyle(3004);								
 				DataClone->Draw("e2 same");	// Full Syst	
