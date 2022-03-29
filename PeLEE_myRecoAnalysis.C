@@ -2178,7 +2178,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 				// MC_Stat weights // bootstrapping
 				if (fEventWeightLabel == "MC_Stat") { 
 
-					int concat = tools.ConcatRunSubRunEvent(Run,SubRun,Event);
+					int concat = tools.ConcatRunSubRunEvent(Run,SubRun,Event,fUniverseIndex);
 					weight = weight*tools.PoissonRandomNumber(concat); 
 				
 				}				
