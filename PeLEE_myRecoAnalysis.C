@@ -2878,8 +2878,8 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 			// Chi2 PID Studies
 
-			 RecoLLRPIDPlot->Fill(reco_mu_LLR_Score,weight/2.);
-			 RecoLLRPIDPlot->Fill(reco_p_LLR_Score,weight/2.);
+			RecoLLRPIDPlot->Fill(reco_mu_LLR_Score,weight/2.);
+			RecoLLRPIDPlot->Fill(reco_p_LLR_Score,weight/2.);
 
 			if (RecoCCQElike) {
 
@@ -4473,7 +4473,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 					if (CandidateMu_MCParticle_Pdg->at(0) == ProtonPdg) {
 
-						ProtonRecoLLRPIDPlot->Fill(reco_mu_LLR_Score,weight);
+						ProtonRecoLLRPIDPlot->Fill(reco_mu_LLR_Score,weight/2.);
 //						ProtonRecoChi2Plot->Fill(reco_Pmu_chi2,weight);		
 
 					}
