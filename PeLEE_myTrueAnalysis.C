@@ -222,7 +222,7 @@ void PeLEE_myTrueAnalysis::Loop() {
 		TrueMuonMomentumPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueMuonMomentumPlot",LabelXAxisMuonMomentum,NBinsMuonMomentum,ArrayNBinsMuonMomentum);
 		TrueMuonPhiPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueMuonPhiPlot",LabelXAxisMuonPhi,NBinsMuonPhi,ArrayNBinsMuonPhi);
 		TrueMuonCosThetaPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueMuonCosThetaPlot",LabelXAxisMuonCosTheta,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta);
-		TrueMuonCosThetaSingleBinPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueMuonCosThetaSingleBinPlot",LabelXAxisMuonCosTheta,1,-1.,1.);
+		TrueMuonCosThetaSingleBinPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueMuonCosThetaSingleBinPlot",LabelXAxisMuonCosTheta,1,0.,1.);
 		TrueProtonMomentumPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueProtonMomentumPlot",LabelXAxisProtonMomentum,NBinsProtonMomentum,ArrayNBinsProtonMomentum);
 		TrueProtonPhiPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueProtonPhiPlot",LabelXAxisProtonPhi,NBinsProtonPhi,ArrayNBinsProtonPhi);
 		TrueProtonCosThetaPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueProtonCosThetaPlot",LabelXAxisProtonCosTheta,NBinsProtonCosTheta,ArrayNBinsProtonCosTheta);
@@ -766,7 +766,7 @@ void PeLEE_myTrueAnalysis::Loop() {
 					TrueMuonMomentumPlot[0]->Fill(TrueMuonMomentum_GeV,weight);
 					TrueMuonPhiPlot[0]->Fill(TrueMuonPhi_Deg,weight);
 					TrueMuonCosThetaPlot[0]->Fill(TrueMuonCosTheta,weight);
-					TrueMuonCosThetaSingleBinPlot[0]->Fill(TrueMuonCosTheta,weight);
+					TrueMuonCosThetaSingleBinPlot[0]->Fill(0.5,weight);
 					TrueProtonMomentumPlot[0]->Fill(TrueProtonMomentum_GeV,weight);
 					TrueProtonPhiPlot[0]->Fill(TrueProtonPhi_Deg,weight);
 					TrueProtonCosThetaPlot[0]->Fill(TrueProtonCosTheta,weight);
@@ -788,7 +788,7 @@ void PeLEE_myTrueAnalysis::Loop() {
 					TrueMuonMomentumPlot[genie_mode]->Fill(TrueMuonMomentum_GeV,weight);
 					TrueMuonPhiPlot[genie_mode]->Fill(TrueMuonPhi_Deg,weight);
 					TrueMuonCosThetaPlot[genie_mode]->Fill(TrueMuonCosTheta,weight);
-					TrueMuonCosThetaSingleBinPlot[genie_mode]->Fill(TrueMuonCosTheta,weight);
+					TrueMuonCosThetaSingleBinPlot[genie_mode]->Fill(0.5,weight);
 					TrueProtonMomentumPlot[genie_mode]->Fill(TrueProtonMomentum_GeV,weight);
 					TrueProtonPhiPlot[genie_mode]->Fill(TrueProtonPhi_Deg,weight);
 					TrueProtonCosThetaPlot[genie_mode]->Fill(TrueProtonCosTheta,weight);					

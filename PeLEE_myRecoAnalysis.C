@@ -189,7 +189,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 		TH1D* RecoMuonMomentumPlot = new TH1D("RecoMuonMomentumPlot",LabelXAxisMuonMomentum,NBinsMuonMomentum,ArrayNBinsMuonMomentum);
 		TH1D* RecoMuonCosThetaPlot = new TH1D("RecoMuonCosThetaPlot",LabelXAxisMuonCosTheta,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta);
-		TH1D* RecoMuonCosThetaSingleBinPlot = new TH1D("RecoMuonCosThetaSingleBinPlot",LabelXAxisMuonCosTheta,1,-1.,1.);
+		TH1D* RecoMuonCosThetaSingleBinPlot = new TH1D("RecoMuonCosThetaSingleBinPlot",LabelXAxisMuonCosTheta,1,0.,1.);
 		TH1D* RecoMuonPhiPlot = new TH1D("RecoMuonPhiPlot",LabelXAxisMuonPhi,NBinsMuonPhi,ArrayNBinsMuonPhi);
 
 		TH1D* RecoCCQEMuonMomentumPlot = new TH1D("RecoCCQEMuonMomentumPlot",LabelXAxisMuonMomentum,CCQENBinsMuonMomentum,CCQEArrayNBinsMuonMomentum);
@@ -273,7 +273,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 		TH1D* CC1pTrueMuonMomentumPlot = new TH1D("CC1pTrueMuonMomentumPlot",LabelXAxisMuonMomentum,NBinsMuonMomentum,ArrayNBinsMuonMomentum);
 		TH1D* CC1pTrueMuonCosThetaPlot = new TH1D("CC1pTrueMuonCosThetaPlot",LabelXAxisMuonCosTheta,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta);
-		TH1D* CC1pTrueMuonCosThetaSingleBinPlot = new TH1D("CC1pTrueMuonCosThetaSingleBinPlot",LabelXAxisMuonCosTheta,1,-1.,1.);
+		TH1D* CC1pTrueMuonCosThetaSingleBinPlot = new TH1D("CC1pTrueMuonCosThetaSingleBinPlot",LabelXAxisMuonCosTheta,1,0.,1.);
 		TH1D* CC1pTrueMuonPhiPlot = new TH1D("CC1pTrueMuonPhiPlot",LabelXAxisMuonPhi,NBinsMuonPhi,ArrayNBinsMuonPhi);
 
 		TH1D* CC1pTrueCCQEMuonMomentumPlot = new TH1D("CC1pTrueCCQEMuonMomentumPlot",LabelXAxisMuonMomentum,CCQENBinsMuonMomentum,CCQEArrayNBinsMuonMomentum);
@@ -336,7 +336,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 		TH1D* CC1pRecoMuonMomentumPlot = new TH1D("CC1pRecoMuonMomentumPlot",LabelXAxisMuonMomentum,NBinsMuonMomentum,ArrayNBinsMuonMomentum);
 		TH1D* CC1pRecoMuonCosThetaPlot = new TH1D("CC1pRecoMuonCosThetaPlot",LabelXAxisMuonCosTheta,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta);
-		TH1D* CC1pRecoMuonCosThetaSingleBinPlot = new TH1D("CC1pRecoMuonCosThetaSingleBinPlot",LabelXAxisMuonCosTheta,1,-1.,1.);
+		TH1D* CC1pRecoMuonCosThetaSingleBinPlot = new TH1D("CC1pRecoMuonCosThetaSingleBinPlot",LabelXAxisMuonCosTheta,1,0.,1.);
 		TH1D* CC1pRecoMuonPhiPlot = new TH1D("CC1pRecoMuonPhiPlot",LabelXAxisMuonPhi,NBinsMuonPhi,ArrayNBinsMuonPhi);
 
 		TH1D* CC1pRecoCCQEMuonMomentumPlot = new TH1D("CC1pRecoCCQEMuonMomentumPlot",LabelXAxisMuonMomentum,CCQENBinsMuonMomentum,CCQEArrayNBinsMuonMomentum);
@@ -416,7 +416,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 		TH2D* CC1pRecoMuonCosThetaPlot2D = new TH2D("CC1pRecoMuonCosThetaPlot2D",LabelXAxisMuonCosTheta2D,NBinsMuonCosTheta,
 			ArrayNBinsMuonCosTheta,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta);
-		TH2D* CC1pRecoMuonCosThetaSingleBinPlot2D = new TH2D("CC1pRecoMuonCosThetaSingleBinPlot2D",LabelXAxisMuonCosTheta2D,1,-1.,1.,1,-1.,1.);
+		TH2D* CC1pRecoMuonCosThetaSingleBinPlot2D = new TH2D("CC1pRecoMuonCosThetaSingleBinPlot2D",LabelXAxisMuonCosTheta2D,1,0.,1.,1,0.,1.);
 		TH2D* CC1pRecoProtonCosThetaPlot2D = new TH2D("CC1pRecoProtonCosThetaPlot2D",LabelXAxisProtonCosTheta2D,NBinsProtonCosTheta,
 			ArrayNBinsProtonCosTheta,NBinsProtonCosTheta,ArrayNBinsProtonCosTheta);
 
@@ -434,6 +434,10 @@ void PeLEE_myRecoAnalysis::Loop() {
 			CCQEArrayNBinsMuonPhi,CCQENBinsMuonPhi,CCQEArrayNBinsMuonPhi);
 		TH2D* CC1pRecoCCQEProtonPhiPlot2D = new TH2D("CC1pRecoCCQEProtonPhiPlot2D",LabelXAxisProtonPhi2D,CCQENBinsProtonPhi,
 			CCQEArrayNBinsProtonPhi,CCQENBinsProtonPhi,CCQEArrayNBinsProtonPhi);
+
+		TH2D* CC1pRecoVertexXPlot2D = new TH2D("CC1pRecoVertexXPlot2D",RecoLabelXAxisVertexX2D,NBinsVertexX,MinVertexX,MaxVertexX,NBinsVertexX,MinVertexX,MaxVertexX);
+		TH2D* CC1pRecoVertexYPlot2D = new TH2D("CC1pRecoVertexYPlot2D",RecoLabelXAxisVertexY2D,NBinsVertexY,MinVertexY,MaxVertexY,NBinsVertexY,MinVertexY,MaxVertexY);
+		TH2D* CC1pRecoVertexZPlot2D = new TH2D("CC1pRecoVertexZPlot2D",RecoLabelXAxisVertexZ2D,NBinsVertexZ,MinVertexZ,MaxVertexZ,NBinsVertexZ,MinVertexZ,MaxVertexZ);			
 
 		TH2D* CC1pRecoDeltaPTPlot2D = new TH2D("CC1pRecoDeltaPTPlot2D",LabelXAxisDeltaPT2D,NBinsDeltaPT,
 			ArrayNBinsDeltaPT,NBinsDeltaPT,ArrayNBinsDeltaPT);
@@ -475,7 +479,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 		TH2D* POTScaledCC1pRecoMuonCosThetaPlot2D = new TH2D("POTScaledCC1pRecoMuonCosThetaPlot2D",LabelXAxisMuonCosTheta2D,NBinsMuonCosTheta,
 			ArrayNBinsMuonCosTheta,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta);
-		TH2D* POTScaledCC1pRecoMuonCosThetaSingleBinPlot2D = new TH2D("POTScaledCC1pRecoMuonCosThetaSingleBinPlot2D",LabelXAxisMuonCosTheta2D,1,-1.,1.,1,-1.,1.);
+		TH2D* POTScaledCC1pRecoMuonCosThetaSingleBinPlot2D = new TH2D("POTScaledCC1pRecoMuonCosThetaSingleBinPlot2D",LabelXAxisMuonCosTheta2D,1,0.,1.,1,0.,1.);
 		TH2D* POTScaledCC1pRecoProtonCosThetaPlot2D = new TH2D("POTScaledCC1pRecoProtonCosThetaPlot2D",LabelXAxisProtonCosTheta2D,NBinsProtonCosTheta,
 			ArrayNBinsProtonCosTheta,NBinsProtonCosTheta,ArrayNBinsProtonCosTheta);
 
@@ -493,6 +497,10 @@ void PeLEE_myRecoAnalysis::Loop() {
 			CCQEArrayNBinsMuonPhi,CCQENBinsMuonPhi,CCQEArrayNBinsMuonPhi);
 		TH2D* POTScaledCC1pRecoCCQEProtonPhiPlot2D = new TH2D("POTScaledCC1pRecoCCQEProtonPhiPlot2D",LabelXAxisProtonPhi2D,CCQENBinsProtonPhi,
 			CCQEArrayNBinsProtonPhi,CCQENBinsProtonPhi,CCQEArrayNBinsProtonPhi);
+
+		TH2D* POTScaledCC1pRecoVertexXPlot2D = new TH2D("POTScaledCC1pRecoVertexXPlot2D",RecoLabelXAxisVertexX2D,NBinsVertexX,MinVertexX,MaxVertexX,NBinsVertexX,MinVertexX,MaxVertexX);
+		TH2D* POTScaledCC1pRecoVertexYPlot2D = new TH2D("POTScaledCC1pRecoVertexYPlot2D",RecoLabelXAxisVertexY2D,NBinsVertexY,MinVertexY,MaxVertexY,NBinsVertexY,MinVertexY,MaxVertexY);
+		TH2D* POTScaledCC1pRecoVertexZPlot2D = new TH2D("POTScaledCC1pRecoVertexZPlot2D",RecoLabelXAxisVertexZ2D,NBinsVertexZ,MinVertexZ,MaxVertexZ,NBinsVertexZ,MinVertexZ,MaxVertexZ);
 
 		TH2D* POTScaledCC1pRecoDeltaPTPlot2D = new TH2D("POTScaledCC1pRecoDeltaPTPlot2D",LabelXAxisDeltaPT2D,NBinsDeltaPT,
 			ArrayNBinsDeltaPT,NBinsDeltaPT,ArrayNBinsDeltaPT);
@@ -553,7 +561,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 		TH1D* NonCC1pRecoPionMomentumPlot = new TH1D("NonCC1pRecoPionMomentumPlot",";P_{#pi} [GeV/c]",20,0.1,0.6); // GeV/c
 		TH1D* NonCC1pRecoMuonMomentumPlot = new TH1D("NonCC1pRecoMuonMomentumPlot",LabelXAxisMuonMomentum,NBinsMuonMomentum,ArrayNBinsMuonMomentum); // GeV/c
 		TH1D* NonCC1pRecoMuonCosThetaPlot = new TH1D("NonCC1pRecoMuonCosThetaPlot",LabelXAxisMuonCosTheta,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta);
-		TH1D* NonCC1pRecoMuonCosThetaSingleBinPlot = new TH1D("NonCC1pRecoMuonCosThetaSingleBinPlot",LabelXAxisMuonCosTheta,1,-1.,1.);
+		TH1D* NonCC1pRecoMuonCosThetaSingleBinPlot = new TH1D("NonCC1pRecoMuonCosThetaSingleBinPlot",LabelXAxisMuonCosTheta,1,0.,1.);
 		TH1D* NonCC1pRecoMuonPhiPlot = new TH1D("NonCC1pRecoMuonPhiPlot",LabelXAxisMuonPhi,NBinsMuonPhi,ArrayNBinsMuonPhi);
 
 		TH1D* NonCC1pRecoCCQEMuonMomentumPlot = new TH1D("NonCC1pRecoCCQEMuonMomentumPlot",LabelXAxisMuonMomentum,CCQENBinsMuonMomentum,CCQEArrayNBinsMuonMomentum); // GeV/c
@@ -648,7 +656,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 		TH1D* CCQERecoMuonMomentumPlot = new TH1D("CCQERecoMuonMomentumPlot",LabelXAxisMuonMomentum,NBinsMuonMomentum,ArrayNBinsMuonMomentum);
 		TH1D* CCQERecoMuonCosThetaPlot = new TH1D("CCQERecoMuonCosThetaPlot",LabelXAxisMuonCosTheta,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta);
-		TH1D* CCQERecoMuonCosThetaSingleBinPlot = new TH1D("CCQERecoMuonCosThetaSingleBinPlot",LabelXAxisMuonCosTheta,1,-1.,1.);
+		TH1D* CCQERecoMuonCosThetaSingleBinPlot = new TH1D("CCQERecoMuonCosThetaSingleBinPlot",LabelXAxisMuonCosTheta,1,0.,1.);
 		TH1D* CCQERecoMuonPhiPlot = new TH1D("CCQERecoMuonPhiPlot",LabelXAxisMuonPhi,NBinsMuonPhi,ArrayNBinsMuonPhi);
 
 		TH1D* CCQERecoCCQEMuonMomentumPlot = new TH1D("CCQERecoCCQEMuonMomentumPlot",LabelXAxisMuonMomentum,CCQENBinsMuonMomentum,CCQEArrayNBinsMuonMomentum);
@@ -738,7 +746,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 		TH1D* CCMECRecoMuonMomentumPlot = new TH1D("CCMECRecoMuonMomentumPlot",LabelXAxisMuonMomentum,NBinsMuonMomentum,ArrayNBinsMuonMomentum);
 		TH1D* CCMECRecoMuonCosThetaPlot = new TH1D("CCMECRecoMuonCosThetaPlot",LabelXAxisMuonCosTheta,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta);
-		TH1D* CCMECRecoMuonCosThetaSingleBinPlot = new TH1D("CCMECRecoMuonCosThetaSingleBinPlot",LabelXAxisMuonCosTheta,1,-1.,1.);
+		TH1D* CCMECRecoMuonCosThetaSingleBinPlot = new TH1D("CCMECRecoMuonCosThetaSingleBinPlot",LabelXAxisMuonCosTheta,1,0.,1.);
 		TH1D* CCMECRecoMuonPhiPlot = new TH1D("CCMECRecoMuonPhiPlot",LabelXAxisMuonPhi,NBinsMuonPhi,ArrayNBinsMuonPhi);
 
 		TH1D* CCMECRecoCCQEMuonMomentumPlot = new TH1D("CCMECRecoCCQEMuonMomentumPlot",LabelXAxisMuonMomentum,CCQENBinsMuonMomentum,CCQEArrayNBinsMuonMomentum);
@@ -828,7 +836,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 		TH1D* CCRESRecoMuonMomentumPlot = new TH1D("CCRESRecoMuonMomentumPlot",LabelXAxisMuonMomentum,NBinsMuonMomentum,ArrayNBinsMuonMomentum);
 		TH1D* CCRESRecoMuonCosThetaPlot = new TH1D("CCRESRecoMuonCosThetaPlot",LabelXAxisMuonCosTheta,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta);
-		TH1D* CCRESRecoMuonCosThetaSingleBinPlot = new TH1D("CCRESRecoMuonCosThetaSingleBinPlot",LabelXAxisMuonCosTheta,1,-1.,1.);
+		TH1D* CCRESRecoMuonCosThetaSingleBinPlot = new TH1D("CCRESRecoMuonCosThetaSingleBinPlot",LabelXAxisMuonCosTheta,1,0.,1.);
 		TH1D* CCRESRecoMuonPhiPlot = new TH1D("CCRESRecoMuonPhiPlot",LabelXAxisMuonPhi,NBinsMuonPhi,ArrayNBinsMuonPhi);
 
 		TH1D* CCRESRecoCCQEMuonMomentumPlot = new TH1D("CCRESRecoCCQEMuonMomentumPlot",LabelXAxisMuonMomentum,CCQENBinsMuonMomentum,CCQEArrayNBinsMuonMomentum);
@@ -918,7 +926,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 		TH1D* CCDISRecoMuonMomentumPlot = new TH1D("CCDISRecoMuonMomentumPlot",LabelXAxisMuonMomentum,NBinsMuonMomentum,ArrayNBinsMuonMomentum);
 		TH1D* CCDISRecoMuonCosThetaPlot = new TH1D("CCDISRecoMuonCosThetaPlot",LabelXAxisMuonCosTheta,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta);
-		TH1D* CCDISRecoMuonCosThetaSingleBinPlot = new TH1D("CCDISRecoMuonCosThetaSingleBinPlot",LabelXAxisMuonCosTheta,1,-1.,1.);
+		TH1D* CCDISRecoMuonCosThetaSingleBinPlot = new TH1D("CCDISRecoMuonCosThetaSingleBinPlot",LabelXAxisMuonCosTheta,1,0.,1.);
 		TH1D* CCDISRecoMuonPhiPlot = new TH1D("CCDISRecoMuonPhiPlot",LabelXAxisMuonPhi,NBinsMuonPhi,ArrayNBinsMuonPhi);
 
 		TH1D* CCDISRecoCCQEMuonMomentumPlot = new TH1D("CCDISRecoCCQEMuonMomentumPlot",LabelXAxisMuonMomentum,CCQENBinsMuonMomentum,CCQEArrayNBinsMuonMomentum);
@@ -2768,7 +2776,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 			RecoMuonMomentumPlot->Fill(reco_Pmu,weight);
 			RecoMuonCosThetaPlot->Fill(reco_Pmu_cos_theta,weight);
-			RecoMuonCosThetaSingleBinPlot->Fill(reco_Pmu_cos_theta,weight);
+			RecoMuonCosThetaSingleBinPlot->Fill(0.5,weight);
 			RecoMuonPhiPlot->Fill(reco_Pmu_phi,weight);
 
 			RecoProtonLengthPlot->Fill(l_pCandidate,weight);
@@ -3001,13 +3009,13 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 					CC1pTrueNuPlot->Fill(true_Nu,weight);
 					CC1pTrueEvPlot->Fill(True_Ev,weight);
-					CC1pTrueVertexXPlot->Fill(Vertex_X->at(0),weight);
-					CC1pTrueVertexYPlot->Fill(Vertex_Y->at(0),weight);
-					CC1pTrueVertexZPlot->Fill(Vertex_Z->at(0),weight);
+					CC1pTrueVertexXPlot->Fill(True_Vx,weight);
+					CC1pTrueVertexYPlot->Fill(True_Vy,weight);
+					CC1pTrueVertexZPlot->Fill(True_Vz,weight);
 
 					CC1pTrueMuonMomentumPlot->Fill(True_CandidateMu_P->at(0),weight);
 					CC1pTrueMuonCosThetaPlot->Fill(True_CandidateMu_CosTheta->at(0),weight);
-					CC1pTrueMuonCosThetaSingleBinPlot->Fill(True_CandidateMu_CosTheta->at(0),weight);
+					CC1pTrueMuonCosThetaSingleBinPlot->Fill(0.5,weight);
 					CC1pTrueMuonPhiPlot->Fill(True_CandidateMu_Phi->at(0),weight);
 
 					CC1pTrueProtonMomentumPlot->Fill(True_CandidateP_P->at(0),weight);
@@ -3168,7 +3176,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 					CC1pRecoDeltaPhiPlot->Fill(DeltaPhiProtonMuon_Deg,weight);
 
 					CC1pRecoMuonCosThetaPlot->Fill(reco_Pmu_cos_theta,weight);
-					CC1pRecoMuonCosThetaSingleBinPlot->Fill(reco_Pmu_cos_theta,weight);
+					CC1pRecoMuonCosThetaSingleBinPlot->Fill(0.5,weight);
 					CC1pRecoProtonCosThetaPlot->Fill(reco_Pp_cos_theta,weight);
 
 					CC1pRecoMuonPhiPlot->Fill(reco_Pmu_phi,weight);
@@ -3268,7 +3276,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 					CC1pRecoProtonMomentumPlot2D->Fill(True_CandidateP_P->at(0),reco_Pp);
 
 					CC1pRecoMuonCosThetaPlot2D->Fill(True_CandidateMu_CosTheta->at(0),reco_Pmu_cos_theta);
-					CC1pRecoMuonCosThetaSingleBinPlot2D->Fill(True_CandidateMu_CosTheta->at(0),reco_Pmu_cos_theta);
+					CC1pRecoMuonCosThetaSingleBinPlot2D->Fill(0.5,0.5);
 					CC1pRecoProtonCosThetaPlot2D->Fill(True_CandidateP_CosTheta->at(0),reco_Pp_cos_theta);
 
 					CC1pRecoMuonPhiPlot2D->Fill(True_CandidateMu_Phi->at(0),reco_Pmu_phi);
@@ -3278,7 +3286,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 					POTScaledCC1pRecoProtonMomentumPlot2D->Fill(True_CandidateP_P->at(0),reco_Pp,weight);
 
 					POTScaledCC1pRecoMuonCosThetaPlot2D->Fill(True_CandidateMu_CosTheta->at(0),reco_Pmu_cos_theta,weight);
-					POTScaledCC1pRecoMuonCosThetaSingleBinPlot2D->Fill(True_CandidateMu_CosTheta->at(0),reco_Pmu_cos_theta,weight);
+					POTScaledCC1pRecoMuonCosThetaSingleBinPlot2D->Fill(0.5,0.5,weight);
 					POTScaledCC1pRecoProtonCosThetaPlot2D->Fill(True_CandidateP_CosTheta->at(0),reco_Pp_cos_theta,weight);
 
 					POTScaledCC1pRecoMuonPhiPlot2D->Fill(True_CandidateMu_Phi->at(0),reco_Pmu_phi,weight);
@@ -3345,6 +3353,10 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 					// True Level STV
 
+					CC1pRecoVertexXPlot2D->Fill(True_Vx,Vertex_X->at(0));
+					CC1pRecoVertexYPlot2D->Fill(True_Vy,Vertex_Y->at(0));
+					CC1pRecoVertexZPlot2D->Fill(True_Vz,Vertex_Z->at(0));															
+
 					CC1pRecoDeltaPTPlot2D->Fill(true_TransMissMomentum,TransMissMomentum);
 					CC1pRecoDeltaAlphaTPlot2D->Fill(true_DeltaAlphaT,DeltaAlphaT);
 					CC1pRecoDeltaPhiTPlot2D->Fill(true_DeltaPhiT,DeltaPhiT);
@@ -3357,6 +3369,10 @@ void PeLEE_myRecoAnalysis::Loop() {
 					CC1pRecokMissPlot2D->Fill(true_kMiss,kMiss);
 					CC1pRecoPMissPlot2D->Fill(true_PMiss,MissMomentum);
 					CC1pRecoPMissMinusPlot2D->Fill(true_PMissMinus,PMissMinus);
+
+					POTScaledCC1pRecoVertexXPlot2D->Fill(True_Vx,Vertex_X->at(0),weight);
+					POTScaledCC1pRecoVertexYPlot2D->Fill(True_Vy,Vertex_Y->at(0),weight);
+					POTScaledCC1pRecoVertexZPlot2D->Fill(True_Vz,Vertex_Z->at(0),weight);					
 
 					POTScaledCC1pRecoDeltaPTPlot2D->Fill(true_TransMissMomentum,TransMissMomentum,weight);
 					POTScaledCC1pRecoDeltaAlphaTPlot2D->Fill(true_DeltaAlphaT,DeltaAlphaT,weight);
@@ -3742,7 +3758,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 					NonCC1pRecoMuonMomentumPlot->Fill(reco_Pmu,weight);
 					NonCC1pRecoMuonCosThetaPlot->Fill(reco_Pmu_cos_theta,weight);
-					NonCC1pRecoMuonCosThetaSingleBinPlot->Fill(reco_Pmu_cos_theta,weight);
+					NonCC1pRecoMuonCosThetaSingleBinPlot->Fill(0.5,weight);
 					NonCC1pRecoMuonPhiPlot->Fill(reco_Pmu_phi,weight);
 
 					if (CandidateMu_EndContainment->at(0) == 1) { NonCC1pRecoContainedMuonMomentumPlot->Fill(reco_Pmu,weight); }
@@ -3894,7 +3910,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 					CCQERecoMuonMomentumPlot->Fill(reco_Pmu,weight);
 					CCQERecoMuonCosThetaPlot->Fill(reco_Pmu_cos_theta,weight);
-					CCQERecoMuonCosThetaSingleBinPlot->Fill(reco_Pmu_cos_theta,weight);
+					CCQERecoMuonCosThetaSingleBinPlot->Fill(0.5,weight);
 					CCQERecoMuonPhiPlot->Fill(reco_Pmu_phi,weight);
 
 					if (CandidateMu_EndContainment->at(0) == 1) { CCQERecoContainedMuonMomentumPlot->Fill(reco_Pmu,weight); }
@@ -4045,7 +4061,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 					CCMECRecoMuonMomentumPlot->Fill(reco_Pmu,weight);
 					CCMECRecoMuonCosThetaPlot->Fill(reco_Pmu_cos_theta,weight);
-					CCMECRecoMuonCosThetaSingleBinPlot->Fill(reco_Pmu_cos_theta,weight);
+					CCMECRecoMuonCosThetaSingleBinPlot->Fill(0.5,weight);
 					CCMECRecoMuonPhiPlot->Fill(reco_Pmu_phi,weight);
 
 					if (CandidateMu_EndContainment->at(0) == 1) { CCQERecoContainedMuonMomentumPlot->Fill(reco_Pmu,weight); }
@@ -4192,7 +4208,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 					CCRESRecoMuonMomentumPlot->Fill(reco_Pmu,weight);
 					CCRESRecoMuonCosThetaPlot->Fill(reco_Pmu_cos_theta,weight);
-					CCRESRecoMuonCosThetaSingleBinPlot->Fill(reco_Pmu_cos_theta,weight);
+					CCRESRecoMuonCosThetaSingleBinPlot->Fill(0.5,weight);
 					CCRESRecoMuonPhiPlot->Fill(reco_Pmu_phi,weight);
 
 					if (CandidateMu_EndContainment->at(0) == 1) { CCRESRecoContainedMuonMomentumPlot->Fill(reco_Pmu,weight); }
@@ -4335,7 +4351,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 					CCDISRecoMuonMomentumPlot->Fill(reco_Pmu,weight);
 					CCDISRecoMuonCosThetaPlot->Fill(reco_Pmu_cos_theta,weight);
-					CCDISRecoMuonCosThetaSingleBinPlot->Fill(reco_Pmu_cos_theta,weight);
+					CCDISRecoMuonCosThetaSingleBinPlot->Fill(0.5,weight);
 					CCDISRecoMuonPhiPlot->Fill(reco_Pmu_phi,weight);
 
 					CCDISRecoProtonLengthPlot->Fill(l_pCandidate,weight);
