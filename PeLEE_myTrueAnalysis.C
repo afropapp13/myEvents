@@ -94,9 +94,6 @@ void PeLEE_myTrueAnalysis::Loop() {
 	TH1D* TrueProtonTrueMomentumLongitudinalRatio = new TH1D("TrueProtonTrueMomentumLongitudinalRatio",";P^{true}_{p,||}/P^{true}_{p}",25,0.,1.);
 	TH1D* TrueMuonTrueMomentumTransverseRatio = new TH1D("TrueMuonTrueMomentumTransverseRatio",";P^{true}_{#mu,T}/P^{true}_{#mu}",25,0.,1.);		
 	TH1D* TrueProtonTrueMomentumTransverseRatio = new TH1D("TrueProtonTrueMomentumTransverseRatio",";P^{true}_{p,T}/P^{true}_{p}",25,0.,1.);	
-	TH1D* TrueVertexXPlot = new TH1D("TrueVertexXPlot",RecoLabelXAxisVertexX,NBinsVertexX,MinVertexX,MaxVertexX);
-	TH1D* TrueVertexYPlot = new TH1D("TrueVertexYPlot",RecoLabelXAxisVertexY,NBinsVertexY,MinVertexY,MaxVertexY);
-	TH1D* TrueVertexZPlot = new TH1D("TrueVertexZPlot",RecoLabelXAxisVertexZ,NBinsVertexZ,MinVertexZ,MaxVertexZ);
 	TH1D* TrueEvPlot = new TH1D("TrueEvPlot",RecoLabelXAxisEv,NBinsEv,MinEv,MaxEv);
 	TH1D* TrueNuPlot = new TH1D("TrueNuPlot",RecoLabelXAxisNu,NBinsNu,MinNu,MaxNu);
 	TH1D* POTScalePlot = new TH1D("POTScalePlot","",1,0,1);
@@ -106,6 +103,10 @@ void PeLEE_myTrueAnalysis::Loop() {
 	//--------------------------------------------------//
 
 	// 1D analysis
+
+	TH1D* TrueVertexXPlot[NInte];
+	TH1D* TrueVertexYPlot[NInte];
+	TH1D* TrueVertexZPlot[NInte];	
 
 	TH1D* TrueDeltaPTPlot[NInte];
 	TH1D* TrueDeltaAlphaTPlot[NInte];
@@ -210,6 +211,10 @@ void PeLEE_myTrueAnalysis::Loop() {
 		//--------------------------------------------------//
 
 		// 1D analysis
+
+		TrueVertexXPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueVertexXPlot",RecoLabelXAxisVertexX,NBinsVertexX,MinVertexX,MaxVertexX);
+		TrueVertexYPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueVertexYPlot",RecoLabelXAxisVertexY,NBinsVertexY,MinVertexY,MaxVertexY);
+		TrueVertexZPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueVertexZPlot",RecoLabelXAxisVertexZ,NBinsVertexZ,MinVertexZ,MaxVertexZ);
 
 		TrueDeltaPTPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueDeltaPTPlot",LabelXAxisDeltaPT,NBinsDeltaPT,ArrayNBinsDeltaPT);
 		TrueDeltaAlphaTPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueDeltaAlphaTPlot",LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);
@@ -700,13 +705,7 @@ void PeLEE_myTrueAnalysis::Loop() {
 					TrueMuonTrueMomentumTransverseRatio->Fill(TrueCandidateMuon.Pt() / TrueCandidateMuon.Mag(),weight);
 
 					TrueProtonTrueMomentumLongitudinalRatio->Fill(TrueCandidateProton.Z() / TrueCandidateProton.Mag(),weight);
-					TrueProtonTrueMomentumTransverseRatio->Fill(TrueCandidateProton.Pt() / TrueCandidateProton.Mag(),weight);	
-
-					// True Vertex
-
-					TrueVertexXPlot->Fill(TrueVertex.X(),weight);
-					TrueVertexYPlot->Fill(TrueVertex.Y(),weight);
-					TrueVertexZPlot->Fill(TrueVertex.Z(),weight);									
+					TrueProtonTrueMomentumTransverseRatio->Fill(TrueCandidateProton.Pt() / TrueCandidateProton.Mag(),weight);										
 
 					//----------------------------------------//
 
@@ -747,7 +746,13 @@ void PeLEE_myTrueAnalysis::Loop() {
 
 					//----------------------------------------//	
 
-					// 1D analysis								
+					// 1D analysis		
+
+					// True Vertex
+
+					TrueVertexXPlot[0]->Fill(TrueVertex.X(),weight);
+					TrueVertexYPlot[0]->Fill(TrueVertex.Y(),weight);
+					TrueVertexZPlot[0]->Fill(TrueVertex.Z(),weight);											
 
 					TruekMissPlot[0]->Fill(TruekMiss,weight);
 					TruePMissMinusPlot[0]->Fill(TruePMissMinus,weight);
@@ -770,6 +775,10 @@ void PeLEE_myTrueAnalysis::Loop() {
 					TrueProtonMomentumPlot[0]->Fill(TrueProtonMomentum_GeV,weight);
 					TrueProtonPhiPlot[0]->Fill(TrueProtonPhi_Deg,weight);
 					TrueProtonCosThetaPlot[0]->Fill(TrueProtonCosTheta,weight);
+
+					TrueVertexXPlot[genie_mode]->Fill(TrueVertex.X(),weight);
+					TrueVertexYPlot[genie_mode]->Fill(TrueVertex.Y(),weight);
+					TrueVertexZPlot[genie_mode]->Fill(TrueVertex.Z(),weight);
 
 					TruekMissPlot[genie_mode]->Fill(TruekMiss,weight);
 					TruePMissMinusPlot[genie_mode]->Fill(TruePMissMinus,weight);
