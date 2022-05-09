@@ -58,6 +58,7 @@ void PeLEE_Create1DPlotsTHStack_InteractionBreakDown(TString BaseMC = "") {
 	//PlotNames.push_back("RecoCCQEECalPlot");
 	//PlotNames.push_back("RecoCCQEQ2Plot");
 
+	PlotNames.push_back("RecoMuonCosThetaSingleBinPlot");
 	PlotNames.push_back("RecoNuScorePlot");
 //	PlotNames.push_back("RecoFlashScorePlot");
 //	PlotNames.push_back("RecoDistancePlot");
@@ -172,6 +173,11 @@ void PeLEE_Create1DPlotsTHStack_InteractionBreakDown(TString BaseMC = "") {
     PlotNames.push_back("RecoDeltaPT_DeltaAlphaT_45_00To90_00Plot");
 	PlotNames.push_back("RecoDeltaPT_DeltaAlphaT_90_00To135_00Plot");	   
 	PlotNames.push_back("RecoDeltaPT_DeltaAlphaT_135_00To180_00Plot");
+
+    PlotNames.push_back("RecoProtonMomentum_DeltaAlphaT_0_00To45_00Plot");
+    PlotNames.push_back("RecoProtonMomentum_DeltaAlphaT_45_00To90_00Plot");
+	PlotNames.push_back("RecoProtonMomentum_DeltaAlphaT_90_00To135_00Plot");	   
+	PlotNames.push_back("RecoProtonMomentum_DeltaAlphaT_135_00To180_00Plot");	
 
     PlotNames.push_back("RecoDeltaPn_DeltaAlphaT_0_00To45_00Plot");
     PlotNames.push_back("RecoDeltaPn_DeltaAlphaT_45_00To90_00Plot");
@@ -363,10 +369,8 @@ void PeLEE_Create1DPlotsTHStack_InteractionBreakDown(TString BaseMC = "") {
 			vector<int> Colors; Colors.clear(); 
 			Colors.push_back(kBlack); Colors.push_back(kRed); Colors.push_back(kGray+2); Colors.push_back(kMagenta);
 
-			//vector<int> ColorsOverlay; ColorsOverlay.clear(); 
-			//ColorsOverlay.push_back(kRed); ColorsOverlay.push_back(kGreen); 
-			//ColorsOverlay.push_back(kBlue); ColorsOverlay.push_back(kMagenta); ColorsOverlay.push_back(kOrange+7);
-			vector<int> ColorsOverlay{kBlue-5,kYellow+1,kOrange+7,kRed+1,kBlue};
+//			vector<int> ColorsOverlay{kBlue-5,kYellow+1,kOrange+7,kRed+1,kBlue};
+			vector<int> ColorsOverlay{OverlayColor,kOrange-3,kGreen+1,kRed+1,kBlue};
 
 			const int NSamples = NameOfSamples.size();
 			vector<TFile*> FileSample; FileSample.clear();
@@ -556,11 +560,11 @@ void PeLEE_Create1DPlotsTHStack_InteractionBreakDown(TString BaseMC = "") {
 							TString NCCDISEvents = ToString((int)(CCDISPlots[WhichSample][WhichPlot]->Integral()));	
 							TString NExtBNBEvents = ToString((int)(Plots[2][WhichPlot]->Integral()));																						
 
-							leg[WhichPlot]->AddEntry(CCQEPlots[WhichSample][WhichPlot],"CCQE (" + NCCQEEvents + ")","f"); 
-							leg[WhichPlot]->AddEntry(CCMECPlots[WhichSample][WhichPlot],"CCMEC (" + NCCMECEvents + ")","f"); 
+							leg[WhichPlot]->AddEntry(CCQEPlots[WhichSample][WhichPlot],"QE (" + NCCQEEvents + ")","f"); 
+							leg[WhichPlot]->AddEntry(CCMECPlots[WhichSample][WhichPlot],"MEC (" + NCCMECEvents + ")","f"); 
 							leg[WhichPlot]->AddEntry(Plots[2][WhichPlot],LabelsOfSamples[2] + " (" + NExtBNBEvents + ")","f"); // ExtBNB
-							leg[WhichPlot]->AddEntry(CCRESPlots[WhichSample][WhichPlot],"CCRES (" + NCCRESEvents + ")","f"); 
-							leg[WhichPlot]->AddEntry(CCDISPlots[WhichSample][WhichPlot],"CCDIS (" + NCCDISEvents + ")","f"); 
+							leg[WhichPlot]->AddEntry(CCRESPlots[WhichSample][WhichPlot],"RES (" + NCCRESEvents + ")","f"); 
+							leg[WhichPlot]->AddEntry(CCDISPlots[WhichSample][WhichPlot],"DIS (" + NCCDISEvents + ")","f"); 
 
 							THStacks[WhichPlot]->Draw("same");
 					
