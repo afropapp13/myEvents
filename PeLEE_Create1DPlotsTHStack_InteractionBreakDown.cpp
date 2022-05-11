@@ -248,6 +248,7 @@ void PeLEE_Create1DPlotsTHStack_InteractionBreakDown(TString BaseMC = "") {
 
     PlotNames.push_back("RecoSerialDeltaPT_MuonCosThetaPlot");
     PlotNames.push_back("RecoSerialDeltaPT_DeltaAlphaTPlot");
+    PlotNames.push_back("RecoSerialProtonMomentum_DeltaAlphaTPlot");	
     PlotNames.push_back("RecoSerialDeltaPn_DeltaAlphaTPlot");		
     PlotNames.push_back("RecoSerialDeltaPT_ProtonCosThetaPlot");
     PlotNames.push_back("RecoSerialMuonMomentum_MuonCosThetaPlot");

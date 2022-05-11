@@ -93,6 +93,7 @@ root -b PeLEE_script_EventSelection_MC_Stat_Systematics_FakeData.C
 
 # locally
 ./PeLEE_DownloadEventRatePlots.sh
+./CopyPlots.sh
 
 ###########################################################################################################################################################################
 

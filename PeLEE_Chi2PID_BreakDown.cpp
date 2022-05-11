@@ -103,9 +103,8 @@ void PeLEE_Chi2PID_BreakDown() {
 			vector<int> Colors; Colors.clear(); 
 			Colors.push_back(kBlack); Colors.push_back(kRed); Colors.push_back(kGray+2); Colors.push_back(kMagenta);
 
-			//vector<int> ColorsOverlay; ColorsOverlay.clear(); 
-			//ColorsOverlay.push_back(kRed); ColorsOverlay.push_back(kBlue); ColorsOverlay.push_back(kCyan); ColorsOverlay.push_back(kMagenta); ColorsOverlay.push_back(kOrange+7);
-			vector<int> ColorsOverlay{kBlue-5,kOrange+7,kYellow+1,kRed+1,kBlue};
+//			vector<int> ColorsOverlay{kBlue-5,kOrange+7,kYellow+1,kRed+1,kBlue};
+			vector<int> ColorsOverlay{OverlayColor,kOrange-3,kGreen+1,kRed+1,kBlue};
 
 			const int NSamples = NameOfSamples.size();
 			vector<TFile*> FileSample; FileSample.clear();
