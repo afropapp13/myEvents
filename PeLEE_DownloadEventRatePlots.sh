@@ -1,10 +1,11 @@
 . ../myClasses/Constants.sh
 
-declare -a arrRun=("Run1" "Run2" "Run3" "Run4" "Run4a" "Combined")
+declare -a arrRun=("Run1" "Run2" "Run3" "Run4a" "Combined")
 
 declare -a arrCuts=("_NoCuts" "_PID_NuScore")
 
-scp $UserID@$UBgpvm:${PlotPath}/*.pdf ./myPlots/pdf/1D/${UBCode}/
+#PID plots
+scp $UserID@$UBgpvm:${PlotPath}/_NoCuts/*.pdf ./myPlots/pdf/1D/${UBCode}/_NoCuts/
 
 # Loop over the run numbers
 

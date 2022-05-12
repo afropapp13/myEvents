@@ -538,7 +538,7 @@ void PeLEE_Create1DPlotsTHStack_TopologicalBreakDown(TString BaseMC = "") {
 
 					}
 
-					if (LabelsOfSamples[WhichSample] == "Overlay") {
+					if (LabelsOfSamples[WhichSample] == "MC") {
 
 							TString NCC1pEvents = ToString( (int)(CC1pPlots[WhichSample][WhichPlot]->Integral() ) );
 							CC1pPlots[WhichSample][WhichPlot]->SetLineColor(ColorsOverlay[0]);
