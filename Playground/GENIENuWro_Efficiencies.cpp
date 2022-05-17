@@ -34,7 +34,12 @@ void GENIENuWro_Efficiencies() {
 	//----------------------------------------//
 
 	vector<TString> PlotNames;
-	PlotNames.push_back("DeltaAlphaTPlot"); 
+	PlotNames.push_back("DeltaAlphaTPlot");
+	PlotNames.push_back("ProtonMomentumPlot");
+	PlotNames.push_back("MuonMomentumPlot");
+	PlotNames.push_back("ProtonCosThetaPlot");
+	PlotNames.push_back("MuonCosThetaPlot");
+	PlotNames.push_back("SerialProtonMomentum_DeltaAlphaTPlot");				 
 
 	//----------------------------------------//
 
@@ -94,7 +99,7 @@ void GENIENuWro_Efficiencies() {
 
 			//----------------------------------------//	
 
-			GENIEHisto->SetTitle("CC1p0#pi Efficiency");
+			GENIEHisto->SetTitle("# Events / " + ToString(DataPOT));
 			GENIEHisto->SetLineWidth(3);			
 
 			GENIEHisto->GetXaxis()->CenterTitle();
@@ -109,10 +114,10 @@ void GENIENuWro_Efficiencies() {
 			GENIEHisto->GetYaxis()->SetLabelSize(TextSize);
 			GENIEHisto->GetYaxis()->SetTitleFont(TextFont);
 			GENIEHisto->GetYaxis()->SetLabelFont(TextFont);
-			GENIEHisto->GetYaxis()->SetTitleOffset(1.15);			
+			GENIEHisto->GetYaxis()->SetTitleOffset(1.05);			
 			GENIEHisto->GetYaxis()->SetNdivisions(8);
 			GENIEHisto->GetYaxis()->SetRangeUser(0.,1.25*GENIEHisto->GetMaximum());
-			GENIEHisto->GetYaxis()->SetTitle("# Events / " + ToString(DataPOT));													
+			GENIEHisto->GetYaxis()->SetTitle("CC1p0#pi Efficiency");
 
 			GENIEHisto->SetMarkerColor(OverlayColor);
 			GENIEHisto->SetMarkerSize(2.);

@@ -646,7 +646,7 @@ void PeLEE_Create1DPlotsTHStack_InteractionBreakDown(TString BaseMC = "") {
 				TLatex* latexPurity = new TLatex();
 				latexPurity->SetTextFont(FontStyle);
 				latexPurity->SetTextSize(0.09);
-				TString LabelPurity = "CCQE = " + ToString(CCQEPurity/10.) + " %";
+				TString LabelPurity = "QE = " + ToString(CCQEPurity/10.) + " %";
 				latexPurity->DrawLatexNDC(0.57,0.9, LabelPurity);
 
 				// --------------------------------------------------------------------------------------

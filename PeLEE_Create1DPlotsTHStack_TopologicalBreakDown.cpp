@@ -579,7 +579,7 @@ void PeLEE_Create1DPlotsTHStack_TopologicalBreakDown(TString BaseMC = "") {
 				TLatex *text = new TLatex();
 				text->SetTextFont(FontStyle);
 				text->SetTextSize(0.09);
-				text->DrawTextNDC(0.14, 0.9, Runs[WhichRun]);
+				if (Runs[WhichRun] != "Combined") { text->DrawTextNDC(0.14, 0.9, Runs[WhichRun]); }
 
 				TLatex *textSlice = new TLatex();
 				textSlice->SetTextFont(FontStyle);
@@ -644,7 +644,7 @@ void PeLEE_Create1DPlotsTHStack_TopologicalBreakDown(TString BaseMC = "") {
 				TLatex latexPurity;
 				latexPurity.SetTextFont(FontStyle);
 				latexPurity.SetTextSize(0.09);
-				TString LabelPurity = "CC1p = " + ToString(CC1pPurity/10.) + " %";
+				TString LabelPurity = "CC1p0#pi = " + ToString(CC1pPurity/10.) + " %";
 				latexPurity.DrawLatexNDC(0.59,0.9, LabelPurity);
 
 				// --------------------------------------------------------------------------------------
