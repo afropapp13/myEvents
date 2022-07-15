@@ -46,6 +46,10 @@ void PeLEE_Create1DPlotsTHStack_InteractionBreakDown(TString BaseMC = "") {
 	PlotNames.push_back("RecoDeltaPtyPlot");
 	//PlotNames.push_back("RecoAPlot");
 
+	PlotNames.push_back("RecoDeltaPhiPlot");
+	PlotNames.push_back("RecoDeltaThetaPlot");	
+	PlotNames.push_back("RecoMuonCosThetaSingleBinPlot");	
+
 	if (BaseMC == "") {
 
 	//PlotNames.push_back("RecoCCQEMuonMomentumPlot");
@@ -58,7 +62,6 @@ void PeLEE_Create1DPlotsTHStack_InteractionBreakDown(TString BaseMC = "") {
 	//PlotNames.push_back("RecoCCQEECalPlot");
 	//PlotNames.push_back("RecoCCQEQ2Plot");
 
-	PlotNames.push_back("RecoMuonCosThetaSingleBinPlot");
 	PlotNames.push_back("RecoNuScorePlot");
 //	PlotNames.push_back("RecoFlashScorePlot");
 //	PlotNames.push_back("RecoDistancePlot");
@@ -66,8 +69,6 @@ void PeLEE_Create1DPlotsTHStack_InteractionBreakDown(TString BaseMC = "") {
 //	PlotNames.push_back("RecodYZPlot");
 //	PlotNames.push_back("RecoNPEPlot");
 
-	PlotNames.push_back("RecoDeltaPhiPlot");
-	PlotNames.push_back("RecoDeltaThetaPlot");
 //	PlotNames.push_back("RecoDeltaForwardThetaPlot");
 //	PlotNames.push_back("RecoDeltaBackwardThetaPlot");
 
@@ -581,7 +582,7 @@ void PeLEE_Create1DPlotsTHStack_InteractionBreakDown(TString BaseMC = "") {
 				TLatex *text = new TLatex();
 				text->SetTextFont(FontStyle);
 				text->SetTextSize(0.09);
-				text->DrawTextNDC(0.14, 0.9, Runs[WhichRun]);
+				if (Runs[WhichRun] != "Combined") { text->DrawTextNDC(0.14, 0.9, Runs[WhichRun]); }
 
 				TLatex *textSlice = new TLatex();
 				textSlice->SetTextFont(FontStyle);

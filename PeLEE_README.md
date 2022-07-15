@@ -61,22 +61,17 @@ cd PurityEfficiencyStudies
 root -b PeLEE_Chi2PID_BreakDown.cpp
 root -b PeLEE_Create1DPlotsTHStack_TopologicalBreakDown.cpp
 root -b PeLEE_Create1DPlotsTHStack_InteractionBreakDown.cpp
+root -b PRD_InteractionBreakDown.cpp
 
 root -b
 .L PeLEE_Create1DPlotsTHStack_TopologicalBreakDown.cpp
 PeLEE_Create1DPlotsTHStack_TopologicalBreakDown("Overlay9NuWro")
-
-root -b
-.L PeLEE_Create1DPlotsTHStack_InteractionBreakDown.cpp
-PeLEE_Create1DPlotsTHStack_InteractionBreakDown("Overlay9NuWro")
-
-root -b
-.L PeLEE_Create1DPlotsTHStack_TopologicalBreakDown.cpp
 PeLEE_Create1DPlotsTHStack_TopologicalBreakDown("NoTuneOverlay9")
 PeLEE_Create1DPlotsTHStack_TopologicalBreakDown("TwiceMECOverlay9")
 
 root -b
 .L PeLEE_Create1DPlotsTHStack_InteractionBreakDown.cpp
+PeLEE_Create1DPlotsTHStack_InteractionBreakDown("Overlay9NuWro")
 PeLEE_Create1DPlotsTHStack_InteractionBreakDown("NoTuneOverlay9")
 PeLEE_Create1DPlotsTHStack_InteractionBreakDown("TwiceMECOverlay9")
 

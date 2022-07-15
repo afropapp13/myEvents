@@ -291,7 +291,7 @@ void PeLEE_Chi2PID_BreakDown() {
 				TLatex *text = new TLatex();
 				text->SetTextFont(FontStyle);
 				text->SetTextSize(0.08);
-				text->DrawTextNDC(0.74, 0.87, Runs[WhichRun]);
+				if (Runs[WhichRun] != "Combined") { text->DrawTextNDC(0.74, 0.87, Runs[WhichRun]); }
 
 				// ---------------------------------------------------------------------------------------------------------------------
 
