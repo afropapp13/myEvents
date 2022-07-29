@@ -571,6 +571,11 @@ void PeLEE_Create1DPlotsTHStack_TopologicalBreakDown(TString BaseMC = "") {
 					line->SetLineStyle(kDashed);					
 					line->Draw();
 
+					TArrow *ar2 = new TArrow(0.2,0.1,0.2,0.7,0.05,"|>");
+					ar2->SetAngle(40);
+					ar2->SetLineWidth(2);
+					ar2->Draw();					
+
 				}
 
 				// -------------------------------------------------------------------------------------------------------------------				
