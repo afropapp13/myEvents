@@ -62,6 +62,7 @@ root -b PeLEE_Chi2PID_BreakDown.cpp
 root -b PeLEE_Create1DPlotsTHStack_TopologicalBreakDown.cpp
 root -b PeLEE_Create1DPlotsTHStack_InteractionBreakDown.cpp
 root -b PRD_InteractionBreakDown.cpp
+root -b PRL_SuppMat_PID.cpp
 
 root -b
 .L PeLEE_Create1DPlotsTHStack_TopologicalBreakDown.cpp

@@ -9,6 +9,7 @@ scp $UserID@$UBgpvm:${PlotPath}/*.pdf ./myPlots/pdf/1D/${UBCode}/
 
 #PID plots
 scp $UserID@$UBgpvm:${PlotPath}/_NoCuts/*.pdf ./myPlots/pdf/1D/${UBCode}/_NoCuts/
+scp apapadop@$UBgpvm.fnal.gov:/uboone/data/users/apapadop/mySTVAnalysis/myPlots/v08_00_00_52/PRL_SuppMat_RecoProtonLLRPIDPlot_Combined_v08_00_00_52_NoCuts.pdf ./myPlots/pdf/1D/v08_00_00_52/
 
 # Loop over the run numbers
 

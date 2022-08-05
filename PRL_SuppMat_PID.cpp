@@ -275,7 +275,7 @@ void PRL_SuppMat_PID(TString BaseMC = "") {
 						leg[WhichPlot]->AddEntry(Plots[2][WhichPlot],"","");	
 						leg[WhichPlot]->AddEntry(CC1pPlots[1][WhichPlot],"MC CC1p0#pi","f");		
 						leg[WhichPlot]->AddEntry(NonCC1pPlots[1][WhichPlot],"MC Non-CC1p0#pi","f");		
-						leg[WhichPlot]->AddEntry(NonCC1pPlots[3][WhichPlot],"Dirt Non-CC1p0#pi","f");	
+						leg[WhichPlot]->AddEntry(NonCC1pPlots[3][WhichPlot],"Dirt","f");	
 
 					}																		
 					
@@ -390,7 +390,7 @@ void PRL_SuppMat_PID(TString BaseMC = "") {
 
 				// --------------------------------------------------------------------------------------
 
-				TString CanvasPath = PlotPath + Cuts+"/TopologicalBreakDown/";
+				TString CanvasPath = PlotPath;
 				TString CanvasName = BaseMC + "PRL_SuppMat_"+PlotNames[WhichPlot]+"_"+Runs[WhichRun]+"_"+UBCodeVersion+Cuts+".pdf";
 				PlotCanvas[WhichPlot]->SaveAs(CanvasPath+CanvasName);
 				//delete PlotCanvas[WhichPlot];

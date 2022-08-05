@@ -25,4 +25,4 @@ do
 done
 
 cp ${InPutDirNoCuts}/../PID_BreakDown_RecoLLRPIDPlot_NoCuts_Combined_v08_00_00_52.pdf		${OutPutDir}
-cp ${InPutDirNoCuts}/THStack_BreakDown_RecoProtonLLRPIDPlot_Combined_v08_00_00_52_NoCuts.pdf	${OutPutDir}
+cp ${InPutDirNoCuts}/../../PRL_SuppMat_RecoProtonLLRPIDPlot_Combined_v08_00_00_52_NoCuts.pdf	${OutPutDir}
