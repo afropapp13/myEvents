@@ -34,6 +34,7 @@ void PeLEE_Create1DPlotsTHStack_TopologicalBreakDown(TString BaseMC = "") {
 	PlotNames.push_back("RecoProtonCosThetaPlot");
 	PlotNames.push_back("RecoDeltaPTPlot");
 	PlotNames.push_back("RecoDeltaAlphaTPlot");
+	PlotNames.push_back("RecoDeltaAlpha3DPlot");	
 	PlotNames.push_back("RecoDeltaPhiTPlot");
 
 	//PlotNames.push_back("RecoPMissMinusPlot");
@@ -149,6 +150,14 @@ void PeLEE_Create1DPlotsTHStack_TopologicalBreakDown(TString BaseMC = "") {
     PlotNames.push_back("RecoDeltaAlphaT_DeltaPT_0_00To0_20Plot");
     PlotNames.push_back("RecoDeltaAlphaT_DeltaPT_0_20To0_40Plot");
     PlotNames.push_back("RecoDeltaAlphaT_DeltaPT_0_40To1_00Plot");
+
+    PlotNames.push_back("RecoDeltaAlphaT_MuonMomentum_0_10To0_40Plot");
+    PlotNames.push_back("RecoDeltaAlphaT_MuonMomentum_0_40To0_60Plot");
+    PlotNames.push_back("RecoDeltaAlphaT_MuonMomentum_0_60To1_20Plot");
+
+    PlotNames.push_back("RecoDeltaAlphaT_ProtonMomentum_0_30To0_50Plot");
+    PlotNames.push_back("RecoDeltaAlphaT_ProtonMomentum_0_50To0_70Plot");
+    PlotNames.push_back("RecoDeltaAlphaT_ProtonMomentum_0_70To1_00Plot");	
 
     PlotNames.push_back("RecoDeltaAlphaT_MuonCosTheta_Minus1_00To0_00Plot");
     PlotNames.push_back("RecoDeltaAlphaT_MuonCosTheta_0_00To0_50Plot");

@@ -149,6 +149,7 @@ public :
    vector<double>  *Reco_PL;
    vector<double>  *Reco_Pn;
    vector<double>  *Reco_DeltaAlphaT;
+   vector<double>  *Reco_DeltaAlpha3D;   
    vector<double>  *Reco_DeltaPhiT;
    vector<double>  *Reco_ECal;
    vector<double>  *Reco_EQE;
@@ -166,6 +167,7 @@ public :
    vector<double>  *True_PL;
    vector<double>  *True_Pn;
    vector<double>  *True_DeltaAlphaT;
+   vector<double>  *True_DeltaAlpha3D;   
    vector<double>  *True_DeltaPhiT;
    vector<double>  *True_ECal;
    vector<double>  *True_EQE;
@@ -297,6 +299,7 @@ public :
    TBranch        *b_Reco_PL;   //!
    TBranch        *b_Reco_Pn;   //!
    TBranch        *b_Reco_DeltaAlphaT;   //!
+   TBranch        *b_Reco_DeltaAlpha3D;   //!   
    TBranch        *b_Reco_DeltaPhiT;   //!
    TBranch        *b_Reco_ECal;   //!
    TBranch        *b_Reco_EQE;   //!
@@ -314,6 +317,7 @@ public :
    TBranch        *b_True_PL;   //!
    TBranch        *b_True_Pn;   //!
    TBranch        *b_True_DeltaAlphaT;   //!
+   TBranch        *b_True_DeltaAlpha3D;   //!   
    TBranch        *b_True_DeltaPhiT;   //!
    TBranch        *b_True_ECal;   //!
    TBranch        *b_True_EQE;   //!
@@ -479,6 +483,7 @@ void PeLEE_myRecoAnalysis::Init(TTree *tree)
    Reco_PL = 0;
    Reco_Pn = 0;
    Reco_DeltaAlphaT = 0;
+   Reco_DeltaAlpha3D = 0;   
    Reco_DeltaPhiT = 0;
    Reco_ECal = 0;
    Reco_EQE = 0;
@@ -495,7 +500,8 @@ void PeLEE_myRecoAnalysis::Init(TTree *tree)
    True_Pty = 0;
    True_PL = 0;
    True_Pn = 0;
-   True_DeltaAlphaT = 0;
+   True_DeltaAlphaT = 0;   
+   True_DeltaAlpha3D = 0;
    True_DeltaPhiT = 0;
    True_ECal = 0;
    True_EQE = 0;
@@ -631,6 +637,7 @@ void PeLEE_myRecoAnalysis::Init(TTree *tree)
    fChain->SetBranchAddress("Reco_PL", &Reco_PL, &b_Reco_PL);
    fChain->SetBranchAddress("Reco_Pn", &Reco_Pn, &b_Reco_Pn);
    fChain->SetBranchAddress("Reco_DeltaAlphaT", &Reco_DeltaAlphaT, &b_Reco_DeltaAlphaT);
+   fChain->SetBranchAddress("Reco_DeltaAlpha3D", &Reco_DeltaAlpha3D, &b_Reco_DeltaAlpha3D);   
    fChain->SetBranchAddress("Reco_DeltaPhiT", &Reco_DeltaPhiT, &b_Reco_DeltaPhiT);
    fChain->SetBranchAddress("Reco_ECal", &Reco_ECal, &b_Reco_ECal);
    fChain->SetBranchAddress("Reco_EQE", &Reco_EQE, &b_Reco_EQE);
@@ -648,6 +655,7 @@ void PeLEE_myRecoAnalysis::Init(TTree *tree)
    fChain->SetBranchAddress("True_PL", &True_PL, &b_True_PL);
    fChain->SetBranchAddress("True_Pn", &True_Pn, &b_True_Pn);
    fChain->SetBranchAddress("True_DeltaAlphaT", &True_DeltaAlphaT, &b_True_DeltaAlphaT);
+   fChain->SetBranchAddress("True_DeltaAlpha3D", &True_DeltaAlpha3D, &b_True_DeltaAlpha3D);   
    fChain->SetBranchAddress("True_DeltaPhiT", &True_DeltaPhiT, &b_True_DeltaPhiT);
    fChain->SetBranchAddress("True_ECal", &True_ECal, &b_True_ECal);
    fChain->SetBranchAddress("True_EQE", &True_EQE, &b_True_EQE);

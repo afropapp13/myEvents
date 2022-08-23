@@ -228,6 +228,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 		TH1D* RecoDeltaPTPlot = new TH1D("RecoDeltaPTPlot",LabelXAxisDeltaPT,NBinsDeltaPT,ArrayNBinsDeltaPT);
 		TH1D* RecoDeltaAlphaTPlot = new TH1D("RecoDeltaAlphaTPlot",LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);
+		TH1D* RecoDeltaAlpha3DPlot = new TH1D("RecoDeltaAlpha3DPlot",LabelXAxisDeltaAlpha3D,NBinsDeltaAlpha3D,ArrayNBinsDeltaAlpha3D);		
 		TH1D* RecoDeltaPhiTPlot = new TH1D("RecoDeltaPhiTPlot",LabelXAxisDeltaPhiT,NBinsDeltaPhiT,ArrayNBinsDeltaPhiT);
 
 		TH1D* RecoECalPlot = new TH1D("RecoECalPlot",LabelXAxisECal,NBinsECal,ArrayNBinsECal);
@@ -290,6 +291,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 		TH1D* CC1pTrueDeltaPTPlot = new TH1D("CC1pTrueDeltaPTPlot",LabelXAxisDeltaPT,NBinsDeltaPT,ArrayNBinsDeltaPT);
 		TH1D* CC1pTrueDeltaAlphaTPlot = new TH1D("CC1pTrueDeltaAlphaTPlot",LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);
+		TH1D* CC1pTrueDeltaAlpha3DPlot = new TH1D("CC1pTrueDeltaAlpha3DPlot",LabelXAxisDeltaAlpha3D,NBinsDeltaAlpha3D,ArrayNBinsDeltaAlpha3D);		
 		TH1D* CC1pTrueDeltaPhiTPlot = new TH1D("CC1pTrueDeltaPhiTPlot",LabelXAxisDeltaPhiT,NBinsDeltaPhiT,ArrayNBinsDeltaPhiT);
 
 		TH1D* CC1pTrueDeltaPLPlot = new TH1D("CC1pTrueDeltaPLPlot",LabelXAxisDeltaPL,NBinsDeltaPL,ArrayNBinsDeltaPL);
@@ -380,6 +382,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 		TH1D* CC1pRecoDeltaPTPlot = new TH1D("CC1pRecoDeltaPTPlot",LabelXAxisDeltaPT,NBinsDeltaPT,ArrayNBinsDeltaPT);
 		TH1D* CC1pRecoDeltaAlphaTPlot = new TH1D("CC1pRecoDeltaAlphaTPlot",LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);
+		TH1D* CC1pRecoDeltaAlpha3DPlot = new TH1D("CC1pRecoDeltaAlpha3DPlot",LabelXAxisDeltaAlpha3D,NBinsDeltaAlpha3D,ArrayNBinsDeltaAlpha3D);		
 		TH1D* CC1pRecoDeltaPhiTPlot = new TH1D("CC1pRecoDeltaPhiTPlot",LabelXAxisDeltaPhiT,NBinsDeltaPhiT,ArrayNBinsDeltaPhiT);
 
 		TH1D* CC1pRecoECalPlot = new TH1D("CC1pRecoECalPlot",LabelXAxisECal,NBinsECal,ArrayNBinsECal);
@@ -443,6 +446,8 @@ void PeLEE_myRecoAnalysis::Loop() {
 			ArrayNBinsDeltaPT,NBinsDeltaPT,ArrayNBinsDeltaPT);
 		TH2D* CC1pRecoDeltaAlphaTPlot2D = new TH2D("CC1pRecoDeltaAlphaTPlot2D",LabelXAxisDeltaAlphaT2D,NBinsDeltaAlphaT,
 			ArrayNBinsDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);
+		TH2D* CC1pRecoDeltaAlpha3DPlot2D = new TH2D("CC1pRecoDeltaAlpha3DPlot2D",LabelXAxisDeltaAlpha3D2D,NBinsDeltaAlpha3D,
+			ArrayNBinsDeltaAlpha3D,NBinsDeltaAlpha3D,ArrayNBinsDeltaAlpha3D);			
 		TH2D* CC1pRecoDeltaPhiTPlot2D = new TH2D("CC1pRecoDeltaPhiTPlot2D",LabelXAxisDeltaPhiT2D,NBinsDeltaPhiT,
 			ArrayNBinsDeltaPhiT,NBinsDeltaPhiT,ArrayNBinsDeltaPhiT);
 
@@ -506,6 +511,8 @@ void PeLEE_myRecoAnalysis::Loop() {
 			ArrayNBinsDeltaPT,NBinsDeltaPT,ArrayNBinsDeltaPT);
 		TH2D* POTScaledCC1pRecoDeltaAlphaTPlot2D = new TH2D("POTScaledCC1pRecoDeltaAlphaTPlot2D",LabelXAxisDeltaAlphaT2D,NBinsDeltaAlphaT,
 			ArrayNBinsDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);
+		TH2D* POTScaledCC1pRecoDeltaAlpha3DPlot2D = new TH2D("POTScaledCC1pRecoDeltaAlpha3DPlot2D",LabelXAxisDeltaAlpha3D2D,NBinsDeltaAlpha3D,
+			ArrayNBinsDeltaAlpha3D,NBinsDeltaAlpha3D,ArrayNBinsDeltaAlpha3D);			
 		TH2D* POTScaledCC1pRecoDeltaPhiTPlot2D = new TH2D("POTScaledCC1pRecoDeltaPhiTPlot2D",LabelXAxisDeltaPhiT2D,NBinsDeltaPhiT,
 			ArrayNBinsDeltaPhiT,NBinsDeltaPhiT,ArrayNBinsDeltaPhiT);
 
@@ -604,6 +611,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 		TH1D* NonCC1pRecoDeltaPTPlot = new TH1D("NonCC1pRecoDeltaPTPlot",LabelXAxisDeltaPT,NBinsDeltaPT,ArrayNBinsDeltaPT);
 		TH1D* NonCC1pRecoDeltaAlphaTPlot = new TH1D("NonCC1pRecoDeltaAlphaTPlot",LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);
+		TH1D* NonCC1pRecoDeltaAlpha3DPlot = new TH1D("NonCC1pRecoDeltaAlpha3DPlot",LabelXAxisDeltaAlpha3D,NBinsDeltaAlpha3D,ArrayNBinsDeltaAlpha3D);		
 		TH1D* NonCC1pRecoDeltaPhiTPlot = new TH1D("NonCC1pRecoDeltaPhiTPlot",LabelXAxisDeltaPhiT,NBinsDeltaPhiT,ArrayNBinsDeltaPhiT);
 
 		TH1D* NonCC1pRecoECalPlot = new TH1D("NonCC1pRecoECalPlot",LabelXAxisECal,NBinsECal,ArrayNBinsECal);
@@ -699,6 +707,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 		TH1D* CCQERecoDeltaPTPlot = new TH1D("CCQERecoDeltaPTPlot",LabelXAxisDeltaPT,NBinsDeltaPT,ArrayNBinsDeltaPT);
 		TH1D* CCQERecoDeltaAlphaTPlot = new TH1D("CCQERecoDeltaAlphaTPlot",LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);
+		TH1D* CCQERecoDeltaAlpha3DPlot = new TH1D("CCQERecoDeltaAlpha3DPlot",LabelXAxisDeltaAlpha3D,NBinsDeltaAlpha3D,ArrayNBinsDeltaAlpha3D);		
 		TH1D* CCQERecoDeltaPhiTPlot = new TH1D("CCQERecoDeltaPhiTPlot",LabelXAxisDeltaPhiT,NBinsDeltaPhiT,ArrayNBinsDeltaPhiT);
 
 		TH1D* CCQERecoECalPlot = new TH1D("CCQERecoECalPlot",LabelXAxisECal,NBinsECal,ArrayNBinsECal);
@@ -789,6 +798,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 		TH1D* CCMECRecoDeltaPTPlot = new TH1D("CCMECRecoDeltaPTPlot",LabelXAxisDeltaPT,NBinsDeltaPT,ArrayNBinsDeltaPT);
 		TH1D* CCMECRecoDeltaAlphaTPlot = new TH1D("CCMECRecoDeltaAlphaTPlot",LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);
+		TH1D* CCMECRecoDeltaAlpha3DPlot = new TH1D("CCMECRecoDeltaAlpha3DPlot",LabelXAxisDeltaAlpha3D,NBinsDeltaAlpha3D,ArrayNBinsDeltaAlpha3D);		
 		TH1D* CCMECRecoDeltaPhiTPlot = new TH1D("CCMECRecoDeltaPhiTPlot",LabelXAxisDeltaPhiT,NBinsDeltaPhiT,ArrayNBinsDeltaPhiT);
 
 		TH1D* CCMECRecoECalPlot = new TH1D("CCMECRecoECalPlot",LabelXAxisECal,NBinsECal,ArrayNBinsECal);
@@ -879,6 +889,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 		TH1D* CCRESRecoDeltaPTPlot = new TH1D("CCRESRecoDeltaPTPlot",LabelXAxisDeltaPT,NBinsDeltaPT,ArrayNBinsDeltaPT);
 		TH1D* CCRESRecoDeltaAlphaTPlot = new TH1D("CCRESRecoDeltaAlphaTPlot",LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);
+		TH1D* CCRESRecoDeltaAlpha3DPlot = new TH1D("CCRESRecoDeltaAlpha3DPlot",LabelXAxisDeltaAlpha3D,NBinsDeltaAlpha3D,ArrayNBinsDeltaAlpha3D);		
 		TH1D* CCRESRecoDeltaPhiTPlot = new TH1D("CCRESRecoDeltaPhiTPlot",LabelXAxisDeltaPhiT,NBinsDeltaPhiT,ArrayNBinsDeltaPhiT);
 
 		TH1D* CCRESRecoECalPlot = new TH1D("CCRESRecoECalPlot",LabelXAxisECal,NBinsECal,ArrayNBinsECal);
@@ -969,6 +980,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 		TH1D* CCDISRecoDeltaPTPlot = new TH1D("CCDISRecoDeltaPTPlot",LabelXAxisDeltaPT,NBinsDeltaPT,ArrayNBinsDeltaPT);
 		TH1D* CCDISRecoDeltaAlphaTPlot = new TH1D("CCDISRecoDeltaAlphaTPlot",LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);
+		TH1D* CCDISRecoDeltaAlpha3DPlot = new TH1D("CCDISRecoDeltaAlpha3DPlot",LabelXAxisDeltaAlpha3D,NBinsDeltaAlpha3D,ArrayNBinsDeltaAlpha3D);		
 		TH1D* CCDISRecoDeltaPhiTPlot = new TH1D("CCDISRecoDeltaPhiTPlot",LabelXAxisDeltaPhiT,NBinsDeltaPhiT,ArrayNBinsDeltaPhiT);
 
 		TH1D* CCDISRecoECalPlot = new TH1D("CCDISRecoECalPlot",LabelXAxisECal,NBinsECal,ArrayNBinsECal);
@@ -1131,7 +1143,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 		//----------------------------------------//
 
-		// 2D analysis
+		// 3D analysis
 		// Ecal in DeltaPT and DeltaAlphaT bins		
 
 		TH1D* RecoECal_InDeltaPTDeltaAlphaTTwoDPlot[TwoDNBinsDeltaPT][TwoDNBinsDeltaAlphaT];
@@ -1143,9 +1155,26 @@ void PeLEE_myRecoAnalysis::Loop() {
 		TH1D* CCRESRecoECal_InDeltaPTDeltaAlphaTTwoDPlot[TwoDNBinsDeltaPT][TwoDNBinsDeltaAlphaT];
 		TH1D* CCDISRecoECal_InDeltaPTDeltaAlphaTTwoDPlot[TwoDNBinsDeltaPT][TwoDNBinsDeltaAlphaT];
 		TH2D* CC1pRecoECal_InDeltaPTDeltaAlphaTTwoDPlot2D[TwoDNBinsDeltaPT][TwoDNBinsDeltaAlphaT];	
-		TH2D* POTScaledCC1pRecoECal_InDeltaPTDeltaAlphaTTwoDPlot2D[TwoDNBinsDeltaPT][TwoDNBinsDeltaAlphaT];	
+		TH2D* POTScaledCC1pRecoECal_InDeltaPTDeltaAlphaTTwoDPlot2D[TwoDNBinsDeltaPT][TwoDNBinsDeltaAlphaT];
 
 		//----------------------------------------//
+
+		// 2D analysis
+
+		//----------------------------------------//		
+
+		TH1D* RecoDeltaAlpha3D_InDeltaPnTwoDPlot[TwoDNBinsDeltaPn];
+		TH1D* CC1pRecoDeltaAlpha3D_InDeltaPnTwoDPlot[TwoDNBinsDeltaPn];
+		TH1D* CC1pTrueDeltaAlpha3D_InDeltaPnTwoDPlot[TwoDNBinsDeltaPn];				
+		TH1D* NonCC1pRecoDeltaAlpha3D_InDeltaPnTwoDPlot[TwoDNBinsDeltaPn];		
+		TH1D* CCQERecoDeltaAlpha3D_InDeltaPnTwoDPlot[TwoDNBinsDeltaPn];
+		TH1D* CCMECRecoDeltaAlpha3D_InDeltaPnTwoDPlot[TwoDNBinsDeltaPn];
+		TH1D* CCRESRecoDeltaAlpha3D_InDeltaPnTwoDPlot[TwoDNBinsDeltaPn];
+		TH1D* CCDISRecoDeltaAlpha3D_InDeltaPnTwoDPlot[TwoDNBinsDeltaPn];
+		TH2D* CC1pRecoDeltaAlpha3D_InDeltaPnTwoDPlot2D[TwoDNBinsDeltaPn];	
+		TH2D* POTScaledCC1pRecoDeltaAlpha3D_InDeltaPnTwoDPlot2D[TwoDNBinsDeltaPn];	
+
+		//----------------------------------------//			
 
 		TH1D* RecoDeltaAlphaT_InDeltaPTTwoDPlot[TwoDNBinsDeltaPT];
 		TH1D* CC1pRecoDeltaAlphaT_InDeltaPTTwoDPlot[TwoDNBinsDeltaPT];
@@ -1196,6 +1225,29 @@ void PeLEE_myRecoAnalysis::Loop() {
 		TH1D* CCDISRecoDeltaPn_InDeltaPTTwoDPlot[TwoDNBinsDeltaPT];
 		TH2D* CC1pRecoDeltaPn_InDeltaPTTwoDPlot2D[TwoDNBinsDeltaPT];	
 		TH2D* POTScaledCC1pRecoDeltaPn_InDeltaPTTwoDPlot2D[TwoDNBinsDeltaPT];			
+
+		//----------------------------------------//			
+
+		for (int WhichDeltaPn = 0; WhichDeltaPn < TwoDNBinsDeltaPn; WhichDeltaPn++) {
+
+			//------------------------------//
+
+			// DeltaAlpha3D in DeltaPn slices
+
+			TString DeltaAlpha3DTwoDInDeltaPnLabel = "DeltaAlpha3D_DeltaPn_"+tools.ConvertToString(TwoDArrayNBinsDeltaPn[WhichDeltaPn])+"To"+tools.ConvertToString(TwoDArrayNBinsDeltaPn[WhichDeltaPn+1])+"Plot";			
+
+			RecoDeltaAlpha3D_InDeltaPnTwoDPlot[WhichDeltaPn] = new TH1D("Reco"+DeltaAlpha3DTwoDInDeltaPnLabel,LabelXAxisDeltaAlpha3D,TwoDArrayNBinsDeltaAlpha3DInDeltaPnSlices[WhichDeltaPn].size()-1,&TwoDArrayNBinsDeltaAlpha3DInDeltaPnSlices[WhichDeltaPn][0]);
+			CC1pRecoDeltaAlpha3D_InDeltaPnTwoDPlot[WhichDeltaPn] = new TH1D("CC1pReco"+DeltaAlpha3DTwoDInDeltaPnLabel,LabelXAxisDeltaAlpha3D,TwoDArrayNBinsDeltaAlpha3DInDeltaPnSlices[WhichDeltaPn].size()-1,&TwoDArrayNBinsDeltaAlpha3DInDeltaPnSlices[WhichDeltaPn][0]);
+			CC1pTrueDeltaAlpha3D_InDeltaPnTwoDPlot[WhichDeltaPn] = new TH1D("CC1pTrue"+DeltaAlpha3DTwoDInDeltaPnLabel,LabelXAxisDeltaAlpha3D,TwoDArrayNBinsDeltaAlpha3DInDeltaPnSlices[WhichDeltaPn].size()-1,&TwoDArrayNBinsDeltaAlpha3DInDeltaPnSlices[WhichDeltaPn][0]);					
+			NonCC1pRecoDeltaAlpha3D_InDeltaPnTwoDPlot[WhichDeltaPn] = new TH1D("NonCC1pReco"+DeltaAlpha3DTwoDInDeltaPnLabel,LabelXAxisDeltaAlpha3D,TwoDArrayNBinsDeltaAlpha3DInDeltaPnSlices[WhichDeltaPn].size()-1,&TwoDArrayNBinsDeltaAlpha3DInDeltaPnSlices[WhichDeltaPn][0]);
+			CCQERecoDeltaAlpha3D_InDeltaPnTwoDPlot[WhichDeltaPn] = new TH1D("CCQEReco"+DeltaAlpha3DTwoDInDeltaPnLabel,LabelXAxisDeltaAlpha3D,TwoDArrayNBinsDeltaAlpha3DInDeltaPnSlices[WhichDeltaPn].size()-1,&TwoDArrayNBinsDeltaAlpha3DInDeltaPnSlices[WhichDeltaPn][0]);
+			CCMECRecoDeltaAlpha3D_InDeltaPnTwoDPlot[WhichDeltaPn] = new TH1D("CCMECReco"+DeltaAlpha3DTwoDInDeltaPnLabel,LabelXAxisDeltaAlpha3D,TwoDArrayNBinsDeltaAlpha3DInDeltaPnSlices[WhichDeltaPn].size()-1,&TwoDArrayNBinsDeltaAlpha3DInDeltaPnSlices[WhichDeltaPn][0]);
+			CCRESRecoDeltaAlpha3D_InDeltaPnTwoDPlot[WhichDeltaPn] = new TH1D("CCRESReco"+DeltaAlpha3DTwoDInDeltaPnLabel,LabelXAxisDeltaAlpha3D,TwoDArrayNBinsDeltaAlpha3DInDeltaPnSlices[WhichDeltaPn].size()-1,&TwoDArrayNBinsDeltaAlpha3DInDeltaPnSlices[WhichDeltaPn][0]);
+			CCDISRecoDeltaAlpha3D_InDeltaPnTwoDPlot[WhichDeltaPn] = new TH1D("CCDISReco"+DeltaAlpha3DTwoDInDeltaPnLabel,LabelXAxisDeltaAlpha3D,TwoDArrayNBinsDeltaAlpha3DInDeltaPnSlices[WhichDeltaPn].size()-1,&TwoDArrayNBinsDeltaAlpha3DInDeltaPnSlices[WhichDeltaPn][0]);	
+			CC1pRecoDeltaAlpha3D_InDeltaPnTwoDPlot2D[WhichDeltaPn] = new TH2D("CC1pReco"+DeltaAlpha3DTwoDInDeltaPnLabel+"2D",LabelXAxisDeltaAlpha3D2D,TwoDArrayNBinsDeltaAlpha3DInDeltaPnSlices[WhichDeltaPn].size()-1,&TwoDArrayNBinsDeltaAlpha3DInDeltaPnSlices[WhichDeltaPn][0],TwoDArrayNBinsDeltaAlpha3DInDeltaPnSlices[WhichDeltaPn].size()-1,&TwoDArrayNBinsDeltaAlpha3DInDeltaPnSlices[WhichDeltaPn][0]);	
+			POTScaledCC1pRecoDeltaAlpha3D_InDeltaPnTwoDPlot2D[WhichDeltaPn] = new TH2D("POTScaledCC1pReco"+DeltaAlpha3DTwoDInDeltaPnLabel+"2D",LabelXAxisDeltaAlpha3D2D,TwoDArrayNBinsDeltaAlpha3DInDeltaPnSlices[WhichDeltaPn].size()-1,&TwoDArrayNBinsDeltaAlpha3DInDeltaPnSlices[WhichDeltaPn][0],TwoDArrayNBinsDeltaAlpha3DInDeltaPnSlices[WhichDeltaPn].size()-1,&TwoDArrayNBinsDeltaAlpha3DInDeltaPnSlices[WhichDeltaPn][0]);																									
+
+		}
 
 		//----------------------------------------//			
 
@@ -1307,6 +1359,21 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 		//----------------------------------------//														
 
+		// DeltaAlphaT in muon momentum slices
+
+		TH1D* RecoDeltaAlphaT_InMuonMomentumTwoDPlot[TwoDNBinsMuonMomentum];
+		TH1D* CC1pRecoDeltaAlphaT_InMuonMomentumTwoDPlot[TwoDNBinsMuonMomentum];
+		TH1D* CC1pTrueDeltaAlphaT_InMuonMomentumTwoDPlot[TwoDNBinsMuonMomentum];				
+		TH1D* NonCC1pRecoDeltaAlphaT_InMuonMomentumTwoDPlot[TwoDNBinsMuonMomentum];		
+		TH1D* CCQERecoDeltaAlphaT_InMuonMomentumTwoDPlot[TwoDNBinsMuonMomentum];
+		TH1D* CCMECRecoDeltaAlphaT_InMuonMomentumTwoDPlot[TwoDNBinsMuonMomentum];
+		TH1D* CCRESRecoDeltaAlphaT_InMuonMomentumTwoDPlot[TwoDNBinsMuonMomentum];
+		TH1D* CCDISRecoDeltaAlphaT_InMuonMomentumTwoDPlot[TwoDNBinsMuonMomentum];
+		TH2D* CC1pRecoDeltaAlphaT_InMuonMomentumTwoDPlot2D[TwoDNBinsMuonMomentum];	
+		TH2D* POTScaledCC1pRecoDeltaAlphaT_InMuonMomentumTwoDPlot2D[TwoDNBinsMuonMomentum];
+
+		//----------------------------------------//														
+
 		// DeltaAlphaT in mu cos theta slices
 
 		TH1D* RecoDeltaAlphaT_InMuonCosThetaTwoDPlot[TwoDNBinsMuonCosTheta];
@@ -1364,6 +1431,25 @@ void PeLEE_myRecoAnalysis::Loop() {
 		TH1D* CCDISRecoProtonCosTheta_InMuonCosThetaTwoDPlot[TwoDNBinsMuonCosTheta];
 		TH2D* CC1pRecoProtonCosTheta_InMuonCosThetaTwoDPlot2D[TwoDNBinsMuonCosTheta];	
 		TH2D* POTScaledCC1pRecoProtonCosTheta_InMuonCosThetaTwoDPlot2D[TwoDNBinsMuonCosTheta];						
+
+		//----------------------------------------//			
+
+		for (int WhichMuonMomentum = 0; WhichMuonMomentum < TwoDNBinsMuonMomentum; WhichMuonMomentum++) {
+
+			TString DeltaAlphaTTwoDInMuonMomentumLabel = "DeltaAlphaT_MuonMomentum_"+tools.ConvertToString(TwoDArrayNBinsMuonMomentum[WhichMuonMomentum])+"To"+tools.ConvertToString(TwoDArrayNBinsMuonMomentum[WhichMuonMomentum+1])+"Plot";			
+
+			RecoDeltaAlphaT_InMuonMomentumTwoDPlot[WhichMuonMomentum] = new TH1D("Reco"+DeltaAlphaTTwoDInMuonMomentumLabel,LabelXAxisDeltaAlphaT,TwoDArrayNBinsDeltaAlphaTInMuonMomentumSlices[WhichMuonMomentum].size()-1,&TwoDArrayNBinsDeltaAlphaTInMuonMomentumSlices[WhichMuonMomentum][0]);
+			CC1pRecoDeltaAlphaT_InMuonMomentumTwoDPlot[WhichMuonMomentum] = new TH1D("CC1pReco"+DeltaAlphaTTwoDInMuonMomentumLabel,LabelXAxisDeltaAlphaT,TwoDArrayNBinsDeltaAlphaTInMuonMomentumSlices[WhichMuonMomentum].size()-1,&TwoDArrayNBinsDeltaAlphaTInMuonMomentumSlices[WhichMuonMomentum][0]);
+			CC1pTrueDeltaAlphaT_InMuonMomentumTwoDPlot[WhichMuonMomentum] = new TH1D("CC1pTrue"+DeltaAlphaTTwoDInMuonMomentumLabel,LabelXAxisDeltaAlphaT,TwoDArrayNBinsDeltaAlphaTInMuonMomentumSlices[WhichMuonMomentum].size()-1,&TwoDArrayNBinsDeltaAlphaTInMuonMomentumSlices[WhichMuonMomentum][0]);					
+			NonCC1pRecoDeltaAlphaT_InMuonMomentumTwoDPlot[WhichMuonMomentum] = new TH1D("NonCC1pReco"+DeltaAlphaTTwoDInMuonMomentumLabel,LabelXAxisDeltaAlphaT,TwoDArrayNBinsDeltaAlphaTInMuonMomentumSlices[WhichMuonMomentum].size()-1,&TwoDArrayNBinsDeltaAlphaTInMuonMomentumSlices[WhichMuonMomentum][0]);
+			CCQERecoDeltaAlphaT_InMuonMomentumTwoDPlot[WhichMuonMomentum] = new TH1D("CCQEReco"+DeltaAlphaTTwoDInMuonMomentumLabel,LabelXAxisDeltaAlphaT,TwoDArrayNBinsDeltaAlphaTInMuonMomentumSlices[WhichMuonMomentum].size()-1,&TwoDArrayNBinsDeltaAlphaTInMuonMomentumSlices[WhichMuonMomentum][0]);
+			CCMECRecoDeltaAlphaT_InMuonMomentumTwoDPlot[WhichMuonMomentum] = new TH1D("CCMECReco"+DeltaAlphaTTwoDInMuonMomentumLabel,LabelXAxisDeltaAlphaT,TwoDArrayNBinsDeltaAlphaTInMuonMomentumSlices[WhichMuonMomentum].size()-1,&TwoDArrayNBinsDeltaAlphaTInMuonMomentumSlices[WhichMuonMomentum][0]);
+			CCRESRecoDeltaAlphaT_InMuonMomentumTwoDPlot[WhichMuonMomentum] = new TH1D("CCRESReco"+DeltaAlphaTTwoDInMuonMomentumLabel,LabelXAxisDeltaAlphaT,TwoDArrayNBinsDeltaAlphaTInMuonMomentumSlices[WhichMuonMomentum].size()-1,&TwoDArrayNBinsDeltaAlphaTInMuonMomentumSlices[WhichMuonMomentum][0]);
+			CCDISRecoDeltaAlphaT_InMuonMomentumTwoDPlot[WhichMuonMomentum] = new TH1D("CCDISReco"+DeltaAlphaTTwoDInMuonMomentumLabel,LabelXAxisDeltaAlphaT,TwoDArrayNBinsDeltaAlphaTInMuonMomentumSlices[WhichMuonMomentum].size()-1,&TwoDArrayNBinsDeltaAlphaTInMuonMomentumSlices[WhichMuonMomentum][0]);	
+			CC1pRecoDeltaAlphaT_InMuonMomentumTwoDPlot2D[WhichMuonMomentum] = new TH2D("CC1pReco"+DeltaAlphaTTwoDInMuonMomentumLabel+"2D",LabelXAxisDeltaAlphaT2D,TwoDArrayNBinsDeltaAlphaTInMuonMomentumSlices[WhichMuonMomentum].size()-1,&TwoDArrayNBinsDeltaAlphaTInMuonMomentumSlices[WhichMuonMomentum][0],TwoDArrayNBinsDeltaAlphaTInMuonMomentumSlices[WhichMuonMomentum].size()-1,&TwoDArrayNBinsDeltaAlphaTInMuonMomentumSlices[WhichMuonMomentum][0]);	
+			POTScaledCC1pRecoDeltaAlphaT_InMuonMomentumTwoDPlot2D[WhichMuonMomentum] = new TH2D("POTScaledCC1pReco"+DeltaAlphaTTwoDInMuonMomentumLabel+"2D",LabelXAxisDeltaAlphaT2D,TwoDArrayNBinsDeltaAlphaTInMuonMomentumSlices[WhichMuonMomentum].size()-1,&TwoDArrayNBinsDeltaAlphaTInMuonMomentumSlices[WhichMuonMomentum][0],TwoDArrayNBinsDeltaAlphaTInMuonMomentumSlices[WhichMuonMomentum].size()-1,&TwoDArrayNBinsDeltaAlphaTInMuonMomentumSlices[WhichMuonMomentum][0]);
+
+		}			
 
 		//----------------------------------------//			
 
@@ -1472,6 +1558,21 @@ void PeLEE_myRecoAnalysis::Loop() {
 		TH2D* CC1pRecoDeltaAlphaT_InProtonCosThetaTwoDPlot2D[TwoDNBinsProtonCosTheta];	
 		TH2D* POTScaledCC1pRecoDeltaAlphaT_InProtonCosThetaTwoDPlot2D[TwoDNBinsProtonCosTheta];		
 
+		//----------------------------------------//														
+
+		// DeltaAlphaT in proton momentum slices
+
+		TH1D* RecoDeltaAlphaT_InProtonMomentumTwoDPlot[TwoDNBinsProtonMomentum];
+		TH1D* CC1pRecoDeltaAlphaT_InProtonMomentumTwoDPlot[TwoDNBinsProtonMomentum];
+		TH1D* CC1pTrueDeltaAlphaT_InProtonMomentumTwoDPlot[TwoDNBinsProtonMomentum];				
+		TH1D* NonCC1pRecoDeltaAlphaT_InProtonMomentumTwoDPlot[TwoDNBinsProtonMomentum];		
+		TH1D* CCQERecoDeltaAlphaT_InProtonMomentumTwoDPlot[TwoDNBinsProtonMomentum];
+		TH1D* CCMECRecoDeltaAlphaT_InProtonMomentumTwoDPlot[TwoDNBinsProtonMomentum];
+		TH1D* CCRESRecoDeltaAlphaT_InProtonMomentumTwoDPlot[TwoDNBinsProtonMomentum];
+		TH1D* CCDISRecoDeltaAlphaT_InProtonMomentumTwoDPlot[TwoDNBinsProtonMomentum];
+		TH2D* CC1pRecoDeltaAlphaT_InProtonMomentumTwoDPlot2D[TwoDNBinsProtonMomentum];	
+		TH2D* POTScaledCC1pRecoDeltaAlphaT_InProtonMomentumTwoDPlot2D[TwoDNBinsProtonMomentum];	
+
 		//----------------------------------------//
 
 		// DeltaPT in p cos theta slices
@@ -1501,6 +1602,25 @@ void PeLEE_myRecoAnalysis::Loop() {
 		TH1D* CCDISRecoProtonMomentum_InProtonCosThetaTwoDPlot[TwoDNBinsProtonCosTheta];
 		TH2D* CC1pRecoProtonMomentum_InProtonCosThetaTwoDPlot2D[TwoDNBinsProtonCosTheta];	
 		TH2D* POTScaledCC1pRecoProtonMomentum_InProtonCosThetaTwoDPlot2D[TwoDNBinsProtonCosTheta];				
+
+		//----------------------------------------//			
+
+		for (int WhichProtonMomentum = 0; WhichProtonMomentum < TwoDNBinsProtonMomentum; WhichProtonMomentum++) {	
+
+			TString DeltaAlphaTTwoDInProtonMomentumLabel = "DeltaAlphaT_ProtonMomentum_"+tools.ConvertToString(TwoDArrayNBinsProtonMomentum[WhichProtonMomentum])+"To"+tools.ConvertToString(TwoDArrayNBinsProtonMomentum[WhichProtonMomentum+1])+"Plot";			
+
+			RecoDeltaAlphaT_InProtonMomentumTwoDPlot[WhichProtonMomentum] = new TH1D("Reco"+DeltaAlphaTTwoDInProtonMomentumLabel,LabelXAxisDeltaAlphaT,TwoDArrayNBinsDeltaAlphaTInProtonMomentumSlices[WhichProtonMomentum].size()-1,&TwoDArrayNBinsDeltaAlphaTInProtonMomentumSlices[WhichProtonMomentum][0]);
+			CC1pRecoDeltaAlphaT_InProtonMomentumTwoDPlot[WhichProtonMomentum] = new TH1D("CC1pReco"+DeltaAlphaTTwoDInProtonMomentumLabel,LabelXAxisDeltaAlphaT,TwoDArrayNBinsDeltaAlphaTInProtonMomentumSlices[WhichProtonMomentum].size()-1,&TwoDArrayNBinsDeltaAlphaTInProtonMomentumSlices[WhichProtonMomentum][0]);
+			CC1pTrueDeltaAlphaT_InProtonMomentumTwoDPlot[WhichProtonMomentum] = new TH1D("CC1pTrue"+DeltaAlphaTTwoDInProtonMomentumLabel,LabelXAxisDeltaAlphaT,TwoDArrayNBinsDeltaAlphaTInProtonMomentumSlices[WhichProtonMomentum].size()-1,&TwoDArrayNBinsDeltaAlphaTInProtonMomentumSlices[WhichProtonMomentum][0]);					
+			NonCC1pRecoDeltaAlphaT_InProtonMomentumTwoDPlot[WhichProtonMomentum] = new TH1D("NonCC1pReco"+DeltaAlphaTTwoDInProtonMomentumLabel,LabelXAxisDeltaAlphaT,TwoDArrayNBinsDeltaAlphaTInProtonMomentumSlices[WhichProtonMomentum].size()-1,&TwoDArrayNBinsDeltaAlphaTInProtonMomentumSlices[WhichProtonMomentum][0]);
+			CCQERecoDeltaAlphaT_InProtonMomentumTwoDPlot[WhichProtonMomentum] = new TH1D("CCQEReco"+DeltaAlphaTTwoDInProtonMomentumLabel,LabelXAxisDeltaAlphaT,TwoDArrayNBinsDeltaAlphaTInProtonMomentumSlices[WhichProtonMomentum].size()-1,&TwoDArrayNBinsDeltaAlphaTInProtonMomentumSlices[WhichProtonMomentum][0]);
+			CCMECRecoDeltaAlphaT_InProtonMomentumTwoDPlot[WhichProtonMomentum] = new TH1D("CCMECReco"+DeltaAlphaTTwoDInProtonMomentumLabel,LabelXAxisDeltaAlphaT,TwoDArrayNBinsDeltaAlphaTInProtonMomentumSlices[WhichProtonMomentum].size()-1,&TwoDArrayNBinsDeltaAlphaTInProtonMomentumSlices[WhichProtonMomentum][0]);
+			CCRESRecoDeltaAlphaT_InProtonMomentumTwoDPlot[WhichProtonMomentum] = new TH1D("CCRESReco"+DeltaAlphaTTwoDInProtonMomentumLabel,LabelXAxisDeltaAlphaT,TwoDArrayNBinsDeltaAlphaTInProtonMomentumSlices[WhichProtonMomentum].size()-1,&TwoDArrayNBinsDeltaAlphaTInProtonMomentumSlices[WhichProtonMomentum][0]);
+			CCDISRecoDeltaAlphaT_InProtonMomentumTwoDPlot[WhichProtonMomentum] = new TH1D("CCDISReco"+DeltaAlphaTTwoDInProtonMomentumLabel,LabelXAxisDeltaAlphaT,TwoDArrayNBinsDeltaAlphaTInProtonMomentumSlices[WhichProtonMomentum].size()-1,&TwoDArrayNBinsDeltaAlphaTInProtonMomentumSlices[WhichProtonMomentum][0]);	
+			CC1pRecoDeltaAlphaT_InProtonMomentumTwoDPlot2D[WhichProtonMomentum] = new TH2D("CC1pReco"+DeltaAlphaTTwoDInProtonMomentumLabel+"2D",LabelXAxisDeltaAlphaT2D,TwoDArrayNBinsDeltaAlphaTInProtonMomentumSlices[WhichProtonMomentum].size()-1,&TwoDArrayNBinsDeltaAlphaTInProtonMomentumSlices[WhichProtonMomentum][0],TwoDArrayNBinsDeltaAlphaTInProtonMomentumSlices[WhichProtonMomentum].size()-1,&TwoDArrayNBinsDeltaAlphaTInProtonMomentumSlices[WhichProtonMomentum][0]);	
+			POTScaledCC1pRecoDeltaAlphaT_InProtonMomentumTwoDPlot2D[WhichProtonMomentum] = new TH2D("POTScaledCC1pReco"+DeltaAlphaTTwoDInProtonMomentumLabel+"2D",LabelXAxisDeltaAlphaT2D,TwoDArrayNBinsDeltaAlphaTInProtonMomentumSlices[WhichProtonMomentum].size()-1,&TwoDArrayNBinsDeltaAlphaTInProtonMomentumSlices[WhichProtonMomentum][0],TwoDArrayNBinsDeltaAlphaTInProtonMomentumSlices[WhichProtonMomentum].size()-1,&TwoDArrayNBinsDeltaAlphaTInProtonMomentumSlices[WhichProtonMomentum][0]);
+
+		}
 
 		//----------------------------------------//			
 
@@ -1754,6 +1874,19 @@ void PeLEE_myRecoAnalysis::Loop() {
 		TH2D* CC1pRecoProtonMomentum_InDeltaAlphaTTwoDPlot2D[TwoDNBinsDeltaAlphaT];	
 		TH2D* POTScaledCC1pRecoProtonMomentum_InDeltaAlphaTTwoDPlot2D[TwoDNBinsDeltaAlphaT];
 
+		// DeltaPn in DeltaAlpha3D slices
+
+		TH1D* RecoDeltaPn_InDeltaAlpha3DTwoDPlot[TwoDNBinsDeltaAlpha3D];
+		TH1D* CC1pRecoDeltaPn_InDeltaAlpha3DTwoDPlot[TwoDNBinsDeltaAlpha3D];
+		TH1D* CC1pTrueDeltaPn_InDeltaAlpha3DTwoDPlot[TwoDNBinsDeltaAlpha3D];				
+		TH1D* NonCC1pRecoDeltaPn_InDeltaAlpha3DTwoDPlot[TwoDNBinsDeltaAlpha3D];		
+		TH1D* CCQERecoDeltaPn_InDeltaAlpha3DTwoDPlot[TwoDNBinsDeltaAlpha3D];
+		TH1D* CCMECRecoDeltaPn_InDeltaAlpha3DTwoDPlot[TwoDNBinsDeltaAlpha3D];
+		TH1D* CCRESRecoDeltaPn_InDeltaAlpha3DTwoDPlot[TwoDNBinsDeltaAlpha3D];
+		TH1D* CCDISRecoDeltaPn_InDeltaAlpha3DTwoDPlot[TwoDNBinsDeltaAlpha3D];
+		TH2D* CC1pRecoDeltaPn_InDeltaAlpha3DTwoDPlot2D[TwoDNBinsDeltaAlpha3D];	
+		TH2D* POTScaledCC1pRecoDeltaPn_InDeltaAlpha3DTwoDPlot2D[TwoDNBinsDeltaAlpha3D];
+
 		// DeltaPT in DeltaAlphaT slices
 
 		TH1D* RecoDeltaPT_InDeltaAlphaTTwoDPlot[TwoDNBinsDeltaAlphaT];
@@ -1792,6 +1925,23 @@ void PeLEE_myRecoAnalysis::Loop() {
 		TH1D* CCDISRecoECal_InDeltaAlphaTTwoDPlot[TwoDNBinsDeltaAlphaT];
 		TH2D* CC1pRecoECal_InDeltaAlphaTTwoDPlot2D[TwoDNBinsDeltaAlphaT];	
 		TH2D* POTScaledCC1pRecoECal_InDeltaAlphaTTwoDPlot2D[TwoDNBinsDeltaAlphaT];			
+
+		for (int WhichDeltaAlpha3D = 0; WhichDeltaAlpha3D < TwoDNBinsDeltaAlpha3D; WhichDeltaAlpha3D++) {
+
+			TString DeltaPnTwoDInDeltaAlpha3DLabel = "DeltaPn_DeltaAlpha3D_"+tools.ConvertToString(TwoDArrayNBinsDeltaAlpha3D[WhichDeltaAlpha3D])+"To"+tools.ConvertToString(TwoDArrayNBinsDeltaAlpha3D[WhichDeltaAlpha3D+1])+"Plot";			
+
+			RecoDeltaPn_InDeltaAlpha3DTwoDPlot[WhichDeltaAlpha3D] = new TH1D("Reco"+DeltaPnTwoDInDeltaAlpha3DLabel,LabelXAxisDeltaPn,TwoDArrayNBinsDeltaPnInDeltaAlpha3DSlices[WhichDeltaAlpha3D].size()-1,&TwoDArrayNBinsDeltaPnInDeltaAlpha3DSlices[WhichDeltaAlpha3D][0]);
+			CC1pRecoDeltaPn_InDeltaAlpha3DTwoDPlot[WhichDeltaAlpha3D] = new TH1D("CC1pReco"+DeltaPnTwoDInDeltaAlpha3DLabel,LabelXAxisDeltaPn,TwoDArrayNBinsDeltaPnInDeltaAlpha3DSlices[WhichDeltaAlpha3D].size()-1,&TwoDArrayNBinsDeltaPnInDeltaAlpha3DSlices[WhichDeltaAlpha3D][0]);
+			CC1pTrueDeltaPn_InDeltaAlpha3DTwoDPlot[WhichDeltaAlpha3D] = new TH1D("CC1pTrue"+DeltaPnTwoDInDeltaAlpha3DLabel,LabelXAxisDeltaPn,TwoDArrayNBinsDeltaPnInDeltaAlpha3DSlices[WhichDeltaAlpha3D].size()-1,&TwoDArrayNBinsDeltaPnInDeltaAlpha3DSlices[WhichDeltaAlpha3D][0]);					
+			NonCC1pRecoDeltaPn_InDeltaAlpha3DTwoDPlot[WhichDeltaAlpha3D] = new TH1D("NonCC1pReco"+DeltaPnTwoDInDeltaAlpha3DLabel,LabelXAxisDeltaPn,TwoDArrayNBinsDeltaPnInDeltaAlpha3DSlices[WhichDeltaAlpha3D].size()-1,&TwoDArrayNBinsDeltaPnInDeltaAlpha3DSlices[WhichDeltaAlpha3D][0]);
+			CCQERecoDeltaPn_InDeltaAlpha3DTwoDPlot[WhichDeltaAlpha3D] = new TH1D("CCQEReco"+DeltaPnTwoDInDeltaAlpha3DLabel,LabelXAxisDeltaPn,TwoDArrayNBinsDeltaPnInDeltaAlpha3DSlices[WhichDeltaAlpha3D].size()-1,&TwoDArrayNBinsDeltaPnInDeltaAlpha3DSlices[WhichDeltaAlpha3D][0]);
+			CCMECRecoDeltaPn_InDeltaAlpha3DTwoDPlot[WhichDeltaAlpha3D] = new TH1D("CCMECReco"+DeltaPnTwoDInDeltaAlpha3DLabel,LabelXAxisDeltaPn,TwoDArrayNBinsDeltaPnInDeltaAlpha3DSlices[WhichDeltaAlpha3D].size()-1,&TwoDArrayNBinsDeltaPnInDeltaAlpha3DSlices[WhichDeltaAlpha3D][0]);
+			CCRESRecoDeltaPn_InDeltaAlpha3DTwoDPlot[WhichDeltaAlpha3D] = new TH1D("CCRESReco"+DeltaPnTwoDInDeltaAlpha3DLabel,LabelXAxisDeltaPn,TwoDArrayNBinsDeltaPnInDeltaAlpha3DSlices[WhichDeltaAlpha3D].size()-1,&TwoDArrayNBinsDeltaPnInDeltaAlpha3DSlices[WhichDeltaAlpha3D][0]);
+			CCDISRecoDeltaPn_InDeltaAlpha3DTwoDPlot[WhichDeltaAlpha3D] = new TH1D("CCDISReco"+DeltaPnTwoDInDeltaAlpha3DLabel,LabelXAxisDeltaPn,TwoDArrayNBinsDeltaPnInDeltaAlpha3DSlices[WhichDeltaAlpha3D].size()-1,&TwoDArrayNBinsDeltaPnInDeltaAlpha3DSlices[WhichDeltaAlpha3D][0]);	
+			CC1pRecoDeltaPn_InDeltaAlpha3DTwoDPlot2D[WhichDeltaAlpha3D] = new TH2D("CC1pReco"+DeltaPnTwoDInDeltaAlpha3DLabel+"2D",LabelXAxisDeltaPn2D,TwoDArrayNBinsDeltaPnInDeltaAlpha3DSlices[WhichDeltaAlpha3D].size()-1,&TwoDArrayNBinsDeltaPnInDeltaAlpha3DSlices[WhichDeltaAlpha3D][0],TwoDArrayNBinsDeltaPnInDeltaAlpha3DSlices[WhichDeltaAlpha3D].size()-1,&TwoDArrayNBinsDeltaPnInDeltaAlpha3DSlices[WhichDeltaAlpha3D][0]);	
+			POTScaledCC1pRecoDeltaPn_InDeltaAlpha3DTwoDPlot2D[WhichDeltaAlpha3D] = new TH2D("POTScaledCC1pReco"+DeltaPnTwoDInDeltaAlpha3DLabel+"2D",LabelXAxisDeltaPn2D,TwoDArrayNBinsDeltaPnInDeltaAlpha3DSlices[WhichDeltaAlpha3D].size()-1,&TwoDArrayNBinsDeltaPnInDeltaAlpha3DSlices[WhichDeltaAlpha3D][0],TwoDArrayNBinsDeltaPnInDeltaAlpha3DSlices[WhichDeltaAlpha3D].size()-1,&TwoDArrayNBinsDeltaPnInDeltaAlpha3DSlices[WhichDeltaAlpha3D][0]);			
+
+		}
 
 		for (int WhichDeltaAlphaT = 0; WhichDeltaAlphaT < TwoDNBinsDeltaAlphaT; WhichDeltaAlphaT++) {	
 
@@ -1907,6 +2057,18 @@ void PeLEE_myRecoAnalysis::Loop() {
 		TH2D* SerialCC1pRecoDeltaAlphaT_InMuonCosThetaPlot2D = new TH2D("CC1pRecoSerialDeltaAlphaT_MuonCosThetaPlot2D",LabelXAxisDeltaAlphaT2D,tools.Return2DNBins(TwoDArrayNBinsDeltaAlphaTInMuonCosThetaSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaAlphaTInMuonCosThetaSlices)[0],tools.Return2DNBins(TwoDArrayNBinsDeltaAlphaTInMuonCosThetaSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaAlphaTInMuonCosThetaSlices)[0]);
 		TH2D* SerialPOTScaledCC1pRecoDeltaAlphaT_InMuonCosThetaPlot2D = new TH2D("POTScaledCC1pRecoSerialDeltaAlphaT_MuonCosThetaPlot2D",LabelXAxisDeltaAlphaT2D,tools.Return2DNBins(TwoDArrayNBinsDeltaAlphaTInMuonCosThetaSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaAlphaTInMuonCosThetaSlices)[0],tools.Return2DNBins(TwoDArrayNBinsDeltaAlphaTInMuonCosThetaSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaAlphaTInMuonCosThetaSlices)[0]);
 
+		// DeltaAlphaT in muon momentum bins
+		TH1D* SerialRecoDeltaAlphaT_InMuonMomentumPlot = new TH1D("RecoSerialDeltaAlphaT_MuonMomentumPlot",LabelXAxisDeltaAlphaT,tools.Return2DNBins(TwoDArrayNBinsDeltaAlphaTInMuonMomentumSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaAlphaTInMuonMomentumSlices)[0]);
+		TH1D* SerialCC1pRecoDeltaAlphaT_InMuonMomentumPlot = new TH1D("CC1pRecoSerialDeltaAlphaT_MuonMomentumPlot",LabelXAxisDeltaAlphaT,tools.Return2DNBins(TwoDArrayNBinsDeltaAlphaTInMuonMomentumSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaAlphaTInMuonMomentumSlices)[0]);
+		TH1D* SerialCC1pTrueDeltaAlphaT_InMuonMomentumPlot = new TH1D("CC1pTrueSerialDeltaAlphaT_MuonMomentumPlot",LabelXAxisDeltaAlphaT,tools.Return2DNBins(TwoDArrayNBinsDeltaAlphaTInMuonMomentumSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaAlphaTInMuonMomentumSlices)[0]);		
+		TH1D* SerialNonCC1pRecoDeltaAlphaT_InMuonMomentumPlot = new TH1D("NonCC1pRecoSerialDeltaAlphaT_MuonMomentumPlot",LabelXAxisDeltaAlphaT,tools.Return2DNBins(TwoDArrayNBinsDeltaAlphaTInMuonMomentumSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaAlphaTInMuonMomentumSlices)[0]);
+		TH1D* SerialCCQERecoDeltaAlphaT_InMuonMomentumPlot = new TH1D("CCQERecoSerialDeltaAlphaT_MuonMomentumPlot",LabelXAxisDeltaAlphaT,tools.Return2DNBins(TwoDArrayNBinsDeltaAlphaTInMuonMomentumSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaAlphaTInMuonMomentumSlices)[0]);
+		TH1D* SerialCCMECRecoDeltaAlphaT_InMuonMomentumPlot = new TH1D("CCMECRecoSerialDeltaAlphaT_MuonMomentumPlot",LabelXAxisDeltaAlphaT,tools.Return2DNBins(TwoDArrayNBinsDeltaAlphaTInMuonMomentumSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaAlphaTInMuonMomentumSlices)[0]);								
+		TH1D* SerialCCRESRecoDeltaAlphaT_InMuonMomentumPlot = new TH1D("CCRESRecoSerialDeltaAlphaT_MuonMomentumPlot",LabelXAxisDeltaAlphaT,tools.Return2DNBins(TwoDArrayNBinsDeltaAlphaTInMuonMomentumSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaAlphaTInMuonMomentumSlices)[0]);
+		TH1D* SerialCCDISRecoDeltaAlphaT_InMuonMomentumPlot = new TH1D("CCDISRecoSerialDeltaAlphaT_MuonMomentumPlot",LabelXAxisDeltaAlphaT,tools.Return2DNBins(TwoDArrayNBinsDeltaAlphaTInMuonMomentumSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaAlphaTInMuonMomentumSlices)[0]);
+		TH2D* SerialCC1pRecoDeltaAlphaT_InMuonMomentumPlot2D = new TH2D("CC1pRecoSerialDeltaAlphaT_MuonMomentumPlot2D",LabelXAxisDeltaAlphaT2D,tools.Return2DNBins(TwoDArrayNBinsDeltaAlphaTInMuonMomentumSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaAlphaTInMuonMomentumSlices)[0],tools.Return2DNBins(TwoDArrayNBinsDeltaAlphaTInMuonMomentumSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaAlphaTInMuonMomentumSlices)[0]);
+		TH2D* SerialPOTScaledCC1pRecoDeltaAlphaT_InMuonMomentumPlot2D = new TH2D("POTScaledCC1pRecoSerialDeltaAlphaT_MuonMomentumPlot2D",LabelXAxisDeltaAlphaT2D,tools.Return2DNBins(TwoDArrayNBinsDeltaAlphaTInMuonMomentumSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaAlphaTInMuonMomentumSlices)[0],tools.Return2DNBins(TwoDArrayNBinsDeltaAlphaTInMuonMomentumSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaAlphaTInMuonMomentumSlices)[0]);
+
 		// DeltaAlphaT in cos theta p bins
 		TH1D* SerialRecoDeltaAlphaT_InProtonCosThetaPlot = new TH1D("RecoSerialDeltaAlphaT_ProtonCosThetaPlot",LabelXAxisDeltaAlphaT,tools.Return2DNBins(TwoDArrayNBinsDeltaAlphaTInProtonCosThetaSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaAlphaTInProtonCosThetaSlices)[0]);
 		TH1D* SerialCC1pRecoDeltaAlphaT_InProtonCosThetaPlot = new TH1D("CC1pRecoSerialDeltaAlphaT_ProtonCosThetaPlot",LabelXAxisDeltaAlphaT,tools.Return2DNBins(TwoDArrayNBinsDeltaAlphaTInProtonCosThetaSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaAlphaTInProtonCosThetaSlices)[0]);
@@ -1919,6 +2081,30 @@ void PeLEE_myRecoAnalysis::Loop() {
 		TH2D* SerialCC1pRecoDeltaAlphaT_InProtonCosThetaPlot2D = new TH2D("CC1pRecoSerialDeltaAlphaT_ProtonCosThetaPlot2D",LabelXAxisDeltaAlphaT2D,tools.Return2DNBins(TwoDArrayNBinsDeltaAlphaTInProtonCosThetaSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaAlphaTInProtonCosThetaSlices)[0],tools.Return2DNBins(TwoDArrayNBinsDeltaAlphaTInProtonCosThetaSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaAlphaTInProtonCosThetaSlices)[0]);
 		TH2D* SerialPOTScaledCC1pRecoDeltaAlphaT_InProtonCosThetaPlot2D = new TH2D("POTScaledCC1pRecoSerialDeltaAlphaT_ProtonCosThetaPlot2D",LabelXAxisDeltaAlphaT2D,tools.Return2DNBins(TwoDArrayNBinsDeltaAlphaTInProtonCosThetaSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaAlphaTInProtonCosThetaSlices)[0],tools.Return2DNBins(TwoDArrayNBinsDeltaAlphaTInProtonCosThetaSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaAlphaTInProtonCosThetaSlices)[0]);
 
+		// DeltaAlphaT in proton momentum bins
+		TH1D* SerialRecoDeltaAlphaT_InProtonMomentumPlot = new TH1D("RecoSerialDeltaAlphaT_ProtonMomentumPlot",LabelXAxisDeltaAlphaT,tools.Return2DNBins(TwoDArrayNBinsDeltaAlphaTInProtonMomentumSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaAlphaTInProtonMomentumSlices)[0]);
+		TH1D* SerialCC1pRecoDeltaAlphaT_InProtonMomentumPlot = new TH1D("CC1pRecoSerialDeltaAlphaT_ProtonMomentumPlot",LabelXAxisDeltaAlphaT,tools.Return2DNBins(TwoDArrayNBinsDeltaAlphaTInProtonMomentumSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaAlphaTInProtonMomentumSlices)[0]);
+		TH1D* SerialCC1pTrueDeltaAlphaT_InProtonMomentumPlot = new TH1D("CC1pTrueSerialDeltaAlphaT_ProtonMomentumPlot",LabelXAxisDeltaAlphaT,tools.Return2DNBins(TwoDArrayNBinsDeltaAlphaTInProtonMomentumSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaAlphaTInProtonMomentumSlices)[0]);		
+		TH1D* SerialNonCC1pRecoDeltaAlphaT_InProtonMomentumPlot = new TH1D("NonCC1pRecoSerialDeltaAlphaT_ProtonMomentumPlot",LabelXAxisDeltaAlphaT,tools.Return2DNBins(TwoDArrayNBinsDeltaAlphaTInProtonMomentumSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaAlphaTInProtonMomentumSlices)[0]);
+		TH1D* SerialCCQERecoDeltaAlphaT_InProtonMomentumPlot = new TH1D("CCQERecoSerialDeltaAlphaT_ProtonMomentumPlot",LabelXAxisDeltaAlphaT,tools.Return2DNBins(TwoDArrayNBinsDeltaAlphaTInProtonMomentumSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaAlphaTInProtonMomentumSlices)[0]);
+		TH1D* SerialCCMECRecoDeltaAlphaT_InProtonMomentumPlot = new TH1D("CCMECRecoSerialDeltaAlphaT_ProtonMomentumPlot",LabelXAxisDeltaAlphaT,tools.Return2DNBins(TwoDArrayNBinsDeltaAlphaTInProtonMomentumSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaAlphaTInProtonMomentumSlices)[0]);								
+		TH1D* SerialCCRESRecoDeltaAlphaT_InProtonMomentumPlot = new TH1D("CCRESRecoSerialDeltaAlphaT_ProtonMomentumPlot",LabelXAxisDeltaAlphaT,tools.Return2DNBins(TwoDArrayNBinsDeltaAlphaTInProtonMomentumSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaAlphaTInProtonMomentumSlices)[0]);
+		TH1D* SerialCCDISRecoDeltaAlphaT_InProtonMomentumPlot = new TH1D("CCDISRecoSerialDeltaAlphaT_ProtonMomentumPlot",LabelXAxisDeltaAlphaT,tools.Return2DNBins(TwoDArrayNBinsDeltaAlphaTInProtonMomentumSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaAlphaTInProtonMomentumSlices)[0]);
+		TH2D* SerialCC1pRecoDeltaAlphaT_InProtonMomentumPlot2D = new TH2D("CC1pRecoSerialDeltaAlphaT_ProtonMomentumPlot2D",LabelXAxisDeltaAlphaT2D,tools.Return2DNBins(TwoDArrayNBinsDeltaAlphaTInProtonMomentumSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaAlphaTInProtonMomentumSlices)[0],tools.Return2DNBins(TwoDArrayNBinsDeltaAlphaTInProtonMomentumSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaAlphaTInProtonMomentumSlices)[0]);
+		TH2D* SerialPOTScaledCC1pRecoDeltaAlphaT_InProtonMomentumPlot2D = new TH2D("POTScaledCC1pRecoSerialDeltaAlphaT_ProtonMomentumPlot2D",LabelXAxisDeltaAlphaT2D,tools.Return2DNBins(TwoDArrayNBinsDeltaAlphaTInProtonMomentumSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaAlphaTInProtonMomentumSlices)[0],tools.Return2DNBins(TwoDArrayNBinsDeltaAlphaTInProtonMomentumSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaAlphaTInProtonMomentumSlices)[0]);		
+
+		// DeltaAlpha3D in DeltaPn bins
+		TH1D* SerialRecoDeltaAlpha3D_InDeltaPnPlot = new TH1D("RecoSerialDeltaAlpha3D_DeltaPnPlot",LabelXAxisDeltaAlpha3D,tools.Return2DNBins(TwoDArrayNBinsDeltaAlpha3DInDeltaPnSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaAlpha3DInDeltaPnSlices)[0]);		
+		TH1D* SerialCC1pRecoDeltaAlpha3D_InDeltaPnPlot = new TH1D("CC1pRecoSerialDeltaAlpha3D_DeltaPnPlot",LabelXAxisDeltaAlpha3D,tools.Return2DNBins(TwoDArrayNBinsDeltaAlpha3DInDeltaPnSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaAlpha3DInDeltaPnSlices)[0]);
+		TH1D* SerialCC1pTrueDeltaAlpha3D_InDeltaPnPlot = new TH1D("CC1pTrueSerialDeltaAlpha3D_DeltaPnPlot",LabelXAxisDeltaAlpha3D,tools.Return2DNBins(TwoDArrayNBinsDeltaAlpha3DInDeltaPnSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaAlpha3DInDeltaPnSlices)[0]);		
+		TH1D* SerialNonCC1pRecoDeltaAlpha3D_InDeltaPnPlot = new TH1D("NonCC1pRecoSerialDeltaAlpha3D_DeltaPnPlot",LabelXAxisDeltaAlpha3D,tools.Return2DNBins(TwoDArrayNBinsDeltaAlpha3DInDeltaPnSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaAlpha3DInDeltaPnSlices)[0]);
+		TH1D* SerialCCQERecoDeltaAlpha3D_InDeltaPnPlot = new TH1D("CCQERecoSerialDeltaAlpha3D_DeltaPnPlot",LabelXAxisDeltaAlpha3D,tools.Return2DNBins(TwoDArrayNBinsDeltaAlpha3DInDeltaPnSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaAlpha3DInDeltaPnSlices)[0]);
+		TH1D* SerialCCMECRecoDeltaAlpha3D_InDeltaPnPlot = new TH1D("CCMECRecoSerialDeltaAlpha3D_DeltaPnPlot",LabelXAxisDeltaAlpha3D,tools.Return2DNBins(TwoDArrayNBinsDeltaAlpha3DInDeltaPnSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaAlpha3DInDeltaPnSlices)[0]);								
+		TH1D* SerialCCRESRecoDeltaAlpha3D_InDeltaPnPlot = new TH1D("CCRESRecoSerialDeltaAlpha3D_DeltaPnPlot",LabelXAxisDeltaAlpha3D,tools.Return2DNBins(TwoDArrayNBinsDeltaAlpha3DInDeltaPnSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaAlpha3DInDeltaPnSlices)[0]);
+		TH1D* SerialCCDISRecoDeltaAlpha3D_InDeltaPnPlot = new TH1D("CCDISRecoSerialDeltaAlpha3D_DeltaPnPlot",LabelXAxisDeltaAlpha3D,tools.Return2DNBins(TwoDArrayNBinsDeltaAlpha3DInDeltaPnSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaAlpha3DInDeltaPnSlices)[0]);
+		TH2D* SerialCC1pRecoDeltaAlpha3D_InDeltaPnPlot2D = new TH2D("CC1pRecoSerialDeltaAlpha3D_DeltaPnPlot2D",LabelXAxisDeltaAlpha3D2D,tools.Return2DNBins(TwoDArrayNBinsDeltaAlpha3DInDeltaPnSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaAlpha3DInDeltaPnSlices)[0],tools.Return2DNBins(TwoDArrayNBinsDeltaAlpha3DInDeltaPnSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaAlpha3DInDeltaPnSlices)[0]);
+		TH2D* SerialPOTScaledCC1pRecoDeltaAlpha3D_InDeltaPnPlot2D = new TH2D("POTScaledCC1pRecoSerialDeltaAlpha3D_DeltaPnPlot2D",LabelXAxisDeltaAlpha3D2D,tools.Return2DNBins(TwoDArrayNBinsDeltaAlpha3DInDeltaPnSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaAlpha3DInDeltaPnSlices)[0],tools.Return2DNBins(TwoDArrayNBinsDeltaAlpha3DInDeltaPnSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaAlpha3DInDeltaPnSlices)[0]);
+
 		// DeltaAlphaT in DeltaPT bins
 		TH1D* SerialRecoDeltaAlphaT_InDeltaPTPlot = new TH1D("RecoSerialDeltaAlphaT_DeltaPTPlot",LabelXAxisDeltaAlphaT,tools.Return2DNBins(TwoDArrayNBinsDeltaAlphaTInDeltaPTSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaAlphaTInDeltaPTSlices)[0]);		
 		TH1D* SerialCC1pRecoDeltaAlphaT_InDeltaPTPlot = new TH1D("CC1pRecoSerialDeltaAlphaT_DeltaPTPlot",LabelXAxisDeltaAlphaT,tools.Return2DNBins(TwoDArrayNBinsDeltaAlphaTInDeltaPTSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaAlphaTInDeltaPTSlices)[0]);
@@ -1929,7 +2115,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 		TH1D* SerialCCRESRecoDeltaAlphaT_InDeltaPTPlot = new TH1D("CCRESRecoSerialDeltaAlphaT_DeltaPTPlot",LabelXAxisDeltaAlphaT,tools.Return2DNBins(TwoDArrayNBinsDeltaAlphaTInDeltaPTSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaAlphaTInDeltaPTSlices)[0]);
 		TH1D* SerialCCDISRecoDeltaAlphaT_InDeltaPTPlot = new TH1D("CCDISRecoSerialDeltaAlphaT_DeltaPTPlot",LabelXAxisDeltaAlphaT,tools.Return2DNBins(TwoDArrayNBinsDeltaAlphaTInDeltaPTSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaAlphaTInDeltaPTSlices)[0]);
 		TH2D* SerialCC1pRecoDeltaAlphaT_InDeltaPTPlot2D = new TH2D("CC1pRecoSerialDeltaAlphaT_DeltaPTPlot2D",LabelXAxisDeltaAlphaT2D,tools.Return2DNBins(TwoDArrayNBinsDeltaAlphaTInDeltaPTSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaAlphaTInDeltaPTSlices)[0],tools.Return2DNBins(TwoDArrayNBinsDeltaAlphaTInDeltaPTSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaAlphaTInDeltaPTSlices)[0]);
-		TH2D* SerialPOTScaledCC1pRecoDeltaAlphaT_InDeltaPTPlot2D = new TH2D("POTScaledCC1pRecoSerialDeltaAlphaT_DeltaPTPlot2D",LabelXAxisDeltaAlphaT2D,tools.Return2DNBins(TwoDArrayNBinsDeltaAlphaTInDeltaPTSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaAlphaTInDeltaPTSlices)[0],tools.Return2DNBins(TwoDArrayNBinsDeltaAlphaTInDeltaPTSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaAlphaTInDeltaPTSlices)[0]);
+		TH2D* SerialPOTScaledCC1pRecoDeltaAlphaT_InDeltaPTPlot2D = new TH2D("POTScaledCC1pRecoSerialDeltaAlphaT_DeltaPTPlot2D",LabelXAxisDeltaAlphaT2D,tools.Return2DNBins(TwoDArrayNBinsDeltaAlphaTInDeltaPTSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaAlphaTInDeltaPTSlices)[0],tools.Return2DNBins(TwoDArrayNBinsDeltaAlphaTInDeltaPTSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaAlphaTInDeltaPTSlices)[0]);		
 
 		// ProtonMomentum in DeltaAlphaT bins
 		TH1D* SerialRecoProtonMomentum_InDeltaAlphaTPlot = new TH1D("RecoSerialProtonMomentum_DeltaAlphaTPlot",LabelXAxisProtonMomentum,tools.Return2DNBins(TwoDArrayNBinsProtonMomentumInDeltaAlphaTSlices),&tools.Return2DBinIndices(TwoDArrayNBinsProtonMomentumInDeltaAlphaTSlices)[0]);		
@@ -1965,7 +2151,20 @@ void PeLEE_myRecoAnalysis::Loop() {
 		TH1D* SerialCCRESRecoDeltaPn_InDeltaAlphaTPlot = new TH1D("CCRESRecoSerialDeltaPn_DeltaAlphaTPlot",LabelXAxisDeltaPn,tools.Return2DNBins(TwoDArrayNBinsDeltaPnInDeltaAlphaTSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaPnInDeltaAlphaTSlices)[0]);
 		TH1D* SerialCCDISRecoDeltaPn_InDeltaAlphaTPlot = new TH1D("CCDISRecoSerialDeltaPn_DeltaAlphaTPlot",LabelXAxisDeltaPn,tools.Return2DNBins(TwoDArrayNBinsDeltaPnInDeltaAlphaTSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaPnInDeltaAlphaTSlices)[0]);
 		TH2D* SerialCC1pRecoDeltaPn_InDeltaAlphaTPlot2D = new TH2D("CC1pRecoSerialDeltaPn_DeltaAlphaTPlot2D",LabelXAxisDeltaPn2D,tools.Return2DNBins(TwoDArrayNBinsDeltaPnInDeltaAlphaTSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaPnInDeltaAlphaTSlices)[0],tools.Return2DNBins(TwoDArrayNBinsDeltaPnInDeltaAlphaTSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaPnInDeltaAlphaTSlices)[0]);
-		TH2D* SerialPOTScaledCC1pRecoDeltaPn_InDeltaAlphaTPlot2D = new TH2D("POTScaledCC1pRecoSerialDeltaPn_DeltaAlphaTPlot2D",LabelXAxisDeltaPn2D,tools.Return2DNBins(TwoDArrayNBinsDeltaPnInDeltaAlphaTSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaPnInDeltaAlphaTSlices)[0],tools.Return2DNBins(TwoDArrayNBinsDeltaPnInDeltaAlphaTSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaPnInDeltaAlphaTSlices)[0]);				
+		TH2D* SerialPOTScaledCC1pRecoDeltaPn_InDeltaAlphaTPlot2D = new TH2D("POTScaledCC1pRecoSerialDeltaPn_DeltaAlphaTPlot2D",LabelXAxisDeltaPn2D,tools.Return2DNBins(TwoDArrayNBinsDeltaPnInDeltaAlphaTSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaPnInDeltaAlphaTSlices)[0],tools.Return2DNBins(TwoDArrayNBinsDeltaPnInDeltaAlphaTSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaPnInDeltaAlphaTSlices)[0]);
+
+
+		// DeltaPn in DeltaAlpha3D bins
+		TH1D* SerialRecoDeltaPn_InDeltaAlpha3DPlot = new TH1D("RecoSerialDeltaPn_DeltaAlpha3DPlot",LabelXAxisDeltaPn,tools.Return2DNBins(TwoDArrayNBinsDeltaPnInDeltaAlpha3DSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaPnInDeltaAlpha3DSlices)[0]);		
+		TH1D* SerialCC1pRecoDeltaPn_InDeltaAlpha3DPlot = new TH1D("CC1pRecoSerialDeltaPn_DeltaAlpha3DPlot",LabelXAxisDeltaPn,tools.Return2DNBins(TwoDArrayNBinsDeltaPnInDeltaAlpha3DSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaPnInDeltaAlpha3DSlices)[0]);
+		TH1D* SerialCC1pTrueDeltaPn_InDeltaAlpha3DPlot = new TH1D("CC1pTrueSerialDeltaPn_DeltaAlpha3DPlot",LabelXAxisDeltaPn,tools.Return2DNBins(TwoDArrayNBinsDeltaPnInDeltaAlpha3DSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaPnInDeltaAlpha3DSlices)[0]);		
+		TH1D* SerialNonCC1pRecoDeltaPn_InDeltaAlpha3DPlot = new TH1D("NonCC1pRecoSerialDeltaPn_DeltaAlpha3DPlot",LabelXAxisDeltaPn,tools.Return2DNBins(TwoDArrayNBinsDeltaPnInDeltaAlpha3DSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaPnInDeltaAlpha3DSlices)[0]);
+		TH1D* SerialCCQERecoDeltaPn_InDeltaAlpha3DPlot = new TH1D("CCQERecoSerialDeltaPn_DeltaAlpha3DPlot",LabelXAxisDeltaPn,tools.Return2DNBins(TwoDArrayNBinsDeltaPnInDeltaAlpha3DSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaPnInDeltaAlpha3DSlices)[0]);
+		TH1D* SerialCCMECRecoDeltaPn_InDeltaAlpha3DPlot = new TH1D("CCMECRecoSerialDeltaPn_DeltaAlpha3DPlot",LabelXAxisDeltaPn,tools.Return2DNBins(TwoDArrayNBinsDeltaPnInDeltaAlpha3DSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaPnInDeltaAlpha3DSlices)[0]);								
+		TH1D* SerialCCRESRecoDeltaPn_InDeltaAlpha3DPlot = new TH1D("CCRESRecoSerialDeltaPn_DeltaAlpha3DPlot",LabelXAxisDeltaPn,tools.Return2DNBins(TwoDArrayNBinsDeltaPnInDeltaAlpha3DSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaPnInDeltaAlpha3DSlices)[0]);
+		TH1D* SerialCCDISRecoDeltaPn_InDeltaAlpha3DPlot = new TH1D("CCDISRecoSerialDeltaPn_DeltaAlpha3DPlot",LabelXAxisDeltaPn,tools.Return2DNBins(TwoDArrayNBinsDeltaPnInDeltaAlpha3DSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaPnInDeltaAlpha3DSlices)[0]);
+		TH2D* SerialCC1pRecoDeltaPn_InDeltaAlpha3DPlot2D = new TH2D("CC1pRecoSerialDeltaPn_DeltaAlpha3DPlot2D",LabelXAxisDeltaPn2D,tools.Return2DNBins(TwoDArrayNBinsDeltaPnInDeltaAlpha3DSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaPnInDeltaAlpha3DSlices)[0],tools.Return2DNBins(TwoDArrayNBinsDeltaPnInDeltaAlpha3DSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaPnInDeltaAlpha3DSlices)[0]);
+		TH2D* SerialPOTScaledCC1pRecoDeltaPn_InDeltaAlpha3DPlot2D = new TH2D("POTScaledCC1pRecoSerialDeltaPn_DeltaAlpha3DPlot2D",LabelXAxisDeltaPn2D,tools.Return2DNBins(TwoDArrayNBinsDeltaPnInDeltaAlpha3DSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaPnInDeltaAlpha3DSlices)[0],tools.Return2DNBins(TwoDArrayNBinsDeltaPnInDeltaAlpha3DSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaPnInDeltaAlpha3DSlices)[0]);				
 
 		// DeltaPhiT in DeltaPT bins
 		TH1D* SerialRecoDeltaPhiT_InDeltaPTPlot = new TH1D("RecoSerialDeltaPhiT_DeltaPTPlot",LabelXAxisDeltaPhiT,tools.Return2DNBins(TwoDArrayNBinsDeltaPhiTInDeltaPTSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaPhiTInDeltaPTSlices)[0]);
@@ -2343,6 +2542,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 			
 			double TransMissMomentum = Reco_Pt->at(0);
 			double DeltaAlphaT = Reco_DeltaAlphaT->at(0);
+			double DeltaAlpha3D = Reco_DeltaAlpha3D->at(0);			
 			double DeltaPhiT = Reco_DeltaPhiT->at(0);
 
 			// Light cone variables
@@ -2381,6 +2581,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 	
 				TransMissMomentum = reco_stv_tool.ReturnPt();
 				DeltaAlphaT = reco_stv_tool.ReturnDeltaAlphaT();
+				DeltaAlpha3D = reco_stv_tool.ReturnDeltaAlpha3D();				
 				DeltaPhiT = reco_stv_tool.ReturnDeltaPhiT();
 				ECal = reco_stv_tool.ReturnECal();
 
@@ -2551,6 +2752,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 		
 			double true_TransMissMomentum = -1;
 			double true_DeltaAlphaT = -1;
+			double true_DeltaAlpha3D = -1;			
 			double true_DeltaPhiT = -1;
 			double true_ECal = -1;
 			double true_EQE = -1;
@@ -2577,6 +2779,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 			
 				true_TransMissMomentum = True_Pt->at(0);
 				true_DeltaAlphaT = True_DeltaAlphaT->at(0);
+				true_DeltaAlpha3D = True_DeltaAlpha3D->at(0);				
 				true_DeltaPhiT = True_DeltaPhiT->at(0);
 				true_ECal = True_ECal->at(0);
 				true_EQE = True_EQE->at(0);
@@ -2747,7 +2950,9 @@ void PeLEE_myRecoAnalysis::Loop() {
 			// Indices for 2D analysis
 
 			int DeltaPTTwoDIndex = tools.ReturnIndex(TransMissMomentum, TwoDArrayNBinsDeltaPT);
+			int DeltaPnTwoDIndex = tools.ReturnIndex(reco_Pn, TwoDArrayNBinsDeltaPn);			
 			int DeltaAlphaTTwoDIndex = tools.ReturnIndex(DeltaAlphaT, TwoDArrayNBinsDeltaAlphaT);
+			int DeltaAlpha3DTwoDIndex = tools.ReturnIndex(DeltaAlpha3D, TwoDArrayNBinsDeltaAlpha3D);			
 			int MuonCosThetaTwoDIndex = tools.ReturnIndex(reco_Pmu_cos_theta, TwoDArrayNBinsMuonCosTheta);
 			int ProtonCosThetaTwoDIndex = tools.ReturnIndex(reco_Pp_cos_theta, TwoDArrayNBinsProtonCosTheta);
 			int DeltaPtxTwoDIndex = tools.ReturnIndex(reco_Ptx, TwoDArrayNBinsDeltaPtx);
@@ -2760,9 +2965,13 @@ void PeLEE_myRecoAnalysis::Loop() {
 			int SerialMuonMomentumInMuonCosThetaIndex = tools.ReturnIndexIn2DList(TwoDArrayNBinsMuonMomentumInMuonCosThetaSlices,MuonCosThetaTwoDIndex,reco_Pmu);
 			int SerialProtonMomentumInProtonCosThetaIndex = tools.ReturnIndexIn2DList(TwoDArrayNBinsProtonMomentumInProtonCosThetaSlices,ProtonCosThetaTwoDIndex,reco_Pp);				
 			int SerialDeltaAlphaTInMuonCosThetaIndex = tools.ReturnIndexIn2DList(TwoDArrayNBinsDeltaAlphaTInMuonCosThetaSlices,MuonCosThetaTwoDIndex,DeltaAlphaT);
+			int SerialDeltaAlphaTInMuonMomentumIndex = tools.ReturnIndexIn2DList(TwoDArrayNBinsDeltaAlphaTInMuonMomentumSlices,MuonMomentumTwoDIndex,DeltaAlphaT);			
 			int SerialDeltaAlphaTInProtonCosThetaIndex = tools.ReturnIndexIn2DList(TwoDArrayNBinsDeltaAlphaTInProtonCosThetaSlices,ProtonCosThetaTwoDIndex,DeltaAlphaT);
+			int SerialDeltaAlphaTInProtonMomentumIndex = tools.ReturnIndexIn2DList(TwoDArrayNBinsDeltaAlphaTInProtonMomentumSlices,ProtonMomentumTwoDIndex,DeltaAlphaT);			
 			int SerialDeltaAlphaTInDeltaPTIndex = tools.ReturnIndexIn2DList(TwoDArrayNBinsDeltaAlphaTInDeltaPTSlices,DeltaPTTwoDIndex,DeltaAlphaT);
+			int SerialDeltaAlpha3DInDeltaPnIndex = tools.ReturnIndexIn2DList(TwoDArrayNBinsDeltaAlpha3DInDeltaPnSlices,DeltaPnTwoDIndex,DeltaAlpha3D);			
 			int SerialDeltaPTInDeltaAlphaTIndex = tools.ReturnIndexIn2DList(TwoDArrayNBinsDeltaPTInDeltaAlphaTSlices,DeltaAlphaTTwoDIndex,TransMissMomentum);
+			int SerialDeltaPnInDeltaAlpha3DIndex = tools.ReturnIndexIn2DList(TwoDArrayNBinsDeltaPnInDeltaAlpha3DSlices,DeltaAlpha3DTwoDIndex,reco_Pn);			
 			int SerialProtonMomentumInDeltaAlphaTIndex = tools.ReturnIndexIn2DList(TwoDArrayNBinsProtonMomentumInDeltaAlphaTSlices,DeltaAlphaTTwoDIndex,reco_Pp);			
 			int SerialDeltaPnInDeltaAlphaTIndex = tools.ReturnIndexIn2DList(TwoDArrayNBinsDeltaPnInDeltaAlphaTSlices,DeltaAlphaTTwoDIndex,reco_Pn);						
 			int SerialDeltaPhiTInDeltaPTIndex = tools.ReturnIndexIn2DList(TwoDArrayNBinsDeltaPhiTInDeltaPTSlices,DeltaPTTwoDIndex,DeltaPhiT);
@@ -2845,6 +3054,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 			RecoDeltaPTPlot->Fill(TransMissMomentum,weight);
 			RecoDeltaAlphaTPlot->Fill(DeltaAlphaT,weight);
+			RecoDeltaAlpha3DPlot->Fill(DeltaAlpha3D,weight);			
 			RecoDeltaPhiTPlot->Fill(DeltaPhiT,weight);
 
 			RecoECalPlot->Fill(ECal,weight);
@@ -2874,7 +3084,9 @@ void PeLEE_myRecoAnalysis::Loop() {
 			// 2D DeltaAlphaT in DeltaPT bins
 
 			RecoDeltaAlphaT_InDeltaPTTwoDPlot[DeltaPTTwoDIndex]->Fill(DeltaAlphaT,weight);
+			RecoDeltaAlpha3D_InDeltaPnTwoDPlot[DeltaPnTwoDIndex]->Fill(DeltaAlpha3D,weight);			
 			RecoDeltaPT_InDeltaAlphaTTwoDPlot[DeltaAlphaTTwoDIndex]->Fill(TransMissMomentum,weight);
+			RecoDeltaPn_InDeltaAlpha3DTwoDPlot[DeltaAlpha3DTwoDIndex]->Fill(reco_Pn,weight);			
 			RecoProtonMomentum_InDeltaAlphaTTwoDPlot[DeltaAlphaTTwoDIndex]->Fill(reco_Pp,weight);			
 			RecoDeltaPn_InDeltaAlphaTTwoDPlot[DeltaAlphaTTwoDIndex]->Fill(reco_Pn,weight);			
 			RecoECal_InDeltaAlphaTTwoDPlot[DeltaAlphaTTwoDIndex]->Fill(ECal,weight);
@@ -2882,7 +3094,9 @@ void PeLEE_myRecoAnalysis::Loop() {
 			RecoECal_InDeltaPtxTwoDPlot[DeltaPtxTwoDIndex]->Fill(ECal,weight);
 			RecoECal_InDeltaPtyTwoDPlot[DeltaPtyTwoDIndex]->Fill(ECal,weight);															
 			RecoDeltaAlphaT_InMuonCosThetaTwoDPlot[MuonCosThetaTwoDIndex]->Fill(DeltaAlphaT,weight);
-			RecoDeltaAlphaT_InProtonCosThetaTwoDPlot[ProtonCosThetaTwoDIndex]->Fill(DeltaAlphaT,weight);			
+			RecoDeltaAlphaT_InMuonMomentumTwoDPlot[MuonMomentumTwoDIndex]->Fill(DeltaAlphaT,weight);			
+			RecoDeltaAlphaT_InProtonCosThetaTwoDPlot[ProtonCosThetaTwoDIndex]->Fill(DeltaAlphaT,weight);
+			RecoDeltaAlphaT_InProtonMomentumTwoDPlot[ProtonMomentumTwoDIndex]->Fill(DeltaAlphaT,weight);						
 			RecoDeltaPT_InMuonCosThetaTwoDPlot[MuonCosThetaTwoDIndex]->Fill(TransMissMomentum,weight);
 			RecoDeltaPT_InProtonCosThetaTwoDPlot[ProtonCosThetaTwoDIndex]->Fill(TransMissMomentum,weight);			
 			RecoMuonMomentum_InMuonCosThetaTwoDPlot[MuonCosThetaTwoDIndex]->Fill(reco_Pmu,weight);
@@ -2898,9 +3112,13 @@ void PeLEE_myRecoAnalysis::Loop() {
 			SerialRecoMuonMomentum_InMuonCosThetaPlot->Fill(SerialMuonMomentumInMuonCosThetaIndex,weight);			
 			SerialRecoProtonMomentum_InProtonCosThetaPlot->Fill(SerialProtonMomentumInProtonCosThetaIndex,weight);
 			SerialRecoDeltaAlphaT_InMuonCosThetaPlot->Fill(SerialDeltaAlphaTInMuonCosThetaIndex,weight);
+			SerialRecoDeltaAlphaT_InMuonMomentumPlot->Fill(SerialDeltaAlphaTInMuonMomentumIndex,weight);			
 			SerialRecoDeltaAlphaT_InProtonCosThetaPlot->Fill(SerialDeltaAlphaTInProtonCosThetaIndex,weight);
+			SerialRecoDeltaAlphaT_InProtonMomentumPlot->Fill(SerialDeltaAlphaTInProtonMomentumIndex,weight);			
 			SerialRecoDeltaAlphaT_InDeltaPTPlot->Fill(SerialDeltaAlphaTInDeltaPTIndex,weight);
+			SerialRecoDeltaAlpha3D_InDeltaPnPlot->Fill(SerialDeltaAlpha3DInDeltaPnIndex,weight);			
 			SerialRecoDeltaPT_InDeltaAlphaTPlot->Fill(SerialDeltaPTInDeltaAlphaTIndex,weight);
+			SerialRecoDeltaPn_InDeltaAlpha3DPlot->Fill(SerialDeltaPnInDeltaAlpha3DIndex,weight);			
 			SerialRecoProtonMomentum_InDeltaAlphaTPlot->Fill(SerialProtonMomentumInDeltaAlphaTIndex,weight);			
 			SerialRecoDeltaPn_InDeltaAlphaTPlot->Fill(SerialDeltaPnInDeltaAlphaTIndex,weight);			
 			SerialRecoECal_InDeltaAlphaTPlot->Fill(SerialECalInDeltaAlphaTIndex,weight);						
@@ -3064,6 +3282,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 					CC1pTrueDeltaPTPlot->Fill(true_TransMissMomentum,weight);
 					CC1pTrueDeltaAlphaTPlot->Fill(true_DeltaAlphaT,weight);
+					CC1pTrueDeltaAlpha3DPlot->Fill(true_DeltaAlpha3D,weight);					
 					CC1pTrueDeltaPhiTPlot->Fill(true_DeltaPhiT,weight);
 
 					CC1pTrueDeltaPLPlot->Fill(true_PL,weight);
@@ -3082,7 +3301,9 @@ void PeLEE_myRecoAnalysis::Loop() {
 					//------------------------------//
 
 					int TrueDeltaPTTwoDIndex = tools.ReturnIndex(true_TransMissMomentum, TwoDArrayNBinsDeltaPT);
+					int TrueDeltaPnTwoDIndex = tools.ReturnIndex(true_Pn, TwoDArrayNBinsDeltaPn);					
 					int TrueDeltaAlphaTTwoDIndex = tools.ReturnIndex(true_DeltaAlphaT, TwoDArrayNBinsDeltaAlphaT);
+					int TrueDeltaAlpha3DTwoDIndex = tools.ReturnIndex(true_DeltaAlpha3D, TwoDArrayNBinsDeltaAlpha3D);					
 					int TrueMuonCosThetaTwoDIndex = tools.ReturnIndex(True_CandidateMu_CosTheta->at(0), TwoDArrayNBinsMuonCosTheta);
 					int TrueProtonCosThetaTwoDIndex = tools.ReturnIndex(True_CandidateP_CosTheta->at(0), TwoDArrayNBinsProtonCosTheta);
 					int TrueDeltaPtxTwoDIndex = tools.ReturnIndex(true_Ptx, TwoDArrayNBinsDeltaPtx);
@@ -3095,9 +3316,13 @@ void PeLEE_myRecoAnalysis::Loop() {
 					int TrueSerialMuonMomentumInMuonCosThetaIndex = tools.ReturnIndexIn2DList(TwoDArrayNBinsMuonMomentumInMuonCosThetaSlices,TrueMuonCosThetaTwoDIndex,True_CandidateMu_P->at(0));
 					int TrueSerialProtonMomentumInProtonCosThetaIndex = tools.ReturnIndexIn2DList(TwoDArrayNBinsProtonMomentumInProtonCosThetaSlices,TrueProtonCosThetaTwoDIndex,True_CandidateP_P->at(0));				
 					int TrueSerialDeltaAlphaTInMuonCosThetaIndex = tools.ReturnIndexIn2DList(TwoDArrayNBinsDeltaAlphaTInMuonCosThetaSlices,TrueMuonCosThetaTwoDIndex,true_DeltaAlphaT);
+					int TrueSerialDeltaAlphaTInMuonMomentumIndex = tools.ReturnIndexIn2DList(TwoDArrayNBinsDeltaAlphaTInMuonMomentumSlices,TrueMuonMomentumTwoDIndex,true_DeltaAlphaT);					
 					int TrueSerialDeltaAlphaTInProtonCosThetaIndex = tools.ReturnIndexIn2DList(TwoDArrayNBinsDeltaAlphaTInProtonCosThetaSlices,TrueProtonCosThetaTwoDIndex,true_DeltaAlphaT);
+					int TrueSerialDeltaAlphaTInProtonMomentumIndex = tools.ReturnIndexIn2DList(TwoDArrayNBinsDeltaAlphaTInProtonMomentumSlices,TrueProtonMomentumTwoDIndex,true_DeltaAlphaT);					
 					int TrueSerialDeltaAlphaTInDeltaPTIndex = tools.ReturnIndexIn2DList(TwoDArrayNBinsDeltaAlphaTInDeltaPTSlices,TrueDeltaPTTwoDIndex,true_DeltaAlphaT);
+					int TrueSerialDeltaAlpha3DInDeltaPnIndex = tools.ReturnIndexIn2DList(TwoDArrayNBinsDeltaAlpha3DInDeltaPnSlices,TrueDeltaPnTwoDIndex,true_DeltaAlpha3D);					
 					int TrueSerialDeltaPTInDeltaAlphaTIndex = tools.ReturnIndexIn2DList(TwoDArrayNBinsDeltaPTInDeltaAlphaTSlices,TrueDeltaAlphaTTwoDIndex,true_TransMissMomentum);
+					int TrueSerialDeltaPnInDeltaAlpha3DIndex = tools.ReturnIndexIn2DList(TwoDArrayNBinsDeltaPnInDeltaAlpha3DSlices,TrueDeltaAlpha3DTwoDIndex,true_Pn);					
 					int TrueSerialProtonMomentumInDeltaAlphaTIndex = tools.ReturnIndexIn2DList(TwoDArrayNBinsProtonMomentumInDeltaAlphaTSlices,TrueDeltaAlphaTTwoDIndex,True_CandidateP_P->at(0));
 					int TrueSerialDeltaPnInDeltaAlphaTIndex = tools.ReturnIndexIn2DList(TwoDArrayNBinsDeltaPnInDeltaAlphaTSlices,TrueDeltaAlphaTTwoDIndex,true_Pn);										
 					int TrueSerialDeltaPhiTInDeltaPTIndex = tools.ReturnIndexIn2DList(TwoDArrayNBinsDeltaPhiTInDeltaPTSlices,TrueDeltaPTTwoDIndex,true_DeltaPhiT);
@@ -3115,12 +3340,16 @@ void PeLEE_myRecoAnalysis::Loop() {
 					SerialCC1pTrueDeltaPT_InMuonCosThetaPlot->Fill(TrueSerialDeltaPTInMuonCosThetaIndex,weight);
 					SerialCC1pTrueDeltaPT_InProtonCosThetaPlot->Fill(TrueSerialDeltaPTInProtonCosThetaIndex,weight);
 					SerialCC1pTrueDeltaPT_InDeltaAlphaTPlot->Fill(TrueSerialDeltaPTInDeltaAlphaTIndex,weight);
+					SerialCC1pTrueDeltaPn_InDeltaAlpha3DPlot->Fill(TrueSerialDeltaPnInDeltaAlpha3DIndex,weight);
 					SerialCC1pTrueProtonMomentum_InDeltaAlphaTPlot->Fill(TrueSerialProtonMomentumInDeltaAlphaTIndex,weight);										
 					SerialCC1pTrueMuonMomentum_InMuonCosThetaPlot->Fill(TrueSerialMuonMomentumInMuonCosThetaIndex,weight);			
 					SerialCC1pTrueProtonMomentum_InProtonCosThetaPlot->Fill(TrueSerialProtonMomentumInProtonCosThetaIndex,weight);
 					SerialCC1pTrueDeltaAlphaT_InMuonCosThetaPlot->Fill(TrueSerialDeltaAlphaTInMuonCosThetaIndex,weight);
+					SerialCC1pTrueDeltaAlphaT_InMuonMomentumPlot->Fill(TrueSerialDeltaAlphaTInMuonMomentumIndex,weight);
 					SerialCC1pTrueDeltaAlphaT_InProtonCosThetaPlot->Fill(TrueSerialDeltaAlphaTInProtonCosThetaIndex,weight);
+					SerialCC1pTrueDeltaAlphaT_InProtonMomentumPlot->Fill(TrueSerialDeltaAlphaTInProtonMomentumIndex,weight);					
 					SerialCC1pTrueDeltaAlphaT_InDeltaPTPlot->Fill(TrueSerialDeltaAlphaTInDeltaPTIndex,weight);
+					SerialCC1pTrueDeltaAlpha3D_InDeltaPnPlot->Fill(TrueSerialDeltaAlpha3DInDeltaPnIndex,weight);					
 					SerialCC1pTrueDeltaPhiT_InDeltaPTPlot->Fill(TrueSerialDeltaPhiTInDeltaPTIndex,weight);
 					SerialCC1pTrueDeltaPn_InDeltaPTPlot->Fill(TrueSerialDeltaPnInDeltaPTIndex,weight);
 					SerialCC1pTrueDeltaPn_InDeltaAlphaTPlot->Fill(TrueSerialDeltaPnInDeltaAlphaTIndex,weight);																													
@@ -3152,13 +3381,17 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 					CC1pTrueDeltaPT_InMuonCosThetaTwoDPlot[TrueMuonCosThetaTwoDIndex]->Fill(true_TransMissMomentum,weight);		
 					CC1pTrueDeltaPT_InProtonCosThetaTwoDPlot[TrueProtonCosThetaTwoDIndex]->Fill(true_TransMissMomentum,weight);
-					CC1pTrueDeltaPT_InDeltaAlphaTTwoDPlot[TrueDeltaAlphaTTwoDIndex]->Fill(true_TransMissMomentum,weight);	
+					CC1pTrueDeltaPT_InDeltaAlphaTTwoDPlot[TrueDeltaAlphaTTwoDIndex]->Fill(true_TransMissMomentum,weight);
+					CC1pTrueDeltaPn_InDeltaAlpha3DTwoDPlot[TrueDeltaAlpha3DTwoDIndex]->Fill(true_Pn,weight);						
 					CC1pTrueProtonMomentum_InDeltaAlphaTTwoDPlot[DeltaAlphaTTwoDIndex]->Fill(True_CandidateP_P->at(0),weight);										
 					CC1pTrueMuonMomentum_InMuonCosThetaTwoDPlot[TrueMuonCosThetaTwoDIndex]->Fill(True_CandidateMu_P->at(0),weight);	
 					CC1pTrueProtonMomentum_InProtonCosThetaTwoDPlot[TrueProtonCosThetaTwoDIndex]->Fill(True_CandidateP_P->at(0),weight);					
-					CC1pTrueDeltaAlphaT_InDeltaPTTwoDPlot[TrueDeltaPTTwoDIndex]->Fill(true_DeltaAlphaT,weight);	
+					CC1pTrueDeltaAlphaT_InDeltaPTTwoDPlot[TrueDeltaPTTwoDIndex]->Fill(true_DeltaAlphaT,weight);
+					CC1pTrueDeltaAlpha3D_InDeltaPnTwoDPlot[TrueDeltaPnTwoDIndex]->Fill(true_DeltaAlpha3D,weight);						
 					CC1pTrueDeltaAlphaT_InMuonCosThetaTwoDPlot[TrueMuonCosThetaTwoDIndex]->Fill(true_DeltaAlphaT,weight);
-					CC1pTrueDeltaAlphaT_InProtonCosThetaTwoDPlot[TrueProtonCosThetaTwoDIndex]->Fill(true_DeltaAlphaT,weight);															
+					CC1pTrueDeltaAlphaT_InMuonMomentumTwoDPlot[TrueMuonMomentumTwoDIndex]->Fill(true_DeltaAlphaT,weight);					
+					CC1pTrueDeltaAlphaT_InProtonCosThetaTwoDPlot[TrueProtonCosThetaTwoDIndex]->Fill(true_DeltaAlphaT,weight);
+					CC1pTrueDeltaAlphaT_InProtonMomentumTwoDPlot[TrueProtonMomentumTwoDIndex]->Fill(true_DeltaAlphaT,weight);																				
 					CC1pTrueDeltaPhiT_InDeltaPTTwoDPlot[TrueDeltaPTTwoDIndex]->Fill(true_DeltaPhiT,weight);	
 					CC1pTrueDeltaPn_InDeltaPTTwoDPlot[TrueDeltaPTTwoDIndex]->Fill(true_Pn,weight);
 					CC1pTrueDeltaPn_InDeltaAlphaTTwoDPlot[TrueDeltaAlphaTTwoDIndex]->Fill(true_Pn,weight);					
@@ -3237,6 +3470,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 					CC1pRecoDeltaPTPlot->Fill(TransMissMomentum,weight);
 					CC1pRecoDeltaAlphaTPlot->Fill(DeltaAlphaT,weight);
+					CC1pRecoDeltaAlpha3DPlot->Fill(DeltaAlpha3D,weight);					
 					CC1pRecoDeltaPhiTPlot->Fill(DeltaPhiT,weight);
 
 					CC1pRecoECalPlot->Fill(ECal,weight);
@@ -3263,8 +3497,10 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 					// 2D DeltaAlphaT in DeltaPT bins
 					
-					CC1pRecoDeltaAlphaT_InDeltaPTTwoDPlot[DeltaPTTwoDIndex]->Fill(DeltaAlphaT,weight);	
+					CC1pRecoDeltaAlphaT_InDeltaPTTwoDPlot[DeltaPTTwoDIndex]->Fill(DeltaAlphaT,weight);
+					CC1pRecoDeltaAlpha3D_InDeltaPnTwoDPlot[DeltaPnTwoDIndex]->Fill(DeltaAlpha3D,weight);						
 					CC1pRecoDeltaPT_InDeltaAlphaTTwoDPlot[DeltaAlphaTTwoDIndex]->Fill(TransMissMomentum,weight);
+					CC1pRecoDeltaPn_InDeltaAlpha3DTwoDPlot[DeltaAlpha3DTwoDIndex]->Fill(reco_Pn,weight);					
 					CC1pRecoProtonMomentum_InDeltaAlphaTTwoDPlot[DeltaAlphaTTwoDIndex]->Fill(reco_Pp,weight);					
 					CC1pRecoDeltaPn_InDeltaAlphaTTwoDPlot[DeltaAlphaTTwoDIndex]->Fill(reco_Pn,weight);					
 					CC1pRecoECal_InDeltaAlphaTTwoDPlot[DeltaAlphaTTwoDIndex]->Fill(ECal,weight);
@@ -3272,7 +3508,9 @@ void PeLEE_myRecoAnalysis::Loop() {
 					CC1pRecoECal_InDeltaPtxTwoDPlot[DeltaPtxTwoDIndex]->Fill(ECal,weight);
 					CC1pRecoECal_InDeltaPtyTwoDPlot[DeltaPtyTwoDIndex]->Fill(ECal,weight);
 					CC1pRecoDeltaAlphaT_InMuonCosThetaTwoDPlot[MuonCosThetaTwoDIndex]->Fill(DeltaAlphaT,weight);
-					CC1pRecoDeltaAlphaT_InProtonCosThetaTwoDPlot[ProtonCosThetaTwoDIndex]->Fill(DeltaAlphaT,weight);					
+					CC1pRecoDeltaAlphaT_InMuonMomentumTwoDPlot[MuonMomentumTwoDIndex]->Fill(DeltaAlphaT,weight);					
+					CC1pRecoDeltaAlphaT_InProtonCosThetaTwoDPlot[ProtonCosThetaTwoDIndex]->Fill(DeltaAlphaT,weight);
+					CC1pRecoDeltaAlphaT_InProtonMomentumTwoDPlot[ProtonMomentumTwoDIndex]->Fill(DeltaAlphaT,weight);									
 					CC1pRecoDeltaPT_InMuonCosThetaTwoDPlot[MuonCosThetaTwoDIndex]->Fill(TransMissMomentum,weight);
 					CC1pRecoDeltaPT_InProtonCosThetaTwoDPlot[ProtonCosThetaTwoDIndex]->Fill(TransMissMomentum,weight);					
 					CC1pRecoMuonMomentum_InMuonCosThetaTwoDPlot[MuonCosThetaTwoDIndex]->Fill(reco_Pmu,weight);
@@ -3288,9 +3526,13 @@ void PeLEE_myRecoAnalysis::Loop() {
 					SerialCC1pRecoMuonMomentum_InMuonCosThetaPlot->Fill(SerialMuonMomentumInMuonCosThetaIndex,weight);			
 					SerialCC1pRecoProtonMomentum_InProtonCosThetaPlot->Fill(SerialProtonMomentumInProtonCosThetaIndex,weight);
 					SerialCC1pRecoDeltaAlphaT_InMuonCosThetaPlot->Fill(SerialDeltaAlphaTInMuonCosThetaIndex,weight);
+					SerialCC1pRecoDeltaAlphaT_InMuonMomentumPlot->Fill(SerialDeltaAlphaTInMuonMomentumIndex,weight);					
 					SerialCC1pRecoDeltaAlphaT_InProtonCosThetaPlot->Fill(SerialDeltaAlphaTInProtonCosThetaIndex,weight);
+					SerialCC1pRecoDeltaAlphaT_InProtonMomentumPlot->Fill(SerialDeltaAlphaTInProtonMomentumIndex,weight);					
 					SerialCC1pRecoDeltaAlphaT_InDeltaPTPlot->Fill(SerialDeltaAlphaTInDeltaPTIndex,weight);
+					SerialCC1pRecoDeltaAlpha3D_InDeltaPnPlot->Fill(SerialDeltaAlpha3DInDeltaPnIndex,weight);					
 					SerialCC1pRecoDeltaPT_InDeltaAlphaTPlot->Fill(SerialDeltaPTInDeltaAlphaTIndex,weight);
+					SerialCC1pRecoDeltaPn_InDeltaAlpha3DPlot->Fill(SerialDeltaPnInDeltaAlpha3DIndex,weight);					
 					SerialCC1pRecoProtonMomentum_InDeltaAlphaTPlot->Fill(SerialProtonMomentumInDeltaAlphaTIndex,weight);					
 					SerialCC1pRecoDeltaPn_InDeltaAlphaTPlot->Fill(SerialDeltaPnInDeltaAlphaTIndex,weight);					
 					SerialCC1pRecoECal_InDeltaAlphaTPlot->Fill(SerialECalInDeltaAlphaTIndex,weight);										
@@ -3345,9 +3587,13 @@ void PeLEE_myRecoAnalysis::Loop() {
 					SerialCC1pRecoMuonMomentum_InMuonCosThetaPlot2D->Fill(TrueSerialMuonMomentumInMuonCosThetaIndex,SerialMuonMomentumInMuonCosThetaIndex);			
 					SerialCC1pRecoProtonMomentum_InProtonCosThetaPlot2D->Fill(TrueSerialProtonMomentumInProtonCosThetaIndex,SerialProtonMomentumInProtonCosThetaIndex);
 					SerialCC1pRecoDeltaAlphaT_InMuonCosThetaPlot2D->Fill(TrueSerialDeltaAlphaTInMuonCosThetaIndex,SerialDeltaAlphaTInMuonCosThetaIndex);
+					SerialCC1pRecoDeltaAlphaT_InMuonMomentumPlot2D->Fill(TrueSerialDeltaAlphaTInMuonMomentumIndex,SerialDeltaAlphaTInMuonMomentumIndex);					
 					SerialCC1pRecoDeltaAlphaT_InProtonCosThetaPlot2D->Fill(TrueSerialDeltaAlphaTInProtonCosThetaIndex,SerialDeltaAlphaTInProtonCosThetaIndex);
+					SerialCC1pRecoDeltaAlphaT_InProtonMomentumPlot2D->Fill(TrueSerialDeltaAlphaTInProtonMomentumIndex,SerialDeltaAlphaTInProtonMomentumIndex);
 					SerialCC1pRecoDeltaAlphaT_InDeltaPTPlot2D->Fill(TrueSerialDeltaAlphaTInDeltaPTIndex,SerialDeltaAlphaTInDeltaPTIndex);
+					SerialCC1pRecoDeltaAlpha3D_InDeltaPnPlot2D->Fill(TrueSerialDeltaAlpha3DInDeltaPnIndex,SerialDeltaAlpha3DInDeltaPnIndex);					
 					SerialCC1pRecoDeltaPT_InDeltaAlphaTPlot2D->Fill(TrueSerialDeltaPTInDeltaAlphaTIndex,SerialDeltaPTInDeltaAlphaTIndex);
+					SerialCC1pRecoDeltaPn_InDeltaAlpha3DPlot2D->Fill(TrueSerialDeltaPnInDeltaAlpha3DIndex,SerialDeltaPnInDeltaAlpha3DIndex);					
 					SerialCC1pRecoProtonMomentum_InDeltaAlphaTPlot2D->Fill(TrueSerialProtonMomentumInDeltaAlphaTIndex, SerialProtonMomentumInDeltaAlphaTIndex);					
 					SerialCC1pRecoDeltaPn_InDeltaAlphaTPlot2D->Fill(TrueSerialDeltaPnInDeltaAlphaTIndex,SerialDeltaPnInDeltaAlphaTIndex);						
 					SerialCC1pRecoECal_InDeltaAlphaTPlot2D->Fill(TrueSerialECalInDeltaAlphaTIndex,SerialECalInDeltaAlphaTIndex);									
@@ -3365,9 +3611,13 @@ void PeLEE_myRecoAnalysis::Loop() {
 					SerialPOTScaledCC1pRecoMuonMomentum_InMuonCosThetaPlot2D->Fill(TrueSerialMuonMomentumInMuonCosThetaIndex,SerialMuonMomentumInMuonCosThetaIndex,weight);			
 					SerialPOTScaledCC1pRecoProtonMomentum_InProtonCosThetaPlot2D->Fill(TrueSerialProtonMomentumInProtonCosThetaIndex,SerialProtonMomentumInProtonCosThetaIndex,weight);
 					SerialPOTScaledCC1pRecoDeltaAlphaT_InMuonCosThetaPlot2D->Fill(TrueSerialDeltaAlphaTInMuonCosThetaIndex,SerialDeltaAlphaTInMuonCosThetaIndex,weight);
+					SerialPOTScaledCC1pRecoDeltaAlphaT_InMuonMomentumPlot2D->Fill(TrueSerialDeltaAlphaTInMuonMomentumIndex,SerialDeltaAlphaTInMuonMomentumIndex,weight);					
 					SerialPOTScaledCC1pRecoDeltaAlphaT_InProtonCosThetaPlot2D->Fill(TrueSerialDeltaAlphaTInProtonCosThetaIndex,SerialDeltaAlphaTInProtonCosThetaIndex,weight);
+					SerialPOTScaledCC1pRecoDeltaAlphaT_InProtonMomentumPlot2D->Fill(TrueSerialDeltaAlphaTInProtonMomentumIndex,SerialDeltaAlphaTInProtonMomentumIndex,weight);					
 					SerialPOTScaledCC1pRecoDeltaAlphaT_InDeltaPTPlot2D->Fill(TrueSerialDeltaAlphaTInDeltaPTIndex,SerialDeltaAlphaTInDeltaPTIndex,weight);
+					SerialPOTScaledCC1pRecoDeltaAlpha3D_InDeltaPnPlot2D->Fill(TrueSerialDeltaAlpha3DInDeltaPnIndex,SerialDeltaAlpha3DInDeltaPnIndex,weight);					
 					SerialPOTScaledCC1pRecoDeltaPT_InDeltaAlphaTPlot2D->Fill(TrueSerialDeltaPTInDeltaAlphaTIndex,SerialDeltaPTInDeltaAlphaTIndex,weight);
+					SerialPOTScaledCC1pRecoDeltaPn_InDeltaAlpha3DPlot2D->Fill(TrueSerialDeltaPnInDeltaAlpha3DIndex,SerialDeltaPnInDeltaAlpha3DIndex,weight);					
 					SerialPOTScaledCC1pRecoProtonMomentum_InDeltaAlphaTPlot2D->Fill(TrueSerialProtonMomentumInDeltaAlphaTIndex,SerialProtonMomentumInDeltaAlphaTIndex,weight);
 					SerialPOTScaledCC1pRecoDeltaPn_InDeltaAlphaTPlot2D->Fill(TrueSerialDeltaPnInDeltaAlphaTIndex,SerialDeltaPnInDeltaAlphaTIndex,weight);					
 					SerialPOTScaledCC1pRecoECal_InDeltaAlphaTPlot2D->Fill(TrueSerialECalInDeltaAlphaTIndex,SerialECalInDeltaAlphaTIndex,weight);					
@@ -3406,6 +3656,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 					CC1pRecoDeltaPTPlot2D->Fill(true_TransMissMomentum,TransMissMomentum);
 					CC1pRecoDeltaAlphaTPlot2D->Fill(true_DeltaAlphaT,DeltaAlphaT);
+					CC1pRecoDeltaAlpha3DPlot2D->Fill(true_DeltaAlpha3D,DeltaAlpha3D);				
 					CC1pRecoDeltaPhiTPlot2D->Fill(true_DeltaPhiT,DeltaPhiT);
 
 					CC1pRecoDeltaPLPlot2D->Fill(true_PL,reco_PL);
@@ -3423,6 +3674,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 					POTScaledCC1pRecoDeltaPTPlot2D->Fill(true_TransMissMomentum,TransMissMomentum,weight);
 					POTScaledCC1pRecoDeltaAlphaTPlot2D->Fill(true_DeltaAlphaT,DeltaAlphaT,weight);
+					POTScaledCC1pRecoDeltaAlpha3DPlot2D->Fill(true_DeltaAlpha3D,DeltaAlpha3D,weight);					
 					POTScaledCC1pRecoDeltaPhiTPlot2D->Fill(true_DeltaPhiT,DeltaPhiT,weight);
 
 					POTScaledCC1pRecoDeltaPLPlot2D->Fill(true_PL,reco_PL,weight);
@@ -3465,10 +3717,16 @@ void PeLEE_myRecoAnalysis::Loop() {
 					// 2D DeltaAlphaT in DeltaPT bins
 					
 					CC1pRecoDeltaAlphaT_InDeltaPTTwoDPlot2D[DeltaPTTwoDIndex]->Fill(true_DeltaAlphaT,DeltaAlphaT);
-					POTScaledCC1pRecoDeltaAlphaT_InDeltaPTTwoDPlot2D[DeltaPTTwoDIndex]->Fill(true_DeltaAlphaT,DeltaAlphaT,weight);	
+					POTScaledCC1pRecoDeltaAlphaT_InDeltaPTTwoDPlot2D[DeltaPTTwoDIndex]->Fill(true_DeltaAlphaT,DeltaAlphaT,weight);
+
+					CC1pRecoDeltaAlpha3D_InDeltaPnTwoDPlot2D[DeltaPnTwoDIndex]->Fill(true_DeltaAlpha3D,DeltaAlpha3D);
+					POTScaledCC1pRecoDeltaAlpha3D_InDeltaPnTwoDPlot2D[DeltaPnTwoDIndex]->Fill(true_DeltaAlpha3D,DeltaAlpha3D,weight);						
 
 					CC1pRecoDeltaPT_InDeltaAlphaTTwoDPlot2D[DeltaAlphaTTwoDIndex]->Fill(true_TransMissMomentum,TransMissMomentum);
 					POTScaledCC1pRecoDeltaPT_InDeltaAlphaTTwoDPlot2D[DeltaAlphaTTwoDIndex]->Fill(true_TransMissMomentum,TransMissMomentum,weight);
+
+					CC1pRecoDeltaPn_InDeltaAlpha3DTwoDPlot2D[DeltaAlpha3DTwoDIndex]->Fill(true_Pn,reco_Pn);
+					POTScaledCC1pRecoDeltaPn_InDeltaAlpha3DTwoDPlot2D[DeltaAlpha3DTwoDIndex]->Fill(true_Pn,reco_Pn,weight);					
 
 					CC1pRecoProtonMomentum_InDeltaAlphaTTwoDPlot2D[DeltaAlphaTTwoDIndex]->Fill(True_CandidateP_P->at(0), reco_Pp);
 					POTScaledCC1pRecoProtonMomentum_InDeltaAlphaTTwoDPlot2D[DeltaAlphaTTwoDIndex]->Fill(True_CandidateP_P->at(0), reco_Pp,weight);																					
@@ -3491,8 +3749,14 @@ void PeLEE_myRecoAnalysis::Loop() {
 					CC1pRecoDeltaAlphaT_InMuonCosThetaTwoDPlot2D[MuonCosThetaTwoDIndex]->Fill(true_DeltaAlphaT,DeltaAlphaT);
 					POTScaledCC1pRecoDeltaAlphaT_InMuonCosThetaTwoDPlot2D[MuonCosThetaTwoDIndex]->Fill(true_DeltaAlphaT,DeltaAlphaT,weight);
 
+					CC1pRecoDeltaAlphaT_InMuonMomentumTwoDPlot2D[MuonMomentumTwoDIndex]->Fill(true_DeltaAlphaT,DeltaAlphaT);
+					POTScaledCC1pRecoDeltaAlphaT_InMuonMomentumTwoDPlot2D[MuonMomentumTwoDIndex]->Fill(true_DeltaAlphaT,DeltaAlphaT,weight);					
+
 					CC1pRecoDeltaAlphaT_InProtonCosThetaTwoDPlot2D[ProtonCosThetaTwoDIndex]->Fill(true_DeltaAlphaT,DeltaAlphaT);
-					POTScaledCC1pRecoDeltaAlphaT_InProtonCosThetaTwoDPlot2D[ProtonCosThetaTwoDIndex]->Fill(true_DeltaAlphaT,DeltaAlphaT,weight);											
+					POTScaledCC1pRecoDeltaAlphaT_InProtonCosThetaTwoDPlot2D[ProtonCosThetaTwoDIndex]->Fill(true_DeltaAlphaT,DeltaAlphaT,weight);
+
+					CC1pRecoDeltaAlphaT_InProtonMomentumTwoDPlot2D[ProtonMomentumTwoDIndex]->Fill(true_DeltaAlphaT,DeltaAlphaT);
+					POTScaledCC1pRecoDeltaAlphaT_InProtonMomentumTwoDPlot2D[ProtonMomentumTwoDIndex]->Fill(true_DeltaAlphaT,DeltaAlphaT,weight);																
 
 					CC1pRecoDeltaPT_InMuonCosThetaTwoDPlot2D[MuonCosThetaTwoDIndex]->Fill(true_TransMissMomentum,TransMissMomentum);
 					POTScaledCC1pRecoDeltaPT_InMuonCosThetaTwoDPlot2D[MuonCosThetaTwoDIndex]->Fill(true_TransMissMomentum,TransMissMomentum,weight);																												
@@ -3839,6 +4103,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 					NonCC1pRecoDeltaPTPlot->Fill(TransMissMomentum,weight);
 					NonCC1pRecoDeltaAlphaTPlot->Fill(DeltaAlphaT,weight);
+					NonCC1pRecoDeltaAlpha3DPlot->Fill(DeltaAlpha3D,weight);					
 					NonCC1pRecoDeltaPhiTPlot->Fill(DeltaPhiT,weight);
 
 					NonCC1pRecoECalPlot->Fill(ECal,weight);
@@ -3856,16 +4121,20 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 					// 2D DeltaAlphaT in DeltaPT bins
 					
-					NonCC1pRecoDeltaAlphaT_InDeltaPTTwoDPlot[DeltaPTTwoDIndex]->Fill(DeltaAlphaT,weight);	
-					NonCC1pRecoDeltaPT_InDeltaAlphaTTwoDPlot[DeltaAlphaTTwoDIndex]->Fill(TransMissMomentum,weight);	
+					NonCC1pRecoDeltaAlphaT_InDeltaPTTwoDPlot[DeltaPTTwoDIndex]->Fill(DeltaAlphaT,weight);
+					NonCC1pRecoDeltaAlpha3D_InDeltaPnTwoDPlot[DeltaPnTwoDIndex]->Fill(DeltaAlpha3D,weight);						
+					NonCC1pRecoDeltaPT_InDeltaAlphaTTwoDPlot[DeltaAlphaTTwoDIndex]->Fill(TransMissMomentum,weight);
+					NonCC1pRecoDeltaPn_InDeltaAlpha3DTwoDPlot[DeltaAlpha3DTwoDIndex]->Fill(reco_Pn,weight);						
 					NonCC1pRecoProtonMomentum_InDeltaAlphaTTwoDPlot[DeltaAlphaTTwoDIndex]->Fill(reco_Pp,weight);					
 					NonCC1pRecoDeltaPn_InDeltaAlphaTTwoDPlot[DeltaAlphaTTwoDIndex]->Fill(reco_Pn,weight);						
 					NonCC1pRecoECal_InDeltaAlphaTTwoDPlot[DeltaAlphaTTwoDIndex]->Fill(ECal,weight);
 					NonCC1pRecoECal_InDeltaPTTwoDPlot[DeltaPTTwoDIndex]->Fill(ECal,weight);	
 					NonCC1pRecoECal_InDeltaPtxTwoDPlot[DeltaPtxTwoDIndex]->Fill(ECal,weight);
 					NonCC1pRecoECal_InDeltaPtyTwoDPlot[DeltaPtyTwoDIndex]->Fill(ECal,weight);
-					NonCC1pRecoDeltaAlphaT_InMuonCosThetaTwoDPlot[MuonCosThetaTwoDIndex]->Fill(DeltaAlphaT,weight);	
-					NonCC1pRecoDeltaAlphaT_InProtonCosThetaTwoDPlot[ProtonCosThetaTwoDIndex]->Fill(DeltaAlphaT,weight);					
+					NonCC1pRecoDeltaAlphaT_InMuonCosThetaTwoDPlot[MuonCosThetaTwoDIndex]->Fill(DeltaAlphaT,weight);
+					NonCC1pRecoDeltaAlphaT_InMuonMomentumTwoDPlot[MuonMomentumTwoDIndex]->Fill(DeltaAlphaT,weight);						
+					NonCC1pRecoDeltaAlphaT_InProtonCosThetaTwoDPlot[ProtonCosThetaTwoDIndex]->Fill(DeltaAlphaT,weight);
+					NonCC1pRecoDeltaAlphaT_InProtonMomentumTwoDPlot[ProtonMomentumTwoDIndex]->Fill(DeltaAlphaT,weight);										
 					NonCC1pRecoDeltaPT_InMuonCosThetaTwoDPlot[MuonCosThetaTwoDIndex]->Fill(TransMissMomentum,weight);	
 					NonCC1pRecoDeltaPT_InProtonCosThetaTwoDPlot[ProtonCosThetaTwoDIndex]->Fill(TransMissMomentum,weight);					
 					NonCC1pRecoMuonMomentum_InMuonCosThetaTwoDPlot[MuonCosThetaTwoDIndex]->Fill(reco_Pmu,weight);
@@ -3881,9 +4150,13 @@ void PeLEE_myRecoAnalysis::Loop() {
 					SerialNonCC1pRecoMuonMomentum_InMuonCosThetaPlot->Fill(SerialMuonMomentumInMuonCosThetaIndex,weight);			
 					SerialNonCC1pRecoProtonMomentum_InProtonCosThetaPlot->Fill(SerialProtonMomentumInProtonCosThetaIndex,weight);
 					SerialNonCC1pRecoDeltaAlphaT_InMuonCosThetaPlot->Fill(SerialDeltaAlphaTInMuonCosThetaIndex,weight);
+					SerialNonCC1pRecoDeltaAlphaT_InMuonMomentumPlot->Fill(SerialDeltaAlphaTInMuonMomentumIndex,weight);					
 					SerialNonCC1pRecoDeltaAlphaT_InProtonCosThetaPlot->Fill(SerialDeltaAlphaTInProtonCosThetaIndex,weight);
+					SerialNonCC1pRecoDeltaAlphaT_InProtonMomentumPlot->Fill(SerialDeltaAlphaTInProtonMomentumIndex,weight);					
 					SerialNonCC1pRecoDeltaAlphaT_InDeltaPTPlot->Fill(SerialDeltaAlphaTInDeltaPTIndex,weight);
-					SerialNonCC1pRecoDeltaPT_InDeltaAlphaTPlot->Fill(SerialDeltaPTInDeltaAlphaTIndex,weight);	
+					SerialNonCC1pRecoDeltaAlpha3D_InDeltaPnPlot->Fill(SerialDeltaAlpha3DInDeltaPnIndex,weight);					
+					SerialNonCC1pRecoDeltaPT_InDeltaAlphaTPlot->Fill(SerialDeltaPTInDeltaAlphaTIndex,weight);
+					SerialNonCC1pRecoDeltaPn_InDeltaAlpha3DPlot->Fill(SerialDeltaPnInDeltaAlpha3DIndex,weight);						
 					SerialNonCC1pRecoProtonMomentum_InDeltaAlphaTPlot->Fill(SerialProtonMomentumInDeltaAlphaTIndex,weight);					
 					SerialNonCC1pRecoDeltaPn_InDeltaAlphaTPlot->Fill(SerialDeltaPnInDeltaAlphaTIndex,weight);					
 					SerialNonCC1pRecoECal_InDeltaAlphaTPlot->Fill(SerialECalInDeltaAlphaTIndex,weight);									
@@ -3993,6 +4266,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 					CCQERecoDeltaPTPlot->Fill(TransMissMomentum,weight);
 					CCQERecoDeltaAlphaTPlot->Fill(DeltaAlphaT,weight);
+					CCQERecoDeltaAlpha3DPlot->Fill(DeltaAlpha3D,weight);					
 					CCQERecoDeltaPhiTPlot->Fill(DeltaPhiT,weight);
 
 					CCQERecoECalPlot->Fill(ECal,weight);
@@ -4010,8 +4284,10 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 					// 2D DeltaAlphaT in DeltaPT bins
 					
-					CCQERecoDeltaAlphaT_InDeltaPTTwoDPlot[DeltaPTTwoDIndex]->Fill(DeltaAlphaT,weight);	
+					CCQERecoDeltaAlphaT_InDeltaPTTwoDPlot[DeltaPTTwoDIndex]->Fill(DeltaAlphaT,weight);
+					CCQERecoDeltaAlpha3D_InDeltaPnTwoDPlot[DeltaPnTwoDIndex]->Fill(DeltaAlpha3D,weight);						
 					CCQERecoDeltaPT_InDeltaAlphaTTwoDPlot[DeltaAlphaTTwoDIndex]->Fill(TransMissMomentum,weight);
+					CCQERecoDeltaPn_InDeltaAlpha3DTwoDPlot[DeltaAlpha3DTwoDIndex]->Fill(reco_Pn,weight);					
 					CCQERecoProtonMomentum_InDeltaAlphaTTwoDPlot[DeltaAlphaTTwoDIndex]->Fill(reco_Pp,weight);					
 					CCQERecoDeltaPn_InDeltaAlphaTTwoDPlot[DeltaAlphaTTwoDIndex]->Fill(reco_Pn,weight);					
 					CCQERecoECal_InDeltaAlphaTTwoDPlot[DeltaAlphaTTwoDIndex]->Fill(ECal,weight);
@@ -4019,7 +4295,9 @@ void PeLEE_myRecoAnalysis::Loop() {
 					CCQERecoECal_InDeltaPtxTwoDPlot[DeltaPtxTwoDIndex]->Fill(ECal,weight);
 					CCQERecoECal_InDeltaPtyTwoDPlot[DeltaPtyTwoDIndex]->Fill(ECal,weight);																				
 					CCQERecoDeltaAlphaT_InMuonCosThetaTwoDPlot[MuonCosThetaTwoDIndex]->Fill(DeltaAlphaT,weight);
-					CCQERecoDeltaAlphaT_InProtonCosThetaTwoDPlot[ProtonCosThetaTwoDIndex]->Fill(DeltaAlphaT,weight);																		
+					CCQERecoDeltaAlphaT_InMuonMomentumTwoDPlot[MuonMomentumTwoDIndex]->Fill(DeltaAlphaT,weight);					
+					CCQERecoDeltaAlphaT_InProtonCosThetaTwoDPlot[ProtonCosThetaTwoDIndex]->Fill(DeltaAlphaT,weight);
+					CCQERecoDeltaAlphaT_InProtonMomentumTwoDPlot[ProtonMomentumTwoDIndex]->Fill(DeltaAlphaT,weight);																							
 					CCQERecoDeltaPT_InMuonCosThetaTwoDPlot[MuonCosThetaTwoDIndex]->Fill(TransMissMomentum,weight);	
 					CCQERecoDeltaPT_InProtonCosThetaTwoDPlot[ProtonCosThetaTwoDIndex]->Fill(TransMissMomentum,weight);									
 					CCQERecoMuonMomentum_InMuonCosThetaTwoDPlot[MuonCosThetaTwoDIndex]->Fill(reco_Pmu,weight);
@@ -4035,9 +4313,13 @@ void PeLEE_myRecoAnalysis::Loop() {
 					SerialCCQERecoMuonMomentum_InMuonCosThetaPlot->Fill(SerialMuonMomentumInMuonCosThetaIndex,weight);			
 					SerialCCQERecoProtonMomentum_InProtonCosThetaPlot->Fill(SerialProtonMomentumInProtonCosThetaIndex,weight);
 					SerialCCQERecoDeltaAlphaT_InMuonCosThetaPlot->Fill(SerialDeltaAlphaTInMuonCosThetaIndex,weight);
+					SerialCCQERecoDeltaAlphaT_InMuonMomentumPlot->Fill(SerialDeltaAlphaTInMuonMomentumIndex,weight);					
 					SerialCCQERecoDeltaAlphaT_InProtonCosThetaPlot->Fill(SerialDeltaAlphaTInProtonCosThetaIndex,weight);
+					SerialCCQERecoDeltaAlphaT_InProtonMomentumPlot->Fill(SerialDeltaAlphaTInProtonMomentumIndex,weight);				
 					SerialCCQERecoDeltaAlphaT_InDeltaPTPlot->Fill(SerialDeltaAlphaTInDeltaPTIndex,weight);
+					SerialCCQERecoDeltaAlpha3D_InDeltaPnPlot->Fill(SerialDeltaAlpha3DInDeltaPnIndex,weight);					
 					SerialCCQERecoDeltaPT_InDeltaAlphaTPlot->Fill(SerialDeltaPTInDeltaAlphaTIndex,weight);
+					SerialCCQERecoDeltaPn_InDeltaAlpha3DPlot->Fill(SerialDeltaPnInDeltaAlpha3DIndex,weight);					
 					SerialCCQERecoProtonMomentum_InDeltaAlphaTPlot->Fill(SerialProtonMomentumInDeltaAlphaTIndex,weight);					
 					SerialCCQERecoDeltaPn_InDeltaAlphaTPlot->Fill(SerialDeltaPnInDeltaAlphaTIndex,weight);					
 					SerialCCQERecoECal_InDeltaAlphaTPlot->Fill(SerialECalInDeltaAlphaTIndex,weight);										
@@ -4142,6 +4424,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 					CCMECRecoDeltaPTPlot->Fill(TransMissMomentum,weight);
 					CCMECRecoDeltaAlphaTPlot->Fill(DeltaAlphaT,weight);
+					CCMECRecoDeltaAlpha3DPlot->Fill(DeltaAlpha3D,weight);					
 					CCMECRecoDeltaPhiTPlot->Fill(DeltaPhiT,weight);
 
 					CCMECRecoECalPlot->Fill(ECal,weight);
@@ -4159,8 +4442,10 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 					// 2D DeltaAlphaT in DeltaPT bins
 					
-					CCMECRecoDeltaAlphaT_InDeltaPTTwoDPlot[DeltaPTTwoDIndex]->Fill(DeltaAlphaT,weight);	
-					CCMECRecoDeltaPT_InDeltaAlphaTTwoDPlot[DeltaAlphaTTwoDIndex]->Fill(TransMissMomentum,weight);	
+					CCMECRecoDeltaAlphaT_InDeltaPTTwoDPlot[DeltaPTTwoDIndex]->Fill(DeltaAlphaT,weight);
+					CCMECRecoDeltaAlpha3D_InDeltaPnTwoDPlot[DeltaPnTwoDIndex]->Fill(DeltaAlpha3D,weight);						
+					CCMECRecoDeltaPT_InDeltaAlphaTTwoDPlot[DeltaAlphaTTwoDIndex]->Fill(TransMissMomentum,weight);
+					CCMECRecoDeltaPn_InDeltaAlpha3DTwoDPlot[DeltaAlpha3DTwoDIndex]->Fill(reco_Pn,weight);						
 					CCMECRecoProtonMomentum_InDeltaAlphaTTwoDPlot[DeltaAlphaTTwoDIndex]->Fill(reco_Pp,weight);					
 					CCMECRecoDeltaPn_InDeltaAlphaTTwoDPlot[DeltaAlphaTTwoDIndex]->Fill(reco_Pn,weight);					
 					CCMECRecoECal_InDeltaAlphaTTwoDPlot[DeltaAlphaTTwoDIndex]->Fill(ECal,weight);	
@@ -4168,7 +4453,9 @@ void PeLEE_myRecoAnalysis::Loop() {
 					CCMECRecoECal_InDeltaPtxTwoDPlot[DeltaPtxTwoDIndex]->Fill(ECal,weight);
 					CCMECRecoECal_InDeltaPtyTwoDPlot[DeltaPtyTwoDIndex]->Fill(ECal,weight);																											
 					CCMECRecoDeltaAlphaT_InMuonCosThetaTwoDPlot[MuonCosThetaTwoDIndex]->Fill(DeltaAlphaT,weight);
-					CCMECRecoDeltaAlphaT_InProtonCosThetaTwoDPlot[ProtonCosThetaTwoDIndex]->Fill(DeltaAlphaT,weight);					
+					CCMECRecoDeltaAlphaT_InMuonMomentumTwoDPlot[MuonMomentumTwoDIndex]->Fill(DeltaAlphaT,weight);					
+					CCMECRecoDeltaAlphaT_InProtonCosThetaTwoDPlot[ProtonCosThetaTwoDIndex]->Fill(DeltaAlphaT,weight);
+					CCMECRecoDeltaAlphaT_InProtonMomentumTwoDPlot[ProtonMomentumTwoDIndex]->Fill(DeltaAlphaT,weight);										
 					CCMECRecoDeltaPT_InMuonCosThetaTwoDPlot[MuonCosThetaTwoDIndex]->Fill(TransMissMomentum,weight);
 					CCMECRecoDeltaPT_InProtonCosThetaTwoDPlot[ProtonCosThetaTwoDIndex]->Fill(TransMissMomentum,weight);					
 					CCMECRecoMuonMomentum_InMuonCosThetaTwoDPlot[MuonCosThetaTwoDIndex]->Fill(reco_Pmu,weight);
@@ -4184,9 +4471,13 @@ void PeLEE_myRecoAnalysis::Loop() {
 					SerialCCMECRecoMuonMomentum_InMuonCosThetaPlot->Fill(SerialMuonMomentumInMuonCosThetaIndex,weight);			
 					SerialCCMECRecoProtonMomentum_InProtonCosThetaPlot->Fill(SerialProtonMomentumInProtonCosThetaIndex,weight);
 					SerialCCMECRecoDeltaAlphaT_InMuonCosThetaPlot->Fill(SerialDeltaAlphaTInMuonCosThetaIndex,weight);
+					SerialCCMECRecoDeltaAlphaT_InMuonMomentumPlot->Fill(SerialDeltaAlphaTInMuonMomentumIndex,weight);					
 					SerialCCMECRecoDeltaAlphaT_InProtonCosThetaPlot->Fill(SerialDeltaAlphaTInProtonCosThetaIndex,weight);
+					SerialCCMECRecoDeltaAlphaT_InProtonMomentumPlot->Fill(SerialDeltaAlphaTInProtonMomentumIndex,weight);					
 					SerialCCMECRecoDeltaAlphaT_InDeltaPTPlot->Fill(SerialDeltaAlphaTInDeltaPTIndex,weight);
-					SerialCCMECRecoDeltaPT_InDeltaAlphaTPlot->Fill(SerialDeltaPTInDeltaAlphaTIndex,weight);	
+					SerialCCMECRecoDeltaAlpha3D_InDeltaPnPlot->Fill(SerialDeltaAlpha3DInDeltaPnIndex,weight);					
+					SerialCCMECRecoDeltaPT_InDeltaAlphaTPlot->Fill(SerialDeltaPTInDeltaAlphaTIndex,weight);
+					SerialCCMECRecoDeltaPn_InDeltaAlpha3DPlot->Fill(SerialDeltaPnInDeltaAlpha3DIndex,weight);						
 					SerialCCMECRecoProtonMomentum_InDeltaAlphaTPlot->Fill(SerialProtonMomentumInDeltaAlphaTIndex,weight);					
 					SerialCCMECRecoDeltaPn_InDeltaAlphaTPlot->Fill(SerialDeltaPnInDeltaAlphaTIndex,weight);					
 					SerialCCMECRecoECal_InDeltaAlphaTPlot->Fill(SerialECalInDeltaAlphaTIndex,weight);									
@@ -4291,6 +4582,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 					CCRESRecoDeltaPTPlot->Fill(TransMissMomentum,weight);
 					CCRESRecoDeltaAlphaTPlot->Fill(DeltaAlphaT,weight);
+					CCRESRecoDeltaAlpha3DPlot->Fill(DeltaAlpha3D,weight);					
 					CCRESRecoDeltaPhiTPlot->Fill(DeltaPhiT,weight);
 
 					CCRESRecoECalPlot->Fill(ECal,weight);
@@ -4308,8 +4600,10 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 					// 2D DeltaAlphaT in DeltaPT bins
 					
-					CCRESRecoDeltaAlphaT_InDeltaPTTwoDPlot[DeltaPTTwoDIndex]->Fill(DeltaAlphaT,weight);		
+					CCRESRecoDeltaAlphaT_InDeltaPTTwoDPlot[DeltaPTTwoDIndex]->Fill(DeltaAlphaT,weight);
+					CCRESRecoDeltaAlpha3D_InDeltaPnTwoDPlot[DeltaPnTwoDIndex]->Fill(DeltaAlpha3D,weight);							
 					CCRESRecoDeltaPT_InDeltaAlphaTTwoDPlot[DeltaAlphaTTwoDIndex]->Fill(TransMissMomentum,weight);
+					CCRESRecoDeltaPn_InDeltaAlpha3DTwoDPlot[DeltaAlpha3DTwoDIndex]->Fill(reco_Pn,weight);					
 					CCRESRecoProtonMomentum_InDeltaAlphaTTwoDPlot[DeltaAlphaTTwoDIndex]->Fill(reco_Pp,weight);					
 					CCRESRecoDeltaPn_InDeltaAlphaTTwoDPlot[DeltaAlphaTTwoDIndex]->Fill(reco_Pn,weight);					
 					CCRESRecoECal_InDeltaAlphaTTwoDPlot[DeltaAlphaTTwoDIndex]->Fill(ECal,weight);	
@@ -4317,7 +4611,9 @@ void PeLEE_myRecoAnalysis::Loop() {
 					CCRESRecoECal_InDeltaPtxTwoDPlot[DeltaPtxTwoDIndex]->Fill(ECal,weight);
 					CCRESRecoECal_InDeltaPtyTwoDPlot[DeltaPtyTwoDIndex]->Fill(ECal,weight);																						
 					CCRESRecoDeltaAlphaT_InMuonCosThetaTwoDPlot[MuonCosThetaTwoDIndex]->Fill(DeltaAlphaT,weight);
-					CCRESRecoDeltaAlphaT_InProtonCosThetaTwoDPlot[ProtonCosThetaTwoDIndex]->Fill(DeltaAlphaT,weight);					
+					CCRESRecoDeltaAlphaT_InMuonMomentumTwoDPlot[MuonMomentumTwoDIndex]->Fill(DeltaAlphaT,weight);					
+					CCRESRecoDeltaAlphaT_InProtonCosThetaTwoDPlot[ProtonCosThetaTwoDIndex]->Fill(DeltaAlphaT,weight);
+					CCRESRecoDeltaAlphaT_InProtonMomentumTwoDPlot[ProtonMomentumTwoDIndex]->Fill(DeltaAlphaT,weight);										
 					CCRESRecoDeltaPT_InMuonCosThetaTwoDPlot[MuonCosThetaTwoDIndex]->Fill(TransMissMomentum,weight);	
 					CCRESRecoDeltaPT_InProtonCosThetaTwoDPlot[ProtonCosThetaTwoDIndex]->Fill(TransMissMomentum,weight);									
 					CCRESRecoMuonMomentum_InMuonCosThetaTwoDPlot[MuonCosThetaTwoDIndex]->Fill(reco_Pmu,weight);
@@ -4333,9 +4629,13 @@ void PeLEE_myRecoAnalysis::Loop() {
 					SerialCCRESRecoMuonMomentum_InMuonCosThetaPlot->Fill(SerialMuonMomentumInMuonCosThetaIndex,weight);			
 					SerialCCRESRecoProtonMomentum_InProtonCosThetaPlot->Fill(SerialProtonMomentumInProtonCosThetaIndex,weight);
 					SerialCCRESRecoDeltaAlphaT_InMuonCosThetaPlot->Fill(SerialDeltaAlphaTInMuonCosThetaIndex,weight);
+					SerialCCRESRecoDeltaAlphaT_InMuonMomentumPlot->Fill(SerialDeltaAlphaTInMuonMomentumIndex,weight);					
 					SerialCCRESRecoDeltaAlphaT_InProtonCosThetaPlot->Fill(SerialDeltaAlphaTInProtonCosThetaIndex,weight);
+					SerialCCRESRecoDeltaAlphaT_InProtonMomentumPlot->Fill(SerialDeltaAlphaTInProtonMomentumIndex,weight);					
 					SerialCCRESRecoDeltaAlphaT_InDeltaPTPlot->Fill(SerialDeltaAlphaTInDeltaPTIndex,weight);
-					SerialCCRESRecoDeltaPT_InDeltaAlphaTPlot->Fill(SerialDeltaPTInDeltaAlphaTIndex,weight);	
+					SerialCCRESRecoDeltaAlpha3D_InDeltaPnPlot->Fill(SerialDeltaAlpha3DInDeltaPnIndex,weight);					
+					SerialCCRESRecoDeltaPT_InDeltaAlphaTPlot->Fill(SerialDeltaPTInDeltaAlphaTIndex,weight);
+					SerialCCRESRecoDeltaPn_InDeltaAlpha3DPlot->Fill(SerialDeltaPnInDeltaAlpha3DIndex,weight);						
 					SerialCCRESRecoProtonMomentum_InDeltaAlphaTPlot->Fill(SerialProtonMomentumInDeltaAlphaTIndex,weight);					
 					SerialCCRESRecoDeltaPn_InDeltaAlphaTPlot->Fill(SerialDeltaPnInDeltaAlphaTIndex,weight);					
 					SerialCCRESRecoECal_InDeltaAlphaTPlot->Fill(SerialECalInDeltaAlphaTIndex,weight);									
@@ -4437,6 +4737,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 					CCDISRecoDeltaPTPlot->Fill(TransMissMomentum,weight);
 					CCDISRecoDeltaAlphaTPlot->Fill(DeltaAlphaT,weight);
+					CCDISRecoDeltaAlpha3DPlot->Fill(DeltaAlpha3D,weight);					
 					CCDISRecoDeltaPhiTPlot->Fill(DeltaPhiT,weight);
 
 					CCDISRecoECalPlot->Fill(ECal,weight);
@@ -4454,16 +4755,20 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 					// 2D DeltaAlphaT in DeltaPT bins
 					
-					CCDISRecoDeltaAlphaT_InDeltaPTTwoDPlot[DeltaPTTwoDIndex]->Fill(DeltaAlphaT,weight);		
-					CCDISRecoDeltaPT_InDeltaAlphaTTwoDPlot[DeltaAlphaTTwoDIndex]->Fill(TransMissMomentum,weight);	
+					CCDISRecoDeltaAlphaT_InDeltaPTTwoDPlot[DeltaPTTwoDIndex]->Fill(DeltaAlphaT,weight);
+					CCDISRecoDeltaAlpha3D_InDeltaPnTwoDPlot[DeltaPnTwoDIndex]->Fill(DeltaAlpha3D,weight);							
+					CCDISRecoDeltaPT_InDeltaAlphaTTwoDPlot[DeltaAlphaTTwoDIndex]->Fill(TransMissMomentum,weight);
+					CCDISRecoDeltaPn_InDeltaAlpha3DTwoDPlot[DeltaAlpha3DTwoDIndex]->Fill(reco_Pn,weight);						
 					CCDISRecoProtonMomentum_InDeltaAlphaTTwoDPlot[DeltaAlphaTTwoDIndex]->Fill(reco_Pp,weight);					
 					CCDISRecoDeltaPn_InDeltaAlphaTTwoDPlot[DeltaAlphaTTwoDIndex]->Fill(reco_Pn,weight);					
 					CCDISRecoECal_InDeltaAlphaTTwoDPlot[DeltaAlphaTTwoDIndex]->Fill(ECal,weight);	
 					CCDISRecoECal_InDeltaPTTwoDPlot[DeltaPTTwoDIndex]->Fill(ECal,weight);
 					CCDISRecoECal_InDeltaPtxTwoDPlot[DeltaPtxTwoDIndex]->Fill(ECal,weight);
 					CCDISRecoECal_InDeltaPtyTwoDPlot[DeltaPtyTwoDIndex]->Fill(ECal,weight);																					
-					CCDISRecoDeltaAlphaT_InMuonCosThetaTwoDPlot[MuonCosThetaTwoDIndex]->Fill(DeltaAlphaT,weight);	
-					CCDISRecoDeltaAlphaT_InProtonCosThetaTwoDPlot[ProtonCosThetaTwoDIndex]->Fill(DeltaAlphaT,weight);									
+					CCDISRecoDeltaAlphaT_InMuonCosThetaTwoDPlot[MuonCosThetaTwoDIndex]->Fill(DeltaAlphaT,weight);
+					CCDISRecoDeltaAlphaT_InMuonMomentumTwoDPlot[MuonMomentumTwoDIndex]->Fill(DeltaAlphaT,weight);						
+					CCDISRecoDeltaAlphaT_InProtonCosThetaTwoDPlot[ProtonCosThetaTwoDIndex]->Fill(DeltaAlphaT,weight);
+					CCDISRecoDeltaAlphaT_InProtonMomentumTwoDPlot[ProtonMomentumTwoDIndex]->Fill(DeltaAlphaT,weight);														
 					CCDISRecoDeltaPT_InMuonCosThetaTwoDPlot[MuonCosThetaTwoDIndex]->Fill(TransMissMomentum,weight);
 					CCDISRecoDeltaPT_InProtonCosThetaTwoDPlot[ProtonCosThetaTwoDIndex]->Fill(TransMissMomentum,weight);					
 					CCDISRecoMuonMomentum_InMuonCosThetaTwoDPlot[MuonCosThetaTwoDIndex]->Fill(reco_Pmu,weight);
@@ -4479,9 +4784,13 @@ void PeLEE_myRecoAnalysis::Loop() {
 					SerialCCDISRecoMuonMomentum_InMuonCosThetaPlot->Fill(SerialMuonMomentumInMuonCosThetaIndex,weight);			
 					SerialCCDISRecoProtonMomentum_InProtonCosThetaPlot->Fill(SerialProtonMomentumInProtonCosThetaIndex,weight);
 					SerialCCDISRecoDeltaAlphaT_InMuonCosThetaPlot->Fill(SerialDeltaAlphaTInMuonCosThetaIndex,weight);
+					SerialCCDISRecoDeltaAlphaT_InMuonMomentumPlot->Fill(SerialDeltaAlphaTInMuonMomentumIndex,weight);					
 					SerialCCDISRecoDeltaAlphaT_InProtonCosThetaPlot->Fill(SerialDeltaAlphaTInProtonCosThetaIndex,weight);
+					SerialCCDISRecoDeltaAlphaT_InProtonMomentumPlot->Fill(SerialDeltaAlphaTInProtonMomentumIndex,weight);					
 					SerialCCDISRecoDeltaAlphaT_InDeltaPTPlot->Fill(SerialDeltaAlphaTInDeltaPTIndex,weight);
+					SerialCCDISRecoDeltaAlpha3D_InDeltaPnPlot->Fill(SerialDeltaAlpha3DInDeltaPnIndex,weight);					
 					SerialCCDISRecoDeltaPT_InDeltaAlphaTPlot->Fill(SerialDeltaPTInDeltaAlphaTIndex,weight);
+					SerialCCDISRecoDeltaPn_InDeltaAlpha3DPlot->Fill(SerialDeltaPnInDeltaAlpha3DIndex,weight);					
 					SerialCCDISRecoProtonMomentum_InDeltaAlphaTPlot->Fill(SerialProtonMomentumInDeltaAlphaTIndex,weight);					
 					SerialCCDISRecoDeltaPn_InDeltaAlphaTPlot->Fill(SerialDeltaPnInDeltaAlphaTIndex,weight);					
 					SerialCCDISRecoECal_InDeltaAlphaTPlot->Fill(SerialECalInDeltaAlphaTIndex,weight);										

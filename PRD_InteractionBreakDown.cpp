@@ -188,9 +188,9 @@ void PRD_InteractionBreakDown(TString BaseMC = "") {
 				midPad->Draw();
 				botPad->Draw();
 
-				leg.push_back(new TLegend(0.1,0.005,0.83,0.495));
+				leg.push_back(new TLegend(0.1,0.005,0.83,0.995));
 				leg[WhichPlot]->SetBorderSize(0);
-				leg[WhichPlot]->SetNColumns(6);
+				leg[WhichPlot]->SetNColumns(3);
 
 				double max = -99.;
 
@@ -271,17 +271,30 @@ void PRD_InteractionBreakDown(TString BaseMC = "") {
 							THStacks[WhichPlot]->Add(CCDISPlots[WhichSample][WhichPlot],"hist");
 							THStacks[WhichPlot]->Add(CCDISPlots[WhichSample+2][WhichPlot],"hist");
 
-							TString NCCQEEvents = ToString((int)(CCQEPlots[WhichSample][WhichPlot]->Integral()));
-							TString NCCMECEvents = ToString((int)(CCMECPlots[WhichSample][WhichPlot]->Integral()));	
-							TString NCCRESEvents = ToString((int)(CCRESPlots[WhichSample][WhichPlot]->Integral()));	
-							TString NCCDISEvents = ToString((int)(CCDISPlots[WhichSample][WhichPlot]->Integral()));	
-							TString NExtBNBEvents = ToString((int)(Plots[2][WhichPlot]->Integral()));																						
+							int IntNCCQEEvents = (int)(std::round(CCQEPlots[WhichSample][WhichPlot]->Integral()));
+							int IntNCCMECEvents = (int)(std::round(CCMECPlots[WhichSample][WhichPlot]->Integral()));	
+							int IntNCCRESEvents = (int)(std::round(CCRESPlots[WhichSample][WhichPlot]->Integral()));	
+							int IntNCCDISEvents = (int)(std::round(CCDISPlots[WhichSample][WhichPlot]->Integral()));	
+							int IntNExtBNBEvents = (int)(std::round(Plots[2][WhichPlot]->Integral()));
+							int IntTotal = IntNCCQEEvents + IntNCCMECEvents + IntNCCRESEvents + IntNCCDISEvents + IntNExtBNBEvents;
 
-							leg[WhichPlot]->AddEntry(Plots[2][WhichPlot],"Cosmic","f"); // ExtBNB
-							leg[WhichPlot]->AddEntry(CCQEPlots[WhichSample][WhichPlot],"QE","f"); 
-							leg[WhichPlot]->AddEntry(CCMECPlots[WhichSample][WhichPlot],"MEC","f"); 
-							leg[WhichPlot]->AddEntry(CCRESPlots[WhichSample][WhichPlot],"RES","f"); 
-							leg[WhichPlot]->AddEntry(CCDISPlots[WhichSample][WhichPlot],"DIS","f"); 
+							int PercNCCQEEvents	  = std::round((double)IntNCCQEEvents / (double)IntTotal * 100.);
+							int PercNCCMECEvents  = std::round((double)IntNCCMECEvents / (double)IntTotal * 100.);
+							int PercNCCRESEvents  = std::round((double)IntNCCRESEvents / (double)IntTotal * 100.);
+							int PercNCCDISEvents  = std::round((double)IntNCCDISEvents / (double)IntTotal * 100.);
+							int PercNExtBNBEvents = std::round((double)IntNExtBNBEvents / (double)IntTotal * 100.);																															
+
+							TString NCCQEEvents = ToString(IntNCCQEEvents);
+							TString NCCMECEvents = ToString(IntNCCMECEvents);	
+							TString NCCRESEvents = ToString(IntNCCRESEvents);	
+							TString NCCDISEvents = ToString(IntNCCDISEvents);	
+							TString NExtBNBEvents = ToString(IntNExtBNBEvents);																						
+
+							leg[WhichPlot]->AddEntry(Plots[2][WhichPlot],"Cosmic (" + ToString(PercNExtBNBEvents) + "%)","f"); // ExtBNB
+							leg[WhichPlot]->AddEntry(CCQEPlots[WhichSample][WhichPlot],"QE (" + ToString(PercNCCQEEvents) + "%)","f"); 
+							leg[WhichPlot]->AddEntry(CCMECPlots[WhichSample][WhichPlot],"MEC (" + ToString(PercNCCMECEvents) + "%)","f"); 
+							leg[WhichPlot]->AddEntry(CCRESPlots[WhichSample][WhichPlot],"RES (" + ToString(PercNCCRESEvents) + "%)","f"); 
+							leg[WhichPlot]->AddEntry(CCDISPlots[WhichSample][WhichPlot],"DIS (" + ToString(PercNCCDISEvents) + "%)","f"); 
 
 							THStacks[WhichPlot]->Draw("same");
 					

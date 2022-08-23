@@ -29,7 +29,10 @@ do
 			./myPlots/pdf/1D/${UBCode}/${AppliedCuts}/TopologicalBreakDown
 			
 		scp $UserID@$UBgpvm:$PlotPath/$AppliedCuts/InteractionBreakDown/*THStack_BreakDown_*_${RunNumber}_${UBCode}${AppliedCuts}.pdf \
-			./myPlots/pdf/1D/${UBCode}/${AppliedCuts}/InteractionBreakDown			
+			./myPlots/pdf/1D/${UBCode}/${AppliedCuts}/InteractionBreakDown
+			
+		scp $UserID@$UBgpvm:$PlotPath/$AppliedCuts/InteractionBreakDown/PRD_Reco*_${RunNumber}_${UBCode}${AppliedCuts}.pdf \
+			./myPlots/pdf/1D/${UBCode}/${AppliedCuts}/InteractionBreakDown						
 
 	done
 
