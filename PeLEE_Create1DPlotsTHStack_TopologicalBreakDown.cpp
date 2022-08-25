@@ -151,6 +151,10 @@ void PeLEE_Create1DPlotsTHStack_TopologicalBreakDown(TString BaseMC = "") {
     PlotNames.push_back("RecoDeltaAlphaT_DeltaPT_0_20To0_40Plot");
     PlotNames.push_back("RecoDeltaAlphaT_DeltaPT_0_40To1_00Plot");
 
+    PlotNames.push_back("RecoDeltaAlpha3D_DeltaPn_0_00To0_20Plot");
+    PlotNames.push_back("RecoDeltaAlpha3D_DeltaPn_0_20To0_40Plot");
+    PlotNames.push_back("RecoDeltaAlpha3D_DeltaPn_0_40To1_00Plot");	
+
     PlotNames.push_back("RecoDeltaAlphaT_MuonMomentum_0_10To0_40Plot");
     PlotNames.push_back("RecoDeltaAlphaT_MuonMomentum_0_40To0_60Plot");
     PlotNames.push_back("RecoDeltaAlphaT_MuonMomentum_0_60To1_20Plot");
@@ -192,7 +196,12 @@ void PeLEE_Create1DPlotsTHStack_TopologicalBreakDown(TString BaseMC = "") {
     PlotNames.push_back("RecoDeltaPn_DeltaAlphaT_0_00To45_00Plot");
     PlotNames.push_back("RecoDeltaPn_DeltaAlphaT_45_00To90_00Plot");
 	PlotNames.push_back("RecoDeltaPn_DeltaAlphaT_90_00To135_00Plot");	   
-	PlotNames.push_back("RecoDeltaPn_DeltaAlphaT_135_00To180_00Plot");	
+	PlotNames.push_back("RecoDeltaPn_DeltaAlphaT_135_00To180_00Plot");
+
+    PlotNames.push_back("RecoDeltaPn_DeltaAlpha3D_0_00To45_00Plot");
+    PlotNames.push_back("RecoDeltaPn_DeltaAlpha3D_45_00To90_00Plot");
+	PlotNames.push_back("RecoDeltaPn_DeltaAlpha3D_90_00To135_00Plot");	   
+	PlotNames.push_back("RecoDeltaPn_DeltaAlpha3D_135_00To180_00Plot");		
 
     PlotNames.push_back("RecoECal_DeltaAlphaT_0_00To45_00Plot");
     PlotNames.push_back("RecoECal_DeltaAlphaT_45_00To90_00Plot");
@@ -373,7 +382,7 @@ void PeLEE_Create1DPlotsTHStack_TopologicalBreakDown(TString BaseMC = "") {
 
 			if (BaseMC == "") { NameOfSamples.push_back("STVStudies_Overlay9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("MC"); }
 			else if (BaseMC == "Overlay9NuWro") { NameOfSamples.push_back("STVStudies_Overlay9NuWro_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("MC"); }
-			else if (BaseMC == "GENIEv2Overlay9") { NameOfSamples.push_back("STVStudies_GENIEv2Overlay9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("MC"); }		
+			else if (BaseMC == "GENIEv2Overlay9") { NameOfSamples.push_back("GENIEv2STVStudies_Overlay9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("MC"); }		
 			else if (BaseMC == "NoTuneOverlay9") { NameOfSamples.push_back("NoTuneSTVStudies_Overlay9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("MC"); }
 			else if (BaseMC == "TwiceMECOverlay9") { NameOfSamples.push_back("TwiceMECSTVStudies_Overlay9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("MC"); }			
 

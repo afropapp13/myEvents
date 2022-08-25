@@ -27,6 +27,8 @@ root -b PeLEE_script_EventSelection_MC_Stat_Systematics.C
 
 # NuWro
 root -b PeLEE_script_EventSelection_FakeData.C
+#GENIE v2
+root -b PeLEE_script_EventSelection_GENIEv2.C
 
 ###########################################################################################################################################################################
 
@@ -69,12 +71,14 @@ root -b
 PeLEE_Create1DPlotsTHStack_TopologicalBreakDown("Overlay9NuWro")
 PeLEE_Create1DPlotsTHStack_TopologicalBreakDown("NoTuneOverlay9")
 PeLEE_Create1DPlotsTHStack_TopologicalBreakDown("TwiceMECOverlay9")
+PeLEE_Create1DPlotsTHStack_TopologicalBreakDown("GENIEv2Overlay9")
 
 root -b
 .L PeLEE_Create1DPlotsTHStack_InteractionBreakDown.cpp
 PeLEE_Create1DPlotsTHStack_InteractionBreakDown("Overlay9NuWro")
 PeLEE_Create1DPlotsTHStack_InteractionBreakDown("NoTuneOverlay9")
 PeLEE_Create1DPlotsTHStack_InteractionBreakDown("TwiceMECOverlay9")
+PeLEE_Create1DPlotsTHStack_InteractionBreakDown("GENIEv2Overlay9")
 
 root -b 
 .L PeLEE_PrintLatexTables.cpp

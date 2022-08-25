@@ -2377,6 +2377,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 				weight = POTWeight * Weight * T2KWeight * ROOTinoWeight; 
 
 				// Fake data studies: removing the T2K tune weight
+				if (fTune == "GENIEv2") { weight = POTWeight; }
 				if (fTune == "NoTune") { weight = POTWeight * Weight * ROOTinoWeight; }
 				// Double the MEC weight (mode = 10)
 				if (fTune == "TwiceMEC" && MCParticle_Mode == 10) { weight = 2 * POTWeight * Weight * T2KWeight * ROOTinoWeight; }

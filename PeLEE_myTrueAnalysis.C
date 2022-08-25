@@ -151,7 +151,9 @@ void PeLEE_myTrueAnalysis::Loop() {
 	TH1D* TrueMuonMomentum_InMuonCosThetaTwoDPlot[NInte][TwoDNBinsMuonCosTheta];
 	TH1D* TrueProtonMomentum_InProtonCosThetaTwoDPlot[NInte][TwoDNBinsProtonCosTheta];			
 	TH1D* TrueDeltaAlphaT_InMuonCosThetaTwoDPlot[NInte][TwoDNBinsMuonCosTheta];
-	TH1D* TrueDeltaAlphaT_InProtonCosThetaTwoDPlot[NInte][TwoDNBinsProtonCosTheta];		
+	TH1D* TrueDeltaAlphaT_InMuonMomentumTwoDPlot[NInte][TwoDNBinsMuonMomentum];	
+	TH1D* TrueDeltaAlphaT_InProtonCosThetaTwoDPlot[NInte][TwoDNBinsProtonCosTheta];
+	TH1D* TrueDeltaAlphaT_InProtonMomentumTwoDPlot[NInte][TwoDNBinsProtonMomentum];			
 	TH1D* TrueDeltaAlphaT_InDeltaPTTwoDPlot[NInte][TwoDNBinsDeltaPT];
 	TH1D* TrueDeltaAlpha3D_InDeltaPnTwoDPlot[NInte][TwoDNBinsDeltaPn];				
 	TH1D* TrueProtonCosTheta_InMuonCosThetaTwoDPlot[NInte][TwoDNBinsProtonCosTheta];	
@@ -186,7 +188,9 @@ void PeLEE_myTrueAnalysis::Loop() {
 	TH1D* SerialTrueMuonMomentum_InMuonCosThetaPlot[NInte];
 	TH1D* SerialTrueProtonMomentum_InProtonCosThetaPlot[NInte];	
 	TH1D* SerialTrueDeltaAlphaT_InMuonCosThetaPlot[NInte];
+	TH1D* SerialTrueDeltaAlphaT_InMuonMomentumPlot[NInte];	
 	TH1D* SerialTrueDeltaAlphaT_InProtonCosThetaPlot[NInte];
+	TH1D* SerialTrueDeltaAlphaT_InProtonMomentumPlot[NInte];	
 	TH1D* SerialTrueDeltaAlphaT_InDeltaPTPlot[NInte];
 	TH1D* SerialTrueDeltaAlpha3D_InDeltaPnPlot[NInte];			
 	TH1D* SerialTrueDeltaPhiT_InDeltaPTPlot[NInte];
@@ -289,6 +293,13 @@ void PeLEE_myTrueAnalysis::Loop() {
 
 		}
 
+		for (int WhichMuonMomentum = 0; WhichMuonMomentum < TwoDNBinsMuonMomentum; WhichMuonMomentum++) {
+
+			TString DeltaAlphaTTwoDInMuonMomentumLabel = "DeltaAlphaT_MuonMomentum_"+tools.ConvertToString(TwoDArrayNBinsMuonMomentum[WhichMuonMomentum])+"To"+tools.ConvertToString(TwoDArrayNBinsMuonMomentum[WhichMuonMomentum+1])+"Plot";			
+			TrueDeltaAlphaT_InMuonMomentumTwoDPlot[inte][WhichMuonMomentum] = new TH1D(InteractionLabels[inte]+"True"+DeltaAlphaTTwoDInMuonMomentumLabel,LabelXAxisDeltaAlphaT,TwoDArrayNBinsDeltaAlphaTInMuonMomentumSlices[WhichMuonMomentum].size()-1,&TwoDArrayNBinsDeltaAlphaTInMuonMomentumSlices[WhichMuonMomentum][0]);
+
+		}
+
 		for (int WhichMuonCosTheta = 0; WhichMuonCosTheta < TwoDNBinsMuonCosTheta; WhichMuonCosTheta++) {
 
 			TString DeltaAlphaTTwoDInMuonCosThetaLabel = "DeltaAlphaT_MuonCosTheta_"+tools.ConvertToString(TwoDArrayNBinsMuonCosTheta[WhichMuonCosTheta])+"To"+tools.ConvertToString(TwoDArrayNBinsMuonCosTheta[WhichMuonCosTheta+1])+"Plot";			
@@ -310,7 +321,14 @@ void PeLEE_myTrueAnalysis::Loop() {
 
 			}
 
-		}		
+		}	
+
+		for (int WhichProtonMomentum = 0; WhichProtonMomentum < TwoDNBinsProtonMomentum; WhichProtonMomentum++) {
+
+			TString DeltaAlphaTTwoDInProtonMomentumLabel = "DeltaAlphaT_ProtonMomentum_"+tools.ConvertToString(TwoDArrayNBinsProtonMomentum[WhichProtonMomentum])+"To"+tools.ConvertToString(TwoDArrayNBinsProtonMomentum[WhichProtonMomentum+1])+"Plot";			
+			TrueDeltaAlphaT_InProtonMomentumTwoDPlot[inte][WhichProtonMomentum] = new TH1D(InteractionLabels[inte]+"True"+DeltaAlphaTTwoDInProtonMomentumLabel,LabelXAxisDeltaAlphaT,TwoDArrayNBinsDeltaAlphaTInProtonMomentumSlices[WhichProtonMomentum].size()-1,&TwoDArrayNBinsDeltaAlphaTInProtonMomentumSlices[WhichProtonMomentum][0]);
+
+		}			
 
 		for (int WhichProtonCosTheta = 0; WhichProtonCosTheta < TwoDNBinsProtonCosTheta; WhichProtonCosTheta++) {
 
@@ -395,7 +413,9 @@ void PeLEE_myTrueAnalysis::Loop() {
 		SerialTrueMuonMomentum_InMuonCosThetaPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueSerialMuonMomentum_MuonCosThetaPlot",LabelXAxisMuonMomentum,tools.Return2DNBins(TwoDArrayNBinsMuonMomentumInMuonCosThetaSlices),&tools.Return2DBinIndices(TwoDArrayNBinsMuonMomentumInMuonCosThetaSlices)[0]);
 		SerialTrueProtonMomentum_InProtonCosThetaPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueSerialProtonMomentum_ProtonCosThetaPlot",LabelXAxisProtonMomentum,tools.Return2DNBins(TwoDArrayNBinsProtonMomentumInProtonCosThetaSlices),&tools.Return2DBinIndices(TwoDArrayNBinsProtonMomentumInProtonCosThetaSlices)[0]);	
 		SerialTrueDeltaAlphaT_InMuonCosThetaPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueSerialDeltaAlphaT_MuonCosThetaPlot",LabelXAxisDeltaAlphaT,tools.Return2DNBins(TwoDArrayNBinsDeltaAlphaTInMuonCosThetaSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaAlphaTInMuonCosThetaSlices)[0]);
+		SerialTrueDeltaAlphaT_InMuonMomentumPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueSerialDeltaAlphaT_MuonMomentumPlot",LabelXAxisDeltaAlphaT,tools.Return2DNBins(TwoDArrayNBinsDeltaAlphaTInMuonMomentumSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaAlphaTInMuonMomentumSlices)[0]);
 		SerialTrueDeltaAlphaT_InProtonCosThetaPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueSerialDeltaAlphaT_ProtonCosThetaPlot",LabelXAxisDeltaAlphaT,tools.Return2DNBins(TwoDArrayNBinsDeltaAlphaTInProtonCosThetaSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaAlphaTInProtonCosThetaSlices)[0]);
+		SerialTrueDeltaAlphaT_InProtonMomentumPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueSerialDeltaAlphaT_ProtonMomentumPlot",LabelXAxisDeltaAlphaT,tools.Return2DNBins(TwoDArrayNBinsDeltaAlphaTInProtonMomentumSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaAlphaTInProtonMomentumSlices)[0]);		
 		SerialTrueDeltaAlphaT_InDeltaPTPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueSerialDeltaAlphaT_DeltaPTPlot",LabelXAxisDeltaAlphaT,tools.Return2DNBins(TwoDArrayNBinsDeltaAlphaTInDeltaPTSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaAlphaTInDeltaPTSlices)[0]);
 		SerialTrueDeltaAlpha3D_InDeltaPnPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueSerialDeltaAlpha3D_DeltaPnPlot",LabelXAxisDeltaAlpha3D,tools.Return2DNBins(TwoDArrayNBinsDeltaAlpha3DInDeltaPnSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaAlpha3DInDeltaPnSlices)[0]);				
 		SerialTrueDeltaPhiT_InDeltaPTPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueSerialDeltaPhiT_DeltaPTPlot",LabelXAxisDeltaPhiT,tools.Return2DNBins(TwoDArrayNBinsDeltaPhiTInDeltaPTSlices),&tools.Return2DBinIndices(TwoDArrayNBinsDeltaPhiTInDeltaPTSlices)[0]);
@@ -455,6 +475,7 @@ void PeLEE_myTrueAnalysis::Loop() {
 		double weight = POTWeight * Weight * T2KWeight * ROOTinoWeight;
 
 		// Fake data studies: removing the T2K tune weight
+		if (fTune == "GENIEv2") { weight = POTWeight; }
 		if (fTune == "NoTune") { weight = POTWeight * Weight * ROOTinoWeight; }
 		// Double the MEC weight  (mode = 10)
 		if (fTune == "TwiceMEC" && Muon_MCParticle_Mode->at(0) == 10) { weight = 2 * POTWeight * Weight * T2KWeight * ROOTinoWeight; }
@@ -753,7 +774,9 @@ void PeLEE_myTrueAnalysis::Loop() {
 					int SerialMuonMomentumInMuonCosThetaIndex = tools.ReturnIndexIn2DList(TwoDArrayNBinsMuonMomentumInMuonCosThetaSlices,MuonCosThetaTwoDIndex,TrueMuonMomentum_GeV);
 					int SerialProtonMomentumInProtonCosThetaIndex = tools.ReturnIndexIn2DList(TwoDArrayNBinsProtonMomentumInProtonCosThetaSlices,ProtonCosThetaTwoDIndex,TrueProtonMomentum_GeV);				
 					int SerialDeltaAlphaTInMuonCosThetaIndex = tools.ReturnIndexIn2DList(TwoDArrayNBinsDeltaAlphaTInMuonCosThetaSlices,MuonCosThetaTwoDIndex,TrueDeltaAlphaT);
+					int SerialDeltaAlphaTInMuonMomentumIndex = tools.ReturnIndexIn2DList(TwoDArrayNBinsDeltaAlphaTInMuonMomentumSlices,MuonMomentumTwoDIndex,TrueDeltaAlphaT);					
 					int SerialDeltaAlphaTInProtonCosThetaIndex = tools.ReturnIndexIn2DList(TwoDArrayNBinsDeltaAlphaTInProtonCosThetaSlices,ProtonCosThetaTwoDIndex,TrueDeltaAlphaT);
+					int SerialDeltaAlphaTInProtonMomentumIndex = tools.ReturnIndexIn2DList(TwoDArrayNBinsDeltaAlphaTInProtonMomentumSlices,ProtonMomentumTwoDIndex,TrueDeltaAlphaT);					
 					int SerialDeltaAlphaTInDeltaPTIndex = tools.ReturnIndexIn2DList(TwoDArrayNBinsDeltaAlphaTInDeltaPTSlices,DeltaPTTwoDIndex,TrueDeltaAlphaT);
 					int SerialDeltaAlpha3DInDeltaPnIndex = tools.ReturnIndexIn2DList(TwoDArrayNBinsDeltaAlpha3DInDeltaPnSlices,DeltaPnTwoDIndex,TrueDeltaAlpha3D);					
 					int SerialDeltaPhiTInDeltaPTIndex = tools.ReturnIndexIn2DList(TwoDArrayNBinsDeltaPhiTInDeltaPTSlices,DeltaPTTwoDIndex,TrueDeltaPhiT);
@@ -847,7 +870,9 @@ void PeLEE_myTrueAnalysis::Loop() {
 					TrueDeltaPn_InDeltaPTTwoDPlot[0][DeltaPTTwoDIndex]->Fill(TruePn,weight);
 					TrueDeltaPn_InDeltaAlphaTTwoDPlot[0][DeltaAlphaTTwoDIndex]->Fill(TruePn,weight);					
 					TrueDeltaAlphaT_InMuonCosThetaTwoDPlot[0][MuonCosThetaTwoDIndex]->Fill(TrueDeltaAlphaT,weight);
-					TrueDeltaAlphaT_InProtonCosThetaTwoDPlot[0][ProtonCosThetaTwoDIndex]->Fill(TrueDeltaAlphaT,weight);					
+					TrueDeltaAlphaT_InMuonMomentumTwoDPlot[0][MuonMomentumTwoDIndex]->Fill(TrueDeltaAlphaT,weight);					
+					TrueDeltaAlphaT_InProtonCosThetaTwoDPlot[0][ProtonCosThetaTwoDIndex]->Fill(TrueDeltaAlphaT,weight);
+					TrueDeltaAlphaT_InProtonMomentumTwoDPlot[0][ProtonMomentumTwoDIndex]->Fill(TrueDeltaAlphaT,weight);										
 					TrueDeltaPT_InMuonCosThetaTwoDPlot[0][MuonCosThetaTwoDIndex]->Fill(TrueTransMissMomentum,weight);
 					TrueDeltaPT_InProtonCosThetaTwoDPlot[0][ProtonCosThetaTwoDIndex]->Fill(TrueTransMissMomentum,weight);					
 					TrueMuonMomentum_InMuonCosThetaTwoDPlot[0][MuonCosThetaTwoDIndex]->Fill(TrueMuonMomentum_GeV,weight);
@@ -869,7 +894,9 @@ void PeLEE_myTrueAnalysis::Loop() {
 					TrueDeltaPn_InDeltaPTTwoDPlot[genie_mode][DeltaPTTwoDIndex]->Fill(TruePn,weight);
 					TrueDeltaPn_InDeltaAlphaTTwoDPlot[genie_mode][DeltaAlphaTTwoDIndex]->Fill(TruePn,weight);					
 					TrueDeltaAlphaT_InMuonCosThetaTwoDPlot[genie_mode][MuonCosThetaTwoDIndex]->Fill(TrueDeltaAlphaT,weight);
-					TrueDeltaAlphaT_InProtonCosThetaTwoDPlot[genie_mode][ProtonCosThetaTwoDIndex]->Fill(TrueDeltaAlphaT,weight);					
+					TrueDeltaAlphaT_InMuonMomentumTwoDPlot[genie_mode][MuonMomentumTwoDIndex]->Fill(TrueDeltaAlphaT,weight);					
+					TrueDeltaAlphaT_InProtonCosThetaTwoDPlot[genie_mode][ProtonCosThetaTwoDIndex]->Fill(TrueDeltaAlphaT,weight);
+					TrueDeltaAlphaT_InProtonMomentumTwoDPlot[genie_mode][ProtonMomentumTwoDIndex]->Fill(TrueDeltaAlphaT,weight);										
 					TrueDeltaPT_InMuonCosThetaTwoDPlot[genie_mode][MuonCosThetaTwoDIndex]->Fill(TrueTransMissMomentum,weight);
 					TrueDeltaPT_InProtonCosThetaTwoDPlot[genie_mode][ProtonCosThetaTwoDIndex]->Fill(TrueTransMissMomentum,weight);					
 					TrueMuonMomentum_InMuonCosThetaTwoDPlot[genie_mode][MuonCosThetaTwoDIndex]->Fill(TrueMuonMomentum_GeV,weight);
@@ -906,7 +933,9 @@ void PeLEE_myTrueAnalysis::Loop() {
 					SerialTrueMuonMomentum_InMuonCosThetaPlot[0]->Fill(SerialMuonMomentumInMuonCosThetaIndex,weight);			
 					SerialTrueProtonMomentum_InProtonCosThetaPlot[0]->Fill(SerialProtonMomentumInProtonCosThetaIndex,weight);
 					SerialTrueDeltaAlphaT_InMuonCosThetaPlot[0]->Fill(SerialDeltaAlphaTInMuonCosThetaIndex,weight);
+					SerialTrueDeltaAlphaT_InMuonMomentumPlot[0]->Fill(SerialDeltaAlphaTInMuonMomentumIndex,weight);					
 					SerialTrueDeltaAlphaT_InProtonCosThetaPlot[0]->Fill(SerialDeltaAlphaTInProtonCosThetaIndex,weight);
+					SerialTrueDeltaAlphaT_InProtonMomentumPlot[0]->Fill(SerialDeltaAlphaTInProtonMomentumIndex,weight);					
 					SerialTrueDeltaAlphaT_InDeltaPTPlot[0]->Fill(SerialDeltaAlphaTInDeltaPTIndex,weight);
 					SerialTrueDeltaAlpha3D_InDeltaPnPlot[0]->Fill(SerialDeltaAlpha3DInDeltaPnIndex,weight);					
 					SerialTrueDeltaPhiT_InDeltaPTPlot[0]->Fill(SerialDeltaPhiTInDeltaPTIndex,weight);
@@ -928,7 +957,9 @@ void PeLEE_myTrueAnalysis::Loop() {
 					SerialTrueMuonMomentum_InMuonCosThetaPlot[genie_mode]->Fill(SerialMuonMomentumInMuonCosThetaIndex,weight);			
 					SerialTrueProtonMomentum_InProtonCosThetaPlot[genie_mode]->Fill(SerialProtonMomentumInProtonCosThetaIndex,weight);
 					SerialTrueDeltaAlphaT_InMuonCosThetaPlot[genie_mode]->Fill(SerialDeltaAlphaTInMuonCosThetaIndex,weight);
+					SerialTrueDeltaAlphaT_InMuonMomentumPlot[genie_mode]->Fill(SerialDeltaAlphaTInMuonMomentumIndex,weight);					
 					SerialTrueDeltaAlphaT_InProtonCosThetaPlot[genie_mode]->Fill(SerialDeltaAlphaTInProtonCosThetaIndex,weight);
+					SerialTrueDeltaAlphaT_InProtonMomentumPlot[genie_mode]->Fill(SerialDeltaAlphaTInProtonMomentumIndex,weight);					
 					SerialTrueDeltaAlphaT_InDeltaPTPlot[genie_mode]->Fill(SerialDeltaAlphaTInDeltaPTIndex,weight);
 					SerialTrueDeltaAlpha3D_InDeltaPnPlot[genie_mode]->Fill(SerialDeltaAlpha3DInDeltaPnIndex,weight);					
 					SerialTrueDeltaPhiT_InDeltaPTPlot[genie_mode]->Fill(SerialDeltaPhiTInDeltaPTIndex,weight);
