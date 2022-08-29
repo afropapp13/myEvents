@@ -268,13 +268,15 @@ void PeLEE_Create1DPlotsTHStack_TopologicalBreakDown(TString BaseMC = "") {
     PlotNames.push_back("RecoSerialDeltaPT_MuonCosThetaPlot");
     PlotNames.push_back("RecoSerialDeltaPT_DeltaAlphaTPlot");
     PlotNames.push_back("RecoSerialProtonMomentum_DeltaAlphaTPlot");	
-    PlotNames.push_back("RecoSerialDeltaPn_DeltaAlphaTPlot");		
+    PlotNames.push_back("RecoSerialDeltaPn_DeltaAlphaTPlot");
+    PlotNames.push_back("RecoSerialDeltaPn_DeltaAlpha3DPlot");			
     PlotNames.push_back("RecoSerialDeltaPT_ProtonCosThetaPlot");
     PlotNames.push_back("RecoSerialMuonMomentum_MuonCosThetaPlot");
     PlotNames.push_back("RecoSerialProtonMomentum_ProtonCosThetaPlot");
     PlotNames.push_back("RecoSerialDeltaAlphaT_MuonCosThetaPlot");
     PlotNames.push_back("RecoSerialDeltaAlphaT_ProtonCosThetaPlot");
     PlotNames.push_back("RecoSerialDeltaAlphaT_DeltaPTPlot");
+    PlotNames.push_back("RecoSerialDeltaAlpha3D_DeltaPnPlot");	
     PlotNames.push_back("RecoSerialDeltaPhiT_DeltaPTPlot");
     PlotNames.push_back("RecoSerialDeltaPn_DeltaPTPlot");
     PlotNames.push_back("RecoSerialECal_DeltaPTPlot");
