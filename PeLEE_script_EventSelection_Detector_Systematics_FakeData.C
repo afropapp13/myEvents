@@ -34,7 +34,7 @@
 	WhichSampleArray.push_back("Overlay9_Run3_YZ");
 	WhichSampleArray.push_back("Overlay9_Run3_ThetaYZ");
 	WhichSampleArray.push_back("Overlay9_Run3_ThetaXZ");
-	WhichSampleArray.push_back("Overlay9_Run3_dEdx");
+//	WhichSampleArray.push_back("Overlay9_Run3_dEdx");
 	WhichSampleArray.push_back("Overlay9_Run3_Recombination2");
 	WhichSampleArray.push_back("Overlay9_Run3_SCE");	
 
