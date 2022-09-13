@@ -93,7 +93,6 @@ PeLEE_PrintLatexTables("",false,false,false,false,false,true)
 
 # locally
 ./PeLEE_DownloadEventRatePlots.sh
-./CopyPlots.sh
 
 ###########################################################################################################################################################################
 
