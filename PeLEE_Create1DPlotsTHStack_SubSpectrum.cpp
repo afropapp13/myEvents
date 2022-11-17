@@ -279,6 +279,8 @@ void PeLEE_Create1DPlotsTHStack_SubSpectrum() {
 				BeamOnClone->SetMarkerColor(kBlack);
 				BeamOnClone->Draw("e1 same"); 
 
+				// Uncertainty band
+
 				TString NameExtractedXSec = MigrationMatrixPath+"WienerSVD_Total_CovarianceMatrices_Overlay9_"+Runs[WhichRun]+"_"+UBCodeVersion+".root";
 				TFile* CovFile = new TFile(NameExtractedXSec,"readonly");
 

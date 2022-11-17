@@ -34,8 +34,8 @@ void PeLEE_Create1DPlotsTHStack_TopologicalBreakDown(TString BaseMC = "") {
 	PlotNames.push_back("RecoProtonCosThetaPlot");
 	PlotNames.push_back("RecoDeltaPTPlot");
 	PlotNames.push_back("RecoDeltaAlphaTPlot");
-	PlotNames.push_back("RecoDeltaAlpha3DPlotq");
-	PlotNames.push_back("RecoDeltaAlpha3DPlotMu");	
+	PlotNames.push_back("RecoDeltaAlpha3DqPlot");
+	PlotNames.push_back("RecoDeltaAlpha3DMuPlot");	
 	PlotNames.push_back("RecoDeltaPhiTPlot");
 
 	//PlotNames.push_back("RecoPMissMinusPlot");
