@@ -148,10 +148,13 @@ public :
    vector<double>  *Reco_Pty;
    vector<double>  *Reco_PL;
    vector<double>  *Reco_Pn;
+   vector<double>  *Reco_PnPerp;
+   vector<double>  *Reco_PnPar;      
    vector<double>  *Reco_DeltaAlphaT;
    vector<double>  *Reco_DeltaAlpha3Dq;
    vector<double>  *Reco_DeltaAlpha3DMu;      
    vector<double>  *Reco_DeltaPhiT;
+   vector<double>  *Reco_DeltaPhi3D;   
    vector<double>  *Reco_ECal;
    vector<double>  *Reco_EQE;
    vector<double>  *Reco_Q2;
@@ -167,10 +170,13 @@ public :
    vector<double>  *True_Pty;
    vector<double>  *True_PL;
    vector<double>  *True_Pn;
+   vector<double>  *True_PnPerp;
+   vector<double>  *True_PnPar;      
    vector<double>  *True_DeltaAlphaT;
    vector<double>  *True_DeltaAlpha3Dq;
    vector<double>  *True_DeltaAlpha3DMu;      
    vector<double>  *True_DeltaPhiT;
+   vector<double>  *True_DeltaPhi3D;   
    vector<double>  *True_ECal;
    vector<double>  *True_EQE;
    vector<double>  *True_Q2;
@@ -300,10 +306,13 @@ public :
    TBranch        *b_Reco_Pty;   //!
    TBranch        *b_Reco_PL;   //!
    TBranch        *b_Reco_Pn;   //!
+   TBranch        *b_Reco_PnPerp;   //!
+   TBranch        *b_Reco_PnPar;   //!      
    TBranch        *b_Reco_DeltaAlphaT;   //!
    TBranch        *b_Reco_DeltaAlpha3Dq;   //!
    TBranch        *b_Reco_DeltaAlpha3DMu;   //!      
    TBranch        *b_Reco_DeltaPhiT;   //!
+   TBranch        *b_Reco_DeltaPhi3D;   //!   
    TBranch        *b_Reco_ECal;   //!
    TBranch        *b_Reco_EQE;   //!
    TBranch        *b_Reco_Q2;   //!
@@ -319,10 +328,13 @@ public :
    TBranch        *b_True_Pty;   //!
    TBranch        *b_True_PL;   //!
    TBranch        *b_True_Pn;   //!
+   TBranch        *b_True_PnPerp;   //!
+   TBranch        *b_True_PnPar;   //!      
    TBranch        *b_True_DeltaAlphaT;   //!
    TBranch        *b_True_DeltaAlpha3Dq;   //!
    TBranch        *b_True_DeltaAlpha3DMu;   //!      
    TBranch        *b_True_DeltaPhiT;   //!
+   TBranch        *b_True_DeltaPhi3D;   //!   
    TBranch        *b_True_ECal;   //!
    TBranch        *b_True_EQE;   //!
    TBranch        *b_True_Q2;   //!
@@ -486,10 +498,13 @@ void PeLEE_myRecoAnalysis::Init(TTree *tree)
    Reco_Pty = 0;
    Reco_PL = 0;
    Reco_Pn = 0;
+   Reco_PnPerp = 0;
+   Reco_PnPar = 0;      
    Reco_DeltaAlphaT = 0;
    Reco_DeltaAlpha3Dq = 0;
    Reco_DeltaAlpha3DMu = 0;      
    Reco_DeltaPhiT = 0;
+   Reco_DeltaPhi3D = 0;   
    Reco_ECal = 0;
    Reco_EQE = 0;
    Reco_Q2 = 0;
@@ -505,10 +520,13 @@ void PeLEE_myRecoAnalysis::Init(TTree *tree)
    True_Pty = 0;
    True_PL = 0;
    True_Pn = 0;
+   True_PnPerp = 0;
+   True_PnPar = 0;      
    True_DeltaAlphaT = 0;   
    True_DeltaAlpha3Dq = 0;
    True_DeltaAlpha3DMu = 0;   
    True_DeltaPhiT = 0;
+   True_DeltaPhi3D = 0;   
    True_ECal = 0;
    True_EQE = 0;
    True_Q2 = 0;
@@ -642,10 +660,13 @@ void PeLEE_myRecoAnalysis::Init(TTree *tree)
    fChain->SetBranchAddress("Reco_Pty", &Reco_Pty, &b_Reco_Pty);
    fChain->SetBranchAddress("Reco_PL", &Reco_PL, &b_Reco_PL);
    fChain->SetBranchAddress("Reco_Pn", &Reco_Pn, &b_Reco_Pn);
+   fChain->SetBranchAddress("Reco_PnPerp", &Reco_PnPerp, &b_Reco_PnPerp);
+   fChain->SetBranchAddress("Reco_PnPar", &Reco_PnPar, &b_Reco_PnPar);      
    fChain->SetBranchAddress("Reco_DeltaAlphaT", &Reco_DeltaAlphaT, &b_Reco_DeltaAlphaT);
    fChain->SetBranchAddress("Reco_DeltaAlpha3Dq", &Reco_DeltaAlpha3Dq, &b_Reco_DeltaAlpha3Dq);
    fChain->SetBranchAddress("Reco_DeltaAlpha3DMu", &Reco_DeltaAlpha3DMu, &b_Reco_DeltaAlpha3DMu);      
    fChain->SetBranchAddress("Reco_DeltaPhiT", &Reco_DeltaPhiT, &b_Reco_DeltaPhiT);
+   fChain->SetBranchAddress("Reco_DeltaPhi3D", &Reco_DeltaPhi3D, &b_Reco_DeltaPhi3D);   
    fChain->SetBranchAddress("Reco_ECal", &Reco_ECal, &b_Reco_ECal);
    fChain->SetBranchAddress("Reco_EQE", &Reco_EQE, &b_Reco_EQE);
    fChain->SetBranchAddress("Reco_Q2", &Reco_Q2, &b_Reco_Q2);
@@ -661,10 +682,13 @@ void PeLEE_myRecoAnalysis::Init(TTree *tree)
    fChain->SetBranchAddress("True_Pty", &True_Pty, &b_True_Pty);
    fChain->SetBranchAddress("True_PL", &True_PL, &b_True_PL);
    fChain->SetBranchAddress("True_Pn", &True_Pn, &b_True_Pn);
+   fChain->SetBranchAddress("True_PnPerp", &True_PnPerp, &b_True_PnPerp);
+   fChain->SetBranchAddress("True_PnPar", &True_PnPar, &b_True_PnPar);      
    fChain->SetBranchAddress("True_DeltaAlphaT", &True_DeltaAlphaT, &b_True_DeltaAlphaT);
    fChain->SetBranchAddress("True_DeltaAlpha3Dq", &True_DeltaAlpha3Dq, &b_True_DeltaAlpha3Dq);
    fChain->SetBranchAddress("True_DeltaAlpha3DMu", &True_DeltaAlpha3DMu, &b_True_DeltaAlpha3DMu);      
    fChain->SetBranchAddress("True_DeltaPhiT", &True_DeltaPhiT, &b_True_DeltaPhiT);
+   fChain->SetBranchAddress("True_DeltaPhi3D", &True_DeltaPhi3D, &b_True_DeltaPhi3D);   
    fChain->SetBranchAddress("True_ECal", &True_ECal, &b_True_ECal);
    fChain->SetBranchAddress("True_EQE", &True_EQE, &b_True_EQE);
    fChain->SetBranchAddress("True_Q2", &True_Q2, &b_True_Q2);

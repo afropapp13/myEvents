@@ -105,10 +105,13 @@ public :
    vector<double>  *True_Pty;
    vector<double>  *True_PL;
    vector<double>  *True_Pn;
+   vector<double>  *True_PnPerp;
+   vector<double>  *True_PnPar;      
    vector<double>  *True_DeltaAlphaT;
    vector<double>  *True_DeltaAlpha3Dq;
    vector<double>  *True_DeltaAlpha3DMu;      
    vector<double>  *True_DeltaPhiT;
+   vector<double>  *True_DeltaPhi3D;   
    vector<double>  *True_ECal;
    vector<double>  *True_EQE;
    vector<double>  *True_Q2;
@@ -192,10 +195,13 @@ public :
    TBranch        *b_True_Pty;   //!
    TBranch        *b_True_PL;   //!
    TBranch        *b_True_Pn;   //!
+   TBranch        *b_True_PnPerp;   //!
+   TBranch        *b_True_PnPar;   //!      
    TBranch        *b_True_DeltaAlphaT;   //!
    TBranch        *b_True_DeltaAlpha3Dq;   //!
    TBranch        *b_True_DeltaAlpha3DMu;   //!      
    TBranch        *b_True_DeltaPhiT;   //!
+   TBranch        *b_True_DeltaPhi3D;   //!   
    TBranch        *b_True_ECal;   //!
    TBranch        *b_True_EQE;   //!
    TBranch        *b_True_Q2;   //!
@@ -319,10 +325,13 @@ void PeLEE_myTrueAnalysis::Init(TTree *tree)
    True_Pty = 0;
    True_PL = 0;
    True_Pn = 0;
+   True_PnPerp = 0;
+   True_PnPar = 0;      
    True_DeltaAlphaT = 0;
    True_DeltaAlpha3Dq = 0;
    True_DeltaAlpha3DMu = 0;      
    True_DeltaPhiT = 0;
+   True_DeltaPhi3D = 0;   
    True_ECal = 0;
    True_EQE = 0;
    True_Q2 = 0;
@@ -410,10 +419,13 @@ void PeLEE_myTrueAnalysis::Init(TTree *tree)
    fChain->SetBranchAddress("True_Pty", &True_Pty, &b_True_Pty);
    fChain->SetBranchAddress("True_PL", &True_PL, &b_True_PL);
    fChain->SetBranchAddress("True_Pn", &True_Pn, &b_True_Pn);
+   fChain->SetBranchAddress("True_PnPerp", &True_PnPerp, &b_True_PnPerp);
+   fChain->SetBranchAddress("True_PnPar", &True_PnPar, &b_True_PnPar);      
    fChain->SetBranchAddress("True_DeltaAlphaT", &True_DeltaAlphaT, &b_True_DeltaAlphaT);
    fChain->SetBranchAddress("True_DeltaAlpha3Dq", &True_DeltaAlpha3Dq, &b_True_DeltaAlpha3Dq);
    fChain->SetBranchAddress("True_DeltaAlpha3DMu", &True_DeltaAlpha3DMu, &b_True_DeltaAlpha3DMu);      
    fChain->SetBranchAddress("True_DeltaPhiT", &True_DeltaPhiT, &b_True_DeltaPhiT);
+   fChain->SetBranchAddress("True_DeltaPhi3D", &True_DeltaPhi3D, &b_True_DeltaPhi3D);   
    fChain->SetBranchAddress("True_ECal", &True_ECal, &b_True_ECal);
    fChain->SetBranchAddress("True_EQE", &True_EQE, &b_True_EQE);
    fChain->SetBranchAddress("True_Q2", &True_Q2, &b_True_Q2);

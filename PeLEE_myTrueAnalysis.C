@@ -113,8 +113,11 @@ void PeLEE_myTrueAnalysis::Loop() {
 	TH1D* TrueDeltaAlpha3DqPlot[NInte];
 	TH1D* TrueDeltaAlpha3DMuPlot[NInte];		
 	TH1D* TrueDeltaPhiTPlot[NInte];
+	TH1D* TrueDeltaPhi3DPlot[NInte];	
 	TH1D* TrueDeltaPLPlot[NInte];
 	TH1D* TrueDeltaPnPlot[NInte];
+	TH1D* TrueDeltaPnPerpPlot[NInte];
+	TH1D* TrueDeltaPnParPlot[NInte];		
 	TH1D* TrueDeltaPtxPlot[NInte];
 	TH1D* TrueDeltaPtyPlot[NInte];
 	TH1D* TrueAPlot[NInte];
@@ -237,8 +240,11 @@ void PeLEE_myTrueAnalysis::Loop() {
 		TrueDeltaAlpha3DqPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueDeltaAlpha3DqPlot",LabelXAxisDeltaAlpha3Dq,NBinsDeltaAlpha3Dq,ArrayNBinsDeltaAlpha3Dq);
 		TrueDeltaAlpha3DMuPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueDeltaAlpha3DMuPlot",LabelXAxisDeltaAlpha3DMu,NBinsDeltaAlpha3DMu,ArrayNBinsDeltaAlpha3DMu);				
 		TrueDeltaPhiTPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueDeltaPhiTPlot",LabelXAxisDeltaPhiT,NBinsDeltaPhiT,ArrayNBinsDeltaPhiT);
+		TrueDeltaPhi3DPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueDeltaPhi3DPlot",LabelXAxisDeltaPhi3D,NBinsDeltaPhi3D,ArrayNBinsDeltaPhi3D);		
 		TrueDeltaPLPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueDeltaPLPlot",LabelXAxisDeltaPL,NBinsDeltaPL,ArrayNBinsDeltaPL);
 		TrueDeltaPnPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueDeltaPnPlot",LabelXAxisDeltaPn,NBinsDeltaPn,ArrayNBinsDeltaPn);
+		TrueDeltaPnPerpPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueDeltaPnPerpPlot",LabelXAxisDeltaPnPerp,NBinsDeltaPnPerp,ArrayNBinsDeltaPnPerp);
+		TrueDeltaPnParPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueDeltaPnParPlot",LabelXAxisDeltaPnPar,NBinsDeltaPnPar,ArrayNBinsDeltaPnPar);				
 		TrueDeltaPtxPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueDeltaPtxPlot",LabelXAxisDeltaPtx,NBinsDeltaPtx,ArrayNBinsDeltaPtx);
 		TrueDeltaPtyPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueDeltaPtyPlot",LabelXAxisDeltaPty,NBinsDeltaPty,ArrayNBinsDeltaPty);
 		TrueAPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueAPlot",LabelXAxisA,NBinsA,ArrayNBinsA);
@@ -612,9 +618,12 @@ void PeLEE_myTrueAnalysis::Loop() {
 			double TrueDeltaAlpha3Dq = True_DeltaAlpha3Dq->at(0);
 			double TrueDeltaAlpha3DMu = True_DeltaAlpha3DMu->at(0);						
 			double TrueDeltaPhiT = True_DeltaPhiT->at(0);
+			double TrueDeltaPhi3D = True_DeltaPhi3D->at(0);			
 
 			double TruePL = True_PL->at(0);
 			double TruePn = True_Pn->at(0);
+			double TruePnPerp = True_PnPerp->at(0);
+			double TruePnPar = True_PnPar->at(0);						
 			double TruePtx = True_Ptx->at(0);
 			double TruePty = True_Pty->at(0);
 			double TrueA = True_A->at(0);
@@ -839,8 +848,11 @@ void PeLEE_myTrueAnalysis::Loop() {
 					TrueDeltaAlpha3DqPlot[0]->Fill(TrueDeltaAlpha3Dq,weight);
 					TrueDeltaAlpha3DMuPlot[0]->Fill(TrueDeltaAlpha3DMu,weight);										
 					TrueDeltaPhiTPlot[0]->Fill(TrueDeltaPhiT,weight);
+					TrueDeltaPhi3DPlot[0]->Fill(TrueDeltaPhi3D,weight);					
 					TrueDeltaPLPlot[0]->Fill(TruePL,weight);
 					TrueDeltaPnPlot[0]->Fill(TruePn,weight);
+					TrueDeltaPnPerpPlot[0]->Fill(TruePnPerp,weight);
+					TrueDeltaPnParPlot[0]->Fill(TruePnPar,weight);										
 					TrueDeltaPtxPlot[0]->Fill(TruePtx,weight);
 					TrueDeltaPtyPlot[0]->Fill(TruePty,weight);
 					TrueAPlot[0]->Fill(TrueA,weight);
@@ -867,8 +879,11 @@ void PeLEE_myTrueAnalysis::Loop() {
 					TrueDeltaAlpha3DqPlot[genie_mode]->Fill(TrueDeltaAlpha3Dq,weight);
 					TrueDeltaAlpha3DMuPlot[genie_mode]->Fill(TrueDeltaAlpha3DMu,weight);										
 					TrueDeltaPhiTPlot[genie_mode]->Fill(TrueDeltaPhiT,weight);
+					TrueDeltaPhi3DPlot[genie_mode]->Fill(TrueDeltaPhi3D,weight);					
 					TrueDeltaPLPlot[genie_mode]->Fill(TruePL,weight);
 					TrueDeltaPnPlot[genie_mode]->Fill(TruePn,weight);
+					TrueDeltaPnPerpPlot[genie_mode]->Fill(TruePnPerp,weight);
+					TrueDeltaPnParPlot[genie_mode]->Fill(TruePnPar,weight);									
 					TrueDeltaPtxPlot[genie_mode]->Fill(TruePtx,weight);
 					TrueDeltaPtyPlot[genie_mode]->Fill(TruePty,weight);
 					TrueAPlot[genie_mode]->Fill(TrueA,weight);
