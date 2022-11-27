@@ -37,6 +37,7 @@ void PeLEE_Create1DPlotsTHStack_InteractionBreakDown(TString BaseMC = "") {
 	PlotNames.push_back("RecoDeltaAlpha3DqPlot");
 	PlotNames.push_back("RecoDeltaAlpha3DMuPlot");		
 	PlotNames.push_back("RecoDeltaPhiTPlot");
+	PlotNames.push_back("RecoDeltaPhi3DPlot");	
 
 	//PlotNames.push_back("RecoPMissMinusPlot");
 	//PlotNames.push_back("RecoPMissPlot");
@@ -44,6 +45,8 @@ void PeLEE_Create1DPlotsTHStack_InteractionBreakDown(TString BaseMC = "") {
 
 	//PlotNames.push_back("RecoDeltaPLPlot");
 	PlotNames.push_back("RecoDeltaPnPlot");
+	PlotNames.push_back("RecoDeltaPnPerpPlot");
+	PlotNames.push_back("RecoDeltaPnParPlot");	
 	PlotNames.push_back("RecoDeltaPtxPlot");
 	PlotNames.push_back("RecoDeltaPtyPlot");
 	//PlotNames.push_back("RecoAPlot");
@@ -498,7 +501,7 @@ void PeLEE_Create1DPlotsTHStack_InteractionBreakDown(TString BaseMC = "") {
 				midPad->SetBottomMargin(0.03);
 				midPad->SetTopMargin(0.03);
 				botPad->SetTopMargin(0.03);
-				botPad->SetBottomMargin(0.26);
+				botPad->SetBottomMargin(0.3);
 				botPad->SetGridx();
 				botPad->SetGridy();
 				topPad->Draw();

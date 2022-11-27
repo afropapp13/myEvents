@@ -648,6 +648,8 @@ void PeLEE_myTrueAnalysis::Loop() {
 			// DeltaPty
 			// DeltaPL
 			// DeltaPn
+			// DeltaPnPerp
+			// DeltaPnPar					
 			// Q2
 			// ECal
 			// EQE
@@ -661,6 +663,8 @@ void PeLEE_myTrueAnalysis::Loop() {
 			if (TruePty > ArrayNBinsDeltaPty[NBinsDeltaPty]) { TruePty = 0.5 * (ArrayNBinsDeltaPty[NBinsDeltaPty] + ArrayNBinsDeltaPty[NBinsDeltaPty-1]); }
 			if (TruePL > ArrayNBinsDeltaPL[NBinsDeltaPL]) { TruePL = 0.5 * (ArrayNBinsDeltaPL[NBinsDeltaPL] + ArrayNBinsDeltaPL[NBinsDeltaPL-1]); }						
 			if (TruePn > ArrayNBinsDeltaPn[NBinsDeltaPn]) { TruePn = 0.5 * (ArrayNBinsDeltaPn[NBinsDeltaPn] + ArrayNBinsDeltaPn[NBinsDeltaPn-1]); }
+			if (TruePnPerp > ArrayNBinsDeltaPnPerp[NBinsDeltaPnPerp]) { TruePnPerp = 0.5 * (ArrayNBinsDeltaPnPerp[NBinsDeltaPnPerp] + ArrayNBinsDeltaPnPerp[NBinsDeltaPnPerp-1]); }
+			if (TruePnPar > ArrayNBinsDeltaPnPar[NBinsDeltaPnPar]) { TruePnPar = 0.5 * (ArrayNBinsDeltaPnPar[NBinsDeltaPnPar] + ArrayNBinsDeltaPnPar[NBinsDeltaPnPar-1]); }						
 
 			if (TrueRecoECal > ArrayNBinsECal[NBinsECal]) { TrueRecoECal = 0.5 * (ArrayNBinsECal[NBinsECal] + ArrayNBinsECal[NBinsECal-1]); }
 			if (TrueRecoEQE > ArrayNBinsEQE[NBinsEQE]) { TrueRecoEQE = 0.5 * (ArrayNBinsEQE[NBinsEQE] + ArrayNBinsEQE[NBinsEQE-1]); }
@@ -681,6 +685,8 @@ void PeLEE_myTrueAnalysis::Loop() {
 			// DeltaPtx
 			// DeltaPty
 			// DeltaPL
+			// DeltaPnPerp
+			// DeltaPnPar						
 			// alpha
 			// PMissMinus
 			
@@ -688,7 +694,9 @@ void PeLEE_myTrueAnalysis::Loop() {
 			if (TrueRecoEQE < ArrayNBinsEQE[0]) { TrueRecoEQE = 0.5 * (ArrayNBinsEQE[0] + ArrayNBinsEQE[1]); }			
 			if (TruePtx < ArrayNBinsDeltaPtx[0]) { TruePtx = 0.5 * (ArrayNBinsDeltaPtx[0] + ArrayNBinsDeltaPtx[1]); }
 			if (TruePty < ArrayNBinsDeltaPty[0]) { TruePty = 0.5 * (ArrayNBinsDeltaPty[0] + ArrayNBinsDeltaPty[1]); }
-			if (TruePL < ArrayNBinsDeltaPL[0]) { TruePL = 0.5 * (ArrayNBinsDeltaPL[0] + ArrayNBinsDeltaPL[1]); }						
+			if (TruePL < ArrayNBinsDeltaPL[0]) { TruePL = 0.5 * (ArrayNBinsDeltaPL[0] + ArrayNBinsDeltaPL[1]); }	
+			if (TruePnPerp < ArrayNBinsDeltaPnPerp[0]) { TruePnPerp = 0.5 * (ArrayNBinsDeltaPnPerp[0] + ArrayNBinsDeltaPnPerp[1]); }
+			if (TruePnPar < ArrayNBinsDeltaPnPar[0]) { TruePnPar = 0.5 * (ArrayNBinsDeltaPnPar[0] + ArrayNBinsDeltaPnPar[1]); }											
 			if (TrueA < ArrayNBinsA[0]) { TrueA = 0.5 * (ArrayNBinsA[0] + ArrayNBinsA[1]); }
 			if (TruePMissMinus < ArrayNBinsPMissMinus[0]) { TruePMissMinus = 0.5 * (ArrayNBinsPMissMinus[0] + ArrayNBinsPMissMinus[1]); }			
 

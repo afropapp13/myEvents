@@ -2745,6 +2745,8 @@ void PeLEE_myRecoAnalysis::Loop() {
 			// DeltaPty
 			// DeltaPL
 			// DeltaPn
+			// DeltaPnPerp
+			// DeltaPnPar
 			// Q2
 			// ECal
 			// EQE
@@ -2758,6 +2760,8 @@ void PeLEE_myRecoAnalysis::Loop() {
 			if (reco_Pty > ArrayNBinsDeltaPty[NBinsDeltaPty]) { reco_Pty = 0.5 * (ArrayNBinsDeltaPty[NBinsDeltaPty] + ArrayNBinsDeltaPty[NBinsDeltaPty-1]); }
 			if (reco_PL > ArrayNBinsDeltaPL[NBinsDeltaPL]) { reco_PL = 0.5 * (ArrayNBinsDeltaPL[NBinsDeltaPL] + ArrayNBinsDeltaPL[NBinsDeltaPL-1]); }						
 			if (reco_Pn > ArrayNBinsDeltaPn[NBinsDeltaPn]) { reco_Pn = 0.5 * (ArrayNBinsDeltaPn[NBinsDeltaPn] + ArrayNBinsDeltaPn[NBinsDeltaPn-1]); }
+			if (reco_PnPerp > ArrayNBinsDeltaPnPerp[NBinsDeltaPnPerp]) { reco_PnPerp = 0.5 * (ArrayNBinsDeltaPnPerp[NBinsDeltaPnPerp] + ArrayNBinsDeltaPnPerp[NBinsDeltaPnPerp-1]); }
+			if (reco_PnPar > ArrayNBinsDeltaPnPar[NBinsDeltaPnPar]) { reco_PnPar = 0.5 * (ArrayNBinsDeltaPnPar[NBinsDeltaPnPar] + ArrayNBinsDeltaPnPar[NBinsDeltaPnPar-1]); }						
 
 			if (ECal > ArrayNBinsECal[NBinsECal]) { ECal = 0.5 * (ArrayNBinsECal[NBinsECal] + ArrayNBinsECal[NBinsECal-1]); }
 			if (EQE > ArrayNBinsEQE[NBinsEQE]) { EQE = 0.5 * (ArrayNBinsEQE[NBinsEQE] + ArrayNBinsEQE[NBinsEQE-1]); }
@@ -2778,6 +2782,8 @@ void PeLEE_myRecoAnalysis::Loop() {
 			// DeltaPtx
 			// DeltaPty
 			// DeltaPL
+			// DeltaPnPerp
+			// DeltaPnPar
 			// alpha
 			// PMissMinus
 
@@ -2787,7 +2793,9 @@ void PeLEE_myRecoAnalysis::Loop() {
 			if (reco_Pty < ArrayNBinsDeltaPty[0]) { reco_Pty = 0.5 * (ArrayNBinsDeltaPty[0] + ArrayNBinsDeltaPty[1]); }
 			if (reco_PL < ArrayNBinsDeltaPL[0]) { reco_PL = 0.5 * (ArrayNBinsDeltaPL[0] + ArrayNBinsDeltaPL[1]); }						
 			if (reco_A < ArrayNBinsA[0]) { reco_A = 0.5 * (ArrayNBinsA[0] + ArrayNBinsA[1]); }
-			if (PMissMinus < ArrayNBinsPMissMinus[0]) { PMissMinus = 0.5 * (ArrayNBinsPMissMinus[0] + ArrayNBinsPMissMinus[1]); }			
+			if (PMissMinus < ArrayNBinsPMissMinus[0]) { PMissMinus = 0.5 * (ArrayNBinsPMissMinus[0] + ArrayNBinsPMissMinus[1]); }	
+			if (reco_PnPerp < ArrayNBinsDeltaPnPerp[0]) { reco_PnPerp = 0.5 * (ArrayNBinsDeltaPnPerp[0] + ArrayNBinsDeltaPnPerp[1]); }
+			if (reco_PnPar < ArrayNBinsDeltaPnPar[0]) { reco_PnPar = 0.5 * (ArrayNBinsDeltaPnPar[0] + ArrayNBinsDeltaPnPar[1]); }								
 
 			// ----------------------------------------------------------------------------------------------------------------------------
 			// ---------------------------------------------------------------------------------------------------------------------------
@@ -2883,6 +2891,8 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 			double true_PL = -1;
 			double true_Pn = -1;
+			double true_PnPerp = -1;
+			double true_PnPar = -1;						
 			double true_Ptx = -1;
 			double true_Pty = -1;
 			double true_A = -1;	
@@ -2940,6 +2950,8 @@ void PeLEE_myRecoAnalysis::Loop() {
 				// DeltaPty
 				// DeltaPL
 				// DeltaPn
+				// DeltaPnPerp
+				// DeltaPnPar							
 				// Q2
 				// ECal
 				// EQE
@@ -2954,6 +2966,8 @@ void PeLEE_myRecoAnalysis::Loop() {
 				if (true_Pty > ArrayNBinsDeltaPty[NBinsDeltaPty]) { true_Pty = 0.5 * (ArrayNBinsDeltaPty[NBinsDeltaPty] + ArrayNBinsDeltaPty[NBinsDeltaPty-1]); }
 				if (true_PL > ArrayNBinsDeltaPL[NBinsDeltaPL]) { true_PL = 0.5 * (ArrayNBinsDeltaPL[NBinsDeltaPL] + ArrayNBinsDeltaPL[NBinsDeltaPL-1]); }						
 				if (true_Pn > ArrayNBinsDeltaPn[NBinsDeltaPn]) { true_Pn = 0.5 * (ArrayNBinsDeltaPn[NBinsDeltaPn] + ArrayNBinsDeltaPn[NBinsDeltaPn-1]); }
+				if (true_PnPerp > ArrayNBinsDeltaPnPerp[NBinsDeltaPnPerp]) { true_PnPerp = 0.5 * (ArrayNBinsDeltaPnPerp[NBinsDeltaPnPerp] + ArrayNBinsDeltaPnPerp[NBinsDeltaPnPerp-1]); }
+				if (true_PnPar > ArrayNBinsDeltaPnPar[NBinsDeltaPnPar]) { true_PnPar = 0.5 * (ArrayNBinsDeltaPnPar[NBinsDeltaPnPar] + ArrayNBinsDeltaPnPar[NBinsDeltaPnPar-1]); }								
 
 				if (true_ECal > ArrayNBinsECal[NBinsECal]) { true_ECal = 0.5 * (ArrayNBinsECal[NBinsECal] + ArrayNBinsECal[NBinsECal-1]); }
 				if (true_EQE > ArrayNBinsEQE[NBinsEQE]) { true_EQE = 0.5 * (ArrayNBinsEQE[NBinsEQE] + ArrayNBinsEQE[NBinsEQE-1]); }
@@ -2974,6 +2988,8 @@ void PeLEE_myRecoAnalysis::Loop() {
 				// DeltaPtx
 				// DeltaPty
 				// DeltaPL
+				// DeltaPnPerp
+				// DeltaPnPar								
 				// alpha
 				// PMissMinus
 				
@@ -2983,7 +2999,9 @@ void PeLEE_myRecoAnalysis::Loop() {
 				if (true_Pty < ArrayNBinsDeltaPty[0]) { true_Pty = 0.5 * (ArrayNBinsDeltaPty[0] + ArrayNBinsDeltaPty[1]); }
 				if (true_PL < ArrayNBinsDeltaPL[0]) { true_PL = 0.5 * (ArrayNBinsDeltaPL[0] + ArrayNBinsDeltaPL[1]); }						
 				if (true_A < ArrayNBinsA[0]) { true_A = 0.5 * (ArrayNBinsA[0] + ArrayNBinsA[1]); }
-				if (true_PMissMinus < ArrayNBinsPMissMinus[0]) { true_PMissMinus = 0.5 * (ArrayNBinsPMissMinus[0] + ArrayNBinsPMissMinus[1]); }				
+				if (true_PMissMinus < ArrayNBinsPMissMinus[0]) { true_PMissMinus = 0.5 * (ArrayNBinsPMissMinus[0] + ArrayNBinsPMissMinus[1]); }
+				if (true_PnPerp < ArrayNBinsDeltaPnPerp[0]) { true_PnPerp = 0.5 * (ArrayNBinsDeltaPnPerp[0] + ArrayNBinsDeltaPnPerp[1]); }
+				if (true_PnPar < ArrayNBinsDeltaPnPar[0]) { true_PnPar = 0.5 * (ArrayNBinsDeltaPnPar[0] + ArrayNBinsDeltaPnPar[1]); }											
 
 				// ----------------------------------------------------------------------------------------------------------------------------
 				// ---------------------------------------------------------------------------------------------------------------------------						
