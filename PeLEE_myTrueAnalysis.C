@@ -511,10 +511,10 @@ void PeLEE_myTrueAnalysis::Loop() {
 
 		if ( 
 			fUniverseIndex != -1 && (fWhichSample == "Overlay9_Run1" || fWhichSample == "Overlay9_Run2" || 
-			fWhichSample == "Overlay9_Run3" || fWhichSample == "Overlay9_Run4a" ||
+			fWhichSample == "Overlay9_Run3" || fWhichSample == "Overlay9_Run4a" || fWhichSample == "Overlay9_Run4aRutgers" ||
 			fWhichSample == "Overlay9_Run4" || fWhichSample == "Overlay9_Run5" || fWhichSample == "Overlay9_Combined" ||
 			fWhichSample == "OverlayDirt9_Run1" || fWhichSample == "OverlayDirt9_Run2" || 
-			fWhichSample == "OverlayDirt9_Run3" || fWhichSample == "OverlayDirt9_Run4a" ||
+			fWhichSample == "OverlayDirt9_Run3" || fWhichSample == "OverlayDirt9_Run4a" || fWhichSample == "OverlayDirt9_Run4aRutgers" ||
 			fWhichSample == "OverlayDirt9_Run4" || fWhichSample == "OverlayDirt9_Run5" || fWhichSample == "OverlayDirt9_Combined") 
 		) {
 

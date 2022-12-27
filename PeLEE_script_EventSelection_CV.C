@@ -39,6 +39,13 @@
 	WhichSampleArray.push_back("OverlayDirt9_Run4a");
 	WhichSampleArray.push_back("Overlay9_Run4a");
 
+	// Run 4a Rutgers
+
+	WhichSampleArray.push_back("BeamOn9_Run4aRutgers");
+	WhichSampleArray.push_back("ExtBNB9_Run4aRutgers");
+	WhichSampleArray.push_back("OverlayDirt9_Run4aRutgers");
+	WhichSampleArray.push_back("Overlay9_Run4aRutgers");	
+
 	// Run 5
 
 //	WhichSampleArray.push_back("BeamOn9_Run5");

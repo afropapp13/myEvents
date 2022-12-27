@@ -375,14 +375,14 @@ void PeLEE_PrintLatexTables(TString BaseMC = "", bool PrintEventLoss = false, bo
 			double TrueCC1p = hTruthCC1pOverlay->Integral();
 			double TrueCC1pError = TMath::Sqrt(TrueCC1p * FilePOT[1]);
 
-			double TrueCC1pContained = hTruthContainedCC1pOverlay->Integral();
-			double TrueCC1pErrorContained = TMath::Sqrt(TrueCC1pContained * FilePOT[1]);
+			//double TrueCC1pContained = hTruthContainedCC1pOverlay->Integral();
+			//double TrueCC1pErrorContained = TMath::Sqrt(TrueCC1pContained * FilePOT[1]);
 
 			double Efficiency = CC1p / TrueCC1p * 100.;
 			double EfficiencyError = Efficiency * TMath::Sqrt( TMath::Power(CC1pError/CC1p,2.) + TMath::Power(TrueCC1pError/TrueCC1p,2.) );
 
-			double EfficiencyContained = CC1p / TrueCC1pContained * 100.;
-			double EfficiencyErrorContained = EfficiencyContained * TMath::Sqrt( TMath::Power(CC1pError/CC1p,2.) + TMath::Power(TrueCC1pErrorContained/TrueCC1pContained,2.) );
+			//double EfficiencyContained = CC1p / TrueCC1pContained * 100.;
+			//double EfficiencyErrorContained = EfficiencyContained * TMath::Sqrt( TMath::Power(CC1pError/CC1p,2.) + TMath::Power(TrueCC1pErrorContained/TrueCC1pContained,2.) );
 
 			// -----------------------------------------------------------------------------------------------------------------------
 
@@ -415,7 +415,7 @@ void PeLEE_PrintLatexTables(TString BaseMC = "", bool PrintEventLoss = false, bo
 
 				cout << Runs[WhichRun] << " & " << Purity << " $\\pm$ " << PurityError << " & " << Efficiency << " $\\pm$ " << EfficiencyError  << " & ";
 //				cout << "\\Signal & " << Purity << " $\\pm$ " << PurityError << " & " << Efficiency << " $\\pm$ " << EfficiencyError  << " & ";
-				cout << EfficiencyContained << " $\\pm$ " << EfficiencyErrorContained;
+				//cout << EfficiencyContained << " $\\pm$ " << EfficiencyErrorContained;
 				cout << " \\tabularnewline \\hline" << endl;
 				//cout << endl << endl;
 		
