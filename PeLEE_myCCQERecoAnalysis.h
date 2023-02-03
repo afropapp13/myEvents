@@ -345,7 +345,7 @@ PeLEE_myCCQERecoAnalysis::PeLEE_myCCQERecoAnalysis(TString WhichSample, TString 
    fEventWeightLabel = WhichEventWeightLabel;
    fUniverseIndex = UniverseIndex;
 
-   fPathToFile = "/pnfs/uboone/persistent/users/apapadop/mySamples/"+UBCodeVersion+"/CCQEPeLEETuples/CCQEPreSelection_"+fWhichSample+"_"+UBCodeVersion+".root";
+   fPathToFile = "/uboone/data/users/apapadop/CCQEPeLEETuples/CCQEPreSelection_"+fWhichSample+"_"+UBCodeVersion+".root";
 
    if (tree == 0) {
       TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject(fPathToFile);
