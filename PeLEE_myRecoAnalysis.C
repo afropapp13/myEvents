@@ -223,6 +223,8 @@ void PeLEE_myRecoAnalysis::Loop() {
 		TH1D* RecoDeltaPLPlot = new TH1D("RecoDeltaPLPlot",LabelXAxisDeltaPL,NBinsDeltaPL,ArrayNBinsDeltaPL);
 		TH1D* RecoDeltaPnPlot = new TH1D("RecoDeltaPnPlot",LabelXAxisDeltaPn,NBinsDeltaPn,ArrayNBinsDeltaPn);
 		TH1D* RecoDeltaPnPerpPlot = new TH1D("RecoDeltaPnPerpPlot",LabelXAxisDeltaPnPerp,NBinsDeltaPnPerp,ArrayNBinsDeltaPnPerp);
+		TH1D* RecoDeltaPnPerpxPlot = new TH1D("RecoDeltaPnPerpxPlot",LabelXAxisDeltaPnPerpx,NBinsDeltaPnPerpx,ArrayNBinsDeltaPnPerpx);
+		TH1D* RecoDeltaPnPerpyPlot = new TH1D("RecoDeltaPnPerpyPlot",LabelXAxisDeltaPnPerpy,NBinsDeltaPnPerpy,ArrayNBinsDeltaPnPerpy);				
 		TH1D* RecoDeltaPnParPlot = new TH1D("RecoDeltaPnParPlot",LabelXAxisDeltaPnPar,NBinsDeltaPnPar,ArrayNBinsDeltaPnPar);				
 		TH1D* RecoDeltaPtxPlot = new TH1D("RecoDeltaPtxPlot",LabelXAxisDeltaPtx,NBinsDeltaPtx,ArrayNBinsDeltaPtx);
 		TH1D* RecoDeltaPtyPlot = new TH1D("RecoDeltaPtyPlot",LabelXAxisDeltaPty,NBinsDeltaPty,ArrayNBinsDeltaPty);
@@ -303,6 +305,8 @@ void PeLEE_myRecoAnalysis::Loop() {
 		TH1D* CC1pTrueDeltaPLPlot = new TH1D("CC1pTrueDeltaPLPlot",LabelXAxisDeltaPL,NBinsDeltaPL,ArrayNBinsDeltaPL);
 		TH1D* CC1pTrueDeltaPnPlot = new TH1D("CC1pTrueDeltaPnPlot",LabelXAxisDeltaPn,NBinsDeltaPn,ArrayNBinsDeltaPn);
 		TH1D* CC1pTrueDeltaPnPerpPlot = new TH1D("CC1pTrueDeltaPnPerpPlot",LabelXAxisDeltaPnPerp,NBinsDeltaPnPerp,ArrayNBinsDeltaPnPerp);
+		TH1D* CC1pTrueDeltaPnPerpxPlot = new TH1D("CC1pTrueDeltaPnPerpxPlot",LabelXAxisDeltaPnPerpx,NBinsDeltaPnPerpx,ArrayNBinsDeltaPnPerpx);
+		TH1D* CC1pTrueDeltaPnPerpyPlot = new TH1D("CC1pTrueDeltaPnPerpyPlot",LabelXAxisDeltaPnPerpy,NBinsDeltaPnPerpy,ArrayNBinsDeltaPnPerpy);				
 		TH1D* CC1pTrueDeltaPnParPlot = new TH1D("CC1pTrueDeltaPnParPlot",LabelXAxisDeltaPnPar,NBinsDeltaPnPar,ArrayNBinsDeltaPnPar);				
 		TH1D* CC1pTrueDeltaPtxPlot = new TH1D("CC1pTrueDeltaPtxPlot",LabelXAxisDeltaPtx,NBinsDeltaPtx,ArrayNBinsDeltaPtx);
 		TH1D* CC1pTrueDeltaPtyPlot = new TH1D("CC1pTrueDeltaPtyPlot",LabelXAxisDeltaPty,NBinsDeltaPty,ArrayNBinsDeltaPty);
@@ -385,6 +389,8 @@ void PeLEE_myRecoAnalysis::Loop() {
 		TH1D* CC1pRecoDeltaPLPlot = new TH1D("CC1pRecoDeltaPLPlot",LabelXAxisDeltaPL,NBinsDeltaPL,ArrayNBinsDeltaPL);
 		TH1D* CC1pRecoDeltaPnPlot = new TH1D("CC1pRecoDeltaPnPlot",LabelXAxisDeltaPn,NBinsDeltaPn,ArrayNBinsDeltaPn);
 		TH1D* CC1pRecoDeltaPnPerpPlot = new TH1D("CC1pRecoDeltaPnPerpPlot",LabelXAxisDeltaPnPerp,NBinsDeltaPnPerp,ArrayNBinsDeltaPnPerp);
+		TH1D* CC1pRecoDeltaPnPerpxPlot = new TH1D("CC1pRecoDeltaPnPerpxPlot",LabelXAxisDeltaPnPerpx,NBinsDeltaPnPerpx,ArrayNBinsDeltaPnPerpx);
+		TH1D* CC1pRecoDeltaPnPerpyPlot = new TH1D("CC1pRecoDeltaPnPerpyPlot",LabelXAxisDeltaPnPerpy,NBinsDeltaPnPerpy,ArrayNBinsDeltaPnPerpy);				
 		TH1D* CC1pRecoDeltaPnParPlot = new TH1D("CC1pRecoDeltaPnParPlot",LabelXAxisDeltaPnPar,NBinsDeltaPnPar,ArrayNBinsDeltaPnPar);				
 		TH1D* CC1pRecoDeltaPtxPlot = new TH1D("CC1pRecoDeltaPtxPlot",LabelXAxisDeltaPtx,NBinsDeltaPtx,ArrayNBinsDeltaPtx);
 		TH1D* CC1pRecoDeltaPtyPlot = new TH1D("CC1pRecoDeltaPtyPlot",LabelXAxisDeltaPty,NBinsDeltaPty,ArrayNBinsDeltaPty);
@@ -477,6 +483,8 @@ void PeLEE_myRecoAnalysis::Loop() {
 		TH2D* CC1pRecoDeltaPLPlot2D = new TH2D("CC1pRecoDeltaPLPlot2D",LabelXAxisDeltaPL2D,NBinsDeltaPL,ArrayNBinsDeltaPL,NBinsDeltaPL,ArrayNBinsDeltaPL);
 		TH2D* CC1pRecoDeltaPnPlot2D = new TH2D("CC1pRecoDeltaPnPlot2D",LabelXAxisDeltaPn2D,NBinsDeltaPn,ArrayNBinsDeltaPn,NBinsDeltaPn,ArrayNBinsDeltaPn);
 		TH2D* CC1pRecoDeltaPnPerpPlot2D = new TH2D("CC1pRecoDeltaPnPerpPlot2D",LabelXAxisDeltaPnPerp2D,NBinsDeltaPnPerp,ArrayNBinsDeltaPnPerp,NBinsDeltaPnPerp,ArrayNBinsDeltaPnPerp);
+		TH2D* CC1pRecoDeltaPnPerpxPlot2D = new TH2D("CC1pRecoDeltaPnPerpxPlot2D",LabelXAxisDeltaPnPerpx2D,NBinsDeltaPnPerpx,ArrayNBinsDeltaPnPerpx,NBinsDeltaPnPerpx,ArrayNBinsDeltaPnPerpx);
+		TH2D* CC1pRecoDeltaPnPerpyPlot2D = new TH2D("CC1pRecoDeltaPnPerpyPlot2D",LabelXAxisDeltaPnPerpy2D,NBinsDeltaPnPerpy,ArrayNBinsDeltaPnPerpy,NBinsDeltaPnPerpy,ArrayNBinsDeltaPnPerpy);				
 		TH2D* CC1pRecoDeltaPnParPlot2D = new TH2D("CC1pRecoDeltaPnParPlot2D",LabelXAxisDeltaPnPar2D,NBinsDeltaPnPar,ArrayNBinsDeltaPnPar,NBinsDeltaPnPar,ArrayNBinsDeltaPnPar);				
 		TH2D* CC1pRecoDeltaPtxPlot2D = new TH2D("CC1pRecoDeltaPtxPlot2D",LabelXAxisDeltaPtx2D,NBinsDeltaPtx,ArrayNBinsDeltaPtx,NBinsDeltaPtx,ArrayNBinsDeltaPtx);
 		TH2D* CC1pRecoDeltaPtyPlot2D = new TH2D("CC1pRecoDeltaPtyPlot2D",LabelXAxisDeltaPty2D,NBinsDeltaPty,ArrayNBinsDeltaPty,NBinsDeltaPty,ArrayNBinsDeltaPty);
@@ -548,6 +556,8 @@ void PeLEE_myRecoAnalysis::Loop() {
 		TH2D* POTScaledCC1pRecoDeltaPLPlot2D = new TH2D("POTScaledCC1pRecoDeltaPLPlot2D",LabelXAxisDeltaPL2D,NBinsDeltaPL,ArrayNBinsDeltaPL,NBinsDeltaPL,ArrayNBinsDeltaPL);
 		TH2D* POTScaledCC1pRecoDeltaPnPlot2D = new TH2D("POTScaledCC1pRecoDeltaPnPlot2D",LabelXAxisDeltaPn2D,NBinsDeltaPn,ArrayNBinsDeltaPn,NBinsDeltaPn,ArrayNBinsDeltaPn);
 		TH2D* POTScaledCC1pRecoDeltaPnPerpPlot2D = new TH2D("POTScaledCC1pRecoDeltaPnPerpPlot2D",LabelXAxisDeltaPnPerp2D,NBinsDeltaPnPerp,ArrayNBinsDeltaPnPerp,NBinsDeltaPnPerp,ArrayNBinsDeltaPnPerp);
+		TH2D* POTScaledCC1pRecoDeltaPnPerpxPlot2D = new TH2D("POTScaledCC1pRecoDeltaPnPerpxPlot2D",LabelXAxisDeltaPnPerpx2D,NBinsDeltaPnPerpx,ArrayNBinsDeltaPnPerpx,NBinsDeltaPnPerpx,ArrayNBinsDeltaPnPerpx);
+		TH2D* POTScaledCC1pRecoDeltaPnPerpyPlot2D = new TH2D("POTScaledCC1pRecoDeltaPnPerpyPlot2D",LabelXAxisDeltaPnPerpy2D,NBinsDeltaPnPerpy,ArrayNBinsDeltaPnPerpy,NBinsDeltaPnPerpy,ArrayNBinsDeltaPnPerpy);				
 		TH2D* POTScaledCC1pRecoDeltaPnParPlot2D = new TH2D("POTScaledCC1pRecoDeltaPnParPlot2D",LabelXAxisDeltaPnPar2D,NBinsDeltaPnPar,ArrayNBinsDeltaPnPar,NBinsDeltaPnPar,ArrayNBinsDeltaPnPar);				
 		TH2D* POTScaledCC1pRecoDeltaPtxPlot2D = new TH2D("POTScaledCC1pRecoDeltaPtxPlot2D",LabelXAxisDeltaPtx2D,NBinsDeltaPtx,ArrayNBinsDeltaPtx,NBinsDeltaPtx,ArrayNBinsDeltaPtx);
 		TH2D* POTScaledCC1pRecoDeltaPtyPlot2D = new TH2D("POTScaledCC1pRecoDeltaPtyPlot2D",LabelXAxisDeltaPty2D,NBinsDeltaPty,ArrayNBinsDeltaPty,NBinsDeltaPty,ArrayNBinsDeltaPty);
@@ -630,6 +640,8 @@ void PeLEE_myRecoAnalysis::Loop() {
 		TH1D* NonCC1pRecoDeltaPLPlot = new TH1D("NonCC1pRecoDeltaPLPlot",LabelXAxisDeltaPL,NBinsDeltaPL,ArrayNBinsDeltaPL);
 		TH1D* NonCC1pRecoDeltaPnPlot = new TH1D("NonCC1pRecoDeltaPnPlot",LabelXAxisDeltaPn,NBinsDeltaPn,ArrayNBinsDeltaPn);
 		TH1D* NonCC1pRecoDeltaPnPerpPlot = new TH1D("NonCC1pRecoDeltaPnPerpPlot",LabelXAxisDeltaPnPerp,NBinsDeltaPnPerp,ArrayNBinsDeltaPnPerp);
+		TH1D* NonCC1pRecoDeltaPnPerpxPlot = new TH1D("NonCC1pRecoDeltaPnPerpxPlot",LabelXAxisDeltaPnPerpx,NBinsDeltaPnPerpx,ArrayNBinsDeltaPnPerpx);
+		TH1D* NonCC1pRecoDeltaPnPerpyPlot = new TH1D("NonCC1pRecoDeltaPnPerpyPlot",LabelXAxisDeltaPnPerpy,NBinsDeltaPnPerpy,ArrayNBinsDeltaPnPerpy);				
 		TH1D* NonCC1pRecoDeltaPnParPlot = new TH1D("NonCC1pRecoDeltaPnParPlot",LabelXAxisDeltaPnPar,NBinsDeltaPnPar,ArrayNBinsDeltaPnPar);				
 		TH1D* NonCC1pRecoDeltaPtxPlot = new TH1D("NonCC1pRecoDeltaPtxPlot",LabelXAxisDeltaPtx,NBinsDeltaPtx,ArrayNBinsDeltaPtx);
 		TH1D* NonCC1pRecoDeltaPtyPlot = new TH1D("NonCC1pRecoDeltaPtyPlot",LabelXAxisDeltaPty,NBinsDeltaPty,ArrayNBinsDeltaPty);
@@ -730,6 +742,8 @@ void PeLEE_myRecoAnalysis::Loop() {
 		TH1D* CCQERecoDeltaPLPlot = new TH1D("CCQERecoDeltaPLPlot",LabelXAxisDeltaPL,NBinsDeltaPL,ArrayNBinsDeltaPL);
 		TH1D* CCQERecoDeltaPnPlot = new TH1D("CCQERecoDeltaPnPlot",LabelXAxisDeltaPn,NBinsDeltaPn,ArrayNBinsDeltaPn);
 		TH1D* CCQERecoDeltaPnPerpPlot = new TH1D("CCQERecoDeltaPnPerpPlot",LabelXAxisDeltaPnPerp,NBinsDeltaPnPerp,ArrayNBinsDeltaPnPerp);
+		TH1D* CCQERecoDeltaPnPerpxPlot = new TH1D("CCQERecoDeltaPnPerpxPlot",LabelXAxisDeltaPnPerpx,NBinsDeltaPnPerpx,ArrayNBinsDeltaPnPerpx);
+		TH1D* CCQERecoDeltaPnPerpyPlot = new TH1D("CCQERecoDeltaPnPerpyPlot",LabelXAxisDeltaPnPerpy,NBinsDeltaPnPerpy,ArrayNBinsDeltaPnPerpy);				
 		TH1D* CCQERecoDeltaPnParPlot = new TH1D("CCQERecoDeltaPnParPlot",LabelXAxisDeltaPnPar,NBinsDeltaPnPar,ArrayNBinsDeltaPnPar);				
 		TH1D* CCQERecoDeltaPtxPlot = new TH1D("CCQERecoDeltaPtxPlot",LabelXAxisDeltaPtx,NBinsDeltaPtx,ArrayNBinsDeltaPtx);
 		TH1D* CCQERecoDeltaPtyPlot = new TH1D("CCQERecoDeltaPtyPlot",LabelXAxisDeltaPty,NBinsDeltaPty,ArrayNBinsDeltaPty);
@@ -825,6 +839,8 @@ void PeLEE_myRecoAnalysis::Loop() {
 		TH1D* CCMECRecoDeltaPLPlot = new TH1D("CCMECRecoDeltaPLPlot",LabelXAxisDeltaPL,NBinsDeltaPL,ArrayNBinsDeltaPL);
 		TH1D* CCMECRecoDeltaPnPlot = new TH1D("CCMECRecoDeltaPnPlot",LabelXAxisDeltaPn,NBinsDeltaPn,ArrayNBinsDeltaPn);
 		TH1D* CCMECRecoDeltaPnPerpPlot = new TH1D("CCMECRecoDeltaPnPerpPlot",LabelXAxisDeltaPnPerp,NBinsDeltaPnPerp,ArrayNBinsDeltaPnPerp);
+		TH1D* CCMECRecoDeltaPnPerpxPlot = new TH1D("CCMECRecoDeltaPnPerpxPlot",LabelXAxisDeltaPnPerpx,NBinsDeltaPnPerpx,ArrayNBinsDeltaPnPerpx);
+		TH1D* CCMECRecoDeltaPnPerpyPlot = new TH1D("CCMECRecoDeltaPnPerpyPlot",LabelXAxisDeltaPnPerpy,NBinsDeltaPnPerpy,ArrayNBinsDeltaPnPerpy);				
 		TH1D* CCMECRecoDeltaPnParPlot = new TH1D("CCMECRecoDeltaPnParPlot",LabelXAxisDeltaPnPar,NBinsDeltaPnPar,ArrayNBinsDeltaPnPar);				
 		TH1D* CCMECRecoDeltaPtxPlot = new TH1D("CCMECRecoDeltaPtxPlot",LabelXAxisDeltaPtx,NBinsDeltaPtx,ArrayNBinsDeltaPtx);
 		TH1D* CCMECRecoDeltaPtyPlot = new TH1D("CCMECRecoDeltaPtyPlot",LabelXAxisDeltaPty,NBinsDeltaPty,ArrayNBinsDeltaPty);
@@ -920,6 +936,8 @@ void PeLEE_myRecoAnalysis::Loop() {
 		TH1D* CCRESRecoDeltaPLPlot = new TH1D("CCRESRecoDeltaPLPlot",LabelXAxisDeltaPL,NBinsDeltaPL,ArrayNBinsDeltaPL);
 		TH1D* CCRESRecoDeltaPnPlot = new TH1D("CCRESRecoDeltaPnPlot",LabelXAxisDeltaPn,NBinsDeltaPn,ArrayNBinsDeltaPn);
 		TH1D* CCRESRecoDeltaPnPerpPlot = new TH1D("CCRESRecoDeltaPnPerpPlot",LabelXAxisDeltaPnPerp,NBinsDeltaPnPerp,ArrayNBinsDeltaPnPerp);
+		TH1D* CCRESRecoDeltaPnPerpxPlot = new TH1D("CCRESRecoDeltaPnPerpxPlot",LabelXAxisDeltaPnPerpx,NBinsDeltaPnPerpx,ArrayNBinsDeltaPnPerpx);
+		TH1D* CCRESRecoDeltaPnPerpyPlot = new TH1D("CCRESRecoDeltaPnPerpyPlot",LabelXAxisDeltaPnPerpy,NBinsDeltaPnPerpy,ArrayNBinsDeltaPnPerpy);				
 		TH1D* CCRESRecoDeltaPnParPlot = new TH1D("CCRESRecoDeltaPnParPlot",LabelXAxisDeltaPnPar,NBinsDeltaPnPar,ArrayNBinsDeltaPnPar);				
 		TH1D* CCRESRecoDeltaPtxPlot = new TH1D("CCRESRecoDeltaPtxPlot",LabelXAxisDeltaPtx,NBinsDeltaPtx,ArrayNBinsDeltaPtx);
 		TH1D* CCRESRecoDeltaPtyPlot = new TH1D("CCRESRecoDeltaPtyPlot",LabelXAxisDeltaPty,NBinsDeltaPty,ArrayNBinsDeltaPty);
@@ -1015,6 +1033,8 @@ void PeLEE_myRecoAnalysis::Loop() {
 		TH1D* CCDISRecoDeltaPLPlot = new TH1D("CCDISRecoDeltaPLPlot",LabelXAxisDeltaPL,NBinsDeltaPL,ArrayNBinsDeltaPL);
 		TH1D* CCDISRecoDeltaPnPlot = new TH1D("CCDISRecoDeltaPnPlot",LabelXAxisDeltaPn,NBinsDeltaPn,ArrayNBinsDeltaPn);
 		TH1D* CCDISRecoDeltaPnPerpPlot = new TH1D("CCDISRecoDeltaPnPerpPlot",LabelXAxisDeltaPnPerp,NBinsDeltaPnPerp,ArrayNBinsDeltaPnPerp);
+		TH1D* CCDISRecoDeltaPnPerpxPlot = new TH1D("CCDISRecoDeltaPnPerpxPlot",LabelXAxisDeltaPnPerpx,NBinsDeltaPnPerpx,ArrayNBinsDeltaPnPerpx);
+		TH1D* CCDISRecoDeltaPnPerpyPlot = new TH1D("CCDISRecoDeltaPnPerpyPlot",LabelXAxisDeltaPnPerpy,NBinsDeltaPnPerpy,ArrayNBinsDeltaPnPerpy);				
 		TH1D* CCDISRecoDeltaPnParPlot = new TH1D("CCDISRecoDeltaPnParPlot",LabelXAxisDeltaPnPar,NBinsDeltaPnPar,ArrayNBinsDeltaPnPar);				
 		TH1D* CCDISRecoDeltaPtxPlot = new TH1D("CCDISRecoDeltaPtxPlot",LabelXAxisDeltaPtx,NBinsDeltaPtx,ArrayNBinsDeltaPtx);
 		TH1D* CCDISRecoDeltaPtyPlot = new TH1D("CCDISRecoDeltaPtyPlot",LabelXAxisDeltaPty,NBinsDeltaPty,ArrayNBinsDeltaPty);
@@ -2451,6 +2471,66 @@ void PeLEE_myRecoAnalysis::Loop() {
 		TH2D* SerialPOTScaledCC1pRecoECal_InProtonCosThetaProtonMomentumPlot2D = new TH2D("POTScaledCC1pRecoSerialECal_ProtonCosThetaProtonMomentumPlot2D",LabelXAxisECal2D,tools.Return3DNBins(TwoDArrayNBinsECalInProtonCosThetaProtonMomentumSlices),&tools.Return3DBinIndices(TwoDArrayNBinsECalInProtonCosThetaProtonMomentumSlices)[0],tools.Return3DNBins(TwoDArrayNBinsECalInProtonCosThetaProtonMomentumSlices),&tools.Return3DBinIndices(TwoDArrayNBinsECalInProtonCosThetaProtonMomentumSlices)[0]);
 
 		//----------------------------------------//
+
+		// Signal / Bkg for STV PRD
+
+		TH1D* CCQESignalRecoDeltaPTPlot = new TH1D("CCQESignalRecoDeltaPTPlot",LabelXAxisDeltaPT,NBinsDeltaPT,ArrayNBinsDeltaPT);
+		TH1D* CCQESignalRecoDeltaAlphaTPlot = new TH1D("CCQESignalRecoDeltaAlphaTPlot",LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);
+		TH1D* CCQESignalRecoDeltaPhiTPlot = new TH1D("CCQESignalRecoDeltaPhiTPlot",LabelXAxisDeltaPhiT,NBinsDeltaPhiT,ArrayNBinsDeltaPhiT);
+		TH1D* CCQESignalRecoDeltaPtxPlot = new TH1D("CCQESignalRecoDeltaPtxPlot",LabelXAxisDeltaPtx,NBinsDeltaPtx,ArrayNBinsDeltaPtx);
+		TH1D* CCQESignalRecoDeltaPtyPlot = new TH1D("CCQESignalRecoDeltaPtyPlot",LabelXAxisDeltaPty,NBinsDeltaPty,ArrayNBinsDeltaPty);		
+		TH1D* CCQESignalRecoECalPlot = new TH1D("CCQESignalRecoECalPlot",LabelXAxisECal,NBinsECal,ArrayNBinsECal);	
+
+		TH1D* CCQEBkgRecoDeltaPTPlot = new TH1D("CCQEBkgRecoDeltaPTPlot",LabelXAxisDeltaPT,NBinsDeltaPT,ArrayNBinsDeltaPT);
+		TH1D* CCQEBkgRecoDeltaAlphaTPlot = new TH1D("CCQEBkgRecoDeltaAlphaTPlot",LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);
+		TH1D* CCQEBkgRecoDeltaPhiTPlot = new TH1D("CCQEBkgRecoDeltaPhiTPlot",LabelXAxisDeltaPhiT,NBinsDeltaPhiT,ArrayNBinsDeltaPhiT);
+		TH1D* CCQEBkgRecoDeltaPtxPlot = new TH1D("CCQEBkgRecoDeltaPtxPlot",LabelXAxisDeltaPtx,NBinsDeltaPtx,ArrayNBinsDeltaPtx);
+		TH1D* CCQEBkgRecoDeltaPtyPlot = new TH1D("CCQEBkgRecoDeltaPtyPlot",LabelXAxisDeltaPty,NBinsDeltaPty,ArrayNBinsDeltaPty);		
+		TH1D* CCQEBkgRecoECalPlot = new TH1D("CCQEBkgRecoECalPlot",LabelXAxisECal,NBinsECal,ArrayNBinsECal);	
+
+		TH1D* CCMECSignalRecoDeltaPTPlot = new TH1D("CCMECSignalRecoDeltaPTPlot",LabelXAxisDeltaPT,NBinsDeltaPT,ArrayNBinsDeltaPT);
+		TH1D* CCMECSignalRecoDeltaAlphaTPlot = new TH1D("CCMECSignalRecoDeltaAlphaTPlot",LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);
+		TH1D* CCMECSignalRecoDeltaPhiTPlot = new TH1D("CCMECSignalRecoDeltaPhiTPlot",LabelXAxisDeltaPhiT,NBinsDeltaPhiT,ArrayNBinsDeltaPhiT);
+		TH1D* CCMECSignalRecoDeltaPtxPlot = new TH1D("CCMECSignalRecoDeltaPtxPlot",LabelXAxisDeltaPtx,NBinsDeltaPtx,ArrayNBinsDeltaPtx);
+		TH1D* CCMECSignalRecoDeltaPtyPlot = new TH1D("CCMECSignalRecoDeltaPtyPlot",LabelXAxisDeltaPty,NBinsDeltaPty,ArrayNBinsDeltaPty);		
+		TH1D* CCMECSignalRecoECalPlot = new TH1D("CCMECSignalRecoECalPlot",LabelXAxisECal,NBinsECal,ArrayNBinsECal);	
+
+		TH1D* CCMECBkgRecoDeltaPTPlot = new TH1D("CCMECBkgRecoDeltaPTPlot",LabelXAxisDeltaPT,NBinsDeltaPT,ArrayNBinsDeltaPT);
+		TH1D* CCMECBkgRecoDeltaAlphaTPlot = new TH1D("CCMECBkgRecoDeltaAlphaTPlot",LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);
+		TH1D* CCMECBkgRecoDeltaPhiTPlot = new TH1D("CCMECBkgRecoDeltaPhiTPlot",LabelXAxisDeltaPhiT,NBinsDeltaPhiT,ArrayNBinsDeltaPhiT);
+		TH1D* CCMECBkgRecoDeltaPtxPlot = new TH1D("CCMECBkgRecoDeltaPtxPlot",LabelXAxisDeltaPtx,NBinsDeltaPtx,ArrayNBinsDeltaPtx);
+		TH1D* CCMECBkgRecoDeltaPtyPlot = new TH1D("CCMECBkgRecoDeltaPtyPlot",LabelXAxisDeltaPty,NBinsDeltaPty,ArrayNBinsDeltaPty);		
+		TH1D* CCMECBkgRecoECalPlot = new TH1D("CCMECBkgRecoECalPlot",LabelXAxisECal,NBinsECal,ArrayNBinsECal);	
+
+		TH1D* CCRESSignalRecoDeltaPTPlot = new TH1D("CCRESSignalRecoDeltaPTPlot",LabelXAxisDeltaPT,NBinsDeltaPT,ArrayNBinsDeltaPT);
+		TH1D* CCRESSignalRecoDeltaAlphaTPlot = new TH1D("CCRESSignalRecoDeltaAlphaTPlot",LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);
+		TH1D* CCRESSignalRecoDeltaPhiTPlot = new TH1D("CCRESSignalRecoDeltaPhiTPlot",LabelXAxisDeltaPhiT,NBinsDeltaPhiT,ArrayNBinsDeltaPhiT);
+		TH1D* CCRESSignalRecoDeltaPtxPlot = new TH1D("CCRESSignalRecoDeltaPtxPlot",LabelXAxisDeltaPtx,NBinsDeltaPtx,ArrayNBinsDeltaPtx);
+		TH1D* CCRESSignalRecoDeltaPtyPlot = new TH1D("CCRESSignalRecoDeltaPtyPlot",LabelXAxisDeltaPty,NBinsDeltaPty,ArrayNBinsDeltaPty);		
+		TH1D* CCRESSignalRecoECalPlot = new TH1D("CCRESSignalRecoECalPlot",LabelXAxisECal,NBinsECal,ArrayNBinsECal);	
+
+		TH1D* CCRESBkgRecoDeltaPTPlot = new TH1D("CCRESBkgRecoDeltaPTPlot",LabelXAxisDeltaPT,NBinsDeltaPT,ArrayNBinsDeltaPT);
+		TH1D* CCRESBkgRecoDeltaAlphaTPlot = new TH1D("CCRESBkgRecoDeltaAlphaTPlot",LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);
+		TH1D* CCRESBkgRecoDeltaPhiTPlot = new TH1D("CCRESBkgRecoDeltaPhiTPlot",LabelXAxisDeltaPhiT,NBinsDeltaPhiT,ArrayNBinsDeltaPhiT);
+		TH1D* CCRESBkgRecoDeltaPtxPlot = new TH1D("CCRESBkgRecoDeltaPtxPlot",LabelXAxisDeltaPtx,NBinsDeltaPtx,ArrayNBinsDeltaPtx);
+		TH1D* CCRESBkgRecoDeltaPtyPlot = new TH1D("CCRESBkgRecoDeltaPtyPlot",LabelXAxisDeltaPty,NBinsDeltaPty,ArrayNBinsDeltaPty);		
+		TH1D* CCRESBkgRecoECalPlot = new TH1D("CCRESBkgRecoECalPlot",LabelXAxisECal,NBinsECal,ArrayNBinsECal);
+
+		TH1D* CCDISSignalRecoDeltaPTPlot = new TH1D("CCDISSignalRecoDeltaPTPlot",LabelXAxisDeltaPT,NBinsDeltaPT,ArrayNBinsDeltaPT);
+		TH1D* CCDISSignalRecoDeltaAlphaTPlot = new TH1D("CCDISSignalRecoDeltaAlphaTPlot",LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);
+		TH1D* CCDISSignalRecoDeltaPhiTPlot = new TH1D("CCDISSignalRecoDeltaPhiTPlot",LabelXAxisDeltaPhiT,NBinsDeltaPhiT,ArrayNBinsDeltaPhiT);
+		TH1D* CCDISSignalRecoDeltaPtxPlot = new TH1D("CCDISSignalRecoDeltaPtxPlot",LabelXAxisDeltaPtx,NBinsDeltaPtx,ArrayNBinsDeltaPtx);
+		TH1D* CCDISSignalRecoDeltaPtyPlot = new TH1D("CCDISSignalRecoDeltaPtyPlot",LabelXAxisDeltaPty,NBinsDeltaPty,ArrayNBinsDeltaPty);		
+		TH1D* CCDISSignalRecoECalPlot = new TH1D("CCDISSignalRecoECalPlot",LabelXAxisECal,NBinsECal,ArrayNBinsECal);	
+
+		TH1D* CCDISBkgRecoDeltaPTPlot = new TH1D("CCDISBkgRecoDeltaPTPlot",LabelXAxisDeltaPT,NBinsDeltaPT,ArrayNBinsDeltaPT);
+		TH1D* CCDISBkgRecoDeltaAlphaTPlot = new TH1D("CCDISBkgRecoDeltaAlphaTPlot",LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);
+		TH1D* CCDISBkgRecoDeltaPhiTPlot = new TH1D("CCDISBkgRecoDeltaPhiTPlot",LabelXAxisDeltaPhiT,NBinsDeltaPhiT,ArrayNBinsDeltaPhiT);
+		TH1D* CCDISBkgRecoDeltaPtxPlot = new TH1D("CCDISBkgRecoDeltaPtxPlot",LabelXAxisDeltaPtx,NBinsDeltaPtx,ArrayNBinsDeltaPtx);
+		TH1D* CCDISBkgRecoDeltaPtyPlot = new TH1D("CCDISBkgRecoDeltaPtyPlot",LabelXAxisDeltaPty,NBinsDeltaPty,ArrayNBinsDeltaPty);		
+		TH1D* CCDISBkgRecoECalPlot = new TH1D("CCDISBkgRecoECalPlot",LabelXAxisECal,NBinsECal,ArrayNBinsECal);									
+
+		//----------------------------------------//
 		//----------------------------------------//
 
 		// Loop over the events
@@ -2556,7 +2636,66 @@ void PeLEE_myRecoAnalysis::Loop() {
 				
 				}				
 
-			}			
+			}	
+
+			//----------------------------------------//
+
+			// detailed xsec genie uncertainties	
+
+			if ( 
+				fUniverseIndex != -1 && fWhichSample == "Overlay9_Run1_DecompXSecUnc"
+			) {
+
+				// Watch out: The EventWeight weights already include the weight for the tune
+
+				// Genie weights
+				if (fEventWeightLabel == "AGKYpT1pi_UBGenie") { weight = weight*AGKYpT1pi_UBGenie->at(fUniverseIndex) / T2KWeight; }
+				if (fEventWeightLabel == "AGKYxF1pi_UBGenie") { weight = weight* AGKYxF1pi_UBGenie->at(fUniverseIndex) / T2KWeight; }	
+				if (fEventWeightLabel == "AhtBY_UBGenie") { weight = weight* AhtBY_UBGenie->at(fUniverseIndex) / T2KWeight; }	
+				if (fEventWeightLabel == "BhtBY_UBGenie") { weight = weight* BhtBY_UBGenie->at(fUniverseIndex) / T2KWeight; }	
+				if (fEventWeightLabel == "CV1uBY_UBGenie") { weight = weight* CV1uBY_UBGenie->at(fUniverseIndex) / T2KWeight; }	
+				if (fEventWeightLabel == "CV2uBY_UBGenie") { weight = weight* CV2uBY_UBGenie->at(fUniverseIndex) / T2KWeight; }
+				if (fEventWeightLabel == "EtaNCEL_UBGenie") { weight = weight* EtaNCEL_UBGenie->at(fUniverseIndex) / T2KWeight; }	
+				if (fEventWeightLabel == "FrAbs_N_UBGenie") { weight = weight* FrAbs_N_UBGenie->at(fUniverseIndex) / T2KWeight; }	
+				if (fEventWeightLabel == "FrAbs_pi_UBGenie") { weight = weight* FrAbs_pi_UBGenie->at(fUniverseIndex) / T2KWeight; }
+				if (fEventWeightLabel == "FrCEx_N_UBGenie") { weight = weight* FrCEx_N_UBGenie->at(fUniverseIndex) / T2KWeight; }	
+				if (fEventWeightLabel == "FrCEx_pi_UBGenie") { weight = weight* FrCEx_pi_UBGenie->at(fUniverseIndex) / T2KWeight; }	
+				if (fEventWeightLabel == "FrInel_N_UBGenie") { weight = weight* FrInel_N_UBGenie->at(fUniverseIndex) / T2KWeight; }	
+				if (fEventWeightLabel == "FrInel_pi_UBGenie") { weight = weight* FrInel_pi_UBGenie->at(fUniverseIndex) / T2KWeight; }	
+				if (fEventWeightLabel == "FrPiProd_N_UBGenie") { weight = weight* FrPiProd_N_UBGenie->at(fUniverseIndex) / T2KWeight; }
+				if (fEventWeightLabel == "FrPiProd_pi_UBGenie") { weight = weight* FrPiProd_pi_UBGenie->at(fUniverseIndex) / T2KWeight; }	
+				if (fEventWeightLabel == "FracDelta_CCMEC_UBGenie") { weight = weight* FracDelta_CCMEC_UBGenie->at(fUniverseIndex) / T2KWeight; }	
+				if (fEventWeightLabel == "FracPN_CCMEC_UBGenie") { weight = weight* FracPN_CCMEC_UBGenie->at(fUniverseIndex) / T2KWeight; }	
+				if (fEventWeightLabel == "MFP_N_UBGenie") { weight = weight* MFP_N_UBGenie->at(fUniverseIndex) / T2KWeight; }	
+				if (fEventWeightLabel == "MFP_pi_UBGenie") { weight = weight* MFP_pi_UBGenie->at(fUniverseIndex) / T2KWeight; }
+				if (fEventWeightLabel == "MaCCQE_UBGenie") { weight = weight* MaCCQE_UBGenie->at(fUniverseIndex) / T2KWeight; }	
+				if (fEventWeightLabel == "MaCCRES_UBGenie") { weight = weight* MaCCRES_UBGenie->at(fUniverseIndex) / T2KWeight; }	
+				if (fEventWeightLabel == "MaNCEL_UBGenie") { weight = weight* MaNCEL_UBGenie->at(fUniverseIndex) / T2KWeight; }	
+				if (fEventWeightLabel == "MaNCRES_UBGenie") { weight = weight* MaNCRES_UBGenie->at(fUniverseIndex) / T2KWeight; }	
+				if (fEventWeightLabel == "MvCCRES_UBGenie") { weight = weight* MvCCRES_UBGenie->at(fUniverseIndex) / T2KWeight; }
+				if (fEventWeightLabel == "MvNCRES_UBGenie") { weight = weight* MvNCRES_UBGenie->at(fUniverseIndex) / T2KWeight; }	
+				if (fEventWeightLabel == "NonRESBGvbarnCC1pi_UBGenie") { weight = weight* NonRESBGvbarnCC1pi_UBGenie->at(fUniverseIndex) / T2KWeight; }	
+				if (fEventWeightLabel == "NonRESBGvbarnCC2pi_UBGenie") { weight = weight* NonRESBGvbarnCC2pi_UBGenie->at(fUniverseIndex) / T2KWeight; }	
+				if (fEventWeightLabel == "NonRESBGvbarnNC1pi_UBGenie") { weight = weight* NonRESBGvbarnNC1pi_UBGenie->at(fUniverseIndex) / T2KWeight; }	
+				if (fEventWeightLabel == "NonRESBGvbarnNC2pi_UBGenie") { weight = weight* NonRESBGvbarnNC2pi_UBGenie->at(fUniverseIndex) / T2KWeight; }
+				if (fEventWeightLabel == "NonRESBGvbarpCC1pi_UBGenie") { weight = weight* NonRESBGvbarpCC1pi_UBGenie->at(fUniverseIndex) / T2KWeight; }	
+				if (fEventWeightLabel == "NonRESBGvbarpCC2pi_UBGenie") { weight = weight* NonRESBGvbarpCC2pi_UBGenie->at(fUniverseIndex) / T2KWeight; }	
+				if (fEventWeightLabel == "NonRESBGvbarpNC1pi_UBGenie") { weight = weight* NonRESBGvbarpNC1pi_UBGenie->at(fUniverseIndex) / T2KWeight; }	
+				if (fEventWeightLabel == "NonRESBGvbarpNC2pi_UBGenie") { weight = weight* NonRESBGvbarpNC2pi_UBGenie->at(fUniverseIndex) / T2KWeight; }	
+				if (fEventWeightLabel == "NonRESBGvnCC1pi_UBGenie") { weight = weight* NonRESBGvnCC1pi_UBGenie->at(fUniverseIndex) / T2KWeight; }
+				if (fEventWeightLabel == "NonRESBGvnCC2pi_UBGenie") { weight = weight* NonRESBGvnCC2pi_UBGenie->at(fUniverseIndex) / T2KWeight; }	
+				if (fEventWeightLabel == "NonRESBGvnNC1pi_UBGenie") { weight = weight* NonRESBGvnNC1pi_UBGenie->at(fUniverseIndex) / T2KWeight; }	
+				if (fEventWeightLabel == "NonRESBGvnNC2pi_UBGenie") { weight = weight* NonRESBGvnNC2pi_UBGenie->at(fUniverseIndex) / T2KWeight; }	
+				if (fEventWeightLabel == "NonRESBGvpCC1pi_UBGenie") { weight = weight* NonRESBGvpCC1pi_UBGenie->at(fUniverseIndex) / T2KWeight; }
+				if (fEventWeightLabel == "NonRESBGvpCC2pi_UBGenie") { weight = weight* NonRESBGvpCC2pi_UBGenie->at(fUniverseIndex) / T2KWeight; }	
+				if (fEventWeightLabel == "NonRESBGvpNC1pi_UBGenie") { weight = weight* NonRESBGvpNC1pi_UBGenie->at(fUniverseIndex) / T2KWeight; }	
+				if (fEventWeightLabel == "NonRESBGvpNC2pi_UBGenie") { weight = weight* NonRESBGvpNC2pi_UBGenie->at(fUniverseIndex) / T2KWeight; }	
+				if (fEventWeightLabel == "NormCCMEC_UBGenie") { weight = weight* NormCCMEC_UBGenie->at(fUniverseIndex) / T2KWeight; }	
+				if (fEventWeightLabel == "NormNCMEC_UBGenie") { weight = weight* NormNCMEC_UBGenie->at(fUniverseIndex) / T2KWeight; }
+				if (fEventWeightLabel == "RDecBR1eta_UBGenie") { weight = weight* RDecBR1eta_UBGenie->at(fUniverseIndex) / T2KWeight; }	
+				if (fEventWeightLabel == "RDecBR1gamma_UBGenie") { weight = weight* RDecBR1gamma_UBGenie->at(fUniverseIndex) / T2KWeight; }			
+
+			}					
 
 			// -----------------------------------------------------------------------------------------------------------------------
 
@@ -2686,6 +2825,8 @@ void PeLEE_myRecoAnalysis::Loop() {
 			double reco_PL = Reco_PL->at(0);
 			double reco_Pn = Reco_Pn->at(0);
 			double reco_PnPerp = Reco_PnPerp->at(0);
+			double reco_PnPerpx = Reco_PnPerpx->at(0);
+			double reco_PnPerpy = Reco_PnPerpy->at(0);						
 			double reco_PnPar = Reco_PnPar->at(0);						
 			double reco_Ptx = Reco_Ptx->at(0);
 			double reco_Pty = Reco_Pty->at(0);
@@ -2727,6 +2868,8 @@ void PeLEE_myRecoAnalysis::Loop() {
 				reco_PL = reco_stv_tool.ReturnPL();
 				reco_Pn = reco_stv_tool.ReturnPn();
 				reco_PnPerp = reco_stv_tool.ReturnPnPerp();
+				reco_PnPerpx = reco_stv_tool.ReturnPnPerpx();
+				reco_PnPerpy = reco_stv_tool.ReturnPnPerpy();								
 				reco_PnPar = reco_stv_tool.ReturnPnPar();								
 				reco_Ptx = reco_stv_tool.ReturnPtx();
 				reco_Pty = reco_stv_tool.ReturnPty();
@@ -2746,6 +2889,8 @@ void PeLEE_myRecoAnalysis::Loop() {
 			// DeltaPL
 			// DeltaPn
 			// DeltaPnPerp
+			// DeltaPnPerpx
+			// DeltaPnPerpy						
 			// DeltaPnPar
 			// Q2
 			// ECal
@@ -2761,6 +2906,8 @@ void PeLEE_myRecoAnalysis::Loop() {
 			if (reco_PL > ArrayNBinsDeltaPL[NBinsDeltaPL]) { reco_PL = 0.5 * (ArrayNBinsDeltaPL[NBinsDeltaPL] + ArrayNBinsDeltaPL[NBinsDeltaPL-1]); }						
 			if (reco_Pn > ArrayNBinsDeltaPn[NBinsDeltaPn]) { reco_Pn = 0.5 * (ArrayNBinsDeltaPn[NBinsDeltaPn] + ArrayNBinsDeltaPn[NBinsDeltaPn-1]); }
 			if (reco_PnPerp > ArrayNBinsDeltaPnPerp[NBinsDeltaPnPerp]) { reco_PnPerp = 0.5 * (ArrayNBinsDeltaPnPerp[NBinsDeltaPnPerp] + ArrayNBinsDeltaPnPerp[NBinsDeltaPnPerp-1]); }
+			if (reco_PnPerpx > ArrayNBinsDeltaPnPerpx[NBinsDeltaPnPerpx]) { reco_PnPerpx = 0.5 * (ArrayNBinsDeltaPnPerpx[NBinsDeltaPnPerpx] + ArrayNBinsDeltaPnPerpx[NBinsDeltaPnPerpx-1]); }
+			if (reco_PnPerpy > ArrayNBinsDeltaPnPerpy[NBinsDeltaPnPerpy]) { reco_PnPerpy = 0.5 * (ArrayNBinsDeltaPnPerpy[NBinsDeltaPnPerpy] + ArrayNBinsDeltaPnPerpy[NBinsDeltaPnPerpy-1]); }						
 			if (reco_PnPar > ArrayNBinsDeltaPnPar[NBinsDeltaPnPar]) { reco_PnPar = 0.5 * (ArrayNBinsDeltaPnPar[NBinsDeltaPnPar] + ArrayNBinsDeltaPnPar[NBinsDeltaPnPar-1]); }						
 
 			if (ECal > ArrayNBinsECal[NBinsECal]) { ECal = 0.5 * (ArrayNBinsECal[NBinsECal] + ArrayNBinsECal[NBinsECal-1]); }
@@ -2783,6 +2930,8 @@ void PeLEE_myRecoAnalysis::Loop() {
 			// DeltaPty
 			// DeltaPL
 			// DeltaPnPerp
+			// DeltaPnPerpx
+			// DeltaPnPerpy						
 			// DeltaPnPar
 			// alpha
 			// PMissMinus
@@ -2795,6 +2944,8 @@ void PeLEE_myRecoAnalysis::Loop() {
 			if (reco_A < ArrayNBinsA[0]) { reco_A = 0.5 * (ArrayNBinsA[0] + ArrayNBinsA[1]); }
 			if (PMissMinus < ArrayNBinsPMissMinus[0]) { PMissMinus = 0.5 * (ArrayNBinsPMissMinus[0] + ArrayNBinsPMissMinus[1]); }	
 			if (reco_PnPerp < ArrayNBinsDeltaPnPerp[0]) { reco_PnPerp = 0.5 * (ArrayNBinsDeltaPnPerp[0] + ArrayNBinsDeltaPnPerp[1]); }
+			if (reco_PnPerpx < ArrayNBinsDeltaPnPerpx[0]) { reco_PnPerpx = 0.5 * (ArrayNBinsDeltaPnPerpx[0] + ArrayNBinsDeltaPnPerpx[1]); }
+			if (reco_PnPerpy < ArrayNBinsDeltaPnPerpy[0]) { reco_PnPerpy = 0.5 * (ArrayNBinsDeltaPnPerpy[0] + ArrayNBinsDeltaPnPerpy[1]); }						
 			if (reco_PnPar < ArrayNBinsDeltaPnPar[0]) { reco_PnPar = 0.5 * (ArrayNBinsDeltaPnPar[0] + ArrayNBinsDeltaPnPar[1]); }								
 
 			// ----------------------------------------------------------------------------------------------------------------------------
@@ -2892,6 +3043,8 @@ void PeLEE_myRecoAnalysis::Loop() {
 			double true_PL = -1;
 			double true_Pn = -1;
 			double true_PnPerp = -1;
+			double true_PnPerpx = -1;
+			double true_PnPerpy = -1;						
 			double true_PnPar = -1;						
 			double true_Ptx = -1;
 			double true_Pty = -1;
@@ -2923,6 +3076,8 @@ void PeLEE_myRecoAnalysis::Loop() {
 				true_PL = True_PL->at(0);
 				true_Pn = True_Pn->at(0);
 				true_PnPerp = True_PnPerp->at(0);
+				true_PnPerpx = True_PnPerpx->at(0);
+				true_PnPerpy = True_PnPerpy->at(0);								
 				true_PnPar = True_PnPar->at(0);								
 				true_Ptx = True_Ptx->at(0);
 				true_Pty = True_Pty->at(0);
@@ -2951,6 +3106,8 @@ void PeLEE_myRecoAnalysis::Loop() {
 				// DeltaPL
 				// DeltaPn
 				// DeltaPnPerp
+				// DeltaPnPerpx
+				// DeltaPnPerpy								
 				// DeltaPnPar							
 				// Q2
 				// ECal
@@ -2967,6 +3124,8 @@ void PeLEE_myRecoAnalysis::Loop() {
 				if (true_PL > ArrayNBinsDeltaPL[NBinsDeltaPL]) { true_PL = 0.5 * (ArrayNBinsDeltaPL[NBinsDeltaPL] + ArrayNBinsDeltaPL[NBinsDeltaPL-1]); }						
 				if (true_Pn > ArrayNBinsDeltaPn[NBinsDeltaPn]) { true_Pn = 0.5 * (ArrayNBinsDeltaPn[NBinsDeltaPn] + ArrayNBinsDeltaPn[NBinsDeltaPn-1]); }
 				if (true_PnPerp > ArrayNBinsDeltaPnPerp[NBinsDeltaPnPerp]) { true_PnPerp = 0.5 * (ArrayNBinsDeltaPnPerp[NBinsDeltaPnPerp] + ArrayNBinsDeltaPnPerp[NBinsDeltaPnPerp-1]); }
+				if (true_PnPerpx > ArrayNBinsDeltaPnPerpx[NBinsDeltaPnPerpx]) { true_PnPerpx = 0.5 * (ArrayNBinsDeltaPnPerpx[NBinsDeltaPnPerpx] + ArrayNBinsDeltaPnPerpx[NBinsDeltaPnPerpx-1]); }
+				if (true_PnPerpy > ArrayNBinsDeltaPnPerpy[NBinsDeltaPnPerpy]) { true_PnPerpy = 0.5 * (ArrayNBinsDeltaPnPerpy[NBinsDeltaPnPerpy] + ArrayNBinsDeltaPnPerpy[NBinsDeltaPnPerpy-1]); }								
 				if (true_PnPar > ArrayNBinsDeltaPnPar[NBinsDeltaPnPar]) { true_PnPar = 0.5 * (ArrayNBinsDeltaPnPar[NBinsDeltaPnPar] + ArrayNBinsDeltaPnPar[NBinsDeltaPnPar-1]); }								
 
 				if (true_ECal > ArrayNBinsECal[NBinsECal]) { true_ECal = 0.5 * (ArrayNBinsECal[NBinsECal] + ArrayNBinsECal[NBinsECal-1]); }
@@ -2989,6 +3148,8 @@ void PeLEE_myRecoAnalysis::Loop() {
 				// DeltaPty
 				// DeltaPL
 				// DeltaPnPerp
+				// DeltaPnPerpx
+				// DeltaPnPerpy								
 				// DeltaPnPar								
 				// alpha
 				// PMissMinus
@@ -3001,6 +3162,8 @@ void PeLEE_myRecoAnalysis::Loop() {
 				if (true_A < ArrayNBinsA[0]) { true_A = 0.5 * (ArrayNBinsA[0] + ArrayNBinsA[1]); }
 				if (true_PMissMinus < ArrayNBinsPMissMinus[0]) { true_PMissMinus = 0.5 * (ArrayNBinsPMissMinus[0] + ArrayNBinsPMissMinus[1]); }
 				if (true_PnPerp < ArrayNBinsDeltaPnPerp[0]) { true_PnPerp = 0.5 * (ArrayNBinsDeltaPnPerp[0] + ArrayNBinsDeltaPnPerp[1]); }
+				if (true_PnPerpx < ArrayNBinsDeltaPnPerpx[0]) { true_PnPerpx = 0.5 * (ArrayNBinsDeltaPnPerpx[0] + ArrayNBinsDeltaPnPerpx[1]); }
+				if (true_PnPerpy < ArrayNBinsDeltaPnPerpy[0]) { true_PnPerpy = 0.5 * (ArrayNBinsDeltaPnPerpy[0] + ArrayNBinsDeltaPnPerpy[1]); }								
 				if (true_PnPar < ArrayNBinsDeltaPnPar[0]) { true_PnPar = 0.5 * (ArrayNBinsDeltaPnPar[0] + ArrayNBinsDeltaPnPar[1]); }											
 
 				// ----------------------------------------------------------------------------------------------------------------------------
@@ -3213,6 +3376,8 @@ void PeLEE_myRecoAnalysis::Loop() {
 			RecoDeltaPLPlot->Fill(reco_PL,weight);
 			RecoDeltaPnPlot->Fill(reco_Pn,weight);
 			RecoDeltaPnPerpPlot->Fill(reco_PnPerp,weight);
+			RecoDeltaPnPerpxPlot->Fill(reco_PnPerpx,weight);
+			RecoDeltaPnPerpyPlot->Fill(reco_PnPerpy,weight);						
 			RecoDeltaPnParPlot->Fill(reco_PnPar,weight);						
 			RecoDeltaPtxPlot->Fill(reco_Ptx,weight);
 			RecoDeltaPtyPlot->Fill(reco_Pty,weight);
@@ -3344,6 +3509,8 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 			if (string(fWhichSample).find("Overlay") != std::string::npos) { 
 
+				bool isSignal = false;
+
 //				TVector3 True_CandidateMuonVertex(True_CandidateMu_StartX->at(0),True_CandidateMu_StartY->at(0),True_CandidateMu_StartZ->at(0));
 //				TVector3 True_CandidateProtonVertex(True_CandidateP_StartX->at(0),True_CandidateP_StartY->at(0),True_CandidateP_StartZ->at(0));
 
@@ -3378,6 +3545,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 					// --------------------------------------------------------------------------------------------------
 				
 					CC1pEventsPassingSelectionCuts++;
+					isSignal = true;
 					myRunTxtFile << endl << "CC1p0pi signal event" << endl;
 
 					// ---------------------------------------------------------------------------------------------------------------------------
@@ -3462,6 +3630,8 @@ void PeLEE_myRecoAnalysis::Loop() {
 					CC1pTrueDeltaPLPlot->Fill(true_PL,weight);
 					CC1pTrueDeltaPnPlot->Fill(true_Pn,weight);
 					CC1pTrueDeltaPnPerpPlot->Fill(true_PnPerp,weight);
+					CC1pTrueDeltaPnPerpxPlot->Fill(true_PnPerpx,weight);
+					CC1pTrueDeltaPnPerpyPlot->Fill(true_PnPerpy,weight);										
 					CC1pTrueDeltaPnParPlot->Fill(true_PnPar,weight);										
 					CC1pTrueDeltaPtxPlot->Fill(true_Ptx,weight);
 					CC1pTrueDeltaPtyPlot->Fill(true_Pty,weight);
@@ -3648,6 +3818,8 @@ void PeLEE_myRecoAnalysis::Loop() {
 					CC1pRecoDeltaPLPlot->Fill(reco_PL,weight);
 					CC1pRecoDeltaPnPlot->Fill(reco_Pn,weight);
 					CC1pRecoDeltaPnPerpPlot->Fill(reco_PnPerp,weight);
+					CC1pRecoDeltaPnPerpxPlot->Fill(reco_PnPerpx,weight);
+					CC1pRecoDeltaPnPerpyPlot->Fill(reco_PnPerpy,weight);										
 					CC1pRecoDeltaPnParPlot->Fill(reco_PnPar,weight);										
 					CC1pRecoDeltaPtxPlot->Fill(reco_Ptx,weight);
 					CC1pRecoDeltaPtyPlot->Fill(reco_Pty,weight);
@@ -3858,7 +4030,9 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 					CC1pRecoDeltaPLPlot2D->Fill(true_PL,reco_PL);
 					CC1pRecoDeltaPnPlot2D->Fill(true_Pn,reco_Pn);
-					CC1pRecoDeltaPnPerpPlot2D->Fill(true_PnPerp,reco_Pn);
+					CC1pRecoDeltaPnPerpPlot2D->Fill(true_PnPerp,reco_PnPerp);
+					CC1pRecoDeltaPnPerpxPlot2D->Fill(true_PnPerpx,reco_PnPerpx);
+					CC1pRecoDeltaPnPerpyPlot2D->Fill(true_PnPerpx,reco_PnPerpy);										
 					CC1pRecoDeltaPnParPlot2D->Fill(true_PnPar,reco_Pn);										
 					CC1pRecoDeltaPtxPlot2D->Fill(true_Ptx,reco_Ptx);
 					CC1pRecoDeltaPtyPlot2D->Fill(true_Pty,reco_Pty);
@@ -3881,6 +4055,8 @@ void PeLEE_myRecoAnalysis::Loop() {
 					POTScaledCC1pRecoDeltaPLPlot2D->Fill(true_PL,reco_PL,weight);
 					POTScaledCC1pRecoDeltaPnPlot2D->Fill(true_Pn,reco_Pn,weight);
 					POTScaledCC1pRecoDeltaPnPerpPlot2D->Fill(true_PnPerp,reco_PnPerp,weight);
+					POTScaledCC1pRecoDeltaPnPerpxPlot2D->Fill(true_PnPerpx,reco_PnPerpx,weight);
+					POTScaledCC1pRecoDeltaPnPerpyPlot2D->Fill(true_PnPerpy,reco_PnPerpy,weight);										
 					POTScaledCC1pRecoDeltaPnParPlot2D->Fill(true_PnPar,reco_PnPar,weight);										
 					POTScaledCC1pRecoDeltaPtxPlot2D->Fill(true_Ptx,reco_Ptx,weight);
 					POTScaledCC1pRecoDeltaPtyPlot2D->Fill(true_Pty,reco_Pty,weight);
@@ -4307,6 +4483,8 @@ void PeLEE_myRecoAnalysis::Loop() {
 					NonCC1pRecoDeltaPLPlot->Fill(reco_PL,weight);
 					NonCC1pRecoDeltaPnPlot->Fill(reco_Pn,weight);
 					NonCC1pRecoDeltaPnPerpPlot->Fill(reco_PnPerp,weight);
+					NonCC1pRecoDeltaPnPerpxPlot->Fill(reco_PnPerpx,weight);
+					NonCC1pRecoDeltaPnPerpyPlot->Fill(reco_PnPerpy,weight);										
 					NonCC1pRecoDeltaPnParPlot->Fill(reco_PnPar,weight);										
 					NonCC1pRecoDeltaPtxPlot->Fill(reco_Ptx,weight);
 					NonCC1pRecoDeltaPtyPlot->Fill(reco_Pty,weight);
@@ -4478,6 +4656,8 @@ void PeLEE_myRecoAnalysis::Loop() {
 					CCQERecoDeltaPLPlot->Fill(reco_PL,weight);
 					CCQERecoDeltaPnPlot->Fill(reco_Pn,weight);
 					CCQERecoDeltaPnPerpPlot->Fill(reco_PnPerp,weight);
+					CCQERecoDeltaPnPerpxPlot->Fill(reco_PnPerpx,weight);
+					CCQERecoDeltaPnPerpyPlot->Fill(reco_PnPerpy,weight);										
 					CCQERecoDeltaPnParPlot->Fill(reco_PnPar,weight);										
 					CCQERecoDeltaPtxPlot->Fill(reco_Ptx,weight);
 					CCQERecoDeltaPtyPlot->Fill(reco_Pty,weight);
@@ -4493,6 +4673,30 @@ void PeLEE_myRecoAnalysis::Loop() {
 					CCQERecoECalPlot->Fill(ECal,weight);
 					CCQERecoEQEPlot->Fill(EQE,weight);
 					CCQERecoQ2Plot->Fill(reco_Q2,weight);
+
+					//------------------------------//
+
+					// CCQE Signal / Bkg	
+
+					if (isSignal) {				
+
+						CCQESignalRecoDeltaPTPlot->Fill(TransMissMomentum,weight);
+						CCQESignalRecoDeltaAlphaTPlot->Fill(DeltaAlphaT,weight);									
+						CCQESignalRecoDeltaPhiTPlot->Fill(DeltaPhiT,weight);
+						CCQESignalRecoDeltaPtxPlot->Fill(reco_Ptx,weight);
+						CCQESignalRecoDeltaPtyPlot->Fill(reco_Pty,weight);					
+						CCQESignalRecoECalPlot->Fill(ECal,weight);	
+
+					} else {
+
+						CCQEBkgRecoDeltaPTPlot->Fill(TransMissMomentum,weight);
+						CCQEBkgRecoDeltaAlphaTPlot->Fill(DeltaAlphaT,weight);									
+						CCQEBkgRecoDeltaPhiTPlot->Fill(DeltaPhiT,weight);
+						CCQEBkgRecoDeltaPtxPlot->Fill(reco_Ptx,weight);
+						CCQEBkgRecoDeltaPtyPlot->Fill(reco_Pty,weight);					
+						CCQEBkgRecoECalPlot->Fill(ECal,weight);
+
+					}				
 
 					//------------------------------//
 
@@ -4644,6 +4848,8 @@ void PeLEE_myRecoAnalysis::Loop() {
 					CCMECRecoDeltaPLPlot->Fill(reco_PL,weight);
 					CCMECRecoDeltaPnPlot->Fill(reco_Pn,weight);
 					CCMECRecoDeltaPnPerpPlot->Fill(reco_PnPerp,weight);
+					CCMECRecoDeltaPnPerpxPlot->Fill(reco_PnPerpx,weight);
+					CCMECRecoDeltaPnPerpyPlot->Fill(reco_PnPerpy,weight);										
 					CCMECRecoDeltaPnParPlot->Fill(reco_PnPar,weight);										
 					CCMECRecoDeltaPtxPlot->Fill(reco_Ptx,weight);
 					CCMECRecoDeltaPtyPlot->Fill(reco_Pty,weight);
@@ -4659,6 +4865,30 @@ void PeLEE_myRecoAnalysis::Loop() {
 					CCMECRecoECalPlot->Fill(ECal,weight);
 					CCMECRecoEQEPlot->Fill(EQE,weight);
 					CCMECRecoQ2Plot->Fill(reco_Q2,weight);
+
+					//------------------------------//
+
+					// CCMEC Signal / Bkg	
+
+					if (isSignal) {				
+
+						CCMECSignalRecoDeltaPTPlot->Fill(TransMissMomentum,weight);
+						CCMECSignalRecoDeltaAlphaTPlot->Fill(DeltaAlphaT,weight);									
+						CCMECSignalRecoDeltaPhiTPlot->Fill(DeltaPhiT,weight);
+						CCMECSignalRecoDeltaPtxPlot->Fill(reco_Ptx,weight);
+						CCMECSignalRecoDeltaPtyPlot->Fill(reco_Pty,weight);					
+						CCMECSignalRecoECalPlot->Fill(ECal,weight);	
+
+					} else {
+
+						CCMECBkgRecoDeltaPTPlot->Fill(TransMissMomentum,weight);
+						CCMECBkgRecoDeltaAlphaTPlot->Fill(DeltaAlphaT,weight);									
+						CCMECBkgRecoDeltaPhiTPlot->Fill(DeltaPhiT,weight);
+						CCMECBkgRecoDeltaPtxPlot->Fill(reco_Ptx,weight);
+						CCMECBkgRecoDeltaPtyPlot->Fill(reco_Pty,weight);					
+						CCMECBkgRecoECalPlot->Fill(ECal,weight);
+
+					}						
 
 					//----------------------------------------//
 
@@ -4810,6 +5040,8 @@ void PeLEE_myRecoAnalysis::Loop() {
 					CCRESRecoDeltaPLPlot->Fill(reco_PL,weight);
 					CCRESRecoDeltaPnPlot->Fill(reco_Pn,weight);
 					CCRESRecoDeltaPnPerpPlot->Fill(reco_PnPerp,weight);
+					CCRESRecoDeltaPnPerpxPlot->Fill(reco_PnPerpx,weight);
+					CCRESRecoDeltaPnPerpyPlot->Fill(reco_PnPerpy,weight);										
 					CCRESRecoDeltaPnParPlot->Fill(reco_PnPar,weight);										
 					CCRESRecoDeltaPtxPlot->Fill(reco_Ptx,weight);
 					CCRESRecoDeltaPtyPlot->Fill(reco_Pty,weight);
@@ -4825,6 +5057,30 @@ void PeLEE_myRecoAnalysis::Loop() {
 					CCRESRecoECalPlot->Fill(ECal,weight);
 					CCRESRecoEQEPlot->Fill(EQE,weight);
 					CCRESRecoQ2Plot->Fill(reco_Q2,weight);
+
+					//------------------------------//
+
+					// CCRES Signal / Bkg	
+
+					if (isSignal) {				
+
+						CCRESSignalRecoDeltaPTPlot->Fill(TransMissMomentum,weight);
+						CCRESSignalRecoDeltaAlphaTPlot->Fill(DeltaAlphaT,weight);									
+						CCRESSignalRecoDeltaPhiTPlot->Fill(DeltaPhiT,weight);
+						CCRESSignalRecoDeltaPtxPlot->Fill(reco_Ptx,weight);
+						CCRESSignalRecoDeltaPtyPlot->Fill(reco_Pty,weight);					
+						CCRESSignalRecoECalPlot->Fill(ECal,weight);	
+
+					} else {
+
+						CCRESBkgRecoDeltaPTPlot->Fill(TransMissMomentum,weight);
+						CCRESBkgRecoDeltaAlphaTPlot->Fill(DeltaAlphaT,weight);									
+						CCRESBkgRecoDeltaPhiTPlot->Fill(DeltaPhiT,weight);
+						CCRESBkgRecoDeltaPtxPlot->Fill(reco_Ptx,weight);
+						CCRESBkgRecoDeltaPtyPlot->Fill(reco_Pty,weight);					
+						CCRESBkgRecoECalPlot->Fill(ECal,weight);
+
+					}					
 
 					//----------------------------------------//
 
@@ -4973,6 +5229,8 @@ void PeLEE_myRecoAnalysis::Loop() {
 					CCDISRecoDeltaPLPlot->Fill(reco_PL,weight);
 					CCDISRecoDeltaPnPlot->Fill(reco_Pn,weight);
 					CCDISRecoDeltaPnPerpPlot->Fill(reco_PnPerp,weight);
+					CCDISRecoDeltaPnPerpxPlot->Fill(reco_PnPerpx,weight);
+					CCDISRecoDeltaPnPerpyPlot->Fill(reco_PnPerpy,weight);										
 					CCDISRecoDeltaPnParPlot->Fill(reco_PnPar,weight);										
 					CCDISRecoDeltaPtxPlot->Fill(reco_Ptx,weight);
 					CCDISRecoDeltaPtyPlot->Fill(reco_Pty,weight);
@@ -4988,6 +5246,30 @@ void PeLEE_myRecoAnalysis::Loop() {
 					CCDISRecoECalPlot->Fill(ECal,weight);
 					CCDISRecoEQEPlot->Fill(EQE,weight);
 					CCDISRecoQ2Plot->Fill(reco_Q2,weight);
+
+					//------------------------------//
+
+					// CCDIS Signal / Bkg	
+
+					if (isSignal) {				
+
+						CCDISSignalRecoDeltaPTPlot->Fill(TransMissMomentum,weight);
+						CCDISSignalRecoDeltaAlphaTPlot->Fill(DeltaAlphaT,weight);									
+						CCDISSignalRecoDeltaPhiTPlot->Fill(DeltaPhiT,weight);
+						CCDISSignalRecoDeltaPtxPlot->Fill(reco_Ptx,weight);
+						CCDISSignalRecoDeltaPtyPlot->Fill(reco_Pty,weight);					
+						CCDISSignalRecoECalPlot->Fill(ECal,weight);	
+
+					} else {
+
+						CCDISBkgRecoDeltaPTPlot->Fill(TransMissMomentum,weight);
+						CCDISBkgRecoDeltaAlphaTPlot->Fill(DeltaAlphaT,weight);									
+						CCDISBkgRecoDeltaPhiTPlot->Fill(DeltaPhiT,weight);
+						CCDISBkgRecoDeltaPtxPlot->Fill(reco_Ptx,weight);
+						CCDISBkgRecoDeltaPtyPlot->Fill(reco_Pty,weight);					
+						CCDISBkgRecoECalPlot->Fill(ECal,weight);
+
+					}					
 
 					//----------------------------------------//
 

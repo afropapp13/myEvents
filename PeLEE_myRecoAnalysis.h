@@ -35,6 +35,7 @@ public :
    Int_t           Run;
    Int_t           SubRun;
    Int_t           Event;
+   
    vector<double>  *All_UBGenie;
    vector<double>  *AxFFCCQEshape_UBGenie;
    vector<double>  *DecayAngMEC_UBGenie;
@@ -45,6 +46,60 @@ public :
    vector<double>  *Theta_Delta2Npi_UBGenie;
    vector<double>  *VecFFCCQEshape_UBGenie;
    vector<double>  *XSecShape_CCMEC_UBGenie;
+   
+	//----------------------------------------//
+
+	// detailed xsec uncertainty contributions 
+
+	std::vector<double> *AGKYpT1pi_UBGenie;
+	std::vector<double> *AGKYxF1pi_UBGenie;
+	std::vector<double> *AhtBY_UBGenie;
+	std::vector<double> *BhtBY_UBGenie;
+	std::vector<double> *CV1uBY_UBGenie;
+	std::vector<double> *CV2uBY_UBGenie;
+	std::vector<double> *EtaNCEL_UBGenie;
+	std::vector<double> *FrAbs_N_UBGenie;
+	std::vector<double> *FrAbs_pi_UBGenie;
+	std::vector<double> *FrCEx_N_UBGenie;
+	std::vector<double> *FrCEx_pi_UBGenie;
+	std::vector<double> *FrInel_N_UBGenie;
+	std::vector<double> *FrInel_pi_UBGenie;
+	std::vector<double> *FrPiProd_N_UBGenie;
+	std::vector<double> *FrPiProd_pi_UBGenie;
+	std::vector<double> *FracDelta_CCMEC_UBGenie;	
+	std::vector<double> *FracPN_CCMEC_UBGenie;
+	std::vector<double> *MFP_N_UBGenie;
+	std::vector<double> *MFP_pi_UBGenie;
+	std::vector<double> *MaCCQE_UBGenie;
+	std::vector<double> *MaCCRES_UBGenie;
+	std::vector<double> *MaNCEL_UBGenie;
+	std::vector<double> *MaNCRES_UBGenie;
+	std::vector<double> *MvCCRES_UBGenie;
+	std::vector<double> *MvNCRES_UBGenie;
+	std::vector<double> *NonRESBGvbarnCC1pi_UBGenie;
+	std::vector<double> *NonRESBGvbarnCC2pi_UBGenie;
+	std::vector<double> *NonRESBGvbarnNC1pi_UBGenie;
+	std::vector<double> *NonRESBGvbarnNC2pi_UBGenie;
+	std::vector<double> *NonRESBGvbarpCC1pi_UBGenie;
+	std::vector<double> *NonRESBGvbarpCC2pi_UBGenie;
+	std::vector<double> *NonRESBGvbarpNC1pi_UBGenie;
+	std::vector<double> *NonRESBGvbarpNC2pi_UBGenie;
+	std::vector<double> *NonRESBGvnCC1pi_UBGenie;
+	std::vector<double> *NonRESBGvnCC2pi_UBGenie;
+	std::vector<double> *NonRESBGvnNC1pi_UBGenie;
+	std::vector<double> *NonRESBGvnNC2pi_UBGenie;
+	std::vector<double> *NonRESBGvpCC1pi_UBGenie;
+	std::vector<double> *NonRESBGvpCC2pi_UBGenie;
+	std::vector<double> *NonRESBGvpNC1pi_UBGenie;
+	std::vector<double> *NonRESBGvpNC2pi_UBGenie;
+	std::vector<double> *NormCCMEC_UBGenie;
+	std::vector<double> *NormNCMEC_UBGenie;
+	std::vector<double> *RDecBR1eta_UBGenie;
+	std::vector<double> *RDecBR1gamma_UBGenie;		
+
+	//----------------------------------------//   
+   
+   
    vector<double>  *fluxes;
    vector<double>  *reinteractions;
    Int_t           nue;
@@ -149,6 +204,8 @@ public :
    vector<double>  *Reco_PL;
    vector<double>  *Reco_Pn;
    vector<double>  *Reco_PnPerp;
+   vector<double>  *Reco_PnPerpx;
+   vector<double>  *Reco_PnPerpy;      
    vector<double>  *Reco_PnPar;      
    vector<double>  *Reco_DeltaAlphaT;
    vector<double>  *Reco_DeltaAlpha3Dq;
@@ -171,6 +228,8 @@ public :
    vector<double>  *True_PL;
    vector<double>  *True_Pn;
    vector<double>  *True_PnPerp;
+   vector<double>  *True_PnPerpx;
+   vector<double>  *True_PnPerpy;      
    vector<double>  *True_PnPar;      
    vector<double>  *True_DeltaAlphaT;
    vector<double>  *True_DeltaAlpha3Dq;
@@ -193,6 +252,7 @@ public :
    TBranch        *b_Run;   //!
    TBranch        *b_SubRun;   //!
    TBranch        *b_Event;   //!
+   
    TBranch        *b_All_UBGenie;   //!
    TBranch        *b_AxFFCCQEshape_UBGenie;   //!
    TBranch        *b_DecayAngMEC_UBGenie;   //!
@@ -203,6 +263,59 @@ public :
    TBranch        *b_Theta_Delta2Npi_UBGenie;   //!
    TBranch        *b_VecFFCCQEshape_UBGenie;   //!
    TBranch        *b_XSecShape_CCMEC_UBGenie;   //!
+ 
+	//----------------------------------------//
+
+	// detailed xsec uncertainty contributions 
+
+   TBranch        *b_AGKYpT1pi_UBGenie;
+   TBranch        *b_AGKYxF1pi_UBGenie;
+   TBranch        *b_AhtBY_UBGenie;
+   TBranch        *b_BhtBY_UBGenie;
+   TBranch        *b_CV1uBY_UBGenie;
+   TBranch        *b_CV2uBY_UBGenie;
+   TBranch        *b_EtaNCEL_UBGenie;
+   TBranch        *b_FrAbs_N_UBGenie;
+   TBranch        *b_FrAbs_pi_UBGenie;
+   TBranch        *b_FrCEx_N_UBGenie;
+   TBranch        *b_FrCEx_pi_UBGenie;
+   TBranch        *b_FrInel_N_UBGenie;
+   TBranch        *b_FrInel_pi_UBGenie;
+   TBranch        *b_FrPiProd_N_UBGenie;
+   TBranch        *b_FrPiProd_pi_UBGenie;
+   TBranch        *b_FracDelta_CCMEC_UBGenie;	
+   TBranch        *b_FracPN_CCMEC_UBGenie;
+   TBranch        *b_MFP_N_UBGenie;
+   TBranch        *b_MFP_pi_UBGenie;
+   TBranch        *b_MaCCQE_UBGenie;
+   TBranch        *b_MaCCRES_UBGenie;
+   TBranch        *b_MaNCEL_UBGenie;
+   TBranch        *b_MaNCRES_UBGenie;
+   TBranch        *b_MvCCRES_UBGenie;
+   TBranch        *b_MvNCRES_UBGenie;
+   TBranch        *b_NonRESBGvbarnCC1pi_UBGenie;
+   TBranch        *b_NonRESBGvbarnCC2pi_UBGenie;
+   TBranch        *b_NonRESBGvbarnNC1pi_UBGenie;
+   TBranch        *b_NonRESBGvbarnNC2pi_UBGenie;
+   TBranch        *b_NonRESBGvbarpCC1pi_UBGenie;
+   TBranch        *b_NonRESBGvbarpCC2pi_UBGenie;
+   TBranch        *b_NonRESBGvbarpNC1pi_UBGenie;
+   TBranch        *b_NonRESBGvbarpNC2pi_UBGenie;
+   TBranch        *b_NonRESBGvnCC1pi_UBGenie;
+   TBranch        *b_NonRESBGvnCC2pi_UBGenie;
+   TBranch        *b_NonRESBGvnNC1pi_UBGenie;
+   TBranch        *b_NonRESBGvnNC2pi_UBGenie;
+   TBranch        *b_NonRESBGvpCC1pi_UBGenie;
+   TBranch        *b_NonRESBGvpCC2pi_UBGenie;
+   TBranch        *b_NonRESBGvpNC1pi_UBGenie;
+   TBranch        *b_NonRESBGvpNC2pi_UBGenie;
+   TBranch        *b_NormCCMEC_UBGenie;
+   TBranch        *b_NormNCMEC_UBGenie;
+   TBranch        *b_RDecBR1eta_UBGenie;
+   TBranch        *b_RDecBR1gamma_UBGenie;		
+
+	//----------------------------------------//   
+   
    TBranch        *b_fluxes;   //!
    TBranch        *b_reinteractions;   //!
    TBranch        *b_nue;   //!
@@ -307,6 +420,8 @@ public :
    TBranch        *b_Reco_PL;   //!
    TBranch        *b_Reco_Pn;   //!
    TBranch        *b_Reco_PnPerp;   //!
+   TBranch        *b_Reco_PnPerpx;   //!   
+   TBranch        *b_Reco_PnPerpy;   //!   
    TBranch        *b_Reco_PnPar;   //!      
    TBranch        *b_Reco_DeltaAlphaT;   //!
    TBranch        *b_Reco_DeltaAlpha3Dq;   //!
@@ -329,6 +444,8 @@ public :
    TBranch        *b_True_PL;   //!
    TBranch        *b_True_Pn;   //!
    TBranch        *b_True_PnPerp;   //!
+   TBranch        *b_True_PnPerpx;   //!
+   TBranch        *b_True_PnPerpy;   //!      
    TBranch        *b_True_PnPar;   //!      
    TBranch        *b_True_DeltaAlphaT;   //!
    TBranch        *b_True_DeltaAlpha3Dq;   //!
@@ -419,6 +536,59 @@ void PeLEE_myRecoAnalysis::Init(TTree *tree)
    Theta_Delta2Npi_UBGenie = 0;
    VecFFCCQEshape_UBGenie = 0;
    XSecShape_CCMEC_UBGenie = 0;
+   
+	//----------------------------------------//
+
+	// detailed xsec uncertainty contributions 
+
+	AGKYpT1pi_UBGenie = 0;
+	AGKYxF1pi_UBGenie = 0;
+	AhtBY_UBGenie = 0;
+	BhtBY_UBGenie = 0;
+	CV1uBY_UBGenie = 0;
+	CV2uBY_UBGenie = 0;
+	EtaNCEL_UBGenie = 0;
+	FrAbs_N_UBGenie = 0;
+	FrAbs_pi_UBGenie = 0;
+	FrCEx_N_UBGenie = 0;
+	FrCEx_pi_UBGenie = 0;
+	FrInel_N_UBGenie = 0;
+	FrInel_pi_UBGenie = 0;
+	FrPiProd_N_UBGenie = 0;
+	FrPiProd_pi_UBGenie = 0;
+	FracDelta_CCMEC_UBGenie = 0;	
+	FracPN_CCMEC_UBGenie = 0;
+	MFP_N_UBGenie = 0;
+	MFP_pi_UBGenie = 0;
+	MaCCQE_UBGenie = 0;
+	MaCCRES_UBGenie = 0;
+	MaNCEL_UBGenie = 0;
+	MaNCRES_UBGenie = 0;
+	MvCCRES_UBGenie = 0;
+	MvNCRES_UBGenie = 0;
+	NonRESBGvbarnCC1pi_UBGenie = 0;
+	NonRESBGvbarnCC2pi_UBGenie = 0;
+	NonRESBGvbarnNC1pi_UBGenie = 0;
+	NonRESBGvbarnNC2pi_UBGenie = 0;
+	NonRESBGvbarpCC1pi_UBGenie = 0;
+	NonRESBGvbarpCC2pi_UBGenie = 0;
+	NonRESBGvbarpNC1pi_UBGenie = 0;
+	NonRESBGvbarpNC2pi_UBGenie = 0;
+	NonRESBGvnCC1pi_UBGenie = 0;
+	NonRESBGvnCC2pi_UBGenie = 0;
+	NonRESBGvnNC1pi_UBGenie = 0;
+	NonRESBGvnNC2pi_UBGenie = 0;
+	NonRESBGvpCC1pi_UBGenie = 0;
+	NonRESBGvpCC2pi_UBGenie = 0;
+	NonRESBGvpNC1pi_UBGenie = 0;
+	NonRESBGvpNC2pi_UBGenie = 0;
+	NormCCMEC_UBGenie = 0;
+	NormNCMEC_UBGenie = 0;
+	RDecBR1eta_UBGenie = 0;
+	RDecBR1gamma_UBGenie = 0;		
+
+	//----------------------------------------//     
+   
    fluxes = 0;
    reinteractions = 0;
    BeamFlashes_TotalPE = 0;
@@ -499,6 +669,8 @@ void PeLEE_myRecoAnalysis::Init(TTree *tree)
    Reco_PL = 0;
    Reco_Pn = 0;
    Reco_PnPerp = 0;
+   Reco_PnPerpx = 0;
+   Reco_PnPerpy = 0;      
    Reco_PnPar = 0;      
    Reco_DeltaAlphaT = 0;
    Reco_DeltaAlpha3Dq = 0;
@@ -521,6 +693,8 @@ void PeLEE_myRecoAnalysis::Init(TTree *tree)
    True_PL = 0;
    True_Pn = 0;
    True_PnPerp = 0;
+   True_PnPerpx = 0;
+   True_PnPerpy = 0;      
    True_PnPar = 0;      
    True_DeltaAlphaT = 0;   
    True_DeltaAlpha3Dq = 0;
@@ -557,6 +731,63 @@ void PeLEE_myRecoAnalysis::Init(TTree *tree)
    fChain->SetBranchAddress("Theta_Delta2Npi_UBGenie", &Theta_Delta2Npi_UBGenie, &b_Theta_Delta2Npi_UBGenie);
    fChain->SetBranchAddress("VecFFCCQEshape_UBGenie", &VecFFCCQEshape_UBGenie, &b_VecFFCCQEshape_UBGenie);
    fChain->SetBranchAddress("XSecShape_CCMEC_UBGenie", &XSecShape_CCMEC_UBGenie, &b_XSecShape_CCMEC_UBGenie);
+
+	//----------------------------------------//
+
+	// detailed xsec uncertainties
+
+	if (fWhichSample == "Overlay9_Run1_DecompXSecUnc") {
+
+		fChain->SetBranchAddress("AGKYpT1pi_UBGenie", &AGKYpT1pi_UBGenie, &b_AGKYpT1pi_UBGenie);
+		fChain->SetBranchAddress("AGKYxF1pi_UBGenie", &AGKYxF1pi_UBGenie, &b_AGKYxF1pi_UBGenie);
+		fChain->SetBranchAddress("AhtBY_UBGenie", &AhtBY_UBGenie, &b_AhtBY_UBGenie);
+		fChain->SetBranchAddress("BhtBY_UBGenie", &BhtBY_UBGenie, &b_BhtBY_UBGenie);
+		fChain->SetBranchAddress("CV1uBY_UBGenie", &CV1uBY_UBGenie, &b_CV1uBY_UBGenie);
+		fChain->SetBranchAddress("CV2uBY_UBGenie", &CV2uBY_UBGenie, &b_CV2uBY_UBGenie);
+		fChain->SetBranchAddress("EtaNCEL_UBGenie", &EtaNCEL_UBGenie, &b_EtaNCEL_UBGenie);
+		fChain->SetBranchAddress("FrAbs_N_UBGenie", &FrAbs_N_UBGenie, &b_FrAbs_N_UBGenie);
+		fChain->SetBranchAddress("FrAbs_pi_UBGenie", &FrAbs_pi_UBGenie, &b_FrAbs_pi_UBGenie);
+		fChain->SetBranchAddress("FrCEx_N_UBGenie", &FrCEx_N_UBGenie, &b_FrCEx_N_UBGenie);
+		fChain->SetBranchAddress("FrCEx_pi_UBGenie", &FrCEx_pi_UBGenie, &b_FrCEx_pi_UBGenie);
+		fChain->SetBranchAddress("FrInel_N_UBGenie", &FrInel_N_UBGenie, &b_FrInel_N_UBGenie);												
+		fChain->SetBranchAddress("FrInel_pi_UBGenie", &FrInel_pi_UBGenie, &b_FrInel_pi_UBGenie);
+		fChain->SetBranchAddress("FrPiProd_N_UBGenie", &FrPiProd_N_UBGenie, &b_FrPiProd_N_UBGenie);
+		fChain->SetBranchAddress("FrPiProd_pi_UBGenie", &FrPiProd_pi_UBGenie, &b_FrPiProd_pi_UBGenie);
+		fChain->SetBranchAddress("FracDelta_CCMEC_UBGenie", &FracDelta_CCMEC_UBGenie, &b_FracDelta_CCMEC_UBGenie);	
+		fChain->SetBranchAddress("FracPN_CCMEC_UBGenie", &FracPN_CCMEC_UBGenie, &b_FracPN_CCMEC_UBGenie);
+		fChain->SetBranchAddress("MFP_N_UBGenie", &MFP_N_UBGenie, &b_MFP_N_UBGenie);
+		fChain->SetBranchAddress("MFP_pi_UBGenie", &MFP_pi_UBGenie, &b_MFP_pi_UBGenie);
+		fChain->SetBranchAddress("MaCCQE_UBGenie", &MaCCQE_UBGenie, &b_MaCCQE_UBGenie);
+		fChain->SetBranchAddress("MaCCRES_UBGenie", &MaCCRES_UBGenie, &b_MaCCRES_UBGenie);
+		fChain->SetBranchAddress("MaNCEL_UBGenie", &MaNCEL_UBGenie, &b_MaNCEL_UBGenie);
+		fChain->SetBranchAddress("MaNCRES_UBGenie", &MaNCRES_UBGenie, &b_MaNCRES_UBGenie);
+		fChain->SetBranchAddress("MvCCRES_UBGenie", &MvCCRES_UBGenie, &b_MvCCRES_UBGenie);
+		fChain->SetBranchAddress("MvNCRES_UBGenie", &MvNCRES_UBGenie, &b_MvNCRES_UBGenie);
+		fChain->SetBranchAddress("NonRESBGvbarnCC1pi_UBGenie", &NonRESBGvbarnCC1pi_UBGenie, &b_NonRESBGvbarnCC1pi_UBGenie);
+		fChain->SetBranchAddress("NonRESBGvbarnCC2pi_UBGenie", &NonRESBGvbarnCC2pi_UBGenie, &b_NonRESBGvbarnCC2pi_UBGenie);
+		fChain->SetBranchAddress("NonRESBGvbarnNC1pi_UBGenie", &NonRESBGvbarnNC1pi_UBGenie, &b_NonRESBGvbarnNC1pi_UBGenie);
+		fChain->SetBranchAddress("NonRESBGvbarnNC2pi_UBGenie", &NonRESBGvbarnNC2pi_UBGenie, &b_NonRESBGvbarnNC2pi_UBGenie);
+		fChain->SetBranchAddress("NonRESBGvbarpCC1pi_UBGenie", &NonRESBGvbarpCC1pi_UBGenie, &b_NonRESBGvbarpCC1pi_UBGenie);
+		fChain->SetBranchAddress("NonRESBGvbarpCC2pi_UBGenie", &NonRESBGvbarpCC2pi_UBGenie, &b_NonRESBGvbarpCC2pi_UBGenie);
+		fChain->SetBranchAddress("NonRESBGvbarpNC1pi_UBGenie", &NonRESBGvbarpNC1pi_UBGenie, &b_NonRESBGvbarpNC1pi_UBGenie);
+		fChain->SetBranchAddress("NonRESBGvbarpNC2pi_UBGenie", &NonRESBGvbarpNC2pi_UBGenie, &b_NonRESBGvbarpNC2pi_UBGenie);
+		fChain->SetBranchAddress("NonRESBGvnCC1pi_UBGenie", &NonRESBGvnCC1pi_UBGenie, &b_NonRESBGvnCC1pi_UBGenie);
+		fChain->SetBranchAddress("NonRESBGvnCC2pi_UBGenie", &NonRESBGvnCC2pi_UBGenie, &b_NonRESBGvnCC2pi_UBGenie);
+		fChain->SetBranchAddress("NonRESBGvnNC1pi_UBGenie", &NonRESBGvnNC1pi_UBGenie, &b_NonRESBGvnNC1pi_UBGenie);
+		fChain->SetBranchAddress("NonRESBGvnNC2pi_UBGenie", &NonRESBGvnNC2pi_UBGenie, &b_NonRESBGvnNC2pi_UBGenie);
+		fChain->SetBranchAddress("NonRESBGvpCC1pi_UBGenie", &NonRESBGvpCC1pi_UBGenie, &b_NonRESBGvpCC1pi_UBGenie);
+		fChain->SetBranchAddress("NonRESBGvpCC2pi_UBGenie", &NonRESBGvpCC2pi_UBGenie, &b_NonRESBGvpCC2pi_UBGenie);
+		fChain->SetBranchAddress("NonRESBGvpNC1pi_UBGenie", &NonRESBGvpNC1pi_UBGenie, &b_NonRESBGvpNC1pi_UBGenie);
+		fChain->SetBranchAddress("NonRESBGvpNC2pi_UBGenie", &NonRESBGvpNC2pi_UBGenie, &b_NonRESBGvpNC2pi_UBGenie);
+		fChain->SetBranchAddress("NormCCMEC_UBGenie", &NormCCMEC_UBGenie, &b_NormCCMEC_UBGenie);
+		fChain->SetBranchAddress("NormNCMEC_UBGenie", &NormNCMEC_UBGenie, &b_NormNCMEC_UBGenie);
+		fChain->SetBranchAddress("RDecBR1eta_UBGenie", &RDecBR1eta_UBGenie, &b_RDecBR1eta_UBGenie);
+		fChain->SetBranchAddress("RDecBR1gamma_UBGenie", &RDecBR1gamma_UBGenie, &b_RDecBR1gamma_UBGenie);
+
+	}
+
+	//----------------------------------------//   
+   
    fChain->SetBranchAddress("fluxes", &fluxes, &b_fluxes);
    fChain->SetBranchAddress("reinteractions", &reinteractions, &b_reinteractions);
    fChain->SetBranchAddress("nue", &nue, &b_nue);
@@ -661,6 +892,8 @@ void PeLEE_myRecoAnalysis::Init(TTree *tree)
    fChain->SetBranchAddress("Reco_PL", &Reco_PL, &b_Reco_PL);
    fChain->SetBranchAddress("Reco_Pn", &Reco_Pn, &b_Reco_Pn);
    fChain->SetBranchAddress("Reco_PnPerp", &Reco_PnPerp, &b_Reco_PnPerp);
+   fChain->SetBranchAddress("Reco_PnPerpx", &Reco_PnPerpx, &b_Reco_PnPerpx);
+   fChain->SetBranchAddress("Reco_PnPerpy", &Reco_PnPerpy, &b_Reco_PnPerpy);      
    fChain->SetBranchAddress("Reco_PnPar", &Reco_PnPar, &b_Reco_PnPar);      
    fChain->SetBranchAddress("Reco_DeltaAlphaT", &Reco_DeltaAlphaT, &b_Reco_DeltaAlphaT);
    fChain->SetBranchAddress("Reco_DeltaAlpha3Dq", &Reco_DeltaAlpha3Dq, &b_Reco_DeltaAlpha3Dq);
@@ -683,6 +916,8 @@ void PeLEE_myRecoAnalysis::Init(TTree *tree)
    fChain->SetBranchAddress("True_PL", &True_PL, &b_True_PL);
    fChain->SetBranchAddress("True_Pn", &True_Pn, &b_True_Pn);
    fChain->SetBranchAddress("True_PnPerp", &True_PnPerp, &b_True_PnPerp);
+   fChain->SetBranchAddress("True_PnPerpx", &True_PnPerpx, &b_True_PnPerpx);
+   fChain->SetBranchAddress("True_PnPerpy", &True_PnPerpy, &b_True_PnPerpy);      
    fChain->SetBranchAddress("True_PnPar", &True_PnPar, &b_True_PnPar);      
    fChain->SetBranchAddress("True_DeltaAlphaT", &True_DeltaAlphaT, &b_True_DeltaAlphaT);
    fChain->SetBranchAddress("True_DeltaAlpha3Dq", &True_DeltaAlpha3Dq, &b_True_DeltaAlpha3Dq);

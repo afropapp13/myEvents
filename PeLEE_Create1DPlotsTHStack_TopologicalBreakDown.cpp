@@ -46,6 +46,8 @@ void PeLEE_Create1DPlotsTHStack_TopologicalBreakDown(TString BaseMC = "") {
 	//PlotNames.push_back("RecoDeltaPLPlot");
 	PlotNames.push_back("RecoDeltaPnPlot");
 	PlotNames.push_back("RecoDeltaPnPerpPlot");
+	PlotNames.push_back("RecoDeltaPnPerpxPlot");
+	PlotNames.push_back("RecoDeltaPnPerpyPlot");		
 	PlotNames.push_back("RecoDeltaPnParPlot");		
 	PlotNames.push_back("RecoDeltaPtxPlot");
 	PlotNames.push_back("RecoDeltaPtyPlot");

@@ -117,6 +117,8 @@ void PeLEE_myTrueAnalysis::Loop() {
 	TH1D* TrueDeltaPLPlot[NInte];
 	TH1D* TrueDeltaPnPlot[NInte];
 	TH1D* TrueDeltaPnPerpPlot[NInte];
+	TH1D* TrueDeltaPnPerpxPlot[NInte];
+	TH1D* TrueDeltaPnPerpyPlot[NInte];		
 	TH1D* TrueDeltaPnParPlot[NInte];		
 	TH1D* TrueDeltaPtxPlot[NInte];
 	TH1D* TrueDeltaPtyPlot[NInte];
@@ -244,6 +246,8 @@ void PeLEE_myTrueAnalysis::Loop() {
 		TrueDeltaPLPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueDeltaPLPlot",LabelXAxisDeltaPL,NBinsDeltaPL,ArrayNBinsDeltaPL);
 		TrueDeltaPnPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueDeltaPnPlot",LabelXAxisDeltaPn,NBinsDeltaPn,ArrayNBinsDeltaPn);
 		TrueDeltaPnPerpPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueDeltaPnPerpPlot",LabelXAxisDeltaPnPerp,NBinsDeltaPnPerp,ArrayNBinsDeltaPnPerp);
+		TrueDeltaPnPerpxPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueDeltaPnPerpxPlot",LabelXAxisDeltaPnPerpx,NBinsDeltaPnPerpx,ArrayNBinsDeltaPnPerpx);
+		TrueDeltaPnPerpyPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueDeltaPnPerpyPlot",LabelXAxisDeltaPnPerpy,NBinsDeltaPnPerpy,ArrayNBinsDeltaPnPerpy);				
 		TrueDeltaPnParPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueDeltaPnParPlot",LabelXAxisDeltaPnPar,NBinsDeltaPnPar,ArrayNBinsDeltaPnPar);				
 		TrueDeltaPtxPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueDeltaPtxPlot",LabelXAxisDeltaPtx,NBinsDeltaPtx,ArrayNBinsDeltaPtx);
 		TrueDeltaPtyPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueDeltaPtyPlot",LabelXAxisDeltaPty,NBinsDeltaPty,ArrayNBinsDeltaPty);
@@ -548,6 +552,65 @@ void PeLEE_myTrueAnalysis::Loop() {
 
 		}
 
+		//----------------------------------------//
+
+		// detailed xsec genie uncertainties	
+
+		if ( 
+			fUniverseIndex != -1 && fWhichSample == "Overlay9_Run1_DecompXSecUnc"
+		) {
+
+			// Watch out: The EventWeight weights already include the weight for the tune
+
+			// Genie weights
+			if (fEventWeightLabel == "AGKYpT1pi_UBGenie") { weight = weight*AGKYpT1pi_UBGenie->at(fUniverseIndex) / T2KWeight; }
+			if (fEventWeightLabel == "AGKYxF1pi_UBGenie") { weight = weight* AGKYxF1pi_UBGenie->at(fUniverseIndex) / T2KWeight; }	
+			if (fEventWeightLabel == "AhtBY_UBGenie") { weight = weight* AhtBY_UBGenie->at(fUniverseIndex) / T2KWeight; }	
+			if (fEventWeightLabel == "BhtBY_UBGenie") { weight = weight* BhtBY_UBGenie->at(fUniverseIndex) / T2KWeight; }	
+			if (fEventWeightLabel == "CV1uBY_UBGenie") { weight = weight* CV1uBY_UBGenie->at(fUniverseIndex) / T2KWeight; }	
+			if (fEventWeightLabel == "CV2uBY_UBGenie") { weight = weight* CV2uBY_UBGenie->at(fUniverseIndex) / T2KWeight; }
+			if (fEventWeightLabel == "EtaNCEL_UBGenie") { weight = weight* EtaNCEL_UBGenie->at(fUniverseIndex) / T2KWeight; }	
+			if (fEventWeightLabel == "FrAbs_N_UBGenie") { weight = weight* FrAbs_N_UBGenie->at(fUniverseIndex) / T2KWeight; }	
+			if (fEventWeightLabel == "FrAbs_pi_UBGenie") { weight = weight* FrAbs_pi_UBGenie->at(fUniverseIndex) / T2KWeight; }
+			if (fEventWeightLabel == "FrCEx_N_UBGenie") { weight = weight* FrCEx_N_UBGenie->at(fUniverseIndex) / T2KWeight; }	
+			if (fEventWeightLabel == "FrCEx_pi_UBGenie") { weight = weight* FrCEx_pi_UBGenie->at(fUniverseIndex) / T2KWeight; }	
+			if (fEventWeightLabel == "FrInel_N_UBGenie") { weight = weight* FrInel_N_UBGenie->at(fUniverseIndex) / T2KWeight; }	
+			if (fEventWeightLabel == "FrInel_pi_UBGenie") { weight = weight* FrInel_pi_UBGenie->at(fUniverseIndex) / T2KWeight; }	
+			if (fEventWeightLabel == "FrPiProd_N_UBGenie") { weight = weight* FrPiProd_N_UBGenie->at(fUniverseIndex) / T2KWeight; }
+			if (fEventWeightLabel == "FrPiProd_pi_UBGenie") { weight = weight* FrPiProd_pi_UBGenie->at(fUniverseIndex) / T2KWeight; }	
+			if (fEventWeightLabel == "FracDelta_CCMEC_UBGenie") { weight = weight* FracDelta_CCMEC_UBGenie->at(fUniverseIndex) / T2KWeight; }	
+			if (fEventWeightLabel == "FracPN_CCMEC_UBGenie") { weight = weight* FracPN_CCMEC_UBGenie->at(fUniverseIndex) / T2KWeight; }	
+			if (fEventWeightLabel == "MFP_N_UBGenie") { weight = weight* MFP_N_UBGenie->at(fUniverseIndex) / T2KWeight; }	
+			if (fEventWeightLabel == "MFP_pi_UBGenie") { weight = weight* MFP_pi_UBGenie->at(fUniverseIndex) / T2KWeight; }
+			if (fEventWeightLabel == "MaCCQE_UBGenie") { weight = weight* MaCCQE_UBGenie->at(fUniverseIndex) / T2KWeight; }	
+			if (fEventWeightLabel == "MaCCRES_UBGenie") { weight = weight* MaCCRES_UBGenie->at(fUniverseIndex) / T2KWeight; }	
+			if (fEventWeightLabel == "MaNCEL_UBGenie") { weight = weight* MaNCEL_UBGenie->at(fUniverseIndex) / T2KWeight; }	
+			if (fEventWeightLabel == "MaNCRES_UBGenie") { weight = weight* MaNCRES_UBGenie->at(fUniverseIndex) / T2KWeight; }	
+			if (fEventWeightLabel == "MvCCRES_UBGenie") { weight = weight* MvCCRES_UBGenie->at(fUniverseIndex) / T2KWeight; }
+			if (fEventWeightLabel == "MvNCRES_UBGenie") { weight = weight* MvNCRES_UBGenie->at(fUniverseIndex) / T2KWeight; }	
+			if (fEventWeightLabel == "NonRESBGvbarnCC1pi_UBGenie") { weight = weight* NonRESBGvbarnCC1pi_UBGenie->at(fUniverseIndex) / T2KWeight; }	
+			if (fEventWeightLabel == "NonRESBGvbarnCC2pi_UBGenie") { weight = weight* NonRESBGvbarnCC2pi_UBGenie->at(fUniverseIndex) / T2KWeight; }	
+			if (fEventWeightLabel == "NonRESBGvbarnNC1pi_UBGenie") { weight = weight* NonRESBGvbarnNC1pi_UBGenie->at(fUniverseIndex) / T2KWeight; }	
+			if (fEventWeightLabel == "NonRESBGvbarnNC2pi_UBGenie") { weight = weight* NonRESBGvbarnNC2pi_UBGenie->at(fUniverseIndex) / T2KWeight; }
+			if (fEventWeightLabel == "NonRESBGvbarpCC1pi_UBGenie") { weight = weight* NonRESBGvbarpCC1pi_UBGenie->at(fUniverseIndex) / T2KWeight; }	
+			if (fEventWeightLabel == "NonRESBGvbarpCC2pi_UBGenie") { weight = weight* NonRESBGvbarpCC2pi_UBGenie->at(fUniverseIndex) / T2KWeight; }	
+			if (fEventWeightLabel == "NonRESBGvbarpNC1pi_UBGenie") { weight = weight* NonRESBGvbarpNC1pi_UBGenie->at(fUniverseIndex) / T2KWeight; }	
+			if (fEventWeightLabel == "NonRESBGvbarpNC2pi_UBGenie") { weight = weight* NonRESBGvbarpNC2pi_UBGenie->at(fUniverseIndex) / T2KWeight; }	
+			if (fEventWeightLabel == "NonRESBGvnCC1pi_UBGenie") { weight = weight* NonRESBGvnCC1pi_UBGenie->at(fUniverseIndex) / T2KWeight; }
+			if (fEventWeightLabel == "NonRESBGvnCC2pi_UBGenie") { weight = weight* NonRESBGvnCC2pi_UBGenie->at(fUniverseIndex) / T2KWeight; }	
+			if (fEventWeightLabel == "NonRESBGvnNC1pi_UBGenie") { weight = weight* NonRESBGvnNC1pi_UBGenie->at(fUniverseIndex) / T2KWeight; }	
+			if (fEventWeightLabel == "NonRESBGvnNC2pi_UBGenie") { weight = weight* NonRESBGvnNC2pi_UBGenie->at(fUniverseIndex) / T2KWeight; }	
+			if (fEventWeightLabel == "NonRESBGvpCC1pi_UBGenie") { weight = weight* NonRESBGvpCC1pi_UBGenie->at(fUniverseIndex) / T2KWeight; }
+			if (fEventWeightLabel == "NonRESBGvpCC2pi_UBGenie") { weight = weight* NonRESBGvpCC2pi_UBGenie->at(fUniverseIndex) / T2KWeight; }	
+			if (fEventWeightLabel == "NonRESBGvpNC1pi_UBGenie") { weight = weight* NonRESBGvpNC1pi_UBGenie->at(fUniverseIndex) / T2KWeight; }	
+			if (fEventWeightLabel == "NonRESBGvpNC2pi_UBGenie") { weight = weight* NonRESBGvpNC2pi_UBGenie->at(fUniverseIndex) / T2KWeight; }	
+			if (fEventWeightLabel == "NormCCMEC_UBGenie") { weight = weight* NormCCMEC_UBGenie->at(fUniverseIndex) / T2KWeight; }	
+			if (fEventWeightLabel == "NormNCMEC_UBGenie") { weight = weight* NormNCMEC_UBGenie->at(fUniverseIndex) / T2KWeight; }
+			if (fEventWeightLabel == "RDecBR1eta_UBGenie") { weight = weight* RDecBR1eta_UBGenie->at(fUniverseIndex) / T2KWeight; }	
+			if (fEventWeightLabel == "RDecBR1gamma_UBGenie") { weight = weight* RDecBR1gamma_UBGenie->at(fUniverseIndex) / T2KWeight; }			
+
+		}			
+
 		//--------------------------------------------------//
 
 		SumWeights += weight / POTWeight;					
@@ -623,6 +686,8 @@ void PeLEE_myTrueAnalysis::Loop() {
 			double TruePL = True_PL->at(0);
 			double TruePn = True_Pn->at(0);
 			double TruePnPerp = True_PnPerp->at(0);
+			double TruePnPerpx = True_PnPerpx->at(0);
+			double TruePnPerpy = True_PnPerpy->at(0);						
 			double TruePnPar = True_PnPar->at(0);						
 			double TruePtx = True_Ptx->at(0);
 			double TruePty = True_Pty->at(0);
@@ -649,6 +714,8 @@ void PeLEE_myTrueAnalysis::Loop() {
 			// DeltaPL
 			// DeltaPn
 			// DeltaPnPerp
+			// DeltaPnPerpx
+			// DeltaPnPerpy						
 			// DeltaPnPar					
 			// Q2
 			// ECal
@@ -664,6 +731,8 @@ void PeLEE_myTrueAnalysis::Loop() {
 			if (TruePL > ArrayNBinsDeltaPL[NBinsDeltaPL]) { TruePL = 0.5 * (ArrayNBinsDeltaPL[NBinsDeltaPL] + ArrayNBinsDeltaPL[NBinsDeltaPL-1]); }						
 			if (TruePn > ArrayNBinsDeltaPn[NBinsDeltaPn]) { TruePn = 0.5 * (ArrayNBinsDeltaPn[NBinsDeltaPn] + ArrayNBinsDeltaPn[NBinsDeltaPn-1]); }
 			if (TruePnPerp > ArrayNBinsDeltaPnPerp[NBinsDeltaPnPerp]) { TruePnPerp = 0.5 * (ArrayNBinsDeltaPnPerp[NBinsDeltaPnPerp] + ArrayNBinsDeltaPnPerp[NBinsDeltaPnPerp-1]); }
+			if (TruePnPerpx > ArrayNBinsDeltaPnPerpx[NBinsDeltaPnPerpx]) { TruePnPerpx = 0.5 * (ArrayNBinsDeltaPnPerpx[NBinsDeltaPnPerpx] + ArrayNBinsDeltaPnPerpx[NBinsDeltaPnPerpx-1]); }
+			if (TruePnPerpy > ArrayNBinsDeltaPnPerpy[NBinsDeltaPnPerpy]) { TruePnPerpy = 0.5 * (ArrayNBinsDeltaPnPerpy[NBinsDeltaPnPerpy] + ArrayNBinsDeltaPnPerpy[NBinsDeltaPnPerpy-1]); }						
 			if (TruePnPar > ArrayNBinsDeltaPnPar[NBinsDeltaPnPar]) { TruePnPar = 0.5 * (ArrayNBinsDeltaPnPar[NBinsDeltaPnPar] + ArrayNBinsDeltaPnPar[NBinsDeltaPnPar-1]); }						
 
 			if (TrueRecoECal > ArrayNBinsECal[NBinsECal]) { TrueRecoECal = 0.5 * (ArrayNBinsECal[NBinsECal] + ArrayNBinsECal[NBinsECal-1]); }
@@ -686,6 +755,8 @@ void PeLEE_myTrueAnalysis::Loop() {
 			// DeltaPty
 			// DeltaPL
 			// DeltaPnPerp
+			// DeltaPnPerpx
+			// DeltaPnPerpy						
 			// DeltaPnPar						
 			// alpha
 			// PMissMinus
@@ -696,6 +767,8 @@ void PeLEE_myTrueAnalysis::Loop() {
 			if (TruePty < ArrayNBinsDeltaPty[0]) { TruePty = 0.5 * (ArrayNBinsDeltaPty[0] + ArrayNBinsDeltaPty[1]); }
 			if (TruePL < ArrayNBinsDeltaPL[0]) { TruePL = 0.5 * (ArrayNBinsDeltaPL[0] + ArrayNBinsDeltaPL[1]); }	
 			if (TruePnPerp < ArrayNBinsDeltaPnPerp[0]) { TruePnPerp = 0.5 * (ArrayNBinsDeltaPnPerp[0] + ArrayNBinsDeltaPnPerp[1]); }
+			if (TruePnPerpx < ArrayNBinsDeltaPnPerpx[0]) { TruePnPerpx = 0.5 * (ArrayNBinsDeltaPnPerpx[0] + ArrayNBinsDeltaPnPerpx[1]); }
+			if (TruePnPerpy < ArrayNBinsDeltaPnPerpy[0]) { TruePnPerpy = 0.5 * (ArrayNBinsDeltaPnPerpy[0] + ArrayNBinsDeltaPnPerpy[1]); }						
 			if (TruePnPar < ArrayNBinsDeltaPnPar[0]) { TruePnPar = 0.5 * (ArrayNBinsDeltaPnPar[0] + ArrayNBinsDeltaPnPar[1]); }											
 			if (TrueA < ArrayNBinsA[0]) { TrueA = 0.5 * (ArrayNBinsA[0] + ArrayNBinsA[1]); }
 			if (TruePMissMinus < ArrayNBinsPMissMinus[0]) { TruePMissMinus = 0.5 * (ArrayNBinsPMissMinus[0] + ArrayNBinsPMissMinus[1]); }			
@@ -860,6 +933,8 @@ void PeLEE_myTrueAnalysis::Loop() {
 					TrueDeltaPLPlot[0]->Fill(TruePL,weight);
 					TrueDeltaPnPlot[0]->Fill(TruePn,weight);
 					TrueDeltaPnPerpPlot[0]->Fill(TruePnPerp,weight);
+					TrueDeltaPnPerpxPlot[0]->Fill(TruePnPerpx,weight);
+					TrueDeltaPnPerpyPlot[0]->Fill(TruePnPerpy,weight);										
 					TrueDeltaPnParPlot[0]->Fill(TruePnPar,weight);										
 					TrueDeltaPtxPlot[0]->Fill(TruePtx,weight);
 					TrueDeltaPtyPlot[0]->Fill(TruePty,weight);
@@ -891,6 +966,8 @@ void PeLEE_myTrueAnalysis::Loop() {
 					TrueDeltaPLPlot[genie_mode]->Fill(TruePL,weight);
 					TrueDeltaPnPlot[genie_mode]->Fill(TruePn,weight);
 					TrueDeltaPnPerpPlot[genie_mode]->Fill(TruePnPerp,weight);
+					TrueDeltaPnPerpxPlot[genie_mode]->Fill(TruePnPerpx,weight);
+					TrueDeltaPnPerpyPlot[genie_mode]->Fill(TruePnPerpy,weight);										
 					TrueDeltaPnParPlot[genie_mode]->Fill(TruePnPar,weight);									
 					TrueDeltaPtxPlot[genie_mode]->Fill(TruePtx,weight);
 					TrueDeltaPtyPlot[genie_mode]->Fill(TruePty,weight);
