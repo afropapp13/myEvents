@@ -50,7 +50,7 @@ root -b PeLEE_script_EventSelection_MC_Stat_Systematics_FakeData.C
 
 # Detailed xsec systematics
 
-root -b PeLEE_script_EventSelection_DetailedGenie_Systematics.C
+#root -b PeLEE_script_EventSelection_DetailedGenie_Systematics.C
 
 ###########################################################################################################################################################################
 

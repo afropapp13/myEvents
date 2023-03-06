@@ -365,9 +365,9 @@ void PeLEE_Create1DPlotsTHStack_InteractionBreakDown(TString BaseMC = "") {
 			if (BaseMC == "GENIEv2Overlay9" && Runs[WhichRun] != "Combined") { continue; }	
 
 			// NuWro/Tweaked GENIE don't have Run 4a
-			if (BaseMC == "Overlay9NuWro" && (Runs[WhichRun] == "Run4a" || Runs[WhichRun] == "Run4aRutgers") ) { continue; }
-			if (BaseMC == "NoTuneOverlay9" && (Runs[WhichRun] == "Run4a" || Runs[WhichRun] == "Run4aRutgers") ) { continue; }
-			if (BaseMC == "TwiceMECOverlay9" && (Runs[WhichRun] == "Run4a" || Runs[WhichRun] == "Run4aRutgers") ) { continue; }												
+			if (BaseMC == "Overlay9NuWro" && (Runs[WhichRun] == "Run4a" || Runs[WhichRun] == "Run4b" || Runs[WhichRun] == "Run4aRutgers") ) { continue; }
+			if (BaseMC == "NoTuneOverlay9" && (Runs[WhichRun] == "Run4a" || Runs[WhichRun] == "Run4b" || Runs[WhichRun] == "Run4aRutgers") ) { continue; }
+			if (BaseMC == "TwiceMECOverlay9" && (Runs[WhichRun] == "Run4a" || Runs[WhichRun] == "Run4b" || Runs[WhichRun] == "Run4aRutgers") ) { continue; }												
 
 //		} // If we want to run only on a specific cut combination, include this } and remove the one at the end of the program
 

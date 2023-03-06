@@ -1,6 +1,6 @@
 . ../myClasses/Constants.sh
 
-declare -a arrRun=("Run1" "Run2" "Run3" "Run4a" "Run4aRutgers" "Combined")
+declare -a arrRun=("Run1" "Run2" "Run3" "Run4a" "Run4b" "Run4aRutgers" "Combined")
 
 declare -a arrCuts=("_NoCuts" "_PID_NuScore")
 
