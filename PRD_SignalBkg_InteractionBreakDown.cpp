@@ -38,6 +38,7 @@ void PRD_SignalBkg_InteractionBreakDown(TString BaseMC = "") {
 	PlotNames.push_back("RecoDeltaPtxPlot");
 	PlotNames.push_back("RecoDeltaPtyPlot");
 	PlotNames.push_back("RecoECalPlot");
+	PlotNames.push_back("RecoMuonCosThetaSingleBinPlot");	
 
 	const int N1DPlots = PlotNames.size();
 	cout << "Number of 1D Plots = " << N1DPlots << endl;
@@ -159,7 +160,13 @@ void PRD_SignalBkg_InteractionBreakDown(TString BaseMC = "") {
 					hist->GetYaxis()->CenterTitle();	
 
 					TString TStringXaxis = 	hist->GetXaxis()->GetTitle();	
-					hist->GetXaxis()->SetTitle("Reconstructed " + TStringXaxis);			
+					hist->GetXaxis()->SetTitle("Reconstructed " + TStringXaxis);
+
+					if (PlotNames[WhichPlot] == "RecoMuonCosThetaSingleBinPlot") {	
+
+						hist->GetXaxis()->SetTitle(TStringXaxis);
+
+					}		
 
 					//------------------------------//				
 
@@ -456,6 +463,14 @@ void PRD_SignalBkg_InteractionBreakDown(TString BaseMC = "") {
 				hratio[0][WhichPlot]->GetXaxis()->SetTitle(Plots[0][WhichPlot]->GetXaxis()->GetTitle());
 				hratio[0][WhichPlot]->GetXaxis()->SetTitleSize(0.15);
 				hratio[0][WhichPlot]->GetXaxis()->SetLabelSize(0.12);
+
+				if (PlotNames[WhichPlot] == "RecoMuonCosThetaSingleBinPlot") { 
+					
+					hratio[0][WhichPlot]->GetXaxis()->SetLabelSize(0.); 
+					hratio[0][WhichPlot]->GetXaxis()->SetTickSize(0);					
+					
+				}
+
 				hratio[0][WhichPlot]->GetXaxis()->SetTitleOffset(1.);
 				hratio[0][WhichPlot]->GetXaxis()->SetNdivisions(8);
 
@@ -527,6 +542,7 @@ void PRD_SignalBkg_InteractionBreakDown(TString BaseMC = "") {
 				//----------------------------------------//
 
 				PlotCanvas[WhichPlot]->cd();
+				
 				TLatex *textPOT = new TLatex();
 				textPOT->SetTextFont(FontStyle);
 				textPOT->SetTextSize(0.045);

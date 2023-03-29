@@ -74,6 +74,8 @@ root -b PRD_SignalBkg_InteractionBreakDown.cpp
 root -b PRL_SuppMat_PID.cpp
 # LLR PRD Fig131.pdf
 root -b PRD_LLR_ParticleBreakDown.cpp 
+# Muon / Proton LLR PRD
+root -b PRD_PID_NoCuts.cpp
 
 root -b
 .L PeLEE_Create1DPlotsTHStack_TopologicalBreakDown.cpp

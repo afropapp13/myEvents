@@ -85,7 +85,7 @@ void PeLEE_Create1DPlotsTHStack_TopologicalBreakDown(TString BaseMC = "") {
 //	PlotNames.push_back("RecoThreePlaneChi2LogLikelihoodCandidateMuonPlot");
 //	PlotNames.push_back("RecoThreePlaneChi2LogLikelihoodCandidateProtonPlot");
 
-//	PlotNames.push_back("RecoMuonLLRPIDPlot");
+	PlotNames.push_back("RecoMuonLLRPIDPlot");
 	PlotNames.push_back("RecoProtonLLRPIDPlot");
 
 	PlotNames.push_back("RecoECalPlot");
@@ -459,7 +459,7 @@ void PeLEE_Create1DPlotsTHStack_TopologicalBreakDown(TString BaseMC = "") {
 					if (LabelsOfSamples[WhichSample] == "BeamOn") { 
 				
 						hist->SetMarkerStyle(20);
-						hist->SetMarkerSize(2.); 
+						hist->SetMarkerSize(1.); 
 					}
 
 					CurrentPlots.push_back(hist);
@@ -503,9 +503,10 @@ void PeLEE_Create1DPlotsTHStack_TopologicalBreakDown(TString BaseMC = "") {
 				midPad->Draw();
 				botPad->Draw();
 
-				leg.push_back(new TLegend(0.05,0.005,0.95,0.995));
+				leg.push_back(new TLegend(0.1,0.005,0.9,0.995));
 				leg[WhichPlot]->SetBorderSize(0);
 				leg[WhichPlot]->SetNColumns(3);
+				leg[WhichPlot]->SetMargin(0.15);				
 
 				double max = -99.;
 
@@ -515,7 +516,7 @@ void PeLEE_Create1DPlotsTHStack_TopologicalBreakDown(TString BaseMC = "") {
 
 					midPad->cd();
 					Plots[WhichSample][WhichPlot]->SetTitle("");
-					Plots[WhichSample][WhichPlot]->SetLineWidth(4);
+					Plots[WhichSample][WhichPlot]->SetLineWidth(1);
 
 					Plots[WhichSample][WhichPlot]->GetXaxis()->SetTitleFont(FontStyle);
 					Plots[WhichSample][WhichPlot]->GetXaxis()->SetLabelFont(FontStyle);
@@ -526,7 +527,8 @@ void PeLEE_Create1DPlotsTHStack_TopologicalBreakDown(TString BaseMC = "") {
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetLabelFont(FontStyle);
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetNdivisions(6);
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetLabelSize(0.06);
-					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitle("# Events / " + ToString(DataPOT));
+//					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitle("# Events / " + ToString(DataPOT));
+					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitle("Number of events / bin");
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitleSize(0.08);
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitleOffset(0.6);
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTickSize(0);
@@ -538,9 +540,10 @@ void PeLEE_Create1DPlotsTHStack_TopologicalBreakDown(TString BaseMC = "") {
 					if (LabelsOfSamples[WhichSample] == "BeamOn") { 
 
 						gStyle->SetErrorX(0); // Removing the horizontal errors
-						Plots[WhichSample][WhichPlot]->Draw("e1 same"); 
+						Plots[WhichSample][WhichPlot]->Draw("e same"); 
 						TString NBeamOnEvents = ToString((int)(Plots[WhichSample][WhichPlot]->Integral()));
-						leg[WhichPlot]->AddEntry(Plots[WhichSample][WhichPlot],LabelsOfSamples[WhichSample] + " ("+NBeamOnEvents+")","ep");
+						leg[WhichPlot]->AddEntry(Plots[WhichSample][WhichPlot], "BNB Data ("+NBeamOnEvents+")","ep");
+//						leg[WhichPlot]->AddEntry(Plots[WhichSample][WhichPlot],"BNB Data","ep");
 
 					}
 
@@ -553,7 +556,8 @@ void PeLEE_Create1DPlotsTHStack_TopologicalBreakDown(TString BaseMC = "") {
 
 							TString NExtBNBEvents = ToString( (int)(Plots[WhichSample][WhichPlot]->Integral() ) );
 							THStacks[WhichPlot]->Add(Plots[WhichSample][WhichPlot],"hist");
-							leg[WhichPlot]->AddEntry(Plots[WhichSample][WhichPlot],LabelsOfSamples[WhichSample] + " ("+NExtBNBEvents+")","f");
+//							leg[WhichPlot]->AddEntry(Plots[WhichSample][WhichPlot],LabelsOfSamples[WhichSample] + " ("+NExtBNBEvents+")","f");
+//							leg[WhichPlot]->AddEntry(Plots[WhichSample][WhichPlot],"Cosmic","f");
 							THStacks[WhichPlot]->Draw("same");
 
 					}
@@ -564,14 +568,16 @@ void PeLEE_Create1DPlotsTHStack_TopologicalBreakDown(TString BaseMC = "") {
 							CC1pPlots[WhichSample][WhichPlot]->SetLineColor(ColorsOverlay[2]);
 							CC1pPlots[WhichSample][WhichPlot]->SetFillColor(ColorsOverlay[2]);
 							THStacks[WhichPlot]->Add(CC1pPlots[WhichSample][WhichPlot],"hist");
-							leg[WhichPlot]->AddEntry(CC1pPlots[WhichSample][WhichPlot],LabelsOfSamples[WhichSample] + " CC1p0#pi ("+NCC1pEvents+")","f");
+//							leg[WhichPlot]->AddEntry(CC1pPlots[WhichSample][WhichPlot],LabelsOfSamples[WhichSample] + " CC1p0#pi ("+NCC1pEvents+")","f");
+							//leg[WhichPlot]->AddEntry(CC1pPlots[WhichSample][WhichPlot],LabelsOfSamples[WhichSample] + " CC1p0#pi","f");
 							THStacks[WhichPlot]->Draw("same");
 
 							TString NNonCC1pEvents = ToString( (int)(NonCC1pPlots[WhichSample][WhichPlot]->Integral() ) );
 							NonCC1pPlots[WhichSample][WhichPlot]->SetLineColor(ColorsOverlay[3]);
 							NonCC1pPlots[WhichSample][WhichPlot]->SetFillColor(ColorsOverlay[3]);
 							THStacks[WhichPlot]->Add(NonCC1pPlots[WhichSample][WhichPlot],"hist");
-							leg[WhichPlot]->AddEntry(NonCC1pPlots[WhichSample][WhichPlot],LabelsOfSamples[WhichSample] + " NonCC1p0#pi ("+NNonCC1pEvents+")","f");
+							leg[WhichPlot]->AddEntry(NonCC1pPlots[WhichSample][WhichPlot],"Out-of-cryo ("+NNonCC1pEvents+")","f");
+//							leg[WhichPlot]->AddEntry(NonCC1pPlots[WhichSample][WhichPlot],"Out-of-cryo","f");				
 							THStacks[WhichPlot]->Draw("same");
 
 					}
@@ -582,14 +588,25 @@ void PeLEE_Create1DPlotsTHStack_TopologicalBreakDown(TString BaseMC = "") {
 							CC1pPlots[WhichSample][WhichPlot]->SetLineColor(ColorsOverlay[0]);
 							CC1pPlots[WhichSample][WhichPlot]->SetFillColor(ColorsOverlay[0]);
 							THStacks[WhichPlot]->Add(CC1pPlots[WhichSample][WhichPlot],"hist");
-							leg[WhichPlot]->AddEntry(CC1pPlots[WhichSample][WhichPlot],LabelsOfSamples[WhichSample] + " CC1p0#pi ("+NCC1pEvents+")","f");
+//							leg[WhichPlot]->AddEntry(CC1pPlots[WhichSample][WhichPlot],LabelsOfSamples[WhichSample] + " CC1p0#pi ("+NCC1pEvents+")","f");
+
+							// add the cosmic label first
+							TString NExtBNBEvents = ToString( (int)(Plots[2][WhichPlot]->Integral() ) );							
+							leg[WhichPlot]->AddEntry(Plots[2][WhichPlot],"Cosmic ("+NExtBNBEvents+")","f");							
+//							leg[WhichPlot]->AddEntry(Plots[2][WhichPlot],"Cosmic","f");	 // ExtBNB
+							// blank space
+							leg[WhichPlot]->AddEntry(Plots[2][WhichPlot],"","");	 // blanck space
+
+							leg[WhichPlot]->AddEntry(CC1pPlots[WhichSample][WhichPlot],"MC CC1p0#pi ("+NCC1pEvents+")","f");
+//							leg[WhichPlot]->AddEntry(CC1pPlots[WhichSample][WhichPlot],LabelsOfSamples[WhichSample] + " CC1p0#pi","f");
 							THStacks[WhichPlot]->Draw("same");
 
 							TString NNonCC1pEvents = ToString( (int)(NonCC1pPlots[WhichSample][WhichPlot]->Integral() ) );
 							NonCC1pPlots[WhichSample][WhichPlot]->SetLineColor(ColorsOverlay[1]);
 							NonCC1pPlots[WhichSample][WhichPlot]->SetFillColor(ColorsOverlay[1]);
 							THStacks[WhichPlot]->Add(NonCC1pPlots[WhichSample][WhichPlot],"hist");
-							leg[WhichPlot]->AddEntry(NonCC1pPlots[WhichSample][WhichPlot],LabelsOfSamples[WhichSample] + " NonCC1p0#pi ("+NNonCC1pEvents+")","f");
+							leg[WhichPlot]->AddEntry(NonCC1pPlots[WhichSample][WhichPlot],"MC non-CC1p0#pi ("+NNonCC1pEvents+")","f");
+//							leg[WhichPlot]->AddEntry(NonCC1pPlots[WhichSample][WhichPlot],LabelsOfSamples[WhichSample] + " non-CC1p0#pi","f");
 							THStacks[WhichPlot]->Draw("same");
 
 					}
@@ -597,7 +614,7 @@ void PeLEE_Create1DPlotsTHStack_TopologicalBreakDown(TString BaseMC = "") {
 
 				} // End of the loop over the samples
 
-				Plots[0][WhichPlot]->Draw("e1 same"); 
+				Plots[0][WhichPlot]->Draw("e same"); 
 
 				// -------------------------------------------------------------------------------------------------------------------
 
@@ -622,14 +639,14 @@ void PeLEE_Create1DPlotsTHStack_TopologicalBreakDown(TString BaseMC = "") {
 				TLatex *text = new TLatex();
 				text->SetTextFont(FontStyle);
 				text->SetTextSize(0.09);
-				if (Runs[WhichRun] != "Combined") { text->DrawTextNDC(0.14, 0.9, Runs[WhichRun]); }
+				if (Runs[WhichRun] != "Combined") { text->DrawTextNDC(0.115, 0.9, Runs[WhichRun]); }
 
 				TLatex *textSlice = new TLatex();
 				textSlice->SetTextFont(FontStyle);
 				textSlice->SetTextSize(0.09);
 				TString PlotNameDuplicate = PlotNames[WhichPlot];
 				TString ReducedPlotName = PlotNameDuplicate.ReplaceAll("Reco","") ;
-				textSlice->DrawLatexNDC(0.14, 0.8, LatexLabel[ReducedPlotName]);				
+				if (Runs[WhichRun] != "Combined") {  textSlice->DrawLatexNDC(0.115, 0.8, LatexLabel[ReducedPlotName]);	}			
 
 				// -------------------------------------------------------------------------------------------------------------------
 
@@ -639,7 +656,7 @@ void PeLEE_Create1DPlotsTHStack_TopologicalBreakDown(TString BaseMC = "") {
 
 				hratio[0][WhichPlot]->GetXaxis()->SetTitleFont(FontStyle);
 				hratio[0][WhichPlot]->GetXaxis()->SetLabelFont(FontStyle);
-				hratio[0][WhichPlot]->GetYaxis()->SetTitle("#frac{BeamOn}{MC+ExtBNB}");
+				hratio[0][WhichPlot]->GetYaxis()->SetTitle("#frac{Data}{Prediction}");
 				hratio[0][WhichPlot]->GetXaxis()->SetTitle(Plots[0][WhichPlot]->GetXaxis()->GetTitle());
 				hratio[0][WhichPlot]->GetXaxis()->SetTitleSize(0.13);
 				hratio[0][WhichPlot]->GetXaxis()->SetLabelSize(0.12);
@@ -648,14 +665,15 @@ void PeLEE_Create1DPlotsTHStack_TopologicalBreakDown(TString BaseMC = "") {
 
 				hratio[0][WhichPlot]->GetYaxis()->SetTitleFont(FontStyle);
 				hratio[0][WhichPlot]->GetYaxis()->SetLabelFont(FontStyle);
-				hratio[0][WhichPlot]->GetYaxis()->SetRangeUser(0.9*hratio[0][WhichPlot]->GetMinimum(),1.1*hratio[0][WhichPlot]->GetMaximum());
+//				hratio[0][WhichPlot]->GetYaxis()->SetRangeUser(0.9*hratio[0][WhichPlot]->GetMinimum(),1.1*hratio[0][WhichPlot]->GetMaximum());
+				hratio[0][WhichPlot]->GetYaxis()->SetRangeUser(0.1,1.9);
 				hratio[0][WhichPlot]->GetYaxis()->SetNdivisions(6);
 				hratio[0][WhichPlot]->GetYaxis()->SetTitleOffset(0.35);
 				hratio[0][WhichPlot]->GetYaxis()->SetTitleSize(0.1);
 				hratio[0][WhichPlot]->GetYaxis()->SetLabelSize(0.11);
 
 				botPad->cd();
-				hratio[0][WhichPlot]->Draw("e1 hist same");
+				hratio[0][WhichPlot]->Draw("e same");
 
 				double RatioMin = hratio[0][WhichPlot]->GetXaxis()->GetXmin();
 				double RatioMax = hratio[0][WhichPlot]->GetXaxis()->GetXmax();
@@ -684,13 +702,23 @@ void PeLEE_Create1DPlotsTHStack_TopologicalBreakDown(TString BaseMC = "") {
 				int CC1pPurity = CC1pPlots[1][WhichPlot]->Integral() / SumNonBeamOn->Integral() * 1000.;
 
 				midPad->cd();
+				
 				TLatex latexPurity;
 				latexPurity.SetTextFont(FontStyle);
 				latexPurity.SetTextSize(0.09);
 				TString LabelPurity = "CC1p0#pi = " + ToString(CC1pPurity/10.) + " %";
-				latexPurity.DrawLatexNDC(0.59,0.9, LabelPurity);
+				latexPurity.DrawLatexNDC(0.61,0.89, LabelPurity);
+				
+				//----------------------------------------//
+				
+				// POT label
+				
+				TLatex *textPOT = new TLatex();
+				textPOT->SetTextFont(FontStyle);
+				textPOT->SetTextSize(0.09);
+				textPOT->DrawLatexNDC(0.115, 0.89,"MicroBooNE " + ToString(DataPOT).ReplaceAll("e"," #times 10").ReplaceAll("+","^{")+"} POT");								
 
-				// --------------------------------------------------------------------------------------
+				//----------------------------------------//
 
 				// Cosmic Contamination
 
@@ -701,9 +729,9 @@ void PeLEE_Create1DPlotsTHStack_TopologicalBreakDown(TString BaseMC = "") {
 				latexCosmic.SetTextFont(FontStyle);
 				latexCosmic.SetTextSize(0.09);
 				TString LabelCosmic = "Cosmics = " + ToString(CosmicContamination/10.) + " %";
-				latexCosmic.DrawLatexNDC(0.59,0.8, LabelCosmic);
+				latexCosmic.DrawLatexNDC(0.61,0.8, LabelCosmic);				
 
-				// --------------------------------------------------------------------------------------
+				//----------------------------------------//
 
 				TString CanvasPath = PlotPath + Cuts+"/TopologicalBreakDown/";
 				TString CanvasName = BaseMC + "THStack_BreakDown_"+PlotNames[WhichPlot]+"_"+Runs[WhichRun]+"_"+UBCodeVersion+Cuts+".pdf";

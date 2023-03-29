@@ -32,6 +32,8 @@ void PRD_LLR_ParticleBreakDown() {
 //	PlotNames.push_back("RecoThreePlaneChi2Plot");
 //	PlotNames.push_back("RecoThreePlaneChi2LogLikelihoodPlot");
 	PlotNames.push_back("RecoLLRPIDPlot");
+	PlotNames.push_back("RecoMuonLLRPIDPlot");
+	PlotNames.push_back("RecoProtonLLRPIDPlot");	
 
 	const int N1DPlots = PlotNames.size();
 	cout << "Number of 1D Plots = " << N1DPlots << endl;
@@ -204,7 +206,7 @@ void PRD_LLR_ParticleBreakDown() {
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitleOffset(1.2);
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetLabelFont(FontStyle);
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetLabelSize(TextSize);					
-					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTickSize(0);
+					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTickSize(0.02);
 
 					double localmax = Plots[WhichSample][WhichPlot]->GetMaximum();
 					if (localmax > max) { max = localmax; }
@@ -291,7 +293,7 @@ void PRD_LLR_ParticleBreakDown() {
 				TLatex *textPOT = new TLatex();
 				textPOT->SetTextFont(FontStyle);
 				textPOT->SetTextSize(TextSize);
-				textPOT->DrawLatexNDC(0.15, 0.83,"MicroBooNE " + ToString(DataPOT).ReplaceAll("e"," #times 10").ReplaceAll("+","^{")+"} POT");								
+				textPOT->DrawLatexNDC(0.2, 0.83,"MicroBooNE " + ToString(DataPOT).ReplaceAll("e"," #times 10").ReplaceAll("+","^{")+"} POT");								
 
 				//----------------------------------------//				
 
