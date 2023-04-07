@@ -92,6 +92,7 @@ void PeLEE_OverlayPOTNormEventRates() {
 	TString PlotName = "RecoDeltaPTPlot";
 //	TString PlotName = "RecoDeltaAlphaTPlot";
 //	TString PlotName = "RecoDeltaPhiTPlot";
+//	TString PlotName = "RecoMuonCosThetaSingleBinPlot";
 
 	// -----------------------------------------------------------------------------------------------------------------------------
 
