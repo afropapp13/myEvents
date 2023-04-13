@@ -20,6 +20,7 @@ using namespace Constants;
 void PRD_LLR_ParticleBreakDown() {
 
 	vector<TString> PlotNames; PlotNames.clear();
+	vector<TString> SaveNames; SaveNames.clear();	
 
 	TString StorePath = "myPlots/";
 	gStyle->SetOptStat(0);	
@@ -31,9 +32,9 @@ void PRD_LLR_ParticleBreakDown() {
 //	PlotNames.push_back("RecoChi2Plot");
 //	PlotNames.push_back("RecoThreePlaneChi2Plot");
 //	PlotNames.push_back("RecoThreePlaneChi2LogLikelihoodPlot");
-	PlotNames.push_back("RecoLLRPIDPlot");
-	PlotNames.push_back("RecoMuonLLRPIDPlot");
-	PlotNames.push_back("RecoProtonLLRPIDPlot");	
+	PlotNames.push_back("RecoLLRPIDPlot"); SaveNames.push_back("Fig131");
+	PlotNames.push_back("RecoMuonLLRPIDPlot"); SaveNames.push_back("Fig132");
+	PlotNames.push_back("RecoProtonLLRPIDPlot"); SaveNames.push_back("Fig122");	
 
 	const int N1DPlots = PlotNames.size();
 	cout << "Number of 1D Plots = " << N1DPlots << endl;
@@ -141,7 +142,7 @@ void PRD_LLR_ParticleBreakDown() {
 				
 						hist->SetMarkerStyle(20);
 						hist->SetMarkerSize(1.); 
-					}
+					}					
 
 					CurrentPlots.push_back(hist);
 					MuonCurrentPlots.push_back(Muonhist);
@@ -188,9 +189,21 @@ void PRD_LLR_ParticleBreakDown() {
 				for (int WhichSample = 0; WhichSample < NSamples; WhichSample ++){
 
 					Plots[WhichSample][WhichPlot]->SetTitle("");
-					Plots[WhichSample][WhichPlot]->SetLineWidth(1);
+					Plots[WhichSample][WhichPlot]->SetLineWidth(1);	
 
-					Plots[WhichSample][WhichPlot]->GetXaxis()->SetRangeUser(-0.9,1.);
+					if (PlotNames[WhichPlot] == "RecoProtonLLRPIDPlot") { 
+						
+						Plots[WhichSample][WhichPlot]->GetXaxis()->SetRangeUser(-0.9,0.95); 
+						
+					}
+
+					if (PlotNames[WhichPlot] == "RecoMuonLLRPIDPlot") { 
+						
+						Plots[WhichSample][WhichPlot]->GetXaxis()->SetRangeUser(0.35,1.); 
+						
+					}									
+
+					//Plots[WhichSample][WhichPlot]->GetXaxis()->SetRangeUser(-0.9,1.);
 					Plots[WhichSample][WhichPlot]->GetXaxis()->SetNdivisions(8);					
 					Plots[WhichSample][WhichPlot]->GetXaxis()->CenterTitle();
 					Plots[WhichSample][WhichPlot]->GetXaxis()->SetTitleSize(TextSize);					
@@ -268,7 +281,7 @@ void PRD_LLR_ParticleBreakDown() {
 
 							leg[WhichPlot]->AddEntry(MuonPlots[WhichSample][WhichPlot],"#mu","f"); 
 							leg[WhichPlot]->AddEntry(ProtonPlots[WhichSample][WhichPlot],"p","f"); 
-							leg[WhichPlot]->AddEntry(PionPlots[WhichSample][WhichPlot],"#pi^{#pm}","f"); 
+							leg[WhichPlot]->AddEntry(PionPlots[WhichSample][WhichPlot],"#pi","f"); 
 							//leg[WhichPlot]->AddEntry(CosmicPlots[WhichSample][WhichPlot],"Overlay Cosmic","f"); 
 
 							THStacks[WhichPlot]->Draw("same");
@@ -300,8 +313,7 @@ void PRD_LLR_ParticleBreakDown() {
 				gPad->RedrawAxis();
 
 				TString CanvasPath = PlotPath + Cuts+"/";
-				TString CanvasName = "Fig131.pdf";
-				PlotCanvas[WhichPlot]->SaveAs(CanvasPath+CanvasName);
+				PlotCanvas[WhichPlot]->SaveAs(CanvasPath+SaveNames[WhichPlot]+".pdf");
 				//delete PlotCanvas[WhichPlot];
 
 			} // End of the loop over the plots

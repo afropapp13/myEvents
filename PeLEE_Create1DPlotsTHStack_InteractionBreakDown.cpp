@@ -87,6 +87,7 @@ void PeLEE_Create1DPlotsTHStack_InteractionBreakDown(TString BaseMC = "") {
 
 	PlotNames.push_back("RecoMuonLLRPIDPlot");
 	PlotNames.push_back("RecoProtonLLRPIDPlot");
+	PlotNames.push_back("RecoLLRPIDPlot");	
 
 	PlotNames.push_back("RecoECalPlot");
 	PlotNames.push_back("RecoEQEPlot");

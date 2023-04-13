@@ -1072,16 +1072,18 @@ void PeLEE_myRecoAnalysis::Loop() {
 		// 1D Reco Level Plots
 
 		TH1D* RecoLLRPIDPlot = new TH1D("RecoLLRPIDPlot",RecoLabelXAxisLLRPID,NBinsLLRPID,MinLLRPID,MaxLLRPID);
+		TH1D* CC1pRecoLLRPIDPlot = new TH1D("CC1pRecoLLRPIDPlot",RecoLabelXAxisLLRPID,NBinsLLRPID,MinLLRPID,MaxLLRPID);
+		TH1D* NonCC1pRecoLLRPIDPlot = new TH1D("NonCC1pRecoLLRPIDPlot",RecoLabelXAxisLLRPID,NBinsLLRPID,MinLLRPID,MaxLLRPID);				
 //		TH1D* RecoChi2Plot = new TH1D("RecoChi2Plot",RecoLabelXAxisChi2,NBinsChi2,MinChi2,MaxChi2);
 
 		// Muon 1D Reco Level Plots
 
-		TH1D* MuonRecoLLRPIDPlot = new TH1D("MuonRecoLLRPIDPlot",RecoLabelXAxisLLRPID,NBinsLLRPID,MinLLRPID,MaxLLRPID);
+		TH1D* MuonRecoLLRPIDPlot = new TH1D("MuonRecoLLRPIDPlot",RecoLabelXAxisLLRPID,NBinsLLRPID,MinLLRPID,MaxLLRPID);		
 //		TH1D* MuonRecoChi2Plot = new TH1D("MuonRecoChi2Plot",RecoLabelXAxisChi2,NBinsChi2,MinChi2,MaxChi2);
 
 		// Proton 1D Reco Level Plots
 
-		TH1D* ProtonRecoLLRPIDPlot = new TH1D("ProtonRecoLLRPIDPlot",RecoLabelXAxisLLRPID,NBinsLLRPID,MinLLRPID,MaxLLRPID);
+		TH1D* ProtonRecoLLRPIDPlot = new TH1D("ProtonRecoLLRPIDPlot",RecoLabelXAxisLLRPID,NBinsLLRPID,MinLLRPID,MaxLLRPID);			
 //		TH1D* ProtonRecoChi2Plot = new TH1D("ProtonRecoChi2Plot",RecoLabelXAxisChi2,NBinsChi2,MinChi2,MaxChi2);
 
 		// Pion 1D Reco Level Plots
@@ -3631,6 +3633,9 @@ void PeLEE_myRecoAnalysis::Loop() {
 					double true_MuonEnergy = TMath::Sqrt( TMath::Power(MuonMass_GeV,2.) + TMath::Power(True_CandidateMu_P->at(0),2.) );
 					double true_Nu = True_Ev - true_MuonEnergy;
 
+					CC1pRecoLLRPIDPlot->Fill(reco_mu_LLR_Score,weight/2.);
+					CC1pRecoLLRPIDPlot->Fill(reco_p_LLR_Score,weight/2.);
+
 					CC1pTrueNuPlot->Fill(true_Nu,weight);
 					CC1pTrueEvPlot->Fill(True_Ev,weight);
 					CC1pTrueVertexXPlot->Fill(True_Vx,weight);
@@ -4458,6 +4463,9 @@ void PeLEE_myRecoAnalysis::Loop() {
 						//std::cout << " NumberNeutrons = " << NumberNeutrons << endl; 
 
 					}
+
+					NonCC1pRecoLLRPIDPlot->Fill(reco_mu_LLR_Score,weight/2.);
+					NonCC1pRecoLLRPIDPlot->Fill(reco_p_LLR_Score,weight/2.);					
 
 					NonCC1pRecoNuPlot->Fill(true_nu,weight);
 					NonCC1pRecoEvPlot->Fill(True_Ev,weight);
@@ -5403,9 +5411,22 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 				// Overlay particle breakdown using the Backtracker for PID studies
 
+				// Sanity check
+
+				if ( !(CandidateMu_MCParticle_Pdg->size() > 0 && CandidateP_MCParticle_Pdg->size() > 0) ) { 
+
+					cout << "muon candidate true pdg = " << CandidateMu_MCParticle_Pdg->at(0) << endl;
+					cout << "proton candidate true pdg = " << CandidateP_MCParticle_Pdg->at(0) << endl;
+
+				}
+
 				if (CandidateMu_MCParticle_Pdg->size() > 0 && CandidateP_MCParticle_Pdg->size() > 0 ) {
 
-					if (CandidateMu_MCParticle_Pdg->at(0) == MuonPdg) {
+					//--------------------------------------------//
+
+					// Muon candidate
+
+					if ( TMath::Abs(CandidateMu_MCParticle_Pdg->at(0)) == MuonPdg) {
 
 						MuonRecoLLRPIDPlot->Fill(reco_mu_LLR_Score,weight/2.);
 //						MuonRecoChi2Plot->Fill(reco_Pmu_chi2,weight/2.);		
@@ -5414,7 +5435,44 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 					}
 
-					if (CandidateP_MCParticle_Pdg->at(0) == MuonPdg) {
+					else if ( TMath::Abs(CandidateMu_MCParticle_Pdg->at(0)) == ProtonPdg) {
+
+						ProtonRecoLLRPIDPlot->Fill(reco_mu_LLR_Score,weight/2.);
+//						ProtonRecoChi2Plot->Fill(reco_Pmu_chi2,weight);		
+
+						ProtonRecoMuonLLRPIDPlot->Fill(reco_mu_LLR_Score,weight);
+
+					}	
+
+					else if ( 
+						TMath::Abs(CandidateMu_MCParticle_Pdg->at(0)) == AbsChargedPionPdg || 
+						TMath::Abs(CandidateMu_MCParticle_Pdg->at(0)) == NeutralPionPdg ||
+						TMath::Abs(CandidateMu_MCParticle_Pdg->at(0)) == ElectronPdg ||
+						TMath::Abs(CandidateMu_MCParticle_Pdg->at(0)) == PhotonPdg ||
+						TMath::Abs(CandidateMu_MCParticle_Pdg->at(0)) == KaonPdg ||
+						TMath::Abs(CandidateMu_MCParticle_Pdg->at(0)) == ProtonPdg ||
+						TMath::Abs(CandidateMu_MCParticle_Pdg->at(0)) == NeutronPdg ||						
+						TMath::Abs(CandidateMu_MCParticle_Pdg->at(0)) == 0																		
+					) {
+
+						PionRecoLLRPIDPlot->Fill(reco_mu_LLR_Score,weight/2.);
+//						PionRecoChi2Plot->Fill(reco_Pmu_chi2,weight/2.);		
+
+						PionRecoMuonLLRPIDPlot->Fill(reco_mu_LLR_Score,weight);
+
+					}	
+
+					else {
+
+						cout << "muon candidate pdg " << CandidateMu_MCParticle_Pdg->at(0) << endl;
+
+					}								
+
+					//--------------------------------------------//
+
+					// Proton candidate					
+
+					if ( TMath::Abs(CandidateP_MCParticle_Pdg->at(0) ) == MuonPdg) {
 
 						MuonRecoLLRPIDPlot->Fill(reco_p_LLR_Score,weight/2.);
 //						MuonRecoChi2Plot->Fill(reco_Pp_chi2,weight/2.);		
@@ -5423,18 +5481,7 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 					}
 
-					// ----------------------------------------------------------------------------------------------------------------
-
-					if (CandidateMu_MCParticle_Pdg->at(0) == ProtonPdg) {
-
-						ProtonRecoLLRPIDPlot->Fill(reco_mu_LLR_Score,weight/2.);
-//						ProtonRecoChi2Plot->Fill(reco_Pmu_chi2,weight);		
-
-						ProtonRecoMuonLLRPIDPlot->Fill(reco_mu_LLR_Score,weight);
-
-					}
-
-					if (CandidateP_MCParticle_Pdg->at(0) == ProtonPdg) {
+					else if ( TMath::Abs(CandidateP_MCParticle_Pdg->at(0) ) == ProtonPdg) {
 
 						ProtonRecoLLRPIDPlot->Fill(reco_p_LLR_Score,weight/2.);
 //						ProtonRecoChi2Plot->Fill(reco_Pp_chi2,weight/2.);		
@@ -5444,23 +5491,27 @@ void PeLEE_myRecoAnalysis::Loop() {
 
 					}
 
-					// -----------------------------------------------------------------------------------------------------------------
-
-					if (CandidateMu_MCParticle_Pdg->at(0) == AbsChargedPionPdg) {
-
-						PionRecoLLRPIDPlot->Fill(reco_mu_LLR_Score,weight/2.);
-//						PionRecoChi2Plot->Fill(reco_Pmu_chi2,weight/2.);		
-
-						PionRecoMuonLLRPIDPlot->Fill(reco_mu_LLR_Score,weight);
-
-					}
-
-					if (CandidateP_MCParticle_Pdg->at(0) == AbsChargedPionPdg) {
+					else if ( 
+						TMath::Abs(CandidateP_MCParticle_Pdg->at(0)) == AbsChargedPionPdg ||
+						TMath::Abs(CandidateP_MCParticle_Pdg->at(0)) == NeutralPionPdg||
+						TMath::Abs(CandidateP_MCParticle_Pdg->at(0)) == ElectronPdg ||
+						TMath::Abs(CandidateP_MCParticle_Pdg->at(0)) == PhotonPdg ||
+						TMath::Abs(CandidateP_MCParticle_Pdg->at(0)) == KaonPdg ||
+						TMath::Abs(CandidateP_MCParticle_Pdg->at(0)) == ProtonPdg ||
+						TMath::Abs(CandidateP_MCParticle_Pdg->at(0)) == NeutronPdg ||																		
+						TMath::Abs(CandidateP_MCParticle_Pdg->at(0)) == 0					 
+					) {
 
 						PionRecoLLRPIDPlot->Fill(reco_p_LLR_Score,weight/2.);
 //						PionRecoChi2Plot->Fill(reco_Pp_chi2,weight/2.);		
 
 						PionRecoProtonLLRPIDPlot->Fill(reco_p_LLR_Score,weight);
+
+					}
+
+					else {
+
+						cout << "proton candidate pdg " << CandidateP_MCParticle_Pdg->at(0) << endl;
 
 					}
 
