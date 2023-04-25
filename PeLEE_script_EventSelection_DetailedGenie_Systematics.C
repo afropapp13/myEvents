@@ -54,7 +54,16 @@
 	EventWeightLabels.push_back("NormCCMEC_UBGenie"); Universes.push_back(2);
 	EventWeightLabels.push_back("NormNCMEC_UBGenie"); Universes.push_back(2);
 	EventWeightLabels.push_back("RDecBR1eta_UBGenie"); Universes.push_back(2);
-	EventWeightLabels.push_back("RDecBR1gamma_UBGenie"); Universes.push_back(2);											
+	EventWeightLabels.push_back("RDecBR1gamma_UBGenie"); Universes.push_back(2);	
+
+	// Unisims										
+
+	EventWeightLabels.push_back("UnShortAxFFCCQEshape_UBGenie"); Universes.push_back(2);
+	EventWeightLabels.push_back("UnShortDecayAngMEC_UBGenie"); Universes.push_back(2);
+	EventWeightLabels.push_back("UnShortRPA_CCQE_UBGenie"); Universes.push_back(2);
+	EventWeightLabels.push_back("UnShortTheta_Delta2Npi_UBGenie"); Universes.push_back(2);
+	EventWeightLabels.push_back("UnShortVecFFCCQEshape_UBGenie"); Universes.push_back(2);
+	EventWeightLabels.push_back("UnShortXSecShape_CCMEC_UBGenie"); Universes.push_back(2);						
 
 	// -----------------------------------------------------------------------------------------
 

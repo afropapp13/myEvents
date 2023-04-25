@@ -21,13 +21,12 @@ root -b PeLEE_script_EventSelection_Flux_Systematics.C
 # MC_Stat variations
 root -b PeLEE_script_EventSelection_MC_Stat_Systematics.C
 
+# NuWro Fake Data
+root -b PeLEE_script_EventSelection_FakeData.C
+
 ###########################################################################################################################################################################
 
-# Fake Data
-
-# NuWro
-root -b PeLEE_script_EventSelection_FakeData.C
-#GENIE v2
+#GENIE v2 Fake Data
 root -b PeLEE_script_EventSelection_GENIEv2.C
 
 ###########################################################################################################################################################################

@@ -24,7 +24,8 @@ void PRD_LLR_ParticleBreakDown() {
 
 	TString StorePath = "myPlots/";
 	gStyle->SetOptStat(0);	
-	double TextSize = 0.06;
+	double TextSize = 0.1;
+	int MCUncColor = kGray;	
 
 	// -----------------------------------------------------------------------------------------------------------------------------------------
 
@@ -33,8 +34,8 @@ void PRD_LLR_ParticleBreakDown() {
 //	PlotNames.push_back("RecoThreePlaneChi2Plot");
 //	PlotNames.push_back("RecoThreePlaneChi2LogLikelihoodPlot");
 	PlotNames.push_back("RecoLLRPIDPlot"); SaveNames.push_back("Fig131");
-	PlotNames.push_back("RecoMuonLLRPIDPlot"); SaveNames.push_back("Fig132");
-	PlotNames.push_back("RecoProtonLLRPIDPlot"); SaveNames.push_back("Fig122");	
+	PlotNames.push_back("RecoMuonLLRPIDPlot"); SaveNames.push_back("Fig139");
+	PlotNames.push_back("RecoProtonLLRPIDPlot"); SaveNames.push_back("Fig140");	
 
 	const int N1DPlots = PlotNames.size();
 	cout << "Number of 1D Plots = " << N1DPlots << endl;
@@ -69,6 +70,9 @@ void PRD_LLR_ParticleBreakDown() {
 
 		// -------------------------------------------------------------------------------------------------------------------------------------
 
+		TString NameExtractedXSec = MigrationMatrixPath+"WienerSVD_Total_EventRateCovarianceMatrices_Overlay9_"+Runs[WhichRun]+"_"+UBCodeVersion+".root";
+		TFile* CovFile = new TFile(NameExtractedXSec,"readonly");
+
 		double DataPOT = PeLEE_ReturnBeamOnRunPOT(Runs[WhichRun]);
 
 		// -------------------------------------------------------------------------------------------------------------------------------------
@@ -86,8 +90,10 @@ void PRD_LLR_ParticleBreakDown() {
 
 			vector<TCanvas*> PlotCanvas; PlotCanvas.clear();
 			vector<THStack*> THStacks; THStacks.clear();
+			vector<THStack*> THStacksMCUnc; THStacksMCUnc.clear();			
 			gStyle->SetPalette(55); const Int_t NCont = 999; gStyle->SetNumberContours(NCont); gStyle->SetTitleSize(0.07,"t");
 			vector<TLegend*> leg; leg.clear();
+			vector<TLegend*> legMC; legMC.clear();			
 
 			vector<vector<TH1D*> > Plots; Plots.clear();
 			vector<vector<TH1D*> > MuonPlots; MuonPlots.clear();
@@ -136,6 +142,24 @@ void PRD_LLR_ParticleBreakDown() {
 
 					//CenterAxisTitle(hist);
 
+					if (PlotNames[WhichPlot] == "RecoLLRPIDPlot") { 
+						
+						hist->GetXaxis()->SetRangeUser(-0.9,1.); 
+						
+					}
+					
+					if (PlotNames[WhichPlot] == "RecoProtonLLRPIDPlot") { 
+						
+						hist->GetXaxis()->SetRangeUser(-0.9,0.95); 
+						
+					}
+
+					if (PlotNames[WhichPlot] == "RecoMuonLLRPIDPlot") { 
+						
+						hist->GetXaxis()->SetRangeUser(0.35,1.); 
+						
+					}					
+
 					hist->SetLineColor(Colors[WhichSample]);
 
 					if (LabelsOfSamples[WhichSample] == "BeamOn") { 
@@ -175,10 +199,25 @@ void PRD_LLR_ParticleBreakDown() {
 				PlotCanvas[WhichPlot]->SetBottomMargin(0.12);
 				PlotCanvas[WhichPlot]->SetLeftMargin(0.14);
 				PlotCanvas[WhichPlot]->cd();
+				
+				TPad *topPad = new TPad("topPad", "", 0.005, 0.86, 0.995, 0.95);
+				TPad *midPad = new TPad("midPad", "", 0.005, 0.3  , 0.995, 0.86);
+				TPad *botPad = new TPad("botPad", "", 0.005, 0.01, 0.995, 0.3);
+				topPad->SetTopMargin(0.);
+				topPad->SetBottomMargin(0.0);
+				midPad->SetBottomMargin(0.025);
+				midPad->SetTopMargin(0.01);
+				midPad->SetLeftMargin(0.13);				
+				botPad->SetTopMargin(0.01);				
+				botPad->SetBottomMargin(0.35);
+				botPad->SetLeftMargin(0.13);				
+				topPad->Draw();
+				midPad->Draw();
+				botPad->Draw();				
 
 				THStacks.push_back(new THStack(PlotNames[WhichPlot],""));
 
-				leg.push_back(new TLegend(0.12,0.91,0.9,0.995));
+				leg.push_back(new TLegend(0.1,0.005,0.9,0.95));
 				leg[WhichPlot]->SetBorderSize(0);
 				leg[WhichPlot]->SetNColumns(5);
 
@@ -203,12 +242,13 @@ void PRD_LLR_ParticleBreakDown() {
 						
 					}									
 
+					midPad->cd();
 					//Plots[WhichSample][WhichPlot]->GetXaxis()->SetRangeUser(-0.9,1.);
 					Plots[WhichSample][WhichPlot]->GetXaxis()->SetNdivisions(8);					
 					Plots[WhichSample][WhichPlot]->GetXaxis()->CenterTitle();
 					Plots[WhichSample][WhichPlot]->GetXaxis()->SetTitleSize(TextSize);					
 					Plots[WhichSample][WhichPlot]->GetXaxis()->SetTitleFont(FontStyle);
-					Plots[WhichSample][WhichPlot]->GetXaxis()->SetLabelSize(TextSize);
+					Plots[WhichSample][WhichPlot]->GetXaxis()->SetLabelSize(0.);
 					Plots[WhichSample][WhichPlot]->GetXaxis()->SetLabelFont(FontStyle);					
 
 					Plots[WhichSample][WhichPlot]->GetYaxis()->CenterTitle();
@@ -216,14 +256,14 @@ void PRD_LLR_ParticleBreakDown() {
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitleFont(FontStyle);
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitle("Number of events / bin");
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitleSize(TextSize);
-					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitleOffset(1.2);
+					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitleOffset(0.7);
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetLabelFont(FontStyle);
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetLabelSize(TextSize);					
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTickSize(0.02);
 
 					double localmax = Plots[WhichSample][WhichPlot]->GetMaximum();
 					if (localmax > max) { max = localmax; }
-					Plots[0][WhichPlot]->GetYaxis()->SetRangeUser(0.,1.05*max);
+					Plots[0][WhichPlot]->GetYaxis()->SetRangeUser(0.1,1.05*max);
 
 					if (LabelsOfSamples[WhichSample] == "BeamOn") { 
 
@@ -295,22 +335,194 @@ void PRD_LLR_ParticleBreakDown() {
 
 				// ---------------------------------------------------------------------------------------------------------------------
 
-				leg[WhichPlot]->SetTextSize(TextSize);
+				topPad->cd();
 				leg[WhichPlot]->SetTextFont(FontStyle);
 				leg[WhichPlot]->SetMargin(0.5);
 				leg[WhichPlot]->Draw();
 
 				//----------------------------------------//
 
-				PlotCanvas[WhichPlot]->cd();
+				midPad->cd();
 				TLatex *textPOT = new TLatex();
 				textPOT->SetTextFont(FontStyle);
 				textPOT->SetTextSize(TextSize);
-				textPOT->DrawLatexNDC(0.2, 0.83,"MicroBooNE " + ToString(DataPOT).ReplaceAll("e"," #times 10").ReplaceAll("+","^{")+"} POT");								
+				textPOT->DrawLatexNDC(0.18, 0.89,"MicroBooNE " + ToString(DataPOT).ReplaceAll("e"," #times 10").ReplaceAll("+","^{")+"} POT");								
 
 				//----------------------------------------//				
 
 				gPad->RedrawAxis();
+				
+				// -------------------------------------------------------------------- //				
+
+				// Uncertainty band
+				
+				TString PlotNameDuplicate = PlotNames[WhichPlot];				
+				TString ReducedPlotName = PlotNameDuplicate.ReplaceAll("Reco","") ;
+				//if (Runs[WhichRun] != "Combined") {  textSlice->DrawLatexNDC(0.115, 0.8, LatexLabel[ReducedPlotName]);	}				
+
+				TH2D* CovMatrix = (TH2D*)(CovFile->Get("TotalCovariance_"+ReducedPlotName));
+				TH2D* StatCovMatrix = (TH2D*)(CovFile->Get("StatCovariance_"+ReducedPlotName));		
+				CovMatrix->Add(StatCovMatrix,-1);		
+				// Sanity check, stat errors should be identical to the ones coming from the Stat covariances 
+				//TH2D* CovMatrix = (TH2D*)(CovFile->Get("StatCovariance_"+ReducedPlotName));				
+				//CovMatrix->Scale(TMath::Power( (IntegratedFlux*NTargets)/Units ,2.));
+
+				int n = Plots[0][WhichPlot]->GetXaxis()->GetNbins();
+				TH1D* MCUnc = (TH1D*)(Plots[0][WhichPlot]->Clone());				
+
+				for (int i = 1; i <= n;i++ ) { 
+
+					double MCCV = ( (TH1*) (THStacks[WhichPlot]->GetStack()->Last()) )->GetBinContent(i);
+					double Unc = TMath::Sqrt( CovMatrix->GetBinContent(i,i) );
+
+					MCUnc->SetBinContent(i,MCCV);					
+					MCUnc->SetBinError(i, Unc);				
+
+				}
+
+				MCUnc->SetMarkerSize(0.);
+				MCUnc->SetMarkerColor(MCUncColor);				
+				MCUnc->SetLineColor(kWhite);
+				MCUnc->SetLineWidth(1);				
+				MCUnc->SetFillColor(MCUncColor);
+				//MCUnc->SetFillStyle(3005);	
+				//MCUnc->Draw("e2 same");										
+
+				//gStyle->SetErrorX(0); // Removing the horizontal errors
+				Plots[0][WhichPlot]->Draw("e same");				
+
+				gPad->RedrawAxis();								
+
+				//----------------------------------------//
+
+				hratio[1][WhichPlot]->Add(hratio[2][WhichPlot]);
+				hratio[1][WhichPlot]->Add(hratio[3][WhichPlot]);
+				hratio[0][WhichPlot]->Divide(hratio[1][WhichPlot]);
+
+				hratio[0][WhichPlot]->GetXaxis()->SetTitleFont(FontStyle);
+				hratio[0][WhichPlot]->GetXaxis()->SetLabelFont(FontStyle);
+				hratio[0][WhichPlot]->GetYaxis()->SetTitle("#frac{Data}{Prediction}");
+				hratio[0][WhichPlot]->GetXaxis()->SetTitle(Plots[0][WhichPlot]->GetXaxis()->GetTitle());
+				hratio[0][WhichPlot]->GetXaxis()->SetTitleSize(0.15);
+				hratio[0][WhichPlot]->GetXaxis()->SetLabelSize(0.12);
+				hratio[0][WhichPlot]->GetXaxis()->CenterTitle();				
+
+				hratio[0][WhichPlot]->GetXaxis()->SetTitleOffset(1.);
+				hratio[0][WhichPlot]->GetXaxis()->SetNdivisions(8);
+
+				hratio[0][WhichPlot]->GetYaxis()->SetTitleFont(FontStyle);
+				hratio[0][WhichPlot]->GetYaxis()->SetLabelFont(FontStyle);
+				hratio[0][WhichPlot]->GetYaxis()->SetRangeUser(0.56,1.44);
+				hratio[0][WhichPlot]->GetYaxis()->SetNdivisions(6);
+				hratio[0][WhichPlot]->GetYaxis()->SetTitleOffset(0.3);
+				hratio[0][WhichPlot]->GetYaxis()->SetTitleSize(0.15);
+				hratio[0][WhichPlot]->GetYaxis()->SetLabelSize(0.11);
+
+				botPad->cd();
+				hratio[0][WhichPlot]->Draw("e same");
+
+				double RatioMin = hratio[0][WhichPlot]->GetXaxis()->GetXmin();
+				double RatioMax = hratio[0][WhichPlot]->GetXaxis()->GetXmax();
+
+				if (PlotNames[WhichPlot] == "RecoLLRPIDPlot") { 
+						
+					RatioMin = -0.9; RatioMax = 1.; 
+						
+				}
+
+				if (PlotNames[WhichPlot] == "RecoProtonLLRPIDPlot") { 
+						
+					RatioMin = -0.9; RatioMax = 0.95; 
+						
+				}
+
+				if (PlotNames[WhichPlot] == "RecoMuonLLRPIDPlot") { 
+						
+					RatioMin = 0.35; RatioMax = 1.;
+						
+				}
+
+				double YRatioCoord = 1.;
+				TLine* RatioLine = new TLine(RatioMin,YRatioCoord,RatioMax,YRatioCoord);
+				RatioLine->SetLineWidth(1);
+				RatioLine->SetLineColor(kBlack);
+				RatioLine->SetLineStyle(kDashed);
+
+				//----------------------------------------//
+
+				// Uncertainty band on ratio plot
+
+				TH1D* MCUncDown = (TH1D*)MCUnc->Clone();
+				TH1D* MCUncTwice = (TH1D*)MCUnc->Clone();				
+
+				for (int WhichBin = 1; WhichBin <= n; WhichBin++) {
+
+					double MCCV = MCUnc->GetBinContent(WhichBin);
+					double Unc = MCUnc->GetBinError(WhichBin);
+					double FracUnc = Unc / MCCV;
+
+					MCUncDown->SetBinContent(WhichBin,1.-FracUnc);					
+					MCUncTwice->SetBinContent(WhichBin,2*FracUnc);	
+
+				}
+
+				THStacksMCUnc.push_back(new THStack(PlotNames[WhichPlot] + "MCUnc",PlotNames[WhichPlot] + "MCUnc"));	
+
+				MCUncDown->SetLineColor(MCUncColor);
+				MCUncDown->SetFillColor(kWhite);
+				MCUncDown->SetLineWidth(1);
+
+				MCUncTwice->SetLineColor(MCUncColor);
+				MCUncTwice->SetFillColor(MCUncColor);
+				MCUncTwice->SetLineWidth(1);				
+
+				botPad->cd();
+				THStacksMCUnc[WhichPlot]->Add(MCUncDown,"hist");
+				THStacksMCUnc[WhichPlot]->Draw("same");
+
+				THStacksMCUnc[WhichPlot]->Add(MCUncTwice,"hist");
+				THStacksMCUnc[WhichPlot]->Draw("same");					
+
+				RatioLine->Draw("same");
+				hratio[0][WhichPlot]->Draw("e same");	
+				gPad->RedrawAxis();														
+
+				//----------------------------------------//
+
+				topPad->cd();
+				leg[WhichPlot]->SetTextSize(0.6);
+				leg[WhichPlot]->SetTextFont(FontStyle);
+				leg[WhichPlot]->Draw();
+
+				//----------------------------------------//
+
+				botPad->cd();
+
+				if (PlotNames[WhichPlot] == "RecoMuonLLRPIDPlot") { legMC.push_back(new TLegend(0.15,0.88,0.35,0.98)); }
+				if (PlotNames[WhichPlot] == "RecoProtonLLRPIDPlot") { legMC.push_back(new TLegend(0.55,0.88,0.75,0.98)); }
+				if (PlotNames[WhichPlot] == "RecoLLRPIDPlot") { legMC.push_back(new TLegend(0.55,0.88,0.75,0.98)); }				
+
+				legMC[WhichPlot]->SetBorderSize(0);
+				legMC[WhichPlot]->SetNColumns(3);
+				legMC[WhichPlot]->AddEntry(MCUnc,"Prediction Uncertainty","f");
+				legMC[WhichPlot]->SetTextSize(0.1);
+				legMC[WhichPlot]->SetMargin(.5);				
+				legMC[WhichPlot]->SetTextFont(FontStyle);	
+						
+				legMC[WhichPlot]->Draw();
+				
+				//----------------------------------------//
+				
+				// Subfig label
+				
+				midPad->cd();
+				TLatex *textsubfig = new TLatex();
+				textsubfig->SetTextFont(FontStyle);
+				textsubfig->SetTextSize(0.1);
+				if (PlotNames[WhichPlot] == "RecoProtonLLRPIDPlot") { textsubfig->DrawLatexNDC(0.79, 0.89,"(a)"); }
+				if (PlotNames[WhichPlot] == "RecoMuonLLRPIDPlot") { textsubfig->DrawLatexNDC(0.79, 0.89,"(b)"); }				
+				
+				//----------------------------------------//
 
 				TString CanvasPath = PlotPath + Cuts+"/";
 				PlotCanvas[WhichPlot]->SaveAs(CanvasPath+SaveNames[WhichPlot]+".pdf");

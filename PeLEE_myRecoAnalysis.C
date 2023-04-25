@@ -2719,7 +2719,16 @@ void PeLEE_myRecoAnalysis::Loop() {
 				if (fEventWeightLabel == "NormCCMEC_UBGenie") { SF =  NormCCMEC_UBGenie->at(fUniverseIndex) / 1000. ; }	
 				if (fEventWeightLabel == "NormNCMEC_UBGenie") { SF =  NormNCMEC_UBGenie->at(fUniverseIndex) / 1000. ; }
 				if (fEventWeightLabel == "RDecBR1eta_UBGenie") { SF =  RDecBR1eta_UBGenie->at(fUniverseIndex) / 1000. ; }	
-				if (fEventWeightLabel == "RDecBR1gamma_UBGenie") { SF =  RDecBR1gamma_UBGenie->at(fUniverseIndex) / 1000. ; }	
+				if (fEventWeightLabel == "RDecBR1gamma_UBGenie") { SF =  RDecBR1gamma_UBGenie->at(fUniverseIndex) / 1000. ; }
+
+				// Unisims
+
+				if (fEventWeightLabel == "UnShortAxFFCCQEshape_UBGenie") { SF =  UnShortAxFFCCQEshape_UBGenie->at(fUniverseIndex) / 1000. ; }
+				if (fEventWeightLabel == "UnShortDecayAngMEC_UBGenie") { SF =  UnShortDecayAngMEC_UBGenie->at(fUniverseIndex) / 1000. ; }
+				if (fEventWeightLabel == "UnShortRPA_CCQE_UBGenie") { SF =  UnShortRPA_CCQE_UBGenie->at(fUniverseIndex) / 1000. ; }
+				if (fEventWeightLabel == "UnShortTheta_Delta2Npi_UBGenie") { SF =  UnShortTheta_Delta2Npi_UBGenie->at(fUniverseIndex) / 1000. ; }
+				if (fEventWeightLabel == "UnShortVecFFCCQEshape_UBGenie") { SF =  UnShortVecFFCCQEshape_UBGenie->at(fUniverseIndex) / 1000. ; }
+				if (fEventWeightLabel == "UnShortXSecShape_CCMEC_UBGenie") { SF =  UnShortXSecShape_CCMEC_UBGenie->at(fUniverseIndex) / 1000. ; }																																
 
 				weight = weight * SF / T2KWeight;		
 

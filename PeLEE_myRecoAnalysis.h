@@ -95,7 +95,16 @@ public :
 	vector<unsigned short> *NormCCMEC_UBGenie;
 	vector<unsigned short> *NormNCMEC_UBGenie;
 	vector<unsigned short> *RDecBR1eta_UBGenie;
-	vector<unsigned short> *RDecBR1gamma_UBGenie;		
+	vector<unsigned short> *RDecBR1gamma_UBGenie;	
+	
+	// Unisims
+	
+	vector<unsigned short> *UnShortAxFFCCQEshape_UBGenie;
+	vector<unsigned short> *UnShortDecayAngMEC_UBGenie;
+	vector<unsigned short> *UnShortRPA_CCQE_UBGenie;
+	vector<unsigned short> *UnShortTheta_Delta2Npi_UBGenie;
+	vector<unsigned short> *UnShortVecFFCCQEshape_UBGenie;
+	vector<unsigned short> *UnShortXSecShape_CCMEC_UBGenie;		
 
 	//----------------------------------------//   
    
@@ -312,7 +321,16 @@ public :
    TBranch        *b_NormCCMEC_UBGenie;
    TBranch        *b_NormNCMEC_UBGenie;
    TBranch        *b_RDecBR1eta_UBGenie;
-   TBranch        *b_RDecBR1gamma_UBGenie;		
+   TBranch        *b_RDecBR1gamma_UBGenie;	
+   
+	// Unisims
+	
+   TBranch        *b_UnShortAxFFCCQEshape_UBGenie;
+   TBranch        *b_UnShortDecayAngMEC_UBGenie;
+   TBranch        *b_UnShortRPA_CCQE_UBGenie;
+   TBranch        *b_UnShortTheta_Delta2Npi_UBGenie;
+   TBranch        *b_UnShortVecFFCCQEshape_UBGenie;
+   TBranch        *b_UnShortXSecShape_CCMEC_UBGenie;               			
 
 	//----------------------------------------//   
    
@@ -585,7 +603,16 @@ void PeLEE_myRecoAnalysis::Init(TTree *tree)
 	NormCCMEC_UBGenie = 0;
 	NormNCMEC_UBGenie = 0;
 	RDecBR1eta_UBGenie = 0;
-	RDecBR1gamma_UBGenie = 0;		
+	RDecBR1gamma_UBGenie = 0;	
+	
+	// Unisims
+	
+	UnShortAxFFCCQEshape_UBGenie = 0;
+	UnShortDecayAngMEC_UBGenie = 0;
+	UnShortRPA_CCQE_UBGenie = 0;
+	UnShortTheta_Delta2Npi_UBGenie = 0;
+	UnShortVecFFCCQEshape_UBGenie = 0;
+	UnShortXSecShape_CCMEC_UBGenie = 0;	 	 	 	 	 	   		
 
 	//----------------------------------------//     
    
@@ -783,6 +810,15 @@ void PeLEE_myRecoAnalysis::Init(TTree *tree)
 		fChain->SetBranchAddress("NormNCMEC_UBGenie", &NormNCMEC_UBGenie, &b_NormNCMEC_UBGenie);
 		fChain->SetBranchAddress("RDecBR1eta_UBGenie", &RDecBR1eta_UBGenie, &b_RDecBR1eta_UBGenie);
 		fChain->SetBranchAddress("RDecBR1gamma_UBGenie", &RDecBR1gamma_UBGenie, &b_RDecBR1gamma_UBGenie);
+		
+		// Unisims
+		
+		fChain->SetBranchAddress("UnShortAxFFCCQEshape_UBGenie", &UnShortAxFFCCQEshape_UBGenie, &b_UnShortAxFFCCQEshape_UBGenie);
+		fChain->SetBranchAddress("UnShortDecayAngMEC_UBGenie", &UnShortDecayAngMEC_UBGenie, &b_UnShortDecayAngMEC_UBGenie);
+		fChain->SetBranchAddress("UnShortRPA_CCQE_UBGenie", &UnShortRPA_CCQE_UBGenie, &b_UnShortRPA_CCQE_UBGenie);
+		fChain->SetBranchAddress("UnShortTheta_Delta2Npi_UBGenie", &UnShortTheta_Delta2Npi_UBGenie, &b_UnShortTheta_Delta2Npi_UBGenie);
+		fChain->SetBranchAddress("UnShortVecFFCCQEshape_UBGenie", &UnShortVecFFCCQEshape_UBGenie, &b_UnShortVecFFCCQEshape_UBGenie);
+		fChain->SetBranchAddress("UnShortXSecShape_CCMEC_UBGenie", &UnShortXSecShape_CCMEC_UBGenie, &b_UnShortXSecShape_CCMEC_UBGenie);		
 
 	}
 

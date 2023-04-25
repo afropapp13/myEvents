@@ -560,54 +560,68 @@ void PeLEE_myTrueAnalysis::Loop() {
 			fUniverseIndex != -1 && fWhichSample == "Overlay9_Run1_DecompXSecUnc"
 		) {
 
-			// Watch out: The EventWeight weights already include the weight for the tune
 
-			// Genie weights
-			if (fEventWeightLabel == "AGKYpT1pi_UBGenie") { weight = weight*AGKYpT1pi_UBGenie->at(fUniverseIndex) / T2KWeight/1000. ; }
-			if (fEventWeightLabel == "AGKYxF1pi_UBGenie") { weight = weight* AGKYxF1pi_UBGenie->at(fUniverseIndex) / T2KWeight/1000. ; }	
-			if (fEventWeightLabel == "AhtBY_UBGenie") { weight = weight* AhtBY_UBGenie->at(fUniverseIndex) / T2KWeight/1000. ; }	
-			if (fEventWeightLabel == "BhtBY_UBGenie") { weight = weight* BhtBY_UBGenie->at(fUniverseIndex) / T2KWeight/1000. ; }	
-			if (fEventWeightLabel == "CV1uBY_UBGenie") { weight = weight* CV1uBY_UBGenie->at(fUniverseIndex) / T2KWeight/1000. ; }	
-			if (fEventWeightLabel == "CV2uBY_UBGenie") { weight = weight* CV2uBY_UBGenie->at(fUniverseIndex) / T2KWeight/1000. ; }
-			if (fEventWeightLabel == "EtaNCEL_UBGenie") { weight = weight* EtaNCEL_UBGenie->at(fUniverseIndex) / T2KWeight/1000. ; }	
-			if (fEventWeightLabel == "FrAbs_N_UBGenie") { weight = weight* FrAbs_N_UBGenie->at(fUniverseIndex) / T2KWeight/1000. ; }	
-			if (fEventWeightLabel == "FrAbs_pi_UBGenie") { weight = weight* FrAbs_pi_UBGenie->at(fUniverseIndex) / T2KWeight/1000. ; }
-			if (fEventWeightLabel == "FrCEx_N_UBGenie") { weight = weight* FrCEx_N_UBGenie->at(fUniverseIndex) / T2KWeight/1000. ; }	
-			if (fEventWeightLabel == "FrCEx_pi_UBGenie") { weight = weight* FrCEx_pi_UBGenie->at(fUniverseIndex) / T2KWeight/1000. ; }	
-			if (fEventWeightLabel == "FrInel_N_UBGenie") { weight = weight* FrInel_N_UBGenie->at(fUniverseIndex) / T2KWeight/1000. ; }	
-			if (fEventWeightLabel == "FrInel_pi_UBGenie") { weight = weight* FrInel_pi_UBGenie->at(fUniverseIndex) / T2KWeight/1000. ; }	
-			if (fEventWeightLabel == "FrPiProd_N_UBGenie") { weight = weight* FrPiProd_N_UBGenie->at(fUniverseIndex) / T2KWeight/1000. ; }
-			if (fEventWeightLabel == "FrPiProd_pi_UBGenie") { weight = weight* FrPiProd_pi_UBGenie->at(fUniverseIndex) / T2KWeight/1000. ; }	
-			if (fEventWeightLabel == "FracDelta_CCMEC_UBGenie") { weight = weight* FracDelta_CCMEC_UBGenie->at(fUniverseIndex) / T2KWeight/1000. ; }	
-			if (fEventWeightLabel == "FracPN_CCMEC_UBGenie") { weight = weight* FracPN_CCMEC_UBGenie->at(fUniverseIndex) / T2KWeight/1000. ; }	
-			if (fEventWeightLabel == "MFP_N_UBGenie") { weight = weight* MFP_N_UBGenie->at(fUniverseIndex) / T2KWeight/1000. ; }	
-			if (fEventWeightLabel == "MFP_pi_UBGenie") { weight = weight* MFP_pi_UBGenie->at(fUniverseIndex) / T2KWeight/1000. ; }
-			if (fEventWeightLabel == "MaCCQE_UBGenie") { weight = weight* MaCCQE_UBGenie->at(fUniverseIndex) / T2KWeight/1000. ; }	
-			if (fEventWeightLabel == "MaCCRES_UBGenie") { weight = weight* MaCCRES_UBGenie->at(fUniverseIndex) / T2KWeight/1000. ; }	
-			if (fEventWeightLabel == "MaNCEL_UBGenie") { weight = weight* MaNCEL_UBGenie->at(fUniverseIndex) / T2KWeight/1000. ; }	
-			if (fEventWeightLabel == "MaNCRES_UBGenie") { weight = weight* MaNCRES_UBGenie->at(fUniverseIndex) / T2KWeight/1000. ; }	
-			if (fEventWeightLabel == "MvCCRES_UBGenie") { weight = weight* MvCCRES_UBGenie->at(fUniverseIndex) / T2KWeight/1000. ; }
-			if (fEventWeightLabel == "MvNCRES_UBGenie") { weight = weight* MvNCRES_UBGenie->at(fUniverseIndex) / T2KWeight/1000. ; }	
-			if (fEventWeightLabel == "NonRESBGvbarnCC1pi_UBGenie") { weight = weight* NonRESBGvbarnCC1pi_UBGenie->at(fUniverseIndex) / T2KWeight/1000. ; }	
-			if (fEventWeightLabel == "NonRESBGvbarnCC2pi_UBGenie") { weight = weight* NonRESBGvbarnCC2pi_UBGenie->at(fUniverseIndex) / T2KWeight/1000. ; }	
-			if (fEventWeightLabel == "NonRESBGvbarnNC1pi_UBGenie") { weight = weight* NonRESBGvbarnNC1pi_UBGenie->at(fUniverseIndex) / T2KWeight/1000. ; }	
-			if (fEventWeightLabel == "NonRESBGvbarnNC2pi_UBGenie") { weight = weight* NonRESBGvbarnNC2pi_UBGenie->at(fUniverseIndex) / T2KWeight/1000. ; }
-			if (fEventWeightLabel == "NonRESBGvbarpCC1pi_UBGenie") { weight = weight* NonRESBGvbarpCC1pi_UBGenie->at(fUniverseIndex) / T2KWeight/1000. ; }	
-			if (fEventWeightLabel == "NonRESBGvbarpCC2pi_UBGenie") { weight = weight* NonRESBGvbarpCC2pi_UBGenie->at(fUniverseIndex) / T2KWeight/1000. ; }	
-			if (fEventWeightLabel == "NonRESBGvbarpNC1pi_UBGenie") { weight = weight* NonRESBGvbarpNC1pi_UBGenie->at(fUniverseIndex) / T2KWeight/1000. ; }	
-			if (fEventWeightLabel == "NonRESBGvbarpNC2pi_UBGenie") { weight = weight* NonRESBGvbarpNC2pi_UBGenie->at(fUniverseIndex) / T2KWeight/1000. ; }	
-			if (fEventWeightLabel == "NonRESBGvnCC1pi_UBGenie") { weight = weight* NonRESBGvnCC1pi_UBGenie->at(fUniverseIndex) / T2KWeight/1000. ; }
-			if (fEventWeightLabel == "NonRESBGvnCC2pi_UBGenie") { weight = weight* NonRESBGvnCC2pi_UBGenie->at(fUniverseIndex) / T2KWeight/1000. ; }	
-			if (fEventWeightLabel == "NonRESBGvnNC1pi_UBGenie") { weight = weight* NonRESBGvnNC1pi_UBGenie->at(fUniverseIndex) / T2KWeight/1000. ; }	
-			if (fEventWeightLabel == "NonRESBGvnNC2pi_UBGenie") { weight = weight* NonRESBGvnNC2pi_UBGenie->at(fUniverseIndex) / T2KWeight/1000. ; }	
-			if (fEventWeightLabel == "NonRESBGvpCC1pi_UBGenie") { weight = weight* NonRESBGvpCC1pi_UBGenie->at(fUniverseIndex) / T2KWeight/1000. ; }
-			if (fEventWeightLabel == "NonRESBGvpCC2pi_UBGenie") { weight = weight* NonRESBGvpCC2pi_UBGenie->at(fUniverseIndex) / T2KWeight/1000. ; }	
-			if (fEventWeightLabel == "NonRESBGvpNC1pi_UBGenie") { weight = weight* NonRESBGvpNC1pi_UBGenie->at(fUniverseIndex) / T2KWeight/1000. ; }	
-			if (fEventWeightLabel == "NonRESBGvpNC2pi_UBGenie") { weight = weight* NonRESBGvpNC2pi_UBGenie->at(fUniverseIndex) / T2KWeight/1000. ; }	
-			if (fEventWeightLabel == "NormCCMEC_UBGenie") { weight = weight* NormCCMEC_UBGenie->at(fUniverseIndex) / T2KWeight/1000. ; }	
-			if (fEventWeightLabel == "NormNCMEC_UBGenie") { weight = weight* NormNCMEC_UBGenie->at(fUniverseIndex) / T2KWeight/1000. ; }
-			if (fEventWeightLabel == "RDecBR1eta_UBGenie") { weight = weight* RDecBR1eta_UBGenie->at(fUniverseIndex) / T2KWeight/1000. ; }	
-			if (fEventWeightLabel == "RDecBR1gamma_UBGenie") { weight = weight* RDecBR1gamma_UBGenie->at(fUniverseIndex) / T2KWeight/1000. ; }			
+				// Watch out: The EventWeight weights already include the weight for the tune
+
+				double SF = 1.;
+
+				// Genie weights
+				if (fEventWeightLabel == "AGKYpT1pi_UBGenie") { SF = double(AGKYpT1pi_UBGenie->at(fUniverseIndex)) / 1000. ; }
+				if (fEventWeightLabel == "AGKYxF1pi_UBGenie") { SF = AGKYxF1pi_UBGenie->at(fUniverseIndex) / 1000. ; }	
+				if (fEventWeightLabel == "AhtBY_UBGenie") { SF =  AhtBY_UBGenie->at(fUniverseIndex) / 1000. ; }	
+				if (fEventWeightLabel == "BhtBY_UBGenie") { SF =  BhtBY_UBGenie->at(fUniverseIndex) / 1000. ; }	
+				if (fEventWeightLabel == "CV1uBY_UBGenie") { SF =  CV1uBY_UBGenie->at(fUniverseIndex) / 1000. ; }	
+				if (fEventWeightLabel == "CV2uBY_UBGenie") { SF =  CV2uBY_UBGenie->at(fUniverseIndex) / 1000. ; }
+				if (fEventWeightLabel == "EtaNCEL_UBGenie") { SF =  EtaNCEL_UBGenie->at(fUniverseIndex) / 1000. ; }	
+				if (fEventWeightLabel == "FrAbs_N_UBGenie") { SF =  FrAbs_N_UBGenie->at(fUniverseIndex) / 1000. ; }	
+				if (fEventWeightLabel == "FrAbs_pi_UBGenie") { SF =  FrAbs_pi_UBGenie->at(fUniverseIndex) / 1000. ; }
+				if (fEventWeightLabel == "FrCEx_N_UBGenie") { SF =  FrCEx_N_UBGenie->at(fUniverseIndex) / 1000. ; }	
+				if (fEventWeightLabel == "FrCEx_pi_UBGenie") { SF =  FrCEx_pi_UBGenie->at(fUniverseIndex) / 1000. ; }	
+				if (fEventWeightLabel == "FrInel_N_UBGenie") { SF =  FrInel_N_UBGenie->at(fUniverseIndex) / 1000. ; }	
+				if (fEventWeightLabel == "FrInel_pi_UBGenie") { SF =  FrInel_pi_UBGenie->at(fUniverseIndex) / 1000. ; }	
+				if (fEventWeightLabel == "FrPiProd_N_UBGenie") { SF =  FrPiProd_N_UBGenie->at(fUniverseIndex) / 1000. ; }
+				if (fEventWeightLabel == "FrPiProd_pi_UBGenie") { SF =  FrPiProd_pi_UBGenie->at(fUniverseIndex) / 1000. ; }	
+				if (fEventWeightLabel == "FracDelta_CCMEC_UBGenie") { SF =  FracDelta_CCMEC_UBGenie->at(fUniverseIndex) / 1000. ; }	
+				if (fEventWeightLabel == "FracPN_CCMEC_UBGenie") { SF =  FracPN_CCMEC_UBGenie->at(fUniverseIndex) / 1000. ; }	
+				if (fEventWeightLabel == "MFP_N_UBGenie") { SF =  MFP_N_UBGenie->at(fUniverseIndex) / 1000. ; }	
+				if (fEventWeightLabel == "MFP_pi_UBGenie") { SF =  MFP_pi_UBGenie->at(fUniverseIndex) / 1000. ; }
+				if (fEventWeightLabel == "MaCCQE_UBGenie") { SF =  double(MaCCQE_UBGenie->at(fUniverseIndex)) / 1000. ; }	
+				if (fEventWeightLabel == "MaCCRES_UBGenie") { SF =  MaCCRES_UBGenie->at(fUniverseIndex) / 1000. ; }	
+				if (fEventWeightLabel == "MaNCEL_UBGenie") { SF =  MaNCEL_UBGenie->at(fUniverseIndex) / 1000. ; }	
+				if (fEventWeightLabel == "MaNCRES_UBGenie") { SF =  MaNCRES_UBGenie->at(fUniverseIndex) / 1000. ; }	
+				if (fEventWeightLabel == "MvCCRES_UBGenie") { SF =  MvCCRES_UBGenie->at(fUniverseIndex) / 1000. ; }
+				if (fEventWeightLabel == "MvNCRES_UBGenie") { SF =  MvNCRES_UBGenie->at(fUniverseIndex) / 1000. ; }	
+				if (fEventWeightLabel == "NonRESBGvbarnCC1pi_UBGenie") { SF =  NonRESBGvbarnCC1pi_UBGenie->at(fUniverseIndex) / 1000. ; }	
+				if (fEventWeightLabel == "NonRESBGvbarnCC2pi_UBGenie") { SF =  NonRESBGvbarnCC2pi_UBGenie->at(fUniverseIndex) / 1000. ; }	
+				if (fEventWeightLabel == "NonRESBGvbarnNC1pi_UBGenie") { SF =  NonRESBGvbarnNC1pi_UBGenie->at(fUniverseIndex) / 1000. ; }	
+				if (fEventWeightLabel == "NonRESBGvbarnNC2pi_UBGenie") { SF =  NonRESBGvbarnNC2pi_UBGenie->at(fUniverseIndex) / 1000. ; }
+				if (fEventWeightLabel == "NonRESBGvbarpCC1pi_UBGenie") { SF =  NonRESBGvbarpCC1pi_UBGenie->at(fUniverseIndex) / 1000. ; }	
+				if (fEventWeightLabel == "NonRESBGvbarpCC2pi_UBGenie") { SF =  NonRESBGvbarpCC2pi_UBGenie->at(fUniverseIndex) / 1000. ; }	
+				if (fEventWeightLabel == "NonRESBGvbarpNC1pi_UBGenie") { SF =  NonRESBGvbarpNC1pi_UBGenie->at(fUniverseIndex) / 1000. ; }	
+				if (fEventWeightLabel == "NonRESBGvbarpNC2pi_UBGenie") { SF =  NonRESBGvbarpNC2pi_UBGenie->at(fUniverseIndex) / 1000. ; }	
+				if (fEventWeightLabel == "NonRESBGvnCC1pi_UBGenie") { SF =  NonRESBGvnCC1pi_UBGenie->at(fUniverseIndex) / 1000. ; }
+				if (fEventWeightLabel == "NonRESBGvnCC2pi_UBGenie") { SF =  NonRESBGvnCC2pi_UBGenie->at(fUniverseIndex) / 1000. ; }	
+				if (fEventWeightLabel == "NonRESBGvnNC1pi_UBGenie") { SF =  NonRESBGvnNC1pi_UBGenie->at(fUniverseIndex) / 1000. ; }	
+				if (fEventWeightLabel == "NonRESBGvnNC2pi_UBGenie") { SF =  NonRESBGvnNC2pi_UBGenie->at(fUniverseIndex) / 1000. ; }	
+				if (fEventWeightLabel == "NonRESBGvpCC1pi_UBGenie") { SF =  NonRESBGvpCC1pi_UBGenie->at(fUniverseIndex) / 1000. ; }
+				if (fEventWeightLabel == "NonRESBGvpCC2pi_UBGenie") { SF =  NonRESBGvpCC2pi_UBGenie->at(fUniverseIndex) / 1000. ; }	
+				if (fEventWeightLabel == "NonRESBGvpNC1pi_UBGenie") { SF =  NonRESBGvpNC1pi_UBGenie->at(fUniverseIndex) / 1000. ; }	
+				if (fEventWeightLabel == "NonRESBGvpNC2pi_UBGenie") { SF =  NonRESBGvpNC2pi_UBGenie->at(fUniverseIndex) / 1000. ; }	
+				if (fEventWeightLabel == "NormCCMEC_UBGenie") { SF =  NormCCMEC_UBGenie->at(fUniverseIndex) / 1000. ; }	
+				if (fEventWeightLabel == "NormNCMEC_UBGenie") { SF =  NormNCMEC_UBGenie->at(fUniverseIndex) / 1000. ; }
+				if (fEventWeightLabel == "RDecBR1eta_UBGenie") { SF =  RDecBR1eta_UBGenie->at(fUniverseIndex) / 1000. ; }	
+				if (fEventWeightLabel == "RDecBR1gamma_UBGenie") { SF =  RDecBR1gamma_UBGenie->at(fUniverseIndex) / 1000. ; }
+
+				// Unisims
+
+				if (fEventWeightLabel == "UnShortAxFFCCQEshape_UBGenie") { SF =  UnShortAxFFCCQEshape_UBGenie->at(fUniverseIndex) / 1000. ; }
+				if (fEventWeightLabel == "UnShortDecayAngMEC_UBGenie") { SF =  UnShortDecayAngMEC_UBGenie->at(fUniverseIndex) / 1000. ; }
+				if (fEventWeightLabel == "UnShortRPA_CCQE_UBGenie") { SF =  UnShortRPA_CCQE_UBGenie->at(fUniverseIndex) / 1000. ; }
+				if (fEventWeightLabel == "UnShortTheta_Delta2Npi_UBGenie") { SF =  UnShortTheta_Delta2Npi_UBGenie->at(fUniverseIndex) / 1000. ; }
+				if (fEventWeightLabel == "UnShortVecFFCCQEshape_UBGenie") { SF =  UnShortVecFFCCQEshape_UBGenie->at(fUniverseIndex) / 1000. ; }
+				if (fEventWeightLabel == "UnShortXSecShape_CCMEC_UBGenie") { SF =  UnShortXSecShape_CCMEC_UBGenie->at(fUniverseIndex) / 1000. ; }																																
+
+				weight = weight * SF / T2KWeight;		
 
 		}			
 

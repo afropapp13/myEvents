@@ -23,6 +23,7 @@ void PRD_PID_NoCuts(TString BaseMC = "") {
 	// -----------------------------------------------------------------------------------------------------------------------------------------
 
 	gStyle->SetOptStat(0);
+	int MCUncColor = kGray;	
 
 	// -----------------------------------------------------------------------------------------------------------------------------------------
 
@@ -60,6 +61,9 @@ void PRD_PID_NoCuts(TString BaseMC = "") {
 
 		// -----------------------------------------------------------------------------------------------------------------------------------------
 
+		TString NameExtractedXSec = MigrationMatrixPath+"WienerSVD_Total_EventRateCovarianceMatrices_Overlay9_"+Runs[WhichRun]+"_"+UBCodeVersion+".root";
+		TFile* CovFile = new TFile(NameExtractedXSec,"readonly");	
+
 		double DataPOT = PeLEE_ReturnBeamOnRunPOT(Runs[WhichRun]);													
 
 		// -----------------------------------------------------------------------------------------------------------------------------------------
@@ -94,9 +98,11 @@ void PRD_PID_NoCuts(TString BaseMC = "") {
 
 			vector<TCanvas*> PlotCanvas; PlotCanvas.clear();
 			vector<THStack*> THStacks; THStacks.clear();
+			vector<THStack*> THStacksMCUnc; THStacksMCUnc.clear();			
 			gStyle->SetPalette(55); const Int_t NCont = 999; 
 			gStyle->SetNumberContours(NCont); gStyle->SetTitleSize(0.07,"t");
 			vector<TLegend*> leg; leg.clear();
+			vector<TLegend*> legMC; legMC.clear();			
 
 			vector<vector<TH1D*> > Plots; Plots.clear();
 			vector<vector<TH1D*> > CC1pPlots; CC1pPlots.clear();
@@ -132,7 +138,7 @@ void PRD_PID_NoCuts(TString BaseMC = "") {
 			vector<int> ColorsOverlay{OverlayColor,kOrange-3,kGreen+1,kRed+1,kBlue};
 
 			const int NSamples = NameOfSamples.size();
-			vector<TFile*> FileSample; FileSample.clear();
+			vector<TFile*> FileSample; FileSample.clear();		
 
 			for (int WhichSample = 0; WhichSample < NSamples; WhichSample ++) {
 
@@ -215,23 +221,20 @@ void PRD_PID_NoCuts(TString BaseMC = "") {
 
 				THStacks.push_back(new THStack(PlotNames[WhichPlot],""));
 
-				TPad *topPad = new TPad("topPad", "", 0.005, 0.90, 0.995, 0.98);
-//				TPad *midPad = new TPad("midPad", "", 0.005, 0.3  , 0.995, 0.92);
-				TPad *midPad = new TPad("midPad", "", 0.005, 0.005  , 0.995, 0.92);
-//				TPad *botPad = new TPad("botPad", "", 0.005, 0.005, 0.995, 0.3);
-				topPad->SetTopMargin(0.05);
+				TPad *topPad = new TPad("topPad", "", 0.005, 0.86, 0.995, 0.95);
+				TPad *midPad = new TPad("midPad", "", 0.005, 0.3  , 0.995, 0.86);
+				TPad *botPad = new TPad("botPad", "", 0.005, 0.01, 0.995, 0.3);
+				topPad->SetTopMargin(0.);
 				topPad->SetBottomMargin(0.0);
-				topPad->SetLeftMargin(0.12);				
-				midPad->SetBottomMargin(0.13);
-				midPad->SetLeftMargin(0.12);				
-				midPad->SetTopMargin(0.03);
-//				botPad->SetTopMargin(0.03);
-//				botPad->SetBottomMargin(0.3);
-//				botPad->SetGridx();
-//				botPad->SetGridy();
+				midPad->SetBottomMargin(0.025);
+				midPad->SetTopMargin(0.01);
+				midPad->SetLeftMargin(0.13);				
+				botPad->SetTopMargin(0.01);				
+				botPad->SetBottomMargin(0.35);
+				botPad->SetLeftMargin(0.13);				
+				topPad->Draw();
 				midPad->Draw();
-				topPad->Draw();				
-//				botPad->Draw();
+				botPad->Draw();
 
 				leg.push_back(new TLegend(0.15,0.005,0.9,0.95));
 				leg[WhichPlot]->SetBorderSize(0);
@@ -252,21 +255,21 @@ void PRD_PID_NoCuts(TString BaseMC = "") {
 					Plots[WhichSample][WhichPlot]->GetXaxis()->SetLabelFont(FontStyle);
 					Plots[WhichSample][WhichPlot]->GetXaxis()->SetNdivisions(8);
 					//Plots[WhichSample][WhichPlot]->GetXaxis()->SetLabelSize(0);
-					Plots[WhichSample][WhichPlot]->GetXaxis()->SetLabelSize(0.06);	
-					Plots[WhichSample][WhichPlot]->GetXaxis()->SetTitleSize(0.06);									
+					Plots[WhichSample][WhichPlot]->GetXaxis()->SetLabelSize(0.);	
+					Plots[WhichSample][WhichPlot]->GetXaxis()->SetTitleSize(0.);									
 
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitleFont(FontStyle);
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetLabelFont(FontStyle);
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetNdivisions(6);
-					Plots[WhichSample][WhichPlot]->GetYaxis()->SetLabelSize(0.06);
+					Plots[WhichSample][WhichPlot]->GetYaxis()->SetLabelSize(0.1);
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitle("Number of events / bin");
-					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitleSize(0.06);
-					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitleOffset(1.1);
+					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitleSize(0.1);
+					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitleOffset(0.7);
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTickSize(0.02);					
 
 					double localmax = Plots[WhichSample][WhichPlot]->GetMaximum();
 					if (localmax > max) { max = localmax; }
-					Plots[0][WhichPlot]->GetYaxis()->SetRangeUser(0.,1.3*max);
+					Plots[0][WhichPlot]->GetYaxis()->SetRangeUser(0.1,1.3*max);
 
 					if (LabelsOfSamples[WhichSample] == "BeamOn") { 
 
@@ -369,9 +372,45 @@ void PRD_PID_NoCuts(TString BaseMC = "") {
 				TString ReducedPlotName = PlotNameDuplicate.ReplaceAll("Reco","") ;
 				if (Runs[WhichRun] != "Combined") {  textSlice->DrawLatexNDC(0.115, 0.8, LatexLabel[ReducedPlotName]);	}			
 
-				// -------------------------------------------------------------------------------------------------------------------
+				// -------------------------------------------------------------------- //				
 
-/*
+				// Uncertainty band
+
+				TH2D* CovMatrix = (TH2D*)(CovFile->Get("TotalCovariance_"+ReducedPlotName));
+				TH2D* StatCovMatrix = (TH2D*)(CovFile->Get("StatCovariance_"+ReducedPlotName));		
+				CovMatrix->Add(StatCovMatrix,-1);		
+				// Sanity check, stat errors should be identical to the ones coming from the Stat covariances 
+				//TH2D* CovMatrix = (TH2D*)(CovFile->Get("StatCovariance_"+ReducedPlotName));				
+				//CovMatrix->Scale(TMath::Power( (IntegratedFlux*NTargets)/Units ,2.));
+
+				int n = Plots[0][WhichPlot]->GetXaxis()->GetNbins();
+				TH1D* MCUnc = (TH1D*)(Plots[0][WhichPlot]->Clone());				
+
+				for (int i = 1; i <= n;i++ ) { 
+
+					double MCCV = ( (TH1*) (THStacks[WhichPlot]->GetStack()->Last()) )->GetBinContent(i);
+					double Unc = TMath::Sqrt( CovMatrix->GetBinContent(i,i) );
+
+					MCUnc->SetBinContent(i,MCCV);					
+					MCUnc->SetBinError(i, Unc);				
+
+				}
+
+				MCUnc->SetMarkerSize(0.);
+				MCUnc->SetMarkerColor(MCUncColor);				
+				MCUnc->SetLineColor(kWhite);
+				MCUnc->SetLineWidth(1);				
+				MCUnc->SetFillColor(MCUncColor);
+				//MCUnc->SetFillStyle(3005);	
+				//MCUnc->Draw("e2 same");										
+
+				//gStyle->SetErrorX(0); // Removing the horizontal errors
+				Plots[0][WhichPlot]->Draw("e same");				
+
+				gPad->RedrawAxis();								
+
+				//----------------------------------------//
+
 				hratio[1][WhichPlot]->Add(hratio[2][WhichPlot]);
 				hratio[1][WhichPlot]->Add(hratio[3][WhichPlot]);
 				hratio[0][WhichPlot]->Divide(hratio[1][WhichPlot]);
@@ -380,17 +419,18 @@ void PRD_PID_NoCuts(TString BaseMC = "") {
 				hratio[0][WhichPlot]->GetXaxis()->SetLabelFont(FontStyle);
 				hratio[0][WhichPlot]->GetYaxis()->SetTitle("#frac{Data}{Prediction}");
 				hratio[0][WhichPlot]->GetXaxis()->SetTitle(Plots[0][WhichPlot]->GetXaxis()->GetTitle());
-				hratio[0][WhichPlot]->GetXaxis()->SetTitleSize(0.13);
+				hratio[0][WhichPlot]->GetXaxis()->SetTitleSize(0.15);
 				hratio[0][WhichPlot]->GetXaxis()->SetLabelSize(0.12);
-				hratio[0][WhichPlot]->GetXaxis()->SetTitleOffset(0.88);
+
+				hratio[0][WhichPlot]->GetXaxis()->SetTitleOffset(1.);
 				hratio[0][WhichPlot]->GetXaxis()->SetNdivisions(8);
 
 				hratio[0][WhichPlot]->GetYaxis()->SetTitleFont(FontStyle);
 				hratio[0][WhichPlot]->GetYaxis()->SetLabelFont(FontStyle);
-				hratio[0][WhichPlot]->GetYaxis()->SetRangeUser(0.1,1.9);
+				hratio[0][WhichPlot]->GetYaxis()->SetRangeUser(0.56,1.44);
 				hratio[0][WhichPlot]->GetYaxis()->SetNdivisions(6);
-				hratio[0][WhichPlot]->GetYaxis()->SetTitleOffset(0.35);
-				hratio[0][WhichPlot]->GetYaxis()->SetTitleSize(0.1);
+				hratio[0][WhichPlot]->GetYaxis()->SetTitleOffset(0.3);
+				hratio[0][WhichPlot]->GetYaxis()->SetTitleSize(0.15);
 				hratio[0][WhichPlot]->GetYaxis()->SetLabelSize(0.11);
 
 				botPad->cd();
@@ -398,13 +438,86 @@ void PRD_PID_NoCuts(TString BaseMC = "") {
 
 				double RatioMin = hratio[0][WhichPlot]->GetXaxis()->GetXmin();
 				double RatioMax = hratio[0][WhichPlot]->GetXaxis()->GetXmax();
-				double YRatioCoord = 1.2;
+
+					if (PlotNames[WhichPlot] == "RecoProtonLLRPIDPlot") { 
+						
+						RatioMin = -0.9; RatioMax = 0.95; 
+						
+					}
+
+					if (PlotNames[WhichPlot] == "RecoMuonLLRPIDPlot") { 
+						
+						RatioMin = 0.35; RatioMax = 1.;
+						
+					}
+
+				double YRatioCoord = 1.;
 				TLine* RatioLine = new TLine(RatioMin,YRatioCoord,RatioMax,YRatioCoord);
-				RatioLine->SetLineWidth(4);
-				RatioLine->SetLineColor(kPink+8);
-				RatioLine->SetLineStyle(4);
-				//RatioLine->Draw("same");
-				*/
+				RatioLine->SetLineWidth(1);
+				RatioLine->SetLineColor(kBlack);
+				RatioLine->SetLineStyle(kDashed);
+
+				//----------------------------------------//
+
+				// Uncertainty band on ratio plot
+
+				TH1D* MCUncDown = (TH1D*)MCUnc->Clone();
+				TH1D* MCUncTwice = (TH1D*)MCUnc->Clone();				
+
+				for (int WhichBin = 1; WhichBin <= n; WhichBin++) {
+
+					double MCCV = MCUnc->GetBinContent(WhichBin);
+					double Unc = MCUnc->GetBinError(WhichBin);
+					double FracUnc = Unc / MCCV;
+
+					MCUncDown->SetBinContent(WhichBin,1.-FracUnc);					
+					MCUncTwice->SetBinContent(WhichBin,2*FracUnc);	
+
+				}
+
+				THStacksMCUnc.push_back(new THStack(PlotNames[WhichPlot] + "MCUnc",PlotNames[WhichPlot] + "MCUnc"));	
+
+				MCUncDown->SetLineColor(MCUncColor);
+				MCUncDown->SetFillColor(kWhite);
+				MCUncDown->SetLineWidth(1);
+
+				MCUncTwice->SetLineColor(MCUncColor);
+				MCUncTwice->SetFillColor(MCUncColor);
+				MCUncTwice->SetLineWidth(1);				
+
+				THStacksMCUnc[WhichPlot]->Add(MCUncDown,"hist");
+				THStacksMCUnc[WhichPlot]->Draw("same");
+
+				THStacksMCUnc[WhichPlot]->Add(MCUncTwice,"hist");
+				THStacksMCUnc[WhichPlot]->Draw("same");					
+
+				RatioLine->Draw("same");
+				hratio[0][WhichPlot]->Draw("e same");	
+				gPad->RedrawAxis();														
+
+				//----------------------------------------//
+
+				topPad->cd();
+				leg[WhichPlot]->SetTextSize(0.4);
+				leg[WhichPlot]->SetTextFont(FontStyle);
+				leg[WhichPlot]->Draw();
+
+				//----------------------------------------//
+
+				PlotCanvas[WhichPlot]->cd();
+
+				if (PlotNames[WhichPlot] == "RecoMuonLLRPIDPlot") { legMC.push_back(new TLegend(0.15,0.88,0.35,0.98)); }
+				if (PlotNames[WhichPlot] == "RecoProtonLLRPIDPlot") { legMC.push_back(new TLegend(0.55,0.88,0.75,0.98)); }
+
+				legMC[WhichPlot]->SetBorderSize(0);
+				legMC[WhichPlot]->SetNColumns(3);
+				legMC[WhichPlot]->AddEntry(MCUnc,"Prediction Uncertainty","f");
+				legMC[WhichPlot]->SetTextSize(0.1);
+				legMC[WhichPlot]->SetMargin(.5);				
+				legMC[WhichPlot]->SetTextFont(FontStyle);	
+
+				botPad->cd();							
+				legMC[WhichPlot]->Draw();
 				
 				// -------------------------------------- //
 			
@@ -412,35 +525,16 @@ void PRD_PID_NoCuts(TString BaseMC = "") {
 				leg[WhichPlot]->SetTextSize(0.6);
 				leg[WhichPlot]->SetTextFont(FontStyle);
 				leg[WhichPlot]->Draw();
-
-				// --------------------------------------------------------------------------------------
-
-				// Sum of NonBeamOn Samples
-
-				TH1D* SumNonBeamOn = (TH1D*)Plots[1][WhichPlot]->Clone(); // ExtBNB
-				SumNonBeamOn->Add(Plots[2][WhichPlot]); // Overlay
-				SumNonBeamOn->Add(Plots[3][WhichPlot]); // Dirt
-
-				// CC1p Purity 
-
-				int CC1pPurity = CC1pPlots[1][WhichPlot]->Integral() / SumNonBeamOn->Integral() * 1000.;
-
-				midPad->cd();
-				
-				TLatex latexPurity;
-				latexPurity.SetTextFont(FontStyle);
-				latexPurity.SetTextSize(0.09);
-				TString LabelPurity = "CC1p0#pi = " + ToString(CC1pPurity/10.) + " %";
-				//latexPurity.DrawLatexNDC(0.61,0.89, LabelPurity);
 				
 				//----------------------------------------//
 				
 				// POT label
 				
-				TLatex *textPOT = new TLatex();
-				textPOT->SetTextFont(FontStyle);
-				textPOT->SetTextSize(0.06);
-				textPOT->DrawLatexNDC(0.13, 0.89,"MicroBooNE " + ToString(DataPOT).ReplaceAll("e"," #times 10").ReplaceAll("+","^{")+"} POT");		
+				midPad->cd();
+				TLatex *POT = new TLatex();
+				POT->SetTextFont(FontStyle);
+				POT->SetTextSize(0.1);
+				POT->DrawLatexNDC(0.16, 0.89,"MicroBooNE " + ToString(DataPOT).ReplaceAll("e"," #times 10").ReplaceAll("+","^{")+"} POT");		
 
 				//----------------------------------------//
 				
@@ -448,22 +542,9 @@ void PRD_PID_NoCuts(TString BaseMC = "") {
 				
 				TLatex *textsubfig = new TLatex();
 				textsubfig->SetTextFont(FontStyle);
-				textsubfig->SetTextSize(0.07);
+				textsubfig->SetTextSize(0.1);
 				if (PlotNames[WhichPlot] == "RecoProtonLLRPIDPlot") { textsubfig->DrawLatexNDC(0.83, 0.89,"(a)"); }
-				if (PlotNames[WhichPlot] == "RecoMuonLLRPIDPlot") { textsubfig->DrawLatexNDC(0.83, 0.89,"(b)"); }														
-
-				//----------------------------------------//
-
-				// Cosmic Contamination
-
-				int CosmicContamination = Plots[2][WhichPlot]->Integral() / SumNonBeamOn->Integral() * 1000.;
-
-				midPad->cd();
-				TLatex latexCosmic;
-				latexCosmic.SetTextFont(FontStyle);
-				latexCosmic.SetTextSize(0.09);
-				TString LabelCosmic = "Cosmics = " + ToString(CosmicContamination/10.) + " %";
-				//latexCosmic.DrawLatexNDC(0.61,0.8, LabelCosmic);				
+				if (PlotNames[WhichPlot] == "RecoMuonLLRPIDPlot") { textsubfig->DrawLatexNDC(0.83, 0.89,"(b)"); }																
 
 				//----------------------------------------//
 
