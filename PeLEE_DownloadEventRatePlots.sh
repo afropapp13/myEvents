@@ -1,10 +1,10 @@
 . ../myClasses/Constants.sh
 
-declare -a arrRun=("Run1" "Run2" "Run3" "Run4a" "Run4b" "Run4aRutgers" "Combined")
+declare -a arrRun=("Run1" "Run2" "Run3" "Run4a" "Run4b" "Run4aRutgers" "Run5" "Combined")
 
 declare -a arrCuts=("_NoCuts" "_PID_NuScore")
 
-#Run4a validation plots
+#Run4/5 validation plots
 scp $UserID@$UBgpvm:${PlotPath}/*.pdf ./myPlots/pdf/1D/${UBCode}/
 
 #PID plots

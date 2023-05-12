@@ -359,6 +359,7 @@ PeLEE_myTrueAnalysis::PeLEE_myTrueAnalysis(TString WhichSample, TString Tune, TS
    fEventWeightLabel = WhichEventWeightLabel;
    fUniverseIndex = UniverseIndex;   
 
+//	//pnfsToXRootD /pnfs/persistent/path/to/your/file
 //   fPathToFile = "/pnfs/uboone/persistent/users/apapadop/mySamples/"+UBCodeVersion+"/PeLEETuples/PreTruthSelection_"+fWhichSample+"_"+UBCodeVersion+".root";
 	fPathToFile = "/uboone/data/users/apapadop/PeLEETuples/PreTruthSelection_"+fWhichSample+"_"+UBCodeVersion+".root";   
   

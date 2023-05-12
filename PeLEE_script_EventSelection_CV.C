@@ -55,10 +55,10 @@
 
 	// Run 5
 
-//	WhichSampleArray.push_back("BeamOn9_Run5");
-//	WhichSampleArray.push_back("ExtBNB9_Run5");
-//	WhichSampleArray.push_back("OverlayDirt9_Run5");
-//	WhichSampleArray.push_back("Overlay9_Run5");
+	WhichSampleArray.push_back("BeamOn9_Run5");
+	WhichSampleArray.push_back("ExtBNB9_Run5");
+	WhichSampleArray.push_back("OverlayDirt9_Run5");
+	WhichSampleArray.push_back("Overlay9_Run5");
 
 	WhichSampleArray.push_back("BeamOn9_Combined");
 	WhichSampleArray.push_back("ExtBNB9_Combined");

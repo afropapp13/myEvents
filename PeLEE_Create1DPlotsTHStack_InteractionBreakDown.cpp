@@ -87,7 +87,7 @@ void PeLEE_Create1DPlotsTHStack_InteractionBreakDown(TString BaseMC = "") {
 
 	PlotNames.push_back("RecoMuonLLRPIDPlot");
 	PlotNames.push_back("RecoProtonLLRPIDPlot");
-	PlotNames.push_back("RecoLLRPIDPlot");	
+//	PlotNames.push_back("RecoLLRPIDPlot");	
 
 	PlotNames.push_back("RecoECalPlot");
 	PlotNames.push_back("RecoEQEPlot");
@@ -535,7 +535,7 @@ void PeLEE_Create1DPlotsTHStack_InteractionBreakDown(TString BaseMC = "") {
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetNdivisions(6);
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetLabelSize(0.06);
 //					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitle("# Events / " + ToString(DataPOT));
-					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitle("Number of events / bin");
+					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitle("Number of " + Runs[WhichRun] + " events / bin");
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitleSize(0.08);
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitleOffset(0.6);
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTickSize(0);
@@ -630,7 +630,7 @@ void PeLEE_Create1DPlotsTHStack_InteractionBreakDown(TString BaseMC = "") {
 				TLatex *text = new TLatex();
 				text->SetTextFont(FontStyle);
 				text->SetTextSize(0.09);
-				if (Runs[WhichRun] != "Combined") { text->DrawTextNDC(0.115, 0.9, Runs[WhichRun]); }
+				//if (Runs[WhichRun] != "Combined") { text->DrawTextNDC(0.115, 0.9, Runs[WhichRun]); }
 
 				TLatex *textSlice = new TLatex();
 				textSlice->SetTextFont(FontStyle);
