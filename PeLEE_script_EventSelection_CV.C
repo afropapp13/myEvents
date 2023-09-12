@@ -65,14 +65,10 @@
 	WhichSampleArray.push_back("OverlayDirt9_Combined");
 	WhichSampleArray.push_back("Overlay9_Combined");
 
-	// Detailed genie xsec CV for uncertainties
-
-	WhichSampleArray.push_back("Overlay9_Run1_DecompXSecUnc");	
-
 	// -----------------------------------------------------------------------------------------
 
-	gROOT->ProcessLine(".L ../../myClasses/Tools.cxx++");
-	gROOT->ProcessLine(".L ../../myClasses/STV_Tools.cxx++");	
+	gROOT->ProcessLine(".L ../myClasses/Tools.cxx++");
+	gROOT->ProcessLine(".L ../myClasses/STV_Tools.cxx++");	
 
 	gROOT->ProcessLine(".L PeLEE_myRecoAnalysis.C++");
 	gROOT->ProcessLine(".L PeLEE_myTrueAnalysis.C++");
