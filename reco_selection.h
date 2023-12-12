@@ -1,5 +1,5 @@
-#ifndef PeLEE_myRecoAnalysis_h
-#define PeLEE_myRecoAnalysis_h
+#ifndef reco_selection_h
+#define reco_selection_h
 
 #include <TROOT.h>
 #include <TChain.h>
@@ -13,7 +13,7 @@
 
 using namespace Constants;
 
-class PeLEE_myRecoAnalysis {
+class reco_selection {
 
 private:
 
@@ -35,6 +35,7 @@ public :
    Int_t           Run;
    Int_t           SubRun;
    Int_t           Event;
+   //TString         run_period;
    
    vector<double>  *All_UBGenie;
    vector<double>  *AxFFCCQEshape_UBGenie;
@@ -135,6 +136,10 @@ public :
    Double_t        True_Vz;
    Float_t         NuScore;
    Float_t         FlashScore;
+   Int_t           crtveto;
+   Float_t         crthitpe;
+   Float_t         CosmicIPAll3D;
+   Float_t         CosmicDirAll3D; 
    vector<double>  *BeamFlashes_TotalPE;
    vector<double>  *BeamFlashes_Time;
    vector<double>  *CandidateMuP_Distance;
@@ -261,6 +266,7 @@ public :
    TBranch        *b_Run;   //!
    TBranch        *b_SubRun;   //!
    TBranch        *b_Event;   //!
+   TBranch        *b_run_period;   //!
    
    TBranch        *b_All_UBGenie;   //!
    TBranch        *b_AxFFCCQEshape_UBGenie;   //!
@@ -360,6 +366,10 @@ public :
    TBranch        *b_True_Vz;   //!
    TBranch        *b_NuScore;   //!
    TBranch        *b_FlashScore;   //!
+   TBranch        *b_crthitpe;   //!
+   TBranch        *b_crtveto;   //!
+   TBranch        *b_CosmicIPAll3D;   //!
+   TBranch        *b_CosmicDirAll3D;   //!
    TBranch        *b_BeamFlashes_TotalPE;   //!
    TBranch        *b_BeamFlashes_Time;   //!
    TBranch        *b_CandidateMuP_Distance;   //!
@@ -478,8 +488,8 @@ public :
    TBranch        *b_StartToStartDistance;   //!
    TBranch        *b_EndToEndDistance;   //!
 
-   PeLEE_myRecoAnalysis(TString WhichSample="",TString Tune="",TString WhichEventWeightLabel="", int UniverseIndex=-1, TTree *tree=0);
-   virtual ~PeLEE_myRecoAnalysis();
+   reco_selection(TString WhichSample="",TString Tune="",TString WhichEventWeightLabel="", int UniverseIndex=-1, TTree *tree=0);
+   virtual ~reco_selection();
    virtual Int_t    Cut(Long64_t entry);
    virtual Int_t    GetEntry(Long64_t entry);
    virtual Long64_t LoadTree(Long64_t entry);
@@ -491,8 +501,8 @@ public :
 
 #endif
 
-#ifdef PeLEE_myRecoAnalysis_cxx
-PeLEE_myRecoAnalysis::PeLEE_myRecoAnalysis(TString WhichSample, TString Tune, TString WhichEventWeightLabel, int UniverseIndex, TTree *tree) : fChain(0) 
+#ifdef reco_selection_cxx
+reco_selection::reco_selection(TString WhichSample, TString Tune, TString WhichEventWeightLabel, int UniverseIndex, TTree *tree) : fChain(0) 
 {
 
    fTune = Tune;
@@ -503,7 +513,7 @@ PeLEE_myRecoAnalysis::PeLEE_myRecoAnalysis(TString WhichSample, TString Tune, TS
 
 // 	//pnfsToXRootD /pnfs/persistent/path/to/your/file
 //   fPathToFile = "/pnfs/uboone/persistent/users/apapadop/mySamples/"+UBCodeVersion+"/PeLEETuples/PreSelection_"+fWhichSample+"_"+UBCodeVersion+".root";
-	fPathToFile = "/uboone/data/users/apapadop/PeLEETuples/PreSelection_"+fWhichSample+"_"+UBCodeVersion+".root";
+	fPathToFile = "/uboone/data/users/apapadop/PeLEETuples_3D_ECal/PreSelection_"+fWhichSample+"_"+UBCodeVersion+".root";
 
    if (tree == 0) {
       TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject(fPathToFile);
@@ -517,19 +527,19 @@ PeLEE_myRecoAnalysis::PeLEE_myRecoAnalysis(TString WhichSample, TString Tune, TS
    Init(tree);
 }
 
-PeLEE_myRecoAnalysis::~PeLEE_myRecoAnalysis()
+reco_selection::~reco_selection()
 {
    if (!fChain) return;
    delete fChain->GetCurrentFile();
 }
 
-Int_t PeLEE_myRecoAnalysis::GetEntry(Long64_t entry)
+Int_t reco_selection::GetEntry(Long64_t entry)
 {
 // Read contents of entry.
    if (!fChain) return 0;
    return fChain->GetEntry(entry);
 }
-Long64_t PeLEE_myRecoAnalysis::LoadTree(Long64_t entry)
+Long64_t reco_selection::LoadTree(Long64_t entry)
 {
 // Set the environment to read one entry
    if (!fChain) return -5;
@@ -542,7 +552,7 @@ Long64_t PeLEE_myRecoAnalysis::LoadTree(Long64_t entry)
    return centry;
 }
 
-void PeLEE_myRecoAnalysis::Init(TTree *tree)
+void reco_selection::Init(TTree *tree)
 {
 
    All_UBGenie = 0;
@@ -748,6 +758,7 @@ void PeLEE_myRecoAnalysis::Init(TTree *tree)
    fChain->SetBranchAddress("POTWeight", &POTWeight, &b_POTWeight);
    fChain->SetBranchAddress("Run", &Run, &b_Run);
    fChain->SetBranchAddress("SubRun", &SubRun, &b_SubRun);
+   //fChain->SetBranchAddress("run_period", &run_period, &b_run_period);
    fChain->SetBranchAddress("Event", &Event, &b_Event);
    fChain->SetBranchAddress("All_UBGenie", &All_UBGenie, &b_All_UBGenie);
    fChain->SetBranchAddress("AxFFCCQEshape_UBGenie", &AxFFCCQEshape_UBGenie, &b_AxFFCCQEshape_UBGenie);
@@ -759,69 +770,6 @@ void PeLEE_myRecoAnalysis::Init(TTree *tree)
    fChain->SetBranchAddress("Theta_Delta2Npi_UBGenie", &Theta_Delta2Npi_UBGenie, &b_Theta_Delta2Npi_UBGenie);
    fChain->SetBranchAddress("VecFFCCQEshape_UBGenie", &VecFFCCQEshape_UBGenie, &b_VecFFCCQEshape_UBGenie);
    fChain->SetBranchAddress("XSecShape_CCMEC_UBGenie", &XSecShape_CCMEC_UBGenie, &b_XSecShape_CCMEC_UBGenie);
-
-	//----------------------------------------//
-
-	// detailed xsec uncertainties
-
-	if (fWhichSample == "Overlay9_Run1_DecompXSecUnc") {
-
-		fChain->SetBranchAddress("AGKYpT1pi_UBGenie", &AGKYpT1pi_UBGenie, &b_AGKYpT1pi_UBGenie);
-		fChain->SetBranchAddress("AGKYxF1pi_UBGenie", &AGKYxF1pi_UBGenie, &b_AGKYxF1pi_UBGenie);
-		fChain->SetBranchAddress("AhtBY_UBGenie", &AhtBY_UBGenie, &b_AhtBY_UBGenie);
-		fChain->SetBranchAddress("BhtBY_UBGenie", &BhtBY_UBGenie, &b_BhtBY_UBGenie);
-		fChain->SetBranchAddress("CV1uBY_UBGenie", &CV1uBY_UBGenie, &b_CV1uBY_UBGenie);
-		fChain->SetBranchAddress("CV2uBY_UBGenie", &CV2uBY_UBGenie, &b_CV2uBY_UBGenie);
-		fChain->SetBranchAddress("EtaNCEL_UBGenie", &EtaNCEL_UBGenie, &b_EtaNCEL_UBGenie);
-		fChain->SetBranchAddress("FrAbs_N_UBGenie", &FrAbs_N_UBGenie, &b_FrAbs_N_UBGenie);
-		fChain->SetBranchAddress("FrAbs_pi_UBGenie", &FrAbs_pi_UBGenie, &b_FrAbs_pi_UBGenie);
-		fChain->SetBranchAddress("FrCEx_N_UBGenie", &FrCEx_N_UBGenie, &b_FrCEx_N_UBGenie);
-		fChain->SetBranchAddress("FrCEx_pi_UBGenie", &FrCEx_pi_UBGenie, &b_FrCEx_pi_UBGenie);
-		fChain->SetBranchAddress("FrInel_N_UBGenie", &FrInel_N_UBGenie, &b_FrInel_N_UBGenie);												
-		fChain->SetBranchAddress("FrInel_pi_UBGenie", &FrInel_pi_UBGenie, &b_FrInel_pi_UBGenie);
-		fChain->SetBranchAddress("FrPiProd_N_UBGenie", &FrPiProd_N_UBGenie, &b_FrPiProd_N_UBGenie);
-		fChain->SetBranchAddress("FrPiProd_pi_UBGenie", &FrPiProd_pi_UBGenie, &b_FrPiProd_pi_UBGenie);
-		fChain->SetBranchAddress("FracDelta_CCMEC_UBGenie", &FracDelta_CCMEC_UBGenie, &b_FracDelta_CCMEC_UBGenie);	
-		fChain->SetBranchAddress("FracPN_CCMEC_UBGenie", &FracPN_CCMEC_UBGenie, &b_FracPN_CCMEC_UBGenie);
-		fChain->SetBranchAddress("MFP_N_UBGenie", &MFP_N_UBGenie, &b_MFP_N_UBGenie);
-		fChain->SetBranchAddress("MFP_pi_UBGenie", &MFP_pi_UBGenie, &b_MFP_pi_UBGenie);
-		fChain->SetBranchAddress("MaCCQE_UBGenie", &MaCCQE_UBGenie, &b_MaCCQE_UBGenie);
-		fChain->SetBranchAddress("MaCCRES_UBGenie", &MaCCRES_UBGenie, &b_MaCCRES_UBGenie);
-		fChain->SetBranchAddress("MaNCEL_UBGenie", &MaNCEL_UBGenie, &b_MaNCEL_UBGenie);
-		fChain->SetBranchAddress("MaNCRES_UBGenie", &MaNCRES_UBGenie, &b_MaNCRES_UBGenie);
-		fChain->SetBranchAddress("MvCCRES_UBGenie", &MvCCRES_UBGenie, &b_MvCCRES_UBGenie);
-		fChain->SetBranchAddress("MvNCRES_UBGenie", &MvNCRES_UBGenie, &b_MvNCRES_UBGenie);
-		fChain->SetBranchAddress("NonRESBGvbarnCC1pi_UBGenie", &NonRESBGvbarnCC1pi_UBGenie, &b_NonRESBGvbarnCC1pi_UBGenie);
-		fChain->SetBranchAddress("NonRESBGvbarnCC2pi_UBGenie", &NonRESBGvbarnCC2pi_UBGenie, &b_NonRESBGvbarnCC2pi_UBGenie);
-		fChain->SetBranchAddress("NonRESBGvbarnNC1pi_UBGenie", &NonRESBGvbarnNC1pi_UBGenie, &b_NonRESBGvbarnNC1pi_UBGenie);
-		fChain->SetBranchAddress("NonRESBGvbarnNC2pi_UBGenie", &NonRESBGvbarnNC2pi_UBGenie, &b_NonRESBGvbarnNC2pi_UBGenie);
-		fChain->SetBranchAddress("NonRESBGvbarpCC1pi_UBGenie", &NonRESBGvbarpCC1pi_UBGenie, &b_NonRESBGvbarpCC1pi_UBGenie);
-		fChain->SetBranchAddress("NonRESBGvbarpCC2pi_UBGenie", &NonRESBGvbarpCC2pi_UBGenie, &b_NonRESBGvbarpCC2pi_UBGenie);
-		fChain->SetBranchAddress("NonRESBGvbarpNC1pi_UBGenie", &NonRESBGvbarpNC1pi_UBGenie, &b_NonRESBGvbarpNC1pi_UBGenie);
-		fChain->SetBranchAddress("NonRESBGvbarpNC2pi_UBGenie", &NonRESBGvbarpNC2pi_UBGenie, &b_NonRESBGvbarpNC2pi_UBGenie);
-		fChain->SetBranchAddress("NonRESBGvnCC1pi_UBGenie", &NonRESBGvnCC1pi_UBGenie, &b_NonRESBGvnCC1pi_UBGenie);
-		fChain->SetBranchAddress("NonRESBGvnCC2pi_UBGenie", &NonRESBGvnCC2pi_UBGenie, &b_NonRESBGvnCC2pi_UBGenie);
-		fChain->SetBranchAddress("NonRESBGvnNC1pi_UBGenie", &NonRESBGvnNC1pi_UBGenie, &b_NonRESBGvnNC1pi_UBGenie);
-		fChain->SetBranchAddress("NonRESBGvnNC2pi_UBGenie", &NonRESBGvnNC2pi_UBGenie, &b_NonRESBGvnNC2pi_UBGenie);
-		fChain->SetBranchAddress("NonRESBGvpCC1pi_UBGenie", &NonRESBGvpCC1pi_UBGenie, &b_NonRESBGvpCC1pi_UBGenie);
-		fChain->SetBranchAddress("NonRESBGvpCC2pi_UBGenie", &NonRESBGvpCC2pi_UBGenie, &b_NonRESBGvpCC2pi_UBGenie);
-		fChain->SetBranchAddress("NonRESBGvpNC1pi_UBGenie", &NonRESBGvpNC1pi_UBGenie, &b_NonRESBGvpNC1pi_UBGenie);
-		fChain->SetBranchAddress("NonRESBGvpNC2pi_UBGenie", &NonRESBGvpNC2pi_UBGenie, &b_NonRESBGvpNC2pi_UBGenie);
-		fChain->SetBranchAddress("NormCCMEC_UBGenie", &NormCCMEC_UBGenie, &b_NormCCMEC_UBGenie);
-		fChain->SetBranchAddress("NormNCMEC_UBGenie", &NormNCMEC_UBGenie, &b_NormNCMEC_UBGenie);
-		fChain->SetBranchAddress("RDecBR1eta_UBGenie", &RDecBR1eta_UBGenie, &b_RDecBR1eta_UBGenie);
-		fChain->SetBranchAddress("RDecBR1gamma_UBGenie", &RDecBR1gamma_UBGenie, &b_RDecBR1gamma_UBGenie);
-		
-		// Unisims
-		
-		fChain->SetBranchAddress("UnShortAxFFCCQEshape_UBGenie", &UnShortAxFFCCQEshape_UBGenie, &b_UnShortAxFFCCQEshape_UBGenie);
-		fChain->SetBranchAddress("UnShortDecayAngMEC_UBGenie", &UnShortDecayAngMEC_UBGenie, &b_UnShortDecayAngMEC_UBGenie);
-		fChain->SetBranchAddress("UnShortRPA_CCQE_UBGenie", &UnShortRPA_CCQE_UBGenie, &b_UnShortRPA_CCQE_UBGenie);
-		fChain->SetBranchAddress("UnShortTheta_Delta2Npi_UBGenie", &UnShortTheta_Delta2Npi_UBGenie, &b_UnShortTheta_Delta2Npi_UBGenie);
-		fChain->SetBranchAddress("UnShortVecFFCCQEshape_UBGenie", &UnShortVecFFCCQEshape_UBGenie, &b_UnShortVecFFCCQEshape_UBGenie);
-		fChain->SetBranchAddress("UnShortXSecShape_CCMEC_UBGenie", &UnShortXSecShape_CCMEC_UBGenie, &b_UnShortXSecShape_CCMEC_UBGenie);		
-
-	}
 
 	//----------------------------------------//   
    
@@ -851,6 +799,10 @@ void PeLEE_myRecoAnalysis::Init(TTree *tree)
    fChain->SetBranchAddress("True_Vz", &True_Vz, &b_True_Vz);
    fChain->SetBranchAddress("NuScore", &NuScore, &b_NuScore);
    fChain->SetBranchAddress("FlashScore", &FlashScore, &b_FlashScore);
+   fChain->SetBranchAddress("crtveto", &crtveto, &b_crtveto);
+   fChain->SetBranchAddress("crthitpe", &crthitpe, &b_crthitpe);
+   fChain->SetBranchAddress("CosmicIPAll3D", &CosmicIPAll3D, &b_CosmicIPAll3D);
+   fChain->SetBranchAddress("CosmicDirAll3D", &CosmicDirAll3D, &b_CosmicDirAll3D);
    fChain->SetBranchAddress("BeamFlashes_TotalPE", &BeamFlashes_TotalPE, &b_BeamFlashes_TotalPE);
    fChain->SetBranchAddress("BeamFlashes_Time", &BeamFlashes_Time, &b_BeamFlashes_Time);
    fChain->SetBranchAddress("CandidateMuP_Distance", &CandidateMuP_Distance, &b_CandidateMuP_Distance);
@@ -971,7 +923,7 @@ void PeLEE_myRecoAnalysis::Init(TTree *tree)
    Notify();
 }
 
-Bool_t PeLEE_myRecoAnalysis::Notify()
+Bool_t reco_selection::Notify()
 {
    // The Notify() function is called when a new file is opened. This
    // can be either for a new TTree in a TChain or when when a new TTree
@@ -982,18 +934,18 @@ Bool_t PeLEE_myRecoAnalysis::Notify()
    return kTRUE;
 }
 
-void PeLEE_myRecoAnalysis::Show(Long64_t entry)
+void reco_selection::Show(Long64_t entry)
 {
 // Print contents of entry.
 // If entry is not specified, print current entry
    if (!fChain) return;
    fChain->Show(entry);
 }
-Int_t PeLEE_myRecoAnalysis::Cut(Long64_t entry)
+Int_t reco_selection::Cut(Long64_t entry)
 {
 // This function may be called from Loop.
 // returns  1 if entry is accepted.
 // returns -1 otherwise.
    return 1;
 }
-#endif // #ifdef PeLEE_myRecoAnalysis_cxx
+#endif // #ifdef reco_selection_cxx

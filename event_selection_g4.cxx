@@ -3,8 +3,8 @@
 	vector<TString> WhichSampleArray;
 	vector<TString> EventWeightLabels;
 	vector<int> Universes;
-//	int MCStatUniverses = 1000;
-	int MCStatUniverses = 100;
+//	int NFluxUniverses = 1000;
+	int NFluxUniverses = 100;
 
 	// -----------------------------------------------------------------------------------------
 
@@ -15,17 +15,15 @@
 //	WhichSampleArray.push_back("Overlay9_Run5");
 	WhichSampleArray.push_back("Overlay9_Combined");
 
-	// -----------------------------------------------------------------------------------------
-
-	EventWeightLabels.push_back("MC_Stat"); Universes.push_back(MCStatUniverses);
+	EventWeightLabels.push_back("reinteractions"); Universes.push_back(NFluxUniverses);
 
 	// -----------------------------------------------------------------------------------------
 
-	gROOT->ProcessLine(".L ../../myClasses/Tools.cxx++");
-	gROOT->ProcessLine(".L ../../myClasses/STV_Tools.cxx++");	
+	gROOT->ProcessLine(".L ../myClasses/Tools.cxx++");
+	gROOT->ProcessLine(".L ../myClasses/STV_Tools.cxx++");	
 
-	gROOT->ProcessLine(".L PeLEE_myRecoAnalysis.C++");
-	gROOT->ProcessLine(".L PeLEE_myTrueAnalysis.C++");
+	gROOT->ProcessLine(".L reco_selection.cxx++");
+	gROOT->ProcessLine(".L true_selection.cxx++");
 
 	for (int i = 0;i < (int)(WhichSampleArray.size()); i++) {
 
@@ -33,13 +31,10 @@
 
 			for (int k = 0; k < Universes[j]; k++) {	
 
-				gROOT->ProcessLine("PeLEE_myRecoAnalysis(\""+WhichSampleArray[i]+"\",\"\",\""+EventWeightLabels[j]+"\","+TString(std::to_string(k))+").Loop()");
+				gROOT->ProcessLine("reco_selection(\""+WhichSampleArray[i]+"\",\"\",\""+EventWeightLabels[j]+"\","+TString(std::to_string(k))+").Loop()");
 
-				if (string(WhichSampleArray[i]).find("Overlay9") != std::string::npos) { 
-					
-					gROOT->ProcessLine("PeLEE_myTrueAnalysis(\""+WhichSampleArray[i]+"\",\"\",\""+EventWeightLabels[j]+"\","+TString(std::to_string(k))+").Loop()");
-					
-				} 
+				if (string(WhichSampleArray[i]).find("Overlay9") != std::string::npos) 
+				  { gROOT->ProcessLine("true_selection(\""+WhichSampleArray[i]+"\",\"\",\""+EventWeightLabels[j]+"\","+TString(std::to_string(k))+").Loop()"); } 
 
 			} // End of the loop over the universes
 			  

@@ -58,7 +58,7 @@ void PrettyPlot(TH1D* h,int LineWidth = 2, int FontStyle = 132, int Ndivisions =
 
 }
 
-void PeLEE_OverlayPOTNormEventRates() {
+void pot_norm_event_rates() {
 
 	// ----------------------------------------------------------------------------------------------------------------------------------------
 

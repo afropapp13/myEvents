@@ -20,7 +20,6 @@
 	EventWeightLabels.push_back("DecayAngMEC_UBGenie"); Universes.push_back(2);
 	EventWeightLabels.push_back("NormCCCOH_UBGenie"); Universes.push_back(2);
 	EventWeightLabels.push_back("NormNCCOH_UBGenie"); Universes.push_back(2);
-//	EventWeightLabels.push_back("RPA_CCQE_Reduced_UBGenie"); Universes.push_back(2);
 	EventWeightLabels.push_back("RPA_CCQE_UBGenie"); Universes.push_back(2);
 	EventWeightLabels.push_back("ThetaDelta2NRad_UBGenie"); Universes.push_back(2);
 	EventWeightLabels.push_back("Theta_Delta2Npi_UBGenie"); Universes.push_back(2);
@@ -30,11 +29,11 @@
 
 	// -----------------------------------------------------------------------------------------
 
-	gROOT->ProcessLine(".L /uboone/app/users/apapadop/uboonecode_v08_00_00_52/srcs/ubana/ubana/myClasses/Tools.cxx++");
-	gROOT->ProcessLine(".L /uboone/app/users/apapadop/uboonecode_v08_00_00_52/srcs/ubana/ubana/myClasses/STV_Tools.cxx++");	
+	gROOT->ProcessLine(".L ../myClasses/Tools.cxx++");
+	gROOT->ProcessLine(".L ../myClasses/STV_Tools.cxx++");	
 
-	gROOT->ProcessLine(".L PeLEE_myRecoAnalysis.C+");
-	gROOT->ProcessLine(".L PeLEE_myTrueAnalysis.C+");
+	gROOT->ProcessLine(".L reco_selection.cxx+");
+	gROOT->ProcessLine(".L true_selection.cxx+");
 
 	for (int i = 0;i < (int)(WhichSampleArray.size()); i++) {
 
@@ -42,14 +41,19 @@
 
 			for (int k = 0; k < Universes[j]; k++) {	
 
-				gROOT->ProcessLine("PeLEE_myRecoAnalysis(\""+WhichSampleArray[i]+"\",\"\",\""+EventWeightLabels[j]+"\","+TString(std::to_string(k))+").Loop()");
-
-				if (string(WhichSampleArray[i]).find("Overlay9") != std::string::npos) 
-				  { gROOT->ProcessLine("PeLEE_myTrueAnalysis(\""+WhichSampleArray[i]+"\",\"\",\""+EventWeightLabels[j]+"\","+TString(std::to_string(k))+").Loop()"); } 
+				gROOT->ProcessLine("reco_selection(\""+WhichSampleArray[i]+"\",\"NoTune\",\""+EventWeightLabels[j]+"\","+TString(std::to_string(k))+").Loop()");
+				gROOT->ProcessLine("reco_selection(\""+WhichSampleArray[i]+"\",\"TwiceMEC\",\""+EventWeightLabels[j]+"\","+TString(std::to_string(k))+").Loop()");			
+	
+				if (string(WhichSampleArray[i]).find("Overlay9") != std::string::npos) { 
+					
+					gROOT->ProcessLine("true_selection(\""+WhichSampleArray[i]+"\",\"NoTune\",\""+EventWeightLabels[j]+"\","+TString(std::to_string(k))+").Loop()");
+					gROOT->ProcessLine("true_selection(\""+WhichSampleArray[i]+"\",\"TwiceMEC\",\""+EventWeightLabels[j]+"\","+TString(std::to_string(k))+").Loop()");					 
+					
+				} 
 
 			} // End of the loop over the universes
 			  
-		} // End of the loop over the reinteraction labels	  
+		} // End of the loop over the xsec labels	  
 
 	} // End of the loop over the samples
 

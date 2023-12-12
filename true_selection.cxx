@@ -1,5 +1,5 @@
-#define PeLEE_myTrueAnalysis_cxx
-#include "PeLEE_myTrueAnalysis.h"
+#define true_selection_cxx
+#include "true_selection.h"
 #include <TH2.h>
 #include <TStyle.h>
 #include <TCanvas.h>
@@ -35,7 +35,7 @@ TString TrueToStringInt(int num) {
 
 //--------------------------------------------------//
 
-void PeLEE_myTrueAnalysis::Loop() {
+void true_selection::Loop() {
 
 	//--------------------------------------------------//	
 
@@ -91,8 +91,6 @@ void PeLEE_myTrueAnalysis::Loop() {
 	TH1D* TrueDeltaPTPlot[NInte];
 	TH1D* TrueDeltaAlphaTPlot[NInte];
 	TH1D* TrueDeltaAlpha3DqPlot[NInte];
-	TH1D* TrueDeltaPhiTPlot[NInte];
-	TH1D* TrueDeltaPhi3DPlot[NInte];	
 	TH1D* TrueDeltaPnPlot[NInte];
 	TH1D* TrueMuonMomentumPlot[NInte];
 	TH1D* TrueMuonCosThetaPlot[NInte];
@@ -106,6 +104,7 @@ void PeLEE_myTrueAnalysis::Loop() {
 	// 3D analysis (uncorrelated)	
 
 	TH1D* TrueECal_InDeltaPTDeltaAlphaTTwoDPlot[NInte][TwoDNBinsDeltaPT][TwoDNBinsDeltaAlphaT];
+	TH1D* TrueECal_InDeltaPnDeltaAlpha3DqTwoDPlot[NInte][TwoDNBinsDeltaPn][TwoDNBinsDeltaAlpha3Dq];
 	TH1D* TrueECal_InMuonCosThetaMuonMomentumTwoDPlot[NInte][TwoDNBinsMuonCosTheta][TwoDNBinsMuonMomentum];
 	TH1D* TrueECal_InProtonCosThetaProtonMomentumTwoDPlot[NInte][TwoDNBinsProtonCosTheta][TwoDNBinsProtonMomentum];	
 
@@ -114,6 +113,7 @@ void PeLEE_myTrueAnalysis::Loop() {
 	// 3D analysis in 1D grid		
 	
 	TH1D* SerialTrueECal_InDeltaPTDeltaAlphaTPlot[NInte];
+	TH1D* SerialTrueECal_InDeltaPnDeltaAlpha3DqPlot[NInte];
 	TH1D* SerialTrueECal_InMuonCosThetaMuonMomentumPlot[NInte];
 	TH1D* SerialTrueECal_InProtonCosThetaProtonMomentumPlot[NInte];
 
@@ -130,8 +130,6 @@ void PeLEE_myTrueAnalysis::Loop() {
 		TrueDeltaPTPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueDeltaPTPlot",LabelXAxisDeltaPT,NBinsDeltaPT,ArrayNBinsDeltaPT);
 		TrueDeltaAlphaTPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueDeltaAlphaTPlot",LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);
 		TrueDeltaAlpha3DqPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueDeltaAlpha3DqPlot",LabelXAxisDeltaAlpha3Dq,NBinsDeltaAlpha3Dq,ArrayNBinsDeltaAlpha3Dq);
-		TrueDeltaPhiTPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueDeltaPhiTPlot",LabelXAxisDeltaPhiT,NBinsDeltaPhiT,ArrayNBinsDeltaPhiT);
-		TrueDeltaPhi3DPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueDeltaPhi3DPlot",LabelXAxisDeltaPhi3D,NBinsDeltaPhi3D,ArrayNBinsDeltaPhi3D);		
 		TrueDeltaPnPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueDeltaPnPlot",LabelXAxisDeltaPn,NBinsDeltaPn,ArrayNBinsDeltaPn);
 		TrueMuonMomentumPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueMuonMomentumPlot",LabelXAxisMuonMomentum,NBinsMuonMomentum,ArrayNBinsMuonMomentum);
 		TrueMuonCosThetaPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueMuonCosThetaPlot",LabelXAxisMuonCosTheta,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta);
@@ -142,7 +140,7 @@ void PeLEE_myTrueAnalysis::Loop() {
 
 		//--------------------------------------------------//	
 
-		// 2D & 3D analysis (uncorrelated)
+		// 3D analysis (uncorrelated)
 
 		for (int WhichDeltaPT = 0; WhichDeltaPT < TwoDNBinsDeltaPT; WhichDeltaPT++) {
 
@@ -154,6 +152,18 @@ void PeLEE_myTrueAnalysis::Loop() {
 			}
 
 		}
+
+		for (int WhichDeltaPn = 0; WhichDeltaPn < TwoDNBinsDeltaPn; WhichDeltaPn++) {
+
+			for (int WhichDeltaAlpha3Dq = 0; WhichDeltaAlpha3Dq < TwoDNBinsDeltaAlpha3Dq; WhichDeltaAlpha3Dq++) {	
+
+				TString ECalTwoDInDeltaPnDeltaAlpha3DqLabel = "ECal_DeltaPn_"+tools.ConvertToString(TwoDArrayNBinsDeltaPn[WhichDeltaPn])+"To"+tools.ConvertToString(TwoDArrayNBinsDeltaPn[WhichDeltaPn+1])+"_DeltaAlpha3Dq_"+tools.ConvertToString(TwoDArrayNBinsDeltaAlpha3Dq[WhichDeltaAlpha3Dq])+"To"+tools.ConvertToString(TwoDArrayNBinsDeltaAlpha3Dq[WhichDeltaAlpha3Dq+1])+"Plot";
+				TrueECal_InDeltaPnDeltaAlpha3DqTwoDPlot[inte][WhichDeltaPn][WhichDeltaAlpha3Dq] = new TH1D(InteractionLabels[inte]+"True"+ECalTwoDInDeltaPnDeltaAlpha3DqLabel,LabelXAxisECal,TwoDArrayNBinsECalInDeltaPnDeltaAlpha3DqSlices[WhichDeltaPn][WhichDeltaAlpha3Dq].size()-1,&TwoDArrayNBinsECalInDeltaPnDeltaAlpha3DqSlices[WhichDeltaPn][WhichDeltaAlpha3Dq][0]);
+
+			}
+
+		}
+
 
 		for (int WhichMuonCosTheta = 0; WhichMuonCosTheta < TwoDNBinsMuonCosTheta; WhichMuonCosTheta++) {
 
@@ -182,6 +192,7 @@ void PeLEE_myTrueAnalysis::Loop() {
 		// 3D analysis in 1D grid		
 		
 		SerialTrueECal_InDeltaPTDeltaAlphaTPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueSerialECal_DeltaPTDeltaAlphaTPlot",LabelXAxisECal,tools.Return3DNBins(TwoDArrayNBinsECalInDeltaPTDeltaAlphaTSlices),&tools.Return3DBinIndices(TwoDArrayNBinsECalInDeltaPTDeltaAlphaTSlices)[0]);
+		SerialTrueECal_InDeltaPnDeltaAlpha3DqPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueSerialECal_DeltaPnDeltaAlpha3DqPlot",LabelXAxisECal,tools.Return3DNBins(TwoDArrayNBinsECalInDeltaPnDeltaAlpha3DqSlices),&tools.Return3DBinIndices(TwoDArrayNBinsECalInDeltaPnDeltaAlpha3DqSlices)[0]);
 		SerialTrueECal_InMuonCosThetaMuonMomentumPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueSerialECal_MuonCosThetaMuonMomentumPlot",LabelXAxisECal,tools.Return3DNBins(TwoDArrayNBinsECalInMuonCosThetaMuonMomentumSlices),&tools.Return3DBinIndices(TwoDArrayNBinsECalInMuonCosThetaMuonMomentumSlices)[0]);
 		SerialTrueECal_InProtonCosThetaProtonMomentumPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueSerialECal_ProtonCosThetaProtonMomentumPlot",LabelXAxisECal,tools.Return3DNBins(TwoDArrayNBinsECalInProtonCosThetaProtonMomentumSlices),&tools.Return3DBinIndices(TwoDArrayNBinsECalInProtonCosThetaProtonMomentumSlices)[0]);
 
@@ -234,12 +245,27 @@ void PeLEE_myTrueAnalysis::Loop() {
 		// Genie, flux & reinteraction weights for systematics
 
 		if ( 
-			fUniverseIndex != -1 && (fWhichSample == "Overlay9_Run1" || fWhichSample == "Overlay9_Run2" || 
-			fWhichSample == "Overlay9_Run3" || fWhichSample == "Overlay9_Run4a" || fWhichSample == "Overlay9_Run4aRutgers" ||
-			fWhichSample == "Overlay9_Run4" || fWhichSample == "Overlay9_Run5" || fWhichSample == "Overlay9_Combined" ||
-			fWhichSample == "OverlayDirt9_Run1" || fWhichSample == "OverlayDirt9_Run2" || 
-			fWhichSample == "OverlayDirt9_Run3" || fWhichSample == "OverlayDirt9_Run4a" || fWhichSample == "OverlayDirt9_Run4aRutgers" ||
-			fWhichSample == "OverlayDirt9_Run4" || fWhichSample == "OverlayDirt9_Run5" || fWhichSample == "OverlayDirt9_Combined") 
+			   fUniverseIndex != -1 && (
+			   fWhichSample == "Overlay9_Run1" 
+			|| fWhichSample == "Overlay9_Run2" 
+			|| fWhichSample == "Overlay9_Run3" 
+			|| fWhichSample == "Overlay9_Run4a"
+			|| fWhichSample == "Overlay9_Run4b" 
+			|| fWhichSample == "Overlay9_Run4c" 
+			|| fWhichSample == "Overlay9_Run4d" 
+			|| fWhichSample == "Overlay9_Run5" 
+			|| fWhichSample == "Overlay9_Combined" 
+			|| fWhichSample == "OverlayDirt9_Run1" 
+			|| fWhichSample == "OverlayDirt9_Run2" 
+			|| fWhichSample == "OverlayDirt9_Run3" 
+			|| fWhichSample == "OverlayDirt9_Run4a" 
+			|| fWhichSample == "OverlayDirt9_Run4b" 
+			|| fWhichSample == "OverlayDirt9_Run4c" 
+			|| fWhichSample == "OverlayDirt9_Run4d" 
+			|| fWhichSample == "OverlayDirt9_Run5" 
+			|| fWhichSample == "OverlayDirt9_Combined"
+
+			) 
 		) {
 
 			// Genie weights
@@ -249,7 +275,6 @@ void PeLEE_myTrueAnalysis::Loop() {
 			if (fEventWeightLabel == "DecayAngMEC_UBGenie") { weight = weight*DecayAngMEC_UBGenie->at(fUniverseIndex) / T2KWeight; }
 			if (fEventWeightLabel == "NormCCCOH_UBGenie") { weight = weight*NormCCCOH_UBGenie->at(fUniverseIndex)/ T2KWeight; }
 			if (fEventWeightLabel == "NormNCCOH_UBGenie") { weight = weight*NormNCCOH_UBGenie->at(fUniverseIndex)/ T2KWeight; }
-//			if (fEventWeightLabel == "RPA_CCQE_Reduced_UBGenie") { weight = weight*RPA_CCQE_Reduced_UBGenie->at(fUniverseIndex)/ T2KWeight; }
 			if (fEventWeightLabel == "RPA_CCQE_UBGenie") { weight = weight*RPA_CCQE_UBGenie->at(fUniverseIndex)/ T2KWeight; }
 			if (fEventWeightLabel == "ThetaDelta2NRad_UBGenie") { weight = weight*ThetaDelta2NRad_UBGenie->at(fUniverseIndex)/ T2KWeight; }
 			if (fEventWeightLabel == "Theta_Delta2Npi_UBGenie") { weight = weight*Theta_Delta2Npi_UBGenie->at(fUniverseIndex)/ T2KWeight; }
@@ -273,79 +298,6 @@ void PeLEE_myTrueAnalysis::Loop() {
 		}
 
 		//----------------------------------------//
-
-		// detailed xsec genie uncertainties	
-
-		if ( 
-			fUniverseIndex != -1 && fWhichSample == "Overlay9_Run1_DecompXSecUnc"
-		) {
-
-
-				// Watch out: The EventWeight weights already include the weight for the tune
-
-				double SF = 1.;
-
-				// Genie weights
-				if (fEventWeightLabel == "AGKYpT1pi_UBGenie") { SF = double(AGKYpT1pi_UBGenie->at(fUniverseIndex)) / 1000. ; }
-				if (fEventWeightLabel == "AGKYxF1pi_UBGenie") { SF = AGKYxF1pi_UBGenie->at(fUniverseIndex) / 1000. ; }	
-				if (fEventWeightLabel == "AhtBY_UBGenie") { SF =  AhtBY_UBGenie->at(fUniverseIndex) / 1000. ; }	
-				if (fEventWeightLabel == "BhtBY_UBGenie") { SF =  BhtBY_UBGenie->at(fUniverseIndex) / 1000. ; }	
-				if (fEventWeightLabel == "CV1uBY_UBGenie") { SF =  CV1uBY_UBGenie->at(fUniverseIndex) / 1000. ; }	
-				if (fEventWeightLabel == "CV2uBY_UBGenie") { SF =  CV2uBY_UBGenie->at(fUniverseIndex) / 1000. ; }
-				if (fEventWeightLabel == "EtaNCEL_UBGenie") { SF =  EtaNCEL_UBGenie->at(fUniverseIndex) / 1000. ; }	
-				if (fEventWeightLabel == "FrAbs_N_UBGenie") { SF =  FrAbs_N_UBGenie->at(fUniverseIndex) / 1000. ; }	
-				if (fEventWeightLabel == "FrAbs_pi_UBGenie") { SF =  FrAbs_pi_UBGenie->at(fUniverseIndex) / 1000. ; }
-				if (fEventWeightLabel == "FrCEx_N_UBGenie") { SF =  FrCEx_N_UBGenie->at(fUniverseIndex) / 1000. ; }	
-				if (fEventWeightLabel == "FrCEx_pi_UBGenie") { SF =  FrCEx_pi_UBGenie->at(fUniverseIndex) / 1000. ; }	
-				if (fEventWeightLabel == "FrInel_N_UBGenie") { SF =  FrInel_N_UBGenie->at(fUniverseIndex) / 1000. ; }	
-				if (fEventWeightLabel == "FrInel_pi_UBGenie") { SF =  FrInel_pi_UBGenie->at(fUniverseIndex) / 1000. ; }	
-				if (fEventWeightLabel == "FrPiProd_N_UBGenie") { SF =  FrPiProd_N_UBGenie->at(fUniverseIndex) / 1000. ; }
-				if (fEventWeightLabel == "FrPiProd_pi_UBGenie") { SF =  FrPiProd_pi_UBGenie->at(fUniverseIndex) / 1000. ; }	
-				if (fEventWeightLabel == "FracDelta_CCMEC_UBGenie") { SF =  FracDelta_CCMEC_UBGenie->at(fUniverseIndex) / 1000. ; }	
-				if (fEventWeightLabel == "FracPN_CCMEC_UBGenie") { SF =  FracPN_CCMEC_UBGenie->at(fUniverseIndex) / 1000. ; }	
-				if (fEventWeightLabel == "MFP_N_UBGenie") { SF =  MFP_N_UBGenie->at(fUniverseIndex) / 1000. ; }	
-				if (fEventWeightLabel == "MFP_pi_UBGenie") { SF =  MFP_pi_UBGenie->at(fUniverseIndex) / 1000. ; }
-				if (fEventWeightLabel == "MaCCQE_UBGenie") { SF =  double(MaCCQE_UBGenie->at(fUniverseIndex)) / 1000. ; }	
-				if (fEventWeightLabel == "MaCCRES_UBGenie") { SF =  MaCCRES_UBGenie->at(fUniverseIndex) / 1000. ; }	
-				if (fEventWeightLabel == "MaNCEL_UBGenie") { SF =  MaNCEL_UBGenie->at(fUniverseIndex) / 1000. ; }	
-				if (fEventWeightLabel == "MaNCRES_UBGenie") { SF =  MaNCRES_UBGenie->at(fUniverseIndex) / 1000. ; }	
-				if (fEventWeightLabel == "MvCCRES_UBGenie") { SF =  MvCCRES_UBGenie->at(fUniverseIndex) / 1000. ; }
-				if (fEventWeightLabel == "MvNCRES_UBGenie") { SF =  MvNCRES_UBGenie->at(fUniverseIndex) / 1000. ; }	
-				if (fEventWeightLabel == "NonRESBGvbarnCC1pi_UBGenie") { SF =  NonRESBGvbarnCC1pi_UBGenie->at(fUniverseIndex) / 1000. ; }	
-				if (fEventWeightLabel == "NonRESBGvbarnCC2pi_UBGenie") { SF =  NonRESBGvbarnCC2pi_UBGenie->at(fUniverseIndex) / 1000. ; }	
-				if (fEventWeightLabel == "NonRESBGvbarnNC1pi_UBGenie") { SF =  NonRESBGvbarnNC1pi_UBGenie->at(fUniverseIndex) / 1000. ; }	
-				if (fEventWeightLabel == "NonRESBGvbarnNC2pi_UBGenie") { SF =  NonRESBGvbarnNC2pi_UBGenie->at(fUniverseIndex) / 1000. ; }
-				if (fEventWeightLabel == "NonRESBGvbarpCC1pi_UBGenie") { SF =  NonRESBGvbarpCC1pi_UBGenie->at(fUniverseIndex) / 1000. ; }	
-				if (fEventWeightLabel == "NonRESBGvbarpCC2pi_UBGenie") { SF =  NonRESBGvbarpCC2pi_UBGenie->at(fUniverseIndex) / 1000. ; }	
-				if (fEventWeightLabel == "NonRESBGvbarpNC1pi_UBGenie") { SF =  NonRESBGvbarpNC1pi_UBGenie->at(fUniverseIndex) / 1000. ; }	
-				if (fEventWeightLabel == "NonRESBGvbarpNC2pi_UBGenie") { SF =  NonRESBGvbarpNC2pi_UBGenie->at(fUniverseIndex) / 1000. ; }	
-				if (fEventWeightLabel == "NonRESBGvnCC1pi_UBGenie") { SF =  NonRESBGvnCC1pi_UBGenie->at(fUniverseIndex) / 1000. ; }
-				if (fEventWeightLabel == "NonRESBGvnCC2pi_UBGenie") { SF =  NonRESBGvnCC2pi_UBGenie->at(fUniverseIndex) / 1000. ; }	
-				if (fEventWeightLabel == "NonRESBGvnNC1pi_UBGenie") { SF =  NonRESBGvnNC1pi_UBGenie->at(fUniverseIndex) / 1000. ; }	
-				if (fEventWeightLabel == "NonRESBGvnNC2pi_UBGenie") { SF =  NonRESBGvnNC2pi_UBGenie->at(fUniverseIndex) / 1000. ; }	
-				if (fEventWeightLabel == "NonRESBGvpCC1pi_UBGenie") { SF =  NonRESBGvpCC1pi_UBGenie->at(fUniverseIndex) / 1000. ; }
-				if (fEventWeightLabel == "NonRESBGvpCC2pi_UBGenie") { SF =  NonRESBGvpCC2pi_UBGenie->at(fUniverseIndex) / 1000. ; }	
-				if (fEventWeightLabel == "NonRESBGvpNC1pi_UBGenie") { SF =  NonRESBGvpNC1pi_UBGenie->at(fUniverseIndex) / 1000. ; }	
-				if (fEventWeightLabel == "NonRESBGvpNC2pi_UBGenie") { SF =  NonRESBGvpNC2pi_UBGenie->at(fUniverseIndex) / 1000. ; }	
-				if (fEventWeightLabel == "NormCCMEC_UBGenie") { SF =  NormCCMEC_UBGenie->at(fUniverseIndex) / 1000. ; }	
-				if (fEventWeightLabel == "NormNCMEC_UBGenie") { SF =  NormNCMEC_UBGenie->at(fUniverseIndex) / 1000. ; }
-				if (fEventWeightLabel == "RDecBR1eta_UBGenie") { SF =  RDecBR1eta_UBGenie->at(fUniverseIndex) / 1000. ; }	
-				if (fEventWeightLabel == "RDecBR1gamma_UBGenie") { SF =  RDecBR1gamma_UBGenie->at(fUniverseIndex) / 1000. ; }
-
-				// Unisims
-
-				if (fEventWeightLabel == "UnShortAxFFCCQEshape_UBGenie") { SF =  UnShortAxFFCCQEshape_UBGenie->at(fUniverseIndex) / 1000. ; }
-				if (fEventWeightLabel == "UnShortDecayAngMEC_UBGenie") { SF =  UnShortDecayAngMEC_UBGenie->at(fUniverseIndex) / 1000. ; }
-				if (fEventWeightLabel == "UnShortRPA_CCQE_UBGenie") { SF =  UnShortRPA_CCQE_UBGenie->at(fUniverseIndex) / 1000. ; }
-				if (fEventWeightLabel == "UnShortTheta_Delta2Npi_UBGenie") { SF =  UnShortTheta_Delta2Npi_UBGenie->at(fUniverseIndex) / 1000. ; }
-				if (fEventWeightLabel == "UnShortVecFFCCQEshape_UBGenie") { SF =  UnShortVecFFCCQEshape_UBGenie->at(fUniverseIndex) / 1000. ; }
-				if (fEventWeightLabel == "UnShortXSecShape_CCMEC_UBGenie") { SF =  UnShortXSecShape_CCMEC_UBGenie->at(fUniverseIndex) / 1000. ; }																																
-
-				weight = weight * SF / T2KWeight;		
-
-		}			
-
-		//--------------------------------------------------//
 
 		SumWeights += weight / POTWeight;					
 
@@ -393,7 +345,6 @@ void PeLEE_myTrueAnalysis::Loop() {
 			double TrueProtonMomentum_GeV = Proton_MCParticle_Mom->at(0); // GeV
 			double TrueProton_E_GeV = TMath::Sqrt( TMath::Power(TrueProtonMomentum_GeV,2.) + TMath::Power(ProtonMass_GeV,2.) ); // GeV
 
-			double TrueDeltaPhiProtonMuon_Deg = True_DeltaPhi->at(0);
 			double TrueDeltaThetaProtonMuon_Deg = True_DeltaTheta->at(0);
 
 			// Reconstructed calorimetric energy using true level info / MCParticles
@@ -461,8 +412,6 @@ void PeLEE_myTrueAnalysis::Loop() {
 				    //&& TrueTransMissMomentum < ArrayNBinsDeltaPT[NBinsDeltaPT]
 				    && TrueDeltaAlphaT > ArrayNBinsDeltaAlphaT[0] 
 				    && TrueDeltaAlphaT < ArrayNBinsDeltaAlphaT[NBinsDeltaAlphaT]
-				    && TrueDeltaPhiT > ArrayNBinsDeltaPhiT[0] 
-				    && TrueDeltaPhiT < ArrayNBinsDeltaPhiT[NBinsDeltaPhiT]
 				    
 				    && TrueMuonMomentum_GeV < ArrayNBinsMuonMomentum[NBinsMuonMomentum]
 				    && TrueProtonMomentum_GeV < ArrayNBinsProtonMomentum[NBinsProtonMomentum]
@@ -521,6 +470,7 @@ void PeLEE_myTrueAnalysis::Loop() {
 
 
 					int SerialECalInDeltaPTDeltaAlphaTIndex = tools.ReturnIndexIn3DList(TwoDArrayNBinsECalInDeltaPTDeltaAlphaTSlices,DeltaPTTwoDIndex,DeltaAlphaTTwoDIndex,TrueRecoECal);
+					int SerialECalInDeltaPnDeltaAlpha3DqIndex = tools.ReturnIndexIn3DList(TwoDArrayNBinsECalInDeltaPnDeltaAlpha3DqSlices,DeltaPnTwoDIndex,DeltaAlpha3DqTwoDIndex,TrueRecoECal);
 					int SerialECalInMuonCosThetaMuonMomentumIndex = tools.ReturnIndexIn3DList(TwoDArrayNBinsECalInMuonCosThetaMuonMomentumSlices,MuonCosThetaTwoDIndex,MuonMomentumTwoDIndex,TrueRecoECal);
 					int SerialECalInProtonCosThetaProtonMomentumIndex = tools.ReturnIndexIn3DList(TwoDArrayNBinsECalInProtonCosThetaProtonMomentumSlices,ProtonCosThetaTwoDIndex,ProtonMomentumTwoDIndex,TrueRecoECal);																							
 
@@ -531,8 +481,6 @@ void PeLEE_myTrueAnalysis::Loop() {
 					TrueDeltaPTPlot[0]->Fill(TrueTransMissMomentum,weight);
 					TrueDeltaAlphaTPlot[0]->Fill(TrueDeltaAlphaT,weight);
 					TrueDeltaAlpha3DqPlot[0]->Fill(TrueDeltaAlpha3Dq,weight);
-					TrueDeltaPhiTPlot[0]->Fill(TrueDeltaPhiT,weight);
-					TrueDeltaPhi3DPlot[0]->Fill(TrueDeltaPhi3D,weight);					
 					TrueDeltaPnPlot[0]->Fill(TruePn,weight);
 					TrueECalPlot[0]->Fill(TrueRecoECal,weight);
 					TrueMuonMomentumPlot[0]->Fill(TrueMuonMomentum_GeV,weight);
@@ -544,8 +492,6 @@ void PeLEE_myTrueAnalysis::Loop() {
 					TrueDeltaPTPlot[genie_mode]->Fill(TrueTransMissMomentum,weight);
 					TrueDeltaAlphaTPlot[genie_mode]->Fill(TrueDeltaAlphaT,weight);
 					TrueDeltaAlpha3DqPlot[genie_mode]->Fill(TrueDeltaAlpha3Dq,weight);
-					TrueDeltaPhiTPlot[genie_mode]->Fill(TrueDeltaPhiT,weight);
-					TrueDeltaPhi3DPlot[genie_mode]->Fill(TrueDeltaPhi3D,weight);					
 					TrueDeltaPnPlot[genie_mode]->Fill(TruePn,weight);
 					TrueECalPlot[genie_mode]->Fill(TrueRecoECal,weight);
 					TrueMuonMomentumPlot[genie_mode]->Fill(TrueMuonMomentum_GeV,weight);
@@ -558,10 +504,12 @@ void PeLEE_myTrueAnalysis::Loop() {
 					// 3D analysis (uncorrelated)
 
 					TrueECal_InDeltaPTDeltaAlphaTTwoDPlot[0][DeltaPTTwoDIndex][DeltaAlphaTTwoDIndex]->Fill(TrueRecoECal,weight);
+					TrueECal_InDeltaPnDeltaAlpha3DqTwoDPlot[0][DeltaPnTwoDIndex][DeltaAlpha3DqTwoDIndex]->Fill(TrueRecoECal,weight);
 					TrueECal_InMuonCosThetaMuonMomentumTwoDPlot[0][MuonCosThetaTwoDIndex][MuonMomentumTwoDIndex]->Fill(TrueRecoECal,weight);
 					TrueECal_InProtonCosThetaProtonMomentumTwoDPlot[0][ProtonCosThetaTwoDIndex][ProtonMomentumTwoDIndex]->Fill(TrueRecoECal,weight);
 
 					TrueECal_InDeltaPTDeltaAlphaTTwoDPlot[genie_mode][DeltaPTTwoDIndex][DeltaAlphaTTwoDIndex]->Fill(TrueRecoECal,weight);
+					TrueECal_InDeltaPnDeltaAlpha3DqTwoDPlot[genie_mode][DeltaPnTwoDIndex][DeltaAlpha3DqTwoDIndex]->Fill(TrueRecoECal,weight);
 					TrueECal_InMuonCosThetaMuonMomentumTwoDPlot[genie_mode][MuonCosThetaTwoDIndex][MuonMomentumTwoDIndex]->Fill(TrueRecoECal,weight);
 					TrueECal_InProtonCosThetaProtonMomentumTwoDPlot[genie_mode][ProtonCosThetaTwoDIndex][ProtonMomentumTwoDIndex]->Fill(TrueRecoECal,weight);					
 
@@ -570,10 +518,12 @@ void PeLEE_myTrueAnalysis::Loop() {
 					// 3D analysis treated in 1D grid
 
 					SerialTrueECal_InDeltaPTDeltaAlphaTPlot[0]->Fill(SerialECalInDeltaPTDeltaAlphaTIndex,weight);
+					SerialTrueECal_InDeltaPnDeltaAlpha3DqPlot[0]->Fill(SerialECalInDeltaPnDeltaAlpha3DqIndex,weight);
 					SerialTrueECal_InMuonCosThetaMuonMomentumPlot[0]->Fill(SerialECalInMuonCosThetaMuonMomentumIndex,weight);
 					SerialTrueECal_InProtonCosThetaProtonMomentumPlot[0]->Fill(SerialECalInProtonCosThetaProtonMomentumIndex,weight);
 
 					SerialTrueECal_InDeltaPTDeltaAlphaTPlot[genie_mode]->Fill(SerialECalInDeltaPTDeltaAlphaTIndex,weight);
+					SerialTrueECal_InDeltaPnDeltaAlpha3DqPlot[genie_mode]->Fill(SerialECalInDeltaPnDeltaAlpha3DqIndex,weight);
 					SerialTrueECal_InMuonCosThetaMuonMomentumPlot[genie_mode]->Fill(SerialECalInMuonCosThetaMuonMomentumIndex,weight);
 					SerialTrueECal_InProtonCosThetaProtonMomentumPlot[genie_mode]->Fill(SerialECalInProtonCosThetaProtonMomentumIndex,weight);					
 

@@ -7,26 +7,31 @@
 #include <TLegend.h>
 #include <TLine.h>
 #include <TLatex.h>
+#include <TPad.h>
 
 #include <iostream>
 #include <vector>
 
-#include "../Secondary_Code/myFunctions.cpp"
-#include "../../myClasses/Constants.h"
+#include "../myClasses/myFunctions.cpp"
+#include "../myClasses/Constants.h"
 
 using namespace std;
 using namespace Constants;
 
-void PeLEE_Create1DPlotsTHStack_InteractionBreakDown(TString BaseMC = "") {
+void topological_breakdown(TString BaseMC = "") {
 
-	// ----------------------------------------------------------------------------------------------------------------------------------------
+	// -----------------------------------------------------------------------------------------------------------------------------------------
 
-	TH1D::SetDefaultSumw2();
-	gStyle->SetOptStat(0);	
+	gStyle->SetOptStat(0);
 
-	// ----------------------------------------------------------------------------------------------------------------------------------------
+	// -----------------------------------------------------------------------------------------------------------------------------------------
 
-	vector<TString> PlotNames; PlotNames.clear();
+	std::vector<TString> PlotNames; PlotNames.clear();
+
+        PlotNames.push_back("RecoCRTVetoPlot");
+        PlotNames.push_back("RecoCRTHitPEPlot");
+        PlotNames.push_back("RecoCosmicIPAll3DPlot");
+        PlotNames.push_back("RecoCosmicDirAll3DPlot");
 
 	PlotNames.push_back("RecoMuonMomentumPlot");
 	PlotNames.push_back("RecoProtonMomentumPlot");
@@ -35,10 +40,8 @@ void PeLEE_Create1DPlotsTHStack_InteractionBreakDown(TString BaseMC = "") {
 	PlotNames.push_back("RecoDeltaPTPlot");
 	PlotNames.push_back("RecoDeltaAlphaTPlot");
 	PlotNames.push_back("RecoDeltaAlpha3DqPlot");
-	PlotNames.push_back("RecoDeltaPhiTPlot");
-	PlotNames.push_back("RecoDeltaPhi3DPlot");	
 
-	PlotNames.push_back("RecoDeltaPnPlot");
+	PlotNames.push_back("RecoDeltaPnPlot");	
 	PlotNames.push_back("RecoMuonCosThetaSingleBinPlot");	
 
 	PlotNames.push_back("RecoECalPlot");
@@ -55,6 +58,19 @@ void PeLEE_Create1DPlotsTHStack_InteractionBreakDown(TString BaseMC = "") {
     PlotNames.push_back("RecoECal_DeltaPT_0_40To1_00_DeltaAlphaT_45_00To90_00Plot");
     PlotNames.push_back("RecoECal_DeltaPT_0_40To1_00_DeltaAlphaT_90_00To135_00Plot");
     PlotNames.push_back("RecoECal_DeltaPT_0_40To1_00_DeltaAlphaT_135_00To180_00Plot");
+
+        PlotNames.push_back("RecoECal_DeltaPn_0_00To0_20_DeltaAlpha3Dq_0_00To45_00Plot");
+    PlotNames.push_back("RecoECal_DeltaPn_0_00To0_20_DeltaAlpha3Dq_45_00To90_00Plot");
+    PlotNames.push_back("RecoECal_DeltaPn_0_00To0_20_DeltaAlpha3Dq_90_00To135_00Plot");
+    PlotNames.push_back("RecoECal_DeltaPn_0_00To0_20_DeltaAlpha3Dq_135_00To180_00Plot");
+    PlotNames.push_back("RecoECal_DeltaPn_0_20To0_40_DeltaAlpha3Dq_0_00To45_00Plot");
+    PlotNames.push_back("RecoECal_DeltaPn_0_20To0_40_DeltaAlpha3Dq_45_00To90_00Plot");
+    PlotNames.push_back("RecoECal_DeltaPn_0_20To0_40_DeltaAlpha3Dq_90_00To135_00Plot");
+    PlotNames.push_back("RecoECal_DeltaPn_0_20To0_40_DeltaAlpha3Dq_135_00To180_00Plot");
+    PlotNames.push_back("RecoECal_DeltaPn_0_40To1_00_DeltaAlpha3Dq_0_00To45_00Plot");
+    PlotNames.push_back("RecoECal_DeltaPn_0_40To1_00_DeltaAlpha3Dq_45_00To90_00Plot");
+    PlotNames.push_back("RecoECal_DeltaPn_0_40To1_00_DeltaAlpha3Dq_90_00To135_00Plot");
+    PlotNames.push_back("RecoECal_DeltaPn_0_40To1_00_DeltaAlpha3Dq_135_00To180_00Plot");
 
     PlotNames.push_back("RecoECal_MuonCosTheta_Minus1_00To0_00_MuonMomentum_0_10To0_40Plot");
     PlotNames.push_back("RecoECal_MuonCosTheta_0_00To0_50_MuonMomentum_0_10To0_40Plot");
@@ -83,10 +99,9 @@ void PeLEE_Create1DPlotsTHStack_InteractionBreakDown(TString BaseMC = "") {
     PlotNames.push_back("RecoECal_ProtonCosTheta_0_75To1_00_ProtonMomentum_0_70To1_00Plot");
 
     PlotNames.push_back("RecoSerialECal_DeltaPTDeltaAlphaTPlot");
+    PlotNames.push_back("RecoSerialECal_DeltaPnDeltaAlpha3DqPlot");
     PlotNames.push_back("RecoSerialECal_MuonCosThetaMuonMomentumPlot");
-    PlotNames.push_back("RecoSerialECal_ProtonCosThetaProtonMomentumPlot");					
-
-	}
+    PlotNames.push_back("RecoSerialECal_ProtonCosThetaProtonMomentumPlot");	
 
 	const int N1DPlots = PlotNames.size();
 	cout << "Number of 1D Plots = " << N1DPlots << endl;
@@ -100,10 +115,11 @@ void PeLEE_Create1DPlotsTHStack_InteractionBreakDown(TString BaseMC = "") {
 	// v52
 	//VectorCuts.push_back("");
 	VectorCuts.push_back("_PID_NuScore");
+	VectorCuts.push_back("_CRT");
 
 	int NCuts = (int)(VectorCuts.size());	
 
-	// ------------------------------------------------------------------------------------------------------------------------------------------
+	// -----------------------------------------------------------------------------------------------------------------------------------------
 
 	//vector<TString> Runs;
 	//Runs.push_back("Run1");
@@ -116,27 +132,27 @@ void PeLEE_Create1DPlotsTHStack_InteractionBreakDown(TString BaseMC = "") {
 	int NRuns = (int)(Runs.size());
 	cout << "Number of Runs = " << NRuns << endl;
 
-	// -------------------------------------------------------------------------------------------------------------------------------------------
+	// -----------------------------------------------------------------------------------------------------------------------------------------
 
 	for (int WhichRun = 0; WhichRun < NRuns; WhichRun++) {
 
-		// -------------------------------------------------------------------------------------------------------------------------------------
+		// -----------------------------------------------------------------------------------------------------------------------------------------
 
-		double DataPOT = PeLEE_ReturnBeamOnRunPOT(Runs[WhichRun]);		
+		double DataPOT = PeLEE_ReturnBeamOnRunPOT(Runs[WhichRun]);													
 
-		// -------------------------------------------------------------------------------------------------------------------------------------
+		// -----------------------------------------------------------------------------------------------------------------------------------------
 
 		Cuts = "_NoCuts";
 
 		for (int i = 0; i < NCuts; i++) {
 
 			Cuts = Cuts + VectorCuts[i];
-	
+
 			// For the alternative MC, we want the figures after the application of all cuts
-			if (BaseMC == "Overlay9NuWro" && i != NCuts-1) { continue; }
-			if (BaseMC == "NoTuneOverlay9" && i != NCuts-1) { continue; }
+			if (BaseMC == "Overlay9NuWro" && i != NCuts-1) { continue; }	
+			if (BaseMC == "GENIEv2Overlay9" && i != NCuts-1) { continue; }			
+			if (BaseMC == "NoTuneOverlay9" && i != NCuts-1) { continue; }		
 			if (BaseMC == "TwiceMECOverlay9" && i != NCuts-1) { continue; }		
-			if (BaseMC == "GENIEv2Overlay9" && i != NCuts-1) { continue; }
 
 			// GENIE v2 has only combined run
 			if (BaseMC == "GENIEv2Overlay9" && Runs[WhichRun] != "Combined") { continue; }	
@@ -145,37 +161,39 @@ void PeLEE_Create1DPlotsTHStack_InteractionBreakDown(TString BaseMC = "") {
 			if (BaseMC == "Overlay9NuWro" && (Runs[WhichRun] == "Run5" || Runs[WhichRun] == "Run4a" || Runs[WhichRun] == "Run4b" || Runs[WhichRun] == "Run4aRutgers") ) { continue; }
 			if (BaseMC == "NoTuneOverlay9" && (Runs[WhichRun] == "Run5" || Runs[WhichRun] == "Run4a" || Runs[WhichRun] == "Run4b" || Runs[WhichRun] == "Run4aRutgers") ) { continue; }
 			if (BaseMC == "TwiceMECOverlay9" && (Runs[WhichRun] == "Run5" || Runs[WhichRun] == "Run4a" || Runs[WhichRun] == "Run4b" || Runs[WhichRun] == "Run4aRutgers") ) { continue; }												
+			TString PathToFilesCut = PathToFiles+"/"+Cuts+"/";
 
-//		} // If we want to run only on a specific cut combination, include this } and remove the one at the end of the program
+			TH1D::SetDefaultSumw2();
 
-			TString PathToFilesCut = PathToFiles + "/"+Cuts+"/";
-
-			// ---------------------------------------------------------------------------------------------------------------------------
+			// ---------------------------------------------------------------------------------------------------------------------
 
 			vector<TCanvas*> PlotCanvas; PlotCanvas.clear();
 			vector<THStack*> THStacks; THStacks.clear();
-			gStyle->SetPalette(55); const Int_t NCont = 999; gStyle->SetNumberContours(NCont); gStyle->SetTitleSize(0.07,"t");
+			gStyle->SetPalette(55); const Int_t NCont = 999; 
+			gStyle->SetNumberContours(NCont); gStyle->SetTitleSize(0.07,"t");
 			vector<TLegend*> leg; leg.clear();
 
 			vector<vector<TH1D*> > Plots; Plots.clear();
-			vector<vector<TH1D*> > CCQEPlots; CCQEPlots.clear();
-			vector<vector<TH1D*> > CCMECPlots; CCMECPlots.clear();
-			vector<vector<TH1D*> > CCRESPlots; CCRESPlots.clear();
-			vector<vector<TH1D*> > CCDISPlots; CCDISPlots.clear();
-			vector<vector<TH1D*> > CCCCDISPlots; CCCCDISPlots.clear();
+			vector<vector<TH1D*> > CC1pPlots; CC1pPlots.clear();
+			vector<vector<TH1D*> > NonCC1pPlots; NonCC1pPlots.clear();
 
 			vector<vector<TH1D*> > hratio;  hratio.clear();
 
 			vector<TString> LabelsOfSamples;
 			vector<TString> NameOfSamples;
-	
+
+			// 0: BeamOn
+			// 1: Overlay
+			// 2: ExtBNB
+			// 3: Dirt
+		
 			NameOfSamples.push_back("STVStudies_BeamOn9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("BeamOn");
 
-			if (BaseMC == "") { NameOfSamples.push_back("STVStudies_Overlay9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("Overlay"); }
-			else if (BaseMC == "Overlay9NuWro") { NameOfSamples.push_back("STVStudies_Overlay9NuWro_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("Overlay"); }			
-			else if (BaseMC == "NoTuneOverlay9") { NameOfSamples.push_back("NoTuneSTVStudies_Overlay9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("Overlay"); }
-			else if (BaseMC == "GENIEv2Overlay9") { NameOfSamples.push_back("GENIEv2STVStudies_Overlay9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("Overlay"); }			
-			else if (BaseMC == "TwiceMECOverlay9") { NameOfSamples.push_back("TwiceMECSTVStudies_Overlay9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("Overlay"); }			
+			if (BaseMC == "") { NameOfSamples.push_back("STVStudies_Overlay9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("MC"); }
+			else if (BaseMC == "Overlay9NuWro") { NameOfSamples.push_back("STVStudies_Overlay9NuWro_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("MC"); }
+			else if (BaseMC == "GENIEv2Overlay9") { NameOfSamples.push_back("GENIEv2STVStudies_Overlay9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("MC"); }		
+			else if (BaseMC == "NoTuneOverlay9") { NameOfSamples.push_back("NoTuneSTVStudies_Overlay9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("MC"); }
+			else if (BaseMC == "TwiceMECOverlay9") { NameOfSamples.push_back("TwiceMECSTVStudies_Overlay9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("MC"); }			
 
 			NameOfSamples.push_back("STVStudies_ExtBNB9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("ExtBNB");
 
@@ -183,7 +201,11 @@ void PeLEE_Create1DPlotsTHStack_InteractionBreakDown(TString BaseMC = "") {
 			else { NameOfSamples.push_back("NoTuneSTVStudies_OverlayDirt9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("Dirt"); }
 
 			vector<int> Colors; Colors.clear(); 
-			Colors.push_back(kBlack); Colors.push_back(kRed); Colors.push_back(kGray+2); Colors.push_back(kMagenta);
+			// Unblind
+			Colors.push_back(kBlack);
+			// Blind 
+			//Colors.push_back(kWhite); 
+			Colors.push_back(kRed); Colors.push_back(kGray+2); Colors.push_back(kMagenta);
 
 //			vector<int> ColorsOverlay{kBlue-5,kYellow+1,kOrange+7,kRed+1,kBlue};
 			vector<int> ColorsOverlay{OverlayColor,kOrange-3,kGreen+1,kRed+1,kBlue};
@@ -196,22 +218,16 @@ void PeLEE_Create1DPlotsTHStack_InteractionBreakDown(TString BaseMC = "") {
 				FileSample.push_back(TFile::Open(PathToFilesCut+NameOfSamples[WhichSample]));
 
 				vector<TH1D*> CurrentPlots; CurrentPlots.clear();
-				vector<TH1D*> CCQECurrentPlots; CCQECurrentPlots.clear();
-				vector<TH1D*> CCMECCurrentPlots; CCMECCurrentPlots.clear();
-				vector<TH1D*> CCRESCurrentPlots; CCRESCurrentPlots.clear();
-				vector<TH1D*> CCDISCurrentPlots; CCDISCurrentPlots.clear();
-//				vector<TH1D*> CCCosmicCurrentPlots; CCCosmicCurrentPlots.clear();
+				vector<TH1D*> CC1pCurrentPlots; CC1pCurrentPlots.clear();
+				vector<TH1D*> NonCC1pCurrentPlots; NonCC1pCurrentPlots.clear();
 
 				vector<TH1D*> Currenthratio;  Currenthratio.clear();
 
-				for (int WhichPlot = 0; WhichPlot < N1DPlots; WhichPlot ++) {
+				for (int WhichPlot = 0; WhichPlot < N1DPlots; WhichPlot ++){
 
 					TH1D* hist = (TH1D*)(FileSample[WhichSample]->Get(PlotNames[WhichPlot]));
-					TH1D* CCQEhist = (TH1D*)(FileSample[WhichSample]->Get("CCQE"+PlotNames[WhichPlot]));
-					TH1D* CCMEChist = (TH1D*)(FileSample[WhichSample]->Get("CCMEC"+PlotNames[WhichPlot]));
-					TH1D* CCREShist = (TH1D*)(FileSample[WhichSample]->Get("CCRES"+PlotNames[WhichPlot]));
-					TH1D* CCDIShist = (TH1D*)(FileSample[WhichSample]->Get("CCDIS"+PlotNames[WhichPlot]));
-//					TH1D* CCCosmichist = (TH1D*)(FileSample[WhichSample]->Get("Cosmic"+PlotNames[WhichPlot]));
+					TH1D* CC1phist = (TH1D*)(FileSample[WhichSample]->Get("CC1p"+PlotNames[WhichPlot]));
+					TH1D* NonCC1phist = (TH1D*)(FileSample[WhichSample]->Get("NonCC1p"+PlotNames[WhichPlot]));
 
 					hist->GetXaxis()->CenterTitle();
 					hist->GetYaxis()->CenterTitle();
@@ -230,42 +246,39 @@ void PeLEE_Create1DPlotsTHStack_InteractionBreakDown(TString BaseMC = "") {
 
 					}								
 
-					//------------------------------//				
+					//------------------------------//										
 
 					hist->SetLineColor(Colors[WhichSample]);
-
+				
 					if (LabelsOfSamples[WhichSample] == "BeamOn") { 
 				
 						hist->SetMarkerStyle(20);
+						// Unblind
 						hist->SetMarkerSize(1.); 
+						// Blind
+						//hist->SetMarkerSize(0.); 
 					}
 
 					CurrentPlots.push_back(hist);
-					CCQECurrentPlots.push_back(CCQEhist);
-					CCMECCurrentPlots.push_back(CCMEChist);
-					CCRESCurrentPlots.push_back(CCREShist);
-					CCDISCurrentPlots.push_back(CCDIShist);
-//					CCCosmicCurrentPlots.push_back(CCCosmichist);
+					CC1pCurrentPlots.push_back(CC1phist);
+					NonCC1pCurrentPlots.push_back(NonCC1phist);
 
 					Currenthratio.push_back((TH1D*)hist->Clone());
-		
-				} // End of the loop over the plots
+			
+				}
 
 				Plots.push_back(CurrentPlots);
-				CCQEPlots.push_back(CCQECurrentPlots);
-				CCMECPlots.push_back(CCMECCurrentPlots);
-				CCRESPlots.push_back(CCRESCurrentPlots);
-				CCDISPlots.push_back(CCDISCurrentPlots);
-//				CCCCDISPlots.push_back(CCCosmicCurrentPlots);
+				CC1pPlots.push_back(CC1pCurrentPlots);
+				NonCC1pPlots.push_back(NonCC1pCurrentPlots);
 
 				hratio.push_back(Currenthratio);
 
-			} // End of the loop over the samples
+			}
 
 			// Loop over the plots
 
 			for (int WhichPlot = 0; WhichPlot < N1DPlots; WhichPlot ++) {
-	
+		
 				TString PlotCanvasName = Runs[WhichRun]+"_"+PlotNames[WhichPlot]+Cuts;
 				PlotCanvas.push_back(new TCanvas(PlotCanvasName,PlotCanvasName,205,34,1024,768));
 				PlotCanvas[WhichPlot]->cd();
@@ -287,9 +300,10 @@ void PeLEE_Create1DPlotsTHStack_InteractionBreakDown(TString BaseMC = "") {
 				midPad->Draw();
 				botPad->Draw();
 
-				leg.push_back(new TLegend(0.1,0.005,0.93,0.995));
+				leg.push_back(new TLegend(0.1,0.005,0.9,0.995));
 				leg[WhichPlot]->SetBorderSize(0);
 				leg[WhichPlot]->SetNColumns(3);
+				leg[WhichPlot]->SetMargin(0.15);				
 
 				double max = -99.;
 
@@ -310,8 +324,7 @@ void PeLEE_Create1DPlotsTHStack_InteractionBreakDown(TString BaseMC = "") {
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetLabelFont(FontStyle);
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetNdivisions(6);
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetLabelSize(0.06);
-//					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitle("# Events / " + ToString(DataPOT));
-					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitle("Number of " + Runs[WhichRun] + " events / bin");
+					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitle(Runs[WhichRun] + " events / bin");
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitleSize(0.08);
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitleOffset(0.6);
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTickSize(0);
@@ -324,9 +337,9 @@ void PeLEE_Create1DPlotsTHStack_InteractionBreakDown(TString BaseMC = "") {
 
 						gStyle->SetErrorX(0); // Removing the horizontal errors
 						Plots[WhichSample][WhichPlot]->Draw("e same"); 
-						TString NBeamOnEvents = ToString((int)(Plots[WhichSample][WhichPlot]->GetEntries()));
-						leg[WhichPlot]->AddEntry(Plots[WhichSample][WhichPlot],"BNB Data ("+NBeamOnEvents+")","ep");
-//						leg[WhichPlot]->AddEntry(Plots[WhichSample][WhichPlot],"BNB Data","ep");
+						TString NBeamOnEvents = ToString((int)(Plots[WhichSample][WhichPlot]->Integral()));
+						// Unblind
+						leg[WhichPlot]->AddEntry(Plots[WhichSample][WhichPlot], "BNB Data ("+NBeamOnEvents+")","ep");
 
 					}
 
@@ -337,85 +350,76 @@ void PeLEE_Create1DPlotsTHStack_InteractionBreakDown(TString BaseMC = "") {
 							Plots[WhichSample][WhichPlot]->SetFillStyle(3004);
 							Plots[WhichSample][WhichPlot]->SetLineWidth(1);
 
+							TString NExtBNBEvents = ToString( (int)(Plots[WhichSample][WhichPlot]->Integral() ) );
 							THStacks[WhichPlot]->Add(Plots[WhichSample][WhichPlot],"hist");
 							THStacks[WhichPlot]->Draw("same");
 
 					}
 
-					if (LabelsOfSamples[WhichSample] == "Overlay") {
+					if (LabelsOfSamples[WhichSample] == "Dirt") {
 
-							CCQEPlots[WhichSample][WhichPlot]->SetLineColor(ColorsOverlay[0]);
-							CCQEPlots[WhichSample][WhichPlot]->SetFillColor(ColorsOverlay[0]);
-							CCQEPlots[WhichSample+2][WhichPlot]->SetLineColor(ColorsOverlay[0]);
-							CCQEPlots[WhichSample+2][WhichPlot]->SetFillColor(ColorsOverlay[0]);
-							THStacks[WhichPlot]->Add(CCQEPlots[WhichSample][WhichPlot],"hist");
-							THStacks[WhichPlot]->Add(CCQEPlots[WhichSample+2][WhichPlot],"hist");
-
-							CCMECPlots[WhichSample][WhichPlot]->SetLineColor(ColorsOverlay[1]);
-							CCMECPlots[WhichSample][WhichPlot]->SetFillColor(ColorsOverlay[1]);
-							CCMECPlots[WhichSample+2][WhichPlot]->SetLineColor(ColorsOverlay[1]);
-							CCMECPlots[WhichSample+2][WhichPlot]->SetFillColor(ColorsOverlay[1]);
-							THStacks[WhichPlot]->Add(CCMECPlots[WhichSample][WhichPlot],"hist");
-							THStacks[WhichPlot]->Add(CCMECPlots[WhichSample+2][WhichPlot],"hist");
-
-							CCRESPlots[WhichSample][WhichPlot]->SetLineColor(ColorsOverlay[2]);
-							CCRESPlots[WhichSample][WhichPlot]->SetFillColor(ColorsOverlay[2]);
-							CCRESPlots[WhichSample+2][WhichPlot]->SetLineColor(ColorsOverlay[2]);
-							CCRESPlots[WhichSample+2][WhichPlot]->SetFillColor(ColorsOverlay[2]);
-							THStacks[WhichPlot]->Add(CCRESPlots[WhichSample][WhichPlot],"hist");
-							THStacks[WhichPlot]->Add(CCRESPlots[WhichSample+2][WhichPlot],"hist");
-
-							CCDISPlots[WhichSample][WhichPlot]->SetLineColor(ColorsOverlay[3]);
-							CCDISPlots[WhichSample][WhichPlot]->SetFillColor(ColorsOverlay[3]);
-							CCDISPlots[WhichSample+2][WhichPlot]->SetLineColor(ColorsOverlay[3]);
-							CCDISPlots[WhichSample+2][WhichPlot]->SetFillColor(ColorsOverlay[3]);
-							THStacks[WhichPlot]->Add(CCDISPlots[WhichSample][WhichPlot],"hist");
-							THStacks[WhichPlot]->Add(CCDISPlots[WhichSample+2][WhichPlot],"hist");
-
-							TString NCCQEEvents = ToString((int)(CCQEPlots[WhichSample][WhichPlot]->Integral()));
-							TString NCCMECEvents = ToString((int)(CCMECPlots[WhichSample][WhichPlot]->Integral()));	
-							TString NCCRESEvents = ToString((int)(CCRESPlots[WhichSample][WhichPlot]->Integral()));	
-							TString NCCDISEvents = ToString((int)(CCDISPlots[WhichSample][WhichPlot]->Integral()));	
-							TString NExtBNBEvents = ToString((int)(Plots[2][WhichPlot]->Integral()));																						
-
-							leg[WhichPlot]->AddEntry(CCQEPlots[WhichSample][WhichPlot],"QE (" + NCCQEEvents + ")","f"); 
-							leg[WhichPlot]->AddEntry(CCMECPlots[WhichSample][WhichPlot],"MEC (" + NCCMECEvents + ")","f"); 
-							leg[WhichPlot]->AddEntry(Plots[2][WhichPlot],"Cosmic (" + NExtBNBEvents + ")","f"); // ExtBNB
-//							leg[WhichPlot]->AddEntry(Plots[2][WhichPlot],"Cosmic","f"); // ExtBNB
-							leg[WhichPlot]->AddEntry(CCRESPlots[WhichSample][WhichPlot],"RES (" + NCCRESEvents + ")","f"); 
-							leg[WhichPlot]->AddEntry(CCDISPlots[WhichSample][WhichPlot],"DIS (" + NCCDISEvents + ")","f"); 
-
-// 							leg[WhichPlot]->AddEntry(CCQEPlots[WhichSample][WhichPlot],"QE","f"); 
-// 							leg[WhichPlot]->AddEntry(CCMECPlots[WhichSample][WhichPlot],"MEC","f"); 
-// //							leg[WhichPlot]->AddEntry(Plots[2][WhichPlot],LabelsOfSamples[2] + "","f"); // ExtBNB
-// 							leg[WhichPlot]->AddEntry(Plots[2][WhichPlot],"Cosmic","f"); // ExtBNB
-// 							leg[WhichPlot]->AddEntry(CCRESPlots[WhichSample][WhichPlot],"RES","f"); 
-// 							leg[WhichPlot]->AddEntry(CCDISPlots[WhichSample][WhichPlot],"DIS","f"); 
-
+							TString NCC1pEvents = ToString( (int)(CC1pPlots[WhichSample][WhichPlot]->Integral() ) );
+							CC1pPlots[WhichSample][WhichPlot]->SetLineColor(ColorsOverlay[2]);
+							CC1pPlots[WhichSample][WhichPlot]->SetFillColor(ColorsOverlay[2]);
+							THStacks[WhichPlot]->Add(CC1pPlots[WhichSample][WhichPlot],"hist");
 							THStacks[WhichPlot]->Draw("same");
-					
+
+							TString NNonCC1pEvents = ToString( (int)(NonCC1pPlots[WhichSample][WhichPlot]->Integral() ) );
+							NonCC1pPlots[WhichSample][WhichPlot]->SetLineColor(ColorsOverlay[3]);
+							NonCC1pPlots[WhichSample][WhichPlot]->SetFillColor(ColorsOverlay[3]);
+							THStacks[WhichPlot]->Add(NonCC1pPlots[WhichSample][WhichPlot],"hist");
+							leg[WhichPlot]->AddEntry(NonCC1pPlots[WhichSample][WhichPlot],"Out-of-cryo ("+NNonCC1pEvents+")","f");
+							THStacks[WhichPlot]->Draw("same");
+
 					}
-				
+
+					if (LabelsOfSamples[WhichSample] == "MC") {
+
+							TString NCC1pEvents = ToString( (int)(CC1pPlots[WhichSample][WhichPlot]->Integral() ) );
+							CC1pPlots[WhichSample][WhichPlot]->SetLineColor(ColorsOverlay[0]);
+							CC1pPlots[WhichSample][WhichPlot]->SetFillColor(ColorsOverlay[0]);
+							THStacks[WhichPlot]->Add(CC1pPlots[WhichSample][WhichPlot],"hist");
+
+							// add the cosmic label first
+							TString NExtBNBEvents = ToString( (int)(Plots[2][WhichPlot]->Integral() ) );							
+							leg[WhichPlot]->AddEntry(Plots[2][WhichPlot],"Cosmic ("+NExtBNBEvents+")","f");							
+							// Unblind
+							leg[WhichPlot]->AddEntry(Plots[2][WhichPlot],"","");	 // blanck space
+
+							leg[WhichPlot]->AddEntry(CC1pPlots[WhichSample][WhichPlot],"MC CC1p0#pi ("+NCC1pEvents+")","f");
+							THStacks[WhichPlot]->Draw("same");
+
+							TString NNonCC1pEvents = ToString( (int)(NonCC1pPlots[WhichSample][WhichPlot]->Integral() ) );
+							NonCC1pPlots[WhichSample][WhichPlot]->SetLineColor(ColorsOverlay[1]);
+							NonCC1pPlots[WhichSample][WhichPlot]->SetFillColor(ColorsOverlay[1]);
+							THStacks[WhichPlot]->Add(NonCC1pPlots[WhichSample][WhichPlot],"hist");
+							leg[WhichPlot]->AddEntry(NonCC1pPlots[WhichSample][WhichPlot],"MC non-CC1p0#pi ("+NNonCC1pEvents+")","f");
+							THStacks[WhichPlot]->Draw("same");
+
+					}
+					
 
 				} // End of the loop over the samples
 
-				Plots[0][WhichPlot]->Draw("e same");
+				// Unblind
+				Plots[0][WhichPlot]->Draw("e same"); 
+
+				// -------------------------------------------------------------------------------------------------------------------				
 
 				gPad->RedrawAxis();
 
 				TLatex *text = new TLatex();
 				text->SetTextFont(FontStyle);
-				text->SetTextSize(0.09);
-				//if (Runs[WhichRun] != "Combined") { text->DrawTextNDC(0.115, 0.9, Runs[WhichRun]); }
+				text->SetTextSize(0.07);
 
 				TLatex *textSlice = new TLatex();
 				textSlice->SetTextFont(FontStyle);
-				textSlice->SetTextSize(0.09);
+				textSlice->SetTextSize(0.07);
 				TString PlotNameDuplicate = PlotNames[WhichPlot];
 				TString ReducedPlotName = PlotNameDuplicate.ReplaceAll("Reco","") ;
-				if (Runs[WhichRun] != "Combined") {  textSlice->DrawLatexNDC(0.115, 0.8, LatexLabel[ReducedPlotName]);	}							
+				textSlice->DrawLatexNDC(0.115, 0.8, LatexLabel[ReducedPlotName]);	
 
-				// --------------------------------------------------------------------------------------------------------
+				// -------------------------------------------------------------------------------------------------------------------
 
 				hratio[1][WhichPlot]->Add(hratio[2][WhichPlot]);
 				hratio[1][WhichPlot]->Add(hratio[3][WhichPlot]);
@@ -432,7 +436,6 @@ void PeLEE_Create1DPlotsTHStack_InteractionBreakDown(TString BaseMC = "") {
 
 				hratio[0][WhichPlot]->GetYaxis()->SetTitleFont(FontStyle);
 				hratio[0][WhichPlot]->GetYaxis()->SetLabelFont(FontStyle);
-//				hratio[0][WhichPlot]->GetYaxis()->SetRangeUser(0.9*hratio[0][WhichPlot]->GetMinimum(),1.1*hratio[0][WhichPlot]->GetMaximum());
 				hratio[0][WhichPlot]->GetYaxis()->SetRangeUser(0.1,1.9);
 				hratio[0][WhichPlot]->GetYaxis()->SetNdivisions(6);
 				hratio[0][WhichPlot]->GetYaxis()->SetTitleOffset(0.35);
@@ -449,8 +452,7 @@ void PeLEE_Create1DPlotsTHStack_InteractionBreakDown(TString BaseMC = "") {
 				RatioLine->SetLineWidth(4);
 				RatioLine->SetLineColor(kPink+8);
 				RatioLine->SetLineStyle(4);
-				//RatioLine->Draw("same");
-		
+			
 				topPad->cd();
 				leg[WhichPlot]->SetTextSize(0.5);
 				leg[WhichPlot]->SetTextFont(FontStyle);
@@ -464,29 +466,17 @@ void PeLEE_Create1DPlotsTHStack_InteractionBreakDown(TString BaseMC = "") {
 				SumNonBeamOn->Add(Plots[2][WhichPlot]); // Overlay
 				SumNonBeamOn->Add(Plots[3][WhichPlot]); // Dirt
 
-				// CCQE Purity 
+				// CC1p Purity 
 
-				int CCQEPurity = CCQEPlots[1][WhichPlot]->Integral() / SumNonBeamOn->Integral() * 1000.;
-
-				midPad->cd();
-				TLatex* latexPurity = new TLatex();
-				latexPurity->SetTextFont(FontStyle);
-				latexPurity->SetTextSize(0.09);
-				TString LabelPurity = "QE = " + ToString(CCQEPurity/10.) + " %";
-				latexPurity->DrawLatexNDC(0.61,0.89, LabelPurity);
-
-				// --------------------------------------------------------------------------------------
-
-				// Cosmic Contamination 
-
-				int CosmicContamination = Plots[2][WhichPlot]->Integral() / SumNonBeamOn->Integral() * 1000.;
+				int CC1pPurity = CC1pPlots[1][WhichPlot]->Integral() / SumNonBeamOn->Integral() * 1000.;
 
 				midPad->cd();
-				TLatex latexCosmic;
-				latexCosmic.SetTextFont(FontStyle);
-				latexCosmic.SetTextSize(0.09);
-				TString LabelCosmic = "Cosmics = " + ToString(CosmicContamination/10.) + " %";
-				latexCosmic.DrawLatexNDC(0.61,0.8, LabelCosmic);
+				
+				TLatex latexPurity;
+				latexPurity.SetTextFont(FontStyle);
+				latexPurity.SetTextSize(0.07);
+				TString LabelPurity = "CC1p0#pi = " + ToString(CC1pPurity/10.) + " %";
+				latexPurity.DrawLatexNDC(0.61,0.89, LabelPurity);
 				
 				//----------------------------------------//
 				
@@ -494,22 +484,24 @@ void PeLEE_Create1DPlotsTHStack_InteractionBreakDown(TString BaseMC = "") {
 				
 				TLatex *textPOT = new TLatex();
 				textPOT->SetTextFont(FontStyle);
-				textPOT->SetTextSize(0.09);
-				textPOT->DrawLatexNDC(0.115, 0.89,"MicroBooNE " + ToString(DataPOT).ReplaceAll("e"," #times 10").ReplaceAll("+","^{")+"} POT");					
+				textPOT->SetTextSize(0.07);
+				textPOT->DrawLatexNDC(0.115, 0.89,"MicroBooNE " + ToString(DataPOT).ReplaceAll("e"," #times 10").ReplaceAll("+","^{")+"} POT");								
+				//----------------------------------------//
 
-				// --------------------------------------------------------------------------------------
+				// Cosmic Contamination
 
-				// Calculate the data / MC ratio
+				int CosmicContamination = Plots[2][WhichPlot]->Integral() / SumNonBeamOn->Integral() * 1000.;
 
-				if (PlotNames[WhichPlot] == "RecoProtonMomentumPlot") {
+				midPad->cd();
+				TLatex latexCosmic;
+				latexCosmic.SetTextFont(FontStyle);
+				latexCosmic.SetTextSize(0.07);
+				TString LabelCosmic = "Cosmics = " + ToString(CosmicContamination/10.) + " %";
+				latexCosmic.DrawLatexNDC(0.61,0.8, LabelCosmic);				
 
-					cout << "Data / MC ratio = " << Plots[0][WhichPlot]->Integral() / SumNonBeamOn->Integral() << endl;
+				//----------------------------------------//
 
-				}
-
-				// --------------------------------------------------------------------------------------
-
-				TString CanvasPath = PlotPath + Cuts + "/InteractionBreakDown/";
+				TString CanvasPath = PlotPath + Cuts+"/TopologicalBreakDown/";
 				TString CanvasName = BaseMC + "THStack_BreakDown_"+PlotNames[WhichPlot]+"_"+Runs[WhichRun]+"_"+UBCodeVersion+Cuts+".pdf";
 				PlotCanvas[WhichPlot]->SaveAs(CanvasPath+CanvasName);
 				delete PlotCanvas[WhichPlot];
@@ -518,6 +510,6 @@ void PeLEE_Create1DPlotsTHStack_InteractionBreakDown(TString BaseMC = "") {
 
 		} // If we want to run on all cut combinations, include this } and remove the one at the beginning of the program
 
-	} // End of the loop over the runs	
+	} // End of the loop over the runs
 
 } // End of the program 

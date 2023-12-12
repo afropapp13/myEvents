@@ -21,11 +21,11 @@
 
 	// -----------------------------------------------------------------------------------------
 
-	gROOT->ProcessLine(".L ../../myClasses/Tools.cxx++");
-	gROOT->ProcessLine(".L ../../myClasses/STV_Tools.cxx++");	
+	gROOT->ProcessLine(".L ../myClasses/Tools.cxx++");
+	gROOT->ProcessLine(".L ../myClasses/STV_Tools.cxx++");	
 
-	gROOT->ProcessLine(".L PeLEE_myRecoAnalysis.C++");
-	gROOT->ProcessLine(".L PeLEE_myTrueAnalysis.C++");
+	gROOT->ProcessLine(".L reco_selection.cxx+");
+	gROOT->ProcessLine(".L true_selection.cxx+");
 
 	for (int i = 0;i < (int)(WhichSampleArray.size()); i++) {
 
@@ -33,13 +33,11 @@
 
 			for (int k = 0; k < Universes[j]; k++) {	
 
-				gROOT->ProcessLine("PeLEE_myRecoAnalysis(\""+WhichSampleArray[i]+"\",\"NoTune\",\""+EventWeightLabels[j]+"\","+TString(std::to_string(k))+").Loop()");
-				gROOT->ProcessLine("PeLEE_myRecoAnalysis(\""+WhichSampleArray[i]+"\",\"TwiceMEC\",\""+EventWeightLabels[j]+"\","+TString(std::to_string(k))+").Loop()");								
+				gROOT->ProcessLine("reco_selection(\""+WhichSampleArray[i]+"\",\"\",\""+EventWeightLabels[j]+"\","+TString(std::to_string(k))+").Loop()");
 
 				if (string(WhichSampleArray[i]).find("Overlay9") != std::string::npos) { 
 					
-					gROOT->ProcessLine("PeLEE_myTrueAnalysis(\""+WhichSampleArray[i]+"\",\"NoTune\",\""+EventWeightLabels[j]+"\","+TString(std::to_string(k))+").Loop()");
-					gROOT->ProcessLine("PeLEE_myTrueAnalysis(\""+WhichSampleArray[i]+"\",\"TwiceMEC\",\""+EventWeightLabels[j]+"\","+TString(std::to_string(k))+").Loop()");										 
+					gROOT->ProcessLine("true_selection(\""+WhichSampleArray[i]+"\",\"\",\""+EventWeightLabels[j]+"\","+TString(std::to_string(k))+").Loop()");
 					
 				} 
 
