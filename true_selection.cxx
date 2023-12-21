@@ -70,52 +70,9 @@ void true_selection::Loop() {
 
 	//--------------------------------------------------//
 
-	// Txt file to keep track of the event reduction at each stage
-
-	TString TxtName = "/uboone/data/users/apapadop/myEvents/my3DTxtFiles/"+UBCodeVersion+"/TxtmyTrueEvents_"+fWhichSample+"_"+UBCodeVersion+".txt";
-	ofstream myTxtFile;
-	myTxtFile.open(TxtName);
-
-	// Txt file to keep track of the run/subrun/event of the candidate events
-
-	TString RunTxtName = "/uboone/data/users/apapadop/myEvents/my3DTxtFiles/"+UBCodeVersion+"/TxtmyTrueRunSubRunEvents_"+fWhichSample+"_"+UBCodeVersion+".txt";
-	ofstream myRunTxtFile;
-	myRunTxtFile.open(RunTxtName);
-	myRunTxtFile << std::fixed << std::setprecision(2);
-	myRunTxtFile << fWhichSample;
-
-	//--------------------------------------------------//
-
-	// 1D analysis
-
-	TH1D* TrueDeltaPTPlot[NInte];
-	TH1D* TrueDeltaAlphaTPlot[NInte];
-	TH1D* TrueDeltaAlpha3DqPlot[NInte];
-	TH1D* TrueDeltaPnPlot[NInte];
-	TH1D* TrueMuonMomentumPlot[NInte];
 	TH1D* TrueMuonCosThetaPlot[NInte];
 	TH1D* TrueMuonCosThetaSingleBinPlot[NInte];
-	TH1D* TrueProtonMomentumPlot[NInte];
-	TH1D* TrueProtonCosThetaPlot[NInte];
-	TH1D* TrueECalPlot[NInte];
-
-	//--------------------------------------------------//	
-
-	// 3D analysis (uncorrelated)	
-
-	TH1D* TrueECal_InDeltaPTDeltaAlphaTTwoDPlot[NInte][TwoDNBinsDeltaPT][TwoDNBinsDeltaAlphaT];
-	TH1D* TrueECal_InDeltaPnDeltaAlpha3DqTwoDPlot[NInte][TwoDNBinsDeltaPn][TwoDNBinsDeltaAlpha3Dq];
-	TH1D* TrueECal_InMuonCosThetaMuonMomentumTwoDPlot[NInte][TwoDNBinsMuonCosTheta][TwoDNBinsMuonMomentum];
-	TH1D* TrueECal_InProtonCosThetaProtonMomentumTwoDPlot[NInte][TwoDNBinsProtonCosTheta][TwoDNBinsProtonMomentum];	
-
-	//--------------------------------------------------//	
-
-	// 3D analysis in 1D grid		
-	
-	TH1D* SerialTrueECal_InDeltaPTDeltaAlphaTPlot[NInte];
-	TH1D* SerialTrueECal_InDeltaPnDeltaAlpha3DqPlot[NInte];
-	TH1D* SerialTrueECal_InMuonCosThetaMuonMomentumPlot[NInte];
-	TH1D* SerialTrueECal_InProtonCosThetaProtonMomentumPlot[NInte];
+	TH1D* TrueThetaZPlot[NInte];
 
 	//--------------------------------------------------//
 
@@ -127,74 +84,9 @@ void true_selection::Loop() {
 
 		// 1D analysis
 
-		TrueDeltaPTPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueDeltaPTPlot",LabelXAxisDeltaPT,NBinsDeltaPT,ArrayNBinsDeltaPT);
-		TrueDeltaAlphaTPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueDeltaAlphaTPlot",LabelXAxisDeltaAlphaT,NBinsDeltaAlphaT,ArrayNBinsDeltaAlphaT);
-		TrueDeltaAlpha3DqPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueDeltaAlpha3DqPlot",LabelXAxisDeltaAlpha3Dq,NBinsDeltaAlpha3Dq,ArrayNBinsDeltaAlpha3Dq);
-		TrueDeltaPnPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueDeltaPnPlot",LabelXAxisDeltaPn,NBinsDeltaPn,ArrayNBinsDeltaPn);
-		TrueMuonMomentumPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueMuonMomentumPlot",LabelXAxisMuonMomentum,NBinsMuonMomentum,ArrayNBinsMuonMomentum);
 		TrueMuonCosThetaPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueMuonCosThetaPlot",LabelXAxisMuonCosTheta,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta);
 		TrueMuonCosThetaSingleBinPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueMuonCosThetaSingleBinPlot",LabelXAxisMuonCosTheta,1,0.,1.);
-		TrueProtonMomentumPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueProtonMomentumPlot",LabelXAxisProtonMomentum,NBinsProtonMomentum,ArrayNBinsProtonMomentum);
-		TrueProtonCosThetaPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueProtonCosThetaPlot",LabelXAxisProtonCosTheta,NBinsProtonCosTheta,ArrayNBinsProtonCosTheta);
-		TrueECalPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueECalPlot",LabelXAxisECal,NBinsECal,ArrayNBinsECal);
-
-		//--------------------------------------------------//	
-
-		// 3D analysis (uncorrelated)
-
-		for (int WhichDeltaPT = 0; WhichDeltaPT < TwoDNBinsDeltaPT; WhichDeltaPT++) {
-
-			for (int WhichDeltaAlphaT = 0; WhichDeltaAlphaT < TwoDNBinsDeltaAlphaT; WhichDeltaAlphaT++) {	
-
-				TString ECalTwoDInDeltaPTDeltaAlphaTLabel = "ECal_DeltaPT_"+tools.ConvertToString(TwoDArrayNBinsDeltaPT[WhichDeltaPT])+"To"+tools.ConvertToString(TwoDArrayNBinsDeltaPT[WhichDeltaPT+1])+"_DeltaAlphaT_"+tools.ConvertToString(TwoDArrayNBinsDeltaAlphaT[WhichDeltaAlphaT])+"To"+tools.ConvertToString(TwoDArrayNBinsDeltaAlphaT[WhichDeltaAlphaT+1])+"Plot";
-				TrueECal_InDeltaPTDeltaAlphaTTwoDPlot[inte][WhichDeltaPT][WhichDeltaAlphaT] = new TH1D(InteractionLabels[inte]+"True"+ECalTwoDInDeltaPTDeltaAlphaTLabel,LabelXAxisECal,TwoDArrayNBinsECalInDeltaPTDeltaAlphaTSlices[WhichDeltaPT][WhichDeltaAlphaT].size()-1,&TwoDArrayNBinsECalInDeltaPTDeltaAlphaTSlices[WhichDeltaPT][WhichDeltaAlphaT][0]);
-
-			}
-
-		}
-
-		for (int WhichDeltaPn = 0; WhichDeltaPn < TwoDNBinsDeltaPn; WhichDeltaPn++) {
-
-			for (int WhichDeltaAlpha3Dq = 0; WhichDeltaAlpha3Dq < TwoDNBinsDeltaAlpha3Dq; WhichDeltaAlpha3Dq++) {	
-
-				TString ECalTwoDInDeltaPnDeltaAlpha3DqLabel = "ECal_DeltaPn_"+tools.ConvertToString(TwoDArrayNBinsDeltaPn[WhichDeltaPn])+"To"+tools.ConvertToString(TwoDArrayNBinsDeltaPn[WhichDeltaPn+1])+"_DeltaAlpha3Dq_"+tools.ConvertToString(TwoDArrayNBinsDeltaAlpha3Dq[WhichDeltaAlpha3Dq])+"To"+tools.ConvertToString(TwoDArrayNBinsDeltaAlpha3Dq[WhichDeltaAlpha3Dq+1])+"Plot";
-				TrueECal_InDeltaPnDeltaAlpha3DqTwoDPlot[inte][WhichDeltaPn][WhichDeltaAlpha3Dq] = new TH1D(InteractionLabels[inte]+"True"+ECalTwoDInDeltaPnDeltaAlpha3DqLabel,LabelXAxisECal,TwoDArrayNBinsECalInDeltaPnDeltaAlpha3DqSlices[WhichDeltaPn][WhichDeltaAlpha3Dq].size()-1,&TwoDArrayNBinsECalInDeltaPnDeltaAlpha3DqSlices[WhichDeltaPn][WhichDeltaAlpha3Dq][0]);
-
-			}
-
-		}
-
-
-		for (int WhichMuonCosTheta = 0; WhichMuonCosTheta < TwoDNBinsMuonCosTheta; WhichMuonCosTheta++) {
-
-			for (int WhichMuonMomentum = 0; WhichMuonMomentum < TwoDNBinsMuonMomentum; WhichMuonMomentum++) {	
-
-				TString ECalTwoDInMuonCosThetaMuonMomentumLabel = "ECal_MuonCosTheta_"+tools.ConvertToString(TwoDArrayNBinsMuonCosTheta[WhichMuonCosTheta])+"To"+tools.ConvertToString(TwoDArrayNBinsMuonCosTheta[WhichMuonCosTheta+1])+"_MuonMomentum_"+tools.ConvertToString(TwoDArrayNBinsMuonMomentum[WhichMuonMomentum])+"To"+tools.ConvertToString(TwoDArrayNBinsMuonMomentum[WhichMuonMomentum+1])+"Plot";
-				TrueECal_InMuonCosThetaMuonMomentumTwoDPlot[inte][WhichMuonCosTheta][WhichMuonMomentum] = new TH1D(InteractionLabels[inte]+"True"+ECalTwoDInMuonCosThetaMuonMomentumLabel,LabelXAxisECal,TwoDArrayNBinsECalInMuonCosThetaMuonMomentumSlices[WhichMuonCosTheta][WhichMuonMomentum].size()-1,&TwoDArrayNBinsECalInMuonCosThetaMuonMomentumSlices[WhichMuonCosTheta][WhichMuonMomentum][0]);
-
-			}
-
-		}	
-
-		for (int WhichProtonCosTheta = 0; WhichProtonCosTheta < TwoDNBinsProtonCosTheta; WhichProtonCosTheta++) {
-
-			for (int WhichProtonMomentum = 0; WhichProtonMomentum < TwoDNBinsProtonMomentum; WhichProtonMomentum++) {	
-
-				TString ECalTwoDInProtonCosThetaProtonMomentumLabel = "ECal_ProtonCosTheta_"+tools.ConvertToString(TwoDArrayNBinsProtonCosTheta[WhichProtonCosTheta])+"To"+tools.ConvertToString(TwoDArrayNBinsProtonCosTheta[WhichProtonCosTheta+1])+"_ProtonMomentum_"+tools.ConvertToString(TwoDArrayNBinsProtonMomentum[WhichProtonMomentum])+"To"+tools.ConvertToString(TwoDArrayNBinsProtonMomentum[WhichProtonMomentum+1])+"Plot";
-				TrueECal_InProtonCosThetaProtonMomentumTwoDPlot[inte][WhichProtonCosTheta][WhichProtonMomentum] = new TH1D(InteractionLabels[inte]+"True"+ECalTwoDInProtonCosThetaProtonMomentumLabel,LabelXAxisECal,TwoDArrayNBinsECalInProtonCosThetaProtonMomentumSlices[WhichProtonCosTheta][WhichProtonMomentum].size()-1,&TwoDArrayNBinsECalInProtonCosThetaProtonMomentumSlices[WhichProtonCosTheta][WhichProtonMomentum][0]);
-
-			}
-
-		}
-
-		//--------------------------------------------------//	
-
-		// 3D analysis in 1D grid		
-		
-		SerialTrueECal_InDeltaPTDeltaAlphaTPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueSerialECal_DeltaPTDeltaAlphaTPlot",LabelXAxisECal,tools.Return3DNBins(TwoDArrayNBinsECalInDeltaPTDeltaAlphaTSlices),&tools.Return3DBinIndices(TwoDArrayNBinsECalInDeltaPTDeltaAlphaTSlices)[0]);
-		SerialTrueECal_InDeltaPnDeltaAlpha3DqPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueSerialECal_DeltaPnDeltaAlpha3DqPlot",LabelXAxisECal,tools.Return3DNBins(TwoDArrayNBinsECalInDeltaPnDeltaAlpha3DqSlices),&tools.Return3DBinIndices(TwoDArrayNBinsECalInDeltaPnDeltaAlpha3DqSlices)[0]);
-		SerialTrueECal_InMuonCosThetaMuonMomentumPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueSerialECal_MuonCosThetaMuonMomentumPlot",LabelXAxisECal,tools.Return3DNBins(TwoDArrayNBinsECalInMuonCosThetaMuonMomentumSlices),&tools.Return3DBinIndices(TwoDArrayNBinsECalInMuonCosThetaMuonMomentumSlices)[0]);
-		SerialTrueECal_InProtonCosThetaProtonMomentumPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueSerialECal_ProtonCosThetaProtonMomentumPlot",LabelXAxisECal,tools.Return3DNBins(TwoDArrayNBinsECalInProtonCosThetaProtonMomentumSlices),&tools.Return3DBinIndices(TwoDArrayNBinsECalInProtonCosThetaProtonMomentumSlices)[0]);
+		TrueThetaZPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueThetaZPlot",LabelXAxisThetaZ,NBinsThetaZ,ArrayNBinsThetaZ);
 
 		//--------------------------------------------------//
 
@@ -346,7 +238,12 @@ void true_selection::Loop() {
 			double TrueProton_E_GeV = TMath::Sqrt( TMath::Power(TrueProtonMomentum_GeV,2.) + TMath::Power(ProtonMass_GeV,2.) ); // GeV
 
 			double TrueDeltaThetaProtonMuon_Deg = True_DeltaTheta->at(0);
+			double TrueThetaZ = True_ThetaZ->at(0);
 
+                       	// Underflow / overflow
+                        if (TrueThetaZ < ArrayNBinsThetaZ[0]) { TrueThetaZ = (ArrayNBinsThetaZ[0] + ArrayNBinsThetaZ[1])/2.; }
+                        if (TrueThetaZ > ArrayNBinsThetaZ[NBinsThetaZ]) { TrueThetaZ = (ArrayNBinsThetaZ[NBinsThetaZ] + ArrayNBinsThetaZ[NBinsThetaZ-1])/2.; }
+        
 			// Reconstructed calorimetric energy using true level info / MCParticles
 
 			double TrueRecoECal = True_ECal->at(0); // GeV
@@ -367,28 +264,6 @@ void true_selection::Loop() {
 
 			TVector3 TrueVertex(True_Vx,True_Vy,True_Vz);
 				
-			//--------------------------------------------------//	
-
-			// Overflow bins
-			// Affects
-
-			// DeltaPT
-			// DeltaPn
-			// ECal
-
-			if (TrueTransMissMomentum > ArrayNBinsDeltaPT[NBinsDeltaPT]) { TrueTransMissMomentum = 0.5 * (ArrayNBinsDeltaPT[NBinsDeltaPT] + ArrayNBinsDeltaPT[NBinsDeltaPT-1]); }
-			if (TruePn > ArrayNBinsDeltaPn[NBinsDeltaPn]) { TruePn = 0.5 * (ArrayNBinsDeltaPn[NBinsDeltaPn] + ArrayNBinsDeltaPn[NBinsDeltaPn-1]); }
-			if (TrueRecoECal > ArrayNBinsECal[NBinsECal]) { TrueRecoECal = 0.5 * (ArrayNBinsECal[NBinsECal] + ArrayNBinsECal[NBinsECal-1]); }
-
-			//--------------------------------------------------//
-
-			// Underflow bins
-			// Affects
-
-			// ECal
-			
-			if (TrueRecoECal < ArrayNBinsECal[0]) { TrueRecoECal = 0.5 * (ArrayNBinsECal[0] + ArrayNBinsECal[1]); }			
-			//--------------------------------------------------//
 			//--------------------------------------------------//		
 
 			// Demand that the true muon / proton start points and the true proton end point are contained
@@ -408,18 +283,8 @@ void true_selection::Loop() {
 				// STV analysis
 
 				if (
-				    TrueTransMissMomentum > ArrayNBinsDeltaPT[0] 
-				    //&& TrueTransMissMomentum < ArrayNBinsDeltaPT[NBinsDeltaPT]
-				    && TrueDeltaAlphaT > ArrayNBinsDeltaAlphaT[0] 
-				    && TrueDeltaAlphaT < ArrayNBinsDeltaAlphaT[NBinsDeltaAlphaT]
-				    
-				    && TrueMuonMomentum_GeV < ArrayNBinsMuonMomentum[NBinsMuonMomentum]
+				    TrueMuonMomentum_GeV < ArrayNBinsMuonMomentum[NBinsMuonMomentum]
 				    && TrueProtonMomentum_GeV < ArrayNBinsProtonMomentum[NBinsProtonMomentum]
-				    
-				    && TrueMuonCosTheta > ArrayNBinsMuonCosTheta[0]
-				    && TrueMuonCosTheta < ArrayNBinsMuonCosTheta[NBinsMuonCosTheta]
-				    && TrueProtonCosTheta > ArrayNBinsProtonCosTheta[0]
-				    && TrueProtonCosTheta < ArrayNBinsProtonCosTheta[NBinsProtonCosTheta]
 				) {
 
 					//----------------------------------------//
@@ -454,80 +319,20 @@ void true_selection::Loop() {
 					TrueCandidateProton.SetPhi(TrueProtonPhi);
 					TrueCandidateProton.SetTheta(TMath::ACos(TrueProtonCosTheta));	
 
-					//----------------------------------------//
-
-					// Indices for 2D & 3D analysis
-
-					int DeltaPTTwoDIndex = tools.ReturnIndex(TrueTransMissMomentum, TwoDArrayNBinsDeltaPT);
-					int DeltaPnTwoDIndex = tools.ReturnIndex(TruePn, TwoDArrayNBinsDeltaPn);					
-					int DeltaAlphaTTwoDIndex = tools.ReturnIndex(TrueDeltaAlphaT, TwoDArrayNBinsDeltaAlphaT);
-					int DeltaAlpha3DqTwoDIndex = tools.ReturnIndex(TrueDeltaAlpha3Dq, TwoDArrayNBinsDeltaAlpha3Dq);
-					int MuonCosThetaTwoDIndex = tools.ReturnIndex(TrueMuonCosTheta, TwoDArrayNBinsMuonCosTheta);
-					int ProtonCosThetaTwoDIndex = tools.ReturnIndex(TrueProtonCosTheta, TwoDArrayNBinsProtonCosTheta);
-					int MuonMomentumTwoDIndex = tools.ReturnIndex(TrueMuonMomentum_GeV, TwoDArrayNBinsMuonMomentum);
-					int ProtonMomentumTwoDIndex = tools.ReturnIndex(TrueProtonMomentum_GeV, TwoDArrayNBinsProtonMomentum);
-
-
-
-					int SerialECalInDeltaPTDeltaAlphaTIndex = tools.ReturnIndexIn3DList(TwoDArrayNBinsECalInDeltaPTDeltaAlphaTSlices,DeltaPTTwoDIndex,DeltaAlphaTTwoDIndex,TrueRecoECal);
-					int SerialECalInDeltaPnDeltaAlpha3DqIndex = tools.ReturnIndexIn3DList(TwoDArrayNBinsECalInDeltaPnDeltaAlpha3DqSlices,DeltaPnTwoDIndex,DeltaAlpha3DqTwoDIndex,TrueRecoECal);
-					int SerialECalInMuonCosThetaMuonMomentumIndex = tools.ReturnIndexIn3DList(TwoDArrayNBinsECalInMuonCosThetaMuonMomentumSlices,MuonCosThetaTwoDIndex,MuonMomentumTwoDIndex,TrueRecoECal);
-					int SerialECalInProtonCosThetaProtonMomentumIndex = tools.ReturnIndexIn3DList(TwoDArrayNBinsECalInProtonCosThetaProtonMomentumSlices,ProtonCosThetaTwoDIndex,ProtonMomentumTwoDIndex,TrueRecoECal);																							
-
 					//----------------------------------------//	
 
 					// 1D analysis		
 
-					TrueDeltaPTPlot[0]->Fill(TrueTransMissMomentum,weight);
-					TrueDeltaAlphaTPlot[0]->Fill(TrueDeltaAlphaT,weight);
-					TrueDeltaAlpha3DqPlot[0]->Fill(TrueDeltaAlpha3Dq,weight);
-					TrueDeltaPnPlot[0]->Fill(TruePn,weight);
-					TrueECalPlot[0]->Fill(TrueRecoECal,weight);
-					TrueMuonMomentumPlot[0]->Fill(TrueMuonMomentum_GeV,weight);
 					TrueMuonCosThetaPlot[0]->Fill(TrueMuonCosTheta,weight);
 					TrueMuonCosThetaSingleBinPlot[0]->Fill(0.5,weight);
-					TrueProtonMomentumPlot[0]->Fill(TrueProtonMomentum_GeV,weight);
-					TrueProtonCosThetaPlot[0]->Fill(TrueProtonCosTheta,weight);
-
-					TrueDeltaPTPlot[genie_mode]->Fill(TrueTransMissMomentum,weight);
-					TrueDeltaAlphaTPlot[genie_mode]->Fill(TrueDeltaAlphaT,weight);
-					TrueDeltaAlpha3DqPlot[genie_mode]->Fill(TrueDeltaAlpha3Dq,weight);
-					TrueDeltaPnPlot[genie_mode]->Fill(TruePn,weight);
-					TrueECalPlot[genie_mode]->Fill(TrueRecoECal,weight);
-					TrueMuonMomentumPlot[genie_mode]->Fill(TrueMuonMomentum_GeV,weight);
+					TrueThetaZPlot[0]->Fill(TrueThetaZ,weight);
+					
 					TrueMuonCosThetaPlot[genie_mode]->Fill(TrueMuonCosTheta,weight);
 					TrueMuonCosThetaSingleBinPlot[genie_mode]->Fill(0.5,weight);
-					TrueProtonMomentumPlot[genie_mode]->Fill(TrueProtonMomentum_GeV,weight);
-					TrueProtonCosThetaPlot[genie_mode]->Fill(TrueProtonCosTheta,weight);					
-					//----------------------------------------//										
-
-					// 3D analysis (uncorrelated)
-
-					TrueECal_InDeltaPTDeltaAlphaTTwoDPlot[0][DeltaPTTwoDIndex][DeltaAlphaTTwoDIndex]->Fill(TrueRecoECal,weight);
-					TrueECal_InDeltaPnDeltaAlpha3DqTwoDPlot[0][DeltaPnTwoDIndex][DeltaAlpha3DqTwoDIndex]->Fill(TrueRecoECal,weight);
-					TrueECal_InMuonCosThetaMuonMomentumTwoDPlot[0][MuonCosThetaTwoDIndex][MuonMomentumTwoDIndex]->Fill(TrueRecoECal,weight);
-					TrueECal_InProtonCosThetaProtonMomentumTwoDPlot[0][ProtonCosThetaTwoDIndex][ProtonMomentumTwoDIndex]->Fill(TrueRecoECal,weight);
-
-					TrueECal_InDeltaPTDeltaAlphaTTwoDPlot[genie_mode][DeltaPTTwoDIndex][DeltaAlphaTTwoDIndex]->Fill(TrueRecoECal,weight);
-					TrueECal_InDeltaPnDeltaAlpha3DqTwoDPlot[genie_mode][DeltaPnTwoDIndex][DeltaAlpha3DqTwoDIndex]->Fill(TrueRecoECal,weight);
-					TrueECal_InMuonCosThetaMuonMomentumTwoDPlot[genie_mode][MuonCosThetaTwoDIndex][MuonMomentumTwoDIndex]->Fill(TrueRecoECal,weight);
-					TrueECal_InProtonCosThetaProtonMomentumTwoDPlot[genie_mode][ProtonCosThetaTwoDIndex][ProtonMomentumTwoDIndex]->Fill(TrueRecoECal,weight);					
-
-					//----------------------------------------//						
-
-					// 3D analysis treated in 1D grid
-
-					SerialTrueECal_InDeltaPTDeltaAlphaTPlot[0]->Fill(SerialECalInDeltaPTDeltaAlphaTIndex,weight);
-					SerialTrueECal_InDeltaPnDeltaAlpha3DqPlot[0]->Fill(SerialECalInDeltaPnDeltaAlpha3DqIndex,weight);
-					SerialTrueECal_InMuonCosThetaMuonMomentumPlot[0]->Fill(SerialECalInMuonCosThetaMuonMomentumIndex,weight);
-					SerialTrueECal_InProtonCosThetaProtonMomentumPlot[0]->Fill(SerialECalInProtonCosThetaProtonMomentumIndex,weight);
-
-					SerialTrueECal_InDeltaPTDeltaAlphaTPlot[genie_mode]->Fill(SerialECalInDeltaPTDeltaAlphaTIndex,weight);
-					SerialTrueECal_InDeltaPnDeltaAlpha3DqPlot[genie_mode]->Fill(SerialECalInDeltaPnDeltaAlpha3DqIndex,weight);
-					SerialTrueECal_InMuonCosThetaMuonMomentumPlot[genie_mode]->Fill(SerialECalInMuonCosThetaMuonMomentumIndex,weight);
-					SerialTrueECal_InProtonCosThetaProtonMomentumPlot[genie_mode]->Fill(SerialECalInProtonCosThetaProtonMomentumIndex,weight);					
-
+					TrueThetaZPlot[genie_mode]->Fill(TrueThetaZ,weight);
+					
 					//----------------------------------------//									
+
 				} // End of the event selection
 
 				// -----------------------------------------------------------------------------------------------------------------
@@ -537,10 +342,6 @@ void true_selection::Loop() {
 		} // End of signal definition: 1 mu (Pmu > 100 MeV / c), 1p (Pp > 300 MeV / c) & pi+/- (Ppi > 70 MeV / c)
 
 		// -------------------------------------------------------------------------------------------------------------------------
-
-		// Storing the run/subrun/event of the candidate events 
-
-		myRunTxtFile << "Run = " << Run << ", SubRun = " << SubRun << ", Event = " << Event ;
 
 	} // End of the loop over the events
 
@@ -557,9 +358,6 @@ void true_selection::Loop() {
 		//std::cout << std::endl << "Samdef events = " << SamdefEvents << std::endl;
 		std::cout << std::endl << "True CC1p events = " << TrueCC1pCounter << std::endl;
 
-		//myTxtFile << "Samdef events = " << SamdefEvents << std::endl;
-		myTxtFile << std::endl << "True CC1p events = " << TrueCC1pCounter << std::endl;
-
 	}
 
 	//----------------------------------------//
@@ -568,7 +366,6 @@ void true_selection::Loop() {
 	OutputFile->cd();
 	OutputFile->Write();
 	OutputFile->Close();
-	myTxtFile.close();
 
 	fFile->Close();
 

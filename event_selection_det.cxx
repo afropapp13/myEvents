@@ -27,7 +27,6 @@
 	gROOT->ProcessLine(".L reco_selection.cxx+");
 	gROOT->ProcessLine(".L true_selection.cxx+");
 
-
 	for (int i =0;i < (int)(WhichSampleArray.size()); i++) {
 
 		gROOT->ProcessLine("reco_selection(\""+WhichSampleArray[i]+"\").Loop()");

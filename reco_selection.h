@@ -231,6 +231,7 @@ public :
    vector<double>  *Reco_Q2;
    vector<double>  *Reco_DeltaPhi;
    vector<double>  *Reco_DeltaTheta;
+   vector<double>  *Reco_ThetaZ;
    vector<double>  *True_A;
    vector<double>  *True_kMiss;
    vector<double>  *True_PMissMinus;
@@ -255,6 +256,7 @@ public :
    vector<double>  *True_Q2;
    vector<double>  *True_DeltaPhi;
    vector<double>  *True_DeltaTheta;
+   vector<double>  *True_ThetaZ;
    vector<double>  *StartToStartDistance;
    vector<double>  *EndToEndDistance;
 
@@ -461,6 +463,7 @@ public :
    TBranch        *b_Reco_Q2;   //!
    TBranch        *b_Reco_DeltaPhi;   //!
    TBranch        *b_Reco_DeltaTheta;   //!
+   TBranch        *b_Reco_ThetaZ;   //!
    TBranch        *b_True_A;   //!
    TBranch        *b_True_kMiss;   //!
    TBranch        *b_True_PMissMinus;   //!
@@ -485,6 +488,7 @@ public :
    TBranch        *b_True_Q2;   //!
    TBranch        *b_True_DeltaPhi;   //!
    TBranch        *b_True_DeltaTheta;   //!
+   TBranch        *b_True_ThetaZ;   //!
    TBranch        *b_StartToStartDistance;   //!
    TBranch        *b_EndToEndDistance;   //!
 
@@ -513,7 +517,7 @@ reco_selection::reco_selection(TString WhichSample, TString Tune, TString WhichE
 
 // 	//pnfsToXRootD /pnfs/persistent/path/to/your/file
 //   fPathToFile = "/pnfs/uboone/persistent/users/apapadop/mySamples/"+UBCodeVersion+"/PeLEETuples/PreSelection_"+fWhichSample+"_"+UBCodeVersion+".root";
-	fPathToFile = "/uboone/data/users/apapadop/PeLEETuples_3D_ECal/PreSelection_"+fWhichSample+"_"+UBCodeVersion+".root";
+	fPathToFile = "/uboone/data/users/apapadop/PeLEETuples_Atmospherics/PreSelection_"+fWhichSample+"_"+UBCodeVersion+".root";
 
    if (tree == 0) {
       TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject(fPathToFile);
@@ -720,6 +724,7 @@ void reco_selection::Init(TTree *tree)
    Reco_Q2 = 0;
    Reco_DeltaPhi = 0;
    Reco_DeltaTheta = 0;
+   Reco_ThetaZ = 0;
    True_A = 0;
    True_kMiss = 0;
    True_PMissMinus = 0;
@@ -744,6 +749,7 @@ void reco_selection::Init(TTree *tree)
    True_Q2 = 0;
    True_DeltaPhi = 0;
    True_DeltaTheta = 0;
+   True_ThetaZ = 0;
    StartToStartDistance = 0;
    EndToEndDistance = 0;
    // Set branch addresses and branch pointers
@@ -894,6 +900,7 @@ void reco_selection::Init(TTree *tree)
    fChain->SetBranchAddress("Reco_Q2", &Reco_Q2, &b_Reco_Q2);
    fChain->SetBranchAddress("Reco_DeltaPhi", &Reco_DeltaPhi, &b_Reco_DeltaPhi);
    fChain->SetBranchAddress("Reco_DeltaTheta", &Reco_DeltaTheta, &b_Reco_DeltaTheta);
+   fChain->SetBranchAddress("Reco_ThetaZ", &Reco_ThetaZ, &b_Reco_ThetaZ);
    fChain->SetBranchAddress("True_A", &True_A, &b_True_A);
    fChain->SetBranchAddress("True_kMiss", &True_kMiss, &b_True_kMiss);
    fChain->SetBranchAddress("True_PMissMinus", &True_PMissMinus, &b_True_PMissMinus);
@@ -918,6 +925,7 @@ void reco_selection::Init(TTree *tree)
    fChain->SetBranchAddress("True_Q2", &True_Q2, &b_True_Q2);
    fChain->SetBranchAddress("True_DeltaPhi", &True_DeltaPhi, &b_True_DeltaPhi);
    fChain->SetBranchAddress("True_DeltaTheta", &True_DeltaTheta, &b_True_DeltaTheta);
+   fChain->SetBranchAddress("True_ThetaZ", &True_ThetaZ, &b_True_ThetaZ);
    fChain->SetBranchAddress("StartToStartDistance", &StartToStartDistance, &b_StartToStartDistance);
    fChain->SetBranchAddress("EndToEndDistance", &EndToEndDistance, &b_EndToEndDistance);
    Notify();

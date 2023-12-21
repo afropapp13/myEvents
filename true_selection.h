@@ -180,6 +180,8 @@ public :
    vector<double>  *True_Q2;
    vector<double>  *True_DeltaPhi;
    vector<double>  *True_DeltaTheta;
+   vector<double>  *True_ThetaZ;
+
 
    // List of branches
    TBranch        *b_Weight;   //!
@@ -334,6 +336,8 @@ public :
    TBranch        *b_True_Q2;   //!
    TBranch        *b_True_DeltaPhi;   //!
    TBranch        *b_True_DeltaTheta;   //!
+   TBranch        *b_True_ThetaZ;   //!
+
 
    true_selection(TString WhichSample="",TString Tune="",TString WhichEventWeightLabel="", int UniverseIndex=-1,TTree *tree=0);
    virtual ~true_selection();
@@ -361,7 +365,7 @@ true_selection::true_selection(TString WhichSample, TString Tune, TString WhichE
 
 //	//pnfsToXRootD /pnfs/persistent/path/to/your/file
 //   fPathToFile = "/pnfs/uboone/persistent/users/apapadop/mySamples/"+UBCodeVersion+"/PeLEETuples/PreTruthSelection_"+fWhichSample+"_"+UBCodeVersion+".root";
-	fPathToFile = "/uboone/data/users/apapadop/PeLEETuples_3D_ECal/PreTruthSelection_"+fWhichSample+"_"+UBCodeVersion+".root";   
+	fPathToFile = "/uboone/data/users/apapadop/PeLEETuples_Atmospherics/PreTruthSelection_"+fWhichSample+"_"+UBCodeVersion+".root";   
   
    if (tree == 0) {
       TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject(fPathToFile);
@@ -529,6 +533,7 @@ void true_selection::Init(TTree *tree)
    True_Q2 = 0;
    True_DeltaPhi = 0;
    True_DeltaTheta = 0;
+   True_ThetaZ = 0;
    // Set branch addresses and branch pointers
    if (!tree) return;
    fChain = tree;
@@ -691,6 +696,7 @@ void true_selection::Init(TTree *tree)
    fChain->SetBranchAddress("True_Q2", &True_Q2, &b_True_Q2);
    fChain->SetBranchAddress("True_DeltaPhi", &True_DeltaPhi, &b_True_DeltaPhi);
    fChain->SetBranchAddress("True_DeltaTheta", &True_DeltaTheta, &b_True_DeltaTheta);
+   fChain->SetBranchAddress("True_ThetaZ", &True_ThetaZ, &b_True_ThetaZ);
    Notify();
 
 }
