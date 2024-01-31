@@ -159,10 +159,16 @@ void interaction_breakdown(TString BaseMC = "") {
 			// GENIE v2 has only combined run
 			if (BaseMC == "GENIEv2Overlay9" && Runs[WhichRun] != "Combined") { continue; }	
 
-			// NuWro/Tweaked GENIE don't have Run 4a
-			if (BaseMC == "Overlay9NuWro" && (Runs[WhichRun] == "Run5" || Runs[WhichRun] == "Run4a" || Runs[WhichRun] == "Run4b" || Runs[WhichRun] == "Run4aRutgers") ) { continue; }
-			if (BaseMC == "NoTuneOverlay9" && (Runs[WhichRun] == "Run5" || Runs[WhichRun] == "Run4a" || Runs[WhichRun] == "Run4b" || Runs[WhichRun] == "Run4aRutgers") ) { continue; }
-			if (BaseMC == "TwiceMECOverlay9" && (Runs[WhichRun] == "Run5" || Runs[WhichRun] == "Run4a" || Runs[WhichRun] == "Run4b" || Runs[WhichRun] == "Run4aRutgers") ) { continue; }												
+                        // NuWro/Tweaked GENIE don't have Runs 4 & 5 for now
+                        if (BaseMC == "Overlay9NuWro" || BaseMC == "NoTuneOverlay9" || BaseMC == "TwiceMECOverlay9") {
+                        
+ 				if (Runs[WhichRun] == "Run4a" || Runs[WhichRun] == "Run4b" || Runs[WhichRun] == "Run4c" || Runs[WhichRun] == "Run4d" || Runs[WhichRun] == "Run5") {
+                       
+                       			continue;
+                        
+              			}
+                        
+			}
 
 //		} // If we want to run only on a specific cut combination, include this } and remove the one at the end of the program
 
@@ -344,7 +350,7 @@ void interaction_breakdown(TString BaseMC = "") {
 
 						gStyle->SetErrorX(0); // Removing the horizontal errors
 						Plots[WhichSample][WhichPlot]->Draw("e same"); 
-						TString NBeamOnEvents = ToString((int)(Plots[WhichSample][WhichPlot]->GetEntries()));
+						TString NBeamOnEvents = to_string_with_precision(Plots[WhichSample][WhichPlot]->GetEntries());
 						// Unblind
 						leg[WhichPlot]->AddEntry(Plots[WhichSample][WhichPlot],"BNB Data ("+NBeamOnEvents+")","ep");
 
@@ -392,11 +398,11 @@ void interaction_breakdown(TString BaseMC = "") {
 							THStacks[WhichPlot]->Add(CCDISPlots[WhichSample][WhichPlot],"hist");
 							THStacks[WhichPlot]->Add(CCDISPlots[WhichSample+2][WhichPlot],"hist");
 
-							TString NCCQEEvents = ToString((int)(CCQEPlots[WhichSample][WhichPlot]->Integral()));
-							TString NCCMECEvents = ToString((int)(CCMECPlots[WhichSample][WhichPlot]->Integral()));	
-							TString NCCRESEvents = ToString((int)(CCRESPlots[WhichSample][WhichPlot]->Integral()));	
-							TString NCCDISEvents = ToString((int)(CCDISPlots[WhichSample][WhichPlot]->Integral()));	
-							TString NExtBNBEvents = ToString((int)(Plots[2][WhichPlot]->Integral()));																						
+							TString NCCQEEvents = to_string_with_precision(CCQEPlots[WhichSample][WhichPlot]->Integral());
+							TString NCCMECEvents = to_string_with_precision(CCMECPlots[WhichSample][WhichPlot]->Integral());	
+							TString NCCRESEvents = to_string_with_precision(CCRESPlots[WhichSample][WhichPlot]->Integral());	
+							TString NCCDISEvents = to_string_with_precision(CCDISPlots[WhichSample][WhichPlot]->Integral());	
+							TString NExtBNBEvents = to_string_with_precision(Plots[2][WhichPlot]->Integral());																						
 
 							leg[WhichPlot]->AddEntry(CCQEPlots[WhichSample][WhichPlot],"QE (" + NCCQEEvents + ")","f"); 
 							leg[WhichPlot]->AddEntry(CCMECPlots[WhichSample][WhichPlot],"MEC (" + NCCMECEvents + ")","f"); 

@@ -824,7 +824,7 @@ void reco_selection::Loop() {
 				|| fWhichSample == "OverlayDirt9_Combined"
 				) 
 			) {
-
+				
 				// Watch out: The EventWeight weights already include the weight for the tune
 
 				// Genie weights
@@ -859,7 +859,7 @@ void reco_selection::Loop() {
 					}
 					else {
 
-						cout << ", run = " << Run << " subrun = " << SubRun << " event = " << Event << endl;
+						cout << "run_period =" << run_period << ", run = " << Run << " subrun = " << SubRun << " event = " << Event << endl;
 
 					}
 

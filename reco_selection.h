@@ -35,7 +35,7 @@ public :
    Int_t           Run;
    Int_t           SubRun;
    Int_t           Event;
-   //TString         run_period;
+   TString         *run_period;
    
    vector<double>  *All_UBGenie;
    vector<double>  *AxFFCCQEshape_UBGenie;
@@ -626,7 +626,8 @@ void reco_selection::Init(TTree *tree)
 	UnShortXSecShape_CCMEC_UBGenie = 0;	 	 	 	 	 	   		
 
 	//----------------------------------------//     
-   
+  
+   run_period = 0; 
    fluxes = 0;
    reinteractions = 0;
    BeamFlashes_TotalPE = 0;

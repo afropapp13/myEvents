@@ -157,10 +157,17 @@ void topological_breakdown(TString BaseMC = "") {
 			// GENIE v2 has only combined run
 			if (BaseMC == "GENIEv2Overlay9" && Runs[WhichRun] != "Combined") { continue; }	
 
-			// NuWro/Tweaked GENIE don't have Run 4a
-			if (BaseMC == "Overlay9NuWro" && (Runs[WhichRun] == "Run5" || Runs[WhichRun] == "Run4a" || Runs[WhichRun] == "Run4b" || Runs[WhichRun] == "Run4aRutgers") ) { continue; }
-			if (BaseMC == "NoTuneOverlay9" && (Runs[WhichRun] == "Run5" || Runs[WhichRun] == "Run4a" || Runs[WhichRun] == "Run4b" || Runs[WhichRun] == "Run4aRutgers") ) { continue; }
-			if (BaseMC == "TwiceMECOverlay9" && (Runs[WhichRun] == "Run5" || Runs[WhichRun] == "Run4a" || Runs[WhichRun] == "Run4b" || Runs[WhichRun] == "Run4aRutgers") ) { continue; }												
+			// NuWro/Tweaked GENIE don't have Runs 4 & 5 for now
+			if (BaseMC == "Overlay9NuWro" || BaseMC == "NoTuneOverlay9" || BaseMC == "TwiceMECOverlay9") {
+
+				if (Runs[WhichRun] == "Run4a" || Runs[WhichRun] == "Run4b" || Runs[WhichRun] == "Run4c" || Runs[WhichRun] == "Run4d" || Runs[WhichRun] == "Run5") {
+
+					continue;
+
+				}
+
+			}
+												
 			TString PathToFilesCut = PathToFiles+"/"+Cuts+"/";
 
 			TH1D::SetDefaultSumw2();
@@ -300,7 +307,7 @@ void topological_breakdown(TString BaseMC = "") {
 				midPad->Draw();
 				botPad->Draw();
 
-				leg.push_back(new TLegend(0.1,0.005,0.9,0.995));
+				leg.push_back(new TLegend(0.1,0.005,0.92,0.995));
 				leg[WhichPlot]->SetBorderSize(0);
 				leg[WhichPlot]->SetNColumns(3);
 				leg[WhichPlot]->SetMargin(0.15);				
@@ -337,7 +344,7 @@ void topological_breakdown(TString BaseMC = "") {
 
 						gStyle->SetErrorX(0); // Removing the horizontal errors
 						Plots[WhichSample][WhichPlot]->Draw("e same"); 
-						TString NBeamOnEvents = ToString((int)(Plots[WhichSample][WhichPlot]->Integral()));
+						TString NBeamOnEvents = to_string_with_precision(Plots[WhichSample][WhichPlot]->Integral());
 						// Unblind
 						leg[WhichPlot]->AddEntry(Plots[WhichSample][WhichPlot], "BNB Data ("+NBeamOnEvents+")","ep");
 
@@ -350,7 +357,7 @@ void topological_breakdown(TString BaseMC = "") {
 							Plots[WhichSample][WhichPlot]->SetFillStyle(3004);
 							Plots[WhichSample][WhichPlot]->SetLineWidth(1);
 
-							TString NExtBNBEvents = ToString( (int)(Plots[WhichSample][WhichPlot]->Integral() ) );
+							TString NExtBNBEvents = to_string_with_precision(Plots[WhichSample][WhichPlot]->Integral());
 							THStacks[WhichPlot]->Add(Plots[WhichSample][WhichPlot],"hist");
 							THStacks[WhichPlot]->Draw("same");
 
@@ -358,13 +365,13 @@ void topological_breakdown(TString BaseMC = "") {
 
 					if (LabelsOfSamples[WhichSample] == "Dirt") {
 
-							TString NCC1pEvents = ToString( (int)(CC1pPlots[WhichSample][WhichPlot]->Integral() ) );
+							TString NCC1pEvents = to_string_with_precision(CC1pPlots[WhichSample][WhichPlot]->Integral());
 							CC1pPlots[WhichSample][WhichPlot]->SetLineColor(ColorsOverlay[2]);
 							CC1pPlots[WhichSample][WhichPlot]->SetFillColor(ColorsOverlay[2]);
 							THStacks[WhichPlot]->Add(CC1pPlots[WhichSample][WhichPlot],"hist");
 							THStacks[WhichPlot]->Draw("same");
 
-							TString NNonCC1pEvents = ToString( (int)(NonCC1pPlots[WhichSample][WhichPlot]->Integral() ) );
+							TString NNonCC1pEvents = to_string_with_precision(NonCC1pPlots[WhichSample][WhichPlot]->Integral());
 							NonCC1pPlots[WhichSample][WhichPlot]->SetLineColor(ColorsOverlay[3]);
 							NonCC1pPlots[WhichSample][WhichPlot]->SetFillColor(ColorsOverlay[3]);
 							THStacks[WhichPlot]->Add(NonCC1pPlots[WhichSample][WhichPlot],"hist");
@@ -375,13 +382,13 @@ void topological_breakdown(TString BaseMC = "") {
 
 					if (LabelsOfSamples[WhichSample] == "MC") {
 
-							TString NCC1pEvents = ToString( (int)(CC1pPlots[WhichSample][WhichPlot]->Integral() ) );
+							TString NCC1pEvents = to_string_with_precision(CC1pPlots[WhichSample][WhichPlot]->Integral());
 							CC1pPlots[WhichSample][WhichPlot]->SetLineColor(ColorsOverlay[0]);
 							CC1pPlots[WhichSample][WhichPlot]->SetFillColor(ColorsOverlay[0]);
 							THStacks[WhichPlot]->Add(CC1pPlots[WhichSample][WhichPlot],"hist");
 
 							// add the cosmic label first
-							TString NExtBNBEvents = ToString( (int)(Plots[2][WhichPlot]->Integral() ) );							
+							TString NExtBNBEvents = to_string_with_precision(Plots[2][WhichPlot]->Integral());							
 							leg[WhichPlot]->AddEntry(Plots[2][WhichPlot],"Cosmic ("+NExtBNBEvents+")","f");							
 							// Unblind
 							leg[WhichPlot]->AddEntry(Plots[2][WhichPlot],"","");	 // blanck space
@@ -389,7 +396,7 @@ void topological_breakdown(TString BaseMC = "") {
 							leg[WhichPlot]->AddEntry(CC1pPlots[WhichSample][WhichPlot],"MC CC1p0#pi ("+NCC1pEvents+")","f");
 							THStacks[WhichPlot]->Draw("same");
 
-							TString NNonCC1pEvents = ToString( (int)(NonCC1pPlots[WhichSample][WhichPlot]->Integral() ) );
+							TString NNonCC1pEvents = to_string_with_precision(NonCC1pPlots[WhichSample][WhichPlot]->Integral());
 							NonCC1pPlots[WhichSample][WhichPlot]->SetLineColor(ColorsOverlay[1]);
 							NonCC1pPlots[WhichSample][WhichPlot]->SetFillColor(ColorsOverlay[1]);
 							THStacks[WhichPlot]->Add(NonCC1pPlots[WhichSample][WhichPlot],"hist");
