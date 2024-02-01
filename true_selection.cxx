@@ -94,6 +94,16 @@ void true_selection::Loop() {
 
 	//--------------------------------------------------//
 
+	// 2D plots
+
+        TH2D* POTScaledCC1pTrueThetaZTrueECalPlot2D = new TH2D("POTScaledCC1pTrueThetaZTrueECalPlot2D",";#theta_{z}^{true} [deg];E_{Cal}^{true} [GeV]",
+                        NBinsThetaZ,ArrayNBinsThetaZ,20,ArrayNBinsECal[0],ArrayNBinsECal[NBinsECal]);
+
+        TH2D* POTScaledCC1pTrueThetaZTrueEnuPlot2D = new TH2D("POTScaledCC1pTrueThetaZTrueEnuPlot2D",";#theta_{z}^{true} [deg];E_{#nu}^{true} [GeV]",
+                        NBinsThetaZ,ArrayNBinsThetaZ,20,ArrayNBinsECal[0],ArrayNBinsECal[NBinsECal]);
+
+	//--------------------------------------------------//
+
 	int TrueCC1pCounter = 0;
 	int TrueCCQElikeCounter = 0;
 	
@@ -332,6 +342,14 @@ void true_selection::Loop() {
 					TrueThetaZPlot[genie_mode]->Fill(TrueThetaZ,weight);
 					
 					//----------------------------------------//									
+
+					// 2D plots
+
+					POTScaledCC1pTrueThetaZTrueECalPlot2D->Fill(TrueThetaZ,TrueRecoECal,weight);
+					POTScaledCC1pTrueThetaZTrueEnuPlot2D->Fill(TrueThetaZ,True_Ev,weight);
+					
+					//----------------------------------------//									
+
 
 				} // End of the event selection
 

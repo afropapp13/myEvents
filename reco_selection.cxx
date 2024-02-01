@@ -145,19 +145,40 @@ void reco_selection::Loop() {
 	
 		//----------------------------------------//
 
+		double ecal_diff_min = -0.2;
+		double ecal_diff_max = 0.2;
+		double ecal_reso_min = -50;
+		double ecal_reso_max = 50;
+
+		double thetaz_diff_min = -30;
+		double thetaz_diff_max = 30;
+		double thetaz_reso_min = -100;
+		double thetaz_reso_max = 100;
+
+		//----------------------------------------//
+
 		TH1D* CC1pThetaZDiff_ECalSlicesPlot[TwoDNBinsECal];	
 		TH1D* CC1pThetaZReso_ECalSlicesPlot[TwoDNBinsECal];	
-
+		TH1D* CC1pThetaZ_ECalSlicesPlot[TwoDNBinsECal];	
+		TH1D* CC1pTrueThetaZ_TrueECalSlicesPlot[TwoDNBinsECal];	
+		TH1D* CC1pTrueThetaZ_TrueEnuSlicesPlot[TwoDNBinsECal];	
+	
 		// Loop over the ECal slices
 		
 		for (int iecal = 0; iecal < TwoDNBinsECal; iecal++) {
 
-			CC1pThetaZDiff_ECalSlicesPlot[iecal] = new TH1D("CC1pThetaZDiff_ECalSlices" + tools.ConvertToString(TwoDArrayNBinsECal[iecal])+"To"+tools.ConvertToString(TwoDArrayNBinsECal[iecal+1]) +"Plot",";#theta_{z}^{reco} - #theta_{z}^{true} [deg]",31,-30,30);
-			CC1pThetaZReso_ECalSlicesPlot[iecal] = new TH1D("CC1pThetaZReso_ECalSlices" + tools.ConvertToString(TwoDArrayNBinsECal[iecal])+"To"+tools.ConvertToString(TwoDArrayNBinsECal[iecal+1]) +"Plot",";(#theta_{z}^{reco} - #theta_{z}^{true})/#theta_{z}^{true} [%]",51,-100,100);
-		
+			CC1pThetaZDiff_ECalSlicesPlot[iecal] = new TH1D("CC1pThetaZDiff_ECalSlices" + tools.ConvertToString(TwoDArrayNBinsECal[iecal])+"To"+tools.ConvertToString(TwoDArrayNBinsECal[iecal+1]) +"Plot",";#theta_{z}^{reco} - #theta_{z}^{true} [deg]",31,thetaz_diff_min,thetaz_diff_max);
+			CC1pThetaZReso_ECalSlicesPlot[iecal] = new TH1D("CC1pThetaZReso_ECalSlices" + tools.ConvertToString(TwoDArrayNBinsECal[iecal])+"To"+tools.ConvertToString(TwoDArrayNBinsECal[iecal+1]) +"Plot",";(#theta_{z}^{reco} - #theta_{z}^{true})/#theta_{z}^{true} [%]",51,thetaz_reso_min,thetaz_reso_max);
+			CC1pThetaZ_ECalSlicesPlot[iecal] = new TH1D("CC1pThetaZ_ECalSlices" + tools.ConvertToString(TwoDArrayNBinsECal[iecal])+"To"+tools.ConvertToString(TwoDArrayNBinsECal[iecal+1]) +"Plot",";#theta_{z}^{reco} [deg]",30,0,180);
+			CC1pTrueThetaZ_TrueECalSlicesPlot[iecal] = new TH1D("CC1pTrueThetaZ_TrueECalSlices" + tools.ConvertToString(TwoDArrayNBinsECal[iecal])+"To"+tools.ConvertToString(TwoDArrayNBinsECal[iecal+1]) +"Plot",";#theta_{z}^{true} [deg]",30,0,180);
+			CC1pTrueThetaZ_TrueEnuSlicesPlot[iecal] = new TH1D("CC1pTrueThetaZ_TrueEnuSlices" + tools.ConvertToString(TwoDArrayNBinsECal[iecal])+"To"+tools.ConvertToString(TwoDArrayNBinsECal[iecal+1]) +"Plot",";#theta_{z}^{true} [deg]",30,0,180);
+	
 		} // End of the loop over ECal slices
 
 		//----------------------------------------//
+
+		TH1D* CC1pECalDiff_MuonMomentumSlicesPlot[TwoDNBinsMuonMomentum];	
+		TH1D* CC1pECalReso_MuonMomentumSlicesPlot[TwoDNBinsMuonMomentum];	
 
 		TH1D* CC1pThetaZDiff_MuonMomentumSlicesPlot[TwoDNBinsMuonMomentum];	
 		TH1D* CC1pThetaZReso_MuonMomentumSlicesPlot[TwoDNBinsMuonMomentum];	
@@ -166,12 +187,32 @@ void reco_selection::Loop() {
 		
 		for (int iecal = 0; iecal < TwoDNBinsMuonMomentum; iecal++) {
 
-			CC1pThetaZDiff_MuonMomentumSlicesPlot[iecal] = new TH1D("CC1pThetaZDiff_MuonMomentumSlices" + tools.ConvertToString(TwoDArrayNBinsMuonMomentum[iecal])+"To"+tools.ConvertToString(TwoDArrayNBinsMuonMomentum[iecal+1]) +"Plot",";#theta_{z}^{reco} - #theta_{z}^{true} [deg]",31,-30,30);
-			CC1pThetaZReso_MuonMomentumSlicesPlot[iecal] = new TH1D("CC1pThetaZReso_MuonMomentumSlices" + tools.ConvertToString(TwoDArrayNBinsMuonMomentum[iecal])+"To"+tools.ConvertToString(TwoDArrayNBinsMuonMomentum[iecal+1]) +"Plot",";(#theta_{z}^{reco} - #theta_{z}^{true})/#theta_{z}^{true} [%]",51,-100,100);
+			CC1pThetaZDiff_MuonMomentumSlicesPlot[iecal] = new TH1D("CC1pThetaZDiff_MuonMomentumSlices" + tools.ConvertToString(TwoDArrayNBinsMuonMomentum[iecal])+"To"+tools.ConvertToString(TwoDArrayNBinsMuonMomentum[iecal+1]) +"Plot",";#theta_{z}^{reco} - #theta_{z}^{true} [deg]",31,thetaz_diff_min,thetaz_diff_max);
+			CC1pThetaZReso_MuonMomentumSlicesPlot[iecal] = new TH1D("CC1pThetaZReso_MuonMomentumSlices" + tools.ConvertToString(TwoDArrayNBinsMuonMomentum[iecal])+"To"+tools.ConvertToString(TwoDArrayNBinsMuonMomentum[iecal+1]) +"Plot",";(#theta_{z}^{reco} - #theta_{z}^{true})/#theta_{z}^{true} [%]",51,thetaz_reso_min,thetaz_reso_max);
+	
+			CC1pECalDiff_MuonMomentumSlicesPlot[iecal] = new TH1D("CC1pECalDiff_MuonMomentumSlices" + tools.ConvertToString(TwoDArrayNBinsMuonMomentum[iecal])+"To"+tools.ConvertToString(TwoDArrayNBinsMuonMomentum[iecal+1]) +"Plot",";E_{Cal}^{reco} - E_{Cal}^{true} [GeV]",31,ecal_diff_min,ecal_diff_max);
+			CC1pECalReso_MuonMomentumSlicesPlot[iecal] = new TH1D("CC1pECalReso_MuonMomentumSlices" + tools.ConvertToString(TwoDArrayNBinsMuonMomentum[iecal])+"To"+tools.ConvertToString(TwoDArrayNBinsMuonMomentum[iecal+1]) +"Plot",";(E_{Cal}^{reco} - E_{Cal}^{true})/E_{Cal}^{true} [%]",51,ecal_reso_min,ecal_reso_max);
 		
 		} // End of the loop over MuonMomentum slices
 	
 		//----------------------------------------//
+
+		TH1D* CC1pECalDiff_MuonCosThetaSlicesPlot[TwoDNBinsMuonCosTheta];	
+		TH1D* CC1pECalReso_MuonCosThetaSlicesPlot[TwoDNBinsMuonCosTheta];	
+
+		// Loop over the MuonCosTheta slices
+		
+		for (int i = 0; i < TwoDNBinsMuonCosTheta; i++) {
+
+			CC1pECalDiff_MuonCosThetaSlicesPlot[i] = new TH1D("CC1pECalDiff_MuonCosThetaSlices" + tools.ConvertToString(TwoDArrayNBinsMuonCosTheta[i])+"To"+tools.ConvertToString(TwoDArrayNBinsMuonCosTheta[i+1]) +"Plot",";E_{Cal}^{reco} - E_{Cal}^{true} [GeV]",31,ecal_diff_min,ecal_diff_max);
+			CC1pECalReso_MuonCosThetaSlicesPlot[i] = new TH1D("CC1pECalReso_MuonCosThetaSlices" + tools.ConvertToString(TwoDArrayNBinsMuonCosTheta[i])+"To"+tools.ConvertToString(TwoDArrayNBinsMuonCosTheta[i+1]) +"Plot",";(E_{Cal}^{reco} - E_{Cal}^{true})/E_{Cal}^{true} [%]",51,ecal_reso_min,ecal_reso_max);
+		
+		} // End of the loop over MuonMomentum slices
+	
+		//----------------------------------------//
+
+		TH1D* CC1pECalDiff_ProtonMomentumSlicesPlot[TwoDNBinsProtonMomentum];	
+		TH1D* CC1pECalReso_ProtonMomentumSlicesPlot[TwoDNBinsProtonMomentum];	
 
 		TH1D* CC1pThetaZDiff_ProtonMomentumSlicesPlot[TwoDNBinsProtonMomentum];	
 		TH1D* CC1pThetaZReso_ProtonMomentumSlicesPlot[TwoDNBinsProtonMomentum];	
@@ -180,11 +221,132 @@ void reco_selection::Loop() {
 		
 		for (int iecal = 0; iecal < TwoDNBinsProtonMomentum; iecal++) {
 
-			CC1pThetaZDiff_ProtonMomentumSlicesPlot[iecal] = new TH1D("CC1pThetaZDiff_ProtonMomentumSlices" + tools.ConvertToString(TwoDArrayNBinsProtonMomentum[iecal])+"To"+tools.ConvertToString(TwoDArrayNBinsProtonMomentum[iecal+1]) +"Plot",";#theta_{z}^{reco} - #theta_{z}^{true} [deg]",31,-30,30);
-			CC1pThetaZReso_ProtonMomentumSlicesPlot[iecal] = new TH1D("CC1pThetaZReso_ProtonMomentumSlices" + tools.ConvertToString(TwoDArrayNBinsProtonMomentum[iecal])+"To"+tools.ConvertToString(TwoDArrayNBinsProtonMomentum[iecal+1]) +"Plot",";(#theta_{z}^{reco} - #theta_{z}^{true})/#theta_{z}^{true} [%]",51,-100,100);
+			CC1pThetaZDiff_ProtonMomentumSlicesPlot[iecal] = new TH1D("CC1pThetaZDiff_ProtonMomentumSlices" + tools.ConvertToString(TwoDArrayNBinsProtonMomentum[iecal])+"To"+tools.ConvertToString(TwoDArrayNBinsProtonMomentum[iecal+1]) +"Plot",";#theta_{z}^{reco} - #theta_{z}^{true} [deg]",31,thetaz_diff_min,thetaz_diff_max);
+			CC1pThetaZReso_ProtonMomentumSlicesPlot[iecal] = new TH1D("CC1pThetaZReso_ProtonMomentumSlices" + tools.ConvertToString(TwoDArrayNBinsProtonMomentum[iecal])+"To"+tools.ConvertToString(TwoDArrayNBinsProtonMomentum[iecal+1]) +"Plot",";(#theta_{z}^{reco} - #theta_{z}^{true})/#theta_{z}^{true} [%]",51,thetaz_reso_min,thetaz_reso_max);
+	
+			CC1pECalDiff_ProtonMomentumSlicesPlot[iecal] = new TH1D("CC1pECalDiff_ProtonMomentumSlices" + tools.ConvertToString(TwoDArrayNBinsProtonMomentum[iecal])+"To"+tools.ConvertToString(TwoDArrayNBinsProtonMomentum[iecal+1]) +"Plot",";E_{Cal}^{reco} - E_{Cal}^{true} [GeV]",31,ecal_diff_min,ecal_diff_max);
+			CC1pECalReso_ProtonMomentumSlicesPlot[iecal] = new TH1D("CC1pECalReso_ProtonMomentumSlices" + tools.ConvertToString(TwoDArrayNBinsProtonMomentum[iecal])+"To"+tools.ConvertToString(TwoDArrayNBinsProtonMomentum[iecal+1]) +"Plot",";(E_{Cal}^{reco} - E_{Cal}^{true})/E_{Cal}^{true} [%]",51,ecal_reso_min,ecal_reso_max);
 		
 		} // End of the loop over ProtonMomentum slices
 	
+		//----------------------------------------//
+
+		TH1D* CC1pECalDiff_ProtonCosThetaSlicesPlot[TwoDNBinsProtonCosTheta];	
+		TH1D* CC1pECalReso_ProtonCosThetaSlicesPlot[TwoDNBinsProtonCosTheta];	
+
+		// Loop over the MuonCosTheta slices
+		
+		for (int i = 0; i < TwoDNBinsProtonCosTheta; i++) {
+
+			CC1pECalDiff_ProtonCosThetaSlicesPlot[i] = new TH1D("CC1pECalDiff_ProtonCosThetaSlices" + tools.ConvertToString(TwoDArrayNBinsProtonCosTheta[i])+"To"+tools.ConvertToString(TwoDArrayNBinsProtonCosTheta[i+1]) +"Plot",";E_{Cal}^{reco} - E_{Cal}^{true} [GeV]",31,ecal_diff_min,ecal_diff_max);
+			CC1pECalReso_ProtonCosThetaSlicesPlot[i] = new TH1D("CC1pECalReso_ProtonCosThetaSlices" + tools.ConvertToString(TwoDArrayNBinsProtonCosTheta[i])+"To"+tools.ConvertToString(TwoDArrayNBinsProtonCosTheta[i+1]) +"Plot",";(E_{Cal}^{reco} - E_{Cal}^{true})/E_{Cal}^{true} [%]",51,ecal_reso_min,ecal_reso_max);
+		
+		} // End of the loop over MuonMomentum slices
+	
+		//----------------------------------------//
+
+		TH1D* CC1pECalDiff_DeltaPTSlicesPlot[TwoDNBinsDeltaPT];	
+		TH1D* CC1pECalReso_DeltaPTSlicesPlot[TwoDNBinsDeltaPT];	
+
+		TH1D* CC1pThetaZDiff_DeltaPTSlicesPlot[TwoDNBinsDeltaPT];	
+		TH1D* CC1pThetaZReso_DeltaPTSlicesPlot[TwoDNBinsDeltaPT];	
+
+		// Loop over the DeltaPT slices
+		
+		for (int i = 0; i < TwoDNBinsDeltaPT; i++) {
+
+			CC1pThetaZDiff_DeltaPTSlicesPlot[i] = new TH1D("CC1pThetaZDiff_DeltaPTSlices" + tools.ConvertToString(TwoDArrayNBinsDeltaPT[i])+"To"+tools.ConvertToString(TwoDArrayNBinsDeltaPT[i+1]) +"Plot",";#theta_{z}^{reco} - #theta_{z}^{true} [deg]",31,thetaz_diff_min,thetaz_diff_max);
+			CC1pThetaZReso_DeltaPTSlicesPlot[i] = new TH1D("CC1pThetaZReso_DeltaPTSlices" + tools.ConvertToString(TwoDArrayNBinsDeltaPT[i])+"To"+tools.ConvertToString(TwoDArrayNBinsDeltaPT[i+1]) +"Plot",";(#theta_{z}^{reco} - #theta_{z}^{true})/#theta_{z}^{true} [%]",51,thetaz_reso_min,thetaz_reso_max);
+	
+			CC1pECalDiff_DeltaPTSlicesPlot[i] = new TH1D("CC1pECalDiff_DeltaPTSlices" + tools.ConvertToString(TwoDArrayNBinsDeltaPT[i])+"To"+tools.ConvertToString(TwoDArrayNBinsDeltaPT[i+1]) +"Plot",";E_{Cal}^{reco} - E_{Cal}^{true} [GeV]",31,ecal_diff_min,ecal_diff_max);
+			CC1pECalReso_DeltaPTSlicesPlot[i] = new TH1D("CC1pECalReso_DeltaPTSlices" + tools.ConvertToString(TwoDArrayNBinsDeltaPT[i])+"To"+tools.ConvertToString(TwoDArrayNBinsDeltaPT[i+1]) +"Plot",";(E_{Cal}^{reco} - E_{Cal}^{true})/E_{Cal}^{true} [%]",51,ecal_reso_min,ecal_reso_max);
+		
+		} // End of the loop over DeltaPT slices
+	
+		//----------------------------------------//
+
+		TH1D* CC1pECalDiff_DeltaAlphaTSlicesPlot[TwoDNBinsDeltaAlphaT];	
+		TH1D* CC1pECalReso_DeltaAlphaTSlicesPlot[TwoDNBinsDeltaAlphaT];	
+
+		TH1D* CC1pThetaZDiff_DeltaAlphaTSlicesPlot[TwoDNBinsDeltaAlphaT];	
+		TH1D* CC1pThetaZReso_DeltaAlphaTSlicesPlot[TwoDNBinsDeltaAlphaT];	
+
+		// Loop over the DeltaAlphaT slices
+		
+		for (int i = 0; i < TwoDNBinsDeltaAlphaT; i++) {
+
+			CC1pThetaZDiff_DeltaAlphaTSlicesPlot[i] = new TH1D("CC1pThetaZDiff_DeltaAlphaTSlices" + tools.ConvertToString(TwoDArrayNBinsDeltaAlphaT[i])+"To"+tools.ConvertToString(TwoDArrayNBinsDeltaAlphaT[i+1]) +"Plot",";#theta_{z}^{reco} - #theta_{z}^{true} [deg]",31,thetaz_diff_min,thetaz_diff_max);
+			CC1pThetaZReso_DeltaAlphaTSlicesPlot[i] = new TH1D("CC1pThetaZReso_DeltaAlphaTSlices" + tools.ConvertToString(TwoDArrayNBinsDeltaAlphaT[i])+"To"+tools.ConvertToString(TwoDArrayNBinsDeltaAlphaT[i+1]) +"Plot",";(#theta_{z}^{reco} - #theta_{z}^{true})/#theta_{z}^{true} [%]",51,thetaz_reso_min,thetaz_reso_max);
+	
+			CC1pECalDiff_DeltaAlphaTSlicesPlot[i] = new TH1D("CC1pECalDiff_DeltaAlphaTSlices" + tools.ConvertToString(TwoDArrayNBinsDeltaAlphaT[i])+"To"+tools.ConvertToString(TwoDArrayNBinsDeltaAlphaT[i+1]) +"Plot",";E_{Cal}^{reco} - E_{Cal}^{true} [GeV]",31,ecal_diff_min,ecal_diff_max);
+			CC1pECalReso_DeltaAlphaTSlicesPlot[i] = new TH1D("CC1pECalReso_DeltaAlphaTSlices" + tools.ConvertToString(TwoDArrayNBinsDeltaAlphaT[i])+"To"+tools.ConvertToString(TwoDArrayNBinsDeltaAlphaT[i+1]) +"Plot",";(E_{Cal}^{reco} - E_{Cal}^{true})/E_{Cal}^{true} [%]",51,ecal_reso_min,ecal_reso_max);
+		
+		} // End of the loop over DeltaAlphaT slices
+
+		//----------------------------------------//
+
+		TH1D* CC1pECalDiff_DeltaPnSlicesPlot[TwoDNBinsDeltaPn];	
+		TH1D* CC1pECalReso_DeltaPnSlicesPlot[TwoDNBinsDeltaPn];	
+
+		TH1D* CC1pThetaZDiff_DeltaPnSlicesPlot[TwoDNBinsDeltaPn];	
+		TH1D* CC1pThetaZReso_DeltaPnSlicesPlot[TwoDNBinsDeltaPn];	
+
+		// Loop over the DeltaPn slices
+		
+		for (int i = 0; i < TwoDNBinsDeltaPn; i++) {
+
+			CC1pThetaZDiff_DeltaPnSlicesPlot[i] = new TH1D("CC1pThetaZDiff_DeltaPnSlices" + tools.ConvertToString(TwoDArrayNBinsDeltaPn[i])+"To"+tools.ConvertToString(TwoDArrayNBinsDeltaPn[i+1]) +"Plot",";#theta_{z}^{reco} - #theta_{z}^{true} [deg]",31,thetaz_diff_min,thetaz_diff_max);
+			CC1pThetaZReso_DeltaPnSlicesPlot[i] = new TH1D("CC1pThetaZReso_DeltaPnSlices" + tools.ConvertToString(TwoDArrayNBinsDeltaPn[i])+"To"+tools.ConvertToString(TwoDArrayNBinsDeltaPn[i+1]) +"Plot",";(#theta_{z}^{reco} - #theta_{z}^{true})/#theta_{z}^{true} [%]",51,thetaz_reso_min,thetaz_reso_max);
+	
+			CC1pECalDiff_DeltaPnSlicesPlot[i] = new TH1D("CC1pECalDiff_DeltaPnSlices" + tools.ConvertToString(TwoDArrayNBinsDeltaPn[i])+"To"+tools.ConvertToString(TwoDArrayNBinsDeltaPn[i+1]) +"Plot",";E_{Cal}^{reco} - E_{Cal}^{true} [GeV]",31,ecal_diff_min,ecal_diff_max);
+			CC1pECalReso_DeltaPnSlicesPlot[i] = new TH1D("CC1pECalReso_DeltaPnSlices" + tools.ConvertToString(TwoDArrayNBinsDeltaPn[i])+"To"+tools.ConvertToString(TwoDArrayNBinsDeltaPn[i+1]) +"Plot",";(E_{Cal}^{reco} - E_{Cal}^{true})/E_{Cal}^{true} [%]",51,ecal_reso_min,ecal_reso_max);
+		
+		} // End of the loop over DeltaPn slices
+	
+		//----------------------------------------//
+
+		TH1D* CC1pECalDiff_DeltaAlpha3DSlicesPlot[TwoDNBinsDeltaAlpha3D];	
+		TH1D* CC1pECalReso_DeltaAlpha3DSlicesPlot[TwoDNBinsDeltaAlpha3D];	
+
+		TH1D* CC1pThetaZDiff_DeltaAlpha3DSlicesPlot[TwoDNBinsDeltaAlpha3D];	
+		TH1D* CC1pThetaZReso_DeltaAlpha3DSlicesPlot[TwoDNBinsDeltaAlpha3D];	
+
+		// Loop over the DeltaAlpha3D slices
+		
+		for (int i = 0; i < TwoDNBinsDeltaAlpha3D; i++) {
+
+			CC1pThetaZDiff_DeltaAlpha3DSlicesPlot[i] = new TH1D("CC1pThetaZDiff_DeltaAlpha3DSlices" + tools.ConvertToString(TwoDArrayNBinsDeltaAlpha3D[i])+"To"+tools.ConvertToString(TwoDArrayNBinsDeltaAlpha3D[i+1]) +"Plot",";#theta_{z}^{reco} - #theta_{z}^{true} [deg]",31,thetaz_diff_min,thetaz_diff_max);
+			CC1pThetaZReso_DeltaAlpha3DSlicesPlot[i] = new TH1D("CC1pThetaZReso_DeltaAlpha3DSlices" + tools.ConvertToString(TwoDArrayNBinsDeltaAlpha3D[i])+"To"+tools.ConvertToString(TwoDArrayNBinsDeltaAlpha3D[i+1]) +"Plot",";(#theta_{z}^{reco} - #theta_{z}^{true})/#theta_{z}^{true} [%]",51,thetaz_reso_min,thetaz_reso_max);
+	
+			CC1pECalDiff_DeltaAlpha3DSlicesPlot[i] = new TH1D("CC1pECalDiff_DeltaAlpha3DSlices" + tools.ConvertToString(TwoDArrayNBinsDeltaAlpha3D[i])+"To"+tools.ConvertToString(TwoDArrayNBinsDeltaAlpha3D[i+1]) +"Plot",";E_{Cal}^{reco} - E_{Cal}^{true} [GeV]",31,ecal_diff_min,ecal_diff_max);
+			CC1pECalReso_DeltaAlpha3DSlicesPlot[i] = new TH1D("CC1pECalReso_DeltaAlpha3DSlices" + tools.ConvertToString(TwoDArrayNBinsDeltaAlpha3D[i])+"To"+tools.ConvertToString(TwoDArrayNBinsDeltaAlpha3D[i+1]) +"Plot",";(E_{Cal}^{reco} - E_{Cal}^{true})/E_{Cal}^{true} [%]",51,ecal_reso_min,ecal_reso_max);
+		
+		} // End of the loop over DeltaAlphaT slices
+
+
+		//----------------------------------------//
+
+		// 2D plots
+
+		// Reco
+
+                TH2D* POTScaledCC1pRecoThetaZRecoECalPlot2D = new TH2D("POTScaledCC1pRecoThetaZRecoECalPlot2D",";#theta_{z}^{reco} [deg];E_{Cal}^{reco} [GeV]",
+                        NBinsThetaZ,ArrayNBinsThetaZ,20,ArrayNBinsECal[0],ArrayNBinsECal[NBinsECal]);
+
+                TH2D* POTScaledCC1pRecoECalTrueECalPlot2D = new TH2D("POTScaledCC1pRecoECalTrueECalPlot2D",";E_{Cal}^{true} [GeV];E_{Cal}^{reco} [GeV]",
+                        20,ArrayNBinsECal[0],ArrayNBinsECal[NBinsECal],20,ArrayNBinsECal[0],ArrayNBinsECal[NBinsECal]);
+
+                TH2D* POTScaledCC1pRecoECalTrueEnuPlot2D = new TH2D("POTScaledCC1pRecoECalTrueEnuPlot2D",";E_{#nu}^{true} [GeV];E_{Cal}^{reco} [GeV]",
+                        20,ArrayNBinsECal[0],ArrayNBinsECal[NBinsECal],20,ArrayNBinsECal[0],ArrayNBinsECal[NBinsECal]);
+
+		// True
+
+                TH2D* POTScaledCC1pTrueThetaZTrueECalPlot2D = new TH2D("POTScaledCC1pTrueThetaZTrueECalPlot2D",";#theta_{z}^{true} [deg];E_{Cal}^{true} [GeV]",
+                        NBinsThetaZ,ArrayNBinsThetaZ,20,ArrayNBinsECal[0],ArrayNBinsECal[NBinsECal]);
+
+                TH2D* POTScaledCC1pTrueThetaZTrueEnuPlot2D = new TH2D("POTScaledCC1pTrueThetaZTrueEnuPlot2D",";#theta_{z}^{true} [deg];E_{#nu}^{true} [GeV]",
+                        NBinsThetaZ,ArrayNBinsThetaZ,20,ArrayNBinsECal[0],ArrayNBinsECal[NBinsECal]);
+
 		//----------------------------------------//
 		//----------------------------------------//
 
@@ -419,11 +581,15 @@ void reco_selection::Loop() {
 
 			// -----------------------------------------------------------------------------------------------------------------------------
 
-			// Calorimetric Energy Reconstruction
+			// Kinematic variables
 	
 			double ECal = Reco_ECal->at(0);
-			
 			double ThetaZ = Reco_ThetaZ->at(0);
+
+			double DeltaPT = Reco_Pt->at(0);
+			double DeltaAlphaT = Reco_DeltaAlphaT->at(0);
+			double DeltaPn = Reco_Pn->at(0);
+			double DeltaAlpha3D = Reco_DeltaAlpha3Dq->at(0);
 
 			// -------------------------------------------------------------------------------------------------------------------------
 			
@@ -440,12 +606,24 @@ void reco_selection::Loop() {
 				ECal = reco_stv_tool.ReturnECal();
 				ThetaZ = reco_stv_tool.ReturnThetaZ();
 
+				DeltaPT = reco_stv_tool.ReturnPt();
+				DeltaAlphaT = reco_stv_tool.ReturnDeltaAlphaT();
+				DeltaPn = reco_stv_tool.ReturnPn();
+				DeltaAlpha3D = reco_stv_tool.ReturnDeltaAlpha3Dq();
+
 			}
 
 			// Underflow / overflow
 			if (ThetaZ < ArrayNBinsThetaZ[0]) { ThetaZ = (ArrayNBinsThetaZ[0] + ArrayNBinsThetaZ[1])/2.; }
 			if (ThetaZ > ArrayNBinsThetaZ[NBinsThetaZ]) { ThetaZ = (ArrayNBinsThetaZ[NBinsThetaZ] + ArrayNBinsThetaZ[NBinsThetaZ-1])/2.; }
-	
+
+			if (DeltaPT > ArrayNBinsDeltaPT[NBinsDeltaPT]) { DeltaPT = 0.5 * (ArrayNBinsDeltaPT[NBinsDeltaPT] + ArrayNBinsDeltaPT[NBinsDeltaPT-1]); }
+
+			if (DeltaPn > ArrayNBinsDeltaPn[NBinsDeltaPn]) { DeltaPn = 0.5 * (ArrayNBinsDeltaPn[NBinsDeltaPn] + ArrayNBinsDeltaPn[NBinsDeltaPn-1]); }
+
+			if (ECal > ArrayNBinsECal[NBinsECal]) { ECal = 0.5 * (ArrayNBinsECal[NBinsECal] + ArrayNBinsECal[NBinsECal-1]); }
+			if (ECal < ArrayNBinsECal[0]) { ECal = 0.5 * (ArrayNBinsECal[0] + ArrayNBinsECal[1]); }	
+
 			// ----------------------------------------------------------------------------------------------------------------------------
 			// ---------------------------------------------------------------------------------------------------------------------------
 
@@ -488,6 +666,11 @@ void reco_selection::Loop() {
 			double true_ECal = -1;
 			double true_ThetaZ = -1;
 
+			double true_DeltaPT = -1;
+			double true_DeltaAlphaT = -1;
+			double true_DeltaPn = -1;
+			double true_DeltaAlpha3D = -1;
+
 			// Only for MC to obtain true vales			
 			
 			if (
@@ -499,10 +682,25 @@ void reco_selection::Loop() {
 				true_ECal = True_ECal->at(0);
 				true_ThetaZ = True_ThetaZ->at(0);
 	
+				true_DeltaPT = True_Pt->at(0);
+				true_DeltaAlphaT = True_DeltaAlphaT->at(0);
+				true_DeltaPn = True_Pn->at(0);
+				true_DeltaAlpha3D = True_DeltaAlpha3Dq->at(0);
+
                         	// Underflow / overflow
                                 if (true_ThetaZ < ArrayNBinsThetaZ[0]) { true_ThetaZ = (ArrayNBinsThetaZ[0] + ArrayNBinsThetaZ[1])/2.; }
                                 if (true_ThetaZ > ArrayNBinsThetaZ[NBinsThetaZ]) { true_ThetaZ = (ArrayNBinsThetaZ[NBinsThetaZ] + ArrayNBinsThetaZ[NBinsThetaZ-1])/2.; }
-                        	
+                        
+				if (true_DeltaPT > ArrayNBinsDeltaPT[NBinsDeltaPT]) { true_DeltaPT = 0.5 * (ArrayNBinsDeltaPT[NBinsDeltaPT] + ArrayNBinsDeltaPT[NBinsDeltaPT-1]); }
+
+				if (true_DeltaPn > ArrayNBinsDeltaPn[NBinsDeltaPn]) { true_DeltaPn = 0.5 * (ArrayNBinsDeltaPn[NBinsDeltaPn] + ArrayNBinsDeltaPn[NBinsDeltaPn-1]); }
+
+	                        if (true_ECal > ArrayNBinsECal[NBinsECal]) { true_ECal = 0.5 * (ArrayNBinsECal[NBinsECal] + ArrayNBinsECal[NBinsECal-1]); }
+        	                if (true_ECal < ArrayNBinsECal[0]) { true_ECal = 0.5 * (ArrayNBinsECal[0] + ArrayNBinsECal[1]); }
+	
+                                if (True_Ev > ArrayNBinsECal[NBinsECal]) { True_Ev = 0.5 * (ArrayNBinsECal[NBinsECal] + ArrayNBinsECal[NBinsECal-1]); }
+                                if (True_Ev < ArrayNBinsECal[0]) { True_Ev = 0.5 * (ArrayNBinsECal[0] + ArrayNBinsECal[1]); }
+
 			} // End of if statement: Only for MC to obtain true vales
 
 			//----------------------------------------//
@@ -571,20 +769,32 @@ void reco_selection::Loop() {
 					POTScaledCC1pRecoMuonCosThetaPlot2D->Fill(True_CandidateMu_CosTheta->at(0),reco_Pmu_cos_theta,weight);
 					POTScaledCC1pRecoMuonCosThetaSingleBinPlot2D->Fill(0.5,0.5,weight);
 					POTScaledCC1pRecoThetaZPlot2D->Fill(true_ThetaZ,ThetaZ,weight);
-					
-					//-----------------------------------------------------------------------------
+
+					//------------------------------//
 
 					// Atmospherics
 				
 					double diff = ThetaZ - true_ThetaZ; // deg
-					double reso = diff / true_ThetaZ * 100.; // deg
+					double reso = diff / true_ThetaZ * 100.; // %
+
+					double ECal_diff = ECal - true_ECal; // GeV
+					double ECal_reso = ECal_diff / true_ECal * 100.; // %
+
+					//------------------------------//
 
 					// ECal slices
 
 					int ECalTwoDIndex = tools.ReturnIndex(ECal, TwoDArrayNBinsECal);
+					int TrueECalTwoDIndex = tools.ReturnIndex(true_ECal, TwoDArrayNBinsECal);
+					int TrueEnuTwoDIndex = tools.ReturnIndex(True_Ev, TwoDArrayNBinsECal);
 
-					CC1pThetaZDiff_ECalSlicesPlot[ECalTwoDIndex]->Fill(diff,weight);	
+					CC1pThetaZ_ECalSlicesPlot[ECalTwoDIndex]->Fill(ThetaZ,weight);	
+					CC1pTrueThetaZ_TrueECalSlicesPlot[TrueECalTwoDIndex]->Fill(true_ThetaZ,weight);	
+					CC1pTrueThetaZ_TrueEnuSlicesPlot[TrueEnuTwoDIndex]->Fill(true_ThetaZ,weight);	
 					CC1pThetaZReso_ECalSlicesPlot[ECalTwoDIndex]->Fill(reso,weight);
+					CC1pThetaZDiff_ECalSlicesPlot[ECalTwoDIndex]->Fill(diff,weight);	
+	
+					//------------------------------//
 
 					// MuonMomentum slices
 
@@ -593,12 +803,103 @@ void reco_selection::Loop() {
 					CC1pThetaZDiff_MuonMomentumSlicesPlot[MuonMomentumTwoDIndex]->Fill(diff,weight);	
 					CC1pThetaZReso_MuonMomentumSlicesPlot[MuonMomentumTwoDIndex]->Fill(reso,weight);
 
+					CC1pECalDiff_MuonMomentumSlicesPlot[MuonMomentumTwoDIndex]->Fill(ECal_diff,weight);	
+					CC1pECalReso_MuonMomentumSlicesPlot[MuonMomentumTwoDIndex]->Fill(ECal_reso,weight);
+
+					//------------------------------//
+
+					// MuonCosTheta slices
+
+					int MuonCosThetaTwoDIndex = tools.ReturnIndex(reco_Pmu_cos_theta,TwoDArrayNBinsMuonCosTheta);
+
+					CC1pECalDiff_MuonCosThetaSlicesPlot[MuonCosThetaTwoDIndex]->Fill(ECal_diff,weight);	
+					CC1pECalReso_MuonCosThetaSlicesPlot[MuonCosThetaTwoDIndex]->Fill(ECal_reso,weight);
+
+					//------------------------------//
+
 					// ProtonMomentum slices
 
 					int ProtonMomentumTwoDIndex = tools.ReturnIndex(reco_Pp, TwoDArrayNBinsProtonMomentum);
 
 					CC1pThetaZDiff_ProtonMomentumSlicesPlot[ProtonMomentumTwoDIndex]->Fill(diff,weight);	
 					CC1pThetaZReso_ProtonMomentumSlicesPlot[ProtonMomentumTwoDIndex]->Fill(reso,weight);
+
+					CC1pECalDiff_ProtonMomentumSlicesPlot[ProtonMomentumTwoDIndex]->Fill(ECal_diff,weight);	
+					CC1pECalReso_ProtonMomentumSlicesPlot[ProtonMomentumTwoDIndex]->Fill(ECal_reso,weight);
+
+					//------------------------------//
+
+					// ProtonCosTheta slices
+
+					int ProtonCosThetaTwoDIndex = tools.ReturnIndex(reco_Pp_cos_theta,TwoDArrayNBinsProtonCosTheta);
+
+					CC1pECalDiff_ProtonCosThetaSlicesPlot[ProtonCosThetaTwoDIndex]->Fill(ECal_diff,weight);	
+					CC1pECalReso_ProtonCosThetaSlicesPlot[ProtonCosThetaTwoDIndex]->Fill(ECal_reso,weight);
+
+					//------------------------------//
+
+					// DeltaPT slices
+
+					int DeltaPTTwoDIndex = tools.ReturnIndex(DeltaPT, TwoDArrayNBinsDeltaPT);
+
+					CC1pThetaZDiff_DeltaPTSlicesPlot[DeltaPTTwoDIndex]->Fill(diff,weight);	
+					CC1pThetaZReso_DeltaPTSlicesPlot[DeltaPTTwoDIndex]->Fill(reso,weight);
+
+					CC1pECalDiff_DeltaPTSlicesPlot[DeltaPTTwoDIndex]->Fill(ECal_diff,weight);	
+					CC1pECalReso_DeltaPTSlicesPlot[DeltaPTTwoDIndex]->Fill(ECal_reso,weight);
+
+					//------------------------------//
+
+					// DeltaAlphaT slices
+
+					int DeltaAlphaTTwoDIndex = tools.ReturnIndex(DeltaAlphaT, TwoDArrayNBinsDeltaAlphaT);
+
+					CC1pThetaZDiff_DeltaAlphaTSlicesPlot[DeltaAlphaTTwoDIndex]->Fill(diff,weight);	
+					CC1pThetaZReso_DeltaAlphaTSlicesPlot[DeltaAlphaTTwoDIndex]->Fill(reso,weight);
+	
+					CC1pECalDiff_DeltaAlphaTSlicesPlot[DeltaAlphaTTwoDIndex]->Fill(ECal_diff,weight);	
+					CC1pECalReso_DeltaAlphaTSlicesPlot[DeltaAlphaTTwoDIndex]->Fill(ECal_reso,weight);
+
+					//------------------------------//
+
+					// DeltaPn slices
+
+					int DeltaPnTwoDIndex = tools.ReturnIndex(DeltaPn, TwoDArrayNBinsDeltaPn);
+
+					CC1pThetaZDiff_DeltaPnSlicesPlot[DeltaPnTwoDIndex]->Fill(diff,weight);	
+					CC1pThetaZReso_DeltaPnSlicesPlot[DeltaPnTwoDIndex]->Fill(reso,weight);
+
+					CC1pECalDiff_DeltaPnSlicesPlot[DeltaPnTwoDIndex]->Fill(ECal_diff,weight);	
+					CC1pECalReso_DeltaPnSlicesPlot[DeltaPnTwoDIndex]->Fill(ECal_reso,weight);
+
+					//------------------------------//
+
+					// DeltaAlpha3D slices
+
+					int DeltaAlpha3DTwoDIndex = tools.ReturnIndex(DeltaAlpha3D, TwoDArrayNBinsDeltaAlpha3D);
+
+					CC1pThetaZDiff_DeltaAlpha3DSlicesPlot[DeltaAlpha3DTwoDIndex]->Fill(diff,weight);	
+					CC1pThetaZReso_DeltaAlpha3DSlicesPlot[DeltaAlpha3DTwoDIndex]->Fill(reso,weight);
+
+					CC1pECalDiff_DeltaAlpha3DSlicesPlot[DeltaAlpha3DTwoDIndex]->Fill(ECal_diff,weight);	
+					CC1pECalReso_DeltaAlpha3DSlicesPlot[DeltaAlpha3DTwoDIndex]->Fill(ECal_reso,weight);
+
+					//------------------------------//
+
+					// 2D plots
+
+					// Reco
+
+					POTScaledCC1pRecoThetaZRecoECalPlot2D->Fill(ThetaZ,ECal,weight);
+					POTScaledCC1pRecoECalTrueECalPlot2D->Fill(true_ECal,ECal,weight);
+					POTScaledCC1pRecoECalTrueEnuPlot2D->Fill(True_Ev,ECal,weight);
+				
+					// True
+					
+					POTScaledCC1pTrueThetaZTrueECalPlot2D->Fill(true_ThetaZ,true_ECal,weight);
+					POTScaledCC1pTrueThetaZTrueEnuPlot2D->Fill(true_ThetaZ,True_Ev,weight);
+
+					//------------------------------//
 
 
 				} // End of the CC1p signal
