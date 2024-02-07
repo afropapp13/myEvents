@@ -126,9 +126,30 @@ void true_selection::Loop() {
 
 		//--------------------------------------------------//
 
-		// For detector variations, the eventweight weights are -1., set them back to 1.
+		// For detector variations runs 1-3, the eventweight weights are -1., set them back to 1.
 		if (Weight == -1.) { Weight = 1.; }
 		if (T2KWeight == -1.) { T2KWeight = 1.; }
+			
+		// For detector variations runs 4-5, the event weights are NOT -1
+		// However setting the weights to 1 for consistency
+		if (
+			string(fWhichSample).find("CV") != std::string::npos || 
+			string(fWhichSample).find("CVextra") != std::string::npos || 
+			string(fWhichSample).find("LYDown") != std::string::npos || 
+			string(fWhichSample).find("LYRayleigh") != std::string::npos || 
+			string(fWhichSample).find("LYAttenuation") != std::string::npos || 
+			string(fWhichSample).find("SCE") != std::string::npos || 
+			string(fWhichSample).find("Recombination2") != std::string::npos || 
+			string(fWhichSample).find("X") != std::string::npos || 
+			string(fWhichSample).find("YZ") != std::string::npos || 
+			string(fWhichSample).find("ThetaXZ") != std::string::npos || 
+			string(fWhichSample).find("ThetaYZ") != std::string::npos
+		) {
+
+			Weight = 1.;
+			T2KWeight = 1.;
+				
+		}
 
 		if (Weight <= 0 || Weight > 30) { continue; }
 		if (T2KWeight <= 0 || T2KWeight > 30) { continue; }		
