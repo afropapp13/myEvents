@@ -16,8 +16,8 @@
 #include <string>
 #include <sstream>
 
-#include "ubana/myClasses/Tools.h"
-#include "ubana/myClasses/Constants.h"
+#include "../myClasses/Tools.h"
+#include "../myClasses/Constants.h"
 
 using namespace Constants;
 using namespace std;
@@ -71,14 +71,14 @@ void pot_norm_event_rates() {
 
 	// ----------------------------------------------------------------------------------------------------------------------------------------
 
-	const std::vector<int> Colors{kBlack,610,410,kRed+1,kGreen+3,kBlue};
+	const std::vector<int> Colors{kOrange+7,kAzure-4,kBlack,610,410,kRed+1,kGreen+3,kBlue};
 
 	// ----------------------------------------------------------------------------------------------------------------------------------------
 
 //	TString Cuts = "_NoCuts";
 //	TString Cuts = "_NoCuts_NuScore";
 //	TString Cuts = "_NoCuts_NuScore_ThreePlaneLogChi2";
-	TString Cuts = "_NoCuts_PID_NuScore";
+	TString Cuts = "_NoCuts_PID_NuScore_CRT";
 
 	// -----------------------------------------------------------------------------------------------------------------------------
 
@@ -96,10 +96,8 @@ void pot_norm_event_rates() {
 
 	// -----------------------------------------------------------------------------------------------------------------------------
 
-	FileNames.push_back("Overlay9_Run1"); Label.push_back("Overlay9 Run1"); 
-	FileNames.push_back("Overlay9_Run1_CV"); Label.push_back("Overlay9 Run1 CV");
-	FileNames.push_back("Overlay9_Run3"); Label.push_back("Overlay9 Run3"); 
-	FileNames.push_back("Overlay9_Run3_CV"); Label.push_back("Overlay9 Run3 CV");
+	FileNames.push_back("Overlay9_Combined"); Label.push_back("Overlay9 Run1"); 
+	FileNames.push_back("Overlay9_Combined_CV"); Label.push_back("Overlay9 Run1 CV");
 
 	const int NFiles = FileNames.size();
 
