@@ -12,6 +12,7 @@
 	WhichSampleArray.push_back("Overlay9NuWro_Run4b");
 	WhichSampleArray.push_back("Overlay9NuWro_Run4c");
 	WhichSampleArray.push_back("Overlay9NuWro_Run4d");
+	WhichSampleArray.push_back("Overlay9NuWro_Run5");
 	WhichSampleArray.push_back("Overlay9NuWro_Combined");
 
 	// -----------------------------------------------------------------------------------------

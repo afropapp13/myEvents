@@ -73,6 +73,11 @@ void true_selection::Loop() {
 	TH1D* TrueMuonCosThetaPlot[NInte];
 	TH1D* TrueMuonCosThetaSingleBinPlot[NInte];
 	TH1D* TrueThetaZPlot[NInte];
+	TH1D* TrueCosThetaZPlot[NInte];
+
+	// 2D plots
+	TH1D* TrueThetaZ_InECalTwoDPlot[NInte][TwoDNBinsECal];
+	TH1D* SerialTrueThetaZ_InECalPlot[NInte];
 
 	//--------------------------------------------------//
 
@@ -87,6 +92,17 @@ void true_selection::Loop() {
 		TrueMuonCosThetaPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueMuonCosThetaPlot",LabelXAxisMuonCosTheta,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta);
 		TrueMuonCosThetaSingleBinPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueMuonCosThetaSingleBinPlot",LabelXAxisMuonCosTheta,1,0.,1.);
 		TrueThetaZPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueThetaZPlot",LabelXAxisThetaZ,NBinsThetaZ,ArrayNBinsThetaZ);
+		TrueCosThetaZPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueCosThetaZPlot",LabelXAxisCosThetaZ,NBinsCosThetaZ,ArrayNBinsCosThetaZ);
+
+
+		for (int WhichECal = 0; WhichECal < TwoDNBinsECal; WhichECal++) {
+
+			TString ThetaZTwoDInECalLabel = "ThetaZ_ECal_"+tools.ConvertToString(TwoDArrayNBinsECal[WhichECal])+"To"+tools.ConvertToString(TwoDArrayNBinsECal[WhichECal+1])+"Plot";			
+			TrueThetaZ_InECalTwoDPlot[inte][WhichECal] = new TH1D(InteractionLabels[inte]+"True"+ThetaZTwoDInECalLabel,LabelXAxisThetaZ,TwoDArrayNBinsThetaZInECalSlices[WhichECal].size()-1,&TwoDArrayNBinsThetaZInECalSlices[WhichECal][0]);
+
+		}	
+
+		SerialTrueThetaZ_InECalPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueSerialThetaZ_ECalPlot",LabelXAxisThetaZ,tools.Return2DNBins(TwoDArrayNBinsThetaZInECalSlices),&tools.Return2DBinIndices(TwoDArrayNBinsThetaZInECalSlices)[0]);
 
 		//--------------------------------------------------//
 
@@ -269,11 +285,8 @@ void true_selection::Loop() {
 			double TrueProton_E_GeV = TMath::Sqrt( TMath::Power(TrueProtonMomentum_GeV,2.) + TMath::Power(ProtonMass_GeV,2.) ); // GeV
 
 			double TrueDeltaThetaProtonMuon_Deg = True_DeltaTheta->at(0);
-			double TrueThetaZ = True_ThetaZ->at(0);
-
-                       	// Underflow / overflow
-                        if (TrueThetaZ < ArrayNBinsThetaZ[0]) { TrueThetaZ = (ArrayNBinsThetaZ[0] + ArrayNBinsThetaZ[1])/2.; }
-                        if (TrueThetaZ > ArrayNBinsThetaZ[NBinsThetaZ]) { TrueThetaZ = (ArrayNBinsThetaZ[NBinsThetaZ] + ArrayNBinsThetaZ[NBinsThetaZ-1])/2.; }
+			double TrueThetaZ = True_ThetaZ->at(0); // deg
+			double TrueCosThetaZ = TMath::Cos(TrueThetaZ * TMath::Pi() / 180.);
         
 			// Reconstructed calorimetric energy using true level info / MCParticles
 
@@ -289,7 +302,14 @@ void true_selection::Loop() {
 
 			double TruePn = True_Pn->at(0);
 
-			//--------------------------------------------------//	
+                       	// Underflow / overflow
+                        if (TrueThetaZ < ArrayNBinsThetaZ[0]) { TrueThetaZ = (ArrayNBinsThetaZ[0] + ArrayNBinsThetaZ[1])/2.; }
+                        if (TrueThetaZ > ArrayNBinsThetaZ[NBinsThetaZ]) { TrueThetaZ = (ArrayNBinsThetaZ[NBinsThetaZ] + ArrayNBinsThetaZ[NBinsThetaZ-1])/2.; }
+
+                        if (TrueRecoECal < ArrayNBinsECal[0]) { TrueRecoECal = (ArrayNBinsECal[0] + ArrayNBinsECal[1])/2.; }
+                        if (TrueRecoECal > ArrayNBinsECal[NBinsECal]) { TrueThetaZ = (ArrayNBinsECal[NBinsECal] + ArrayNBinsECal[NBinsECal-1])/2.; }
+
+ 			//--------------------------------------------------//	
 
 			// True Vertex
 
@@ -352,16 +372,31 @@ void true_selection::Loop() {
 
 					//----------------------------------------//	
 
+					// 2D indices
+
+					int ECalTwoDIndex = tools.ReturnIndex(TrueRecoECal, TwoDArrayNBinsECal);
+					int SerialThetaZInECalIndex = tools.ReturnIndexIn2DList(TwoDArrayNBinsThetaZInECalSlices,ECalTwoDIndex,TrueRecoECal);
+
+					//----------------------------------------//	
+
 					// 1D analysis		
 
 					TrueMuonCosThetaPlot[0]->Fill(TrueMuonCosTheta,weight);
 					TrueMuonCosThetaSingleBinPlot[0]->Fill(0.5,weight);
 					TrueThetaZPlot[0]->Fill(TrueThetaZ,weight);
-					
+					TrueCosThetaZPlot[0]->Fill(TrueCosThetaZ,weight);
+
+					TrueThetaZ_InECalTwoDPlot[0][ECalTwoDIndex]->Fill(TrueThetaZ,weight);
+					SerialTrueThetaZ_InECalPlot[0]->Fill(SerialThetaZInECalIndex,weight);								
+
 					TrueMuonCosThetaPlot[genie_mode]->Fill(TrueMuonCosTheta,weight);
 					TrueMuonCosThetaSingleBinPlot[genie_mode]->Fill(0.5,weight);
 					TrueThetaZPlot[genie_mode]->Fill(TrueThetaZ,weight);
-					
+					TrueCosThetaZPlot[genie_mode]->Fill(TrueCosThetaZ,weight);
+			
+					TrueThetaZ_InECalTwoDPlot[genie_mode][ECalTwoDIndex]->Fill(TrueThetaZ,weight);
+					SerialTrueThetaZ_InECalPlot[genie_mode]->Fill(SerialThetaZInECalIndex,weight);								
+
 					//----------------------------------------//									
 
 					// 2D plots
