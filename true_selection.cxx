@@ -375,7 +375,7 @@ void true_selection::Loop() {
 					// 2D indices
 
 					int ECalTwoDIndex = tools.ReturnIndex(TrueRecoECal, TwoDArrayNBinsECal);
-					int SerialThetaZInECalIndex = tools.ReturnIndexIn2DList(TwoDArrayNBinsThetaZInECalSlices,ECalTwoDIndex,TrueRecoECal);
+					int SerialThetaZInECalIndex = tools.ReturnIndexIn2DList(TwoDArrayNBinsThetaZInECalSlices,ECalTwoDIndex,TrueThetaZ);
 
 					//----------------------------------------//	
 

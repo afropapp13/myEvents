@@ -32,7 +32,11 @@ void topological_breakdown(TString BaseMC = "") {
 	PlotNames.push_back("RecoMuonCosThetaSingleBinPlot");	
 	PlotNames.push_back("RecoThetaZPlot");	
 	PlotNames.push_back("RecoCosThetaZPlot");	
-
+	PlotNames.push_back("RecoThetaZ_ECal_0_00To0_50Plot");	
+	PlotNames.push_back("RecoThetaZ_ECal_0_50To0_80Plot");	
+	PlotNames.push_back("RecoThetaZ_ECal_0_80To2_00Plot");	
+	PlotNames.push_back("RecoSerialThetaZ_ECalPlot");	
+	
 	const int N1DPlots = PlotNames.size();
 	cout << "Number of 1D Plots = " << N1DPlots << endl;
 

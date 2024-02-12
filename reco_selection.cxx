@@ -222,16 +222,16 @@ void reco_selection::Loop() {
 			CC1pTrueThetaZ_TrueEnuSlicesPlot[iecal] = new TH1D("CC1pTrueThetaZ_TrueEnuSlices" + tools.ConvertToString(TwoDArrayNBinsECal[iecal])+"To"+tools.ConvertToString(TwoDArrayNBinsECal[iecal+1]) +"Plot",";#theta_{z}^{true} [deg]",30,0,180);
 
 			TString ThetaZTwoDInECalLabel = "ThetaZ_ECal_"+tools.ConvertToString(TwoDArrayNBinsECal[iecal])+"To"+tools.ConvertToString(TwoDArrayNBinsECal[iecal+1])+"Plot";			
-			RecoThetaZ_ECalSlicesPlot[iecal] = new TH1D("Reco" + ThetaZTwoDInECalLabel,LabelXAxisThetaZ,NBinsThetaZ,ArrayNBinsThetaZ);
-			CC1pRecoThetaZ_ECalSlicesPlot[iecal] = new TH1D("CC1pReco" + ThetaZTwoDInECalLabel,LabelXAxisThetaZ,NBinsThetaZ,ArrayNBinsThetaZ);	
-			CC1pTrueThetaZ_ECalSlicesPlot[iecal] = new TH1D("CC1pTrue" + ThetaZTwoDInECalLabel,LabelXAxisThetaZ,NBinsThetaZ,ArrayNBinsThetaZ);
-			CC1pRecoThetaZ_ECalSlicesPlot2D[iecal] = new TH2D("CC1pReco" + ThetaZTwoDInECalLabel + "2D",LabelXAxisThetaZ2D,NBinsThetaZ,ArrayNBinsThetaZ,NBinsThetaZ,ArrayNBinsThetaZ);
-			POTScaledCC1pRecoThetaZ_ECalSlicesPlot2D[iecal] = new TH2D("POTScaledCC1pReco" + ThetaZTwoDInECalLabel + "2D",LabelXAxisThetaZ2D,NBinsThetaZ,ArrayNBinsThetaZ,NBinsThetaZ,ArrayNBinsThetaZ);
-			NonCC1pRecoThetaZ_ECalSlicesPlot[iecal] = new TH1D("NonCC1pReco" + ThetaZTwoDInECalLabel,LabelXAxisThetaZ,NBinsThetaZ,ArrayNBinsThetaZ);
-			CCQERecoThetaZ_ECalSlicesPlot[iecal] = new TH1D("CCQEReco" + ThetaZTwoDInECalLabel,LabelXAxisThetaZ,NBinsThetaZ,ArrayNBinsThetaZ);
-			CCMECRecoThetaZ_ECalSlicesPlot[iecal] = new TH1D("CCMECReco" + ThetaZTwoDInECalLabel,LabelXAxisThetaZ,NBinsThetaZ,ArrayNBinsThetaZ);
-			CCRESRecoThetaZ_ECalSlicesPlot[iecal] = new TH1D("CCRESReco" + ThetaZTwoDInECalLabel,LabelXAxisThetaZ,NBinsThetaZ,ArrayNBinsThetaZ);
-			CCDISRecoThetaZ_ECalSlicesPlot[iecal] = new TH1D("CCDISReco" + ThetaZTwoDInECalLabel,LabelXAxisThetaZ,NBinsThetaZ,ArrayNBinsThetaZ);
+			RecoThetaZ_ECalSlicesPlot[iecal] = new TH1D("Reco" + ThetaZTwoDInECalLabel,LabelXAxisThetaZ,TwoDArrayNBinsThetaZInECalSlices[iecal].size()-1,&TwoDArrayNBinsThetaZInECalSlices[iecal][0]);
+			CC1pRecoThetaZ_ECalSlicesPlot[iecal] = new TH1D("CC1pReco" + ThetaZTwoDInECalLabel,LabelXAxisThetaZ,TwoDArrayNBinsThetaZInECalSlices[iecal].size()-1,&TwoDArrayNBinsThetaZInECalSlices[iecal][0]);	
+			CC1pTrueThetaZ_ECalSlicesPlot[iecal] = new TH1D("CC1pTrue" + ThetaZTwoDInECalLabel,LabelXAxisThetaZ,TwoDArrayNBinsThetaZInECalSlices[iecal].size()-1,&TwoDArrayNBinsThetaZInECalSlices[iecal][0]);
+			CC1pRecoThetaZ_ECalSlicesPlot2D[iecal] = new TH2D("CC1pReco" + ThetaZTwoDInECalLabel + "2D",LabelXAxisThetaZ2D,TwoDArrayNBinsThetaZInECalSlices[iecal].size()-1,&TwoDArrayNBinsThetaZInECalSlices[iecal][0],TwoDArrayNBinsThetaZInECalSlices[iecal].size()-1,&TwoDArrayNBinsThetaZInECalSlices[iecal][0]);
+			POTScaledCC1pRecoThetaZ_ECalSlicesPlot2D[iecal] = new TH2D("POTScaledCC1pReco" + ThetaZTwoDInECalLabel + "2D",LabelXAxisThetaZ2D,TwoDArrayNBinsThetaZInECalSlices[iecal].size()-1,&TwoDArrayNBinsThetaZInECalSlices[iecal][0],TwoDArrayNBinsThetaZInECalSlices[iecal].size()-1,&TwoDArrayNBinsThetaZInECalSlices[iecal][0]);
+			NonCC1pRecoThetaZ_ECalSlicesPlot[iecal] = new TH1D("NonCC1pReco" + ThetaZTwoDInECalLabel,LabelXAxisThetaZ,TwoDArrayNBinsThetaZInECalSlices[iecal].size()-1,&TwoDArrayNBinsThetaZInECalSlices[iecal][0]);
+			CCQERecoThetaZ_ECalSlicesPlot[iecal] = new TH1D("CCQEReco" + ThetaZTwoDInECalLabel,LabelXAxisThetaZ,TwoDArrayNBinsThetaZInECalSlices[iecal].size()-1,&TwoDArrayNBinsThetaZInECalSlices[iecal][0]);
+			CCMECRecoThetaZ_ECalSlicesPlot[iecal] = new TH1D("CCMECReco" + ThetaZTwoDInECalLabel,LabelXAxisThetaZ,TwoDArrayNBinsThetaZInECalSlices[iecal].size()-1,&TwoDArrayNBinsThetaZInECalSlices[iecal][0]);
+			CCRESRecoThetaZ_ECalSlicesPlot[iecal] = new TH1D("CCRESReco" + ThetaZTwoDInECalLabel,LabelXAxisThetaZ,TwoDArrayNBinsThetaZInECalSlices[iecal].size()-1,&TwoDArrayNBinsThetaZInECalSlices[iecal][0]);
+			CCDISRecoThetaZ_ECalSlicesPlot[iecal] = new TH1D("CCDISReco" + ThetaZTwoDInECalLabel,LabelXAxisThetaZ,TwoDArrayNBinsThetaZInECalSlices[iecal].size()-1,&TwoDArrayNBinsThetaZInECalSlices[iecal][0]);
 		
 		} // End of the loop over ECal slices
 
