@@ -64,13 +64,22 @@ void interaction_breakdown(TString BaseMC = "") {
 	int NRuns = (int)(Runs.size());
 	cout << "Number of Runs = " << NRuns << endl;
 
+	TFile* FluxFile = TFile::Open("../mySTVAnalysis/MCC9_FluxHist_volTPCActive.root"); 
+	TH1D* HistoFlux = (TH1D*)(FluxFile->Get("hEnumu_cv"));		
+
 	// -------------------------------------------------------------------------------------------------------------------------------------------
 
 	for (int WhichRun = 0; WhichRun < NRuns; WhichRun++) {
 
-		// -------------------------------------------------------------------------------------------------------------------------------------
+		// -----------------------------------------------------------------------------------------------------------------------------------------
 
-		double DataPOT = PeLEE_ReturnBeamOnRunPOT(Runs[WhichRun]);		
+		// We needs these for the uncertainty band
+
+		TString NameExtractedXSec = MigrationMatrixPath+"WienerSVD_Total_CovarianceMatrices_Overlay9_"+Runs[WhichRun]+"_"+UBCodeVersion+".root";
+		TFile* CovFile = new TFile(NameExtractedXSec,"readonly");		
+
+		double DataPOT = PeLEE_ReturnBeamOnRunPOT(Runs[WhichRun]);
+		double IntegratedFlux = (HistoFlux->Integral() * DataPOT / POTPerSpill / Nominal_UB_XY_Surface) * (SoftFidSurface / Nominal_UB_XY_Surface);	
 
 		// -------------------------------------------------------------------------------------------------------------------------------------
 
@@ -102,6 +111,8 @@ void interaction_breakdown(TString BaseMC = "") {
 
 			vector<TCanvas*> PlotCanvas; PlotCanvas.clear();
 			vector<THStack*> THStacks; THStacks.clear();
+			// Uncertainty band
+			vector<THStack*> THStacksMCUnc; THStacksMCUnc.clear();			
 			gStyle->SetPalette(55); const Int_t NCont = 999; gStyle->SetNumberContours(NCont); gStyle->SetTitleSize(0.07,"t");
 			vector<TLegend*> leg; leg.clear();
 
@@ -232,8 +243,8 @@ void interaction_breakdown(TString BaseMC = "") {
 				midPad->SetTopMargin(0.03);
 				botPad->SetTopMargin(0.03);
 				botPad->SetBottomMargin(0.3);
-				botPad->SetGridx();
-				botPad->SetGridy();
+				//botPad->SetGridx();
+				//botPad->SetGridy();
 				topPad->Draw();
 				midPad->Draw();
 				botPad->Draw();
@@ -374,7 +385,7 @@ void interaction_breakdown(TString BaseMC = "") {
 
 				hratio[0][WhichPlot]->GetYaxis()->SetTitleFont(FontStyle);
 				hratio[0][WhichPlot]->GetYaxis()->SetLabelFont(FontStyle);
-				hratio[0][WhichPlot]->GetYaxis()->SetRangeUser(0.1,1.9);
+				hratio[0][WhichPlot]->GetYaxis()->SetRangeUser(0.51,1.49);
 				hratio[0][WhichPlot]->GetYaxis()->SetNdivisions(6);
 				hratio[0][WhichPlot]->GetYaxis()->SetTitleOffset(0.35);
 				hratio[0][WhichPlot]->GetYaxis()->SetTitleSize(0.1);
@@ -385,11 +396,11 @@ void interaction_breakdown(TString BaseMC = "") {
 
 				double RatioMin = hratio[0][WhichPlot]->GetXaxis()->GetXmin();
 				double RatioMax = hratio[0][WhichPlot]->GetXaxis()->GetXmax();
-				double YRatioCoord = 1.2;
+				double YRatioCoord = 1.;
 				TLine* RatioLine = new TLine(RatioMin,YRatioCoord,RatioMax,YRatioCoord);
-				RatioLine->SetLineWidth(4);
-				RatioLine->SetLineColor(kPink+8);
-				RatioLine->SetLineStyle(4);
+				RatioLine->SetLineWidth(2);
+				RatioLine->SetLineColor(kBlack);
+				RatioLine->SetLineStyle(kDashed);
 		
 				topPad->cd();
 				leg[WhichPlot]->SetTextSize(0.5);
@@ -436,6 +447,147 @@ void interaction_breakdown(TString BaseMC = "") {
 				textPOT->SetTextFont(FontStyle);
 				textPOT->SetTextSize(0.07);
 				textPOT->DrawLatexNDC(0.115, 0.89,"MicroBooNE " + ToString(DataPOT).ReplaceAll("e"," #times 10").ReplaceAll("+","^{")+"} POT");					
+
+				// -------------------------------------------------------------------- //				
+
+				if ( string(PlotNames[WhichPlot]).find("ThetaZ_ECal_") != std::string::npos ) {
+
+					TLatex latexDataStats;
+					latexDataStats.SetTextFont(FontStyle);
+					latexDataStats.SetTextSize(0.07);
+					double data_peak = FindOneDimHistoMaxValueBin(Plots[0][WhichPlot]);
+					double data_mean = Plots[0][WhichPlot]->GetMean();
+					double data_std = Plots[0][WhichPlot]->GetRMS();
+					TString LabelDataStats = "#splitline{Data peak = " + to_string_with_precision(data_peak,2) + "}{#mu = " + to_string_with_precision(data_mean,2) + ", #sigma = " + to_string_with_precision(data_std,2) + "}";
+					latexDataStats.DrawLatexNDC(0.61,0.6, LabelDataStats);				
+
+					TH1D* MC = (TH1D*) (THStacks[WhichPlot]->GetStack()->Last());
+					TLatex latexMCStats;
+					latexMCStats.SetTextFont(FontStyle);
+					latexMCStats.SetTextSize(0.07);
+					double mc_peak = FindOneDimHistoMaxValueBin(MC);
+					double mc_mean = MC->GetMean();
+					double mc_std = MC->GetRMS();
+					TString LabelMCStats = "#splitline{MC peak = " + to_string_with_precision(mc_peak,2) + "}{#mu = " + to_string_with_precision(mc_mean,2) + ", #sigma = " + to_string_with_precision(mc_std,2) + "}";
+					latexMCStats.DrawLatexNDC(0.61,0.4, LabelMCStats);				
+
+
+				}
+
+				//----------------------------------------//
+
+				// Uncertainty band
+
+				int n = Plots[0][WhichPlot]->GetXaxis()->GetNbins();
+				TString CopyPlotName = PlotNames[WhichPlot];
+				// Total covariance matrix
+				TH2D* CovMatrix = (TH2D*)(CovFile->Get("TotalCovariance_"+ReducedPlotName));
+				// Clone the covariance matrix, so that you can scale it to the correct units (events vs flux averaged)
+				TH2D* CovMatrixEvents = (TH2D*)CovMatrix->Clone();
+
+				for (int i = 1; i <= n;i++ ) { 
+
+					for (int j = 1; j <= n;j++ ) { 
+
+						double bin_entry = CovMatrix->GetBinContent(i,j);
+						// Scale the covariances to events, not flux averaged events as they are right now
+						double scaled_bin_entry = bin_entry * TMath::Power( (IntegratedFlux*NTargets)/Units, 2);
+
+						CovMatrixEvents->SetBinContent(i,j,scaled_bin_entry);					
+
+					}				
+
+				}
+
+				// Statistical covariance matrix
+				TH2D* StatCovMatrix = (TH2D*)(CovFile->Get("StatCovariance_"+ReducedPlotName));		
+				// Statistical covariance needs to be removed from total
+				CovMatrix->Add(StatCovMatrix,-1);		
+				// Sanity check, stat errors should be identical to the ones coming from the Stat covariances 
+				//TH2D* CovMatrix = (TH2D*)(CovFile->Get("StatCovariance_"+ReducedPlotName));				
+				//CovMatrix->Scale(TMath::Power( (IntegratedFlux*NTargets)/Units ,2.));
+
+				TH1D* MCUnc = (TH1D*)(Plots[0][WhichPlot]->Clone());				
+				TH1D* MCStack = (TH1D*) (THStacks[WhichPlot]->GetStack()->Last());
+
+				for (int i = 1; i <= n;i++ ) { 
+
+					double MCCV = ( (TH1*) (THStacks[WhichPlot]->GetStack()->Last()) )->GetBinContent(i);
+					// Scale the covariances to events, not flux averaged events as they are right now
+					double Unc = TMath::Sqrt( CovMatrix->GetBinContent(i,i) ) * (IntegratedFlux*NTargets)/Units;
+
+					MCUnc->SetBinContent(i,MCCV);					
+					MCUnc->SetBinError(i, Unc);				
+
+				}
+
+				MCUnc->SetMarkerSize(0.);
+				MCUnc->SetMarkerColor(MCUncColor);				
+				MCUnc->SetLineColor(kWhite);
+				MCUnc->SetLineWidth(1);				
+				MCUnc->SetFillColor(MCUncColor);
+				//MCUnc->SetFillStyle(3005);	
+				//MCUnc->Draw("e2 same");										
+
+				//gStyle->SetErrorX(0); // Removing the horizontal errors
+				//Plots[0][WhichPlot]->Draw("e same");				
+
+				//gPad->RedrawAxis();								
+
+				//----------------------------------------//
+
+				// Uncertainty band on ratio plot
+
+				TH1D* MCUncDown = (TH1D*)MCUnc->Clone();
+				TH1D* MCUncTwice = (TH1D*)MCUnc->Clone();				
+
+				for (int WhichBin = 1; WhichBin <= n; WhichBin++) {
+
+					double MCCV = MCUnc->GetBinContent(WhichBin);
+					double Unc = MCUnc->GetBinError(WhichBin);
+					double FracUnc = Unc / MCCV;
+
+					MCUncDown->SetBinContent(WhichBin,1.-FracUnc);					
+					MCUncTwice->SetBinContent(WhichBin,2*FracUnc);	
+
+				}
+
+				THStacksMCUnc.push_back(new THStack(PlotNames[WhichPlot] + "MCUnc",PlotNames[WhichPlot] + "MCUnc"));	
+
+				MCUncDown->SetLineColor(MCUncColor);
+				MCUncDown->SetFillColor(kWhite);
+				MCUncDown->SetLineWidth(1);
+
+				MCUncTwice->SetLineColor(MCUncColor);
+				MCUncTwice->SetFillColor(MCUncColor);
+				MCUncTwice->SetLineWidth(1);				
+
+				botPad->cd();
+
+				THStacksMCUnc[WhichPlot]->Add(MCUncDown,"hist");
+				THStacksMCUnc[WhichPlot]->Draw("same");
+
+				THStacksMCUnc[WhichPlot]->Add(MCUncTwice,"hist");
+				THStacksMCUnc[WhichPlot]->Draw(" same");					
+
+				RatioLine->Draw("same");
+				hratio[0][WhichPlot]->Draw("e same");	
+				gPad->RedrawAxis();														
+
+				//----------------------------------------//
+
+				// Chi2, p-value, sigma
+
+				double chi2, pval, sigma; int ndof;
+				
+				CalcChiSquared(Plots[0][WhichPlot],MCStack,CovMatrixEvents,chi2,ndof,pval,sigma);
+				TString Chi2Ndof = "#chi^{2}/ndof = " + to_string_with_precision(chi2,1) + "/" + TString(std::to_string(ndof)) +", p = " + to_string_with_precision(pval,2) + ", " + to_string_with_precision(sigma,2) + "#sigma";
+
+				TLatex latexChi2;
+				latexChi2.SetTextFont(FontStyle);
+				latexChi2.SetTextSize(0.1);
+				latexChi2.DrawLatexNDC(0.15,0.88,Chi2Ndof);				
+
 
 				// --------------------------------------------------------------------------------------
 
