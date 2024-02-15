@@ -132,13 +132,22 @@ void topological_breakdown(TString BaseMC = "") {
 	int NRuns = (int)(Runs.size());
 	cout << "Number of Runs = " << NRuns << endl;
 
+	TFile* FluxFile = TFile::Open("../mySTVAnalysis/MCC9_FluxHist_volTPCActive.root"); 
+	TH1D* HistoFlux = (TH1D*)(FluxFile->Get("hEnumu_cv"));		
+
 	// -----------------------------------------------------------------------------------------------------------------------------------------
 
 	for (int WhichRun = 0; WhichRun < NRuns; WhichRun++) {
 
 		// -----------------------------------------------------------------------------------------------------------------------------------------
 
-		double DataPOT = PeLEE_ReturnBeamOnRunPOT(Runs[WhichRun]);													
+		// We needs these for the uncertainty band
+
+		TString NameExtractedXSec = MigrationMatrixPath+"WienerSVD_Total_CovarianceMatrices_Overlay9_"+Runs[WhichRun]+"_"+UBCodeVersion+".root";
+		TFile* CovFile = new TFile(NameExtractedXSec,"readonly");		
+
+		double DataPOT = PeLEE_ReturnBeamOnRunPOT(Runs[WhichRun]);
+		double IntegratedFlux = (HistoFlux->Integral() * DataPOT / POTPerSpill / Nominal_UB_XY_Surface) * (SoftFidSurface / Nominal_UB_XY_Surface);	
 
 		// -----------------------------------------------------------------------------------------------------------------------------------------
 
@@ -158,15 +167,15 @@ void topological_breakdown(TString BaseMC = "") {
 			if (BaseMC == "GENIEv2Overlay9" && Runs[WhichRun] != "Combined") { continue; }	
 
 			// NuWro/Tweaked GENIE don't have Runs 4 & 5 for now
-			if (BaseMC == "Overlay9NuWro" || BaseMC == "NoTuneOverlay9" || BaseMC == "TwiceMECOverlay9") {
+			//if (BaseMC == "Overlay9NuWro" || BaseMC == "NoTuneOverlay9" || BaseMC == "TwiceMECOverlay9") {
 
-				if (Runs[WhichRun] == "Run4a" || Runs[WhichRun] == "Run4b" || Runs[WhichRun] == "Run4c" || Runs[WhichRun] == "Run4d" || Runs[WhichRun] == "Run5") {
+			//	if (Runs[WhichRun] == "Run4a" || Runs[WhichRun] == "Run4b" || Runs[WhichRun] == "Run4c" || Runs[WhichRun] == "Run4d" || Runs[WhichRun] == "Run5") {
 
-					continue;
+			//		continue;
 
-				}
+			//	}
 
-			}
+			//}
 												
 			TString PathToFilesCut = PathToFiles+"/"+Cuts+"/";
 
@@ -176,6 +185,8 @@ void topological_breakdown(TString BaseMC = "") {
 
 			vector<TCanvas*> PlotCanvas; PlotCanvas.clear();
 			vector<THStack*> THStacks; THStacks.clear();
+			// Uncertainty band
+			vector<THStack*> THStacksMCUnc; THStacksMCUnc.clear();			
 			gStyle->SetPalette(55); const Int_t NCont = 999; 
 			gStyle->SetNumberContours(NCont); gStyle->SetTitleSize(0.07,"t");
 			vector<TLegend*> leg; leg.clear();
@@ -454,11 +465,11 @@ void topological_breakdown(TString BaseMC = "") {
 
 				double RatioMin = hratio[0][WhichPlot]->GetXaxis()->GetXmin();
 				double RatioMax = hratio[0][WhichPlot]->GetXaxis()->GetXmax();
-				double YRatioCoord = 1.2;
+				double YRatioCoord = 1.;
 				TLine* RatioLine = new TLine(RatioMin,YRatioCoord,RatioMax,YRatioCoord);
-				RatioLine->SetLineWidth(4);
-				RatioLine->SetLineColor(kPink+8);
-				RatioLine->SetLineStyle(4);
+				RatioLine->SetLineWidth(2);
+				RatioLine->SetLineColor(kBlack);
+				RatioLine->SetLineStyle(kDashed);
 			
 				topPad->cd();
 				leg[WhichPlot]->SetTextSize(0.5);
@@ -507,6 +518,55 @@ void topological_breakdown(TString BaseMC = "") {
 				latexCosmic.DrawLatexNDC(0.61,0.8, LabelCosmic);				
 
 				//----------------------------------------//
+
+				// Uncertainty band
+
+				TString CopyPlotName = PlotNames[WhichPlot];
+				// Total covariance matrix
+				TH2D* CovMatrix = (TH2D*)(CovFile->Get("TotalCovariance_"+ReducedPlotName));
+				// Statistical covariance matrix
+				TH2D* StatCovMatrix = (TH2D*)(CovFile->Get("StatCovariance_"+ReducedPlotName));		
+				// Statistical covariance needs to be removed from total
+				CovMatrix->Add(StatCovMatrix,-1);		
+				// Sanity check, stat errors should be identical to the ones coming from the Stat covariances 
+				//TH2D* CovMatrix = (TH2D*)(CovFile->Get("StatCovariance_"+ReducedPlotName));				
+				//CovMatrix->Scale(TMath::Power( (IntegratedFlux*NTargets)/Units ,2.));
+
+				int n = Plots[0][WhichPlot]->GetXaxis()->GetNbins();
+				TH1D* MCUnc = (TH1D*)(Plots[0][WhichPlot]->Clone());				
+
+				for (int i = 1; i <= n;i++ ) { 
+
+					double MCCV = ( (TH1*) (THStacks[WhichPlot]->GetStack()->Last()) )->GetBinContent(i);
+					// Scale the covariances to events, not flux averaged events as they are right now
+					double Unc = TMath::Sqrt( CovMatrix->GetBinContent(i,i) ) * (IntegratedFlux*NTargets)/Units;
+
+					MCUnc->SetBinContent(i,MCCV);					
+					MCUnc->SetBinError(i, Unc);				
+
+				}
+
+				MCUnc->SetMarkerSize(0.);
+				MCUnc->SetMarkerColor(MCUncColor);				
+				MCUnc->SetLineColor(kWhite);
+				MCUnc->SetLineWidth(1);				
+				MCUnc->SetFillColor(MCUncColor);
+				//MCUnc->SetFillStyle(3005);	
+				//MCUnc->Draw("e2 same");										
+
+				//gStyle->SetErrorX(0); // Removing the horizontal errors
+				//Plots[0][WhichPlot]->Draw("e same");				
+
+				//gPad->RedrawAxis();								
+
+				//----------------------------------------//
+
+				// Uncertainty band on ratio plot
+
+				TH1D* MCUncDown = (TH1D*)MCUnc->Clone();
+				TH1D* MCUncTwice = (TH1D*)MCUnc->Clone();				
+
+				for (int WhichBin = 1; WhichBin <= n; WhichBin++) {				//----------------------------------------//
 
 				TString CanvasPath = PlotPath + Cuts+"/TopologicalBreakDown/";
 				TString CanvasName = BaseMC + "THStack_BreakDown_"+PlotNames[WhichPlot]+"_"+Runs[WhichRun]+"_"+UBCodeVersion+Cuts+".pdf";

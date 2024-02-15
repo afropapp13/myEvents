@@ -157,18 +157,18 @@ void interaction_breakdown(TString BaseMC = "") {
 			if (BaseMC == "GENIEv2Overlay9" && i != NCuts-1) { continue; }
 
 			// GENIE v2 has only combined run
-			if (BaseMC == "GENIEv2Overlay9" && Runs[WhichRun] != "Combined") { continue; }	
+			//if (BaseMC == "GENIEv2Overlay9" && Runs[WhichRun] != "Combined") { continue; }	
 
                         // NuWro/Tweaked GENIE don't have Runs 4 & 5 for now
-                        if (BaseMC == "Overlay9NuWro" || BaseMC == "NoTuneOverlay9" || BaseMC == "TwiceMECOverlay9") {
+                        //if (BaseMC == "Overlay9NuWro" || BaseMC == "NoTuneOverlay9" || BaseMC == "TwiceMECOverlay9") {
                         
- 				if (Runs[WhichRun] == "Run4a" || Runs[WhichRun] == "Run4b" || Runs[WhichRun] == "Run4c" || Runs[WhichRun] == "Run4d" || Runs[WhichRun] == "Run5") {
+ 			//	if (Runs[WhichRun] == "Run4a" || Runs[WhichRun] == "Run4b" || Runs[WhichRun] == "Run4c" || Runs[WhichRun] == "Run4d" || Runs[WhichRun] == "Run5") {
                        
-                       			continue;
+                       	//		continue;
                         
-              			}
+              		//	}
                         
-			}
+			//}
 
 //		} // If we want to run only on a specific cut combination, include this } and remove the one at the end of the program
 

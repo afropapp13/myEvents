@@ -1076,7 +1076,7 @@ void reco_selection::Loop() {
 				if (VectorCuts[i] == "_PID_NuScore" && !(reco_p_LLR_Score < ProtonLLRPIDScore) ) 
 					{ PassedSelection = false; }
 
-				if (VectorCuts[i] == "_PID_NuScore_CRT" && !(crtveto == 0) ) 
+				if (VectorCuts[i] == "_PID_NuScore_CRT" && !( reco_p_LLR_Score < ProtonLLRPIDScore /*&& crtveto == 0*/) ) 
 					{ PassedSelection = false; }
 
 
