@@ -42,8 +42,6 @@ print_latex_tables("",false,false,false,false,true)
 
 ###########################################################################################################################################################################
 
-root -b topological_breakdown.cxx
-root -b interaction_breakdown.cxx
 root -b print_1d_slices.cxx
 root -b print_2d_slices.cxx
 
