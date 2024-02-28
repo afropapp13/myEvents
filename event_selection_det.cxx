@@ -64,11 +64,11 @@
 	WhichSampleArray.push_back("Overlay9_Run4b_LYAttenuation");
 
 	WhichSampleArray.push_back("Overlay9_Run4b_X");
-	//WhichSampleArray.push_back("Overlay9_Run4b_YZ");
-	//WhichSampleArray.push_back("Overlay9_Run4b_ThetaYZ");
-	//WhichSampleArray.push_back("Overlay9_Run4b_ThetaXZ");
-	//WhichSampleArray.push_back("Overlay9_Run4b_Recombination2");
-	//WhichSampleArray.push_back("Overlay9_Run4b_SCE");
+	WhichSampleArray.push_back("Overlay9_Run4b_YZ");
+	WhichSampleArray.push_back("Overlay9_Run4b_ThetaYZ");
+	WhichSampleArray.push_back("Overlay9_Run4b_ThetaXZ");
+	WhichSampleArray.push_back("Overlay9_Run4b_Recombination2");
+	WhichSampleArray.push_back("Overlay9_Run4b_SCE");
 
 	//--------------------//
 	
@@ -81,11 +81,11 @@
 	WhichSampleArray.push_back("Overlay9_Run4c_LYAttenuation");
 
 	WhichSampleArray.push_back("Overlay9_Run4c_X");
-	//WhichSampleArray.push_back("Overlay9_Run4c_YZ");
-	//WhichSampleArray.push_back("Overlay9_Run4c_ThetaYZ");
-	//WhichSampleArray.push_back("Overlay9_Run4c_ThetaXZ");
-	//WhichSampleArray.push_back("Overlay9_Run4c_Recombination2");
-	//WhichSampleArray.push_back("Overlay9_Run4c_SCE");
+	WhichSampleArray.push_back("Overlay9_Run4c_YZ");
+	WhichSampleArray.push_back("Overlay9_Run4c_ThetaYZ");
+	WhichSampleArray.push_back("Overlay9_Run4c_ThetaXZ");
+	WhichSampleArray.push_back("Overlay9_Run4c_Recombination2");
+	WhichSampleArray.push_back("Overlay9_Run4c_SCE");
 
 	//--------------------//
 	
@@ -98,11 +98,11 @@
 	WhichSampleArray.push_back("Overlay9_Run4d_LYAttenuation");
 
 	WhichSampleArray.push_back("Overlay9_Run4d_X");
-	//WhichSampleArray.push_back("Overlay9_Run4d_YZ");
-	//WhichSampleArray.push_back("Overlay9_Run4d_ThetaYZ");
-	//WhichSampleArray.push_back("Overlay9_Run4d_ThetaXZ");
-	//WhichSampleArray.push_back("Overlay9_Run4d_Recombination2");
-	//WhichSampleArray.push_back("Overlay9_Run4d_SCE");
+	WhichSampleArray.push_back("Overlay9_Run4d_YZ");
+	WhichSampleArray.push_back("Overlay9_Run4d_ThetaYZ");
+	WhichSampleArray.push_back("Overlay9_Run4d_ThetaXZ");
+	WhichSampleArray.push_back("Overlay9_Run4d_Recombination2");
+	WhichSampleArray.push_back("Overlay9_Run4d_SCE");
 
 	//--------------------//
 	
@@ -115,11 +115,11 @@
 	WhichSampleArray.push_back("Overlay9_Run5_LYAttenuation");
 
 	WhichSampleArray.push_back("Overlay9_Run5_X");
-	//WhichSampleArray.push_back("Overlay9_Run5_YZ");
-	//WhichSampleArray.push_back("Overlay9_Run5_ThetaYZ");
-	//WhichSampleArray.push_back("Overlay9_Run5_ThetaXZ");
-	//WhichSampleArray.push_back("Overlay9_Run5_Recombination2");
-	//WhichSampleArray.push_back("Overlay9_Run5_SCE");
+	WhichSampleArray.push_back("Overlay9_Run5_YZ");
+	WhichSampleArray.push_back("Overlay9_Run5_ThetaYZ");
+	WhichSampleArray.push_back("Overlay9_Run5_ThetaXZ");
+	WhichSampleArray.push_back("Overlay9_Run5_Recombination2");
+	WhichSampleArray.push_back("Overlay9_Run5_SCE");
 
 	//--------------------//
 	
@@ -132,11 +132,11 @@
 	WhichSampleArray.push_back("Overlay9_Combined_LYAttenuation");
 
 	WhichSampleArray.push_back("Overlay9_Combined_X");
-//	WhichSampleArray.push_back("Overlay9_Combined_YZ");
-//	WhichSampleArray.push_back("Overlay9_Combined_ThetaYZ");
-//	WhichSampleArray.push_back("Overlay9_Combined_ThetaXZ");
-//	WhichSampleArray.push_back("Overlay9_Combined_Recombination2");
-//	WhichSampleArray.push_back("Overlay9_Combined_SCE");
+	WhichSampleArray.push_back("Overlay9_Combined_YZ");
+	WhichSampleArray.push_back("Overlay9_Combined_ThetaYZ");
+	WhichSampleArray.push_back("Overlay9_Combined_ThetaXZ");
+	WhichSampleArray.push_back("Overlay9_Combined_Recombination2");
+	WhichSampleArray.push_back("Overlay9_Combined_SCE");
 
 	// -----------------------------------------------------------------------------------------
 
