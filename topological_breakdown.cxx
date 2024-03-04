@@ -445,7 +445,7 @@ void topological_breakdown(TString BaseMC = "") {
 
 				// -------------------------------------------------------------------- //				
 
-				if ( string(PlotNames[WhichPlot]).find("ThetaZ_ECal_") != std::string::npos ) {
+				if ( string(PlotNames[WhichPlot]).find("RecoThetaZ") != std::string::npos ) {
 
 					TLatex latexDataStats;
 					latexDataStats.SetTextFont(FontStyle);

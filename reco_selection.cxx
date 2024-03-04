@@ -128,6 +128,9 @@ void reco_selection::Loop() {
 
 		//----------------------------------------//
 
+		// theta beam vector reco vs truth
+		TH1D* CC1pRecoThetaBRTPlot = new TH1D("CC1pRecoThetaBRTPlot",";#theta_{brt}",20,0,180);	
+	
 		// ThetaZ
 
 		TH1D* RecoThetaZPlot = new TH1D("RecoThetaZPlot",LabelXAxisThetaZ,NBinsThetaZ,ArrayNBinsThetaZ);
@@ -696,6 +699,9 @@ void reco_selection::Loop() {
 
 			}
 
+			TVector3 reco_b_vector = reco_stv_tool.ReturnBeamVector();
+			TVector3 reco_b_vector_unit = reco_b_vector.Unit();
+
 			// Underflow / overflow
 			if (ThetaZ < ArrayNBinsThetaZ[0]) { ThetaZ = (ArrayNBinsThetaZ[0] + ArrayNBinsThetaZ[1])/2.; }
 			if (ThetaZ > ArrayNBinsThetaZ[NBinsThetaZ]) { ThetaZ = (ArrayNBinsThetaZ[NBinsThetaZ] + ArrayNBinsThetaZ[NBinsThetaZ-1])/2.; }
@@ -768,6 +774,8 @@ void reco_selection::Loop() {
 			int TrueECalTwoDIndex = -1;
 			int TrueSerialThetaZInECalIndex = -1;
 
+			TVector3 true_b_vector_unit(-1,-1,-1);
+
 			//----------------------------------------//
 
 			// Only for MC to obtain true vales			
@@ -803,6 +811,22 @@ void reco_selection::Loop() {
 
 				TrueECalTwoDIndex = tools.ReturnIndex(true_ECal, TwoDArrayNBinsECal);
 				TrueSerialThetaZInECalIndex = tools.ReturnIndexIn2DList(TwoDArrayNBinsThetaZInECalSlices,TrueECalTwoDIndex,true_ThetaZ);
+
+				TVector3 TVector3TrueMuon(-1,-1,-1);
+				TVector3TrueMuon.SetMag(True_CandidateMu_P->at(0));
+				TVector3TrueMuon.SetTheta(True_CandidateMu_Theta->at(0) * TMath::Pi() / 180.);
+				TVector3TrueMuon.SetPhi(True_CandidateMu_Phi->at(0) * TMath::Pi() / 180.);
+				double muon_e = TMath::Sqrt( TMath::Power(True_CandidateMu_P->at(0),2.) + TMath::Power(MuonMass_GeV,2.) );
+
+				TVector3 TVector3TrueProton(-1,-1,-1);
+				TVector3TrueProton.SetMag(True_CandidateP_P->at(0));
+				TVector3TrueProton.SetTheta(True_CandidateP_Theta->at(0) * TMath::Pi() / 180.);
+				TVector3TrueProton.SetPhi(True_CandidateP_Phi->at(0) * TMath::Pi() / 180.);
+				double proton_e = TMath::Sqrt( TMath::Power(True_CandidateP_P->at(0),2.) + TMath::Power(ProtonMass_GeV,2.) );
+
+				STV_Tools true_stv_tool(TVector3TrueMuon,TVector3TrueProton,muon_e,proton_e);
+				TVector3 true_b_vector = true_stv_tool.ReturnBeamVector();
+				true_b_vector_unit = true_b_vector.Unit();
 
 			} // End of if statement: Only for MC to obtain true vales
 
@@ -907,6 +931,9 @@ void reco_selection::Loop() {
 
 					double ECal_diff = ECal - true_ECal; // GeV
 					double ECal_reso = ECal_diff / true_ECal * 100.; // %
+
+					double theta_brt = TMath::ACos(reco_b_vector_unit * true_b_vector_unit) * 180. / TMath::Pi();
+					CC1pRecoThetaBRTPlot->Fill(theta_brt, weight);
 
 					//------------------------------//
 
