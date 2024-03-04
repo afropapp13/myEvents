@@ -30,16 +30,6 @@ root -b event_selection_nuwro_fds.cxx
 
 root -b event_selection_cv_fds.cxx
 
-#root -b event_selection_det_fds.cxx
-
-#root -b event_selection_g4_fds.cxx
-
-#root -b event_selection_xsec_fds.cxx
-
-#root -b event_selection_flux_fds.cxx
-
-#root -b event_selection_mc_stat_fds.cxx
-
 ###########################################################################################################################################################################
 
 root -b 
