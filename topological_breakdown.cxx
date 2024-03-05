@@ -114,6 +114,12 @@ cout << "covariance matrix = " << NameExtractedXSec << endl;
 				
 		// -----------------------------------------------------------------------------------------------------------------------------------------
 
+		bool plot_unc = false;
+		if (BaseMC == "" && Runs[WhichRun] == "Combined") { plot_unc = true; }
+
+		//-------------------------------------//
+
+
 		Cuts = "_NoCuts";
 
 		for (int i = 0; i < NCuts; i++) {
@@ -171,9 +177,10 @@ cout << "covariance matrix = " << NameExtractedXSec << endl;
 
 			NameOfSamples.push_back("STVStudies_ExtBNB9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("ExtBNB");
 
-			if (BaseMC != "NoTuneOverlay9") { NameOfSamples.push_back("STVStudies_OverlayDirt9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("Dirt"); }
-			else { NameOfSamples.push_back("NoTuneSTVStudies_OverlayDirt9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("Dirt"); }
-
+			if (BaseMC == "NoTuneOverlay9") { NameOfSamples.push_back("NoTuneSTVStudies_OverlayDirt9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("Dirt"); }
+			else if (BaseMC == "TwiceMECOverlay9") { NameOfSamples.push_back("TwiceMECSTVStudies_OverlayDirt9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("Dirt"); }
+			else { NameOfSamples.push_back("STVStudies_OverlayDirt9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("Dirt"); }
+	
 			vector<int> Colors; Colors.clear(); 
 			// Unblind
 			Colors.push_back(kBlack);
@@ -590,10 +597,10 @@ cout << "covariance matrix = " << NameExtractedXSec << endl;
 				botPad->cd();
 
 				THStacksMCUnc[WhichPlot]->Add(MCUncDown,"hist");
-				THStacksMCUnc[WhichPlot]->Draw("same");
+				if (plot_unc) { THStacksMCUnc[WhichPlot]->Draw("same"); }
 
 				THStacksMCUnc[WhichPlot]->Add(MCUncTwice,"hist");
-				THStacksMCUnc[WhichPlot]->Draw(" same");					
+				if (plot_unc) { THStacksMCUnc[WhichPlot]->Draw(" same"); }			
 
 				RatioLine->Draw("same");
 				hratio[0][WhichPlot]->Draw("e same");	
@@ -611,7 +618,7 @@ cout << "covariance matrix = " << NameExtractedXSec << endl;
 				TLatex latexChi2;
 				latexChi2.SetTextFont(FontStyle);
 				latexChi2.SetTextSize(0.1);
-				latexChi2.DrawLatexNDC(0.15,0.88,Chi2Ndof);				
+				if (plot_unc) { latexChi2.DrawLatexNDC(0.15,0.88,Chi2Ndof); }			
 
 				//----------------------------------------//
 
