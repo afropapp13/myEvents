@@ -84,6 +84,11 @@ void topological_breakdown(TString BaseMC = "") {
 				
 		// -----------------------------------------------------------------------------------------------------------------------------------------
 
+		bool plot_unc = false;
+		if (BaseMC == "" && Runs[WhichRun] == "Combined") { plot_unc = true; }
+
+		//-------------------------------------//
+
 		Cuts = "_NoCuts";
 
 		for (int i = 0; i < NCuts; i++) {
@@ -96,18 +101,11 @@ void topological_breakdown(TString BaseMC = "") {
 			if (BaseMC == "NoTuneOverlay9" && i != NCuts-1) { continue; }		
 			if (BaseMC == "TwiceMECOverlay9" && i != NCuts-1) { continue; }		
 
-			// GENIE v2 has only combined run
-			if (BaseMC == "GENIEv2Overlay9" && Runs[WhichRun] != "Combined") { continue; }	
-
-			// NuWro/Tweaked GENIE don't have Run 4a
-			//if (BaseMC == "Overlay9NuWro" && (Runs[WhichRun] == "Run5" || Runs[WhichRun] == "Run4a" || Runs[WhichRun] == "Run4b" || Runs[WhichRun] == "Run4aRutgers") ) { continue; }
-			//if (BaseMC == "NoTuneOverlay9" && (Runs[WhichRun] == "Run5" || Runs[WhichRun] == "Run4a" || Runs[WhichRun] == "Run4b" || Runs[WhichRun] == "Run4aRutgers") ) { continue; }
-			//if (BaseMC == "TwiceMECOverlay9" && (Runs[WhichRun] == "Run5" || Runs[WhichRun] == "Run4a" || Runs[WhichRun] == "Run4b" || Runs[WhichRun] == "Run4aRutgers") ) { continue; }												
 			TString PathToFilesCut = PathToFiles+"/"+Cuts+"/";
 
 			TH1D::SetDefaultSumw2();
 
-			// ---------------------------------------------------------------------------------------------------------------------
+			//--------------------------------------------------------------------------------
 
 			vector<TCanvas*> PlotCanvas; PlotCanvas.clear();
 			vector<THStack*> THStacks; THStacks.clear();
@@ -130,20 +128,25 @@ void topological_breakdown(TString BaseMC = "") {
 			// 1: Overlay
 			// 2: ExtBNB
 			// 3: Dirt
-		
+	
+			// 0	
 			NameOfSamples.push_back("STVStudies_BeamOn9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("BeamOn");
 
+			// 1
 			if (BaseMC == "") { NameOfSamples.push_back("STVStudies_Overlay9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("MC"); }
 			else if (BaseMC == "Overlay9NuWro") { NameOfSamples.push_back("STVStudies_Overlay9NuWro_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("MC"); }
 			else if (BaseMC == "GENIEv2Overlay9") { NameOfSamples.push_back("GENIEv2STVStudies_Overlay9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("MC"); }		
 			else if (BaseMC == "NoTuneOverlay9") { NameOfSamples.push_back("NoTuneSTVStudies_Overlay9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("MC"); }
 			else if (BaseMC == "TwiceMECOverlay9") { NameOfSamples.push_back("TwiceMECSTVStudies_Overlay9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("MC"); }			
 
+			// 2
 			NameOfSamples.push_back("STVStudies_ExtBNB9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("ExtBNB");
 
-			if (BaseMC != "NoTuneOverlay9") { NameOfSamples.push_back("STVStudies_OverlayDirt9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("Dirt"); }
-			else { NameOfSamples.push_back("NoTuneSTVStudies_OverlayDirt9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("Dirt"); }
-
+			// 3
+			if (BaseMC == "NoTuneOverlay9") { NameOfSamples.push_back("NoTuneSTVStudies_OverlayDirt9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("Dirt"); }
+			else if (BaseMC == "TwiceMECOverlay9") { NameOfSamples.push_back("TwiceMECSTVStudies_OverlayDirt9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("Dirt"); }
+			else { NameOfSamples.push_back("STVStudies_OverlayDirt9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("Dirt"); }
+	
 			vector<int> Colors; Colors.clear(); 
 			// Unblind
 			Colors.push_back(kBlack);
@@ -218,7 +221,7 @@ void topological_breakdown(TString BaseMC = "") {
 				hratio.push_back(Currenthratio);
 
 			}
-
+			
 			// Loop over the plots
 
 			for (int WhichPlot = 0; WhichPlot < N1DPlots; WhichPlot ++) {
@@ -348,7 +351,7 @@ void topological_breakdown(TString BaseMC = "") {
 				// Unblind
 				Plots[0][WhichPlot]->Draw("e same"); 
 
-				// -------------------------------------------------------------------------------------------------------------------				
+				// -----------------------------------------------------------------------------------	
 
 				gPad->RedrawAxis();
 
@@ -363,12 +366,12 @@ void topological_breakdown(TString BaseMC = "") {
 				TString ReducedPlotName = PlotNameDuplicate.ReplaceAll("Reco","") ;
 				textSlice->DrawLatexNDC(0.115, 0.8, LatexLabel[ReducedPlotName]);	
 
-				// -------------------------------------------------------------------------------------------------------------------
+				// ------------------------------------------------------------------------------------
 
 				hratio[1][WhichPlot]->Add(hratio[2][WhichPlot]);
 				hratio[1][WhichPlot]->Add(hratio[3][WhichPlot]);
 				hratio[0][WhichPlot]->Divide(hratio[1][WhichPlot]);
-
+				
 				hratio[0][WhichPlot]->GetXaxis()->SetTitleFont(FontStyle);
 				hratio[0][WhichPlot]->GetXaxis()->SetLabelFont(FontStyle);
 				hratio[0][WhichPlot]->GetYaxis()->SetTitle("#frac{Data}{Prediction}");
@@ -560,10 +563,10 @@ void topological_breakdown(TString BaseMC = "") {
 				botPad->cd();
 
 				THStacksMCUnc[WhichPlot]->Add(MCUncDown,"hist");
-				THStacksMCUnc[WhichPlot]->Draw("same");
+				if (plot_unc) { THStacksMCUnc[WhichPlot]->Draw("same"); }
 
 				THStacksMCUnc[WhichPlot]->Add(MCUncTwice,"hist");
-				THStacksMCUnc[WhichPlot]->Draw(" same");					
+				if (plot_unc) { THStacksMCUnc[WhichPlot]->Draw(" same"); }					
 
 				RatioLine->Draw("same");
 				hratio[0][WhichPlot]->Draw("e same");	
@@ -581,7 +584,7 @@ void topological_breakdown(TString BaseMC = "") {
 				TLatex latexChi2;
 				latexChi2.SetTextFont(FontStyle);
 				latexChi2.SetTextSize(0.1);
-				latexChi2.DrawLatexNDC(0.15,0.88,Chi2Ndof);				
+				if (plot_unc) { latexChi2.DrawLatexNDC(0.15,0.88,Chi2Ndof); }				
 
 				//----------------------------------------//
 
