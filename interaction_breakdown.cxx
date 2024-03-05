@@ -452,7 +452,7 @@ void interaction_breakdown(TString BaseMC = "") {
 				midPad->cd();
 				TLatex* latexPurity = new TLatex();
 				latexPurity->SetTextFont(FontStyle);
-				latexPurity->SetTextSize(0.09);
+				latexPurity->SetTextSize(0.07);
 				TString LabelPurity = "QE = " + ToString(CCQEPurity/10.) + " %";
 				latexPurity->DrawLatexNDC(0.61,0.89, LabelPurity);
 
@@ -465,7 +465,7 @@ void interaction_breakdown(TString BaseMC = "") {
 				midPad->cd();
 				TLatex latexCosmic;
 				latexCosmic.SetTextFont(FontStyle);
-				latexCosmic.SetTextSize(0.09);
+				latexCosmic.SetTextSize(0.07);
 				TString LabelCosmic = "Cosmics = " + ToString(CosmicContamination/10.) + " %";
 				latexCosmic.DrawLatexNDC(0.61,0.8, LabelCosmic);
 				
