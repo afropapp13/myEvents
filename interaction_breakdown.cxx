@@ -118,7 +118,6 @@ void interaction_breakdown(TString BaseMC = "") {
 
 		//-------------------------------------//
 
-
 		Cuts = "_NoCuts";
 
 		for (int i = 0; i < NCuts; i++) {
@@ -158,6 +157,13 @@ void interaction_breakdown(TString BaseMC = "") {
 			vector<vector<TH1D*> > CCRESPlots; CCRESPlots.clear();
 			vector<vector<TH1D*> > CCDISPlots; CCDISPlots.clear();
 			vector<vector<TH1D*> > CCCCDISPlots; CCCCDISPlots.clear();
+
+			vector<vector<TH1D*> > bin_width_Plots; bin_width_Plots.clear();
+			vector<vector<TH1D*> > bin_width_CCQEPlots; bin_width_CCQEPlots.clear();
+			vector<vector<TH1D*> > bin_width_CCMECPlots; bin_width_CCMECPlots.clear();
+			vector<vector<TH1D*> > bin_width_CCRESPlots; bin_width_CCRESPlots.clear();
+			vector<vector<TH1D*> > bin_width_CCDISPlots; bin_width_CCDISPlots.clear();
+			vector<vector<TH1D*> > bin_width_CCCCDISPlots; bin_width_CCCCDISPlots.clear();
 
 			vector<vector<TH1D*> > hratio;  hratio.clear();
 
@@ -257,6 +263,12 @@ void interaction_breakdown(TString BaseMC = "") {
 				CCRESPlots.push_back(CCRESCurrentPlots);
 				CCDISPlots.push_back(CCDISCurrentPlots);
 
+				bin_width_Plots.push_back(CurrentPlots);
+				bin_width_CCQEPlots.push_back(CCQECurrentPlots);
+				bin_width_CCMECPlots.push_back(CCMECCurrentPlots);
+				bin_width_CCRESPlots.push_back(CCRESCurrentPlots);
+				bin_width_CCDISPlots.push_back(CCDISCurrentPlots);
+
 				hratio.push_back(Currenthratio);
 
 			} // End of the loop over the samples
@@ -314,14 +326,19 @@ void interaction_breakdown(TString BaseMC = "") {
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitleOffset(0.6);
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTickSize(0);
 
-					double localmax = Plots[WhichSample][WhichPlot]->GetMaximum();
-					if (localmax > max) { max = localmax; }
-					Plots[0][WhichPlot]->GetYaxis()->SetRangeUser(0.,1.3*max);
+					if (WhichSample == 0) { 
 
+						bin_width_Plots[0][WhichPlot] = (TH1D*)(Plots[0][WhichPlot]->Clone()); 
+						Reweight(bin_width_Plots[0][WhichPlot]); 
+						max = FindOneDimHistoMaxValue(bin_width_Plots[0][WhichPlot]);
+						bin_width_Plots[0][WhichPlot]->GetYaxis()->SetRangeUser(0.,1.3*max);
+
+					}
+					
 					if (LabelsOfSamples[WhichSample] == "BeamOn") { 
 
 						gStyle->SetErrorX(0); // Removing the horizontal errors
-						Plots[WhichSample][WhichPlot]->Draw("e same"); 
+						bin_width_Plots[WhichSample][WhichPlot]->Draw("e same"); 
 						TString NBeamOnEvents = ToString((int)(Plots[WhichSample][WhichPlot]->GetEntries()));
 						// Unblind
 						leg[WhichPlot]->AddEntry(Plots[WhichSample][WhichPlot],"BNB Data ("+NBeamOnEvents+")","ep");
@@ -335,7 +352,10 @@ void interaction_breakdown(TString BaseMC = "") {
 							Plots[WhichSample][WhichPlot]->SetFillStyle(3004);
 							Plots[WhichSample][WhichPlot]->SetLineWidth(1);
 
-							THStacks[WhichPlot]->Add(Plots[WhichSample][WhichPlot],"hist");
+							bin_width_Plots[WhichSample][WhichPlot] = (TH1D*)(Plots[WhichSample][WhichPlot]->Clone());
+							Reweight(bin_width_Plots[WhichSample][WhichPlot]);
+	
+							THStacks[WhichPlot]->Add(bin_width_Plots[WhichSample][WhichPlot],"hist");
 							THStacks[WhichPlot]->Draw("same");
 
 					}
@@ -344,31 +364,47 @@ void interaction_breakdown(TString BaseMC = "") {
 
 							CCQEPlots[WhichSample][WhichPlot]->SetLineColor(ColorsOverlay[0]);
 							CCQEPlots[WhichSample][WhichPlot]->SetFillColor(ColorsOverlay[0]);
+							bin_width_CCQEPlots[WhichSample][WhichPlot] = (TH1D*)(CCQEPlots[WhichSample][WhichPlot]->Clone());
+							Reweight(bin_width_CCQEPlots[WhichSample][WhichPlot]);
 							CCQEPlots[WhichSample+2][WhichPlot]->SetLineColor(ColorsOverlay[0]);
 							CCQEPlots[WhichSample+2][WhichPlot]->SetFillColor(ColorsOverlay[0]);
-							THStacks[WhichPlot]->Add(CCQEPlots[WhichSample][WhichPlot],"hist");
-							THStacks[WhichPlot]->Add(CCQEPlots[WhichSample+2][WhichPlot],"hist");
+							bin_width_CCQEPlots[WhichSample+2][WhichPlot] = (TH1D*)(CCQEPlots[WhichSample+2][WhichPlot]->Clone());
+							Reweight(bin_width_CCQEPlots[WhichSample+2][WhichPlot]);
+							THStacks[WhichPlot]->Add(bin_width_CCQEPlots[WhichSample][WhichPlot],"hist");
+							THStacks[WhichPlot]->Add(bin_width_CCQEPlots[WhichSample+2][WhichPlot],"hist");
 
 							CCMECPlots[WhichSample][WhichPlot]->SetLineColor(ColorsOverlay[1]);
 							CCMECPlots[WhichSample][WhichPlot]->SetFillColor(ColorsOverlay[1]);
+							bin_width_CCMECPlots[WhichSample][WhichPlot] = (TH1D*)(CCMECPlots[WhichSample][WhichPlot]->Clone());
+							Reweight(bin_width_CCMECPlots[WhichSample][WhichPlot]);
 							CCMECPlots[WhichSample+2][WhichPlot]->SetLineColor(ColorsOverlay[1]);
 							CCMECPlots[WhichSample+2][WhichPlot]->SetFillColor(ColorsOverlay[1]);
-							THStacks[WhichPlot]->Add(CCMECPlots[WhichSample][WhichPlot],"hist");
-							THStacks[WhichPlot]->Add(CCMECPlots[WhichSample+2][WhichPlot],"hist");
+							bin_width_CCMECPlots[WhichSample+2][WhichPlot] = (TH1D*)(CCMECPlots[WhichSample+2][WhichPlot]->Clone());
+							Reweight(bin_width_CCMECPlots[WhichSample+2][WhichPlot]);
+							THStacks[WhichPlot]->Add(bin_width_CCMECPlots[WhichSample][WhichPlot],"hist");
+							THStacks[WhichPlot]->Add(bin_width_CCMECPlots[WhichSample+2][WhichPlot],"hist");
 
 							CCRESPlots[WhichSample][WhichPlot]->SetLineColor(ColorsOverlay[2]);
 							CCRESPlots[WhichSample][WhichPlot]->SetFillColor(ColorsOverlay[2]);
+							bin_width_CCRESPlots[WhichSample][WhichPlot] = (TH1D*)(CCRESPlots[WhichSample][WhichPlot]->Clone());
+							Reweight(bin_width_CCRESPlots[WhichSample][WhichPlot]);
 							CCRESPlots[WhichSample+2][WhichPlot]->SetLineColor(ColorsOverlay[2]);
 							CCRESPlots[WhichSample+2][WhichPlot]->SetFillColor(ColorsOverlay[2]);
-							THStacks[WhichPlot]->Add(CCRESPlots[WhichSample][WhichPlot],"hist");
-							THStacks[WhichPlot]->Add(CCRESPlots[WhichSample+2][WhichPlot],"hist");
+							bin_width_CCRESPlots[WhichSample+2][WhichPlot] = (TH1D*)(CCRESPlots[WhichSample+2][WhichPlot]->Clone());
+							Reweight(bin_width_CCRESPlots[WhichSample+2][WhichPlot]);
+							THStacks[WhichPlot]->Add(bin_width_CCRESPlots[WhichSample][WhichPlot],"hist");
+							THStacks[WhichPlot]->Add(bin_width_CCRESPlots[WhichSample+2][WhichPlot],"hist");
 
 							CCDISPlots[WhichSample][WhichPlot]->SetLineColor(ColorsOverlay[3]);
 							CCDISPlots[WhichSample][WhichPlot]->SetFillColor(ColorsOverlay[3]);
+							bin_width_CCDISPlots[WhichSample][WhichPlot] = (TH1D*)(CCDISPlots[WhichSample][WhichPlot]->Clone());
+							Reweight(bin_width_CCDISPlots[WhichSample][WhichPlot]);
 							CCDISPlots[WhichSample+2][WhichPlot]->SetLineColor(ColorsOverlay[3]);
 							CCDISPlots[WhichSample+2][WhichPlot]->SetFillColor(ColorsOverlay[3]);
-							THStacks[WhichPlot]->Add(CCDISPlots[WhichSample][WhichPlot],"hist");
-							THStacks[WhichPlot]->Add(CCDISPlots[WhichSample+2][WhichPlot],"hist");
+							bin_width_CCDISPlots[WhichSample+2][WhichPlot] = (TH1D*)(CCDISPlots[WhichSample+2][WhichPlot]->Clone());
+							Reweight(bin_width_CCDISPlots[WhichSample+2][WhichPlot]);
+							THStacks[WhichPlot]->Add(bin_width_CCDISPlots[WhichSample][WhichPlot],"hist");
+							THStacks[WhichPlot]->Add(bin_width_CCDISPlots[WhichSample+2][WhichPlot],"hist");
 
 							TString NCCQEEvents = ToString((int)(CCQEPlots[WhichSample][WhichPlot]->Integral()));
 							TString NCCMECEvents = ToString((int)(CCMECPlots[WhichSample][WhichPlot]->Integral()));	
@@ -390,7 +426,7 @@ void interaction_breakdown(TString BaseMC = "") {
 				} // End of the loop over the samples
 
 				// Unblind
-				Plots[0][WhichPlot]->Draw("e same");
+				bin_width_Plots[0][WhichPlot]->Draw("e same");
 
 				gPad->RedrawAxis();
 
@@ -487,7 +523,7 @@ void interaction_breakdown(TString BaseMC = "") {
 
 				// -------------------------------------------------------------------- //				
 
-				if ( string(PlotNames[WhichPlot]).find("ThetaZ_ECal_") != std::string::npos ) {
+				if ( string(PlotNames[WhichPlot]).find("RecoThetaZ") != std::string::npos ) {
 
 					TLatex latexDataStats;
 					latexDataStats.SetTextFont(FontStyle);
@@ -499,12 +535,14 @@ void interaction_breakdown(TString BaseMC = "") {
 					latexDataStats.DrawLatexNDC(0.61,0.6, LabelDataStats);				
 
 					TH1D* MC = (TH1D*) (THStacks[WhichPlot]->GetStack()->Last());
+					TH1D* clone_MC = (TH1D*)(MC->Clone());
+					rm_bin_width(clone_MC);
 					TLatex latexMCStats;
 					latexMCStats.SetTextFont(FontStyle);
 					latexMCStats.SetTextSize(0.07);
 					double mc_peak = FindOneDimHistoMaxValueBin(MC);
-					double mc_mean = MC->GetMean();
-					double mc_std = MC->GetRMS();
+					double mc_mean = clone_MC->GetMean();
+					double mc_std = clone_MC->GetRMS();
 					TString LabelMCStats = "#splitline{MC peak = " + to_string_with_precision(mc_peak,2) + "}{#mu = " + to_string_with_precision(mc_mean,2) + ", #sigma = " + to_string_with_precision(mc_std,2) + "}";
 					latexMCStats.DrawLatexNDC(0.61,0.4, LabelMCStats);				
 
@@ -546,10 +584,12 @@ void interaction_breakdown(TString BaseMC = "") {
 
 				TH1D* MCUnc = (TH1D*)(Plots[0][WhichPlot]->Clone());				
 				TH1D* MCStack = (TH1D*) (THStacks[WhichPlot]->GetStack()->Last());
+				TH1D* MCStackClone = (TH1D*)(MCStack->Clone());
+				rm_bin_width(MCStackClone);
 
 				for (int i = 1; i <= n;i++ ) { 
 
-					double MCCV = ( (TH1*) (THStacks[WhichPlot]->GetStack()->Last()) )->GetBinContent(i);
+					double MCCV = MCStackClone->GetBinContent(i);
 					// Scale the covariances to events, not flux averaged events as they are right now
 					double Unc = TMath::Sqrt( CovMatrix->GetBinContent(i,i) ) * (IntegratedFlux*NTargets)/Units;
 
@@ -605,7 +645,7 @@ void interaction_breakdown(TString BaseMC = "") {
 				if (plot_unc) { THStacksMCUnc[WhichPlot]->Draw("same"); }
 
 				THStacksMCUnc[WhichPlot]->Add(MCUncTwice,"hist");
-				if (plot_unc) { THStacksMCUnc[WhichPlot]->Draw("same"); }					
+				if (plot_unc) { THStacksMCUnc[WhichPlot]->Draw(" same"); }					
 
 				RatioLine->Draw("same");
 				hratio[0][WhichPlot]->Draw("e same");	
@@ -617,13 +657,13 @@ void interaction_breakdown(TString BaseMC = "") {
 
 				double chi2, pval, sigma; int ndof;
 				
-				CalcChiSquared(Plots[0][WhichPlot],MCStack,CovMatrixEvents,chi2,ndof,pval,sigma);
+				CalcChiSquared(Plots[0][WhichPlot],MCStackClone,CovMatrixEvents,chi2,ndof,pval,sigma);
 				TString Chi2Ndof = "#chi^{2}/ndof = " + to_string_with_precision(chi2,1) + "/" + TString(std::to_string(ndof)) +", p = " + to_string_with_precision(pval,2) + ", " + to_string_with_precision(sigma,2) + "#sigma";
 
 				TLatex latexChi2;
 				latexChi2.SetTextFont(FontStyle);
 				latexChi2.SetTextSize(0.1);
-				if (plot_unc) { latexChi2.DrawLatexNDC(0.15,0.88,Chi2Ndof); }				
+				if (plot_unc) { latexChi2.DrawLatexNDC(0.15,0.88,Chi2Ndof); }
 
 				// --------------------------------------------------------------------------------------
 

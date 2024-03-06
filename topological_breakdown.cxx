@@ -106,7 +106,6 @@ void topological_breakdown(TString BaseMC = "") {
 		// We needs these for the uncertainty band
 
 		TString NameExtractedXSec = MigrationMatrixPath+"WienerSVD_Total_CovarianceMatrices_Overlay9_"+Runs[WhichRun]+"_"+UBCodeVersion+".root";
-cout << "covariance matrix = " << NameExtractedXSec << endl;
 		TFile* CovFile = new TFile(NameExtractedXSec,"readonly");		
 
 		double DataPOT = PeLEE_ReturnBeamOnRunPOT(Runs[WhichRun]);
@@ -118,7 +117,6 @@ cout << "covariance matrix = " << NameExtractedXSec << endl;
 		if (BaseMC == "" && Runs[WhichRun] == "Combined") { plot_unc = true; }
 
 		//-------------------------------------//
-
 
 		Cuts = "_NoCuts";
 
@@ -132,18 +130,11 @@ cout << "covariance matrix = " << NameExtractedXSec << endl;
 			if (BaseMC == "NoTuneOverlay9" && i != NCuts-1) { continue; }		
 			if (BaseMC == "TwiceMECOverlay9" && i != NCuts-1) { continue; }		
 
-			// GENIE v2 has only combined run
-			if (BaseMC == "GENIEv2Overlay9" && Runs[WhichRun] != "Combined") { continue; }	
-
-			// NuWro/Tweaked GENIE don't have Run 4a
-			//if (BaseMC == "Overlay9NuWro" && (Runs[WhichRun] == "Run5" || Runs[WhichRun] == "Run4a" || Runs[WhichRun] == "Run4b" || Runs[WhichRun] == "Run4aRutgers") ) { continue; }
-			//if (BaseMC == "NoTuneOverlay9" && (Runs[WhichRun] == "Run5" || Runs[WhichRun] == "Run4a" || Runs[WhichRun] == "Run4b" || Runs[WhichRun] == "Run4aRutgers") ) { continue; }
-			//if (BaseMC == "TwiceMECOverlay9" && (Runs[WhichRun] == "Run5" || Runs[WhichRun] == "Run4a" || Runs[WhichRun] == "Run4b" || Runs[WhichRun] == "Run4aRutgers") ) { continue; }												
 			TString PathToFilesCut = PathToFiles+"/"+Cuts+"/";
 
 			TH1D::SetDefaultSumw2();
 
-			// ---------------------------------------------------------------------------------------------------------------------
+			//--------------------------------------------------------------------------------
 
 			vector<TCanvas*> PlotCanvas; PlotCanvas.clear();
 			vector<THStack*> THStacks; THStacks.clear();
@@ -157,6 +148,10 @@ cout << "covariance matrix = " << NameExtractedXSec << endl;
 			vector<vector<TH1D*> > CC1pPlots; CC1pPlots.clear();
 			vector<vector<TH1D*> > NonCC1pPlots; NonCC1pPlots.clear();
 
+			vector<vector<TH1D*> > bin_width_Plots; bin_width_Plots.clear();
+			vector<vector<TH1D*> > bin_width_CC1pPlots; bin_width_CC1pPlots.clear();
+			vector<vector<TH1D*> > bin_width_NonCC1pPlots; bin_width_NonCC1pPlots.clear();
+
 			vector<vector<TH1D*> > hratio;  hratio.clear();
 
 			vector<TString> LabelsOfSamples;
@@ -166,17 +161,21 @@ cout << "covariance matrix = " << NameExtractedXSec << endl;
 			// 1: Overlay
 			// 2: ExtBNB
 			// 3: Dirt
-		
+	
+			// 0	
 			NameOfSamples.push_back("STVStudies_BeamOn9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("BeamOn");
 
+			// 1
 			if (BaseMC == "") { NameOfSamples.push_back("STVStudies_Overlay9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("MC"); }
 			else if (BaseMC == "Overlay9NuWro") { NameOfSamples.push_back("STVStudies_Overlay9NuWro_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("MC"); }
 			else if (BaseMC == "GENIEv2Overlay9") { NameOfSamples.push_back("GENIEv2STVStudies_Overlay9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("MC"); }		
 			else if (BaseMC == "NoTuneOverlay9") { NameOfSamples.push_back("NoTuneSTVStudies_Overlay9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("MC"); }
 			else if (BaseMC == "TwiceMECOverlay9") { NameOfSamples.push_back("TwiceMECSTVStudies_Overlay9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("MC"); }			
 
+			// 2
 			NameOfSamples.push_back("STVStudies_ExtBNB9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("ExtBNB");
 
+			// 3
 			if (BaseMC == "NoTuneOverlay9") { NameOfSamples.push_back("NoTuneSTVStudies_OverlayDirt9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("Dirt"); }
 			else if (BaseMC == "TwiceMECOverlay9") { NameOfSamples.push_back("TwiceMECSTVStudies_OverlayDirt9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("Dirt"); }
 			else { NameOfSamples.push_back("STVStudies_OverlayDirt9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("Dirt"); }
@@ -252,10 +251,14 @@ cout << "covariance matrix = " << NameExtractedXSec << endl;
 				CC1pPlots.push_back(CC1pCurrentPlots);
 				NonCC1pPlots.push_back(NonCC1pCurrentPlots);
 
+				bin_width_Plots.push_back(CurrentPlots);
+				bin_width_CC1pPlots.push_back(CC1pCurrentPlots);
+				bin_width_NonCC1pPlots.push_back(NonCC1pCurrentPlots);
+
 				hratio.push_back(Currenthratio);
 
 			}
-
+			
 			// Loop over the plots
 
 			for (int WhichPlot = 0; WhichPlot < N1DPlots; WhichPlot ++) {
@@ -309,15 +312,20 @@ cout << "covariance matrix = " << NameExtractedXSec << endl;
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitleSize(0.08);
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitleOffset(0.6);
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTickSize(0);
+		
+					if (WhichSample == 0) { 
 
-					double localmax = Plots[WhichSample][WhichPlot]->GetMaximum();
-					if (localmax > max) { max = localmax; }
-					Plots[0][WhichPlot]->GetYaxis()->SetRangeUser(0.,1.3*max);
+						bin_width_Plots[0][WhichPlot] = (TH1D*)(Plots[0][WhichPlot]->Clone()); 
+						Reweight(bin_width_Plots[0][WhichPlot]); 
+						max = FindOneDimHistoMaxValue(bin_width_Plots[0][WhichPlot]);
+						bin_width_Plots[0][WhichPlot]->GetYaxis()->SetRangeUser(0.,1.3*max);
 
+					}
+	
 					if (LabelsOfSamples[WhichSample] == "BeamOn") { 
 
 						gStyle->SetErrorX(0); // Removing the horizontal errors
-						Plots[WhichSample][WhichPlot]->Draw("e same"); 
+						bin_width_Plots[WhichSample][WhichPlot]->Draw("e same"); 
 						TString NBeamOnEvents = ToString((int)(Plots[WhichSample][WhichPlot]->Integral()));
 						// Unblind
 						leg[WhichPlot]->AddEntry(Plots[WhichSample][WhichPlot], "BNB Data ("+NBeamOnEvents+")","ep");
@@ -331,8 +339,11 @@ cout << "covariance matrix = " << NameExtractedXSec << endl;
 							Plots[WhichSample][WhichPlot]->SetFillStyle(3004);
 							Plots[WhichSample][WhichPlot]->SetLineWidth(1);
 
+							bin_width_Plots[WhichSample][WhichPlot] = (TH1D*)(Plots[WhichSample][WhichPlot]->Clone());
+							Reweight(bin_width_Plots[WhichSample][WhichPlot]);
+	
 							TString NExtBNBEvents = ToString( (int)(Plots[WhichSample][WhichPlot]->Integral() ) );
-							THStacks[WhichPlot]->Add(Plots[WhichSample][WhichPlot],"hist");
+							THStacks[WhichPlot]->Add(bin_width_Plots[WhichSample][WhichPlot],"hist");
 							THStacks[WhichPlot]->Draw("same");
 
 					}
@@ -342,13 +353,17 @@ cout << "covariance matrix = " << NameExtractedXSec << endl;
 							TString NCC1pEvents = ToString( (int)(CC1pPlots[WhichSample][WhichPlot]->Integral() ) );
 							CC1pPlots[WhichSample][WhichPlot]->SetLineColor(ColorsOverlay[2]);
 							CC1pPlots[WhichSample][WhichPlot]->SetFillColor(ColorsOverlay[2]);
-							THStacks[WhichPlot]->Add(CC1pPlots[WhichSample][WhichPlot],"hist");
+							bin_width_CC1pPlots[WhichSample][WhichPlot] = (TH1D*)(CC1pPlots[WhichSample][WhichPlot]->Clone());
+							Reweight(bin_width_CC1pPlots[WhichSample][WhichPlot]);
+							THStacks[WhichPlot]->Add(bin_width_CC1pPlots[WhichSample][WhichPlot],"hist");
 							THStacks[WhichPlot]->Draw("same");
 
 							TString NNonCC1pEvents = ToString( (int)(NonCC1pPlots[WhichSample][WhichPlot]->Integral() ) );
 							NonCC1pPlots[WhichSample][WhichPlot]->SetLineColor(ColorsOverlay[3]);
 							NonCC1pPlots[WhichSample][WhichPlot]->SetFillColor(ColorsOverlay[3]);
-							THStacks[WhichPlot]->Add(NonCC1pPlots[WhichSample][WhichPlot],"hist");
+							bin_width_NonCC1pPlots[WhichSample][WhichPlot] = (TH1D*)(NonCC1pPlots[WhichSample][WhichPlot]->Clone());
+							Reweight(bin_width_NonCC1pPlots[WhichSample][WhichPlot]);
+							THStacks[WhichPlot]->Add(bin_width_NonCC1pPlots[WhichSample][WhichPlot],"hist");
 							leg[WhichPlot]->AddEntry(NonCC1pPlots[WhichSample][WhichPlot],"Out-of-cryo ("+NNonCC1pEvents+")","f");
 							THStacks[WhichPlot]->Draw("same");
 
@@ -359,7 +374,9 @@ cout << "covariance matrix = " << NameExtractedXSec << endl;
 							TString NCC1pEvents = ToString( (int)(CC1pPlots[WhichSample][WhichPlot]->Integral() ) );
 							CC1pPlots[WhichSample][WhichPlot]->SetLineColor(ColorsOverlay[0]);
 							CC1pPlots[WhichSample][WhichPlot]->SetFillColor(ColorsOverlay[0]);
-							THStacks[WhichPlot]->Add(CC1pPlots[WhichSample][WhichPlot],"hist");
+							bin_width_CC1pPlots[WhichSample][WhichPlot] = (TH1D*)(CC1pPlots[WhichSample][WhichPlot]->Clone());
+							Reweight(bin_width_CC1pPlots[WhichSample][WhichPlot]);
+							THStacks[WhichPlot]->Add(bin_width_CC1pPlots[WhichSample][WhichPlot],"hist");
 
 							// add the cosmic label first
 							TString NExtBNBEvents = ToString( (int)(Plots[2][WhichPlot]->Integral() ) );							
@@ -373,7 +390,9 @@ cout << "covariance matrix = " << NameExtractedXSec << endl;
 							TString NNonCC1pEvents = ToString( (int)(NonCC1pPlots[WhichSample][WhichPlot]->Integral() ) );
 							NonCC1pPlots[WhichSample][WhichPlot]->SetLineColor(ColorsOverlay[1]);
 							NonCC1pPlots[WhichSample][WhichPlot]->SetFillColor(ColorsOverlay[1]);
-							THStacks[WhichPlot]->Add(NonCC1pPlots[WhichSample][WhichPlot],"hist");
+							bin_width_NonCC1pPlots[WhichSample][WhichPlot] = (TH1D*)(NonCC1pPlots[WhichSample][WhichPlot]->Clone());
+							Reweight(bin_width_NonCC1pPlots[WhichSample][WhichPlot]);
+							THStacks[WhichPlot]->Add(bin_width_NonCC1pPlots[WhichSample][WhichPlot],"hist");
 							leg[WhichPlot]->AddEntry(NonCC1pPlots[WhichSample][WhichPlot],"MC non-CC1p0#pi ("+NNonCC1pEvents+")","f");
 							THStacks[WhichPlot]->Draw("same");
 
@@ -383,9 +402,9 @@ cout << "covariance matrix = " << NameExtractedXSec << endl;
 				} // End of the loop over the samples
 
 				// Unblind
-				Plots[0][WhichPlot]->Draw("e same"); 
-
-				// -------------------------------------------------------------------------------------------------------------------				
+				bin_width_Plots[0][WhichPlot]->Draw("e same"); 
+				
+				// -----------------------------------------------------------------------------------	
 
 				gPad->RedrawAxis();
 
@@ -400,12 +419,12 @@ cout << "covariance matrix = " << NameExtractedXSec << endl;
 				TString ReducedPlotName = PlotNameDuplicate.ReplaceAll("Reco","") ;
 				textSlice->DrawLatexNDC(0.115, 0.8, LatexLabel[ReducedPlotName]);	
 
-				// -------------------------------------------------------------------------------------------------------------------
+				// ------------------------------------------------------------------------------------
 
 				hratio[1][WhichPlot]->Add(hratio[2][WhichPlot]);
 				hratio[1][WhichPlot]->Add(hratio[3][WhichPlot]);
 				hratio[0][WhichPlot]->Divide(hratio[1][WhichPlot]);
-
+				
 				hratio[0][WhichPlot]->GetXaxis()->SetTitleFont(FontStyle);
 				hratio[0][WhichPlot]->GetXaxis()->SetLabelFont(FontStyle);
 				hratio[0][WhichPlot]->GetYaxis()->SetTitle("#frac{Data}{Prediction}");
@@ -482,7 +501,7 @@ cout << "covariance matrix = " << NameExtractedXSec << endl;
 
 				// -------------------------------------------------------------------- //				
 
-				if ( string(PlotNames[WhichPlot]).find("ThetaZ_ECal_") != std::string::npos ) {
+				if ( string(PlotNames[WhichPlot]).find("RecoThetaZ") != std::string::npos ) {
 
 					TLatex latexDataStats;
 					latexDataStats.SetTextFont(FontStyle);
@@ -494,12 +513,14 @@ cout << "covariance matrix = " << NameExtractedXSec << endl;
 					latexDataStats.DrawLatexNDC(0.61,0.6, LabelDataStats);				
 
 					TH1D* MC = (TH1D*) (THStacks[WhichPlot]->GetStack()->Last());
+					TH1D* clone_MC = (TH1D*)(MC->Clone());
+					rm_bin_width(clone_MC);
 					TLatex latexMCStats;
 					latexMCStats.SetTextFont(FontStyle);
 					latexMCStats.SetTextSize(0.07);
 					double mc_peak = FindOneDimHistoMaxValueBin(MC);
-					double mc_mean = MC->GetMean();
-					double mc_std = MC->GetRMS();
+					double mc_mean = clone_MC->GetMean();
+					double mc_std = clone_MC->GetRMS();
 					TString LabelMCStats = "#splitline{MC peak = " + to_string_with_precision(mc_peak,2) + "}{#mu = " + to_string_with_precision(mc_mean,2) + ", #sigma = " + to_string_with_precision(mc_std,2) + "}";
 					latexMCStats.DrawLatexNDC(0.61,0.4, LabelMCStats);				
 
@@ -540,11 +561,13 @@ cout << "covariance matrix = " << NameExtractedXSec << endl;
 				//CovMatrix->Scale(TMath::Power( (IntegratedFlux*NTargets)/Units ,2.));
 
 				TH1D* MCUnc = (TH1D*)(Plots[0][WhichPlot]->Clone());				
-				TH1D* MCStack = (TH1D*) (THStacks[WhichPlot]->GetStack()->Last());
+				TH1D* MCStack = (TH1D*) (THStacks[WhichPlot]->GetStack())->Last();
+				TH1D* MCStackClone = (TH1D*)(MCStack->Clone());
+				rm_bin_width(MCStackClone);
 
 				for (int i = 1; i <= n;i++ ) { 
 
-					double MCCV = MCStack->GetBinContent(i);
+					double MCCV = MCStackClone->GetBinContent(i);
 					// Scale the covariances to events, not flux averaged events as they are right now
 					double Unc = TMath::Sqrt( CovMatrix->GetBinContent(i,i) ) * (IntegratedFlux*NTargets)/Units;
 
@@ -600,7 +623,7 @@ cout << "covariance matrix = " << NameExtractedXSec << endl;
 				if (plot_unc) { THStacksMCUnc[WhichPlot]->Draw("same"); }
 
 				THStacksMCUnc[WhichPlot]->Add(MCUncTwice,"hist");
-				if (plot_unc) { THStacksMCUnc[WhichPlot]->Draw(" same"); }			
+				if (plot_unc) { THStacksMCUnc[WhichPlot]->Draw(" same"); }					
 
 				RatioLine->Draw("same");
 				hratio[0][WhichPlot]->Draw("e same");	
@@ -612,13 +635,13 @@ cout << "covariance matrix = " << NameExtractedXSec << endl;
 
 				double chi2, pval, sigma; int ndof;
 				
-				CalcChiSquared(Plots[0][WhichPlot],MCStack,CovMatrixEvents,chi2,ndof,pval,sigma);
+				CalcChiSquared(Plots[0][WhichPlot],MCStackClone,CovMatrixEvents,chi2,ndof,pval,sigma);
 				TString Chi2Ndof = "#chi^{2}/ndof = " + to_string_with_precision(chi2,1) + "/" + TString(std::to_string(ndof)) +", p = " + to_string_with_precision(pval,2) + ", " + to_string_with_precision(sigma,2) + "#sigma";
 
 				TLatex latexChi2;
 				latexChi2.SetTextFont(FontStyle);
 				latexChi2.SetTextSize(0.1);
-				if (plot_unc) { latexChi2.DrawLatexNDC(0.15,0.88,Chi2Ndof); }			
+				if (plot_unc) { latexChi2.DrawLatexNDC(0.15,0.88,Chi2Ndof); }				
 
 				//----------------------------------------//
 
