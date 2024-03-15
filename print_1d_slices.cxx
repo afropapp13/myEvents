@@ -88,31 +88,34 @@ void print_1d_slices() {
 	
 	//--------------------------------------//
 
-	// ThetaZ
+	// ThetaVis
 
-	plot_names.push_back("CC1pThetaZ_ECalSlices"); slices.push_back(TwoDArrayNBinsECal); variable.push_back("E_{Cal}^{reco} [GeV]");	
-	plot_names.push_back("CC1pTrueThetaZ_TrueECalSlices"); slices.push_back(TwoDArrayNBinsECal); variable.push_back("E_{Cal}^{true} [GeV]");	
-	plot_names.push_back("CC1pTrueThetaZ_TrueEnuSlices"); slices.push_back(TwoDArrayNBinsECal); variable.push_back("E_{#nu}^{true} [GeV]");	
-	plot_names.push_back("CC1pThetaZDiff_ECalSlices"); slices.push_back(TwoDArrayNBinsECal); variable.push_back("E_{Cal} [GeV]");
-	plot_names.push_back("CC1pThetaZReso_ECalSlices"); slices.push_back(TwoDArrayNBinsECal); variable.push_back("E_{Cal} [GeV]");
-
-	plot_names.push_back("CC1pThetaZDiff_MuonMomentumSlices"); slices.push_back(TwoDArrayNBinsMuonMomentum); variable.push_back("p_{#mu} [GeV/c]");
-	plot_names.push_back("CC1pThetaZReso_MuonMomentumSlices"); slices.push_back(TwoDArrayNBinsMuonMomentum); variable.push_back("p_{#mu} [GeV/c]");
-
-	plot_names.push_back("CC1pThetaZDiff_ProtonMomentumSlices"); slices.push_back(TwoDArrayNBinsProtonMomentum); variable.push_back("p_{p} [GeV/c]");
-	plot_names.push_back("CC1pThetaZReso_ProtonMomentumSlices"); slices.push_back(TwoDArrayNBinsProtonMomentum); variable.push_back("p_{p} [GeV/c]");
+	plot_names.push_back("CC1pThetaVis_DeltaPnSlices"); slices.push_back(TwoDArrayNBinsDeltaPn); variable.push_back("p_{n}^{reco} [GeV/c]");	
+	plot_names.push_back("CC1pThetaVis_DeltaPTSlices"); slices.push_back(TwoDArrayNBinsDeltaPT); variable.push_back("#deltap_{T}^{reco} [GeV/c]");	
 	
-	plot_names.push_back("CC1pThetaZDiff_DeltaPTSlices"); slices.push_back(TwoDArrayNBinsDeltaPT); variable.push_back("#deltap_{T} [GeV/c]");
-	plot_names.push_back("CC1pThetaZReso_DeltaPTSlices"); slices.push_back(TwoDArrayNBinsDeltaPT); variable.push_back("#deltap_{T} [GeV/c]");
-	
-	plot_names.push_back("CC1pThetaZDiff_DeltaAlphaTSlices"); slices.push_back(TwoDArrayNBinsDeltaAlphaT); variable.push_back("#delta#alpha_{T} [deg]");
-	plot_names.push_back("CC1pThetaZReso_DeltaAlphaTSlices"); slices.push_back(TwoDArrayNBinsDeltaAlphaT); variable.push_back("#delta#alpha_{T} [deg]");
+	plot_names.push_back("CC1pThetaVis_ECalSlices"); slices.push_back(TwoDArrayNBinsECal); variable.push_back("E_{Cal}^{reco} [GeV]");	
+	plot_names.push_back("CC1pTrueThetaVis_TrueECalSlices"); slices.push_back(TwoDArrayNBinsECal); variable.push_back("E_{Cal}^{true} [GeV]");	
+	plot_names.push_back("CC1pTrueThetaVis_TrueEnuSlices"); slices.push_back(TwoDArrayNBinsECal); variable.push_back("E_{#nu}^{true} [GeV]");	
+	plot_names.push_back("CC1pThetaVisDiff_ECalSlices"); slices.push_back(TwoDArrayNBinsECal); variable.push_back("E_{Cal} [GeV]");
+	plot_names.push_back("CC1pThetaVisReso_ECalSlices"); slices.push_back(TwoDArrayNBinsECal); variable.push_back("E_{Cal} [GeV]");
 
-	plot_names.push_back("CC1pThetaZDiff_DeltaPnSlices"); slices.push_back(TwoDArrayNBinsDeltaPn); variable.push_back("p_{n} [GeV/c]");
-	plot_names.push_back("CC1pThetaZReso_DeltaPnSlices"); slices.push_back(TwoDArrayNBinsDeltaPn); variable.push_back("p_{n} [GeV/c]");
+	plot_names.push_back("CC1pThetaVisDiff_MuonMomentumSlices"); slices.push_back(TwoDArrayNBinsMuonMomentum); variable.push_back("p_{#mu} [GeV/c]");
+	plot_names.push_back("CC1pThetaVisReso_MuonMomentumSlices"); slices.push_back(TwoDArrayNBinsMuonMomentum); variable.push_back("p_{#mu} [GeV/c]");
+
+	plot_names.push_back("CC1pThetaVisDiff_ProtonMomentumSlices"); slices.push_back(TwoDArrayNBinsProtonMomentum); variable.push_back("p_{p} [GeV/c]");
+	plot_names.push_back("CC1pThetaVisReso_ProtonMomentumSlices"); slices.push_back(TwoDArrayNBinsProtonMomentum); variable.push_back("p_{p} [GeV/c]");
 	
-	plot_names.push_back("CC1pThetaZDiff_DeltaAlpha3DSlices"); slices.push_back(TwoDArrayNBinsDeltaAlpha3D); variable.push_back("#alpha_{3D} [deg]");
-	plot_names.push_back("CC1pThetaZReso_DeltaAlpha3DSlices"); slices.push_back(TwoDArrayNBinsDeltaAlpha3D); variable.push_back("#alpha_{3D} [deg]");
+	plot_names.push_back("CC1pThetaVisDiff_DeltaPTSlices"); slices.push_back(TwoDArrayNBinsDeltaPT); variable.push_back("#deltap_{T} [GeV/c]");
+	plot_names.push_back("CC1pThetaVisReso_DeltaPTSlices"); slices.push_back(TwoDArrayNBinsDeltaPT); variable.push_back("#deltap_{T} [GeV/c]");
+	
+	plot_names.push_back("CC1pThetaVisDiff_DeltaAlphaTSlices"); slices.push_back(TwoDArrayNBinsDeltaAlphaT); variable.push_back("#delta#alpha_{T} [deg]");
+	plot_names.push_back("CC1pThetaVisReso_DeltaAlphaTSlices"); slices.push_back(TwoDArrayNBinsDeltaAlphaT); variable.push_back("#delta#alpha_{T} [deg]");
+
+	plot_names.push_back("CC1pThetaVisDiff_DeltaPnSlices"); slices.push_back(TwoDArrayNBinsDeltaPn); variable.push_back("p_{n} [GeV/c]");
+	plot_names.push_back("CC1pThetaVisReso_DeltaPnSlices"); slices.push_back(TwoDArrayNBinsDeltaPn); variable.push_back("p_{n} [GeV/c]");
+	
+	plot_names.push_back("CC1pThetaVisDiff_DeltaAlpha3DSlices"); slices.push_back(TwoDArrayNBinsDeltaAlpha3D); variable.push_back("#alpha_{3D} [deg]");
+	plot_names.push_back("CC1pThetaVisReso_DeltaAlpha3DSlices"); slices.push_back(TwoDArrayNBinsDeltaAlpha3D); variable.push_back("#alpha_{3D} [deg]");
 
 
 	const int nplots = plot_names.size();

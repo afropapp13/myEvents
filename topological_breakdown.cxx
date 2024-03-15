@@ -30,12 +30,12 @@ void topological_breakdown(TString BaseMC = "") {
 
 	PlotNames.push_back("RecoMuonCosThetaPlot");
 	PlotNames.push_back("RecoMuonCosThetaSingleBinPlot");	
-	PlotNames.push_back("RecoThetaZPlot");	
-	PlotNames.push_back("RecoCosThetaZPlot");	
-	PlotNames.push_back("RecoThetaZ_ECal_0_00To0_50Plot");	
-	PlotNames.push_back("RecoThetaZ_ECal_0_50To0_80Plot");	
-	PlotNames.push_back("RecoThetaZ_ECal_0_80To2_00Plot");	
-	PlotNames.push_back("RecoSerialThetaZ_ECalPlot");	
+	PlotNames.push_back("RecoThetaVisPlot");	
+	PlotNames.push_back("RecoCosThetaVisPlot");	
+	PlotNames.push_back("RecoThetaVis_ECal_0_00To0_50Plot");	
+	PlotNames.push_back("RecoThetaVis_ECal_0_50To0_80Plot");	
+	PlotNames.push_back("RecoThetaVis_ECal_0_80To2_00Plot");	
+	PlotNames.push_back("RecoSerialThetaVis_ECalPlot");	
 	
 	const int N1DPlots = PlotNames.size();
 	cout << "Number of 1D Plots = " << N1DPlots << endl;
@@ -281,7 +281,7 @@ void topological_breakdown(TString BaseMC = "") {
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetLabelSize(0.06);
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitle(Runs[WhichRun] + " events / bin");
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitleSize(0.08);
-					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitleOffset(0.7);
+					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitleOffset(0.65);
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTickSize(0);
 		
 					if (WhichSample == 0) { 
@@ -472,7 +472,7 @@ void topological_breakdown(TString BaseMC = "") {
 
 				// -------------------------------------------------------------------- //				
 
-				if ( string(PlotNames[WhichPlot]).find("RecoThetaZ") != std::string::npos ) {
+				if ( string(PlotNames[WhichPlot]).find("RecoThetaVis") != std::string::npos ) {
 
 					TLatex latexDataStats;
 					latexDataStats.SetTextFont(FontStyle);

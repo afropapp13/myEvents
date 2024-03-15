@@ -180,7 +180,7 @@ public :
    vector<double>  *True_Q2;
    vector<double>  *True_DeltaPhi;
    vector<double>  *True_DeltaTheta;
-   vector<double>  *True_ThetaZ;
+   vector<double>  *True_ThetaVis;
 
 
    // List of branches
@@ -336,7 +336,7 @@ public :
    TBranch        *b_True_Q2;   //!
    TBranch        *b_True_DeltaPhi;   //!
    TBranch        *b_True_DeltaTheta;   //!
-   TBranch        *b_True_ThetaZ;   //!
+   TBranch        *b_True_ThetaVis;   //!
 
 
    true_selection(TString WhichSample="",TString Tune="",TString WhichEventWeightLabel="", int UniverseIndex=-1,TTree *tree=0);
@@ -533,7 +533,7 @@ void true_selection::Init(TTree *tree)
    True_Q2 = 0;
    True_DeltaPhi = 0;
    True_DeltaTheta = 0;
-   True_ThetaZ = 0;
+   True_ThetaVis = 0;
    // Set branch addresses and branch pointers
    if (!tree) return;
    fChain = tree;
@@ -696,7 +696,7 @@ void true_selection::Init(TTree *tree)
    fChain->SetBranchAddress("True_Q2", &True_Q2, &b_True_Q2);
    fChain->SetBranchAddress("True_DeltaPhi", &True_DeltaPhi, &b_True_DeltaPhi);
    fChain->SetBranchAddress("True_DeltaTheta", &True_DeltaTheta, &b_True_DeltaTheta);
-   fChain->SetBranchAddress("True_ThetaZ", &True_ThetaZ, &b_True_ThetaZ);
+   fChain->SetBranchAddress("True_ThetaVis", &True_ThetaVis, &b_True_ThetaVis);
    Notify();
 
 }

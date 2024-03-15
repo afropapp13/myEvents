@@ -30,11 +30,11 @@ void interaction_breakdown(TString BaseMC = "") {
 
 	PlotNames.push_back("RecoMuonCosThetaPlot");
 	PlotNames.push_back("RecoMuonCosThetaSingleBinPlot");
-	PlotNames.push_back("RecoThetaZPlot");
-	PlotNames.push_back("RecoThetaZ_ECal_0_00To0_50Plot");	
-	PlotNames.push_back("RecoThetaZ_ECal_0_50To0_80Plot");	
-	PlotNames.push_back("RecoThetaZ_ECal_0_80To2_00Plot");	
-	PlotNames.push_back("RecoSerialThetaZ_ECalPlot");	
+	PlotNames.push_back("RecoThetaVisPlot");
+	PlotNames.push_back("RecoThetaVis_ECal_0_00To0_50Plot");	
+	PlotNames.push_back("RecoThetaVis_ECal_0_50To0_80Plot");	
+	PlotNames.push_back("RecoThetaVis_ECal_0_80To2_00Plot");	
+	PlotNames.push_back("RecoSerialThetaVis_ECalPlot");	
 
 	const int N1DPlots = PlotNames.size();
 	cout << "Number of 1D Plots = " << N1DPlots << endl;
@@ -293,7 +293,7 @@ void interaction_breakdown(TString BaseMC = "") {
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetLabelSize(0.06);
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitle(Runs[WhichRun] + " events / bin");
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitleSize(0.08);
-					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitleOffset(0.7);
+					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitleOffset(0.65);
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTickSize(0);
 
 					if (WhichSample == 0) { 
@@ -493,14 +493,14 @@ void interaction_breakdown(TString BaseMC = "") {
 
 				// -------------------------------------------------------------------- //				
 
-				if ( string(PlotNames[WhichPlot]).find("RecoThetaZ") != std::string::npos ) {
+				if ( string(PlotNames[WhichPlot]).find("RecoThetaVis") != std::string::npos ) {
 
 					TLatex latexDataStats;
 					latexDataStats.SetTextFont(FontStyle);
 					latexDataStats.SetTextSize(0.07);
 					double data_peak = FindOneDimHistoMaxValueBin(Plots[0][WhichPlot]);
-					double data_mean = Plots[0][WhichPlot]->GetMean();
-					double data_std = Plots[0][WhichPlot]->GetRMS();
+					double data_mean = bin_width_Plots[0][WhichPlot]->GetMean();
+					double data_std = bin_width_Plots[0][WhichPlot]->GetRMS();
 					TString LabelDataStats = "#splitline{Data peak = " + to_string_with_precision(data_peak,2) + "}{#mu = " + to_string_with_precision(data_mean,2) + ", #sigma = " + to_string_with_precision(data_std,2) + "}";
 					latexDataStats.DrawLatexNDC(0.61,0.6, LabelDataStats);				
 
@@ -511,8 +511,8 @@ void interaction_breakdown(TString BaseMC = "") {
 					latexMCStats.SetTextFont(FontStyle);
 					latexMCStats.SetTextSize(0.07);
 					double mc_peak = FindOneDimHistoMaxValueBin(MC);
-					double mc_mean = clone_MC->GetMean();
-					double mc_std = clone_MC->GetRMS();
+					double mc_mean = MC->GetMean();
+					double mc_std = MC->GetRMS();
 					TString LabelMCStats = "#splitline{MC peak = " + to_string_with_precision(mc_peak,2) + "}{#mu = " + to_string_with_precision(mc_mean,2) + ", #sigma = " + to_string_with_precision(mc_std,2) + "}";
 					latexMCStats.DrawLatexNDC(0.61,0.4, LabelMCStats);				
 

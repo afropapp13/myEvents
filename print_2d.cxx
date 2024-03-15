@@ -49,12 +49,14 @@ void print_2d() {
 
 	vector<TString> PlotNames;
 
-	PlotNames.push_back("RecoThetaZRecoECalPlot"); 
+	PlotNames.push_back("RecoThetaVisRecoECalPlot"); 
+	PlotNames.push_back("RecoThetaVisRecoDeltaPnPlot"); 
+	PlotNames.push_back("RecoThetaVisRecoDeltaPTPlot"); 
 	PlotNames.push_back("RecoECalTrueECalPlot"); 
 	PlotNames.push_back("RecoECalTrueEnuPlot"); 
 
-	PlotNames.push_back("TrueThetaZTrueECalPlot"); 
-	PlotNames.push_back("TrueThetaZTrueEnuPlot"); 
+	PlotNames.push_back("TrueThetaVisTrueECalPlot"); 
+	PlotNames.push_back("TrueThetaVisTrueEnuPlot"); 
 	
 	const int N2DPlots = PlotNames.size();
 	cout << "Number of 2D Plots = " << N2DPlots << endl;
