@@ -310,7 +310,7 @@ void topological_breakdown(TString BaseMC = "") {
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetLabelSize(0.06);
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitle(Runs[WhichRun] + " events / bin");
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitleSize(0.08);
-					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitleOffset(0.6);
+					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitleOffset(0.65);
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTickSize(0);
 		
 					if (WhichSample == 0) { 

@@ -114,7 +114,7 @@ void interaction_breakdown(TString BaseMC = "") {
 		// -------------------------------------------------------------------------------------------------------------------------------------
 
 		bool plot_unc = false;
-		if (BaseMC == "" && Runs[WhichRun] == "Combined") { plot_unc = true; }
+		if (BaseMC == "" && Runs[WhichRun] == "Combined" ) { plot_unc = true; }
 
 		//-------------------------------------//
 
@@ -277,6 +277,7 @@ void interaction_breakdown(TString BaseMC = "") {
 
 			for (int WhichPlot = 0; WhichPlot < N1DPlots; WhichPlot ++) {
 	
+
 				TString PlotCanvasName = Runs[WhichRun]+"_"+PlotNames[WhichPlot]+Cuts;
 				PlotCanvas.push_back(new TCanvas(PlotCanvasName,PlotCanvasName,205,34,1024,768));
 				PlotCanvas[WhichPlot]->cd();
@@ -323,7 +324,7 @@ void interaction_breakdown(TString BaseMC = "") {
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetLabelSize(0.06);
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitle(Runs[WhichRun] + " events / bin");
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitleSize(0.08);
-					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitleOffset(0.6);
+					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitleOffset(0.65);
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTickSize(0);
 
 					if (WhichSample == 0) { 
