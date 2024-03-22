@@ -99,8 +99,6 @@ void fluxes() {
 							
 	// --------------------------------------------------------------------------------------------------
 
-	// Pad 1: Unoscillated spectra
-
 	PlotCanvas->cd();
 
 	bnb_flux->Draw("c hist same");
@@ -123,6 +121,6 @@ void fluxes() {
 	PlotCanvas->SaveAs("/exp/uboone/data/users/apapadop/PeLEETuples_Atmospherics/FlatTTreePlots/"+CanvasName+".pdf");
 	delete PlotCanvas;
 
-	// --------------------------------------------------------------------------------------------------
+	//---------------------//
 
 } // End of the program
