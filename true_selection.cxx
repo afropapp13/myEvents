@@ -179,6 +179,7 @@ void true_selection::Loop() {
 				
 		}
 
+		// Set some limits to make sure that the weights are not negative or unreasonable / infinity
 		if (Weight <= 0 || Weight > 30) { continue; }
 		if (T2KWeight <= 0 || T2KWeight > 30) { continue; }		
 		// Weight from v3.0.4 to v.3.0.6 * weight from application of T2K tune
