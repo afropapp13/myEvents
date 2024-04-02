@@ -1,34 +1,13 @@
 ###########################################################################################################################################################################
 
-# switch between series of cuts
+# run just the reco combined files 
 
-root -b event_selection_cv.cxx 
-
-###########################################################################################################################################################################
-
-# Detector variations
-root -b event_selection_det.cxx 
-
-# GEANT4 variations
-root -b event_selection_g4.cxx
-
-# GENIE variations
-root -b event_selection_xsec.cxx 
-
-# Flux variations
-root -b event_selection_flux.cxx 
-
-# MC_Stat variations
-root -b event_selection_mc_stat.cxx 
-
-# NuWro Fake Data
-root -b event_selection_nuwro_fds.cxx
+root -b event_selection_cv_reco.cxx 
 
 ###########################################################################################################################################################################
 
-# Untuned MC & Twice MEC
-
-root -b event_selection_cv_fds.cxx
+# run both reco and truth for all files
+./run_event_selection.sh 
 
 ###########################################################################################################################################################################
 

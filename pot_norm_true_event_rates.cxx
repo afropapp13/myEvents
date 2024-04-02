@@ -18,11 +18,12 @@
 
 #include "../myClasses/Tools.h"
 #include "../myClasses/Constants.h"
+#include "../myClasses/myFunctions.cpp"
 
 using namespace Constants;
 using namespace std;
 
-void PrettyPlot(TH1D* h,int LineWidth = 2, int FontStyle = 132, int Ndivisions = 6, double TextSize = 0.06) {
+void myPrettyPlot(TH1D* h,int LineWidth = 2, int FontStyle = 132, int Ndivisions = 6, double TextSize = 0.06) {
 
 	// ----------------------------------------------------------------------------------------------------------------
 
@@ -52,13 +53,13 @@ void PrettyPlot(TH1D* h,int LineWidth = 2, int FontStyle = 132, int Ndivisions =
 	h->GetYaxis()->SetLabelFont(FontStyle);
 	h->GetYaxis()->SetTitleOffset(1.05);
 	h->GetYaxis()->SetNdivisions(Ndivisions);
-	h->GetYaxis()->SetTitle("POT Normalized Events");
+	h->GetYaxis()->SetTitle("True POT Normalized Events");
 
 	return;	
 
 }
 
-void pot_norm_event_rates() {
+void pot_norm_true_event_rates() {
 
 	// ----------------------------------------------------------------------------------------------------------------------------------------
 
@@ -73,27 +74,17 @@ void pot_norm_event_rates() {
 
 	const std::vector<int> Colors{kOrange+7,kAzure-4,kBlack,610,410,kRed+1,kGreen+3,kBlue};
 
-	// ----------------------------------------------------------------------------------------------------------------------------------------
-
-//	TString Cuts = "_NoCuts";
-//	TString Cuts = "_NoCuts_NuScore";
-//	TString Cuts = "_NoCuts_NuScore_ThreePlaneLogChi2";
-	TString Cuts = "_NoCuts_PID_NuScore_CRT";
-
 	// -----------------------------------------------------------------------------------------------------------------------------
 
 	TH1D::SetDefaultSumw2();
 	vector<TString> FileNames; FileNames.clear();
 	vector<TString> Label; Label.clear();
 	vector<TH1D*> Plots; Plots.clear();
+	vector<double> pot; pot.clear();
 
 	// -----------------------------------------------------------------------------------------------------------------------------
 
-	TString PlotName = "RecoMuonCosThetaPlot";
-//	TString PlotName = "RecoDeltaPTPlot";
-//	TString PlotName = "RecoDeltaAlphaTPlot";
-//	TString PlotName = "RecoDeltaPhiTPlot";
-//	TString PlotName = "RecoMuonCosThetaSingleBinPlot";
+	TString PlotName = "TrueMuonCosThetaPlot";
 
 	// -----------------------------------------------------------------------------------------------------------------------------
 
@@ -104,7 +95,6 @@ void pot_norm_event_rates() {
 	FileNames.push_back("Overlay9_Run4c"); Label.push_back("Run4c"); pot.push_back(Fulltor860_wcut_Run4c);
 	FileNames.push_back("Overlay9_Run4d"); Label.push_back("Run4d"); pot.push_back(Fulltor860_wcut_Run4d);
 	FileNames.push_back("Overlay9_Run5"); Label.push_back("Run5"); pot.push_back(Fulltor860_wcut_Run5);
-	FileNames.push_back("Overlay9_Combined"); Label.push_back("Combined"); pot.push_back(Fulltor860_wcut_Combined);
 
 	const int NFiles = FileNames.size();
 
@@ -117,22 +107,23 @@ void pot_norm_event_rates() {
 
 	// -----------------------------------------------------------------------------------------------------------------------------
 
-	TLegend* leg = new TLegend(0.5,0.6,0.7,0.8);
+	TLegend* leg = new TLegend(0.2,0.5,0.4,0.8);
 	leg->SetNColumns(1);
 
 	// -----------------------------------------------------------------------------------------------------------------------------
 
 	for (int WhichFile = 0; WhichFile < NFiles; WhichFile++) {
 
-		TFile* f = TFile::Open(PathToFiles+Cuts+"/STVStudies_"+FileNames[WhichFile]+Cuts+".root");
+		TFile* f = TFile::Open(PathToFiles+"/TruthSTVAnalysis_"+FileNames[WhichFile]+"_"+UBCodeVersion+".root");
 		TH1D* h = (TH1D*)(f->Get(PlotName));
 		Plots.push_back(h);
 			
 		Plots[WhichFile]->SetLineColor(Colors[WhichFile]);
-		PrettyPlot(Plots[WhichFile]);
+		myPrettyPlot(Plots[WhichFile]);
+		Plots[WhichFile]->Scale(pot[0]/pot[WhichFile]);
 		Plots[WhichFile]->Draw("e same");
 
-		leg->AddEntry(Plots[WhichFile],Label[WhichFile],"l");
+		leg->AddEntry(Plots[WhichFile],Label[WhichFile] + " " + ToString(pot[WhichFile]),"l");
 
 	}
 
