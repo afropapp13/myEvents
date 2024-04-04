@@ -487,7 +487,7 @@ void topological_breakdown(TString BaseMC = "") {
 					double data_mean = bin_width_Plots[0][WhichPlot]->GetMean();
 					double data_std = bin_width_Plots[0][WhichPlot]->GetRMS();
 					TString LabelDataStats = "#splitline{Data peak = " + to_string_with_precision(data_peak,2) + "}{#mu = " + to_string_with_precision(data_mean,2) + ", #sigma = " + to_string_with_precision(data_std,2) + "}";
-					latexDataStats.DrawLatexNDC(0.61,0.6, LabelDataStats);				
+					//latexDataStats.DrawLatexNDC(0.61,0.6, LabelDataStats);				
 
 					TH1D* MC = (TH1D*) (THStacks[WhichPlot]->GetStack()->Last());
 					TH1D* clone_MC = (TH1D*)(MC->Clone());
@@ -499,7 +499,7 @@ void topological_breakdown(TString BaseMC = "") {
 					double mc_mean = MC->GetMean();
 					double mc_std = MC->GetRMS();
 					TString LabelMCStats = "#splitline{MC peak = " + to_string_with_precision(mc_peak,2) + "}{#mu = " + to_string_with_precision(mc_mean,2) + ", #sigma = " + to_string_with_precision(mc_std,2) + "}";
-					latexMCStats.DrawLatexNDC(0.61,0.4, LabelMCStats);				
+					//latexMCStats.DrawLatexNDC(0.61,0.4, LabelMCStats);				
 
 
 				}
