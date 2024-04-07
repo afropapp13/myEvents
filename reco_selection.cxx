@@ -146,7 +146,7 @@ void reco_selection::Loop() {
 
 		// Txt file to keep track of the run/subrun/event of the candidate events
 
-		TString RunTxtName = "/uboone/data/users/apapadop/my3DEvents/myTxtFiles/"+UBCodeVersion+"/TxtmyRunSubRunEvents_"+fWhichSample+"_"+UBCodeVersion+".txt";
+		TString RunTxtName = "/exp/uboone/data/users/apapadop/my3DEvents/myTxtFiles/"+UBCodeVersion+"/TxtmyRunSubRunEvents_"+fWhichSample+"_"+UBCodeVersion+".txt";
 		ofstream myRunTxtFile;
 		myRunTxtFile.open(RunTxtName);
 		myRunTxtFile << std::fixed << std::setprecision(2);
@@ -777,6 +777,7 @@ void reco_selection::Loop() {
 			// -------------------------------------------------------------------------------------------------------------------------
 
 			weight = POTWeight;
+			if (jentry == nentries -1) { cout << "pot scale = " << POTWeight << endl; }
 
 			if (string(fWhichSample).find("Overlay") != std::string::npos) { 
 
@@ -1083,7 +1084,7 @@ void reco_selection::Loop() {
 			}
 
 			if (PassedSelection == false) { continue; }
-
+			
 			NEventsPassingSelectionCuts++;
 
 			// -------------------------------------------------------------------------------------------------------------------------

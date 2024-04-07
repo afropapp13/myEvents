@@ -321,7 +321,7 @@
 	XSecEventWeightLabels.push_back("Theta_Delta2Npi_UBGenie"); XSecUniverses.push_back(2);
 	XSecEventWeightLabels.push_back("VecFFCCQEshape_UBGenie"); XSecUniverses.push_back(2);
 	XSecEventWeightLabels.push_back("XSecShape_CCMEC_UBGenie"); XSecUniverses.push_back(2);
-	XSecEventWeightLabels.push_back("All_UBGenie"); Universes.push_back(NXSecEUniverses);
+	XSecEventWeightLabels.push_back("All_UBGenie"); XSecUniverses.push_back(NXSecUniverses);
 
 	for (int i = 0;i < (int)(XSecWhichSampleArray.size()); i++) {
 

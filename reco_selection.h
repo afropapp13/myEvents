@@ -140,8 +140,6 @@ public :
    Float_t         crthitpe;
    Float_t         CosmicIPAll3D;
    Float_t         CosmicDirAll3D; 
-   vector<double>  *BeamFlashes_TotalPE;
-   vector<double>  *BeamFlashes_Time;
    vector<double>  *CandidateMuP_Distance;
    vector<float>   *Vertex_X;
    vector<float>   *Vertex_Y;
@@ -370,8 +368,6 @@ public :
    TBranch        *b_crtveto;   //!
    TBranch        *b_CosmicIPAll3D;   //!
    TBranch        *b_CosmicDirAll3D;   //!
-   TBranch        *b_BeamFlashes_TotalPE;   //!
-   TBranch        *b_BeamFlashes_Time;   //!
    TBranch        *b_CandidateMuP_Distance;   //!
    TBranch        *b_Vertex_X;   //!
    TBranch        *b_Vertex_Y;   //!
@@ -513,7 +509,7 @@ reco_selection::reco_selection(TString WhichSample, TString Tune, TString WhichE
 
 // 	//pnfsToXRootD /pnfs/persistent/path/to/your/file
 //   fPathToFile = "/pnfs/uboone/persistent/users/apapadop/mySamples/"+UBCodeVersion+"/PeLEETuples/PreSelection_"+fWhichSample+"_"+UBCodeVersion+".root";
-	fPathToFile = "/uboone/data/users/apapadop/PeLEETuples_3D_ECal/PreSelection_"+fWhichSample+"_"+UBCodeVersion+".root";
+	fPathToFile = "/exp/uboone/data/users/apapadop/PeLEETuples_3D_ECal/PreSelection_"+fWhichSample+"_"+UBCodeVersion+".root";
 
    if (tree == 0) {
       TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject(fPathToFile);
@@ -630,8 +626,6 @@ void reco_selection::Init(TTree *tree)
    run_period = 0; 
    fluxes = 0;
    reinteractions = 0;
-   BeamFlashes_TotalPE = 0;
-   BeamFlashes_Time = 0;
    CandidateMuP_Distance = 0;
    Vertex_X = 0;
    Vertex_Y = 0;
@@ -804,8 +798,6 @@ void reco_selection::Init(TTree *tree)
    fChain->SetBranchAddress("crthitpe", &crthitpe, &b_crthitpe);
    fChain->SetBranchAddress("CosmicIPAll3D", &CosmicIPAll3D, &b_CosmicIPAll3D);
    fChain->SetBranchAddress("CosmicDirAll3D", &CosmicDirAll3D, &b_CosmicDirAll3D);
-   fChain->SetBranchAddress("BeamFlashes_TotalPE", &BeamFlashes_TotalPE, &b_BeamFlashes_TotalPE);
-   fChain->SetBranchAddress("BeamFlashes_Time", &BeamFlashes_Time, &b_BeamFlashes_Time);
    fChain->SetBranchAddress("CandidateMuP_Distance", &CandidateMuP_Distance, &b_CandidateMuP_Distance);
    fChain->SetBranchAddress("Vertex_X", &Vertex_X, &b_Vertex_X);
    fChain->SetBranchAddress("Vertex_Y", &Vertex_Y, &b_Vertex_Y);

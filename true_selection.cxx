@@ -72,13 +72,13 @@ void true_selection::Loop() {
 
 	// Txt file to keep track of the event reduction at each stage
 
-	TString TxtName = "/uboone/data/users/apapadop/myEvents/my3DTxtFiles/"+UBCodeVersion+"/TxtmyTrueEvents_"+fWhichSample+"_"+UBCodeVersion+".txt";
+	TString TxtName = "/exp/uboone/data/users/apapadop/myEvents/my3DTxtFiles/"+UBCodeVersion+"/TxtmyTrueEvents_"+fWhichSample+"_"+UBCodeVersion+".txt";
 	ofstream myTxtFile;
 	myTxtFile.open(TxtName);
 
 	// Txt file to keep track of the run/subrun/event of the candidate events
 
-	TString RunTxtName = "/uboone/data/users/apapadop/myEvents/my3DTxtFiles/"+UBCodeVersion+"/TxtmyTrueRunSubRunEvents_"+fWhichSample+"_"+UBCodeVersion+".txt";
+	TString RunTxtName = "/exp/uboone/data/users/apapadop/myEvents/my3DTxtFiles/"+UBCodeVersion+"/TxtmyTrueRunSubRunEvents_"+fWhichSample+"_"+UBCodeVersion+".txt";
 	ofstream myRunTxtFile;
 	myRunTxtFile.open(RunTxtName);
 	myRunTxtFile << std::fixed << std::setprecision(2);
