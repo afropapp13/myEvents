@@ -233,7 +233,7 @@
 
 	//--------------------//
 
-	//Flux uncertainties/Flux
+	//Flux uncertainties
 
 	vector<TString> FluxWhichSampleArray;
 	vector<TString> FluxEventWeightLabels;
@@ -267,14 +267,12 @@
 
 	//--------------------//
 
+	// G4 uncertainties
+
 	vector<TString> G4WhichSampleArray;
 	vector<TString> G4EventWeightLabels;
 	vector<int> G4Universes;
 	int NG4Universes = 100;
-
-	// -----------------------------------------------------------------------------------------
-
-	// G4 uncertainties
 
 //	G4WhichSampleArray.push_back("Overlay9_Run1");
 //	G4WhichSampleArray.push_back("Overlay9_Run2");
@@ -302,6 +300,8 @@
 	} // End of the loop over the samples
 
 	//--------------------//
+
+	// XSec uncertainties
 	
 	vector<TString> XSecWhichSampleArray;
 	vector<TString> XSecEventWeightLabels;
@@ -343,6 +343,8 @@
 	
 	//--------------------//
 	
+	// MC stat uncertainties
+
 	vector<TString> MCStatWhichSampleArray;
 	vector<TString> MCStatEventWeightLabels;
 	vector<int> MCStatUniverses;
@@ -377,6 +379,8 @@
 	} // End of the loop over the samples
 
 	//--------------------//
+
+	// FDS
 
 	vector<TString> FDSWhichSampleArray;
 

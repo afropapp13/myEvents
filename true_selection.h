@@ -365,7 +365,7 @@ true_selection::true_selection(TString WhichSample, TString Tune, TString WhichE
 
 //	//pnfsToXRootD /pnfs/persistent/path/to/your/file
 //   fPathToFile = "/pnfs/uboone/persistent/users/apapadop/mySamples/"+UBCodeVersion+"/PeLEETuples/PreTruthSelection_"+fWhichSample+"_"+UBCodeVersion+".root";
-	fPathToFile = "/uboone/data/users/apapadop/PeLEETuples_Atmospherics/PreTruthSelection_"+fWhichSample+"_"+UBCodeVersion+".root";   
+	fPathToFile = "/exp/uboone/data/users/apapadop/PeLEETuples_Atmospherics/PreTruthSelection_"+fWhichSample+"_"+UBCodeVersion+".root";   
   
    if (tree == 0) {
       TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject(fPathToFile);

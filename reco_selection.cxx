@@ -506,6 +506,7 @@ void reco_selection::Loop() {
 			// -------------------------------------------------------------------------------------------------------------------------
 
 			weight = POTWeight;
+			if (jentry == nentries -1) { cout << "pot scale = " << POTWeight << endl; }
 
 			if (string(fWhichSample).find("Overlay") != std::string::npos) { 
 
@@ -799,7 +800,7 @@ void reco_selection::Loop() {
 			}
 
 			if (PassedSelection == false) { continue; }
-
+cout << "Run = " << Run << " Subrun = " << SubRun << " Event = " << Event << endl;
 			// -------------------------------------------------------------------------------------------------------------------------
 			// -----------------------------------------------------------------------------------------------------------------------
 
