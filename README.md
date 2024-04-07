@@ -31,6 +31,7 @@ print_latex_tables("",false,false,false,false,true)
 root -b print_1d_slices.cxx
 root -b print_2d_slices.cxx
 root -b fluxes.cxx
+root -b print_theta_vis_mean_std.cxx
 
 ###########################################################################################################################################################################
 

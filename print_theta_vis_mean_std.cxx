@@ -29,10 +29,16 @@ void  print_theta_vis_mean_std() {
 
 	vector<TString> plot_names; plot_names.clear();
 	
-	plot_names.push_back("CC1pThetaVis_ECalSlices0_00To0_50Plot");
-	plot_names.push_back("CC1pThetaVis_ECalSlices0_50To0_80Plot");
-	plot_names.push_back("CC1pThetaVis_ECalSlices0_80To2_00Plot");
+	plot_names.push_back("CC1pFineBinThetaVisPlot");
+	
+	plot_names.push_back("CC1pFineBinThetaVis_ECalSlices0_00To0_50Plot");
+	plot_names.push_back("CC1pFineBinThetaVis_ECalSlices0_50To0_80Plot");
+	plot_names.push_back("CC1pFineBinThetaVis_ECalSlices0_80To2_00Plot");
 
+	plot_names.push_back("CC1pFineBinThetaVis_DeltaPnSlices0_00To0_20Plot");
+	plot_names.push_back("CC1pFineBinThetaVis_DeltaPnSlices0_20To0_40Plot");
+	plot_names.push_back("CC1pFineBinThetaVis_DeltaPnSlices0_40To1_00Plot");
+	
 	const int nplots = plot_names.size();
 
 	//--------------------------------------//
