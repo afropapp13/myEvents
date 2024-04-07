@@ -475,8 +475,8 @@ void reco_selection::Loop() {
 
 		// PL_GKI vs PL_Vis
 
-                TH2D* POTScaledCC1pTruePLGKIvsPLVisPlot2D = new TH2D("POTScaledCC1pTruePlot2D",";true p_{L}^{GKI} [GeV/c];true p_{L}^{vis} [GeV/c]",20,-0.5,0.5,20,-0.5,0.5);
-                TH2D* POTScaledCC1pPLGKIvsPLVisPlot2D = new TH2D("POTScaledCC1pPlot2D",";reco p_{L}^{GKI} [GeV/c];reco p_{L}^{vis} [GeV/c]",20,-0.5,0.5,20,-0.5,0.5);
+                TH2D* POTScaledCC1pTruePLGKIvsPLVisPlot2D = new TH2D("POTScaledCC1pTruePLGKIvsPLVisPlot2D",";true p_{L}^{GKI} [GeV/c];true p_{L}^{vis} [GeV/c]",20,-0.5,0.5,20,-0.5,0.5);
+                TH2D* POTScaledCC1pPLGKIvsPLVisPlot2D = new TH2D("POTScaledCC1pPLGKIvsPLVisPlot2D",";reco p_{L}^{GKI} [GeV/c];reco p_{L}^{vis} [GeV/c]",20,-0.5,0.5,20,-0.5,0.5);
 
 		//----------------------------------------//
 		//----------------------------------------//

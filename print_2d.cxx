@@ -58,6 +58,9 @@ void print_2d() {
 	PlotNames.push_back("TrueThetaVisTrueECalPlot"); 
 	PlotNames.push_back("TrueThetaVisTrueEnuPlot"); 
 	
+	PlotNames.push_back("TruePLGKIvsPLVisPlot"); 
+	PlotNames.push_back("PLGKIvsPLVisPlot"); 
+	
 	const int N2DPlots = PlotNames.size();
 	cout << "Number of 2D Plots = " << N2DPlots << endl;
 
