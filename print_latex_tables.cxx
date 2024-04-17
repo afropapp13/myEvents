@@ -164,6 +164,9 @@ void print_latex_tables(TString BaseMC = "", bool PrintStats = false, bool Print
 			vector<double> FileFinalError; FileFinalError.clear();
 			vector<double> FileCC1p; FileCC1p.clear();
 			vector<double> FileCC1pError; FileCC1pError.clear();
+			vector<double> FileNonCC1p; FileNonCC1p.clear();
+			vector<double> FileNonCC1pError; FileNonCC1pError.clear();
+
 
 			vector<TH1D*> Plots; Plots.resize(NSamples);
 			vector<TH1D*> CC1pPlots; CC1pPlots.resize(NSamples);
@@ -213,7 +216,14 @@ void print_latex_tables(TString BaseMC = "", bool PrintStats = false, bool Print
 				double CC1pCountError = CC1pPlot->GetBinError(1);
 				FileCC1pError.push_back(CC1pCountError);
 
-				//-------------------//
+				TH1D* NonCC1pPlot = (TH1D*)(FileSample[WhichSample]->Get("NonCC1pRecoMuonCosThetaSingleBinPlot"));
+				double NonCC1pCount = NonCC1pPlot->GetBinContent(1);
+				FileNonCC1p.push_back(NonCC1pCount);
+
+				double NonCC1pCountError = NonCC1pPlot->GetBinError(1);
+				FileNonCC1pError.push_back(NonCC1pCountError);
+
+			//-------------------//
 
 			} // End of the loop over the samples
 
@@ -226,15 +236,25 @@ void print_latex_tables(TString BaseMC = "", bool PrintStats = false, bool Print
 
 				for (int WhichSample = 0; WhichSample < NSamples; WhichSample ++) {		
 
-					cout << LabelsOfSamples[WhichSample] << " & " << FileFinal[WhichSample] << " $\\pm$ " << FileFinalError[WhichSample];
+					TString label = "";
+					if (LabelsOfSamples[WhichSample] == "BeamOn") { label = "BeamOn (data)"; }
+					if (LabelsOfSamples[WhichSample] == "Dirt") { label = "Dirt (bkg)"; }
+					if (LabelsOfSamples[WhichSample] == "ExtBNB") { label = "ExtBNB (bkg)"; }
+					if (LabelsOfSamples[WhichSample] == "MC") { label = "MC (total)"; }
+
+					cout << label << " & " << FileFinal[WhichSample] << " $\\pm$ " << FileFinalError[WhichSample];
 					cout << " \\tabularnewline \\hline" << endl;
 
 					// Special case for MC, print also the CC1p event count
 
 					if (string(LabelsOfSamples[WhichSample]).find("MC") != std::string::npos) {
 
-						cout << "\\Signal " << LabelsOfSamples[WhichSample] << " & " << FileCC1p[WhichSample] << " $\\pm$ " << FileCC1pError[WhichSample];
+						cout << "CC1p0$\\pi$ \\," << LabelsOfSamples[WhichSample] << " (signal) & " << FileCC1p[WhichSample] << " $\\pm$ " << FileCC1pError[WhichSample];
 						cout << " \\tabularnewline \\hline" << endl;
+
+						cout << "non-CC1p0$\\pi$ \\," << LabelsOfSamples[WhichSample] << " (bkg) & " << FileNonCC1p[WhichSample] << " $\\pm$ " << FileNonCC1pError[WhichSample];
+						cout << " \\tabularnewline \\hline" << endl;
+
 
 					}
 

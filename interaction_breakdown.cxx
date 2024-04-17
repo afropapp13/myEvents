@@ -105,7 +105,7 @@ void interaction_breakdown(TString BaseMC = "") {
 
 		// We needs these for the uncertainty band
 
-		TString NameExtractedXSec = MigrationMatrixPath+"WienerSVD_Total_CovarianceMatrices_Overlay9_"+Runs[WhichRun]+"_"+UBCodeVersion+".root";
+		TString NameExtractedXSec = MigrationMatrixPath+"ER_WienerSVD_Total_CovarianceMatrices_Overlay9_"+Runs[WhichRun]+"_"+UBCodeVersion+".root";
 		TFile* CovFile = new TFile(NameExtractedXSec,"readonly");		
 
 		double DataPOT = PeLEE_ReturnBeamOnRunPOT(Runs[WhichRun]);
@@ -325,7 +325,7 @@ void interaction_breakdown(TString BaseMC = "") {
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitle(Runs[WhichRun] + " events / bin");
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitleSize(0.08);
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitleOffset(0.65);
-					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTickSize(0);
+					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTickSize(0.01);
 
 					if (WhichSample == 0) { 
 
@@ -567,7 +567,7 @@ void interaction_breakdown(TString BaseMC = "") {
 
 						double bin_entry = CovMatrix->GetBinContent(i,j);
 						// Scale the covariances to events, not flux averaged events as they are right now
-						double scaled_bin_entry = bin_entry * TMath::Power( (IntegratedFlux*NTargets)/Units, 2);
+						double scaled_bin_entry = bin_entry;
 
 						CovMatrixEvents->SetBinContent(i,j,scaled_bin_entry);					
 
@@ -585,14 +585,17 @@ void interaction_breakdown(TString BaseMC = "") {
 
 				TH1D* MCUnc = (TH1D*)(Plots[0][WhichPlot]->Clone());				
 				TH1D* MCStack = (TH1D*) (THStacks[WhichPlot]->GetStack()->Last());
-				TH1D* MCStackClone = (TH1D*)(MCStack->Clone());
-				rm_bin_width(MCStackClone);
+				//TH1D* MCStackClone = (TH1D*)(MCStack->Clone());
+				//rm_bin_width(MCStackClone);
+				TH1D* MCStackClone = (TH1D*)(Plots[1][WhichPlot]->Clone()); // overlay
+				MCStackClone->Add(Plots[2][WhichPlot]); // extBNB
+				MCStackClone->Add(Plots[3][WhichPlot]); // dirt	
 
 				for (int i = 1; i <= n;i++ ) { 
 
 					double MCCV = MCStackClone->GetBinContent(i);
 					// Scale the covariances to events, not flux averaged events as they are right now
-					double Unc = TMath::Sqrt( CovMatrix->GetBinContent(i,i) ) * (IntegratedFlux*NTargets)/Units;
+					double Unc = TMath::Sqrt( CovMatrix->GetBinContent(i,i) );
 
 					MCUnc->SetBinContent(i,MCCV);					
 					MCUnc->SetBinError(i, Unc);				
