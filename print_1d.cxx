@@ -87,6 +87,21 @@ void print_1d() {
 
 		gPad->RedrawAxis();
 
+		if (plot_names[iplot] == "CC1pRecoThetaBRTPlot") {
+
+			double mean = plot.at(iplot)->GetMean();
+			double median = GetMedian(plot.at(iplot));
+			double sigma = plot.at(iplot)->GetRMS();
+			double peak = FindOneDimHistoMaxValueBin(plot.at(iplot));
+	
+			TLatex latex;
+			latex.SetTextFont(FontStyle);
+			latex.SetTextSize(0.07);
+			TString label = "#splitline{peak = " + to_string_with_precision(peak,2) + "^{o}, median = " + to_string_with_precision(median,2)  + "^{o}}{#mu = " + to_string_with_precision(mean,2) + "^{o}, #sigma = " + to_string_with_precision(sigma,2) + "^{o}}";
+			latex.DrawLatexNDC(0.3,0.7, label);				
+
+		}
+
                 TString canvas_path = PlotPath + cut + "/";
                 TString canvas_export_name = "print_1d_"+plot_names.at(iplot)+"_"+run+"_"+UBCodeVersion+cut+".pdf";
                 canvas.at(iplot)->SaveAs(canvas_path + canvas_export_name);

@@ -649,7 +649,19 @@ void interaction_breakdown(TString BaseMC = "") {
 				latexChi2.SetTextSize(0.1);
 				if (plot_unc) { latexChi2.DrawLatexNDC(0.15,0.88,Chi2Ndof); }
 
-				// --------------------------------------------------------------------------------------
+				//----------------------------------------//
+
+				// Plot vertical lines
+				// Add latex label with phase space limits
+
+//				if (string(PlotNames[WhichPlot]).find("Serial") != std::string::npos) {	
+
+//cout << "map_to_2d_bin[ PlotNames[WhichPlot].size() = " << map_to_2d_bin[ PlotNames[WhichPlot] ].size() << endl; 
+//					get_2d_bin_break_points( map_to_2d_bin[ PlotNames[WhichPlot] ] );
+
+//				}
+
+				//----------------------------------------//
 
 				TString CanvasPath = PlotPath + Cuts + "/InteractionBreakDown/";
 				TString CanvasName = BaseMC + "THStack_BreakDown_"+PlotNames[WhichPlot]+"_"+Runs[WhichRun]+"_"+UBCodeVersion+Cuts+".pdf";

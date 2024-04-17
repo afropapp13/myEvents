@@ -63,7 +63,7 @@ void  print_theta_vis_mean_std() {
 
 		double mean = plot.at(iplot)->GetMean();
 		double sigma = plot.at(iplot)->GetRMS();
-
+	
 		cout << plot_names.at(iplot) << " mean = " << mean << "  sigma = " << sigma << endl;
 
 	} // End of the loop over the plots
