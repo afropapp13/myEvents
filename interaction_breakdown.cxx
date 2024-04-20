@@ -332,7 +332,7 @@ void interaction_breakdown(TString BaseMC = "") {
 						bin_width_Plots[0][WhichPlot] = (TH1D*)(Plots[0][WhichPlot]->Clone()); 
 						Reweight(bin_width_Plots[0][WhichPlot]); 
 						max = FindOneDimHistoMaxValue(bin_width_Plots[0][WhichPlot]);
-						bin_width_Plots[0][WhichPlot]->GetYaxis()->SetRangeUser(0.,1.3*max);
+						bin_width_Plots[0][WhichPlot]->GetYaxis()->SetRangeUser(0.,1.4*max);
 
 					}
 					
@@ -668,6 +668,49 @@ void interaction_breakdown(TString BaseMC = "") {
 				latexChi2.SetTextFont(FontStyle);
 				latexChi2.SetTextSize(0.1);
 				if (plot_unc) { latexChi2.DrawLatexNDC(0.15,0.88,Chi2Ndof); }
+
+				//----------------------------------------//
+
+				// Plot vertical lines
+				// Add latex label with phase space limits
+
+				if (string(PlotNames[WhichPlot]).find("Serial") != std::string::npos) {	
+
+					TString clone_name = PlotNames[WhichPlot];
+					clone_name.ReplaceAll("Reco","");
+					vector<int> bin_break_points = get_3d_bin_break_points( map_to_3d_bin.at(clone_name) );
+
+					int nbreaks = bin_break_points.size() - 1;
+					vector<TLine*> line; line.resize(nbreaks);
+
+					for (int ipoint = 0; ipoint < nbreaks; ipoint ++) {
+
+						line.at(ipoint) = new TLine( bin_break_points.at(ipoint) + 0.5,0., bin_break_points.at(ipoint) + 0.5, bin_width_Plots[0][WhichPlot]->GetMaximum() );
+						midPad->cd();
+						line.at(ipoint)->SetLineStyle(kDashed);
+						line.at(ipoint)->Draw("same");
+
+					}
+	
+					//----------------------------------------//
+
+					vector<TLatex*> slice; slice.resize(nbreaks+1);
+
+					for (int ipoint = 0; ipoint < nbreaks + 1; ipoint ++) {
+
+			
+						slice.at(ipoint) = new TLatex();
+						slice.at(ipoint)->SetTextFont(FontStyle);
+						slice.at(ipoint)->SetTextSize(0.025);
+						TString phase_space = MapUncorCor[ clone_name + "_" + TString(std::to_string(ipoint) ) ];
+						midPad->cd();
+						if (ipoint == 0) { slice.at(ipoint)->DrawLatex( bin_break_points.at(ipoint) / 5. , 0.7 * bin_width_Plots[0][WhichPlot]->GetMaximum(), LatexLabel[phase_space ]); }
+						else { slice.at(ipoint)->DrawLatex( bin_break_points.at(ipoint - 1) + ( bin_break_points.at(ipoint) - bin_break_points.at(ipoint-1) ) / 5. , 0.7 * bin_width_Plots[0][WhichPlot]->GetMaximum(), LatexLabel[phase_space ]); }
+
+
+					}
+
+				}
 
 				// --------------------------------------------------------------------------------------
 
