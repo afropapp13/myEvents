@@ -11,6 +11,9 @@
 	WhichSampleArray.push_back("OverlayDirt9_Combined");
 	WhichSampleArray.push_back("Overlay9_Combined");
 
+	// BNB to Honda reweight
+	//WhichSampleArray.push_back("Overlay9BNBToHonda_Combined");
+
 	// -----------------------------------------------------------------------------------------
 
 	gROOT->ProcessLine(".L ../myClasses/Tools.cxx++");

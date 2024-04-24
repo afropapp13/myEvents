@@ -19,6 +19,7 @@
 
 #include "../myClasses/Tools.h"
 #include "../myClasses/STV_Tools.h"
+#include "../myClasses/myFunctions.cpp"
 
 using namespace std;
 
@@ -36,6 +37,20 @@ TString ToStringInt(int num) {
 //----------------------------------------//
 
 void reco_selection::Loop() {
+
+	//----------------------------------------//
+
+	// File for the BNB-To-Honda reweighting
+
+	TFile* f_bnb_honda = nullptr;
+	TH1D* h_spline = nullptr;	
+
+	if (fWhichSample == "Overlay9BNBToHonda_Combined") {
+
+		f_bnb_honda = new TFile("../FlatTreeAnalyzer/OutputFiles/spline.root","readonly");
+		h_spline = (TH1D*)(f_bnb_honda->Get("TrueFineBinEvPlot"));
+	
+	}
 
 	//----------------------------------------//
 
@@ -548,7 +563,17 @@ void reco_selection::Loop() {
 				if (Weight <= 0 || Weight > 30) { continue; } // bug fix weight 
 				if (T2KWeight <= 0 || T2KWeight > 30) { continue; }	// T2K tune weight	
 				// For the detector variations, Weight (bug fix) = 1		
-				weight = POTWeight * Weight * T2KWeight * ROOTinoWeight; 
+				weight = POTWeight * Weight * T2KWeight * ROOTinoWeight;
+
+				// BNB To Honda reweighting
+
+				if (fWhichSample == "Overlay9BNBToHonda_Combined") {
+
+					int bin_bnb_to_honda = LocateClosetsBinWithValue(h_spline,True_Ev); 
+					double scale_bnb_to_honda = h_spline->GetBinContent(bin_bnb_to_honda);
+					weight = weight * scale_bnb_to_honda;
+
+				} 
 
 				// Fake data studies: removing the T2K tune weight
 				if (fTune == "GENIEv2") { weight = POTWeight; }

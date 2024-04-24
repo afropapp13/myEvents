@@ -219,6 +219,12 @@
 
 	//--------------------//
 
+	// BNB-To-Honda reweighting
+
+	WhichSampleArray.push_back("Overlay9BNBToHonda_Combined");
+
+	//--------------------//
+
 	gROOT->ProcessLine(".L ../myClasses/Tools.cxx++");
 	gROOT->ProcessLine(".L ../myClasses/STV_Tools.cxx++");	
 

@@ -511,9 +511,12 @@ reco_selection::reco_selection(TString WhichSample, TString Tune, TString WhichE
    fEventWeightLabel = WhichEventWeightLabel;
    fUniverseIndex = UniverseIndex;
 
-// 	//pnfsToXRootD /pnfs/persistent/path/to/your/file
-//   fPathToFile = "/pnfs/uboone/persistent/users/apapadop/mySamples/"+UBCodeVersion+"/PeLEETuples/PreSelection_"+fWhichSample+"_"+UBCodeVersion+".root";
-	fPathToFile = "/exp/uboone/data/users/apapadop/PeLEETuples_Atmospherics/PreSelection_"+fWhichSample+"_"+UBCodeVersion+".root";
+   fPathToFile = "/exp/uboone/data/users/apapadop/PeLEETuples_Atmospherics/PreSelection_"+fWhichSample+"_"+UBCodeVersion+".root";
+   if (fWhichSample == "Overlay9BNBToHonda_Combined") {
+
+	fPathToFile = "/exp/uboone/data/users/apapadop/PeLEETuples_Atmospherics/PreSelection_Overlay9_Combined_"+UBCodeVersion+".root";
+
+   }
 
    if (tree == 0) {
       TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject(fPathToFile);

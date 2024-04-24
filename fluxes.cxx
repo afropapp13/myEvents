@@ -101,8 +101,8 @@ void fluxes() {
 
 	PlotCanvas->cd();
 
-	bnb_flux->Draw("c hist same");
-	honda_flux->Draw("c hist same");
+	bnb_flux->Draw("hist same");
+	honda_flux->Draw("hist same");
 
 	// --------------------------------------------------------------------------------------------------
 
