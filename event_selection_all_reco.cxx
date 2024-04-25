@@ -219,6 +219,14 @@
 
 	//--------------------//
 
+	// GENIE sample using 4c scaled to the 4b/cd/ POT
+	// since NuWro was made using 4c
+
+
+	WhichSampleArray.push_back("Overlay9_Combined_CVextraNuWro");
+        
+	//--------------------//
+
 	// BNB-To-Honda reweighting
 
 	WhichSampleArray.push_back("Overlay9BNBToHonda_Combined");

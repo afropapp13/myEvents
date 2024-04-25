@@ -219,6 +219,14 @@
 
 	//--------------------//
 
+	// GENIE sample using 4c scaled to the 4b/cd/ POT
+	// since NuWro was made using 4c
+
+
+	WhichSampleArray.push_back("Overlay9_Combined_CVextraNuWro");
+
+	//--------------------//
+
 	gROOT->ProcessLine(".L ../myClasses/Tools.cxx++");
 	gROOT->ProcessLine(".L ../myClasses/STV_Tools.cxx++");	
 

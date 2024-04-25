@@ -60,11 +60,13 @@ void interaction_breakdown(TString BaseMC = "") {
 
 	vector<TString> Runs;
 	//Runs.push_back("Run1");
-//	Runs.push_back("Run2");
+	//Runs.push_back("Run2");
 	//Runs.push_back("Run3");
-//	Runs.push_back("Run4");
-//	Runs.push_back("Run5");
-	Runs.push_back("Combined");
+	//Runs.push_back("Run4b");
+	//Runs.push_back("Run4c");
+	//Runs.push_back("Run4d");
+	Runs.push_back("Run5");
+	//Runs.push_back("Combined");
 
 	int NRuns = (int)(Runs.size());
 	cout << "Number of Runs = " << NRuns << endl;
@@ -80,7 +82,7 @@ void interaction_breakdown(TString BaseMC = "") {
 
 		// We needs these for the uncertainty band
 
-		TString NameExtractedXSec = MigrationMatrixPath+"ER_WienerSVD_Total_CovarianceMatrices_Overlay9_"+Runs[WhichRun]+"_"+UBCodeVersion+".root";
+		TString NameExtractedXSec = MigrationMatrixPath+"ER_WienerSVD_Total_CovarianceMatrices_Overlay9_Combined_"+UBCodeVersion+".root";
 		TFile* CovFile = new TFile(NameExtractedXSec,"readonly");		
 
 		double DataPOT = PeLEE_ReturnBeamOnRunPOT(Runs[WhichRun]);
@@ -101,6 +103,7 @@ void interaction_breakdown(TString BaseMC = "") {
 	
 			// For the alternative MC, we want the figures after the application of all cuts
 			if (BaseMC == "Overlay9NuWro" && i != NCuts-1) { continue; }
+			if (BaseMC == "Overlay9CVextraNuWro" && i != NCuts-1) { continue; }
 			if (BaseMC == "NoTuneOverlay9" && i != NCuts-1) { continue; }
 			if (BaseMC == "TwiceMECOverlay9" && i != NCuts-1) { continue; }		
 			if (BaseMC == "GENIEv2Overlay9" && i != NCuts-1) { continue; }
@@ -109,7 +112,8 @@ void interaction_breakdown(TString BaseMC = "") {
 			if (BaseMC == "GENIEv2Overlay9" && Runs[WhichRun] != "Combined") { continue; }	
 
 			// NuWro/Tweaked GENIE don't have Run 4a
-			if (BaseMC == "Overlay9NuWro" && (Runs[WhichRun] == "Run5" || Runs[WhichRun] == "Run4a" || Runs[WhichRun] == "Run4b" || Runs[WhichRun] == "Run4aRutgers") ) { continue; }
+			if (BaseMC == "Overlay9NuWro" && (Runs[WhichRun] == "Run4a" || Runs[WhichRun] == "Run4aRutgers") ) { continue; }
+			if (BaseMC == "OverlayCVextra9NuWro" && (Runs[WhichRun] == "Run5" || Runs[WhichRun] == "Run4a" || Runs[WhichRun] == "Run4b" || Runs[WhichRun] == "Run4aRutgers") ) { continue; }
 			if (BaseMC == "NoTuneOverlay9" && (Runs[WhichRun] == "Run5" || Runs[WhichRun] == "Run4a" || Runs[WhichRun] == "Run4b" || Runs[WhichRun] == "Run4aRutgers") ) { continue; }
 			if (BaseMC == "TwiceMECOverlay9" && (Runs[WhichRun] == "Run5" || Runs[WhichRun] == "Run4a" || Runs[WhichRun] == "Run4b" || Runs[WhichRun] == "Run4aRutgers") ) { continue; }												
 
@@ -149,6 +153,7 @@ void interaction_breakdown(TString BaseMC = "") {
 
 			if (BaseMC == "") { NameOfSamples.push_back("STVStudies_Overlay9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("Overlay"); }
 			else if (BaseMC == "Overlay9NuWro") { NameOfSamples.push_back("STVStudies_Overlay9NuWro_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("Overlay"); }			
+			else if (BaseMC == "Overlay9CVextraNuWro") { NameOfSamples.push_back("STVStudies_Overlay9_"+Runs[WhichRun]+"_CVextraNuWro"+Cuts+".root"); LabelsOfSamples.push_back("Overlay"); }	
 			else if (BaseMC == "NoTuneOverlay9") { NameOfSamples.push_back("NoTuneSTVStudies_Overlay9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("Overlay"); }
 			else if (BaseMC == "GENIEv2Overlay9") { NameOfSamples.push_back("GENIEv2STVStudies_Overlay9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("Overlay"); }			
 			else if (BaseMC == "TwiceMECOverlay9") { NameOfSamples.push_back("TwiceMECSTVStudies_Overlay9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("Overlay"); }			
