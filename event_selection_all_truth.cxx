@@ -11,6 +11,21 @@
 	WhichSampleArray.push_back("OverlayDirt9_Run1");
 	WhichSampleArray.push_back("Overlay9_Run1");
 
+	// Run 1A open trigger
+
+	WhichSampleArray.push_back("BeamOn9_Run1A_open_trigger");
+	WhichSampleArray.push_back("ExtBNB9_Run1A_open_trigger");
+	WhichSampleArray.push_back("OverlayDirt9_Run1A_open_trigger");
+	WhichSampleArray.push_back("Overlay9_Run1A_open_trigger");
+
+	// Run 1B open trigger
+
+	WhichSampleArray.push_back("BeamOn9_Run1B_open_trigger");
+	WhichSampleArray.push_back("ExtBNB9_Run1B_open_trigger");
+	WhichSampleArray.push_back("OverlayDirt9_Run1B_open_trigger");
+	WhichSampleArray.push_back("Overlay9_Run1B_open_trigger");
+
+
 	// Run 2
 
 	WhichSampleArray.push_back("BeamOn9_Run2");

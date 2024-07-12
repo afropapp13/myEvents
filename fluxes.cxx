@@ -26,13 +26,8 @@ using namespace std;
 double TextSize = 0.08;
 double FontStyle = 132;
 
-//int DUNEColor = kBlue-9;
-//int T2KColor = kOrange-3;
-//int NOvAColor = kGreen+1;
-
-int DUNEColor = kBlue-9;
-int T2KColor = kOrange+1;
-int NOvAColor = kOrange+5;
+int DUNEColor = kBlack;
+int T2KColor = kRed+1;
 
 // -------------------------------------------------------------------------------------------------------------------------------------
 

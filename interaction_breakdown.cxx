@@ -31,6 +31,7 @@ void interaction_breakdown(TString BaseMC = "") {
 	PlotNames.push_back("RecoMuonCosThetaPlot");
 	PlotNames.push_back("RecoMuonCosThetaSingleBinPlot");
 	PlotNames.push_back("RecoThetaVisPlot");
+	PlotNames.push_back("RecoCosThetaVisPlot");
 	PlotNames.push_back("RecoThetaVis_ECal_0_00To0_50Plot");	
 	PlotNames.push_back("RecoThetaVis_ECal_0_50To0_80Plot");	
 	PlotNames.push_back("RecoThetaVis_ECal_0_80To2_00Plot");	
@@ -60,13 +61,15 @@ void interaction_breakdown(TString BaseMC = "") {
 
 	vector<TString> Runs;
 	//Runs.push_back("Run1");
+	//Runs.push_back("Run1A_open_trigger");
+	//Runs.push_back("Run1B_open_trigger");
 	//Runs.push_back("Run2");
 	//Runs.push_back("Run3");
 	//Runs.push_back("Run4b");
 	//Runs.push_back("Run4c");
 	//Runs.push_back("Run4d");
-	Runs.push_back("Run5");
-	//Runs.push_back("Combined");
+	//Runs.push_back("Run5");
+	Runs.push_back("Combined");
 
 	int NRuns = (int)(Runs.size());
 	cout << "Number of Runs = " << NRuns << endl;

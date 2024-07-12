@@ -59,7 +59,7 @@ void print_1d() {
 
 		TString canvas_name = "canvas_"+plot_names[iplot];
 		canvas.at(iplot) = new TCanvas(canvas_name,canvas_name,205,34,1024,768);
-		canvas.at(iplot)->SetBottomMargin(0.16);
+		canvas.at(iplot)->SetBottomMargin(0.17);
 		canvas.at(iplot)->SetTopMargin(0.18);
 		canvas.at(iplot)->SetLeftMargin(0.15);
 
@@ -78,8 +78,8 @@ void print_1d() {
                 plot.at(iplot)->GetYaxis()->SetLabelSize(size);
                 plot.at(iplot)->GetYaxis()->SetTitleFont(font);
                 plot.at(iplot)->GetYaxis()->SetLabelFont(font);
-                plot.at(iplot)->GetYaxis()->SetTitleOffset(1.);
-                plot.at(iplot)->GetYaxis()->SetNdivisions(8);
+                plot.at(iplot)->GetYaxis()->SetTitleOffset(1.1);
+                plot.at(iplot)->GetYaxis()->SetNdivisions(6);
 
 		plot.at(iplot)->SetLineColor(colors);
 		plot.at(iplot)->SetLineWidth(3);

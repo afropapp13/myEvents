@@ -5,14 +5,24 @@
 	// -----------------------------------------------------------------------------------------
 
 	// Combined
-
+	//WhichSampleArray.push_back("BeamOn9_Run1");
+	
 	WhichSampleArray.push_back("BeamOn9_Combined");
 	WhichSampleArray.push_back("ExtBNB9_Combined");
 	WhichSampleArray.push_back("OverlayDirt9_Combined");
 	WhichSampleArray.push_back("Overlay9_Combined");
 
-	// BNB to Honda reweight
+	// BNB to Honda reweight using true Enu
+	//WhichSampleArray.push_back("BeamOn9BNBToHonda_Combined");
+	//WhichSampleArray.push_back("ExtBNB9BNBToHonda_Combined");
 	//WhichSampleArray.push_back("Overlay9BNBToHonda_Combined");
+	//WhichSampleArray.push_back("OverlayDirt9BNBToHonda_Combined");
+
+	// BNB to Honda reweight using ECal
+	//WhichSampleArray.push_back("BeamOn9BNBToHondaECal_Combined");
+	//WhichSampleArray.push_back("ExtBNB9BNBToHondaECal_Combined");
+	//WhichSampleArray.push_back("Overlay9BNBToHondaECal_Combined");
+	//WhichSampleArray.push_back("OverlayDirt9BNBToHondaECal_Combined");
 
 	// -----------------------------------------------------------------------------------------
 

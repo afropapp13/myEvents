@@ -40,17 +40,39 @@ void reco_selection::Loop() {
 
 	//----------------------------------------//
 
-	// File for the BNB-To-Honda reweighting
+	// File for the BNB-To-Honda reweighting using the true Enu
 
 	TFile* f_bnb_honda = nullptr;
 	TH1D* h_spline = nullptr;	
 
-	if (fWhichSample == "Overlay9BNBToHonda_Combined") {
+	if (
+		fWhichSample == "Overlay9BNBToHonda_Combined" ||
+		fWhichSample == "OverlayDirt9BNBToHonda_Combined" ||
+		fWhichSample == "BeamOn9BNBToHonda_Combined" ||
+		fWhichSample == "ExtBNB9BNBToHonda_Combined"
+	) {
 
 		f_bnb_honda = new TFile("../FlatTreeAnalyzer/OutputFiles/spline.root","readonly");
 		h_spline = (TH1D*)(f_bnb_honda->Get("TrueFineBinEvPlot"));
 	
 	}
+
+	//----------------------------------------//
+
+	// File for the BNB-To-Honda reweighting using ECal
+
+	if (
+		fWhichSample == "Overlay9BNBToHondaECal_Combined" ||
+		fWhichSample == "OverlayDirt9BNBToHondaECal_Combined" ||
+		fWhichSample == "BeamOn9BNBToHondaECal_Combined" ||
+		fWhichSample == "ExtBNB9BNBToHondaECal_Combined"
+	) {
+
+		f_bnb_honda = new TFile("../FlatTreeAnalyzer/OutputFiles/spline.root","readonly");
+		h_spline = (TH1D*)(f_bnb_honda->Get("TrueFineBinECalPlot"));
+	
+	}
+
 
 	//----------------------------------------//
 
@@ -565,9 +587,9 @@ void reco_selection::Loop() {
 				// For the detector variations, Weight (bug fix) = 1		
 				weight = POTWeight * Weight * T2KWeight * ROOTinoWeight;
 
-				// BNB To Honda reweighting
+				// BNB To Honda reweighting for MC using true Ev
 
-				if (fWhichSample == "Overlay9BNBToHonda_Combined") {
+				if (fWhichSample == "Overlay9BNBToHonda_Combined" || fWhichSample == "OverlayDirt9BNBToHonda_Combined") {
 
 					int bin_bnb_to_honda = LocateClosetsBinWithValue(h_spline,True_Ev); 
 					double scale_bnb_to_honda = h_spline->GetBinContent(bin_bnb_to_honda);
@@ -698,7 +720,16 @@ void reco_selection::Loop() {
 			if (CandidateMu_EndContainment->at(0) == 1) { 
 
 				double Reso =  TMath::Abs(CandidateMu_P_MCS->at(0) - CandidateMu_P_Range->at(0) ) / CandidateMu_P_Range->at(0) ; 
-				if (Reso > MuRangeMCSAgreeValue) { continue; }
+				if (Reso > MuRangeMCSAgreeValue) { 
+
+					//if (Vertex_Z->at(0) > 450 && Vertex_Z->at(0)< 850) {
+
+						//cout << "quality cut no satisfied, run = " << Run << ", subrun = " << SubRun << ", event = " << Event << endl;
+					//}
+
+					continue; 
+
+				}
 
 			}
 
@@ -771,6 +802,23 @@ void reco_selection::Loop() {
 			double DeltaAlphaT = Reco_DeltaAlphaT->at(0);
 			double DeltaPn = Reco_Pn->at(0);
 			double DeltaAlpha3D = Reco_DeltaAlpha3Dq->at(0);
+
+			// BNB To Honda reweighting for MC
+
+			if (
+				fWhichSample == "BeamOn9BNBToHonda_Combined" || 
+				fWhichSample == "ExtBNB9BNBToHonda_Combined" ||
+				fWhichSample == "BeamOn9BNBToHondaECal_Combined" || 
+				fWhichSample == "ExtBNB9BNBToHondaECal_Combined" ||
+				fWhichSample == "Overlay9BNBToHondaECal_Combined" || 
+				fWhichSample == "OverlayDirt9BNBToHondaECal_Combined"
+			) {
+
+				int bin_bnb_to_honda = LocateClosetsBinWithValue(h_spline,ECal); 
+				double scale_bnb_to_honda = h_spline->GetBinContent(bin_bnb_to_honda);
+				weight = weight * scale_bnb_to_honda;
+
+			} 
 
 			// -------------------------------------------------------------------------------------------------------------------------
 			
