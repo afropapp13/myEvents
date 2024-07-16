@@ -82,6 +82,9 @@ void true_selection::Loop() {
 	TH1D* TrueThetaVis_InDeltaPnTwoDPlot[NInte][TwoDNBinsDeltaPn];
 	TH1D* SerialTrueThetaVis_InDeltaPnPlot[NInte];
 
+	TH1D* TrueThetaVis_InPMissTwoDPlot[NInte][TwoDNBinsPMiss];
+	TH1D* SerialTrueThetaVis_InPMissPlot[NInte];
+
 	//--------------------------------------------------//
 
 	// Loop over the interaction processes
@@ -115,6 +118,14 @@ void true_selection::Loop() {
 
 		SerialTrueThetaVis_InDeltaPnPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueSerialThetaVis_DeltaPnPlot",LabelXAxisThetaVis,tools.Return2DNBins(TwoDArrayNBinsThetaVisInDeltaPnSlices),&tools.Return2DBinIndices(TwoDArrayNBinsThetaVisInDeltaPnSlices)[0]);
 
+		for (int WhichPMiss = 0; WhichPMiss < TwoDNBinsPMiss; WhichPMiss++) {
+
+			TString ThetaVisTwoDInPMissLabel = "ThetaVis_PMiss_"+tools.ConvertToString(TwoDArrayNBinsPMiss[WhichPMiss])+"To"+tools.ConvertToString(TwoDArrayNBinsPMiss[WhichPMiss+1])+"Plot";			
+			TrueThetaVis_InPMissTwoDPlot[inte][WhichPMiss] = new TH1D(InteractionLabels[inte]+"True"+ThetaVisTwoDInPMissLabel,LabelXAxisThetaVis,TwoDArrayNBinsThetaVisInPMissSlices[WhichPMiss].size()-1,&TwoDArrayNBinsThetaVisInPMissSlices[WhichPMiss][0]);
+
+		}	
+
+		SerialTrueThetaVis_InPMissPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueSerialThetaVis_PMissPlot",LabelXAxisThetaVis,tools.Return2DNBins(TwoDArrayNBinsThetaVisInPMissSlices),&tools.Return2DBinIndices(TwoDArrayNBinsThetaVisInPMissSlices)[0]);
 
 		//--------------------------------------------------//
 
@@ -325,7 +336,7 @@ void true_selection::Loop() {
                         if (TruePn < ArrayNBinsDeltaPn[0]) { TruePn = (ArrayNBinsDeltaPn[0] + ArrayNBinsDeltaPn[1])/2.; }
                         if (TruePn > ArrayNBinsDeltaPn[NBinsDeltaPn]) { TruePn = (ArrayNBinsDeltaPn[NBinsDeltaPn] + ArrayNBinsDeltaPn[NBinsDeltaPn-1])/2.; }
 
- 			//--------------------------------------------------//	
+			//--------------------------------------------------//	
 
 			// True Vertex
 
@@ -386,6 +397,12 @@ void true_selection::Loop() {
 					TrueCandidateProton.SetPhi(TrueProtonPhi);
 					TrueCandidateProton.SetTheta(TMath::ACos(TrueProtonCosTheta));	
 
+					TVector3 vec_b = TrueCandidateMuon + TrueCandidateProton;
+					double TruePMiss = TrueRecoECal - vec_b.Mag(); 
+
+		                        if (TruePMiss < ArrayNBinsPMiss[0]) { TruePMiss = (ArrayNBinsPMiss[0] + ArrayNBinsPMiss[1])/2.; }
+                		        if (TruePMiss > ArrayNBinsPMiss[NBinsPMiss]) { TruePMiss = (ArrayNBinsPMiss[NBinsPMiss] + ArrayNBinsPMiss[NBinsPMiss-1])/2.; }
+
 					//----------------------------------------//	
 
 					// 2D indices
@@ -396,6 +413,9 @@ void true_selection::Loop() {
 					int DeltaPnTwoDIndex = tools.ReturnIndex(TruePn, TwoDArrayNBinsDeltaPn);
 					int SerialThetaVisInDeltaPnIndex = tools.ReturnIndexIn2DList(TwoDArrayNBinsThetaVisInDeltaPnSlices,DeltaPnTwoDIndex,TrueThetaVis);
 
+					int PMissTwoDIndex = tools.ReturnIndex( TMath::Abs(TruePMiss), TwoDArrayNBinsPMiss);
+					int SerialThetaVisInPMissIndex = tools.ReturnIndexIn2DList(TwoDArrayNBinsThetaVisInPMissSlices,PMissTwoDIndex,TrueThetaVis);
+	
 					//----------------------------------------//	
 
 					// 1D analysis		
@@ -411,6 +431,10 @@ void true_selection::Loop() {
 					TrueThetaVis_InDeltaPnTwoDPlot[0][DeltaPnTwoDIndex]->Fill(TrueThetaVis,weight);
 					SerialTrueThetaVis_InDeltaPnPlot[0]->Fill(SerialThetaVisInDeltaPnIndex,weight);								
 
+					TrueThetaVis_InPMissTwoDPlot[0][PMissTwoDIndex]->Fill(TrueThetaVis,weight);
+					SerialTrueThetaVis_InPMissPlot[0]->Fill(SerialThetaVisInPMissIndex,weight);								
+
+
 					TrueMuonCosThetaPlot[genie_mode]->Fill(TrueMuonCosTheta,weight);
 					TrueMuonCosThetaSingleBinPlot[genie_mode]->Fill(0.5,weight);
 					TrueThetaVisPlot[genie_mode]->Fill(TrueThetaVis,weight);
@@ -421,6 +445,9 @@ void true_selection::Loop() {
 
 					TrueThetaVis_InDeltaPnTwoDPlot[genie_mode][DeltaPnTwoDIndex]->Fill(TrueThetaVis,weight);
 					SerialTrueThetaVis_InDeltaPnPlot[genie_mode]->Fill(SerialThetaVisInDeltaPnIndex,weight);								
+
+					TrueThetaVis_InPMissTwoDPlot[genie_mode][PMissTwoDIndex]->Fill(TrueThetaVis,weight);
+					SerialTrueThetaVis_InPMissPlot[genie_mode]->Fill(SerialThetaVisInPMissIndex,weight);								
 
 					//----------------------------------------//									
 

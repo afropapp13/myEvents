@@ -1,5 +1,5 @@
 {
-
+/*
 	vector<TString> WhichSampleArray;
 
 	// -----------------------------------------------------------------------------------------
@@ -244,14 +244,14 @@
 	// BNB-To-Honda reweighting
 
 	WhichSampleArray.push_back("Overlay9BNBToHonda_Combined");
-
+*/
 	//--------------------//
 
 	gROOT->ProcessLine(".L ../myClasses/Tools.cxx++");
 	gROOT->ProcessLine(".L ../myClasses/STV_Tools.cxx++");	
 
 	gROOT->ProcessLine(".L reco_selection.cxx++");
-
+/*
 	for (int i = 0;i < (int)(WhichSampleArray.size()); i++) {
 
 		gROOT->ProcessLine("reco_selection(\""+WhichSampleArray[i]+"\").Loop()");
@@ -397,7 +397,7 @@
 	} // End of the loop over the samples
 
 	//--------------------//
-
+*/
 	vector<TString> FDSWhichSampleArray;
 
 	FDSWhichSampleArray.push_back("OverlayDirt9_Combined");

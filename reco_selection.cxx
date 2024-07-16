@@ -327,6 +327,55 @@ void reco_selection::Loop() {
 
 		//----------------------------------------//
 
+		// ThetaVis in PMiss slices 
+		// Uncorrelated
+
+		TH1D* RecoThetaVis_PMissSlicesPlot[TwoDNBinsPMiss];
+		TH1D* CC1pRecoThetaVis_PMissSlicesPlot[TwoDNBinsPMiss];	
+		TH1D* CC1pTrueThetaVis_PMissSlicesPlot[TwoDNBinsPMiss];
+		TH2D* CC1pRecoThetaVis_PMissSlicesPlot2D[TwoDNBinsPMiss];
+		TH2D* POTScaledCC1pRecoThetaVis_PMissSlicesPlot2D[TwoDNBinsPMiss];
+		TH1D* NonCC1pRecoThetaVis_PMissSlicesPlot[TwoDNBinsPMiss];
+		TH1D* CCQERecoThetaVis_PMissSlicesPlot[TwoDNBinsPMiss];
+		TH1D* CCMECRecoThetaVis_PMissSlicesPlot[TwoDNBinsPMiss];
+		TH1D* CCRESRecoThetaVis_PMissSlicesPlot[TwoDNBinsPMiss];
+		TH1D* CCDISRecoThetaVis_PMissSlicesPlot[TwoDNBinsPMiss];
+
+		// ThetaVis in PMiss slices
+		// Correlated
+
+		TH1D* SerialRecoThetaVis_InPMissPlot = new TH1D("RecoSerialThetaVis_PMissPlot",LabelXAxisThetaVis,tools.Return2DNBins(TwoDArrayNBinsThetaVisInPMissSlices),&tools.Return2DBinIndices(TwoDArrayNBinsThetaVisInPMissSlices)[0]);
+		TH1D* SerialCC1pRecoThetaVis_InPMissPlot = new TH1D("CC1pRecoSerialThetaVis_PMissPlot",LabelXAxisThetaVis,tools.Return2DNBins(TwoDArrayNBinsThetaVisInPMissSlices),&tools.Return2DBinIndices(TwoDArrayNBinsThetaVisInPMissSlices)[0]);
+		TH1D* SerialCC1pTrueThetaVis_InPMissPlot = new TH1D("CC1pTrueSerialThetaVis_PMissPlot",LabelXAxisThetaVis,tools.Return2DNBins(TwoDArrayNBinsThetaVisInPMissSlices),&tools.Return2DBinIndices(TwoDArrayNBinsThetaVisInPMissSlices)[0]);		
+		TH1D* SerialNonCC1pRecoThetaVis_InPMissPlot = new TH1D("NonCC1pRecoSerialThetaVis_PMissPlot",LabelXAxisThetaVis,tools.Return2DNBins(TwoDArrayNBinsThetaVisInPMissSlices),&tools.Return2DBinIndices(TwoDArrayNBinsThetaVisInPMissSlices)[0]);
+		TH1D* SerialCCQERecoThetaVis_InPMissPlot = new TH1D("CCQERecoSerialThetaVis_PMissPlot",LabelXAxisThetaVis,tools.Return2DNBins(TwoDArrayNBinsThetaVisInPMissSlices),&tools.Return2DBinIndices(TwoDArrayNBinsThetaVisInPMissSlices)[0]);
+		TH1D* SerialCCMECRecoThetaVis_InPMissPlot = new TH1D("CCMECRecoSerialThetaVis_PMissPlot",LabelXAxisThetaVis,tools.Return2DNBins(TwoDArrayNBinsThetaVisInPMissSlices),&tools.Return2DBinIndices(TwoDArrayNBinsThetaVisInPMissSlices)[0]);								
+		TH1D* SerialCCRESRecoThetaVis_InPMissPlot = new TH1D("CCRESRecoSerialThetaVis_PMissPlot",LabelXAxisThetaVis,tools.Return2DNBins(TwoDArrayNBinsThetaVisInPMissSlices),&tools.Return2DBinIndices(TwoDArrayNBinsThetaVisInPMissSlices)[0]);
+		TH1D* SerialCCDISRecoThetaVis_InPMissPlot = new TH1D("CCDISRecoSerialThetaVis_PMissPlot",LabelXAxisThetaVis,tools.Return2DNBins(TwoDArrayNBinsThetaVisInPMissSlices),&tools.Return2DBinIndices(TwoDArrayNBinsThetaVisInPMissSlices)[0]);
+		TH2D* SerialCC1pRecoThetaVis_InPMissPlot2D = new TH2D("CC1pRecoSerialThetaVis_PMissPlot2D",LabelXAxisThetaVis2D,tools.Return2DNBins(TwoDArrayNBinsThetaVisInPMissSlices),&tools.Return2DBinIndices(TwoDArrayNBinsThetaVisInPMissSlices)[0],tools.Return2DNBins(TwoDArrayNBinsThetaVisInPMissSlices),&tools.Return2DBinIndices(TwoDArrayNBinsThetaVisInPMissSlices)[0]);
+		TH2D* SerialPOTScaledCC1pRecoThetaVis_InPMissPlot2D = new TH2D("POTScaledCC1pRecoSerialThetaVis_PMissPlot2D",LabelXAxisThetaVis2D,tools.Return2DNBins(TwoDArrayNBinsThetaVisInPMissSlices),&tools.Return2DBinIndices(TwoDArrayNBinsThetaVisInPMissSlices)[0],tools.Return2DNBins(TwoDArrayNBinsThetaVisInPMissSlices),&tools.Return2DBinIndices(TwoDArrayNBinsThetaVisInPMissSlices)[0]);				
+			
+		// Loop over the PMiss slices
+		
+		for (int ideltapn = 0; ideltapn < TwoDNBinsPMiss; ideltapn++) {
+
+			TString ThetaVisTwoDInPMissLabel = "ThetaVis_PMiss_"+tools.ConvertToString(TwoDArrayNBinsPMiss[ideltapn])+"To"+tools.ConvertToString(TwoDArrayNBinsPMiss[ideltapn+1])+"Plot";			
+			RecoThetaVis_PMissSlicesPlot[ideltapn] = new TH1D("Reco" + ThetaVisTwoDInPMissLabel,LabelXAxisThetaVis,TwoDArrayNBinsThetaVisInPMissSlices[ideltapn].size()-1,&TwoDArrayNBinsThetaVisInPMissSlices[ideltapn][0]);
+			CC1pRecoThetaVis_PMissSlicesPlot[ideltapn] = new TH1D("CC1pReco" + ThetaVisTwoDInPMissLabel,LabelXAxisThetaVis,TwoDArrayNBinsThetaVisInPMissSlices[ideltapn].size()-1,&TwoDArrayNBinsThetaVisInPMissSlices[ideltapn][0]);	
+			CC1pTrueThetaVis_PMissSlicesPlot[ideltapn] = new TH1D("CC1pTrue" + ThetaVisTwoDInPMissLabel,LabelXAxisThetaVis,TwoDArrayNBinsThetaVisInPMissSlices[ideltapn].size()-1,&TwoDArrayNBinsThetaVisInPMissSlices[ideltapn][0]);
+			CC1pRecoThetaVis_PMissSlicesPlot2D[ideltapn] = new TH2D("CC1pReco" + ThetaVisTwoDInPMissLabel + "2D",LabelXAxisThetaVis2D,TwoDArrayNBinsThetaVisInPMissSlices[ideltapn].size()-1,&TwoDArrayNBinsThetaVisInPMissSlices[ideltapn][0],TwoDArrayNBinsThetaVisInPMissSlices[ideltapn].size()-1,&TwoDArrayNBinsThetaVisInPMissSlices[ideltapn][0]);
+			POTScaledCC1pRecoThetaVis_PMissSlicesPlot2D[ideltapn] = new TH2D("POTScaledCC1pReco" + ThetaVisTwoDInPMissLabel + "2D",LabelXAxisThetaVis2D,TwoDArrayNBinsThetaVisInPMissSlices[ideltapn].size()-1,&TwoDArrayNBinsThetaVisInPMissSlices[ideltapn][0],TwoDArrayNBinsThetaVisInPMissSlices[ideltapn].size()-1,&TwoDArrayNBinsThetaVisInPMissSlices[ideltapn][0]);
+			NonCC1pRecoThetaVis_PMissSlicesPlot[ideltapn] = new TH1D("NonCC1pReco" + ThetaVisTwoDInPMissLabel,LabelXAxisThetaVis,TwoDArrayNBinsThetaVisInPMissSlices[ideltapn].size()-1,&TwoDArrayNBinsThetaVisInPMissSlices[ideltapn][0]);
+			CCQERecoThetaVis_PMissSlicesPlot[ideltapn] = new TH1D("CCQEReco" + ThetaVisTwoDInPMissLabel,LabelXAxisThetaVis,TwoDArrayNBinsThetaVisInPMissSlices[ideltapn].size()-1,&TwoDArrayNBinsThetaVisInPMissSlices[ideltapn][0]);
+			CCMECRecoThetaVis_PMissSlicesPlot[ideltapn] = new TH1D("CCMECReco" + ThetaVisTwoDInPMissLabel,LabelXAxisThetaVis,TwoDArrayNBinsThetaVisInPMissSlices[ideltapn].size()-1,&TwoDArrayNBinsThetaVisInPMissSlices[ideltapn][0]);
+			CCRESRecoThetaVis_PMissSlicesPlot[ideltapn] = new TH1D("CCRESReco" + ThetaVisTwoDInPMissLabel,LabelXAxisThetaVis,TwoDArrayNBinsThetaVisInPMissSlices[ideltapn].size()-1,&TwoDArrayNBinsThetaVisInPMissSlices[ideltapn][0]);
+			CCDISRecoThetaVis_PMissSlicesPlot[ideltapn] = new TH1D("CCDISReco" + ThetaVisTwoDInPMissLabel,LabelXAxisThetaVis,TwoDArrayNBinsThetaVisInPMissSlices[ideltapn].size()-1,&TwoDArrayNBinsThetaVisInPMissSlices[ideltapn][0]);
+		
+		} // End of the loop over PMiss slices
+
+
+		//----------------------------------------//
+
 		TH1D* CC1pECalDiff_MuonMomentumSlicesPlot[TwoDNBinsMuonMomentum];	
 		TH1D* CC1pECalReso_MuonMomentumSlicesPlot[TwoDNBinsMuonMomentum];	
 
@@ -445,6 +494,7 @@ void reco_selection::Loop() {
 		TH1D* CC1pThetaVisReso_DeltaPnSlicesPlot[TwoDNBinsDeltaPn];	
 		TH1D* CC1pThetaVis_DeltaPnSlicesPlot[TwoDNBinsDeltaPn];	
 		TH1D* CC1pFineBinThetaVis_DeltaPnSlicesPlot[TwoDNBinsDeltaPn];	
+		TH1D* CC1pFineBinThetaVis_PMissSlicesPlot[TwoDNBinsPMiss];	
 	
 		// Loop over the DeltaPn slices
 		
@@ -454,11 +504,19 @@ void reco_selection::Loop() {
 			CC1pThetaVisReso_DeltaPnSlicesPlot[i] = new TH1D("CC1pThetaVisReso_DeltaPnSlices" + tools.ConvertToString(TwoDArrayNBinsDeltaPn[i])+"To"+tools.ConvertToString(TwoDArrayNBinsDeltaPn[i+1]) +"Plot",";(#theta_{vis}^{reco} - #theta_{vis}^{true})/#theta_{vis}^{true} [%]",51,thetaz_reso_min,thetaz_reso_max);
 			CC1pThetaVis_DeltaPnSlicesPlot[i] = new TH1D("CC1pThetaVis_DeltaPnSlices" + tools.ConvertToString(TwoDArrayNBinsDeltaPn[i])+"To"+tools.ConvertToString(TwoDArrayNBinsDeltaPn[i+1]) +"Plot",";#theta_{vis}^{reco} [deg]",30,0,180);
 			CC1pFineBinThetaVis_DeltaPnSlicesPlot[i] = new TH1D("CC1pFineBinThetaVis_DeltaPnSlices" + tools.ConvertToString(TwoDArrayNBinsDeltaPn[i])+"To"+tools.ConvertToString(TwoDArrayNBinsDeltaPn[i+1]) +"Plot",";#theta_{vis}^{reco} [deg]",180,0,180);
-	
+
 			CC1pECalDiff_DeltaPnSlicesPlot[i] = new TH1D("CC1pECalDiff_DeltaPnSlices" + tools.ConvertToString(TwoDArrayNBinsDeltaPn[i])+"To"+tools.ConvertToString(TwoDArrayNBinsDeltaPn[i+1]) +"Plot",";E_{Cal}^{reco} - E_{Cal}^{true} [GeV]",31,ecal_diff_min,ecal_diff_max);
 			CC1pECalReso_DeltaPnSlicesPlot[i] = new TH1D("CC1pECalReso_DeltaPnSlices" + tools.ConvertToString(TwoDArrayNBinsDeltaPn[i])+"To"+tools.ConvertToString(TwoDArrayNBinsDeltaPn[i+1]) +"Plot",";(E_{Cal}^{reco} - E_{Cal}^{true})/E_{Cal}^{true} [%]",51,ecal_reso_min,ecal_reso_max);
 		
 		} // End of the loop over DeltaPn slices
+	
+		// Loop over the PMiss slices
+		
+		for (int i = 0; i < TwoDNBinsPMiss; i++) {
+
+			CC1pFineBinThetaVis_PMissSlicesPlot[i] = new TH1D("CC1pFineBinThetaVis_PMissSlices" + tools.ConvertToString(TwoDArrayNBinsPMiss[i])+"To"+tools.ConvertToString(TwoDArrayNBinsPMiss[i+1]) +"Plot",";#theta_{vis}^{reco} [deg]",180,0,180);
+	
+		} // End of the loop over PMiss slices
 	
 		//----------------------------------------//
 
@@ -845,6 +903,7 @@ void reco_selection::Loop() {
 
 			TVector3 reco_b_vector = reco_stv_tool.ReturnBeamVector();
 			TVector3 reco_b_vector_unit = reco_b_vector.Unit();
+			double pmiss = ECal - reco_b_vector.Mag();
 
 			// Underflow / overflow
 			if (ThetaVis < ArrayNBinsThetaVis[0]) { ThetaVis = (ArrayNBinsThetaVis[0] + ArrayNBinsThetaVis[1])/2.; }
@@ -857,6 +916,9 @@ void reco_selection::Loop() {
 			if (ECal > ArrayNBinsECal[NBinsECal]) { ECal = 0.5 * (ArrayNBinsECal[NBinsECal] + ArrayNBinsECal[NBinsECal-1]); }
 			if (ECal < ArrayNBinsECal[0]) { ECal = 0.5 * (ArrayNBinsECal[0] + ArrayNBinsECal[1]); }	
 
+			if (pmiss > ArrayNBinsPMiss[NBinsPMiss]) { pmiss = 0.5 * (ArrayNBinsPMiss[NBinsPMiss] + ArrayNBinsPMiss[NBinsPMiss-1]); }
+			if (pmiss < ArrayNBinsPMiss[0]) { pmiss = 0.5 * (ArrayNBinsPMiss[0] + ArrayNBinsPMiss[1]); }	
+
 			//----------------------------------------//
 
 			//Reco  2D indices
@@ -866,6 +928,9 @@ void reco_selection::Loop() {
 
 			int DeltaPnTwoDIndex = tools.ReturnIndex(DeltaPn, TwoDArrayNBinsDeltaPn);
 			int SerialThetaVisInDeltaPnIndex = tools.ReturnIndexIn2DList(TwoDArrayNBinsThetaVisInDeltaPnSlices,DeltaPnTwoDIndex,ThetaVis);
+
+			int PMissTwoDIndex = tools.ReturnIndex( TMath::Abs(pmiss), TwoDArrayNBinsPMiss);
+			int SerialThetaVisInPMissIndex = tools.ReturnIndexIn2DList(TwoDArrayNBinsThetaVisInPMissSlices,PMissTwoDIndex,ThetaVis);
 
 			//----------------------------------------//
 
@@ -914,6 +979,7 @@ void reco_selection::Loop() {
 			double true_DeltaPLVis = -1;
 			double true_DeltaAlphaT = -1;
 			double true_DeltaPn = -1;
+			double true_pmiss = -1;
 			double true_DeltaAlpha3D = -1;
 
 			//----------------------------------------//
@@ -925,6 +991,9 @@ void reco_selection::Loop() {
 
 			int TrueDeltaPnTwoDIndex = -1;
 			int TrueSerialThetaVisInDeltaPnIndex = -1;
+
+			int TruePMissTwoDIndex = -1;
+			int TrueSerialThetaVisInPMissIndex = -1;
 
 			TVector3 true_b_vector_unit(-1,-1,-1);
 
@@ -985,6 +1054,10 @@ void reco_selection::Loop() {
 				TVector3 true_b_vector = true_stv_tool.ReturnBeamVector();
 				true_b_vector_unit = true_b_vector.Unit();
 
+				true_pmiss = true_ECal - true_b_vector.Mag();				
+				TruePMissTwoDIndex = tools.ReturnIndex( TMath::Abs(true_pmiss), TwoDArrayNBinsPMiss);
+				TrueSerialThetaVisInPMissIndex = tools.ReturnIndexIn2DList(TwoDArrayNBinsThetaVisInPMissSlices,TruePMissTwoDIndex,true_ThetaVis);
+
 			} // End of if statement: Only for MC to obtain true vales
 
 			//----------------------------------------//
@@ -1000,6 +1073,9 @@ void reco_selection::Loop() {
 
 			RecoThetaVis_DeltaPnSlicesPlot[DeltaPnTwoDIndex]->Fill(ThetaVis,weight);
 			SerialRecoThetaVis_InDeltaPnPlot->Fill(SerialThetaVisInDeltaPnIndex,weight);
+
+			RecoThetaVis_PMissSlicesPlot[PMissTwoDIndex]->Fill(ThetaVis,weight);
+			SerialRecoThetaVis_InPMissPlot->Fill(SerialThetaVisInPMissIndex,weight);
 
 			//------------------------------//
 
@@ -1052,6 +1128,9 @@ void reco_selection::Loop() {
 					CC1pTrueThetaVis_DeltaPnSlicesPlot[TrueDeltaPnTwoDIndex]->Fill(true_ThetaVis,weight);
 					SerialCC1pTrueThetaVis_InDeltaPnPlot->Fill(TrueSerialThetaVisInDeltaPnIndex,weight);
 
+					CC1pTrueThetaVis_PMissSlicesPlot[TruePMissTwoDIndex]->Fill(true_ThetaVis,weight);
+					SerialCC1pTrueThetaVis_InPMissPlot->Fill(TrueSerialThetaVisInPMissIndex,weight);
+
 					//----------------------------------------//
 
 					// 1D Reco Plots for the selected CC1p events 
@@ -1068,6 +1147,9 @@ void reco_selection::Loop() {
 					CC1pRecoThetaVis_DeltaPnSlicesPlot[DeltaPnTwoDIndex]->Fill(ThetaVis,weight);
 					SerialCC1pRecoThetaVis_InDeltaPnPlot->Fill(SerialThetaVisInDeltaPnIndex,weight);
 
+					CC1pRecoThetaVis_PMissSlicesPlot[PMissTwoDIndex]->Fill(ThetaVis,weight);
+					SerialCC1pRecoThetaVis_InPMissPlot->Fill(SerialThetaVisInPMissIndex,weight);
+
 					//------------------------------//
 
 					CC1pRecoMuonCosThetaPlot2D->Fill(True_CandidateMu_CosTheta->at(0),reco_Pmu_cos_theta);
@@ -1082,6 +1164,9 @@ void reco_selection::Loop() {
 					CC1pRecoThetaVis_DeltaPnSlicesPlot2D[DeltaPnTwoDIndex]->Fill(true_ThetaVis,ThetaVis,weight);
 					SerialCC1pRecoThetaVis_InDeltaPnPlot2D->Fill(TrueSerialThetaVisInDeltaPnIndex,SerialThetaVisInDeltaPnIndex,weight);
 
+					CC1pRecoThetaVis_PMissSlicesPlot2D[PMissTwoDIndex]->Fill(true_ThetaVis,ThetaVis,weight);
+					SerialCC1pRecoThetaVis_InPMissPlot2D->Fill(TrueSerialThetaVisInPMissIndex,SerialThetaVisInPMissIndex,weight);
+
 					POTScaledCC1pRecoMuonCosThetaPlot2D->Fill(True_CandidateMu_CosTheta->at(0),reco_Pmu_cos_theta,weight);
 					POTScaledCC1pRecoMuonCosThetaSingleBinPlot2D->Fill(0.5,0.5,weight);
 					POTScaledCC1pRecoThetaVisPlot2D->Fill(true_ThetaVis,ThetaVis,weight);
@@ -1093,6 +1178,9 @@ void reco_selection::Loop() {
 					
 					POTScaledCC1pRecoThetaVis_DeltaPnSlicesPlot2D[DeltaPnTwoDIndex]->Fill(true_ThetaVis,ThetaVis,weight);
 					SerialPOTScaledCC1pRecoThetaVis_InDeltaPnPlot2D->Fill(TrueSerialThetaVisInDeltaPnIndex,SerialThetaVisInDeltaPnIndex,weight);
+
+					POTScaledCC1pRecoThetaVis_PMissSlicesPlot2D[PMissTwoDIndex]->Fill(true_ThetaVis,ThetaVis,weight);
+					SerialPOTScaledCC1pRecoThetaVis_InPMissPlot2D->Fill(TrueSerialThetaVisInPMissIndex,SerialThetaVisInPMissIndex,weight);
 
 					//------------------------------//
 
@@ -1200,7 +1288,8 @@ void reco_selection::Loop() {
 					CC1pThetaVisReso_DeltaPnSlicesPlot[DeltaPnTwoDIndex]->Fill(reso,weight);
 					CC1pThetaVis_DeltaPnSlicesPlot[DeltaPnTwoDIndex]->Fill(ThetaVis,weight);	
 					CC1pFineBinThetaVis_DeltaPnSlicesPlot[DeltaPnTwoDIndex]->Fill(ThetaVis,weight);	
-	
+					CC1pFineBinThetaVis_PMissSlicesPlot[PMissTwoDIndex]->Fill(ThetaVis,weight);	
+
 					CC1pECalDiff_DeltaPnSlicesPlot[DeltaPnTwoDIndex]->Fill(ECal_diff,weight);	
 					CC1pECalReso_DeltaPnSlicesPlot[DeltaPnTwoDIndex]->Fill(ECal_reso,weight);
 
@@ -1262,7 +1351,10 @@ void reco_selection::Loop() {
 					NonCC1pRecoThetaVis_DeltaPnSlicesPlot[DeltaPnTwoDIndex]->Fill(ThetaVis,weight);
 					SerialNonCC1pRecoThetaVis_InDeltaPnPlot->Fill(SerialThetaVisInDeltaPnIndex,weight);
 
-					//------------------------------//
+					NonCC1pRecoThetaVis_PMissSlicesPlot[PMissTwoDIndex]->Fill(ThetaVis,weight);
+					SerialNonCC1pRecoThetaVis_InPMissPlot->Fill(SerialThetaVisInPMissIndex,weight);
+
+				//------------------------------//
 
 				} // End of the Non-CC1p beam related background
 
@@ -1285,6 +1377,8 @@ void reco_selection::Loop() {
 					CCQERecoThetaVis_DeltaPnSlicesPlot[DeltaPnTwoDIndex]->Fill(ThetaVis,weight);
 					SerialCCQERecoThetaVis_InDeltaPnPlot->Fill(SerialThetaVisInDeltaPnIndex,weight);
 
+					CCQERecoThetaVis_PMissSlicesPlot[PMissTwoDIndex]->Fill(ThetaVis,weight);
+					SerialCCQERecoThetaVis_InPMissPlot->Fill(SerialThetaVisInPMissIndex,weight);
 
 				} // End of CCQE selection
 
@@ -1305,6 +1399,9 @@ void reco_selection::Loop() {
 	
 					CCMECRecoThetaVis_DeltaPnSlicesPlot[DeltaPnTwoDIndex]->Fill(ThetaVis,weight);
 					SerialCCMECRecoThetaVis_InDeltaPnPlot->Fill(SerialThetaVisInDeltaPnIndex,weight);
+	
+					CCMECRecoThetaVis_PMissSlicesPlot[PMissTwoDIndex]->Fill(ThetaVis,weight);
+					SerialCCMECRecoThetaVis_InPMissPlot->Fill(SerialThetaVisInPMissIndex,weight);
 		
 				}
 
@@ -1326,6 +1423,9 @@ void reco_selection::Loop() {
 					CCRESRecoThetaVis_DeltaPnSlicesPlot[DeltaPnTwoDIndex]->Fill(ThetaVis,weight);
 					SerialCCRESRecoThetaVis_InDeltaPnPlot->Fill(SerialThetaVisInDeltaPnIndex,weight);
 	
+					CCRESRecoThetaVis_PMissSlicesPlot[PMissTwoDIndex]->Fill(ThetaVis,weight);
+					SerialCCRESRecoThetaVis_InPMissPlot->Fill(SerialThetaVisInPMissIndex,weight);
+	
 				}
 
 				// -------------------------------------------------------------------------------------------------------------------------
@@ -1340,11 +1440,14 @@ void reco_selection::Loop() {
 					CCDISRecoCosThetaVisPlot->Fill(CosThetaVis,weight);
 
 					// 2D analysis
-					CCRESRecoThetaVis_ECalSlicesPlot[ECalTwoDIndex]->Fill(ThetaVis,weight);
-					SerialCCRESRecoThetaVis_InECalPlot->Fill(SerialThetaVisInECalIndex,weight);
+					CCDISRecoThetaVis_ECalSlicesPlot[ECalTwoDIndex]->Fill(ThetaVis,weight);
+					SerialCCDISRecoThetaVis_InECalPlot->Fill(SerialThetaVisInECalIndex,weight);
 					
-					CCRESRecoThetaVis_DeltaPnSlicesPlot[DeltaPnTwoDIndex]->Fill(ThetaVis,weight);
-					SerialCCRESRecoThetaVis_InDeltaPnPlot->Fill(SerialThetaVisInDeltaPnIndex,weight);
+					CCDISRecoThetaVis_DeltaPnSlicesPlot[DeltaPnTwoDIndex]->Fill(ThetaVis,weight);
+					SerialCCDISRecoThetaVis_InDeltaPnPlot->Fill(SerialThetaVisInDeltaPnIndex,weight);
+
+					CCDISRecoThetaVis_PMissSlicesPlot[PMissTwoDIndex]->Fill(ThetaVis,weight);
+					SerialCCDISRecoThetaVis_InPMissPlot->Fill(SerialThetaVisInPMissIndex,weight);
 
 
 				}

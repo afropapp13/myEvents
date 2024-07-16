@@ -39,6 +39,9 @@ void  print_theta_vis_mean_std() {
 	plot_names.push_back("CC1pFineBinThetaVis_DeltaPnSlices0_20To0_40Plot");
 	plot_names.push_back("CC1pFineBinThetaVis_DeltaPnSlices0_40To1_00Plot");
 	
+	plot_names.push_back("CC1pFineBinThetaVis_PMissSlices0_00To0_15Plot");
+	plot_names.push_back("CC1pFineBinThetaVis_PMissSlices0_15To0_50Plot");
+	
 	const int nplots = plot_names.size();
 
 	//--------------------------------------//

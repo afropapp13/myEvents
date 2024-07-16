@@ -412,7 +412,7 @@
 
 	for (int i = 0;i < (int)(FDSWhichSampleArray.size()); i++) {
 
-		if (string(WhichSampleArray[i]).find("Overlay9") != std::string::npos) { 
+		if (string(FDSWhichSampleArray[i]).find("Overlay9") != std::string::npos) { 
 
 			gROOT->ProcessLine("true_selection(\""+FDSWhichSampleArray[i]+"\",\"NoTune\").Loop()"); 
 		  	gROOT->ProcessLine("true_selection(\""+FDSWhichSampleArray[i]+"\",\"TwiceMEC\").Loop()"); 
