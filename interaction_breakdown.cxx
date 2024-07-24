@@ -318,7 +318,7 @@ void interaction_breakdown(TString BaseMC = "") {
 						bin_width_Plots[0][WhichPlot] = (TH1D*)(Plots[0][WhichPlot]->Clone()); 
 						Reweight(bin_width_Plots[0][WhichPlot]); 
 						max = FindOneDimHistoMaxValue(bin_width_Plots[0][WhichPlot]);
-						bin_width_Plots[0][WhichPlot]->GetYaxis()->SetRangeUser(0.,1.3*max);
+						bin_width_Plots[0][WhichPlot]->GetYaxis()->SetRangeUser(0.,1.35*max);
 
 					}
 					
