@@ -511,32 +511,32 @@ reco_selection::reco_selection(TString WhichSample, TString Tune, TString WhichE
    fEventWeightLabel = WhichEventWeightLabel;
    fUniverseIndex = UniverseIndex;
 
-   fPathToFile = "/exp/uboone/data/users/apapadop/PeLEETuples_Atmospherics/PreSelection_"+fWhichSample+"_"+UBCodeVersion+".root";
+   fPathToFile = "/exp/uboone/data/users/"+UserID+"/PeLEETuples_Atmospherics/PreSelection_"+fWhichSample+"_"+UBCodeVersion+".root";
 
    // ------------------------ //
 
    if (fWhichSample == "Overlay9BNBToHonda_Combined" || fWhichSample == "Overlay9BNBToHondaECal_Combined") {
 
-	fPathToFile = "/exp/uboone/data/users/apapadop/PeLEETuples_Atmospherics/PreSelection_Overlay9_Combined_"+UBCodeVersion+".root";
+	fPathToFile = "/exp/uboone/data/users/"+UserID+"/PeLEETuples_Atmospherics/PreSelection_Overlay9_Combined_"+UBCodeVersion+".root";
 
    }
 
    if (fWhichSample == "OverlayDirt9BNBToHonda_Combined" || fWhichSample == "OverlayDirt9BNBToHondaECal_Combined") {
 
-	fPathToFile = "/exp/uboone/data/users/apapadop/PeLEETuples_Atmospherics/PreSelection_OverlayDirt9_Combined_"+UBCodeVersion+".root";
+	fPathToFile = "/exp/uboone/data/users/"+UserID+"/PeLEETuples_Atmospherics/PreSelection_OverlayDirt9_Combined_"+UBCodeVersion+".root";
 
    }
 
    if (fWhichSample == "BeamOn9BNBToHonda_Combined" || fWhichSample == "BeamOn9BNBToHondaECal_Combined") {
 
-	fPathToFile = "/exp/uboone/data/users/apapadop/PeLEETuples_Atmospherics/PreSelection_BeamOn9_Combined_"+UBCodeVersion+".root";
+	fPathToFile = "/exp/uboone/data/users/"+UserID+"/PeLEETuples_Atmospherics/PreSelection_BeamOn9_Combined_"+UBCodeVersion+".root";
 
    }
 
 
    if (fWhichSample == "ExtBNB9BNBToHonda_Combined" || fWhichSample == "ExtBNB9BNBToHondaECal_Combined") {
 
-	fPathToFile = "/exp/uboone/data/users/apapadop/PeLEETuples_Atmospherics/PreSelection_ExtBNB9_Combined_"+UBCodeVersion+".root";
+	fPathToFile = "/exp/uboone/data/users/"+UserID+"/PeLEETuples_Atmospherics/PreSelection_ExtBNB9_Combined_"+UBCodeVersion+".root";
 
    }
 

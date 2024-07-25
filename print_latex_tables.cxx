@@ -95,6 +95,8 @@ void print_latex_tables(TString BaseMC = "", bool PrintStats = false, bool Print
 
 	vector<TString> Runs;
 	Runs.push_back("Run1");
+	Runs.push_back("Run1A_open_trigger");
+	Runs.push_back("Run1B_open_trigger");
 	Runs.push_back("Run2");
 	Runs.push_back("Run3");
 	//Runs.push_back("Run4a");

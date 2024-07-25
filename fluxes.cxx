@@ -21,10 +21,10 @@
 #include <map>
 #include <utility>
 
-using namespace std;
+#include "../myClasses/Constants.h"
 
-double TextSize = 0.08;
-double FontStyle = 132;
+using namespace std;
+using namespace Constants;
 
 int DUNEColor = kBlack;
 int T2KColor = kRed+1;
@@ -84,7 +84,7 @@ void fluxes() {
 	TFile* bnb_file = TFile::Open("../mySTVAnalysis/MCC9_FluxHist_volTPCActive.root");
 	TH1D* bnb_flux = (TH1D*)( bnb_file->Get("hEnumu_cv") );
 
-	TFile* honda_file = TFile::Open("/pnfs/uboone/persistent/users/apapadop/Fluxes/histogram.root");
+	TFile* honda_file = TFile::Open("/pnfs/uboone/persistent/users/apapadop/Fluxes/histogram.root","readonly");
 	TH1D* honda_flux = (TH1D*)(honda_file->Get("h"));
 
 	// --------------------------------------------------------------------------------------------------
@@ -113,7 +113,7 @@ void fluxes() {
 	Honda->SetTextSize(TextSize);
 	Honda->DrawLatexNDC(0.7,0.75,"Honda");
 
-	PlotCanvas->SaveAs("/exp/uboone/data/users/apapadop/PeLEETuples_Atmospherics/FlatTTreePlots/"+CanvasName+".pdf");
+	PlotCanvas->SaveAs("/exp/uboone/data/users/"+UserID+"/PeLEETuples_Atmospherics/FlatTTreePlots/"+CanvasName+".pdf");
 	delete PlotCanvas;
 
 	//---------------------//

@@ -23,6 +23,17 @@
 	//WhichSampleArray.push_back("ExtBNB9BNBToHondaECal_Combined");
 	//WhichSampleArray.push_back("Overlay9BNBToHondaECal_Combined");
 	//WhichSampleArray.push_back("OverlayDirt9BNBToHondaECal_Combined");
+	
+	//WhichSampleArray.push_back("BeamOn9_Run1A_open_trigger");
+	//WhichSampleArray.push_back("ExtBNB9_Run1A_open_trigger");
+	//WhichSampleArray.push_back("OverlayDirt9_Run1A_open_trigger");
+	//WhichSampleArray.push_back("Overlay9_Run1A_open_trigger");
+
+	//WhichSampleArray.push_back("BeamOn9_Run1B_open_trigger");
+	//WhichSampleArray.push_back("ExtBNB9_Run1B_open_trigger");
+	//WhichSampleArray.push_back("OverlayDirt9_Run1B_open_trigger");
+	//WhichSampleArray.push_back("Overlay9_Run1B_open_trigger");
+
 
 	// -----------------------------------------------------------------------------------------
 
