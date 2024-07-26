@@ -508,8 +508,8 @@ reco_selection::reco_selection(TString WhichSample, TString Tune, TString WhichE
    fUniverseIndex = UniverseIndex;
 
 // 	//pnfsToXRootD /pnfs/persistent/path/to/your/file
-//   fPathToFile = "/pnfs/uboone/persistent/users/apapadop/mySamples/"+UBCodeVersion+"/PeLEETuples/PreSelection_"+fWhichSample+"_"+UBCodeVersion+".root";
-	fPathToFile = "/exp/uboone/data/users/apapadop/PeLEETuples_3D_ECal/PreSelection_"+fWhichSample+"_"+UBCodeVersion+".root";
+//   fPathToFile = "/pnfs/uboone/persistent/users/"+UserID+"/mySamples/"+UBCodeVersion+"/PeLEETuples/PreSelection_"+fWhichSample+"_"+UBCodeVersion+".root";
+	fPathToFile = "/exp/uboone/data/users/"+UserID+"/PeLEETuples_3D_ECal/PreSelection_"+fWhichSample+"_"+UBCodeVersion+".root";
 
    if (tree == 0) {
       TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject(fPathToFile);

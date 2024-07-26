@@ -146,7 +146,7 @@ void reco_selection::Loop() {
 
 		// Txt file to keep track of the run/subrun/event of the candidate events
 
-		TString RunTxtName = "/exp/uboone/data/users/apapadop/my3DEvents/myTxtFiles/"+UBCodeVersion+"/TxtmyRunSubRunEvents_"+fWhichSample+"_"+UBCodeVersion+".txt";
+		TString RunTxtName = "/exp/uboone/data/users/"+UserID+"/my3DEvents/myTxtFiles/"+UBCodeVersion+"/TxtmyRunSubRunEvents_"+fWhichSample+"_"+UBCodeVersion+".txt";
 		ofstream myRunTxtFile;
 		myRunTxtFile.open(RunTxtName);
 		myRunTxtFile << std::fixed << std::setprecision(2);
