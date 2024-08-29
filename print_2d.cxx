@@ -51,9 +51,12 @@ void print_2d() {
 
 	PlotNames.push_back("RecoThetaVisRecoECalPlot"); 
 	PlotNames.push_back("RecoThetaVisRecoDeltaPnPlot"); 
+	PlotNames.push_back("RecoThetaVisRecoPMissPlot");
+	PlotNames.push_back("RecoDeltaPnRecoPMissPlot");
 	PlotNames.push_back("RecoThetaVisRecoDeltaPTPlot"); 
 	PlotNames.push_back("RecoECalTrueECalPlot"); 
 	PlotNames.push_back("RecoECalTrueEnuPlot"); 
+	PlotNames.push_back("RecoThetaVisRecoPMissPlot"); 
 
 	PlotNames.push_back("TrueThetaVisTrueECalPlot"); 
 	PlotNames.push_back("TrueThetaVisTrueEnuPlot"); 

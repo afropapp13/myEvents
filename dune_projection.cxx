@@ -64,7 +64,7 @@ void dune_projection(TString BaseMC = "") {
 	vector<TString> labels;
 	
 	samples.push_back("Overlay9"); labels.push_back("MicroBooNE");
-	samples.push_back("Overlay9BNBToHonda"); labels.push_back("DUNE projection");
+	samples.push_back("Overlay9BNBToHonda"); labels.push_back("DUNE atmospheric projection");
 
 	int nsamples = samples.size();
 		

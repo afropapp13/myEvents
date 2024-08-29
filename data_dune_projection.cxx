@@ -72,7 +72,7 @@ void data_dune_projection(TString BaseMC = "") {
 	samples.push_back("ExtBNB9"); colors.push_back(kGray); leg_samples.push_back("Cosmics");
 
 	reweight.push_back(""); labels.push_back("MicroBooNE");
-	reweight.push_back("BNBToHondaECal"); labels.push_back("DUNE projection");
+	reweight.push_back("BNBToHondaECal"); labels.push_back("atmospheric DUNE projection");
 
 	int nsamples = samples.size();
 	int nreweight = reweight.size();	

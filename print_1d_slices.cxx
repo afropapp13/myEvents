@@ -91,6 +91,7 @@ void print_1d_slices() {
 	// ThetaVis
 
 	plot_names.push_back("CC1pThetaVis_DeltaPnSlices"); slices.push_back(TwoDArrayNBinsDeltaPn); variable.push_back("p_{n}^{reco} [GeV/c]");	
+	plot_names.push_back("CC1pThetaVis_PMissSlices"); slices.push_back(TwoDArrayNBinsPMiss); variable.push_back("p_{miss}^{reco} [GeV/c]");	
 	plot_names.push_back("CC1pThetaVis_DeltaPTSlices"); slices.push_back(TwoDArrayNBinsDeltaPT); variable.push_back("#deltap_{T}^{reco} [GeV/c]");	
 	
 	plot_names.push_back("CC1pThetaVis_ECalSlices"); slices.push_back(TwoDArrayNBinsECal); variable.push_back("E_{Cal}^{reco} [GeV]");	
