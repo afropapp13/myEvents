@@ -66,8 +66,9 @@ void  print_theta_vis_mean_std() {
 
 		double mean = plot.at(iplot)->GetMean();
 		double sigma = plot.at(iplot)->GetRMS();
+		double median = plot.at(iplot)->GetMedian();
 	
-		cout << plot_names.at(iplot) << " mean = " << mean << "  sigma = " << sigma << endl;
+		cout << plot_names.at(iplot) << " mean = " << mean << "  sigma = " << sigma << "  median = " << median << endl;
 
 	} // End of the loop over the plots
 

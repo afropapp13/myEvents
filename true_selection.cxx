@@ -234,7 +234,16 @@ void true_selection::Loop() {
 			// Genie weights
 
 			if (fEventWeightLabel == "All_UBGenie") { weight = weight*All_UBGenie->at(fUniverseIndex) / T2KWeight; }
-			if (fEventWeightLabel == "AxFFCCQEshape_UBGenie") { weight = weight*AxFFCCQEshape_UBGenie->at(fUniverseIndex) / T2KWeight; }
+			if (fEventWeightLabel == "AxFFCCQEshape_UBGenie") { 
+
+				if ( int(AxFFCCQEshape_UBGenie->size()) > fUniverseIndex ) {
+				
+					weight = weight*AxFFCCQEshape_UBGenie->at(fUniverseIndex) / T2KWeight; 
+
+				}
+
+			}
+
 			if (fEventWeightLabel == "DecayAngMEC_UBGenie") { weight = weight*DecayAngMEC_UBGenie->at(fUniverseIndex) / T2KWeight; }
 			if (fEventWeightLabel == "NormCCCOH_UBGenie") { weight = weight*NormCCCOH_UBGenie->at(fUniverseIndex)/ T2KWeight; }
 			if (fEventWeightLabel == "NormNCCOH_UBGenie") { weight = weight*NormNCCOH_UBGenie->at(fUniverseIndex)/ T2KWeight; }
@@ -245,10 +254,26 @@ void true_selection::Loop() {
 			if (fEventWeightLabel == "XSecShape_CCMEC_UBGenie") { weight = weight*XSecShape_CCMEC_UBGenie->at(fUniverseIndex)/ T2KWeight; }
 
 			// Flux weights
-			if (fEventWeightLabel == "fluxes") { weight = weight*fluxes->at(fUniverseIndex); }
+			if (fEventWeightLabel == "fluxes") {
+
+				if ( int(fluxes->size()) > fUniverseIndex ) {
+
+					 weight = weight*fluxes->at(fUniverseIndex); 
+
+				}
+
+			}
 
 			// Reinteraction weights
-			if (fEventWeightLabel == "reinteractions") { weight = weight*reinteractions->at(fUniverseIndex); }		
+			if (fEventWeightLabel == "reinteractions") { 
+
+				if ( int(reinteractions->size()) > fUniverseIndex ) {
+				
+					weight = weight*reinteractions->at(fUniverseIndex);
+
+				} 
+
+			}		
 
 			// MC_Stat weights // bootstrapping
 			if (fEventWeightLabel == "MC_Stat") { 
