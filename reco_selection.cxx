@@ -865,11 +865,11 @@ void reco_selection::Loop() {
 					if (fEventWeightLabel == "XSecShape_CCMEC_UBGenie") { weight = weight*XSecShape_CCMEC_UBGenie->at(fUniverseIndex) / T2KWeight; }
 
 				}
-                                else {
+                                //else {
 
-                                	cout <<  ", run = " << Run << " subrun = " << SubRun << " event = " << Event << endl;
+                                	//cout <<  ", run = " << Run << " subrun = " << SubRun << " event = " << Event << endl;
 
-                                }
+                                //}
 
 				// Flux weights
 				if (fEventWeightLabel == "fluxes") { 
@@ -879,11 +879,11 @@ void reco_selection::Loop() {
 						weight = weight*fluxes->at(fUniverseIndex); 
 
 					}
-					else {
+					//else {
 
-						cout << "run_period =" << run_period << ", run = " << Run << " subrun = " << SubRun << " event = " << Event << endl;
+					//	cout << "run_period =" << run_period << ", run = " << Run << " subrun = " << SubRun << " event = " << Event << endl;
 
-					}
+					//}
 
 				}
 

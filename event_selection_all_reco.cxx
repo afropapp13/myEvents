@@ -11,6 +11,20 @@
 	WhichSampleArray.push_back("OverlayDirt9_Run1");
 	WhichSampleArray.push_back("Overlay9_Run1");
 
+	// Run 1A open trigger
+
+	WhichSampleArray.push_back("BeamOn9_Run1A_open_trigger");
+	WhichSampleArray.push_back("ExtBNB9_Run1A_open_trigger");
+	WhichSampleArray.push_back("OverlayDirt9_Run1A_open_trigger");
+	WhichSampleArray.push_back("Overlay9_Run1A_open_trigger");
+
+	// Run 1B open trigger
+
+	WhichSampleArray.push_back("BeamOn9_Run1B_open_trigger");
+	WhichSampleArray.push_back("ExtBNB9_Run1B_open_trigger");
+	WhichSampleArray.push_back("OverlayDirt9_Run1B_open_trigger");
+	WhichSampleArray.push_back("Overlay9_Run1B_open_trigger");
+
 	// Run 2
 
 	WhichSampleArray.push_back("BeamOn9_Run2");
@@ -86,6 +100,40 @@
 
 	//--------------------//
 	
+	// Run 1A open trigger Detector Variations
+
+	WhichSampleArray.push_back("Overlay9_Run1A_open_trigger_CV");
+	WhichSampleArray.push_back("Overlay9_Run1A_open_trigger_CVextra");
+        WhichSampleArray.push_back("Overlay9_Run1A_open_trigger_LYDown");
+	WhichSampleArray.push_back("Overlay9_Run1A_open_trigger_LYRayleigh");
+	WhichSampleArray.push_back("Overlay9_Run1A_open_trigger_LYAttenuation");
+
+	WhichSampleArray.push_back("Overlay9_Run1A_open_trigger_X");
+	WhichSampleArray.push_back("Overlay9_Run1A_open_trigger_YZ");
+	WhichSampleArray.push_back("Overlay9_Run1A_open_trigger_ThetaYZ");
+	WhichSampleArray.push_back("Overlay9_Run1A_open_trigger_ThetaXZ");
+	WhichSampleArray.push_back("Overlay9_Run1A_open_trigger_Recombination2");
+	WhichSampleArray.push_back("Overlay9_Run1A_open_trigger_SCE");
+
+	//--------------------//
+	
+	// Run 1B open trigger Detector Variations
+
+	WhichSampleArray.push_back("Overlay9_Run1B_open_trigger_CV");
+	WhichSampleArray.push_back("Overlay9_Run1B_open_trigger_CVextra");
+        WhichSampleArray.push_back("Overlay9_Run1B_open_trigger_LYDown");
+	WhichSampleArray.push_back("Overlay9_Run1B_open_trigger_LYRayleigh");
+	WhichSampleArray.push_back("Overlay9_Run1B_open_trigger_LYAttenuation");
+
+	WhichSampleArray.push_back("Overlay9_Run1B_open_trigger_X");
+	WhichSampleArray.push_back("Overlay9_Run1B_open_trigger_YZ");
+	WhichSampleArray.push_back("Overlay9_Run1B_open_trigger_ThetaYZ");
+	WhichSampleArray.push_back("Overlay9_Run1B_open_trigger_ThetaXZ");
+	WhichSampleArray.push_back("Overlay9_Run1B_open_trigger_Recombination2");
+	WhichSampleArray.push_back("Overlay9_Run1B_open_trigger_SCE");
+
+	//--------------------//
+	
 	// Run 2 Detector Variations
 
 	WhichSampleArray.push_back("Overlay9_Run2_CV");
@@ -117,6 +165,24 @@
 	WhichSampleArray.push_back("Overlay9_Run3_ThetaXZ");
 	WhichSampleArray.push_back("Overlay9_Run3_Recombination2");
 	WhichSampleArray.push_back("Overlay9_Run3_SCE");
+
+	//--------------------//
+	
+	//Run 4a detector variations
+
+	WhichSampleArray.push_back("Overlay9_Run4a_CV");
+	WhichSampleArray.push_back("Overlay9_Run4a_CVextra");
+        WhichSampleArray.push_back("Overlay9_Run4a_LYDown");
+	WhichSampleArray.push_back("Overlay9_Run4a_LYRayleigh");
+	WhichSampleArray.push_back("Overlay9_Run4a_LYAttenuation");
+
+	WhichSampleArray.push_back("Overlay9_Run4a_X");
+	WhichSampleArray.push_back("Overlay9_Run4a_YZ");
+	WhichSampleArray.push_back("Overlay9_Run4a_ThetaYZ");
+	WhichSampleArray.push_back("Overlay9_Run4a_ThetaXZ");
+	WhichSampleArray.push_back("Overlay9_Run4a_Recombination2");
+	WhichSampleArray.push_back("Overlay9_Run4a_SCE");
+
 
 	//--------------------//
 	
@@ -219,6 +285,20 @@
 
 	//--------------------//
 
+	// GENIE sample using 4c scaled to the 4b/cd/ POT
+	// since NuWro was made using 4c
+
+
+	WhichSampleArray.push_back("Overlay9_Combined_CVextraNuWro");
+        
+	//--------------------//
+
+	// BNB-To-Honda reweighting
+
+	WhichSampleArray.push_back("Overlay9BNBToHonda_Combined");
+
+	//--------------------//
+
 	gROOT->ProcessLine(".L ../myClasses/Tools.cxx++");
 	gROOT->ProcessLine(".L ../myClasses/STV_Tools.cxx++");	
 
@@ -239,11 +319,16 @@
 	vector<int> FluxUniverses;
 	int NFluxUniverses = 100;
 
-//	FluxWhichSampleArray.push_back("Overlay9_Run1");
-//	FluxWhichSampleArray.push_back("Overlay9_Run2");
-//	FluxWhichSampleArray.push_back("Overlay9_Run3");
-//	FluxWhichSampleArray.push_back("Overlay9_Run4");
-//	FluxWhichSampleArray.push_back("Overlay9_Run5");
+	FluxWhichSampleArray.push_back("Overlay9_Run1");
+	FluxWhichSampleArray.push_back("Overlay9_Run1A_open_trigger");
+	FluxWhichSampleArray.push_back("Overlay9_Run1B_open_trigger");
+	FluxWhichSampleArray.push_back("Overlay9_Run2");
+	FluxWhichSampleArray.push_back("Overlay9_Run3");
+	FluxWhichSampleArray.push_back("Overlay9_Run4a");
+	FluxWhichSampleArray.push_back("Overlay9_Run4b");
+	FluxWhichSampleArray.push_back("Overlay9_Run4c");
+	FluxWhichSampleArray.push_back("Overlay9_Run4d");
+	FluxWhichSampleArray.push_back("Overlay9_Run5");
 	FluxWhichSampleArray.push_back("Overlay9_Combined");
 
 	FluxEventWeightLabels.push_back("fluxes"); 
@@ -274,11 +359,16 @@
 
 	// G4 uncertainties
 
-//	G4WhichSampleArray.push_back("Overlay9_Run1");
-//	G4WhichSampleArray.push_back("Overlay9_Run2");
-//	G4WhichSampleArray.push_back("Overlay9_Run3");
-//	G4WhichSampleArray.push_back("Overlay9_Run4");
-//	G4WhichSampleArray.push_back("Overlay9_Run5");
+	G4WhichSampleArray.push_back("Overlay9_Run1");
+	G4WhichSampleArray.push_back("Overlay9_Run1");
+	G4WhichSampleArray.push_back("Overlay9_Run1");
+	G4WhichSampleArray.push_back("Overlay9_Run2");
+	G4WhichSampleArray.push_back("Overlay9_Run3");
+	G4WhichSampleArray.push_back("Overlay9_Run4a");
+	G4WhichSampleArray.push_back("Overlay9_Run4b");
+	G4WhichSampleArray.push_back("Overlay9_Run4c");
+	G4WhichSampleArray.push_back("Overlay9_Run4d");
+	G4WhichSampleArray.push_back("Overlay9_Run5");
 	G4WhichSampleArray.push_back("Overlay9_Combined");
 
 	G4EventWeightLabels.push_back("reinteractions"); 
@@ -305,11 +395,16 @@
 	vector<int> XSecUniverses;
 	int NXSecUniverses = 100;
 
-//	XSecWhichSampleArray.push_back("Overlay9_Run1");
-//	XSecWhichSampleArray.push_back("Overlay9_Run2");
-//	XSecWhichSampleArray.push_back("Overlay9_Run3");
-//	XSecWhichSampleArray.push_back("Overlay9_Run4");
-//	XSecWhichSampleArray.push_back("Overlay9_Run5");
+	XSecWhichSampleArray.push_back("Overlay9_Run1");
+	XSecWhichSampleArray.push_back("Overlay9_Run1A_open_trigger");
+	XSecWhichSampleArray.push_back("Overlay9_Run1B_open_trigger");
+	XSecWhichSampleArray.push_back("Overlay9_Run2");
+	XSecWhichSampleArray.push_back("Overlay9_Run3");
+	XSecWhichSampleArray.push_back("Overlay9_Run4a");
+	XSecWhichSampleArray.push_back("Overlay9_Run4b");
+	XSecWhichSampleArray.push_back("Overlay9_Run4c");
+	XSecWhichSampleArray.push_back("Overlay9_Run4d");
+	XSecWhichSampleArray.push_back("Overlay9_Run5");
 	XSecWhichSampleArray.push_back("Overlay9_Combined");
 
 	XSecEventWeightLabels.push_back("AxFFCCQEshape_UBGenie"); XSecUniverses.push_back(2);
@@ -344,11 +439,16 @@
 	vector<int> MCStatUniverses;
 	int NMCStatUniverses = 100;
 
-//	MCStatWhichSampleArray.push_back("Overlay9_Run1");
-//	MCStatWhichSampleArray.push_back("Overlay9_Run2");
-//	MCStatWhichSampleArray.push_back("Overlay9_Run3");
-//	MCStatWhichSampleArray.push_back("Overlay9_Run4");
-//	MCStatWhichSampleArray.push_back("Overlay9_Run5");
+	MCStatWhichSampleArray.push_back("Overlay9_Run1");
+	MCStatWhichSampleArray.push_back("Overlay9_Run1A_open_trigger");
+	MCStatWhichSampleArray.push_back("Overlay9_Run1B_open_trigger");
+	MCStatWhichSampleArray.push_back("Overlay9_Run2");
+	MCStatWhichSampleArray.push_back("Overlay9_Run3");
+	MCStatWhichSampleArray.push_back("Overlay9_Run4a");
+	MCStatWhichSampleArray.push_back("Overlay9_Run4b");
+	MCStatWhichSampleArray.push_back("Overlay9_Run4c");
+	MCStatWhichSampleArray.push_back("Overlay9_Run4d");
+	MCStatWhichSampleArray.push_back("Overlay9_Run5");
 	MCStatWhichSampleArray.push_back("Overlay9_Combined");
 
 	MCStatEventWeightLabels.push_back("MC_Stat"); 
