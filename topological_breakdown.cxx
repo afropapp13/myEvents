@@ -43,8 +43,8 @@ void topological_breakdown(TString BaseMC = "") {
 	PlotNames.push_back("RecoThetaVis_DeltaPn_0_40To1_00Plot");	
 	PlotNames.push_back("RecoSerialThetaVis_DeltaPnPlot");	
 	
-	PlotNames.push_back("RecoThetaVis_PMiss_0_00To0_15Plot");	
-	PlotNames.push_back("RecoThetaVis_PMiss_0_15To0_50Plot");	
+	PlotNames.push_back("RecoThetaVis_PMiss_0_00To0_12Plot");	
+	PlotNames.push_back("RecoThetaVis_PMiss_0_12To0_50Plot");	
 	PlotNames.push_back("RecoSerialThetaVis_PMissPlot");	
 	
 	const int N1DPlots = PlotNames.size();
@@ -65,13 +65,16 @@ void topological_breakdown(TString BaseMC = "") {
 	// -----------------------------------------------------------------------------------------------------------------------------------------
 
 	vector<TString> Runs;
-	//Runs.push_back("Run1");
-	//Runs.push_back("Run1A_open_trigger");
-	//Runs.push_back("Run1B_open_trigger");
-	//Runs.push_back("Run2");
-	//Runs.push_back("Run3");
-//	Runs.push_back("Run4");
-//	Runs.push_back("Run5");
+	Runs.push_back("Run1");
+	Runs.push_back("Run1A_open_trigger");
+	Runs.push_back("Run1B_open_trigger");
+	Runs.push_back("Run2");
+	Runs.push_back("Run3");
+	Runs.push_back("Run4a");
+	Runs.push_back("Run4b");
+	Runs.push_back("Run4c");
+	Runs.push_back("Run4d");
+	Runs.push_back("Run5");
 	Runs.push_back("Combined");
 
 	int NRuns = (int)(Runs.size());
@@ -97,7 +100,7 @@ void topological_breakdown(TString BaseMC = "") {
 		// -----------------------------------------------------------------------------------------------------------------------------------------
 
 		bool plot_unc = false;
-		if (BaseMC == "" && Runs[WhichRun] == "Combined") { plot_unc = true; }
+		if (BaseMC == "") { plot_unc = true; }
 
 		//-------------------------------------//
 

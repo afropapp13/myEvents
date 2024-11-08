@@ -275,6 +275,8 @@
 	// NuWro
 
 	WhichSampleArray.push_back("Overlay9NuWro_Run1");
+	WhichSampleArray.push_back("Overlay9NuWro_Run1A_open_trigger");
+	WhichSampleArray.push_back("Overlay9NuWro_Run1B_open_trigger");
 	WhichSampleArray.push_back("Overlay9NuWro_Run2");
 	WhichSampleArray.push_back("Overlay9NuWro_Run3");
 	WhichSampleArray.push_back("Overlay9NuWro_Run4a");
@@ -288,7 +290,6 @@
 
 	// GENIE sample using 4c scaled to the 4b/cd/ POT
 	// since NuWro was made using 4c
-
 
 	WhichSampleArray.push_back("Overlay9_Combined_CVextraNuWro");
 
@@ -478,6 +479,36 @@
 	// FDS
 
 	vector<TString> FDSWhichSampleArray;
+
+	FDSWhichSampleArray.push_back("OverlayDirt9_Run1");
+	FDSWhichSampleArray.push_back("Overlay9_Run1");
+
+	FDSWhichSampleArray.push_back("OverlayDirt9_Run1A_open_trigger");
+	FDSWhichSampleArray.push_back("Overlay9_Run1A_open_trigger");
+
+	FDSWhichSampleArray.push_back("OverlayDirt9_Run1B_open_trigger");
+	FDSWhichSampleArray.push_back("Overlay9_Run1B_open_trigger");
+
+	FDSWhichSampleArray.push_back("OverlayDirt9_Run2");
+	FDSWhichSampleArray.push_back("Overlay9_Run2");
+
+	FDSWhichSampleArray.push_back("OverlayDirt9_Run3");
+	FDSWhichSampleArray.push_back("Overlay9_Run3");
+
+	FDSWhichSampleArray.push_back("OverlayDirt9_Run4a");
+	FDSWhichSampleArray.push_back("Overlay9_Run4a");
+
+	FDSWhichSampleArray.push_back("OverlayDirt9_Run4b");
+	FDSWhichSampleArray.push_back("Overlay9_Run4b");
+
+	FDSWhichSampleArray.push_back("OverlayDirt9_Run4c");
+	FDSWhichSampleArray.push_back("Overlay9_Run4c");
+
+	FDSWhichSampleArray.push_back("OverlayDirt9_Run4d");
+	FDSWhichSampleArray.push_back("Overlay9_Run4d");
+
+	FDSWhichSampleArray.push_back("OverlayDirt9_Run5");
+	FDSWhichSampleArray.push_back("Overlay9_Run5");
 
 	FDSWhichSampleArray.push_back("OverlayDirt9_Combined");
 	FDSWhichSampleArray.push_back("Overlay9_Combined");
