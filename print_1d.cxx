@@ -62,7 +62,7 @@ void print_1d() {
 		canvas.at(iplot)->SetBottomMargin(0.17);
 		canvas.at(iplot)->SetTopMargin(0.18);
 		canvas.at(iplot)->SetLeftMargin(0.15);
-
+		
 		plot.at(iplot) = (TH1D*)( file->Get( plot_names.at(iplot) ) );
 
 		plot.at(iplot)->GetXaxis()->CenterTitle();
@@ -89,6 +89,8 @@ void print_1d() {
 
 		if (plot_names[iplot] == "CC1pRecoThetaBRTPlot") {
 
+                	plot.at(iplot)->GetYaxis()->SetTitle("CC1p0#pi event count");
+			
 			double mean = plot.at(iplot)->GetMean();
 			double median = GetMedian(plot.at(iplot));
 			double sigma = plot.at(iplot)->GetRMS();
@@ -101,6 +103,11 @@ void print_1d() {
 			latex.DrawLatexNDC(0.3,0.7, label);				
 
 		}
+
+	        TLatex *bnb = new TLatex();
+        	bnb->SetTextFont(FontStyle);
+        	bnb->SetTextSize(TextSize);
+        	bnb->DrawLatexNDC(0.15,0.85,"MicroBooNE Simulation");
 
                 TString canvas_path = PlotPath + cut + "/";
                 TString canvas_export_name = "print_1d_"+plot_names.at(iplot)+"_"+run+"_"+UBCodeVersion+cut+".pdf";

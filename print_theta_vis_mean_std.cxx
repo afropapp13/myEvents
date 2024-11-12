@@ -28,19 +28,27 @@ void  print_theta_vis_mean_std() {
 	//--------------------------------------//
 
 	vector<TString> plot_names; plot_names.clear();
+	vector<TString> plot_label; plot_label.clear();
 	
-	plot_names.push_back("CC1pFineBinThetaVisPlot");
+	plot_names.push_back("CC1pFineBinThetaVisPlot"); plot_label.push_back("All events");
 	
-	plot_names.push_back("CC1pFineBinThetaVis_ECalSlices0_00To0_50Plot");
-	plot_names.push_back("CC1pFineBinThetaVis_ECalSlices0_50To0_80Plot");
-	plot_names.push_back("CC1pFineBinThetaVis_ECalSlices0_80To2_00Plot");
+	plot_names.push_back(""); plot_label.push_back("");
+	
+	plot_names.push_back("CC1pFineBinThetaVis_ECalSlices0_00To0_50Plot"); plot_label.push_back("$E_{\\mathrm{reco}} <$ 0.5\\,GeV");
+	plot_names.push_back("CC1pFineBinThetaVis_ECalSlices0_50To0_80Plot"); plot_label.push_back("0.5 $ < E_{\\mathrm{reco}} <$ 0.8\\,GeV");
+	plot_names.push_back("CC1pFineBinThetaVis_ECalSlices0_80To2_00Plot"); plot_label.push_back("$E_{\\mathrm{reco}} >$ 0.8\\,GeV");
 
-	plot_names.push_back("CC1pFineBinThetaVis_DeltaPnSlices0_00To0_20Plot");
-	plot_names.push_back("CC1pFineBinThetaVis_DeltaPnSlices0_20To0_40Plot");
-	plot_names.push_back("CC1pFineBinThetaVis_DeltaPnSlices0_40To1_00Plot");
+	plot_names.push_back(""); plot_label.push_back("");
 	
-	plot_names.push_back("CC1pFineBinThetaVis_PMissSlices0_00To0_15Plot");
-	plot_names.push_back("CC1pFineBinThetaVis_PMissSlices0_15To0_50Plot");
+	plot_names.push_back("CC1pFineBinThetaVis_DeltaPnSlices0_00To0_20Plot"); plot_label.push_back("$p_{n} <$ 0.2\\,GeV/c");
+	plot_names.push_back("CC1pFineBinThetaVis_DeltaPnSlices0_20To0_40Plot"); plot_label.push_back("0.2 $< p_{n} <$ 0.4\\,GeV/c");
+	plot_names.push_back("CC1pFineBinThetaVis_DeltaPnSlices0_40To1_00Plot"); plot_label.push_back("$p_{n} >$ 0.4\\,GeV/c");
+	
+	plot_names.push_back(""); plot_label.push_back("");
+	
+	plot_names.push_back("CC1pThetaVis_PMissSlices0_00To0_12Plot"); plot_label.push_back("$|p_{\\mathrm{miss}}| <$ 0.12\\,GeV/c");
+	plot_names.push_back("CC1pThetaVis_PMissSlices0_12To0_50Plot"); plot_label.push_back("$|p_{\\mathrm{miss}}| >$ 0.12\\,GeV/c");
+
 	
 	const int nplots = plot_names.size();
 
@@ -62,13 +70,22 @@ void  print_theta_vis_mean_std() {
 	
 	for (int iplot = 0; iplot < nplots; iplot ++) {
 
-		plot.at(iplot) = (TH1D*)( file->Get( plot_names.at(iplot) ) );
+		if (plot_names.at(iplot) == "") { 
 
-		double mean = plot.at(iplot)->GetMean();
-		double sigma = plot.at(iplot)->GetRMS();
-		double median = plot.at(iplot)->GetMedian();
+			cout << " \\hline";
+
+		} else {
+
+			plot.at(iplot) = (TH1D*)( file->Get( plot_names.at(iplot) ) );
+
+			double mean = plot.at(iplot)->GetMean();
+			double sigma = plot.at(iplot)->GetRMS();
+			double median = Median( plot.at(iplot) );
 	
-		cout << plot_names.at(iplot) << " mean = " << mean << "  sigma = " << sigma << "  median = " << median << endl;
+			//cout << plot_names.at(iplot) << " mean = " << mean << "  sigma = " << sigma << "  median = " << median << endl;
+			cout << " " << plot_label.at(iplot) << " & " << mean << "  &  " << sigma << " & " << median << " \\tabularnewline \\hline" << endl;
+		
+		}
 
 	} // End of the loop over the plots
 
