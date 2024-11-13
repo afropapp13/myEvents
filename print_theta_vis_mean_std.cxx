@@ -83,7 +83,7 @@ void  print_theta_vis_mean_std() {
 			double median = Median( plot.at(iplot) );
 	
 			//cout << plot_names.at(iplot) << " mean = " << mean << "  sigma = " << sigma << "  median = " << median << endl;
-			cout << " " << plot_label.at(iplot) << " & " << mean << "  &  " << sigma << " & " << median << " \\tabularnewline \\hline" << endl;
+			cout << " " << plot_label.at(iplot) << " & " << to_string_with_precision(mean,1) << "  &  " << to_string_with_precision(sigma,1) << " & " << to_string_with_precision(median,1) << " \\tabularnewline \\hline" << endl;
 		
 		}
 
