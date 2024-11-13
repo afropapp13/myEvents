@@ -294,7 +294,17 @@ void topological_breakdown(TString BaseMC = "") {
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetLabelFont(FontStyle);
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetNdivisions(6);
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetLabelSize(0.06);
-					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitle(Runs[WhichRun] + " events / bin");
+
+					if (Runs[WhichRun] == "Combined") {
+
+						Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitle("Number of  events / bin");
+
+					} else {
+
+						Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitle(Runs[WhichRun] + " events / bin");
+
+					}
+
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitleSize(0.08);
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitleOffset(0.65);
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTickSize(0.01);

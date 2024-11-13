@@ -26,7 +26,9 @@ void dune_projection(TString BaseMC = "") {
 	gStyle->SetPalette(55); 
 	const Int_t NCont = 999; 
 	gStyle->SetNumberContours(NCont); 
-	gStyle->SetTitleSize(0.07,"t");
+	gStyle->SetTitleSize(0.06,"t");
+
+	double TextSize = 0.06;
 
 	//-------------------------------------//
 
@@ -125,7 +127,7 @@ void dune_projection(TString BaseMC = "") {
 					topPad->Draw();
 					midPad->Draw();
 
-					leg.push_back(new TLegend(0.1,0.005,0.93,0.995));
+					leg.push_back(new TLegend(0.05,0.005,0.95,0.995));
 					leg[iplot]->SetBorderSize(0);
 					leg[iplot]->SetNColumns(4);
 
@@ -135,13 +137,13 @@ void dune_projection(TString BaseMC = "") {
 					CCQEPlots[iplot]->SetLineColor(ColorsOverlay[0]);
 					CCQEPlots[iplot]->SetFillColor(ColorsOverlay[0]);
 					Reweight(CCQEPlots[iplot]);
-					THStacks[iplot]->Add(CCQEPlots[iplot],"hist e0");
+					THStacks[iplot]->Add(CCQEPlots[iplot],"hist");
 
 					// MEC
 					CCMECPlots[iplot]->SetLineColor(ColorsOverlay[1]);
 					CCMECPlots[iplot]->SetFillColor(ColorsOverlay[1]);
 					Reweight(CCMECPlots[iplot]);
-					//THStacks[iplot]->Add(CCMECPlots[iplot],"hist");
+					THStacks[iplot]->Add(CCMECPlots[iplot],"hist");
 
 					// RES
 					CCRESPlots[iplot]->SetLineColor(ColorsOverlay[2]);
@@ -155,14 +157,31 @@ void dune_projection(TString BaseMC = "") {
 					Reweight(CCDISPlots[iplot]);
 					THStacks[iplot]->Add(CCDISPlots[iplot],"hist");
 
-					leg[iplot]->AddEntry(CCQEPlots[iplot],"QE","f"); 
-					leg[iplot]->AddEntry(CCMECPlots[iplot],"MEC","f"); 
-					leg[iplot]->AddEntry(CCRESPlots[iplot],"RES","f"); 
-					leg[iplot]->AddEntry(CCDISPlots[iplot],"DIS","f"); 
-
+					// ---------------------------------------------//
+					
 					TH1D* stack = (TH1D*)(THStacks[iplot]->GetStack()->Last());
-					stack->Draw("same");
+					stack->Draw("same hist");
+
+					// ---------------------------------------------//
+
+					TString qefrac = to_string_with_precision(CCQEPlots[iplot]->Integral()/stack->Integral()*100.,2);
+					TLegendEntry* lqe = leg[iplot]->AddEntry(CCQEPlots[iplot],"QE (" + qefrac  + "%)","f");
+					lqe->SetTextColor(ColorsOverlay[0]);
+
+					TString mecfrac = to_string_with_precision(CCMECPlots[iplot]->Integral()/stack->Integral()*100.,2);
+					TLegendEntry* lmec = leg[iplot]->AddEntry(CCMECPlots[iplot],"MEC (" + mecfrac  + "%)","f");
+					lmec->SetTextColor(ColorsOverlay[1]);
+
+					TString resfrac = to_string_with_precision(CCRESPlots[iplot]->Integral()/stack->Integral()*100.,2);
+					TLegendEntry* lres = leg[iplot]->AddEntry(CCRESPlots[iplot],"RES (" + resfrac  + "%)","f");
+					lres->SetTextColor(ColorsOverlay[2]);
+
+					TString disfrac = to_string_with_precision(CCDISPlots[iplot]->Integral()/stack->Integral()*100.,2);
+					TLegendEntry* ldis = leg[iplot]->AddEntry(CCDISPlots[iplot],"QE (" + disfrac  + "%)","f");
+					ldis->SetTextColor(ColorsOverlay[3]);
 	
+					// ---------------------------------------------//
+					
 					stack->SetTitle("");
 					stack->SetLineWidth(1);
 	
@@ -177,9 +196,19 @@ void dune_projection(TString BaseMC = "") {
 					stack->GetYaxis()->SetLabelFont(FontStyle);
 					stack->GetYaxis()->SetNdivisions(6);
 					stack->GetYaxis()->SetLabelSize(TextSize);
-					stack->GetYaxis()->SetTitle(Runs[WhichRun] + " events / bin");
+
+					if (Runs[WhichRun] == "Combined") {
+
+						stack->GetYaxis()->SetTitle("Number of events / bin");
+
+					} else {
+
+						stack->GetYaxis()->SetTitle(Runs[WhichRun] + " events / bin");
+
+					}
+
 					stack->GetYaxis()->SetTitleSize(TextSize);
-					stack->GetYaxis()->SetTitleOffset(0.75);
+					stack->GetYaxis()->SetTitleOffset(0.85);
 					stack->GetYaxis()->SetTickSize(0.01);
 					stack->GetYaxis()->CenterTitle();
 	
