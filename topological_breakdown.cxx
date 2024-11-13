@@ -471,7 +471,16 @@ void topological_breakdown(TString BaseMC = "") {
 				TLatex *textPOT = new TLatex();
 				textPOT->SetTextFont(FontStyle);
 				textPOT->SetTextSize(0.07);
-				textPOT->DrawLatexNDC(0.115, 0.89,"MicroBooNE " + ToString(DataPOT).ReplaceAll("e"," #times 10").ReplaceAll("+","^{")+"} POT");								
+
+				if (Runs[WhichRun] == "Combined") { 
+
+					textPOT->DrawLatexNDC(0.115, 0.89,"MicroBooNE 1.30 #times 10^{21} POT");
+
+				} else {
+								
+					textPOT->DrawLatexNDC(0.115, 0.89,"MicroBooNE " + ToString(DataPOT).ReplaceAll("e"," #times 10").ReplaceAll("+","^{")+"} POT");								
+				}
+
 				//----------------------------------------//
 
 				// Cosmic Contamination
