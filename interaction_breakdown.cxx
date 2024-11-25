@@ -404,10 +404,10 @@ void interaction_breakdown(TString BaseMC = "") {
 							THStacks[WhichPlot]->Add(bin_width_CCDISPlots[WhichSample][WhichPlot],"hist");
 							THStacks[WhichPlot]->Add(bin_width_CCDISPlots[WhichSample+2][WhichPlot],"hist");
 
-							TString NCCQEEvents = ToString((int)(CCQEPlots[WhichSample][WhichPlot]->Integral()));
-							TString NCCMECEvents = ToString((int)(CCMECPlots[WhichSample][WhichPlot]->Integral()));	
-							TString NCCRESEvents = ToString((int)(CCRESPlots[WhichSample][WhichPlot]->Integral()));	
-							TString NCCDISEvents = ToString((int)(CCDISPlots[WhichSample][WhichPlot]->Integral()));	
+							TString NCCQEEvents = ToString((int)( CCQEPlots[WhichSample][WhichPlot]->Integral() + CCQEPlots[WhichSample+2][WhichPlot]->Integral()));
+							TString NCCMECEvents = ToString((int)( CCMECPlots[WhichSample][WhichPlot]->Integral() + CCMECPlots[WhichSample+2][WhichPlot]->Integral()));	
+							TString NCCRESEvents = ToString((int)( CCRESPlots[WhichSample][WhichPlot]->Integral() +  CCRESPlots[WhichSample+2][WhichPlot]->Integral() ));	
+							TString NCCDISEvents = ToString((int)( CCDISPlots[WhichSample][WhichPlot]->Integral() +  CCDISPlots[WhichSample+2][WhichPlot]->Integral() ));	
 							TString NExtBNBEvents = ToString((int)(Plots[2][WhichPlot]->Integral()));																						
 
 							leg[WhichPlot]->AddEntry(CCQEPlots[WhichSample][WhichPlot],"QE (" + NCCQEEvents + ")","f"); 

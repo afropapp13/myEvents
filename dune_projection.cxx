@@ -127,7 +127,7 @@ void dune_projection(TString BaseMC = "") {
 					topPad->Draw();
 					midPad->Draw();
 
-					leg.push_back(new TLegend(0.05,0.005,0.95,0.995));
+					leg.push_back(new TLegend(0.09,0.005,0.9,0.995));
 					leg[iplot]->SetBorderSize(0);
 					leg[iplot]->SetNColumns(4);
 
@@ -164,20 +164,20 @@ void dune_projection(TString BaseMC = "") {
 
 					// ---------------------------------------------//
 
-					TString qefrac = to_string_with_precision(CCQEPlots[iplot]->Integral()/stack->Integral()*100.,2);
+					TString qefrac = to_string_with_precision(CCQEPlots[iplot]->Integral()/stack->Integral()*100.,1);
 					TLegendEntry* lqe = leg[iplot]->AddEntry(CCQEPlots[iplot],"QE (" + qefrac  + "%)","f");
 					lqe->SetTextColor(ColorsOverlay[0]);
 
-					TString mecfrac = to_string_with_precision(CCMECPlots[iplot]->Integral()/stack->Integral()*100.,2);
+					TString mecfrac = to_string_with_precision(CCMECPlots[iplot]->Integral()/stack->Integral()*100.,1);
 					TLegendEntry* lmec = leg[iplot]->AddEntry(CCMECPlots[iplot],"MEC (" + mecfrac  + "%)","f");
 					lmec->SetTextColor(ColorsOverlay[1]);
 
-					TString resfrac = to_string_with_precision(CCRESPlots[iplot]->Integral()/stack->Integral()*100.,2);
+					TString resfrac = to_string_with_precision(CCRESPlots[iplot]->Integral()/stack->Integral()*100.,1);
 					TLegendEntry* lres = leg[iplot]->AddEntry(CCRESPlots[iplot],"RES (" + resfrac  + "%)","f");
 					lres->SetTextColor(ColorsOverlay[2]);
 
-					TString disfrac = to_string_with_precision(CCDISPlots[iplot]->Integral()/stack->Integral()*100.,2);
-					TLegendEntry* ldis = leg[iplot]->AddEntry(CCDISPlots[iplot],"QE (" + disfrac  + "%)","f");
+					TString disfrac = to_string_with_precision(CCDISPlots[iplot]->Integral()/stack->Integral()*100.,1);
+					TLegendEntry* ldis = leg[iplot]->AddEntry(CCDISPlots[iplot],"DIS (" + disfrac  + "%)","f");
 					ldis->SetTextColor(ColorsOverlay[3]);
 	
 					// ---------------------------------------------//
@@ -225,9 +225,9 @@ void dune_projection(TString BaseMC = "") {
 					TLatex latex;
 					latex.SetTextFont(FontStyle);
 					latex.SetTextSize(TextSize);
-					TString label = "#splitline{peak = " + to_string_with_precision(peak,2) + "^{o}, median = " + to_string_with_precision(median,2)  + "^{o}}{#mu = " + to_string_with_precision(mean,2) + "^{o}, #sigma = " + to_string_with_precision(sigma,2) + "^{o}}";
-					latex.DrawLatexNDC(0.3,0.7, label);				
-					latex.DrawLatexNDC(0.3,0.8, labels[isample]);				
+					TString label = "#splitline{p = " + to_string_with_precision(peak,2) + "^{o}, m = " + to_string_with_precision(median,2)  + "^{o}}{#mu = " + to_string_with_precision(mean,2) + "^{o}, #sigma = " + to_string_with_precision(sigma,2) + "^{o}}";
+					latex.DrawLatexNDC(0.4,0.8, label);				
+					latex.DrawLatexNDC(0.4,0.9, labels[isample]);				
 
 					//----------------------------------------//
 

@@ -571,8 +571,13 @@ void topological_breakdown(TString BaseMC = "") {
 
 				TH1D* MCUnc = (TH1D*)(Plots[0][WhichPlot]->Clone());				
 				TH1D* MCStack = (TH1D*) (THStacks[WhichPlot]->GetStack())->Last();
-				TH1D* MCStackClone = (TH1D*)(MCStack->Clone());
-				rm_bin_width(MCStackClone);
+				
+				//TH1D* MCStackClone = (TH1D*)(MCStack->Clone());
+				//rm_bin_width(MCStackClone);
+
+				TH1D* MCStackClone = (TH1D*)(Plots[1][WhichPlot]->Clone()); // Overlay
+				MCStackClone->Add(Plots[2][WhichPlot]); // ExtBNB
+				MCStackClone->Add(Plots[3][WhichPlot]); // Dirt
 
 				for (int i = 1; i <= n;i++ ) { 
 

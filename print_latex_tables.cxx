@@ -99,7 +99,7 @@ void print_latex_tables(TString BaseMC = "", bool PrintStats = false, bool Print
 	Runs.push_back("Run1B_open_trigger");
 	Runs.push_back("Run2");
 	Runs.push_back("Run3");
-	//Runs.push_back("Run4a");
+	Runs.push_back("Run4a");
 	Runs.push_back("Run4b");
 	Runs.push_back("Run4c");
 	Runs.push_back("Run4d");
