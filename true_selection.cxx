@@ -75,6 +75,20 @@ void true_selection::Loop() {
 	TH1D* TrueThetaVisPlot[NInte];
 	TH1D* TrueCosThetaVisPlot[NInte];
 
+	//--------------------------------------------------//
+	
+	// neutron breakdown
+	int nneutrons = 3;
+	TH1D* TrueThetaVis_NeutronMultiPlot[nneutrons];
+	
+	for (int ineutron = 0; ineutron <= nneutrons; ineutron++) {
+
+                TrueThetaVis_NeutronMultiPlot[ineutron] = new TH1D(TrueToStringInt(ineutron)+"n_TrueThetaVisPlot",LabelXAxisThetaVis,NBinsThetaVis,ArrayNBinsThetaVis);
+
+	}
+
+	//--------------------------------------------------//
+	
 	// 2D plots
 	TH1D* TrueThetaVis_InECalTwoDPlot[NInte][TwoDNBinsECal];
 	TH1D* SerialTrueThetaVis_InECalPlot[NInte];
@@ -479,6 +493,14 @@ void true_selection::Loop() {
 					else if (Muon_MCParticle_Mode->at(0) == 1) { genie_mode = 3; }
 					else if (Muon_MCParticle_Mode->at(0) == 2) { genie_mode = 4; }
 					else { genie_mode = 5; }																				
+					//----------------------------------------//
+
+					// neutron counter
+
+					int neutron_counter = NumberNeutrons;
+					if (neutron_counter > nneutrons) { neutron_counter = nneutrons; } 
+					
+					TrueThetaVis_NeutronMultiPlot[neutron_counter]->Fill(TrueThetaVis,weight);
 
 					//----------------------------------------//
 
