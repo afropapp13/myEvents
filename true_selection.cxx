@@ -80,11 +80,14 @@ void true_selection::Loop() {
 	// neutron breakdown
 	int nneutrons = 3;
 	TH1D* TrueThetaVis_NeutronMultiPlot[nneutrons];
+	TH1D* TruePMiss_NeutronMultiPlot[nneutrons];
+	TH1D* SerialTrueThetaVis_InPMissNeutronMultiPlot[nneutrons];
 	
 	for (int ineutron = 0; ineutron <= nneutrons; ineutron++) {
 
                 TrueThetaVis_NeutronMultiPlot[ineutron] = new TH1D(TrueToStringInt(ineutron)+"n_TrueThetaVisPlot",LabelXAxisThetaVis,NBinsThetaVis,ArrayNBinsThetaVis);
-
+                TruePMiss_NeutronMultiPlot[ineutron] = new TH1D(TrueToStringInt(ineutron)+"n_TruePMissPlot",LabelXAxisPMiss,NBinsPMiss,ArrayNBinsPMiss);
+		SerialTrueThetaVis_InPMissNeutronMultiPlot[ineutron] = new TH1D(TrueToStringInt(ineutron)+"n_TrueSerialThetaVis_PMissPlot",LabelXAxisThetaVis,tools.Return2DNBins(TwoDArrayNBinsThetaVisInPMissSlices),&tools.Return2DBinIndices(TwoDArrayNBinsThetaVisInPMissSlices)[0]);
 	}
 
 	//--------------------------------------------------//
@@ -495,15 +498,6 @@ void true_selection::Loop() {
 					else { genie_mode = 5; }																				
 					//----------------------------------------//
 
-					// neutron counter
-
-					int neutron_counter = NumberNeutrons;
-					if (neutron_counter > nneutrons) { neutron_counter = nneutrons; } 
-					
-					TrueThetaVis_NeutronMultiPlot[neutron_counter]->Fill(TrueThetaVis,weight);
-
-					//----------------------------------------//
-
 					// True CC1p event
 
 					TrueCC1pEvent = true;
@@ -542,6 +536,17 @@ void true_selection::Loop() {
 
 					int PMissTwoDIndex = tools.ReturnIndex( TMath::Abs(TruePMiss), TwoDArrayNBinsPMiss);
 					int SerialThetaVisInPMissIndex = tools.ReturnIndexIn2DList(TwoDArrayNBinsThetaVisInPMissSlices,PMissTwoDIndex,TrueThetaVis);
+	
+					//----------------------------------------//
+
+					// neutron counter
+
+					int neutron_counter = NumberNeutrons;
+					if (neutron_counter > nneutrons) { neutron_counter = nneutrons; } 
+					
+					TrueThetaVis_NeutronMultiPlot[neutron_counter]->Fill(TrueThetaVis,weight);
+					TruePMiss_NeutronMultiPlot[neutron_counter]->Fill(TruePMiss,weight);
+					SerialTrueThetaVis_InPMissNeutronMultiPlot[neutron_counter]->Fill(SerialThetaVisInPMissIndex,weight);
 	
 					//----------------------------------------//	
 
