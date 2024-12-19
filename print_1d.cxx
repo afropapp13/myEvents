@@ -99,7 +99,7 @@ void print_1d() {
 			TLatex latex;
 			latex.SetTextFont(FontStyle);
 			latex.SetTextSize(0.07);
-			TString label = "#splitline{peak = " + to_string_with_precision(peak,2) + "^{o}, median = " + to_string_with_precision(median,2)  + "^{o}}{#mu = " + to_string_with_precision(mean,2) + "^{o}, #sigma = " + to_string_with_precision(sigma,2) + "^{o}}";
+			TString label = "#splitline{p = " + to_string_with_precision(peak,2) + "^{o}, m = " + to_string_with_precision(median,2)  + "^{o}}{#mu = " + to_string_with_precision(mean,2) + "^{o}, #sigma = " + to_string_with_precision(sigma,2) + "^{o}}";
 			latex.DrawLatexNDC(0.3,0.7, label);				
 
 		}
