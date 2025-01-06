@@ -12,20 +12,10 @@
 #include <vector>
 
 #include "../myClasses/Constants.h"
+#include "../myClasses/myFunctions.cpp"
 
 using namespace std;
 using namespace Constants;
-
-//----------------------------------------//
-
-TString to_string_with_precision(double value, const int n = 2) {
-
-    std::ostringstream out;
-    out.precision(n);
-    out << std::fixed << value;
-    return TString(out.str());
-
-}
 
 //----------------------------------------//
 
@@ -94,7 +84,7 @@ void print_1d_slices() {
 	plot_names.push_back("CC1pThetaVis_PMissSlices"); slices.push_back(TwoDArrayNBinsPMiss); variable.push_back("p_{miss}^{reco} [GeV/c]");	
 	plot_names.push_back("CC1pThetaVis_DeltaPTSlices"); slices.push_back(TwoDArrayNBinsDeltaPT); variable.push_back("#deltap_{T}^{reco} [GeV/c]");	
 	
-	plot_names.push_back("CC1pThetaVis_ECalSlices"); slices.push_back(TwoDArrayNBinsECal); variable.push_back("E_{Cal}^{reco} [GeV]");	
+	plot_names.push_back("CC1pThetaVis_ECalSlices"); slices.push_back(TwoDArrayNBinsECal); variable.push_back("E_{reco} [GeV]");	
 	plot_names.push_back("CC1pTrueThetaVis_TrueECalSlices"); slices.push_back(TwoDArrayNBinsECal); variable.push_back("E_{Cal}^{true} [GeV]");	
 	plot_names.push_back("CC1pTrueThetaVis_TrueEnuSlices"); slices.push_back(TwoDArrayNBinsECal); variable.push_back("E_{#nu}^{true} [GeV]");	
 	plot_names.push_back("CC1pThetaVisDiff_ECalSlices"); slices.push_back(TwoDArrayNBinsECal); variable.push_back("E_{Cal} [GeV]");
@@ -147,7 +137,7 @@ void print_1d_slices() {
 	
 	for (int iplot = 0; iplot < nplots; iplot ++) {
 
-		leg.at(iplot) = new TLegend(0.25,0.83,0.9,0.98);
+		leg.at(iplot) = new TLegend(0.12,0.83,0.9,0.98);
 
 		TString canvas_name = "canvas_"+plot_names[iplot];
 		canvas.at(iplot) = new TCanvas(canvas_name,canvas_name,205,34,1024,768);
@@ -192,11 +182,16 @@ void print_1d_slices() {
 
 			plot.at(iplot).at(islice)->Draw("ep0 same");
 
-			TString mean = to_string_with_precision( plot.at(iplot).at(islice)->GetMean() );
-			TString std = to_string_with_precision( plot.at(iplot).at(islice)->GetStdDev() );
+			TString mean = to_string_with_precision( plot.at(iplot).at(islice)->GetMean(),2 );
+			TString std = to_string_with_precision( plot.at(iplot).at(islice)->GetRMS(),2 );
+			TString median = to_string_with_precision( GetMedian(plot.at(iplot).at(islice)),2 );
+			TString peak = to_string_with_precision( FindOneDimHistoMaxValueBin(plot.at(iplot).at(islice)),2 );
 
-
-			TString leg_entry = to_string_with_precision(slices.at(iplot).at(islice)) +" < " + variable.at(iplot) + " < " + to_string_with_precision(slices.at(iplot).at(islice+1)) + ", #mu = " + mean + ", #sigma = " + std;
+			TString leg_entry = to_string_with_precision(slices.at(iplot).at(islice),2) +" < " + variable.at(iplot) + " < " + to_string_with_precision(slices.at(iplot).at(islice+1),2) + ","\
+                                            + " p = " + peak 
+                                            + ", m = " + median 
+                                            + ", #mu = " + mean 
+					    + ", #sigma = " + std;
 			TLegendEntry* lMC = leg.at(iplot)->AddEntry(plot.at(iplot).at(islice),leg_entry,"ep0");
 			lMC->SetTextColor(colors.at(islice));	
 
@@ -208,7 +203,7 @@ void print_1d_slices() {
 		leg.at(iplot)->SetTextSize(size-0.03);
 		leg.at(iplot)->SetTextFont(font);
 		leg.at(iplot)->SetNColumns(1);
-		leg.at(iplot)->SetMargin(0.1);
+		leg.at(iplot)->SetMargin(0.05);
 		leg.at(iplot)->Draw();
 
                 TString canvas_path = PlotPath + cut + "/";

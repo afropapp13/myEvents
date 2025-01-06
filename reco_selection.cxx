@@ -258,7 +258,7 @@ void reco_selection::Loop() {
 
 			CC1pThetaVisDiff_ECalSlicesPlot[iecal] = new TH1D("CC1pThetaVisDiff_ECalSlices" + tools.ConvertToString(TwoDArrayNBinsECal[iecal])+"To"+tools.ConvertToString(TwoDArrayNBinsECal[iecal+1]) +"Plot",";#theta_{vis}^{reco} - #theta_{vis}^{true} [deg]",31,thetaz_diff_min,thetaz_diff_max);
 			CC1pThetaVisReso_ECalSlicesPlot[iecal] = new TH1D("CC1pThetaVisReso_ECalSlices" + tools.ConvertToString(TwoDArrayNBinsECal[iecal])+"To"+tools.ConvertToString(TwoDArrayNBinsECal[iecal+1]) +"Plot",";(#theta_{vis}^{reco} - #theta_{vis}^{true})/#theta_{vis}^{true} [%]",51,thetaz_reso_min,thetaz_reso_max);
-			CC1pThetaVis_ECalSlicesPlot[iecal] = new TH1D("CC1pThetaVis_ECalSlices" + tools.ConvertToString(TwoDArrayNBinsECal[iecal])+"To"+tools.ConvertToString(TwoDArrayNBinsECal[iecal+1]) +"Plot",";#theta_{vis}^{reco} [deg]",30,0,180);
+			CC1pThetaVis_ECalSlicesPlot[iecal] = new TH1D("CC1pThetaVis_ECalSlices" + tools.ConvertToString(TwoDArrayNBinsECal[iecal])+"To"+tools.ConvertToString(TwoDArrayNBinsECal[iecal+1]) +"Plot",";#theta_{vis} [deg]",30,0,180);
 			CC1pFineBinThetaVis_ECalSlicesPlot[iecal] = new TH1D("CC1pFineBinThetaVis_ECalSlices" + tools.ConvertToString(TwoDArrayNBinsECal[iecal])+"To"+tools.ConvertToString(TwoDArrayNBinsECal[iecal+1]) +"Plot",";#theta_{vis}^{reco} [deg]",180,0,180);
 			CC1pTrueThetaVis_TrueECalSlicesPlot[iecal] = new TH1D("CC1pTrueThetaVis_TrueECalSlices" + tools.ConvertToString(TwoDArrayNBinsECal[iecal])+"To"+tools.ConvertToString(TwoDArrayNBinsECal[iecal+1]) +"Plot",";#theta_{vis}^{true} [deg]",30,0,180);
 			CC1pTrueThetaVis_TrueEnuSlicesPlot[iecal] = new TH1D("CC1pTrueThetaVis_TrueEnuSlices" + tools.ConvertToString(TwoDArrayNBinsECal[iecal])+"To"+tools.ConvertToString(TwoDArrayNBinsECal[iecal+1]) +"Plot",";#theta_{vis}^{true} [deg]",30,0,180);
@@ -546,7 +546,7 @@ void reco_selection::Loop() {
 
 		// Reco
 
-                TH2D* POTScaledCC1pRecoThetaVisRecoECalPlot2D = new TH2D("POTScaledCC1pRecoThetaVisRecoECalPlot2D",";#theta_{vis}^{reco} [deg];E_{Cal}^{reco} [GeV]",
+                TH2D* POTScaledCC1pRecoThetaVisRecoECalPlot2D = new TH2D("POTScaledCC1pRecoThetaVisRecoECalPlot2D",";#theta_{vis} [deg];E_{reco} [GeV]",
                         NBinsThetaVis,ArrayNBinsThetaVis,20,ArrayNBinsECal[0],ArrayNBinsECal[NBinsECal]);
 
                 TH2D* POTScaledCC1pRecoThetaVisRecoDeltaPnPlot2D = new TH2D("POTScaledCC1pRecoThetaVisRecoDeltaPnPlot2D",";#theta_{vis}^{reco} [deg];p_{n}^{reco} [GeV/c]",
