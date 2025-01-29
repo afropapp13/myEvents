@@ -538,7 +538,7 @@ void interaction_breakdown(TString BaseMC = "") {
 					double data_peak = FindOneDimHistoMaxValueBin(Plots[0][WhichPlot]);
 					double data_mean = bin_width_Plots[0][WhichPlot]->GetMean();
 					double data_std = bin_width_Plots[0][WhichPlot]->GetRMS();
-					TString LabelDataStats = "#splitline{Data peak = " + to_string_with_precision(data_peak,2) + "}{#mu = " + to_string_with_precision(data_mean,2) + ", #sigma = " + to_string_with_precision(data_std,2) + "}";
+					TString LabelDataStats = "#splitline{Data peak = " + to_string_with_precision(data_peak,2) + "}{#mu = " + to_string_with_precision(data_mean,2) + ", #sigma' = " + to_string_with_precision(data_std,2) + "}";
 					//latexDataStats.DrawLatexNDC(0.61,0.6, LabelDataStats);				
 
 					TH1D* MC = (TH1D*) (THStacks[WhichPlot]->GetStack()->Last());
@@ -550,7 +550,7 @@ void interaction_breakdown(TString BaseMC = "") {
 					double mc_peak = FindOneDimHistoMaxValueBin(MC);
 					double mc_mean = MC->GetMean();
 					double mc_std = MC->GetRMS();
-					TString LabelMCStats = "#splitline{MC peak = " + to_string_with_precision(mc_peak,2) + "}{#mu = " + to_string_with_precision(mc_mean,2) + ", #sigma = " + to_string_with_precision(mc_std,2) + "}";
+					TString LabelMCStats = "#splitline{MC peak = " + to_string_with_precision(mc_peak,2) + "}{#mu = " + to_string_with_precision(mc_mean,2) + ", #sigma' = " + to_string_with_precision(mc_std,2) + "}";
 					//latexMCStats.DrawLatexNDC(0.61,0.4, LabelMCStats);				
 
 
@@ -674,7 +674,7 @@ void interaction_breakdown(TString BaseMC = "") {
 				double chi2, pval, sigma; int ndof;
 				
 				CalcChiSquared(Plots[0][WhichPlot],MCStackClone,CovMatrixEvents,chi2,ndof,pval,sigma);
-				TString Chi2Ndof = "#chi^{2}/ndof = " + to_string_with_precision(chi2,1) + "/" + TString(std::to_string(ndof)) +", p = " + to_string_with_precision(pval,2) + ", " + to_string_with_precision(sigma,2) + "#sigma";
+				TString Chi2Ndof = "#chi^{2}/ndof = " + to_string_with_precision(chi2,1) + "/" + TString(std::to_string(ndof)) +", p = " + to_string_with_precision(pval,2) + ", " + to_string_with_precision(sigma,2) + "#sigma'";
 
 				TLatex latexChi2;
 				latexChi2.SetTextFont(FontStyle);

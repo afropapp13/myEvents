@@ -496,6 +496,8 @@ void reco_selection::Loop() {
 		TH1D* CC1pFineBinThetaVis_DeltaPnSlicesPlot[TwoDNBinsDeltaPn];	
 
 		TH1D* CC1pThetaVis_PMissSlicesPlot[TwoDNBinsPMiss];	
+		TH1D* CC1pThetaVisDiff_PMissSlicesPlot[TwoDNBinsPMiss];	
+		TH1D* CC1pThetaVisReso_PMissSlicesPlot[TwoDNBinsPMiss];	
 	
 		// Loop over the DeltaPn slices
 		
@@ -516,6 +518,8 @@ void reco_selection::Loop() {
 		for (int i = 0; i < TwoDNBinsPMiss; i++) {
 
 			CC1pThetaVis_PMissSlicesPlot[i] = new TH1D("CC1pThetaVis_PMissSlices" + tools.ConvertToString(TwoDArrayNBinsPMiss[i])+"To"+tools.ConvertToString(TwoDArrayNBinsPMiss[i+1]) +"Plot",";#theta_{vis}^{reco} [deg]",180,0,180);
+			CC1pThetaVisDiff_PMissSlicesPlot[i] = new TH1D("CC1pThetaVisDiff_PMissSlices" + tools.ConvertToString(TwoDArrayNBinsPMiss[i])+"To"+tools.ConvertToString(TwoDArrayNBinsPMiss[i+1]) +"Plot",";#theta_{vis}^{reco} - #theta_{vis}^{true} [deg]",31,thetaz_diff_min,thetaz_diff_max);
+			CC1pThetaVisReso_PMissSlicesPlot[i] = new TH1D("CC1pThetaVisReso_PMissSlices" + tools.ConvertToString(TwoDArrayNBinsPMiss[i])+"To"+tools.ConvertToString(TwoDArrayNBinsPMiss[i+1]) +"Plot",";(#theta_{vis}^{reco} - #theta_{vis}^{true})/#theta_{vis}^{true} [%]",51,thetaz_reso_min,thetaz_reso_max);
 	
 		} // End of the loop over PMiss slices
 	
@@ -1295,10 +1299,18 @@ void reco_selection::Loop() {
 					CC1pThetaVisReso_DeltaPnSlicesPlot[DeltaPnTwoDIndex]->Fill(reso,weight);
 					CC1pThetaVis_DeltaPnSlicesPlot[DeltaPnTwoDIndex]->Fill(ThetaVis,weight);	
 					CC1pFineBinThetaVis_DeltaPnSlicesPlot[DeltaPnTwoDIndex]->Fill(ThetaVis,weight);	
-					CC1pThetaVis_PMissSlicesPlot[PMissTwoDIndex]->Fill(ThetaVis,weight);	
-
+					
 					CC1pECalDiff_DeltaPnSlicesPlot[DeltaPnTwoDIndex]->Fill(ECal_diff,weight);	
 					CC1pECalReso_DeltaPnSlicesPlot[DeltaPnTwoDIndex]->Fill(ECal_reso,weight);
+
+					//------------------------------//
+
+					// PMiss slices
+
+					CC1pThetaVisDiff_PMissSlicesPlot[PMissTwoDIndex]->Fill(diff,weight);	
+					CC1pThetaVisReso_PMissSlicesPlot[PMissTwoDIndex]->Fill(reso,weight);
+	
+					CC1pThetaVis_PMissSlicesPlot[PMissTwoDIndex]->Fill(ThetaVis,weight);	
 
 					//------------------------------//
 

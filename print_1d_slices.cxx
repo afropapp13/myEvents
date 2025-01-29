@@ -50,7 +50,7 @@ void print_1d_slices() {
 
 	//--------------------------------------//
 
-	// ECal
+	// Ereco
 	
 	plot_names.push_back("CC1pECalDiff_MuonMomentumSlices"); slices.push_back(TwoDArrayNBinsMuonMomentum); variable.push_back("P_{#mu} [GeV/c]");
 	plot_names.push_back("CC1pECalReso_MuonMomentumSlices"); slices.push_back(TwoDArrayNBinsMuonMomentum); variable.push_back("P_{#mu} [GeV/c]");
@@ -85,10 +85,10 @@ void print_1d_slices() {
 	plot_names.push_back("CC1pThetaVis_DeltaPTSlices"); slices.push_back(TwoDArrayNBinsDeltaPT); variable.push_back("#deltap_{T}^{reco} [GeV/c]");	
 	
 	plot_names.push_back("CC1pThetaVis_ECalSlices"); slices.push_back(TwoDArrayNBinsECal); variable.push_back("E_{reco} [GeV]");	
-	plot_names.push_back("CC1pTrueThetaVis_TrueECalSlices"); slices.push_back(TwoDArrayNBinsECal); variable.push_back("E_{Cal}^{true} [GeV]");	
+	plot_names.push_back("CC1pTrueThetaVis_TrueECalSlices"); slices.push_back(TwoDArrayNBinsECal); variable.push_back("E_{reco}^{true} [GeV]");	
 	plot_names.push_back("CC1pTrueThetaVis_TrueEnuSlices"); slices.push_back(TwoDArrayNBinsECal); variable.push_back("E_{#nu}^{true} [GeV]");	
-	plot_names.push_back("CC1pThetaVisDiff_ECalSlices"); slices.push_back(TwoDArrayNBinsECal); variable.push_back("E_{Cal} [GeV]");
-	plot_names.push_back("CC1pThetaVisReso_ECalSlices"); slices.push_back(TwoDArrayNBinsECal); variable.push_back("E_{Cal} [GeV]");
+	plot_names.push_back("CC1pThetaVisDiff_ECalSlices"); slices.push_back(TwoDArrayNBinsECal); variable.push_back("E_{reco} [GeV]");
+	plot_names.push_back("CC1pThetaVisReso_ECalSlices"); slices.push_back(TwoDArrayNBinsECal); variable.push_back("E_{reco} [GeV]");
 
 	plot_names.push_back("CC1pThetaVisDiff_MuonMomentumSlices"); slices.push_back(TwoDArrayNBinsMuonMomentum); variable.push_back("p_{#mu} [GeV/c]");
 	plot_names.push_back("CC1pThetaVisReso_MuonMomentumSlices"); slices.push_back(TwoDArrayNBinsMuonMomentum); variable.push_back("p_{#mu} [GeV/c]");
@@ -108,7 +108,9 @@ void print_1d_slices() {
 	plot_names.push_back("CC1pThetaVisDiff_DeltaAlpha3DSlices"); slices.push_back(TwoDArrayNBinsDeltaAlpha3D); variable.push_back("#alpha_{3D} [deg]");
 	plot_names.push_back("CC1pThetaVisReso_DeltaAlpha3DSlices"); slices.push_back(TwoDArrayNBinsDeltaAlpha3D); variable.push_back("#alpha_{3D} [deg]");
 
-
+	plot_names.push_back("CC1pThetaVisDiff_PMissSlices"); slices.push_back(TwoDArrayNBinsPMiss); variable.push_back("p_{miss} [GeV/c]");
+	plot_names.push_back("CC1pThetaVisReso_PMissSlices"); slices.push_back(TwoDArrayNBinsPMiss); variable.push_back("p_{miss} [GeV/c]");
+	
 	const int nplots = plot_names.size();
 	const int nslices = slices.size();
 
@@ -188,10 +190,10 @@ void print_1d_slices() {
 			TString peak = to_string_with_precision( FindOneDimHistoMaxValueBin(plot.at(iplot).at(islice)),2 );
 
 			TString leg_entry = to_string_with_precision(slices.at(iplot).at(islice),2) +" < " + variable.at(iplot) + " < " + to_string_with_precision(slices.at(iplot).at(islice+1),2) + ","\
-                                            + " p = " + peak 
+                                            + " p' = " + peak 
                                             + ", m = " + median 
                                             + ", #mu = " + mean 
-					    + ", #sigma = " + std;
+					    + ", #tilde{#sigma} = " + std;
 			TLegendEntry* lMC = leg.at(iplot)->AddEntry(plot.at(iplot).at(islice),leg_entry,"ep0");
 			lMC->SetTextColor(colors.at(islice));	
 

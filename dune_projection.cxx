@@ -225,7 +225,7 @@ void dune_projection(TString BaseMC = "") {
 					TLatex latex;
 					latex.SetTextFont(FontStyle);
 					latex.SetTextSize(TextSize);
-					TString label = "#splitline{p = " + to_string_with_precision(peak,2) + "^{o}, m = " + to_string_with_precision(median,2)  + "^{o}}{#mu = " + to_string_with_precision(mean,2) + "^{o}, #sigma = " + to_string_with_precision(sigma,2) + "^{o}}";
+					TString label = "#splitline{p' = " + to_string_with_precision(peak,2) + "^{o}, m = " + to_string_with_precision(median,2)  + "^{o}}{#mu = " + to_string_with_precision(mean,2) + "^{o}, #tilde{#sigma} = " + to_string_with_precision(sigma,2) + "^{o}}";
 					latex.DrawLatexNDC(0.4,0.8, label);				
 					latex.DrawLatexNDC(0.4,0.9, labels[isample]);				
 
