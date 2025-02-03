@@ -74,6 +74,7 @@ void true_selection::Loop() {
 	TH1D* TrueMuonCosThetaSingleBinPlot[NInte];
 	TH1D* TrueThetaVisPlot[NInte];
 	TH1D* TrueCosThetaVisPlot[NInte];
+	TH1D* TruePMissPlot[NInte];
 
 	//--------------------------------------------------//
 	
@@ -116,6 +117,7 @@ void true_selection::Loop() {
 		TrueMuonCosThetaSingleBinPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueMuonCosThetaSingleBinPlot",LabelXAxisMuonCosTheta,1,0.,1.);
 		TrueThetaVisPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueThetaVisPlot",LabelXAxisThetaVis,NBinsThetaVis,ArrayNBinsThetaVis);
 		TrueCosThetaVisPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueCosThetaVisPlot",LabelXAxisCosThetaVis,NBinsCosThetaVis,ArrayNBinsCosThetaVis);
+		TruePMissPlot[inte] = new TH1D(InteractionLabels[inte]+"TruePMissPlot",LabelXAxisPMiss,NBinsPMiss,ArrayNBinsPMiss);
 
 		for (int WhichECal = 0; WhichECal < TwoDNBinsECal; WhichECal++) {
 
@@ -556,6 +558,7 @@ void true_selection::Loop() {
 					TrueMuonCosThetaSingleBinPlot[0]->Fill(0.5,weight);
 					TrueThetaVisPlot[0]->Fill(TrueThetaVis,weight);
 					TrueCosThetaVisPlot[0]->Fill(TrueCosThetaVis,weight);
+					TruePMissPlot[0]->Fill(TruePMiss,weight);
 
 					TrueThetaVis_InECalTwoDPlot[0][ECalTwoDIndex]->Fill(TrueThetaVis,weight);
 					SerialTrueThetaVis_InECalPlot[0]->Fill(SerialThetaVisInECalIndex,weight);								
@@ -571,6 +574,7 @@ void true_selection::Loop() {
 					TrueMuonCosThetaSingleBinPlot[genie_mode]->Fill(0.5,weight);
 					TrueThetaVisPlot[genie_mode]->Fill(TrueThetaVis,weight);
 					TrueCosThetaVisPlot[genie_mode]->Fill(TrueCosThetaVis,weight);
+					TruePMissPlot[genie_mode]->Fill(TruePMiss,weight);
 			
 					TrueThetaVis_InECalTwoDPlot[genie_mode][ECalTwoDIndex]->Fill(TrueThetaVis,weight);
 					SerialTrueThetaVis_InECalPlot[genie_mode]->Fill(SerialThetaVisInECalIndex,weight);								

@@ -202,6 +202,24 @@ void reco_selection::Loop() {
 
 		//----------------------------------------//
 
+		//PMiss
+
+		TH1D* RecoPMissPlot = new TH1D("RecoPMissPlot",LabelXAxisPMiss,NBinsPMiss,ArrayNBinsPMiss);
+		TH1D* CC1pRecoPMissPlot = new TH1D("CC1pRecoPMissPlot",LabelXAxisPMiss,NBinsPMiss,ArrayNBinsPMiss);	
+		TH1D* CC1pTruePMissPlot = new TH1D("CC1pTruePMissPlot",LabelXAxisPMiss,NBinsPMiss,ArrayNBinsPMiss);
+		TH2D* CC1pRecoPMissPlot2D = new TH2D("CC1pRecoPMissPlot2D",LabelXAxisPMiss2D,NBinsPMiss,
+			ArrayNBinsPMiss,NBinsPMiss,ArrayNBinsPMiss);
+		TH2D* POTScaledCC1pRecoPMissPlot2D = new TH2D("POTScaledCC1pRecoPMissPlot2D",LabelXAxisPMiss2D,NBinsPMiss,
+			ArrayNBinsPMiss,NBinsPMiss,ArrayNBinsPMiss);
+		TH1D* NonCC1pRecoPMissPlot = new TH1D("NonCC1pRecoPMissPlot",LabelXAxisPMiss,NBinsPMiss,ArrayNBinsPMiss);
+		TH1D* CCQERecoPMissPlot = new TH1D("CCQERecoPMissPlot",LabelXAxisPMiss,NBinsPMiss,ArrayNBinsPMiss);
+		TH1D* CCMECRecoPMissPlot = new TH1D("CCMECRecoPMissPlot",LabelXAxisPMiss,NBinsPMiss,ArrayNBinsPMiss);
+		TH1D* CCRESRecoPMissPlot = new TH1D("CCRESRecoPMissPlot",LabelXAxisPMiss,NBinsPMiss,ArrayNBinsPMiss);
+		TH1D* CCDISRecoPMissPlot = new TH1D("CCDISRecoPMissPlot",LabelXAxisPMiss,NBinsPMiss,ArrayNBinsPMiss);
+
+
+		//----------------------------------------//
+
 		double ecal_diff_min = -0.2;
 		double ecal_diff_max = 0.2;
 		double ecal_reso_min = -50;
@@ -923,6 +941,8 @@ void reco_selection::Loop() {
 			if (DeltaPT > ArrayNBinsDeltaPT[NBinsDeltaPT]) { DeltaPT = 0.5 * (ArrayNBinsDeltaPT[NBinsDeltaPT] + ArrayNBinsDeltaPT[NBinsDeltaPT-1]); }
 
 			if (DeltaPn > ArrayNBinsDeltaPn[NBinsDeltaPn]) { DeltaPn = 0.5 * (ArrayNBinsDeltaPn[NBinsDeltaPn] + ArrayNBinsDeltaPn[NBinsDeltaPn-1]); }
+			
+			if (pmiss > ArrayNBinsPMiss[NBinsPMiss]) { pmiss = 0.5 * (ArrayNBinsPMiss[NBinsPMiss] + ArrayNBinsPMiss[NBinsPMiss-1]); }
 
 			if (ECal > ArrayNBinsECal[NBinsECal]) { ECal = 0.5 * (ArrayNBinsECal[NBinsECal] + ArrayNBinsECal[NBinsECal-1]); }
 			if (ECal < ArrayNBinsECal[0]) { ECal = 0.5 * (ArrayNBinsECal[0] + ArrayNBinsECal[1]); }	
@@ -1077,6 +1097,7 @@ void reco_selection::Loop() {
 			RecoMuonCosThetaSingleBinPlot->Fill(0.5,weight);
 			RecoThetaVisPlot->Fill(ThetaVis,weight); // deg
 			RecoCosThetaVisPlot->Fill(CosThetaVis,weight); // deg
+			RecoPMissPlot->Fill(pmiss,weight); // deg
 
 			// 2D analysis
 			RecoThetaVis_ECalSlicesPlot[ECalTwoDIndex]->Fill(ThetaVis,weight);
@@ -1131,6 +1152,7 @@ void reco_selection::Loop() {
 					CC1pTrueMuonCosThetaSingleBinPlot->Fill(0.5,weight);
 					CC1pTrueThetaVisPlot->Fill(true_ThetaVis,weight);
 					CC1pTrueCosThetaVisPlot->Fill(true_CosThetaVis,weight);
+					CC1pTruePMissPlot->Fill(true_pmiss,weight);
 
 					// 2D analysis
 					CC1pTrueThetaVis_ECalSlicesPlot[TrueECalTwoDIndex]->Fill(true_ThetaVis,weight);
@@ -1150,6 +1172,7 @@ void reco_selection::Loop() {
 					CC1pRecoMuonCosThetaSingleBinPlot->Fill(0.5,weight);
 					CC1pRecoThetaVisPlot->Fill(ThetaVis,weight);
 					CC1pRecoCosThetaVisPlot->Fill(CosThetaVis,weight);
+					CC1pRecoPMissPlot->Fill(pmiss,weight);
 	
 					// 2D analysis
 					CC1pRecoThetaVis_ECalSlicesPlot[ECalTwoDIndex]->Fill(ThetaVis,weight);
@@ -1167,6 +1190,7 @@ void reco_selection::Loop() {
 					CC1pRecoMuonCosThetaSingleBinPlot2D->Fill(0.5,0.5);
 					CC1pRecoThetaVisPlot2D->Fill(true_ThetaVis,ThetaVis);
 					CC1pRecoCosThetaVisPlot2D->Fill(true_CosThetaVis,CosThetaVis);
+					CC1pRecoPMissPlot2D->Fill(true_pmiss,pmiss);
 
 					// 2D analysis
 					CC1pRecoThetaVis_ECalSlicesPlot2D[ECalTwoDIndex]->Fill(true_ThetaVis,ThetaVis,weight);
@@ -1182,6 +1206,7 @@ void reco_selection::Loop() {
 					POTScaledCC1pRecoMuonCosThetaSingleBinPlot2D->Fill(0.5,0.5,weight);
 					POTScaledCC1pRecoThetaVisPlot2D->Fill(true_ThetaVis,ThetaVis,weight);
 					POTScaledCC1pRecoCosThetaVisPlot2D->Fill(true_CosThetaVis,CosThetaVis,weight);
+					POTScaledCC1pRecoPMissPlot2D->Fill(true_pmiss,pmiss,weight);
 
 					// 2D analysis
 					POTScaledCC1pRecoThetaVis_ECalSlicesPlot2D[ECalTwoDIndex]->Fill(true_ThetaVis,ThetaVis,weight);
@@ -1364,6 +1389,7 @@ void reco_selection::Loop() {
 					NonCC1pRecoMuonCosThetaSingleBinPlot->Fill(0.5,weight);
 					NonCC1pRecoThetaVisPlot->Fill(ThetaVis,weight);
 					NonCC1pRecoCosThetaVisPlot->Fill(CosThetaVis,weight);
+					NonCC1pRecoPMissPlot->Fill(pmiss,weight);
 
 					// 2D analysis
 					NonCC1pRecoThetaVis_ECalSlicesPlot[ECalTwoDIndex]->Fill(ThetaVis,weight);
@@ -1390,6 +1416,7 @@ void reco_selection::Loop() {
 					CCQERecoMuonCosThetaSingleBinPlot->Fill(0.5,weight);
 					CCQERecoThetaVisPlot->Fill(ThetaVis,weight);
 					CCQERecoCosThetaVisPlot->Fill(CosThetaVis,weight);
+					CCQERecoPMissPlot->Fill(pmiss,weight);
 
 					// 2D analysis
 					CCQERecoThetaVis_ECalSlicesPlot[ECalTwoDIndex]->Fill(ThetaVis,weight);
@@ -1413,6 +1440,7 @@ void reco_selection::Loop() {
 					CCMECRecoMuonCosThetaSingleBinPlot->Fill(0.5,weight);
 					CCMECRecoThetaVisPlot->Fill(ThetaVis,weight);
 					CCMECRecoCosThetaVisPlot->Fill(CosThetaVis,weight);
+					CCMECRecoPMissPlot->Fill(pmiss,weight);
 
 					// 2D analysis
 					CCMECRecoThetaVis_ECalSlicesPlot[ECalTwoDIndex]->Fill(ThetaVis,weight);
@@ -1436,6 +1464,7 @@ void reco_selection::Loop() {
 					CCRESRecoMuonCosThetaSingleBinPlot->Fill(0.5,weight);
 					CCRESRecoThetaVisPlot->Fill(ThetaVis,weight);
 					CCRESRecoCosThetaVisPlot->Fill(CosThetaVis,weight);
+					CCRESRecoPMissPlot->Fill(pmiss,weight);
 	
 					// 2D analysis
 					CCRESRecoThetaVis_ECalSlicesPlot[ECalTwoDIndex]->Fill(ThetaVis,weight);
@@ -1459,6 +1488,7 @@ void reco_selection::Loop() {
 					CCDISRecoMuonCosThetaSingleBinPlot->Fill(0.5,weight);
 					CCDISRecoThetaVisPlot->Fill(ThetaVis,weight);
 					CCDISRecoCosThetaVisPlot->Fill(CosThetaVis,weight);
+					CCDISRecoPMissPlot->Fill(pmiss,weight);
 
 					// 2D analysis
 					CCDISRecoThetaVis_ECalSlicesPlot[ECalTwoDIndex]->Fill(ThetaVis,weight);

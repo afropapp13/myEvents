@@ -32,6 +32,8 @@ void interaction_breakdown(TString BaseMC = "") {
 	PlotNames.push_back("RecoMuonCosThetaSingleBinPlot");
 	PlotNames.push_back("RecoThetaVisPlot");
 	PlotNames.push_back("RecoCosThetaVisPlot");
+	PlotNames.push_back("RecoPMissPlot");
+
 	PlotNames.push_back("RecoThetaVis_ECal_0_00To0_50Plot");	
 	PlotNames.push_back("RecoThetaVis_ECal_0_50To0_80Plot");	
 	PlotNames.push_back("RecoThetaVis_ECal_0_80To2_00Plot");	
