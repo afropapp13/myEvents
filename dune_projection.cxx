@@ -65,8 +65,8 @@ void dune_projection(TString BaseMC = "") {
 	vector<TString> samples;
 	vector<TString> labels;
 	
-	samples.push_back("Overlay9"); labels.push_back("MicroBooNE");
-	samples.push_back("Overlay9BNBToHonda"); labels.push_back("DUNE atmospheric projection");
+	samples.push_back("Overlay9"); labels.push_back("MicroBooNE Simulation");
+	samples.push_back("Overlay9BNBToHonda"); labels.push_back("#splitline{DUNE Atmospheric}{Reweighted Projection}");
 
 	int nsamples = samples.size();
 		
@@ -226,8 +226,8 @@ void dune_projection(TString BaseMC = "") {
 					latex.SetTextFont(FontStyle);
 					latex.SetTextSize(TextSize);
 					TString label = "#splitline{p' = " + to_string_with_precision(peak,2) + "^{o}, m = " + to_string_with_precision(median,2)  + "^{o}}{#mu = " + to_string_with_precision(mean,2) + "^{o}, #tilde{#sigma} = " + to_string_with_precision(sigma,2) + "^{o}}";
-					latex.DrawLatexNDC(0.4,0.8, label);				
-					latex.DrawLatexNDC(0.4,0.9, labels[isample]);				
+					latex.DrawLatexNDC(0.4,0.7, label);				
+					latex.DrawLatexNDC(0.4,0.85, labels[isample]);				
 
 					//----------------------------------------//
 

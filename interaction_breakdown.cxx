@@ -44,8 +44,9 @@ void interaction_breakdown(TString BaseMC = "") {
 	PlotNames.push_back("RecoThetaVis_DeltaPn_0_40To1_00Plot");	
 	PlotNames.push_back("RecoSerialThetaVis_DeltaPnPlot");	
 	
-	PlotNames.push_back("RecoThetaVis_PMiss_0_00To0_12Plot");	
-	PlotNames.push_back("RecoThetaVis_PMiss_0_12To0_50Plot");	
+	PlotNames.push_back("RecoThetaVis_PMiss_0_00To0_10Plot");	
+	PlotNames.push_back("RecoThetaVis_PMiss_0_10To0_20Plot");	
+	PlotNames.push_back("RecoThetaVis_PMiss_0_20To0_50Plot");	
 	PlotNames.push_back("RecoSerialThetaVis_PMissPlot");	
 	
 	const int N1DPlots = PlotNames.size();
@@ -330,8 +331,8 @@ void interaction_breakdown(TString BaseMC = "") {
 
 						bin_width_Plots[0][WhichPlot] = (TH1D*)(Plots[0][WhichPlot]->Clone()); 
 						Reweight(bin_width_Plots[0][WhichPlot]); 
-						max = FindOneDimHistoMaxValue(bin_width_Plots[0][WhichPlot]);
-						bin_width_Plots[0][WhichPlot]->GetYaxis()->SetRangeUser(0.,1.35*max);
+					//	max = FindOneDimHistoMaxValue(bin_width_Plots[0][WhichPlot]);
+					//	bin_width_Plots[0][WhichPlot]->GetYaxis()->SetRangeUser(0.,1.47*max);
 
 					}
 					
@@ -424,6 +425,10 @@ void interaction_breakdown(TString BaseMC = "") {
 				
 
 				} // End of the loop over the samples
+
+				TH1D* stack_max = (TH1D*) (THStacks[WhichPlot]->GetStack()->Last());
+				double m_stack = TMath::Max( FindOneDimHistoMaxValue(bin_width_Plots[0][WhichPlot]) , FindOneDimHistoMaxValue(stack_max) );
+				bin_width_Plots[0][WhichPlot]->GetYaxis()->SetRangeUser(0.,1.35*m_stack);
 
 				// Unblind
 				bin_width_Plots[0][WhichPlot]->Draw("e same");
@@ -676,7 +681,7 @@ void interaction_breakdown(TString BaseMC = "") {
 				double chi2, pval, sigma; int ndof;
 				
 				CalcChiSquared(Plots[0][WhichPlot],MCStackClone,CovMatrixEvents,chi2,ndof,pval,sigma);
-				TString Chi2Ndof = "#chi^{2}/ndof = " + to_string_with_precision(chi2,1) + "/" + TString(std::to_string(ndof)) +", p = " + to_string_with_precision(pval,2) + ", " + to_string_with_precision(sigma,2) + "#sigma'";
+				TString Chi2Ndof = "#chi^{2}/ndf = " + to_string_with_precision(chi2,1) + "/" + TString(std::to_string(ndof)) +", p = " + to_string_with_precision(pval,2) + ", " + to_string_with_precision(sigma,2) + "#sigma'";
 
 				TLatex latexChi2;
 				latexChi2.SetTextFont(FontStyle);

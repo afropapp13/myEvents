@@ -46,8 +46,9 @@ void  print_theta_vis_mean_std() {
 	
 	plot_names.push_back(""); plot_label.push_back("");
 	
-	plot_names.push_back("CC1pThetaVis_PMissSlices0_00To0_12Plot"); plot_label.push_back("$|p_{\\mathrm{miss}}| <$ 0.12\\,GeV/c");
-	plot_names.push_back("CC1pThetaVis_PMissSlices0_12To0_50Plot"); plot_label.push_back("$|p_{\\mathrm{miss}}| >$ 0.12\\,GeV/c");
+	plot_names.push_back("CC1pThetaVis_PMissSlices0_00To0_10Plot"); plot_label.push_back("$|p_{\\mathrm{miss}}| <$ 0.10\\,GeV/c");
+	plot_names.push_back("CC1pThetaVis_PMissSlices0_10To0_20Plot"); plot_label.push_back("0.1 $< |p_{\\mathrm{miss}}| <$ 0.2\\,GeV/c");
+	plot_names.push_back("CC1pThetaVis_PMissSlices0_20To0_50Plot"); plot_label.push_back("$|p_{\\mathrm{miss}}| >$ 0.2\\,GeV/c");
 
 	
 	const int nplots = plot_names.size();
