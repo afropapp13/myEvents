@@ -167,6 +167,8 @@ void reco_selection::Loop() {
 
 		// theta beam vector reco vs truth
 		TH1D* CC1pRecoThetaBRTPlot = new TH1D("CC1pRecoThetaBRTPlot",";#theta_{brt} [deg];CC1p0#pi MC weighted events",20,0,20);	
+		TH1D* CC1pRecoMuonThetaPlot = new TH1D("CC1pRecoMuonThetaPlot",";#theta_{#mu,rt} [deg];CC1p0#pi MC weighted events",20,0,20);	
+		TH1D* CC1pRecoProtonThetaPlot = new TH1D("CC1pRecoProtonThetaPlot",";#theta_{p,rt} [deg];CC1p0#pi MC weighted events",20,0,20);	
 	
 		// ThetaVis
 
@@ -602,6 +604,13 @@ void reco_selection::Loop() {
                 TH2D* POTScaledCC1pTruePLGKIvsPLVisPlot2D = new TH2D("POTScaledCC1pTruePLGKIvsPLVisPlot2D",";true p_{L}^{GKI} [GeV/c];true p_{L}^{vis} [GeV/c]",20,-0.5,0.5,20,-0.5,0.5);
                 TH2D* POTScaledCC1pPLGKIvsPLVisPlot2D = new TH2D("POTScaledCC1pPLGKIvsPLVisPlot2D",";reco p_{L}^{GKI} [GeV/c];reco p_{L}^{vis} [GeV/c]",20,-0.5,0.5,20,-0.5,0.5);
 
+		// 1st collaboration review
+		// Comments by David Caratelli 03/04/2025
+
+                TH2D* POTScaledCC1pBVectorAnglePlot2D = new TH2D("POTScaledCC1pBVectorAnglePlot2D",";\\theta_{vis}^{true} [deg];\\theta_{vis}^{reco} [deg]",90,0.,180.,90,0.,180.);
+                TH2D* POTScaledCC1pMuonCosThetaPlot2D = new TH2D("POTScaledCC1pMuonCosThetaPlot2D",";cos\\theta_{\\mu}^{true};cos\\theta_{\\mu}^{reco}",20,-1.,1.,20,-1.,1.);
+                TH2D* POTScaledCC1pProtonCosThetaPlot2D = new TH2D("POTScaledCC1pProtonCosThetaPlot2D",";cos\\theta_{p}^{true};cos\\theta_{p}^{reco}",20,-1.,1.,20,-1.,1.);
+		
 		//----------------------------------------//
 		//----------------------------------------//
 
@@ -1027,6 +1036,8 @@ void reco_selection::Loop() {
 			int TrueSerialThetaVisInPMissIndex = -1;
 
 			TVector3 true_b_vector_unit(-1,-1,-1);
+			TVector3 TVector3TrueMuon(-1,-1,-1);
+			TVector3 TVector3TrueProton(-1,-1,-1);
 
 			//----------------------------------------//
 
@@ -1069,13 +1080,11 @@ void reco_selection::Loop() {
 				TrueDeltaPnTwoDIndex = tools.ReturnIndex(true_DeltaPn, TwoDArrayNBinsDeltaPn);
 				TrueSerialThetaVisInDeltaPnIndex = tools.ReturnIndexIn2DList(TwoDArrayNBinsThetaVisInDeltaPnSlices,TrueDeltaPnTwoDIndex,true_ThetaVis);
 
-				TVector3 TVector3TrueMuon(-1,-1,-1);
 				TVector3TrueMuon.SetMag(True_CandidateMu_P->at(0));
 				TVector3TrueMuon.SetTheta(True_CandidateMu_Theta->at(0) * TMath::Pi() / 180.);
 				TVector3TrueMuon.SetPhi(True_CandidateMu_Phi->at(0) * TMath::Pi() / 180.);
 				double muon_e = TMath::Sqrt( TMath::Power(True_CandidateMu_P->at(0),2.) + TMath::Power(MuonMass_GeV,2.) );
 
-				TVector3 TVector3TrueProton(-1,-1,-1);
 				TVector3TrueProton.SetMag(True_CandidateP_P->at(0));
 				TVector3TrueProton.SetTheta(True_CandidateP_Theta->at(0) * TMath::Pi() / 180.);
 				TVector3TrueProton.SetPhi(True_CandidateP_Phi->at(0) * TMath::Pi() / 180.);
@@ -1229,7 +1238,19 @@ void reco_selection::Loop() {
 					double ECal_reso = ECal_diff / true_ECal * 100.; // %
 
 					double theta_brt = TMath::ACos(reco_b_vector_unit * true_b_vector_unit) * 180. / TMath::Pi();
+
+					//TVector3 unitv3_reco_muon = TVector3CandidateMuon.Unit();
+					//TVector3 unitv3_true_muon = TVector3TrueMuon.Unit();
+
+					//TVector3 unitv3_reco_proton = TVector3CandidateProton.Unit();
+					//TVector3 unitv3_true_proton = TVector3TrueProton.Unit();
+
+					double mu_theta_brt = TMath::ACos( (TVector3CandidateMuon * TVector3TrueMuon) / ( TVector3CandidateMuon.Mag() * TVector3TrueMuon.Mag()) ) * 180. / TMath::Pi();
+					double p_theta_brt = TMath::ACos( (TVector3CandidateProton * TVector3TrueProton) / ( TVector3CandidateProton.Mag() * TVector3TrueProton.Mag()) ) * 180. / TMath::Pi();
+					
 					CC1pRecoThetaBRTPlot->Fill(theta_brt, weight);
+					CC1pRecoMuonThetaPlot->Fill(mu_theta_brt, weight);
+					CC1pRecoProtonThetaPlot->Fill(p_theta_brt, weight);
 
 					//------------------------------//
 
@@ -1374,6 +1395,15 @@ void reco_selection::Loop() {
 
 					POTScaledCC1pTruePLGKIvsPLVisPlot2D->Fill(true_DeltaPL, true_DeltaPLVis, weight);
 					POTScaledCC1pPLGKIvsPLVisPlot2D->Fill(DeltaPL, DeltaPLVis, weight);
+
+					//------------------------------//
+
+					// 1st collaboration review
+					// Comments by David Caratelli 03/04/2025
+
+					POTScaledCC1pBVectorAnglePlot2D->Fill(true_ThetaVis,ThetaVis,weight);
+					POTScaledCC1pMuonCosThetaPlot2D->Fill(True_CandidateMu_CosTheta->at(0),reco_Pmu_cos_theta,weight);
+					POTScaledCC1pProtonCosThetaPlot2D->Fill(True_CandidateP_CosTheta->at(0),reco_Pp_cos_theta,weight);
 
 				} // End of the CC1p signal
 

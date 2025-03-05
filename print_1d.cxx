@@ -35,6 +35,8 @@ void print_1d() {
 	vector<TString> plot_names; plot_names.clear();
 	
 	plot_names.push_back("CC1pRecoThetaBRTPlot");
+	plot_names.push_back("CC1pRecoMuonThetaPlot");
+	plot_names.push_back("CC1pRecoProtonThetaPlot");
 
 	const int nplots = plot_names.size();
 
@@ -87,7 +89,7 @@ void print_1d() {
 
 		gPad->RedrawAxis();
 
-		if (plot_names[iplot] == "CC1pRecoThetaBRTPlot") {
+//		if (plot_names[iplot] == "CC1pRecoThetaBRTPlot") {
 
                 	plot.at(iplot)->GetYaxis()->SetTitle("CC1p0#pi event count");
 			
@@ -102,7 +104,7 @@ void print_1d() {
 			TString label = "#splitline{p' = " + to_string_with_precision(peak,2) + "^{o}, m = " + to_string_with_precision(median,2)  + "^{o}}{#mu = " + to_string_with_precision(mean,2) + "^{o}, #tilde{#sigma} = " + to_string_with_precision(sigma,2) + "^{o}}";
 			latex.DrawLatexNDC(0.3,0.7, label);				
 
-		}
+//		}
 
 	        TLatex *bnb = new TLatex();
         	bnb->SetTextFont(FontStyle);

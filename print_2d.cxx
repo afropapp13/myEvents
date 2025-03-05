@@ -49,6 +49,9 @@ void print_2d() {
 
 	vector<TString> PlotNames;
 
+	PlotNames.push_back("BVectorAnglePlot"); 
+	PlotNames.push_back("MuonCosThetaPlot"); 
+	PlotNames.push_back("ProtonCosThetaPlot"); 
 	PlotNames.push_back("RecoThetaVisRecoECalPlot"); 
 	PlotNames.push_back("RecoThetaVisRecoDeltaPnPlot"); 
 	PlotNames.push_back("RecoThetaVisRecoPMissPlot");
@@ -132,7 +135,7 @@ void print_2d() {
 				Plots[WhichSample][WhichPlot]->GetXaxis()->SetTitleSize(TextSize);
 				Plots[WhichSample][WhichPlot]->GetXaxis()->SetLabelSize(TextSize);				
 				Plots[WhichSample][WhichPlot]->GetXaxis()->CenterTitle();
-				Plots[WhichSample][WhichPlot]->GetXaxis()->SetNdivisions(8);
+				Plots[WhichSample][WhichPlot]->GetXaxis()->SetNdivisions(6);
 				Plots[WhichSample][WhichPlot]->GetXaxis()->SetLabelOffset(0.02);				
 					
 				Plots[WhichSample][WhichPlot]->GetYaxis()->SetLabelFont(FontStyle);
@@ -140,7 +143,7 @@ void print_2d() {
 				Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitleSize(TextSize);
 				Plots[WhichSample][WhichPlot]->GetYaxis()->SetLabelSize(TextSize);				
 				Plots[WhichSample][WhichPlot]->GetYaxis()->CenterTitle();
-				Plots[WhichSample][WhichPlot]->GetYaxis()->SetNdivisions(8);
+				Plots[WhichSample][WhichPlot]->GetYaxis()->SetNdivisions(6);
 				Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitleOffset(1.);				
 									
 				Plots[WhichSample][WhichPlot]->GetZaxis()->SetLabelFont(FontStyle);

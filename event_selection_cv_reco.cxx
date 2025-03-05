@@ -10,7 +10,7 @@
 	WhichSampleArray.push_back("BeamOn9_Combined");
 	//WhichSampleArray.push_back("ExtBNB9_Combined");
 	//WhichSampleArray.push_back("OverlayDirt9_Combined");
-	//WhichSampleArray.push_back("Overlay9_Combined");
+	WhichSampleArray.push_back("Overlay9_Combined");
 
 	// BNB to Honda reweight using true Enu
 	//WhichSampleArray.push_back("BeamOn9BNBToHonda_Combined");
