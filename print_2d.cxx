@@ -53,6 +53,8 @@ void print_2d() {
 	PlotNames.push_back("MuonCosThetaPlot"); 
 	PlotNames.push_back("ProtonCosThetaPlot"); 
 	PlotNames.push_back("RecoThetaVisRecoECalPlot"); 
+	PlotNames.push_back("MuonMomentumPlot"); 
+	PlotNames.push_back("ProtonMomentumPlot"); 
 	PlotNames.push_back("RecoThetaVisRecoDeltaPnPlot"); 
 	PlotNames.push_back("RecoThetaVisRecoPMissPlot");
 	PlotNames.push_back("RecoDeltaPnRecoPMissPlot");
@@ -136,7 +138,7 @@ void print_2d() {
 				Plots[WhichSample][WhichPlot]->GetXaxis()->SetLabelSize(TextSize);				
 				Plots[WhichSample][WhichPlot]->GetXaxis()->CenterTitle();
 				Plots[WhichSample][WhichPlot]->GetXaxis()->SetNdivisions(6);
-				Plots[WhichSample][WhichPlot]->GetXaxis()->SetLabelOffset(0.02);				
+				Plots[WhichSample][WhichPlot]->GetXaxis()->SetLabelOffset(0.01);				
 					
 				Plots[WhichSample][WhichPlot]->GetYaxis()->SetLabelFont(FontStyle);
 				Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitleFont(FontStyle);
@@ -148,7 +150,7 @@ void print_2d() {
 									
 				Plots[WhichSample][WhichPlot]->GetZaxis()->SetLabelFont(FontStyle);
 				Plots[WhichSample][WhichPlot]->GetZaxis()->SetLabelSize(TextSize);
-				Plots[WhichSample][WhichPlot]->GetZaxis()->SetNdivisions(8);				
+				Plots[WhichSample][WhichPlot]->GetZaxis()->SetNdivisions(6);				
 //				Plots[WhichSample][WhichPlot]->GetZaxis()->SetRangeUser(-0.1,1.);
 
 				Plots[WhichSample][WhichPlot]->SetMarkerColor(kWhite);				

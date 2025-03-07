@@ -607,10 +607,13 @@ void reco_selection::Loop() {
 		// 1st collaboration review
 		// Comments by David Caratelli 03/04/2025
 
-                TH2D* POTScaledCC1pBVectorAnglePlot2D = new TH2D("POTScaledCC1pBVectorAnglePlot2D",";\\theta_{vis}^{true} [deg];\\theta_{vis}^{reco} [deg]",90,0.,180.,90,0.,180.);
-                TH2D* POTScaledCC1pMuonCosThetaPlot2D = new TH2D("POTScaledCC1pMuonCosThetaPlot2D",";cos\\theta_{\\mu}^{true};cos\\theta_{\\mu}^{reco}",20,-1.,1.,20,-1.,1.);
-                TH2D* POTScaledCC1pProtonCosThetaPlot2D = new TH2D("POTScaledCC1pProtonCosThetaPlot2D",";cos\\theta_{p}^{true};cos\\theta_{p}^{reco}",20,-1.,1.,20,-1.,1.);
+        TH2D* POTScaledCC1pBVectorAnglePlot2D = new TH2D("POTScaledCC1pBVectorAnglePlot2D",";\\theta_{vis}^{true} [deg];\\theta_{vis}^{reco} [deg]",90,0.,180.,90,0.,180.);
+        TH2D* POTScaledCC1pMuonCosThetaPlot2D = new TH2D("POTScaledCC1pMuonCosThetaPlot2D",";cos\\theta_{\\mu}^{true};cos\\theta_{\\mu}^{reco}",50,-1.,1.,50,-1.,1.);
+        TH2D* POTScaledCC1pProtonCosThetaPlot2D = new TH2D("POTScaledCC1pProtonCosThetaPlot2D",";cos\\theta_{p}^{true};cos\\theta_{p}^{reco}",50,-1.,1.,50,-1.,1.);
 		
+        TH2D* POTScaledCC1pMuonMomentumPlot2D = new TH2D("POTScaledCC1pMuonMomentumPlot2D",";p_{\\mu}^{true} [GeV/c];p_{\\mu}^{reco} [GeV/c]",50,0.1,1.2,50,0.1,1.2);
+        TH2D* POTScaledCC1pProtonMomentumPlot2D = new TH2D("POTScaledCC1pProtonMomentumPlot2D",";p_{p}^{true} [GeV/c];p_{p}^{reco} [GeV/c]",50,0.3,1.,50,0.3,1.);
+
 		//----------------------------------------//
 		//----------------------------------------//
 
@@ -1404,6 +1407,9 @@ void reco_selection::Loop() {
 					POTScaledCC1pBVectorAnglePlot2D->Fill(true_ThetaVis,ThetaVis,weight);
 					POTScaledCC1pMuonCosThetaPlot2D->Fill(True_CandidateMu_CosTheta->at(0),reco_Pmu_cos_theta,weight);
 					POTScaledCC1pProtonCosThetaPlot2D->Fill(True_CandidateP_CosTheta->at(0),reco_Pp_cos_theta,weight);
+
+					POTScaledCC1pMuonMomentumPlot2D->Fill(True_CandidateMu_P->at(0),reco_Pmu,weight);
+					POTScaledCC1pProtonMomentumPlot2D->Fill(True_CandidateP_P->at(0),reco_Pp,weight);
 
 				} // End of the CC1p signal
 
