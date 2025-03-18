@@ -157,6 +157,11 @@ void print_2d() {
 				Plots[WhichSample][WhichPlot]->SetMarkerSize(0.9);
 				//Plots[WhichSample][WhichPlot]->SetTitle(Runs[WhichRun]);					
 				Plots[WhichSample][WhichPlot]->Draw("colz"); 
+
+				TLatex *bnb = new TLatex();
+				bnb->SetTextFont(FontStyle);
+				bnb->SetTextSize(TextSize);
+				bnb->DrawLatexNDC(0.15,0.91,"MicroBooNE Simulation");				
 					
 				PlotCanvas->SaveAs(PlotPath+NameOfSamples[0]+"/Atmospherics_2D_"+PlotNames[WhichPlot]
 						+NameOfSamples[WhichSample]+"_"+Runs[WhichRun]+"_"+UBCodeVersion+".pdf");

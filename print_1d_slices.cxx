@@ -208,10 +208,15 @@ void print_1d_slices() {
 		leg.at(iplot)->SetMargin(0.05);
 		leg.at(iplot)->Draw();
 
-                TString canvas_path = PlotPath + cut + "/";
-                TString canvas_export_name = "Resolution_"+plot_names.at(iplot)+"_"+run+"_"+UBCodeVersion+cut+".pdf";
-                canvas.at(iplot)->SaveAs(canvas_path + canvas_export_name);
-                delete canvas.at(iplot);
+		TLatex *bnb = new TLatex();
+		bnb->SetTextFont(font);
+		bnb->SetTextSize(size-0.03);
+		bnb->DrawLatexNDC(0.61,0.77,"MicroBooNE Simulation");		
+
+        TString canvas_path = PlotPath + cut + "/";
+        TString canvas_export_name = "Resolution_"+plot_names.at(iplot)+"_"+run+"_"+UBCodeVersion+cut+".pdf";
+        canvas.at(iplot)->SaveAs(canvas_path + canvas_export_name);
+        delete canvas.at(iplot);
 	
 
 	} // End of the loop over the plots
