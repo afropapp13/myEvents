@@ -1,0 +1,636 @@
+#define mcc9_10_true_selection_cxx
+#include "mcc9_10_true_selection.h"
+#include <TH2.h>
+#include <TStyle.h>
+#include <TCanvas.h>
+#include <TVector3.h>
+#include <TLorentzVector.h>
+#include <TH1D.h>
+#include <TH2D.h>
+#include <TMath.h>
+#include <TFile.h>
+#include <TSpline.h>
+#include <TProfile.h>
+
+#include <iostream>
+#include <iomanip>
+#include <vector>
+#include <string>
+#include <sstream>
+
+using namespace std;
+
+#include "../../myClasses/Tools.h"
+
+//--------------------------------------------------//
+
+TString TrueToStringInt(int num) {
+
+	std::ostringstream start;
+	start << num;
+	string start1 = start.str();
+	return start1;
+
+}
+
+//--------------------------------------------------//
+
+void mcc9_10_true_selection::Loop() {
+
+	//--------------------------------------------------//	
+
+	if (fChain == 0) return; 
+	Long64_t nentries = fChain->GetEntriesFast(); 
+	Long64_t nbytes = 0, nb = 0;
+
+	TH1D::SetDefaultSumw2();
+	TH2D::SetDefaultSumw2();
+
+	//--------------------------------------------------//
+
+	Tools tools;	
+
+	//--------------------------------------------------//
+
+	TString Extension = "";
+
+	// For overlays only for genie, flux and reinteraction uncertainties
+
+	if (fUniverseIndex != -1) {
+
+		Extension = "_"+fEventWeightLabel+"_"+TrueToStringInt(fUniverseIndex); 
+
+	}
+
+	// Output Files
+
+	TString FileName = PathToFiles+fTune+"TruthSTVAnalysis_"+fWhichSample+Extension+"_"+UBCodeVersion+".root";	
+	TFile* OutputFile = new TFile(FileName,"recreate");
+	std::cout << std::endl << "File " << FileName << " to be created"<< std::endl << std::endl;
+
+	//--------------------------------------------------//
+
+	TH1D* TrueMuonCosThetaPlot[NInte];
+	TH1D* TrueMuonCosThetaSingleBinPlot[NInte];
+	TH1D* TrueThetaVisPlot[NInte];
+	TH1D* TrueCosThetaVisPlot[NInte];
+	TH1D* TruePMissPlot[NInte];
+
+	//--------------------------------------------------//
+	
+	// neutron breakdown
+	int nneutrons = 3;
+	TH1D* TrueThetaVis_NeutronMultiPlot[nneutrons];
+	TH1D* TruePMiss_NeutronMultiPlot[nneutrons];
+	TH1D* SerialTrueThetaVis_InPMissNeutronMultiPlot[nneutrons];
+	
+	for (int ineutron = 0; ineutron <= nneutrons; ineutron++) {
+
+                TrueThetaVis_NeutronMultiPlot[ineutron] = new TH1D(TrueToStringInt(ineutron)+"n_TrueThetaVisPlot",LabelXAxisThetaVis,NBinsThetaVis,ArrayNBinsThetaVis);
+                TruePMiss_NeutronMultiPlot[ineutron] = new TH1D(TrueToStringInt(ineutron)+"n_TruePMissPlot",LabelXAxisPMiss,NBinsPMiss,ArrayNBinsPMiss);
+		SerialTrueThetaVis_InPMissNeutronMultiPlot[ineutron] = new TH1D(TrueToStringInt(ineutron)+"n_TrueSerialThetaVis_PMissPlot",LabelXAxisThetaVis,tools.Return2DNBins(TwoDArrayNBinsThetaVisInPMissSlices),&tools.Return2DBinIndices(TwoDArrayNBinsThetaVisInPMissSlices)[0]);
+	}
+
+	//--------------------------------------------------//
+	
+	// 2D plots
+	TH1D* TrueThetaVis_InECalTwoDPlot[NInte][TwoDNBinsECal];
+	TH1D* SerialTrueThetaVis_InECalPlot[NInte];
+
+	TH1D* TrueThetaVis_InDeltaPnTwoDPlot[NInte][TwoDNBinsDeltaPn];
+	TH1D* SerialTrueThetaVis_InDeltaPnPlot[NInte];
+
+	TH1D* TrueThetaVis_InPMissTwoDPlot[NInte][TwoDNBinsPMiss];
+	TH1D* SerialTrueThetaVis_InPMissPlot[NInte];
+
+	//--------------------------------------------------//
+
+	// Loop over the interaction processes
+
+	for (int inte = 0; inte < NInte; inte++) {
+
+		//--------------------------------------------------//
+
+		// 1D analysis
+
+		TrueMuonCosThetaPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueMuonCosThetaPlot",LabelXAxisMuonCosTheta,NBinsMuonCosTheta,ArrayNBinsMuonCosTheta);
+		TrueMuonCosThetaSingleBinPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueMuonCosThetaSingleBinPlot",LabelXAxisMuonCosTheta,1,0.,1.);
+		TrueThetaVisPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueThetaVisPlot",LabelXAxisThetaVis,NBinsThetaVis,ArrayNBinsThetaVis);
+		TrueCosThetaVisPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueCosThetaVisPlot",LabelXAxisCosThetaVis,NBinsCosThetaVis,ArrayNBinsCosThetaVis);
+		TruePMissPlot[inte] = new TH1D(InteractionLabels[inte]+"TruePMissPlot",LabelXAxisPMiss,NBinsPMiss,ArrayNBinsPMiss);
+
+		for (int WhichECal = 0; WhichECal < TwoDNBinsECal; WhichECal++) {
+
+			TString ThetaVisTwoDInECalLabel = "ThetaVis_ECal_"+tools.ConvertToString(TwoDArrayNBinsECal[WhichECal])+"To"+tools.ConvertToString(TwoDArrayNBinsECal[WhichECal+1])+"Plot";			
+			TrueThetaVis_InECalTwoDPlot[inte][WhichECal] = new TH1D(InteractionLabels[inte]+"True"+ThetaVisTwoDInECalLabel,LabelXAxisThetaVis,TwoDArrayNBinsThetaVisInECalSlices[WhichECal].size()-1,&TwoDArrayNBinsThetaVisInECalSlices[WhichECal][0]);
+
+		}	
+
+		SerialTrueThetaVis_InECalPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueSerialThetaVis_ECalPlot",LabelXAxisThetaVis,tools.Return2DNBins(TwoDArrayNBinsThetaVisInECalSlices),&tools.Return2DBinIndices(TwoDArrayNBinsThetaVisInECalSlices)[0]);
+
+		for (int WhichDeltaPn = 0; WhichDeltaPn < TwoDNBinsDeltaPn; WhichDeltaPn++) {
+
+			TString ThetaVisTwoDInDeltaPnLabel = "ThetaVis_DeltaPn_"+tools.ConvertToString(TwoDArrayNBinsDeltaPn[WhichDeltaPn])+"To"+tools.ConvertToString(TwoDArrayNBinsDeltaPn[WhichDeltaPn+1])+"Plot";			
+			TrueThetaVis_InDeltaPnTwoDPlot[inte][WhichDeltaPn] = new TH1D(InteractionLabels[inte]+"True"+ThetaVisTwoDInDeltaPnLabel,LabelXAxisThetaVis,TwoDArrayNBinsThetaVisInDeltaPnSlices[WhichDeltaPn].size()-1,&TwoDArrayNBinsThetaVisInDeltaPnSlices[WhichDeltaPn][0]);
+
+		}	
+
+		SerialTrueThetaVis_InDeltaPnPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueSerialThetaVis_DeltaPnPlot",LabelXAxisThetaVis,tools.Return2DNBins(TwoDArrayNBinsThetaVisInDeltaPnSlices),&tools.Return2DBinIndices(TwoDArrayNBinsThetaVisInDeltaPnSlices)[0]);
+
+		for (int WhichPMiss = 0; WhichPMiss < TwoDNBinsPMiss; WhichPMiss++) {
+
+			TString ThetaVisTwoDInPMissLabel = "ThetaVis_PMiss_"+tools.ConvertToString(TwoDArrayNBinsPMiss[WhichPMiss])+"To"+tools.ConvertToString(TwoDArrayNBinsPMiss[WhichPMiss+1])+"Plot";			
+			TrueThetaVis_InPMissTwoDPlot[inte][WhichPMiss] = new TH1D(InteractionLabels[inte]+"True"+ThetaVisTwoDInPMissLabel,LabelXAxisThetaVis,TwoDArrayNBinsThetaVisInPMissSlices[WhichPMiss].size()-1,&TwoDArrayNBinsThetaVisInPMissSlices[WhichPMiss][0]);
+
+		}	
+
+		SerialTrueThetaVis_InPMissPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueSerialThetaVis_PMissPlot",LabelXAxisThetaVis,tools.Return2DNBins(TwoDArrayNBinsThetaVisInPMissSlices),&tools.Return2DBinIndices(TwoDArrayNBinsThetaVisInPMissSlices)[0]);
+
+		//--------------------------------------------------//
+
+	} // End of the loop over the interaction processes	
+
+	//--------------------------------------------------//
+
+	// 2D plots
+
+        TH2D* POTScaledCC1pTrueThetaVisTrueECalPlot2D = new TH2D("POTScaledCC1pTrueThetaVisTrueECalPlot2D",";#theta_{vis}^{true} [deg];E_{Cal}^{true} [GeV]",
+                        NBinsThetaVis,ArrayNBinsThetaVis,20,ArrayNBinsECal[0],ArrayNBinsECal[NBinsECal]);
+
+        TH2D* POTScaledCC1pTrueThetaVisTrueEnuPlot2D = new TH2D("POTScaledCC1pTrueThetaVisTrueEnuPlot2D",";#theta_{vis}^{true} [deg];E_{#nu}^{true} [GeV]",
+                        NBinsThetaVis,ArrayNBinsThetaVis,20,ArrayNBinsECal[0],ArrayNBinsECal[NBinsECal]);
+
+	//--------------------------------------------------//
+
+	int TrueCC1pCounter = 0;
+	int TrueCCQElikeCounter = 0;
+	
+	double SumWeights = 0.;
+
+	//--------------------------------------------------//
+
+	// Loop over the events
+
+	cout << nentries << " events included in the file" << endl;	
+
+	//--------------------------------------------------//	
+
+	for (Long64_t jentry=0; jentry<nentries;jentry++) {
+
+		//--------------------------------------------------//
+
+		Long64_t ientry = LoadTree(jentry); if (ientry < 0) break; nb = fChain->GetEntry(jentry); nbytes += nb;
+		if (jentry%1000 == 0) std::cout << jentry/1000 << " k " << std::setprecision(2) << double(jentry)/nentries*100. << " %"<< std::endl;	
+
+		//--------------------------------------------------//
+
+		// For detector variations runs 1-3, the eventweight weights are -1., set them back to 1.
+		if (Weight == -1.) { Weight = 1.; }
+		if (T2KWeight == -1.) { T2KWeight = 1.; }
+			
+		// For detector variations runs 4-5, the event weights are NOT -1
+		// However setting the weights to 1 for consistency
+		if (
+			string(fWhichSample).find("CV") != std::string::npos || 
+			string(fWhichSample).find("CVextra") != std::string::npos || 
+			string(fWhichSample).find("LYDown") != std::string::npos || 
+			string(fWhichSample).find("LYRayleigh") != std::string::npos || 
+			string(fWhichSample).find("LYAttenuation") != std::string::npos || 
+			string(fWhichSample).find("SCE") != std::string::npos || 
+			string(fWhichSample).find("Recombination2") != std::string::npos || 
+			string(fWhichSample).find("X") != std::string::npos || 
+			string(fWhichSample).find("YZ") != std::string::npos || 
+			string(fWhichSample).find("ThetaXZ") != std::string::npos || 
+			string(fWhichSample).find("ThetaYZ") != std::string::npos
+		) {
+
+			Weight = 1.;
+			T2KWeight = 1.;
+				
+		}
+
+		// Set some limits to make sure that the weights are not negative or unreasonable / infinity
+		if (Weight <= 0 || Weight > 30) { continue; }
+		if (T2KWeight <= 0 || T2KWeight > 30) { continue; }		
+		// Weight from v3.0.4 to v.3.0.6 * weight from application of T2K tune
+		double weight = POTWeight * Weight * T2KWeight * ROOTinoWeight;
+
+		// Fake data studies: removing the T2K tune weight
+		if (fTune == "GENIEv2") { weight = POTWeight; }
+		if (fTune == "NoTune") { weight = POTWeight * Weight * ROOTinoWeight; }
+		// Double the MEC weight  (mode = 10)
+		if (fTune == "TwiceMEC" && Muon_MCParticle_Mode->at(0) == 10) { weight = 2 * POTWeight * Weight * T2KWeight * ROOTinoWeight; }
+		if (fTune == "TwiceMEC" && Muon_MCParticle_Mode->at(0) != 10) { weight = POTWeight * Weight * T2KWeight * ROOTinoWeight; }		
+
+		//--------------------------------------------------//
+
+		// Genie, flux & reinteraction weights for systematics
+
+		if ( 
+			   fUniverseIndex != -1 && (
+			   fWhichSample == "Overlay9_Run1" 
+			|| fWhichSample == "Overlay9_Run2" 
+			|| fWhichSample == "Overlay9_Run3" 
+			|| fWhichSample == "Overlay9_Run4a"
+			|| fWhichSample == "Overlay9_Run4b" 
+			|| fWhichSample == "Overlay9_Run4c" 
+			|| fWhichSample == "Overlay9_Run4d" 
+			|| fWhichSample == "Overlay9_Run5" 
+			|| fWhichSample == "Overlay9_Combined" 
+			|| fWhichSample == "OverlayDirt9_Run1" 
+			|| fWhichSample == "OverlayDirt9_Run2" 
+			|| fWhichSample == "OverlayDirt9_Run3" 
+			|| fWhichSample == "OverlayDirt9_Run4a" 
+			|| fWhichSample == "OverlayDirt9_Run4b" 
+			|| fWhichSample == "OverlayDirt9_Run4c" 
+			|| fWhichSample == "OverlayDirt9_Run4d" 
+			|| fWhichSample == "OverlayDirt9_Run5" 
+			|| fWhichSample == "OverlayDirt9_Combined"
+
+			) 
+		) {
+
+			// Genie weights
+
+			if (fEventWeightLabel == "All_UBGenie") { 
+
+				if ( int(All_UBGenie->size()) > fUniverseIndex ) {
+
+					weight = weight*All_UBGenie->at(fUniverseIndex) / T2KWeight; 
+
+				}
+
+			}
+
+			if (fEventWeightLabel == "AxFFCCQEshape_UBGenie") { 
+
+				if ( int(AxFFCCQEshape_UBGenie->size()) > fUniverseIndex ) {
+				
+					weight = weight*AxFFCCQEshape_UBGenie->at(fUniverseIndex) / T2KWeight; 
+
+				}
+
+			}
+
+			if (fEventWeightLabel == "DecayAngMEC_UBGenie") { 
+
+				if ( int(DecayAngMEC_UBGenie->size()) > fUniverseIndex ) {
+				
+					weight = weight*DecayAngMEC_UBGenie->at(fUniverseIndex) / T2KWeight;
+ 
+				}
+
+			}
+
+			if (fEventWeightLabel == "NormCCCOH_UBGenie") { 
+
+				if ( int(NormCCCOH_UBGenie->size()) > fUniverseIndex ) {
+
+					weight = weight*NormCCCOH_UBGenie->at(fUniverseIndex)/ T2KWeight; 
+
+				}
+
+			}
+
+			if (fEventWeightLabel == "NormNCCOH_UBGenie") { 
+
+				if ( int(NormNCCOH_UBGenie->size()) > fUniverseIndex ) {
+
+					weight = weight*NormNCCOH_UBGenie->at(fUniverseIndex)/ T2KWeight; 
+				
+				}
+
+			}
+
+			if (fEventWeightLabel == "RPA_CCQE_UBGenie") { 
+	
+				if ( int(RPA_CCQE_UBGenie->size()) > fUniverseIndex ) {
+
+					weight = weight*RPA_CCQE_UBGenie->at(fUniverseIndex)/ T2KWeight; 
+
+				}
+
+			}
+
+			if (fEventWeightLabel == "ThetaDelta2NRad_UBGenie") { 
+
+				if ( int(ThetaDelta2NRad_UBGenie->size()) > fUniverseIndex ) {
+				
+					weight = weight*ThetaDelta2NRad_UBGenie->at(fUniverseIndex)/ T2KWeight; 
+
+				}
+
+			}
+
+			if (fEventWeightLabel == "Theta_Delta2Npi_UBGenie") { 
+
+				if ( int(Theta_Delta2Npi_UBGenie->size()) > fUniverseIndex ) {
+				
+					weight = weight*Theta_Delta2Npi_UBGenie->at(fUniverseIndex)/ T2KWeight; 
+
+				}
+
+			}
+
+			if (fEventWeightLabel == "VecFFCCQEshape_UBGenie") { 
+	
+				if ( int(VecFFCCQEshape_UBGenie->size()) > fUniverseIndex ) {
+
+					weight = weight*VecFFCCQEshape_UBGenie->at(fUniverseIndex)/ T2KWeight; 
+
+				}
+
+			}
+
+			if (fEventWeightLabel == "XSecShape_CCMEC_UBGenie") { 
+
+				if ( int(XSecShape_CCMEC_UBGenie->size()) > fUniverseIndex ) {
+
+					weight = weight*XSecShape_CCMEC_UBGenie->at(fUniverseIndex)/ T2KWeight; 
+
+				}
+
+			}
+
+			// Flux weights
+			if (fEventWeightLabel == "fluxes") {
+
+				if ( int(fluxes->size()) > fUniverseIndex ) {
+
+					 weight = weight*fluxes->at(fUniverseIndex); 
+
+				}
+
+			}
+
+			// Reinteraction weights
+			if (fEventWeightLabel == "reinteractions") { 
+
+				if ( int(reinteractions->size()) > fUniverseIndex ) {
+				
+					weight = weight*reinteractions->at(fUniverseIndex);
+
+				} 
+
+			}		
+
+			// MC_Stat weights // bootstrapping
+			if (fEventWeightLabel == "MC_Stat") { 
+
+				int concat = tools.ConcatRunSubRunEvent(Run,SubRun,Event,fUniverseIndex);
+				weight = weight*tools.PoissonRandomNumber(concat); 
+				
+			}			
+
+		}
+
+		//----------------------------------------//
+
+		SumWeights += weight / POTWeight;					
+
+		//--------------------------------------------------//
+
+		// Analysis over the simb::MCParticles
+
+		std::vector<int> VectorTrueMuonIndex; VectorTrueMuonIndex.clear();
+		std::vector<int> VectorTrueProtonIndex; VectorTrueProtonIndex.clear();
+
+		int TrueMuonCounter = 0, TrueProtonCounter = 0, TrueChargedPionCounter = 0;
+		bool TrueCC1pEvent = false;
+		bool TrueCCQElikeEvent = false;
+
+		//--------------------------------------------------//
+
+		// Signal definition: 1 mu (Pmu > 100 MeV / c), 1p (Pp > 200 MeV / c) & 0 pi+/- (Ppi > 70 MeV / c)
+
+		if (CC1p == 1 && NumberPi0 == 0) {
+		
+			//--------------------------------------------------//		
+			
+			// Containment of the vertex has already been demanded in PreTruthSelection
+			// Soft fiducial volume for true vertex
+
+			//if (Muon_MCParticle_StartContainment->at(0) == 0) { continue; }
+
+			//--------------------------------------------------//	
+
+			// True muon
+
+			double TrueMuonCosTheta = Muon_MCParticle_CosTheta->at(0);
+			double TrueMuonTheta = TMath::ACos(TrueMuonCosTheta);
+			double TrueMuonPhi_Deg = Muon_MCParticle_Phi->at(0);
+			double TrueMuonPhi = TrueMuonPhi_Deg * TMath::Pi() / 180.;
+			double TrueMuonMomentum_GeV = Muon_MCParticle_Mom->at(0); // GeV
+			double TrueMuon_E_GeV = TMath::Sqrt( TMath::Power(TrueMuonMomentum_GeV,2.) + TMath::Power(MuonMass_GeV,2.) ); // GeV
+
+			// True proton
+
+			double TrueProtonCosTheta = Proton_MCParticle_CosTheta->at(0);
+			double TrueProtonTheta = TMath::ACos(TrueProtonCosTheta);
+			double TrueProtonPhi_Deg = Proton_MCParticle_Phi->at(0);
+			double TrueProtonPhi = TrueProtonPhi_Deg * TMath::Pi() / 180.;
+			double TrueProtonMomentum_GeV = Proton_MCParticle_Mom->at(0); // GeV
+			double TrueProton_E_GeV = TMath::Sqrt( TMath::Power(TrueProtonMomentum_GeV,2.) + TMath::Power(ProtonMass_GeV,2.) ); // GeV
+
+			double TrueDeltaThetaProtonMuon_Deg = True_DeltaTheta->at(0);
+			double TrueThetaVis = True_ThetaVis->at(0); // deg
+			double TrueCosThetaVis = TMath::Cos(TrueThetaVis * TMath::Pi() / 180.);
+        
+			// Reconstructed calorimetric energy using true level info / MCParticles
+
+			double TrueRecoECal = True_ECal->at(0); // GeV
+
+			// Transverse Variables
+
+			double TrueTransMissMomentum = True_Pt->at(0);
+			double TrueDeltaAlphaT = True_DeltaAlphaT->at(0);	
+			double TrueDeltaAlpha3Dq = True_DeltaAlpha3Dq->at(0);
+			double TrueDeltaPhiT = True_DeltaPhiT->at(0);
+			double TrueDeltaPhi3D = True_DeltaPhi3D->at(0);			
+
+			double TruePn = True_Pn->at(0);
+
+                       	// Underflow / overflow
+                        if (TrueThetaVis < ArrayNBinsThetaVis[0]) { TrueThetaVis = (ArrayNBinsThetaVis[0] + ArrayNBinsThetaVis[1])/2.; }
+                        if (TrueThetaVis > ArrayNBinsThetaVis[NBinsThetaVis]) { TrueThetaVis = (ArrayNBinsThetaVis[NBinsThetaVis] + ArrayNBinsThetaVis[NBinsThetaVis-1])/2.; }
+
+                        if (TrueRecoECal < ArrayNBinsECal[0]) { TrueRecoECal = (ArrayNBinsECal[0] + ArrayNBinsECal[1])/2.; }
+                        if (TrueRecoECal > ArrayNBinsECal[NBinsECal]) { TrueRecoECal = (ArrayNBinsECal[NBinsECal] + ArrayNBinsECal[NBinsECal-1])/2.; }
+
+                        if (TruePn < ArrayNBinsDeltaPn[0]) { TruePn = (ArrayNBinsDeltaPn[0] + ArrayNBinsDeltaPn[1])/2.; }
+                        if (TruePn > ArrayNBinsDeltaPn[NBinsDeltaPn]) { TruePn = (ArrayNBinsDeltaPn[NBinsDeltaPn] + ArrayNBinsDeltaPn[NBinsDeltaPn-1])/2.; }
+
+			//--------------------------------------------------//	
+
+			// True Vertex
+
+			TVector3 TrueVertex(True_Vx,True_Vy,True_Vz);
+				
+			//--------------------------------------------------//		
+
+			// Demand that the true muon / proton start points and the true proton end point are contained
+			// Angle selection cuts: collinearity to reject broken tracks
+			// Momentum threshold
+			// Same events fill all the plots
+
+			if (
+			    /*TrueMuonStartContainment == true 
+			    && TrueProtonStartContainment == true 
+			    &&*/ TrueMuonMomentum_GeV > ArrayNBinsMuonMomentum[0]
+			    && TrueProtonMomentum_GeV > ArrayNBinsProtonMomentum[0]
+			) {
+
+				//--------------------------------------------------//
+
+				// STV analysis
+
+				if (
+				    TrueMuonMomentum_GeV < ArrayNBinsMuonMomentum[NBinsMuonMomentum]
+				    && TrueProtonMomentum_GeV < ArrayNBinsProtonMomentum[NBinsProtonMomentum]
+				) {
+
+					//----------------------------------------//
+
+					int genie_mode = -1;
+
+					if (Muon_MCParticle_Mode->at(0) == 0) { genie_mode = 1; }
+					else if (Muon_MCParticle_Mode->at(0) == 10) { genie_mode = 2; }
+					else if (Muon_MCParticle_Mode->at(0) == 1) { genie_mode = 3; }
+					else if (Muon_MCParticle_Mode->at(0) == 2) { genie_mode = 4; }
+					else { genie_mode = 5; }																				
+					//----------------------------------------//
+
+					// True CC1p event
+
+					TrueCC1pEvent = true;
+					TrueCC1pCounter++;
+
+					double true_MuonEnergy = TMath::Sqrt( TMath::Power(MuonMass_GeV,2.) + TMath::Power(TrueMuonMomentum_GeV,2.) );
+					double true_Nu = True_Ev - true_MuonEnergy;
+
+					// Playground for CC1p true momenta (longitudinal & perpendicular) ratios
+
+					TVector3 TrueCandidateMuon(1,1,1);
+					TrueCandidateMuon.SetMag(TrueMuonMomentum_GeV);
+					TrueCandidateMuon.SetPhi(TrueMuonPhi);
+					TrueCandidateMuon.SetTheta(TMath::ACos(TrueMuonCosTheta));
+
+					TVector3 TrueCandidateProton(1,1,1);
+					TrueCandidateProton.SetMag(TrueProtonMomentum_GeV);
+					TrueCandidateProton.SetPhi(TrueProtonPhi);
+					TrueCandidateProton.SetTheta(TMath::ACos(TrueProtonCosTheta));	
+
+					TVector3 vec_b = TrueCandidateMuon + TrueCandidateProton;
+					double TruePMiss = TrueRecoECal - vec_b.Mag(); 
+
+		                        if (TruePMiss < ArrayNBinsPMiss[0]) { TruePMiss = (ArrayNBinsPMiss[0] + ArrayNBinsPMiss[1])/2.; }
+                		        if (TruePMiss > ArrayNBinsPMiss[NBinsPMiss]) { TruePMiss = (ArrayNBinsPMiss[NBinsPMiss] + ArrayNBinsPMiss[NBinsPMiss-1])/2.; }
+
+					//----------------------------------------//	
+
+					// 2D indices
+
+					int ECalTwoDIndex = tools.ReturnIndex(TrueRecoECal, TwoDArrayNBinsECal);
+					int SerialThetaVisInECalIndex = tools.ReturnIndexIn2DList(TwoDArrayNBinsThetaVisInECalSlices,ECalTwoDIndex,TrueThetaVis);
+
+					int DeltaPnTwoDIndex = tools.ReturnIndex(TruePn, TwoDArrayNBinsDeltaPn);
+					int SerialThetaVisInDeltaPnIndex = tools.ReturnIndexIn2DList(TwoDArrayNBinsThetaVisInDeltaPnSlices,DeltaPnTwoDIndex,TrueThetaVis);
+
+					int PMissTwoDIndex = tools.ReturnIndex( TMath::Abs(TruePMiss), TwoDArrayNBinsPMiss);
+					int SerialThetaVisInPMissIndex = tools.ReturnIndexIn2DList(TwoDArrayNBinsThetaVisInPMissSlices,PMissTwoDIndex,TrueThetaVis);
+	
+					//----------------------------------------//
+
+					// neutron counter
+
+					int neutron_counter = NumberNeutrons;
+					if (neutron_counter > nneutrons) { neutron_counter = nneutrons; } 
+					
+					TrueThetaVis_NeutronMultiPlot[neutron_counter]->Fill(TrueThetaVis,weight);
+					TruePMiss_NeutronMultiPlot[neutron_counter]->Fill(TruePMiss,weight);
+					SerialTrueThetaVis_InPMissNeutronMultiPlot[neutron_counter]->Fill(SerialThetaVisInPMissIndex,weight);
+	
+					//----------------------------------------//	
+
+					// 1D analysis		
+
+					TrueMuonCosThetaPlot[0]->Fill(TrueMuonCosTheta,weight);
+					TrueMuonCosThetaSingleBinPlot[0]->Fill(0.5,weight);
+					TrueThetaVisPlot[0]->Fill(TrueThetaVis,weight);
+					TrueCosThetaVisPlot[0]->Fill(TrueCosThetaVis,weight);
+					TruePMissPlot[0]->Fill(TruePMiss,weight);
+
+					TrueThetaVis_InECalTwoDPlot[0][ECalTwoDIndex]->Fill(TrueThetaVis,weight);
+					SerialTrueThetaVis_InECalPlot[0]->Fill(SerialThetaVisInECalIndex,weight);								
+
+					TrueThetaVis_InDeltaPnTwoDPlot[0][DeltaPnTwoDIndex]->Fill(TrueThetaVis,weight);
+					SerialTrueThetaVis_InDeltaPnPlot[0]->Fill(SerialThetaVisInDeltaPnIndex,weight);								
+
+					TrueThetaVis_InPMissTwoDPlot[0][PMissTwoDIndex]->Fill(TrueThetaVis,weight);
+					SerialTrueThetaVis_InPMissPlot[0]->Fill(SerialThetaVisInPMissIndex,weight);								
+
+
+					TrueMuonCosThetaPlot[genie_mode]->Fill(TrueMuonCosTheta,weight);
+					TrueMuonCosThetaSingleBinPlot[genie_mode]->Fill(0.5,weight);
+					TrueThetaVisPlot[genie_mode]->Fill(TrueThetaVis,weight);
+					TrueCosThetaVisPlot[genie_mode]->Fill(TrueCosThetaVis,weight);
+					TruePMissPlot[genie_mode]->Fill(TruePMiss,weight);
+			
+					TrueThetaVis_InECalTwoDPlot[genie_mode][ECalTwoDIndex]->Fill(TrueThetaVis,weight);
+					SerialTrueThetaVis_InECalPlot[genie_mode]->Fill(SerialThetaVisInECalIndex,weight);								
+
+					TrueThetaVis_InDeltaPnTwoDPlot[genie_mode][DeltaPnTwoDIndex]->Fill(TrueThetaVis,weight);
+					SerialTrueThetaVis_InDeltaPnPlot[genie_mode]->Fill(SerialThetaVisInDeltaPnIndex,weight);								
+
+					TrueThetaVis_InPMissTwoDPlot[genie_mode][PMissTwoDIndex]->Fill(TrueThetaVis,weight);
+					SerialTrueThetaVis_InPMissPlot[genie_mode]->Fill(SerialThetaVisInPMissIndex,weight);								
+
+					//----------------------------------------//									
+
+					// 2D plots
+
+					POTScaledCC1pTrueThetaVisTrueECalPlot2D->Fill(TrueThetaVis,TrueRecoECal,weight);
+					POTScaledCC1pTrueThetaVisTrueEnuPlot2D->Fill(TrueThetaVis,True_Ev,weight);
+					
+					//----------------------------------------//									
+
+
+				} // End of the event selection
+
+				// -----------------------------------------------------------------------------------------------------------------
+
+			} // End of the angle selection cuts && the demand that we fill the plots with the same events
+
+		} // End of signal definition: 1 mu (Pmu > 100 MeV / c), 1p (Pp > 300 MeV / c) & pi+/- (Ppi > 70 MeV / c)
+
+		// -------------------------------------------------------------------------------------------------------------------------
+
+	} // End of the loop over the events
+
+	// --------------------------------------------------------------------------------------------------------------------------------------------
+
+	// STV-CC1p analysis summary
+
+	std::cout << std::endl;
+
+	// -------------------------------------------------------------------------------------------------------------------------
+
+	if ( string(fWhichSample).find("Overlay9") != std::string::npos ) {
+
+		//std::cout << std::endl << "Samdef events = " << SamdefEvents << std::endl;
+		std::cout << std::endl << "True CC1p events = " << TrueCC1pCounter << std::endl;
+
+	}
+
+	//----------------------------------------//
+
+	std::cout << std::endl << "File " << FileName << " has been created"<< std::endl << std::endl;
+	OutputFile->cd();
+	OutputFile->Write();
+	OutputFile->Close();
+
+	fFile->Close();
+
+	//----------------------------------------//
+
+} // End of the program

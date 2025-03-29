@@ -13,11 +13,14 @@ root -b event_selection_cv_reco.cxx
 
 root -b 
 .L print_latex_tables.cxx
+# print stats
 print_latex_tables("",true)
+# print purity / efficiency
 print_latex_tables("",false,true)
+# cosmic/dirt contamination
 print_latex_tables("",false,false,true)
+# interaction breakdown
 print_latex_tables("",false,false,false,true)
-print_latex_tables("",false,false,false,false,true)
 
 ###########################################################################################################################################################################
 
