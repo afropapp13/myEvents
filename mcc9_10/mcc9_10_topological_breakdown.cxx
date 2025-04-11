@@ -48,7 +48,17 @@ void mcc9_10_topological_breakdown(TString BaseMC = "") {
 	PlotNames.push_back("RecoThetaVis_PMiss_0_10To0_20Plot");	
 	PlotNames.push_back("RecoThetaVis_PMiss_0_20To0_50Plot");	
 	PlotNames.push_back("RecoSerialThetaVis_PMissPlot");	
-	
+
+	// Blips
+
+	//PlotNames.push_back("ReconBlips_savedPlot");
+	//PlotNames.push_back("RecoBlip_xPlot");
+	//PlotNames.push_back("RecoBlip_yPlot");
+	//PlotNames.push_back("RecoBlip_zPlot");
+	//PlotNames.push_back("RecoBlip_energyPlot");
+	//PlotNames.push_back("RecoBlip_sizePlot");						
+	//PlotNames.push_back("RecoBlip_proxtrkdistPlot");
+
 	const int N1DPlots = PlotNames.size();
 	cout << "Number of 1D Plots = " << N1DPlots << endl;
 
@@ -74,7 +84,7 @@ void mcc9_10_topological_breakdown(TString BaseMC = "") {
 	// Runs.push_back("Run3");
 	// Runs.push_back("Run4a");
 	Runs.push_back("Run4b");
-	Runs.push_back("Run4b_noweights");	
+	//Runs.push_back("Run4b_noweights");	
 	// Runs.push_back("Run4c");
 	// Runs.push_back("Run4d");
 	// Runs.push_back("Run5");
@@ -404,7 +414,9 @@ void mcc9_10_topological_breakdown(TString BaseMC = "") {
 				double m_stack = TMath::Max( FindOneDimHistoMaxValue(bin_width_Plots[0][WhichPlot]) , FindOneDimHistoMaxValue(stack_max) );
 				bin_width_Plots[0][WhichPlot]->GetYaxis()->SetRangeUser(0.,1.35*m_stack);
 
-				// Unblind
+				// Area normalize bc we don't have POT
+				//bin_width_Plots[0][WhichPlot]->Scale( stack_max->Integral("width") / bin_width_Plots[0][WhichPlot]->Integral("width") );
+				// Unblind and draw on top
 				bin_width_Plots[0][WhichPlot]->Draw("e same"); 
 				
 				// -----------------------------------------------------------------------------------	

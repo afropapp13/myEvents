@@ -146,7 +146,86 @@ void mcc9_10_reco_selection::Loop() {
 		TH1D* CCQERecoBlip_xPlot = new TH1D("CCQERecoBlip_xPlot",LabelXAxisBlip_x,NBinsBlip_x,borderx,FVx-borderx);
 		TH1D* CCMECRecoBlip_xPlot = new TH1D("CCMECRecoBlip_xPlot",LabelXAxisBlip_x,NBinsBlip_x,borderx,FVx-borderx);
 		TH1D* CCRESRecoBlip_xPlot = new TH1D("CCRESRecoBlip_xPlot",LabelXAxisBlip_x,NBinsBlip_x,borderx,FVx-borderx);
-		TH1D* CCDISRecoBlip_xPlot = new TH1D("CCDISRecoBlip_xPlot",LabelXAxisBlip_x,NBinsBlip_x,borderx,FVx-borderx);		
+		TH1D* CCDISRecoBlip_xPlot = new TH1D("CCDISRecoBlip_xPlot",LabelXAxisBlip_x,NBinsBlip_x,borderx,FVx-borderx);	
+		
+
+		TH1D* RecoBlip_yPlot = new TH1D("RecoBlip_yPlot",LabelXAxisBlip_y,NBinsBlip_y,bordery,FVy-bordery);
+		TH1D* CC1pRecoBlip_yPlot = new TH1D("CC1pRecoBlip_yPlot",LabelXAxisBlip_y,NBinsBlip_y,bordery,FVy-bordery);	
+		TH1D* CC1pTrueBlip_yPlot = new TH1D("CC1pTrueBlip_yPlot",LabelXAxisBlip_y,NBinsBlip_y,bordery,FVy-bordery);
+		TH2D* CC1pRecoBlip_yPlot2D = new TH2D("CC1pRecoBlip_yPlot2D",LabelXAxisBlip_y2D,NBinsBlip_y,
+			bordery,FVy-bordery,NBinsBlip_y,bordery,FVy-bordery);
+		TH2D* POTScaledCC1pRecoBlip_yPlot2D = new TH2D("POTScaledCC1pRecoBlip_yPlot2D",LabelXAxisBlip_y2D,NBinsBlip_y,
+			bordery,FVy-bordery,NBinsBlip_y,bordery,FVy-bordery);
+		TH1D* NonCC1pRecoBlip_yPlot = new TH1D("NonCC1pRecoBlip_yPlot",LabelXAxisBlip_y,NBinsBlip_y,bordery,FVy-bordery);
+		TH1D* CCQERecoBlip_yPlot = new TH1D("CCQERecoBlip_yPlot",LabelXAxisBlip_y,NBinsBlip_y,bordery,FVy-bordery);
+		TH1D* CCMECRecoBlip_yPlot = new TH1D("CCMECRecoBlip_yPlot",LabelXAxisBlip_y,NBinsBlip_y,bordery,FVy-bordery);
+		TH1D* CCRESRecoBlip_yPlot = new TH1D("CCRESRecoBlip_yPlot",LabelXAxisBlip_y,NBinsBlip_y,bordery,FVy-bordery);
+		TH1D* CCDISRecoBlip_yPlot = new TH1D("CCDISRecoBlip_yPlot",LabelXAxisBlip_y,NBinsBlip_y,bordery,FVy-bordery);
+		
+		TH1D* RecoBlip_zPlot = new TH1D("RecoBlip_zPlot",LabelXAxisBlip_z,NBinsBlip_z,borderz,FVz-borderz);
+		TH1D* CC1pRecoBlip_zPlot = new TH1D("CC1pRecoBlip_zPlot",LabelXAxisBlip_z,NBinsBlip_z,borderz,FVz-borderz);	
+		TH1D* CC1pTrueBlip_zPlot = new TH1D("CC1pTrueBlip_zPlot",LabelXAxisBlip_z,NBinsBlip_z,borderz,FVz-borderz);
+		TH2D* CC1pRecoBlip_zPlot2D = new TH2D("CC1pRecoBlip_zPlot2D",LabelXAxisBlip_z2D,NBinsBlip_z,
+			borderz,FVz-borderz,NBinsBlip_z,borderz,FVz-borderz);
+		TH2D* POTScaledCC1pRecoBlip_zPlot2D = new TH2D("POTScaledCC1pRecoBlip_zPlot2D",LabelXAxisBlip_z2D,NBinsBlip_z,
+			borderz,FVz-borderz,NBinsBlip_z,borderz,FVz-borderz);
+		TH1D* NonCC1pRecoBlip_zPlot = new TH1D("NonCC1pRecoBlip_zPlot",LabelXAxisBlip_z,NBinsBlip_z,borderz,FVz-borderz);
+		TH1D* CCQERecoBlip_zPlot = new TH1D("CCQERecoBlip_zPlot",LabelXAxisBlip_z,NBinsBlip_z,borderz,FVz-borderz);
+		TH1D* CCMECRecoBlip_zPlot = new TH1D("CCMECRecoBlip_zPlot",LabelXAxisBlip_z,NBinsBlip_z,borderz,FVz-borderz);
+		TH1D* CCRESRecoBlip_zPlot = new TH1D("CCRESRecoBlip_zPlot",LabelXAxisBlip_z,NBinsBlip_z,borderz,FVz-borderz);
+		TH1D* CCDISRecoBlip_zPlot = new TH1D("CCDISRecoBlip_zPlot",LabelXAxisBlip_z,NBinsBlip_z,borderz,FVz-borderz);
+		
+		TH1D* ReconBlips_savedPlot = new TH1D("ReconBlips_savedPlot",LabelXAxisnBlips_saved,NBinsnBlips_saved,nBlips_saved_min,nBlips_saved_max);
+		TH1D* CC1pReconBlips_savedPlot = new TH1D("CC1pReconBlips_savedPlot",LabelXAxisnBlips_saved,NBinsnBlips_saved,nBlips_saved_min,nBlips_saved_max);	
+		TH1D* CC1pTruenBlips_savedPlot = new TH1D("CC1pTruenBlips_savedPlot",LabelXAxisnBlips_saved,NBinsnBlips_saved,nBlips_saved_min,nBlips_saved_max);
+		TH2D* CC1pReconBlips_savedPlot2D = new TH2D("CC1pReconBlips_savedPlot2D",LabelXAxisnBlips_saved2D,NBinsnBlips_saved,
+			nBlips_saved_min,nBlips_saved_max,NBinsnBlips_saved,nBlips_saved_min,nBlips_saved_max);
+		TH2D* POTScaledCC1pReconBlips_savedPlot2D = new TH2D("POTScaledCC1pReconBlips_savedPlot2D",LabelXAxisnBlips_saved2D,NBinsnBlips_saved,
+			nBlips_saved_min,nBlips_saved_max,NBinsnBlips_saved,nBlips_saved_min,nBlips_saved_max);
+		TH1D* NonCC1pReconBlips_savedPlot = new TH1D("NonCC1pReconBlips_savedPlot",LabelXAxisnBlips_saved,NBinsnBlips_saved,nBlips_saved_min,nBlips_saved_max);
+		TH1D* CCQEReconBlips_savedPlot = new TH1D("CCQEReconBlips_savedPlot",LabelXAxisnBlips_saved,NBinsnBlips_saved,nBlips_saved_min,nBlips_saved_max);
+		TH1D* CCMECReconBlips_savedPlot = new TH1D("CCMECReconBlips_savedPlot",LabelXAxisnBlips_saved,NBinsnBlips_saved,nBlips_saved_min,nBlips_saved_max);
+		TH1D* CCRESReconBlips_savedPlot = new TH1D("CCRESReconBlips_savedPlot",LabelXAxisnBlips_saved,NBinsnBlips_saved,nBlips_saved_min,nBlips_saved_max);
+		TH1D* CCDISReconBlips_savedPlot = new TH1D("CCDISReconBlips_savedPlot",LabelXAxisnBlips_saved,NBinsnBlips_saved,nBlips_saved_min,nBlips_saved_max);		
+
+		TH1D* RecoBlip_sizePlot = new TH1D("RecoBlip_sizePlot",LabelXAxisBlip_size,NBinsBlip_size,Blip_size_min,Blip_size_max);
+		TH1D* CC1pRecoBlip_sizePlot = new TH1D("CC1pRecoBlip_sizePlot",LabelXAxisBlip_size,NBinsBlip_size,Blip_size_min,Blip_size_max);	
+		TH1D* CC1pTrueBlip_sizePlot = new TH1D("CC1pTrueBlip_sizePlot",LabelXAxisBlip_size,NBinsBlip_size,Blip_size_min,Blip_size_max);
+		TH2D* CC1pRecoBlip_sizePlot2D = new TH2D("CC1pRecoBlip_sizePlot2D",LabelXAxisBlip_size2D,NBinsBlip_size,
+			Blip_size_min,Blip_size_max,NBinsBlip_size,Blip_size_min,Blip_size_max);
+		TH2D* POTScaledCC1pRecoBlip_sizePlot2D = new TH2D("POTScaledCC1pRecoBlip_sizePlot2D",LabelXAxisBlip_size2D,NBinsBlip_size,
+			Blip_size_min,Blip_size_max,NBinsBlip_size,Blip_size_min,Blip_size_max);
+		TH1D* NonCC1pRecoBlip_sizePlot = new TH1D("NonCC1pRecoBlip_sizePlot",LabelXAxisBlip_size,NBinsBlip_size,Blip_size_min,Blip_size_max);
+		TH1D* CCQERecoBlip_sizePlot = new TH1D("CCQERecoBlip_sizePlot",LabelXAxisBlip_size,NBinsBlip_size,Blip_size_min,Blip_size_max);
+		TH1D* CCMECRecoBlip_sizePlot = new TH1D("CCMECRecoBlip_sizePlot",LabelXAxisBlip_size,NBinsBlip_size,Blip_size_min,Blip_size_max);
+		TH1D* CCRESRecoBlip_sizePlot = new TH1D("CCRESRecoBlip_sizePlot",LabelXAxisBlip_size,NBinsBlip_size,Blip_size_min,Blip_size_max);
+		TH1D* CCDISRecoBlip_sizePlot = new TH1D("CCDISRecoBlip_sizePlot",LabelXAxisBlip_size,NBinsBlip_size,Blip_size_min,Blip_size_max);
+		
+		TH1D* RecoBlip_energyPlot = new TH1D("RecoBlip_energyPlot",LabelXAxisBlip_energy,NBinsBlip_energy,Blip_energy_min,Blip_energy_max);
+		TH1D* CC1pRecoBlip_energyPlot = new TH1D("CC1pRecoBlip_energyPlot",LabelXAxisBlip_energy,NBinsBlip_energy,Blip_energy_min,Blip_energy_max);	
+		TH1D* CC1pTrueBlip_energyPlot = new TH1D("CC1pTrueBlip_energyPlot",LabelXAxisBlip_energy,NBinsBlip_energy,Blip_energy_min,Blip_energy_max);
+		TH2D* CC1pRecoBlip_energyPlot2D = new TH2D("CC1pRecoBlip_energyPlot2D",LabelXAxisBlip_energy2D,NBinsBlip_energy,
+			Blip_energy_min,Blip_energy_max,NBinsBlip_energy,Blip_energy_min,Blip_energy_max);
+		TH2D* POTScaledCC1pRecoBlip_energyPlot2D = new TH2D("POTScaledCC1pRecoBlip_energyPlot2D",LabelXAxisBlip_energy2D,NBinsBlip_energy,
+			Blip_energy_min,Blip_energy_max,NBinsBlip_energy,Blip_energy_min,Blip_energy_max);
+		TH1D* NonCC1pRecoBlip_energyPlot = new TH1D("NonCC1pRecoBlip_energyPlot",LabelXAxisBlip_energy,NBinsBlip_energy,Blip_energy_min,Blip_energy_max);
+		TH1D* CCQERecoBlip_energyPlot = new TH1D("CCQERecoBlip_energyPlot",LabelXAxisBlip_energy,NBinsBlip_energy,Blip_energy_min,Blip_energy_max);
+		TH1D* CCMECRecoBlip_energyPlot = new TH1D("CCMECRecoBlip_energyPlot",LabelXAxisBlip_energy,NBinsBlip_energy,Blip_energy_min,Blip_energy_max);
+		TH1D* CCRESRecoBlip_energyPlot = new TH1D("CCRESRecoBlip_energyPlot",LabelXAxisBlip_energy,NBinsBlip_energy,Blip_energy_min,Blip_energy_max);
+		TH1D* CCDISRecoBlip_energyPlot = new TH1D("CCDISRecoBlip_energyPlot",LabelXAxisBlip_energy,NBinsBlip_energy,Blip_energy_min,Blip_energy_max);		
+
+		TH1D* RecoBlip_proxtrkdistPlot = new TH1D("RecoBlip_proxtrkdistPlot",LabelXAxisBlip_proxtrkdist,NBinsBlip_proxtrkdist,Blip_proxtrkdist_min,Blip_proxtrkdist_max);
+		TH1D* CC1pRecoBlip_proxtrkdistPlot = new TH1D("CC1pRecoBlip_proxtrkdistPlot",LabelXAxisBlip_proxtrkdist,NBinsBlip_proxtrkdist,Blip_proxtrkdist_min,Blip_proxtrkdist_max);	
+		TH1D* CC1pTrueBlip_proxtrkdistPlot = new TH1D("CC1pTrueBlip_proxtrkdistPlot",LabelXAxisBlip_proxtrkdist,NBinsBlip_proxtrkdist,Blip_proxtrkdist_min,Blip_proxtrkdist_max);
+		TH2D* CC1pRecoBlip_proxtrkdistPlot2D = new TH2D("CC1pRecoBlip_proxtrkdistPlot2D",LabelXAxisBlip_proxtrkdist2D,NBinsBlip_proxtrkdist,
+			Blip_proxtrkdist_min,Blip_proxtrkdist_max,NBinsBlip_proxtrkdist,Blip_proxtrkdist_min,Blip_proxtrkdist_max);
+		TH2D* POTScaledCC1pRecoBlip_proxtrkdistPlot2D = new TH2D("POTScaledCC1pRecoBlip_proxtrkdistPlot2D",LabelXAxisBlip_proxtrkdist2D,NBinsBlip_proxtrkdist,
+			Blip_proxtrkdist_min,Blip_proxtrkdist_max,NBinsBlip_proxtrkdist,Blip_proxtrkdist_min,Blip_proxtrkdist_max);
+		TH1D* NonCC1pRecoBlip_proxtrkdistPlot = new TH1D("NonCC1pRecoBlip_proxtrkdistPlot",LabelXAxisBlip_proxtrkdist,NBinsBlip_proxtrkdist,Blip_proxtrkdist_min,Blip_proxtrkdist_max);
+		TH1D* CCQERecoBlip_proxtrkdistPlot = new TH1D("CCQERecoBlip_proxtrkdistPlot",LabelXAxisBlip_proxtrkdist,NBinsBlip_proxtrkdist,Blip_proxtrkdist_min,Blip_proxtrkdist_max);
+		TH1D* CCMECRecoBlip_proxtrkdistPlot = new TH1D("CCMECRecoBlip_proxtrkdistPlot",LabelXAxisBlip_proxtrkdist,NBinsBlip_proxtrkdist,Blip_proxtrkdist_min,Blip_proxtrkdist_max);
+		TH1D* CCRESRecoBlip_proxtrkdistPlot = new TH1D("CCRESRecoBlip_proxtrkdistPlot",LabelXAxisBlip_proxtrkdist,NBinsBlip_proxtrkdist,Blip_proxtrkdist_min,Blip_proxtrkdist_max);
+		TH1D* CCDISRecoBlip_proxtrkdistPlot = new TH1D("CCDISRecoBlip_proxtrkdistPlot",LabelXAxisBlip_proxtrkdist,NBinsBlip_proxtrkdist,Blip_proxtrkdist_min,Blip_proxtrkdist_max);			
 
 		//----------------------------------------//		
 
@@ -1080,19 +1159,19 @@ void mcc9_10_reco_selection::Loop() {
 				true_DeltaPn = True_Pn->at(0);
 				true_DeltaAlpha3D = True_DeltaAlpha3Dq->at(0);
 
-                        	// Underflow / overflow
-                                if (true_ThetaVis < ArrayNBinsThetaVis[0]) { true_ThetaVis = (ArrayNBinsThetaVis[0] + ArrayNBinsThetaVis[1])/2.; }
-                                if (true_ThetaVis > ArrayNBinsThetaVis[NBinsThetaVis]) { true_ThetaVis = (ArrayNBinsThetaVis[NBinsThetaVis] + ArrayNBinsThetaVis[NBinsThetaVis-1])/2.; }
+                // Underflow / overflow
+                if (true_ThetaVis < ArrayNBinsThetaVis[0]) { true_ThetaVis = (ArrayNBinsThetaVis[0] + ArrayNBinsThetaVis[1])/2.; }
+                if (true_ThetaVis > ArrayNBinsThetaVis[NBinsThetaVis]) { true_ThetaVis = (ArrayNBinsThetaVis[NBinsThetaVis] + ArrayNBinsThetaVis[NBinsThetaVis-1])/2.; }
                         
 				if (true_DeltaPT > ArrayNBinsDeltaPT[NBinsDeltaPT]) { true_DeltaPT = 0.5 * (ArrayNBinsDeltaPT[NBinsDeltaPT] + ArrayNBinsDeltaPT[NBinsDeltaPT-1]); }
 
 				if (true_DeltaPn > ArrayNBinsDeltaPn[NBinsDeltaPn]) { true_DeltaPn = 0.5 * (ArrayNBinsDeltaPn[NBinsDeltaPn] + ArrayNBinsDeltaPn[NBinsDeltaPn-1]); }
 
-	                        if (true_ECal > ArrayNBinsECal[NBinsECal]) { true_ECal = 0.5 * (ArrayNBinsECal[NBinsECal] + ArrayNBinsECal[NBinsECal-1]); }
-        	                if (true_ECal < ArrayNBinsECal[0]) { true_ECal = 0.5 * (ArrayNBinsECal[0] + ArrayNBinsECal[1]); }
+	            if (true_ECal > ArrayNBinsECal[NBinsECal]) { true_ECal = 0.5 * (ArrayNBinsECal[NBinsECal] + ArrayNBinsECal[NBinsECal-1]); }
+        	    if (true_ECal < ArrayNBinsECal[0]) { true_ECal = 0.5 * (ArrayNBinsECal[0] + ArrayNBinsECal[1]); }
 	
-                                if (True_Ev > ArrayNBinsECal[NBinsECal]) { True_Ev = 0.5 * (ArrayNBinsECal[NBinsECal] + ArrayNBinsECal[NBinsECal-1]); }
-                                if (True_Ev < ArrayNBinsECal[0]) { True_Ev = 0.5 * (ArrayNBinsECal[0] + ArrayNBinsECal[1]); }
+                if (True_Ev > ArrayNBinsECal[NBinsECal]) { True_Ev = 0.5 * (ArrayNBinsECal[NBinsECal] + ArrayNBinsECal[NBinsECal-1]); }
+                if (True_Ev < ArrayNBinsECal[0]) { True_Ev = 0.5 * (ArrayNBinsECal[0] + ArrayNBinsECal[1]); }
 
 				TrueECalTwoDIndex = tools.ReturnIndex(true_ECal, TwoDArrayNBinsECal);
 				TrueSerialThetaVisInECalIndex = tools.ReturnIndexIn2DList(TwoDArrayNBinsThetaVisInECalSlices,TrueECalTwoDIndex,true_ThetaVis);
@@ -1127,6 +1206,20 @@ void mcc9_10_reco_selection::Loop() {
 			RecoThetaVisPlot->Fill(ThetaVis,weight); // deg
 			RecoCosThetaVisPlot->Fill(CosThetaVis,weight); // deg
 			RecoPMissPlot->Fill(pmiss,weight); // deg
+
+			// Blips
+			ReconBlips_savedPlot->Fill(nBlips_saved,weight);
+
+			for (int iblip = 0; iblip < nBlips_saved; iblip++) {
+
+				RecoBlip_xPlot->Fill(Blip_x->at(iblip),weight);
+				RecoBlip_yPlot->Fill(Blip_y->at(iblip),weight);
+				RecoBlip_zPlot->Fill(Blip_z->at(iblip),weight);
+				RecoBlip_energyPlot->Fill(Blip_energy->at(iblip),weight);												
+				RecoBlip_sizePlot->Fill(Blip_size->at(iblip),weight);
+				RecoBlip_proxtrkdistPlot->Fill(Blip_proxtrkdist->at(iblip),weight);
+
+			}
 
 			// 2D analysis
 			RecoThetaVis_ECalSlicesPlot[ECalTwoDIndex]->Fill(ThetaVis,weight);
@@ -1183,6 +1276,20 @@ void mcc9_10_reco_selection::Loop() {
 					CC1pTrueCosThetaVisPlot->Fill(true_CosThetaVis,weight);
 					CC1pTruePMissPlot->Fill(true_pmiss,weight);
 
+					// Blips
+					CC1pTruenBlips_savedPlot->Fill(nBlips_saved,weight);
+
+					for (int iblip = 0; iblip < nBlips_saved; iblip++) {
+
+						CC1pTrueBlip_xPlot->Fill(Blip_x->at(iblip),weight);
+						CC1pTrueBlip_yPlot->Fill(Blip_y->at(iblip),weight);
+						CC1pTrueBlip_zPlot->Fill(Blip_z->at(iblip),weight);
+						CC1pTrueBlip_energyPlot->Fill(Blip_energy->at(iblip),weight);												
+						CC1pTrueBlip_sizePlot->Fill(Blip_size->at(iblip),weight);
+						CC1pTrueBlip_proxtrkdistPlot->Fill(Blip_proxtrkdist->at(iblip),weight);
+
+					}					
+
 					// 2D analysis
 					CC1pTrueThetaVis_ECalSlicesPlot[TrueECalTwoDIndex]->Fill(true_ThetaVis,weight);
 					SerialCC1pTrueThetaVis_InECalPlot->Fill(TrueSerialThetaVisInECalIndex,weight);
@@ -1202,6 +1309,20 @@ void mcc9_10_reco_selection::Loop() {
 					CC1pRecoThetaVisPlot->Fill(ThetaVis,weight);
 					CC1pRecoCosThetaVisPlot->Fill(CosThetaVis,weight);
 					CC1pRecoPMissPlot->Fill(pmiss,weight);
+
+					// Blips
+					CC1pReconBlips_savedPlot->Fill(nBlips_saved,weight);
+
+					for (int iblip = 0; iblip < nBlips_saved; iblip++) {
+
+						CC1pRecoBlip_xPlot->Fill(Blip_x->at(iblip),weight);
+						CC1pRecoBlip_yPlot->Fill(Blip_y->at(iblip),weight);
+						CC1pRecoBlip_zPlot->Fill(Blip_z->at(iblip),weight);
+						CC1pRecoBlip_energyPlot->Fill(Blip_energy->at(iblip),weight);												
+						CC1pRecoBlip_sizePlot->Fill(Blip_size->at(iblip),weight);
+						CC1pRecoBlip_proxtrkdistPlot->Fill(Blip_proxtrkdist->at(iblip),weight);
+
+					}				
 	
 					// 2D analysis
 					CC1pRecoThetaVis_ECalSlicesPlot[ECalTwoDIndex]->Fill(ThetaVis,weight);
@@ -1221,6 +1342,20 @@ void mcc9_10_reco_selection::Loop() {
 					CC1pRecoCosThetaVisPlot2D->Fill(true_CosThetaVis,CosThetaVis);
 					CC1pRecoPMissPlot2D->Fill(true_pmiss,pmiss);
 
+					// Blips
+					CC1pReconBlips_savedPlot2D->Fill(nBlips_saved, nBlips_saved);
+
+					for (int iblip = 0; iblip < nBlips_saved; iblip++) {
+
+						CC1pRecoBlip_xPlot2D->Fill(Blip_x->at(iblip),Blip_x->at(iblip));
+						CC1pRecoBlip_yPlot2D->Fill(Blip_y->at(iblip),Blip_y->at(iblip));
+						CC1pRecoBlip_zPlot2D->Fill(Blip_z->at(iblip),Blip_z->at(iblip));
+						CC1pRecoBlip_energyPlot2D->Fill(Blip_energy->at(iblip),Blip_energy->at(iblip));												
+						CC1pRecoBlip_sizePlot2D->Fill(Blip_size->at(iblip),Blip_size->at(iblip));
+						CC1pRecoBlip_proxtrkdistPlot2D->Fill(Blip_proxtrkdist->at(iblip),Blip_proxtrkdist->at(iblip));
+
+					}						
+
 					// 2D analysis
 					CC1pRecoThetaVis_ECalSlicesPlot2D[ECalTwoDIndex]->Fill(true_ThetaVis,ThetaVis,weight);
 					SerialCC1pRecoThetaVis_InECalPlot2D->Fill(TrueSerialThetaVisInECalIndex,SerialThetaVisInECalIndex,weight);
@@ -1236,6 +1371,20 @@ void mcc9_10_reco_selection::Loop() {
 					POTScaledCC1pRecoThetaVisPlot2D->Fill(true_ThetaVis,ThetaVis,weight);
 					POTScaledCC1pRecoCosThetaVisPlot2D->Fill(true_CosThetaVis,CosThetaVis,weight);
 					POTScaledCC1pRecoPMissPlot2D->Fill(true_pmiss,pmiss,weight);
+
+					// Blips
+					CC1pReconBlips_savedPlot2D->Fill(nBlips_saved, nBlips_saved,weight);
+
+					for (int iblip = 0; iblip < nBlips_saved; iblip++) {
+
+						POTScaledCC1pRecoBlip_xPlot2D->Fill(Blip_x->at(iblip),Blip_x->at(iblip),weight);
+						POTScaledCC1pRecoBlip_yPlot2D->Fill(Blip_y->at(iblip),Blip_y->at(iblip),weight);
+						POTScaledCC1pRecoBlip_zPlot2D->Fill(Blip_z->at(iblip),Blip_z->at(iblip),weight);
+						POTScaledCC1pRecoBlip_energyPlot2D->Fill(Blip_energy->at(iblip),Blip_energy->at(iblip),weight);												
+						POTScaledCC1pRecoBlip_sizePlot2D->Fill(Blip_size->at(iblip),Blip_size->at(iblip),weight);
+						POTScaledCC1pRecoBlip_proxtrkdistPlot2D->Fill(Blip_proxtrkdist->at(iblip),Blip_proxtrkdist->at(iblip),weight);
+
+					}						
 
 					// 2D analysis
 					POTScaledCC1pRecoThetaVis_ECalSlicesPlot2D[ECalTwoDIndex]->Fill(true_ThetaVis,ThetaVis,weight);
@@ -1444,6 +1593,20 @@ void mcc9_10_reco_selection::Loop() {
 					NonCC1pRecoCosThetaVisPlot->Fill(CosThetaVis,weight);
 					NonCC1pRecoPMissPlot->Fill(pmiss,weight);
 
+					// Blips
+					NonCC1pReconBlips_savedPlot->Fill(nBlips_saved,weight);
+
+					for (int iblip = 0; iblip < nBlips_saved; iblip++) {
+
+						NonCC1pRecoBlip_xPlot->Fill(Blip_x->at(iblip),weight);
+						NonCC1pRecoBlip_yPlot->Fill(Blip_y->at(iblip),weight);
+						NonCC1pRecoBlip_zPlot->Fill(Blip_z->at(iblip),weight);
+						NonCC1pRecoBlip_energyPlot->Fill(Blip_energy->at(iblip),weight);												
+						NonCC1pRecoBlip_sizePlot->Fill(Blip_size->at(iblip),weight);
+						NonCC1pRecoBlip_proxtrkdistPlot->Fill(Blip_proxtrkdist->at(iblip),weight);
+
+					}						
+
 					// 2D analysis
 					NonCC1pRecoThetaVis_ECalSlicesPlot[ECalTwoDIndex]->Fill(ThetaVis,weight);
 					SerialNonCC1pRecoThetaVis_InECalPlot->Fill(SerialThetaVisInECalIndex,weight);
@@ -1471,6 +1634,20 @@ void mcc9_10_reco_selection::Loop() {
 					CCQERecoCosThetaVisPlot->Fill(CosThetaVis,weight);
 					CCQERecoPMissPlot->Fill(pmiss,weight);
 
+					// Blips
+					CCQEReconBlips_savedPlot->Fill(nBlips_saved,weight);
+
+					for (int iblip = 0; iblip < nBlips_saved; iblip++) {
+
+						CCQERecoBlip_xPlot->Fill(Blip_x->at(iblip),weight);
+						CCQERecoBlip_yPlot->Fill(Blip_y->at(iblip),weight);
+						CCQERecoBlip_zPlot->Fill(Blip_z->at(iblip),weight);
+						CCQERecoBlip_energyPlot->Fill(Blip_energy->at(iblip),weight);												
+						CCQERecoBlip_sizePlot->Fill(Blip_size->at(iblip),weight);
+						CCQERecoBlip_proxtrkdistPlot->Fill(Blip_proxtrkdist->at(iblip),weight);
+
+					}						
+
 					// 2D analysis
 					CCQERecoThetaVis_ECalSlicesPlot[ECalTwoDIndex]->Fill(ThetaVis,weight);
 					SerialCCQERecoThetaVis_InECalPlot->Fill(SerialThetaVisInECalIndex,weight);
@@ -1495,6 +1672,20 @@ void mcc9_10_reco_selection::Loop() {
 					CCMECRecoCosThetaVisPlot->Fill(CosThetaVis,weight);
 					CCMECRecoPMissPlot->Fill(pmiss,weight);
 
+					// Blips
+					CCMECReconBlips_savedPlot->Fill(nBlips_saved,weight);
+
+					for (int iblip = 0; iblip < nBlips_saved; iblip++) {
+
+						CCMECRecoBlip_xPlot->Fill(Blip_x->at(iblip),weight);
+						CCMECRecoBlip_yPlot->Fill(Blip_y->at(iblip),weight);
+						CCMECRecoBlip_zPlot->Fill(Blip_z->at(iblip),weight);
+						CCMECRecoBlip_energyPlot->Fill(Blip_energy->at(iblip),weight);												
+						CCMECRecoBlip_sizePlot->Fill(Blip_size->at(iblip),weight);
+						CCMECRecoBlip_proxtrkdistPlot->Fill(Blip_proxtrkdist->at(iblip),weight);
+
+					}						
+
 					// 2D analysis
 					CCMECRecoThetaVis_ECalSlicesPlot[ECalTwoDIndex]->Fill(ThetaVis,weight);
 					SerialCCMECRecoThetaVis_InECalPlot->Fill(SerialThetaVisInECalIndex,weight);
@@ -1518,6 +1709,20 @@ void mcc9_10_reco_selection::Loop() {
 					CCRESRecoThetaVisPlot->Fill(ThetaVis,weight);
 					CCRESRecoCosThetaVisPlot->Fill(CosThetaVis,weight);
 					CCRESRecoPMissPlot->Fill(pmiss,weight);
+
+					// Blips
+					CCRESReconBlips_savedPlot->Fill(nBlips_saved,weight);
+
+					for (int iblip = 0; iblip < nBlips_saved; iblip++) {
+
+						CCRESRecoBlip_xPlot->Fill(Blip_x->at(iblip),weight);
+						CCRESRecoBlip_yPlot->Fill(Blip_y->at(iblip),weight);
+						CCRESRecoBlip_zPlot->Fill(Blip_z->at(iblip),weight);
+						CCRESRecoBlip_energyPlot->Fill(Blip_energy->at(iblip),weight);												
+						CCRESRecoBlip_sizePlot->Fill(Blip_size->at(iblip),weight);
+						CCRESRecoBlip_proxtrkdistPlot->Fill(Blip_proxtrkdist->at(iblip),weight);
+
+					}						
 	
 					// 2D analysis
 					CCRESRecoThetaVis_ECalSlicesPlot[ECalTwoDIndex]->Fill(ThetaVis,weight);
@@ -1543,6 +1748,20 @@ void mcc9_10_reco_selection::Loop() {
 					CCDISRecoCosThetaVisPlot->Fill(CosThetaVis,weight);
 					CCDISRecoPMissPlot->Fill(pmiss,weight);
 
+					// Blips
+					CCDISReconBlips_savedPlot->Fill(nBlips_saved,weight);
+
+					for (int iblip = 0; iblip < nBlips_saved; iblip++) {
+
+						CCDISRecoBlip_xPlot->Fill(Blip_x->at(iblip),weight);
+						CCDISRecoBlip_yPlot->Fill(Blip_y->at(iblip),weight);
+						CCDISRecoBlip_zPlot->Fill(Blip_z->at(iblip),weight);
+						CCDISRecoBlip_energyPlot->Fill(Blip_energy->at(iblip),weight);												
+						CCDISRecoBlip_sizePlot->Fill(Blip_size->at(iblip),weight);
+						CCDISRecoBlip_proxtrkdistPlot->Fill(Blip_proxtrkdist->at(iblip),weight);
+
+					}						
+
 					// 2D analysis
 					CCDISRecoThetaVis_ECalSlicesPlot[ECalTwoDIndex]->Fill(ThetaVis,weight);
 					SerialCCDISRecoThetaVis_InECalPlot->Fill(SerialThetaVisInECalIndex,weight);
@@ -1552,7 +1771,6 @@ void mcc9_10_reco_selection::Loop() {
 
 					CCDISRecoThetaVis_PMissSlicesPlot[PMissTwoDIndex]->Fill(ThetaVis,weight);
 					SerialCCDISRecoThetaVis_InPMissPlot->Fill(SerialThetaVisInPMissIndex,weight);
-
 
 				}
 

@@ -11,6 +11,7 @@
 #include <TFile.h>
 #include <TSpline.h>
 #include <TProfile.h>
+#include <TRandom.h>
 
 #include <iostream>
 #include <iomanip>
@@ -74,7 +75,7 @@ void mcc9_10_true_selection::Loop() {
 	TH1D* TrueMuonCosThetaSingleBinPlot[NInte];
 	TH1D* TrueThetaVisPlot[NInte];
 	TH1D* TrueCosThetaVisPlot[NInte];
-	TH1D* TruePMissPlot[NInte];
+	TH1D* TruePMissPlot[NInte];						
 
 	//--------------------------------------------------//
 	
@@ -86,8 +87,8 @@ void mcc9_10_true_selection::Loop() {
 	
 	for (int ineutron = 0; ineutron <= nneutrons; ineutron++) {
 
-                TrueThetaVis_NeutronMultiPlot[ineutron] = new TH1D(TrueToStringInt(ineutron)+"n_TrueThetaVisPlot",LabelXAxisThetaVis,NBinsThetaVis,ArrayNBinsThetaVis);
-                TruePMiss_NeutronMultiPlot[ineutron] = new TH1D(TrueToStringInt(ineutron)+"n_TruePMissPlot",LabelXAxisPMiss,NBinsPMiss,ArrayNBinsPMiss);
+    	TrueThetaVis_NeutronMultiPlot[ineutron] = new TH1D(TrueToStringInt(ineutron)+"n_TrueThetaVisPlot",LabelXAxisThetaVis,NBinsThetaVis,ArrayNBinsThetaVis);
+    	TruePMiss_NeutronMultiPlot[ineutron] = new TH1D(TrueToStringInt(ineutron)+"n_TruePMissPlot",LabelXAxisPMiss,NBinsPMiss,ArrayNBinsPMiss);
 		SerialTrueThetaVis_InPMissNeutronMultiPlot[ineutron] = new TH1D(TrueToStringInt(ineutron)+"n_TrueSerialThetaVis_PMissPlot",LabelXAxisThetaVis,tools.Return2DNBins(TwoDArrayNBinsThetaVisInPMissSlices),&tools.Return2DBinIndices(TwoDArrayNBinsThetaVisInPMissSlices)[0]);
 	}
 
@@ -146,7 +147,7 @@ void mcc9_10_true_selection::Loop() {
 
 		SerialTrueThetaVis_InPMissPlot[inte] = new TH1D(InteractionLabels[inte]+"TrueSerialThetaVis_PMissPlot",LabelXAxisThetaVis,tools.Return2DNBins(TwoDArrayNBinsThetaVisInPMissSlices),&tools.Return2DBinIndices(TwoDArrayNBinsThetaVisInPMissSlices)[0]);
 
-		//--------------------------------------------------//
+		//--------------------------------------------------//		
 
 	} // End of the loop over the interaction processes	
 
@@ -154,11 +155,11 @@ void mcc9_10_true_selection::Loop() {
 
 	// 2D plots
 
-        TH2D* POTScaledCC1pTrueThetaVisTrueECalPlot2D = new TH2D("POTScaledCC1pTrueThetaVisTrueECalPlot2D",";#theta_{vis}^{true} [deg];E_{Cal}^{true} [GeV]",
-                        NBinsThetaVis,ArrayNBinsThetaVis,20,ArrayNBinsECal[0],ArrayNBinsECal[NBinsECal]);
+    TH2D* POTScaledCC1pTrueThetaVisTrueECalPlot2D = new TH2D("POTScaledCC1pTrueThetaVisTrueECalPlot2D",";#theta_{vis}^{true} [deg];E_{Cal}^{true} [GeV]",
+    	NBinsThetaVis,ArrayNBinsThetaVis,20,ArrayNBinsECal[0],ArrayNBinsECal[NBinsECal]);
 
-        TH2D* POTScaledCC1pTrueThetaVisTrueEnuPlot2D = new TH2D("POTScaledCC1pTrueThetaVisTrueEnuPlot2D",";#theta_{vis}^{true} [deg];E_{#nu}^{true} [GeV]",
-                        NBinsThetaVis,ArrayNBinsThetaVis,20,ArrayNBinsECal[0],ArrayNBinsECal[NBinsECal]);
+    TH2D* POTScaledCC1pTrueThetaVisTrueEnuPlot2D = new TH2D("POTScaledCC1pTrueThetaVisTrueEnuPlot2D",";#theta_{vis}^{true} [deg];E_{#nu}^{true} [GeV]",
+    	NBinsThetaVis,ArrayNBinsThetaVis,20,ArrayNBinsECal[0],ArrayNBinsECal[NBinsECal]);
 
 	//--------------------------------------------------//
 
@@ -450,15 +451,15 @@ void mcc9_10_true_selection::Loop() {
 
 			double TruePn = True_Pn->at(0);
 
-                       	// Underflow / overflow
-                        if (TrueThetaVis < ArrayNBinsThetaVis[0]) { TrueThetaVis = (ArrayNBinsThetaVis[0] + ArrayNBinsThetaVis[1])/2.; }
-                        if (TrueThetaVis > ArrayNBinsThetaVis[NBinsThetaVis]) { TrueThetaVis = (ArrayNBinsThetaVis[NBinsThetaVis] + ArrayNBinsThetaVis[NBinsThetaVis-1])/2.; }
+            // Underflow / overflow
+            if (TrueThetaVis < ArrayNBinsThetaVis[0]) { TrueThetaVis = (ArrayNBinsThetaVis[0] + ArrayNBinsThetaVis[1])/2.; }
+            if (TrueThetaVis > ArrayNBinsThetaVis[NBinsThetaVis]) { TrueThetaVis = (ArrayNBinsThetaVis[NBinsThetaVis] + ArrayNBinsThetaVis[NBinsThetaVis-1])/2.; }
 
-                        if (TrueRecoECal < ArrayNBinsECal[0]) { TrueRecoECal = (ArrayNBinsECal[0] + ArrayNBinsECal[1])/2.; }
-                        if (TrueRecoECal > ArrayNBinsECal[NBinsECal]) { TrueRecoECal = (ArrayNBinsECal[NBinsECal] + ArrayNBinsECal[NBinsECal-1])/2.; }
+			if (TrueRecoECal < ArrayNBinsECal[0]) { TrueRecoECal = (ArrayNBinsECal[0] + ArrayNBinsECal[1])/2.; }
+            if (TrueRecoECal > ArrayNBinsECal[NBinsECal]) { TrueRecoECal = (ArrayNBinsECal[NBinsECal] + ArrayNBinsECal[NBinsECal-1])/2.; }
 
-                        if (TruePn < ArrayNBinsDeltaPn[0]) { TruePn = (ArrayNBinsDeltaPn[0] + ArrayNBinsDeltaPn[1])/2.; }
-                        if (TruePn > ArrayNBinsDeltaPn[NBinsDeltaPn]) { TruePn = (ArrayNBinsDeltaPn[NBinsDeltaPn] + ArrayNBinsDeltaPn[NBinsDeltaPn-1])/2.; }
+            if (TruePn < ArrayNBinsDeltaPn[0]) { TruePn = (ArrayNBinsDeltaPn[0] + ArrayNBinsDeltaPn[1])/2.; }
+            if (TruePn > ArrayNBinsDeltaPn[NBinsDeltaPn]) { TruePn = (ArrayNBinsDeltaPn[NBinsDeltaPn] + ArrayNBinsDeltaPn[NBinsDeltaPn-1])/2.; }
 
 			//--------------------------------------------------//	
 
@@ -523,8 +524,8 @@ void mcc9_10_true_selection::Loop() {
 					TVector3 vec_b = TrueCandidateMuon + TrueCandidateProton;
 					double TruePMiss = TrueRecoECal - vec_b.Mag(); 
 
-		                        if (TruePMiss < ArrayNBinsPMiss[0]) { TruePMiss = (ArrayNBinsPMiss[0] + ArrayNBinsPMiss[1])/2.; }
-                		        if (TruePMiss > ArrayNBinsPMiss[NBinsPMiss]) { TruePMiss = (ArrayNBinsPMiss[NBinsPMiss] + ArrayNBinsPMiss[NBinsPMiss-1])/2.; }
+		            if (TruePMiss < ArrayNBinsPMiss[0]) { TruePMiss = (ArrayNBinsPMiss[0] + ArrayNBinsPMiss[1])/2.; }
+                	if (TruePMiss > ArrayNBinsPMiss[NBinsPMiss]) { TruePMiss = (ArrayNBinsPMiss[NBinsPMiss] + ArrayNBinsPMiss[NBinsPMiss-1])/2.; }
 
 					//----------------------------------------//	
 
@@ -583,7 +584,7 @@ void mcc9_10_true_selection::Loop() {
 					SerialTrueThetaVis_InDeltaPnPlot[genie_mode]->Fill(SerialThetaVisInDeltaPnIndex,weight);								
 
 					TrueThetaVis_InPMissTwoDPlot[genie_mode][PMissTwoDIndex]->Fill(TrueThetaVis,weight);
-					SerialTrueThetaVis_InPMissPlot[genie_mode]->Fill(SerialThetaVisInPMissIndex,weight);								
+					SerialTrueThetaVis_InPMissPlot[genie_mode]->Fill(SerialThetaVisInPMissIndex,weight);		
 
 					//----------------------------------------//									
 
