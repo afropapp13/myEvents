@@ -611,8 +611,8 @@ void reco_selection::Loop() {
         TH2D* POTScaledCC1pMuonCosThetaPlot2D = new TH2D("POTScaledCC1pMuonCosThetaPlot2D",";cos\\theta_{\\mu}^{true};cos\\theta_{\\mu}^{reco}",100,-1.,1.,100,-1.,1.);
         TH2D* POTScaledCC1pProtonCosThetaPlot2D = new TH2D("POTScaledCC1pProtonCosThetaPlot2D",";cos\\theta_{p}^{true};cos\\theta_{p}^{reco}",100,-1.,1.,100,-1.,1.);
 		
-        TH2D* POTScaledCC1pMuonMomentumPlot2D = new TH2D("POTScaledCC1pMuonMomentumPlot2D",";p_{\\mu}^{true} [GeV/c];p_{\\mu}^{reco} [GeV/c]",100,0.1,1.2,100,0.1,1.2);
-        TH2D* POTScaledCC1pProtonMomentumPlot2D = new TH2D("POTScaledCC1pProtonMomentumPlot2D",";p_{p}^{true} [GeV/c];p_{p}^{reco} [GeV/c]",100,0.3,1.,100,0.3,1.);
+        TH2D* POTScaledCC1pMuonMomentumPlot2D = new TH2D("POTScaledCC1pMuonMomentumPlot2D",";p_{\\mu}^{true} [GeV/c];p_{\\mu}^{reco} [GeV/c]",50,0.1,1.2,50,0.1,1.2);
+        TH2D* POTScaledCC1pProtonMomentumPlot2D = new TH2D("POTScaledCC1pProtonMomentumPlot2D",";p_{p}^{true} [GeV/c];p_{p}^{reco} [GeV/c]",50,0.32,1.,50,0.32,1.);
 
 		//----------------------------------------//
 		//----------------------------------------//

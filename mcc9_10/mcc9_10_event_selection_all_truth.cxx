@@ -32,12 +32,15 @@
 	// Run 4a
 
 	WhichSampleArray.push_back("mcc9_10_OverlayDirt9_Run4a");
-	WhichSampleArray.push_back("mcc9_10_Overlay9_Run4a");
+	WhichSampleArray.push_back("mcc9_10_Overlay9_Run4a");*/
 
 	// Run 4b
 
-	WhichSampleArray.push_back("mcc9_10_OverlayDirt9_Run4b");*/
-	WhichSampleArray.push_back("mcc9_10_Overlay9_Run4b");
+	WhichSampleArray.push_back("mcc9_10_OverlayDirt9_Run4b_standalone");
+	WhichSampleArray.push_back("mcc9_10_Overlay9_Run4b_standalone");
+
+	WhichSampleArray.push_back("mcc9_10_OverlayDirt9_Run4b_unified");
+	WhichSampleArray.push_back("mcc9_10_Overlay9_Run4b_unified");	
 	
 	// Run 4b no weights
 
@@ -58,10 +61,10 @@
 	WhichSampleArray.push_back("mcc9_10_OverlayDirt9_Run5");
 	WhichSampleArray.push_back("mcc9_10_Overlay9_Run5");
 
-	// Combined
+	// unified
 
-	WhichSampleArray.push_back("mcc9_10_OverlayDirt9_Combined");
-	WhichSampleArray.push_back("mcc9_10_Overlay9_Combined");
+	WhichSampleArray.push_back("mcc9_10_OverlayDirt9_unified");
+	WhichSampleArray.push_back("mcc9_10_Overlay9_unified");
 
 	// -----------------------------------------------------------------------------------------
 
@@ -236,20 +239,20 @@
 
 	//--------------------//
 	
-	// Combined detector variations
+	// unified detector variations
 
-	WhichSampleArray.push_back("mcc9_10_Overlay9_Combined_CV");
-	WhichSampleArray.push_back("mcc9_10_Overlay9_Combined_CVextra");
-    WhichSampleArray.push_back("mcc9_10_Overlay9_Combined_LYDown");
-	WhichSampleArray.push_back("mcc9_10_Overlay9_Combined_LYRayleigh");
-	WhichSampleArray.push_back("mcc9_10_Overlay9_Combined_LYAttenuation");
+	WhichSampleArray.push_back("mcc9_10_Overlay9_unified_CV");
+	WhichSampleArray.push_back("mcc9_10_Overlay9_unified_CVextra");
+    WhichSampleArray.push_back("mcc9_10_Overlay9_unified_LYDown");
+	WhichSampleArray.push_back("mcc9_10_Overlay9_unified_LYRayleigh");
+	WhichSampleArray.push_back("mcc9_10_Overlay9_unified_LYAttenuation");
 
-	WhichSampleArray.push_back("mcc9_10_Overlay9_Combined_X");
-	WhichSampleArray.push_back("mcc9_10_Overlay9_Combined_YZ");
-	WhichSampleArray.push_back("mcc9_10_Overlay9_Combined_ThetaYZ");
-	WhichSampleArray.push_back("mcc9_10_Overlay9_Combined_ThetaXZ");
-	WhichSampleArray.push_back("mcc9_10_Overlay9_Combined_Recombination2");
-	WhichSampleArray.push_back("mcc9_10_Overlay9_Combined_SCE");
+	WhichSampleArray.push_back("mcc9_10_Overlay9_unified_X");
+	WhichSampleArray.push_back("mcc9_10_Overlay9_unified_YZ");
+	WhichSampleArray.push_back("mcc9_10_Overlay9_unified_ThetaYZ");
+	WhichSampleArray.push_back("mcc9_10_Overlay9_unified_ThetaXZ");
+	WhichSampleArray.push_back("mcc9_10_Overlay9_unified_Recombination2");
+	WhichSampleArray.push_back("mcc9_10_Overlay9_unified_SCE");
 
 	//--------------------//
 
@@ -265,14 +268,14 @@
 	WhichSampleArray.push_back("mcc9_10_Overlay9NuWro_Run4c");
 	WhichSampleArray.push_back("mcc9_10_Overlay9NuWro_Run4d");
 	WhichSampleArray.push_back("mcc9_10_Overlay9NuWro_Run5");
-	WhichSampleArray.push_back("mcc9_10_Overlay9NuWro_Combined");
+	WhichSampleArray.push_back("mcc9_10_Overlay9NuWro_unified");
 
 	//--------------------//
 
 	// GENIE sample using 4c scaled to the 4b/cd/ POT
 	// since NuWro was made using 4c
 
-	WhichSampleArray.push_back("mcc9_10_Overlay9_Combined_CVextraNuWro");*/
+	WhichSampleArray.push_back("mcc9_10_Overlay9_unified_CVextraNuWro");*/
 
 	//--------------------//
 
@@ -302,13 +305,18 @@
 	FluxWhichSampleArray.push_back("mcc9_10_Overlay9_Run1B_open_trigger");
 	FluxWhichSampleArray.push_back("mcc9_10_Overlay9_Run2");
 	FluxWhichSampleArray.push_back("mcc9_10_Overlay9_Run3");
-	FluxWhichSampleArray.push_back("mcc9_10_Overlay9_Run4a");*/
+	FluxWhichSampleArray.push_back("mcc9_10_Overlay9_Run4a");
 	FluxWhichSampleArray.push_back("mcc9_10_Overlay9_Run4b");
-	FluxWhichSampleArray.push_back("mcc9_10_Overlay9_Run4b_noweights");	
+	FluxWhichSampleArray.push_back("mcc9_10_Overlay9_Run4b_noweights");*/
+	
+	FluxWhichSampleArray.push_back("mcc9_10_Overlay9_Run4b_standalone");
+
+	FluxWhichSampleArray.push_back("mcc9_10_Overlay9_Run4b_unified");
+	
 	/*FluxWhichSampleArray.push_back("mcc9_10_Overlay9_Run4c");
 	FluxWhichSampleArray.push_back("mcc9_10_Overlay9_Run4d");
 	FluxWhichSampleArray.push_back("mcc9_10_Overlay9_Run5");
-	FluxWhichSampleArray.push_back("mcc9_10_Overlay9_Combined");*/
+	FluxWhichSampleArray.push_back("mcc9_10_Overlay9_unified");*/
 
 	FluxEventWeightLabels.push_back("fluxes"); 
 	FluxUniverses.push_back(NFluxUniverses);
@@ -342,13 +350,18 @@
 	G4WhichSampleArray.push_back("mcc9_10_Overlay9_Run1B_open_trigger");
 	G4WhichSampleArray.push_back("mcc9_10_Overlay9_Run2");
 	G4WhichSampleArray.push_back("mcc9_10_Overlay9_Run3");
-	G4WhichSampleArray.push_back("mcc9_10_Overlay9_Run4a");*/
+	G4WhichSampleArray.push_back("mcc9_10_Overlay9_Run4a");
 	G4WhichSampleArray.push_back("mcc9_10_Overlay9_Run4b");
-	G4WhichSampleArray.push_back("mcc9_10_Overlay9_Run4b_noweights");	
+	G4WhichSampleArray.push_back("mcc9_10_Overlay9_Run4b_noweights");*/
+
+	G4WhichSampleArray.push_back("mcc9_10_Overlay9_Run4b_standalone");
+
+	G4WhichSampleArray.push_back("mcc9_10_Overlay9_Run4b_unified");
+
 	/*G4WhichSampleArray.push_back("mcc9_10_Overlay9_Run4c");
 	G4WhichSampleArray.push_back("mcc9_10_Overlay9_Run4d");
 	G4WhichSampleArray.push_back("mcc9_10_Overlay9_Run5");
-	G4WhichSampleArray.push_back("mcc9_10_Overlay9_Combined");*/
+	G4WhichSampleArray.push_back("mcc9_10_Overlay9_unified");*/
 
 	G4EventWeightLabels.push_back("reinteractions"); 
 	G4Universes.push_back(NG4Universes);
@@ -382,13 +395,18 @@
 	XSecWhichSampleArray.push_back("mcc9_10_Overlay9_Run1B_open_trigger");
 	XSecWhichSampleArray.push_back("mcc9_10_Overlay9_Run2");
 	XSecWhichSampleArray.push_back("mcc9_10_Overlay9_Run3");
-	XSecWhichSampleArray.push_back("mcc9_10_Overlay9_Run4a");*/
+	XSecWhichSampleArray.push_back("mcc9_10_Overlay9_Run4a");
 	XSecWhichSampleArray.push_back("mcc9_10_Overlay9_Run4b");
-	XSecWhichSampleArray.push_back("mcc9_10_Overlay9_Run4b_noweights");	
+	XSecWhichSampleArray.push_back("mcc9_10_Overlay9_Run4b_noweights");*/
+	
+	XSecWhichSampleArray.push_back("mcc9_10_Overlay9_Run4b_standalone");
+
+	XSecWhichSampleArray.push_back("mcc9_10_Overlay9_Run4b_unified");
+	
 	/*XSecWhichSampleArray.push_back("mcc9_10_Overlay9_Run4c");
 	XSecWhichSampleArray.push_back("mcc9_10_Overlay9_Run4d");
 	XSecWhichSampleArray.push_back("mcc9_10_Overlay9_Run5");
-	XSecWhichSampleArray.push_back("mcc9_10_Overlay9_Combined");*/
+	XSecWhichSampleArray.push_back("mcc9_10_Overlay9_unified");*/
 
 	XSecEventWeightLabels.push_back("AxFFCCQEshape_UBGenie");XSecUniverses.push_back(2);
 	XSecEventWeightLabels.push_back("DecayAngMEC_UBGenie"); XSecUniverses.push_back(2);
@@ -430,13 +448,18 @@
 	MCStatWhichSampleArray.push_back("mcc9_10_Overlay9_Run1B_open_trigger");
 	MCStatWhichSampleArray.push_back("mcc9_10_Overlay9_Run2");
 	MCStatWhichSampleArray.push_back("mcc9_10_Overlay9_Run3");
-	MCStatWhichSampleArray.push_back("mcc9_10_Overlay9_Run4a");*/
+	MCStatWhichSampleArray.push_back("mcc9_10_Overlay9_Run4a");
 	MCStatWhichSampleArray.push_back("mcc9_10_Overlay9_Run4b");
-	MCStatWhichSampleArray.push_back("mcc9_10_Overlay9_Run4b_noweights");	
+	MCStatWhichSampleArray.push_back("mcc9_10_Overlay9_Run4b_noweights");*/	
+
+	MCStatWhichSampleArray.push_back("mcc9_10_Overlay9_Run4b_standalone");
+
+	MCStatWhichSampleArray.push_back("mcc9_10_Overlay9_Run4b_unified");	
+
 	/*MCStatWhichSampleArray.push_back("mcc9_10_Overlay9_Run4c");
 	MCStatWhichSampleArray.push_back("mcc9_10_Overlay9_Run4d");
 	MCStatWhichSampleArray.push_back("mcc9_10_Overlay9_Run5");
-	MCStatWhichSampleArray.push_back("mcc9_10_Overlay9_Combined");*/
+	MCStatWhichSampleArray.push_back("mcc9_10_Overlay9_unified");*/
 
 	MCStatEventWeightLabels.push_back("MC_Stat"); 
 	MCStatUniverses.push_back(NMCStatUniverses);
@@ -483,10 +506,14 @@
 	FDSWhichSampleArray.push_back("mcc9_10_OverlayDirt9_Run4a");
 	FDSWhichSampleArray.push_back("mcc9_10_Overlay9_Run4a");
 
-	FDSWhichSampleArray.push_back("mcc9_10_OverlayDirt9_Run4b");*/
+	FDSWhichSampleArray.push_back("mcc9_10_OverlayDirt9_Run4b");
 	FDSWhichSampleArray.push_back("mcc9_10_Overlay9_Run4b");
 
-	FDSWhichSampleArray.push_back("mcc9_10_Overlay9_Run4b_noweights");	
+	FDSWhichSampleArray.push_back("mcc9_10_Overlay9_Run4b_noweights");*/	
+
+	FDSWhichSampleArray.push_back("mcc9_10_Overlay9_Run4b_standalone");	
+
+	FDSWhichSampleArray.push_back("mcc9_10_Overlay9_Run4b_unified");
 
 	/*FDSWhichSampleArray.push_back("mcc9_10_OverlayDirt9_Run4c");
 	FDSWhichSampleArray.push_back("mcc9_10_Overlay9_Run4c");
@@ -497,8 +524,8 @@
 	FDSWhichSampleArray.push_back("mcc9_10_OverlayDirt9_Run5");
 	FDSWhichSampleArray.push_back("mcc9_10_Overlay9_Run5");
 
-	FDSWhichSampleArray.push_back("mcc9_10_OverlayDirt9_Combined");
-	FDSWhichSampleArray.push_back("mcc9_10_Overlay9_Combined");*/
+	FDSWhichSampleArray.push_back("mcc9_10_OverlayDirt9_unified");
+	FDSWhichSampleArray.push_back("mcc9_10_Overlay9_unified");*/
 
 	for (int i = 0;i < (int)(FDSWhichSampleArray.size()); i++) {
 

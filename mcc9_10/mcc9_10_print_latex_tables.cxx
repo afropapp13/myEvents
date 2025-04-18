@@ -93,17 +93,8 @@ void mcc9_10_print_latex_tables(TString BaseMC = "", bool PrintStats = false, bo
 	// -----------------------------------------------------------------------------------------------------------------------------------------
 
 	vector<TString> Runs;
-	Runs.push_back("Run1");
-	/*Runs.push_back("Run1A_open_trigger");
-	Runs.push_back("Run1B_open_trigger");
-	Runs.push_back("Run2");
-	Runs.push_back("Run3");
-	Runs.push_back("Run4a");
-	Runs.push_back("Run4b");
-	Runs.push_back("Run4c");
-	Runs.push_back("Run4d");
-	Runs.push_back("Run5");
-	Runs.push_back("Combined");*/
+	Runs.push_back("Run4b_unified");
+	Runs.push_back("Run4b_standalone");	
 
 	int NRuns = (int)(Runs.size());
 //	cout << "Number of Runs = " << NRuns << endl;
@@ -142,7 +133,7 @@ void mcc9_10_print_latex_tables(TString BaseMC = "", bool PrintStats = false, bo
 			NameOfSamples.push_back("STVStudies_mcc9_10_BeamOn9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("BeamOn");
 
 			if (BaseMC == "") { NameOfSamples.push_back("STVStudies_mcc9_10_Overlay9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("MC"); }
-			else if (BaseMC == "Overlay9NuWro") { NameOfSamples.push_back("STVStudies_mcc9_10_Overlay9NuWro_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("NuWro MC"); }
+			else if (BaseMC == "mcc9_10_Overlay9NuWro") { NameOfSamples.push_back("STVStudies_mcc9_10_Overlay9NuWro_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("NuWro MC"); }
 
 			NameOfSamples.push_back("STVStudies_mcc9_10_ExtBNB9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("ExtBNB");
 			NameOfSamples.push_back("STVStudies_mcc9_10_OverlayDirt9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("Dirt");

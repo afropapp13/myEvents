@@ -49,15 +49,22 @@ void mcc9_10_topological_breakdown(TString BaseMC = "") {
 	PlotNames.push_back("RecoThetaVis_PMiss_0_20To0_50Plot");	
 	PlotNames.push_back("RecoSerialThetaVis_PMissPlot");	
 
+	PlotNames.push_back("RecoNuScorePlot");	
+	PlotNames.push_back("Recons_timePlot");		
+
 	// Blips
 
-	//PlotNames.push_back("ReconBlips_savedPlot");
-	//PlotNames.push_back("RecoBlip_xPlot");
-	//PlotNames.push_back("RecoBlip_yPlot");
-	//PlotNames.push_back("RecoBlip_zPlot");
-	//PlotNames.push_back("RecoBlip_energyPlot");
-	//PlotNames.push_back("RecoBlip_sizePlot");						
-	//PlotNames.push_back("RecoBlip_proxtrkdistPlot");
+	PlotNames.push_back("ReconBlips_savedPlot");
+	PlotNames.push_back("RecoBlip_xPlot");
+	PlotNames.push_back("RecoBlip_yPlot");
+	PlotNames.push_back("RecoBlip_zPlot");
+	PlotNames.push_back("RecoBlip_energyPlot");
+	PlotNames.push_back("RecoBlip_sizePlot");						
+	PlotNames.push_back("RecoBlip_proxtrkdistPlot");
+
+	PlotNames.push_back("Recoblip_vrtPlot");	
+	PlotNames.push_back("RecoBlip_pairdistPlot");	
+	PlotNames.push_back("Recowc_numu_scorePlot");	
 
 	const int N1DPlots = PlotNames.size();
 	cout << "Number of 1D Plots = " << N1DPlots << endl;
@@ -76,21 +83,7 @@ void mcc9_10_topological_breakdown(TString BaseMC = "") {
 
 	// -----------------------------------------------------------------------------------------------------------------------------------------
 
-	vector<TString> Runs;
-	// Runs.push_back("Run1");
-	// Runs.push_back("Run1A_open_trigger");
-	// Runs.push_back("Run1B_open_trigger");
-	// Runs.push_back("Run2");
-	// Runs.push_back("Run3");
-	// Runs.push_back("Run4a");
-	Runs.push_back("Run4b");
-	//Runs.push_back("Run4b_noweights");	
-	// Runs.push_back("Run4c");
-	// Runs.push_back("Run4d");
-	// Runs.push_back("Run5");
-	// Runs.push_back("Combined");
-
-	int NRuns = (int)(Runs.size());
+	int NRuns = (int)(xsec_Runs.size());
 	cout << "Number of Runs = " << NRuns << endl;
 
 	TFile* FluxFile = TFile::Open("../../mySTVAnalysis/MCC9_FluxHist_volTPCActive.root"); 
@@ -104,10 +97,10 @@ void mcc9_10_topological_breakdown(TString BaseMC = "") {
 
 		// We needs these for the uncertainty band
 		// event rate based
-		TString NameExtractedXSec = MigrationMatrixPath+"ER_WienerSVD_Total_CovarianceMatrices_Overlay9_"+Runs[WhichRun]+"_"+UBCodeVersion+".root";
+		TString NameExtractedXSec = MigrationMatrixPath+"ER_WienerSVD_Total_CovarianceMatrices_Overlay9_"+xsec_Runs[WhichRun]+"_"+UBCodeVersion+".root";
 		TFile* CovFile = new TFile(NameExtractedXSec,"readonly");		
 
-		double DataPOT = PeLEE_ReturnBeamOnRunPOT(Runs[WhichRun]);
+		double DataPOT = PeLEE_ReturnBeamOnRunPOT(xsec_Runs[WhichRun]);
 		double IntegratedFlux = (HistoFlux->Integral() * DataPOT / POTPerSpill / Nominal_UB_XY_Surface) * (SoftFidSurface / Nominal_UB_XY_Surface);	
 				
 		// -----------------------------------------------------------------------------------------------------------------------------------------
@@ -162,22 +155,22 @@ void mcc9_10_topological_breakdown(TString BaseMC = "") {
 			// 3: Dirt
 	
 			// 0	
-			NameOfSamples.push_back("STVStudies_mcc9_10_BeamOn9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("BeamOn");
+			NameOfSamples.push_back("STVStudies_mcc9_10_BeamOn9_"+xsec_Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("BeamOn");
 
 			// 1
-			if (BaseMC == "") { NameOfSamples.push_back("STVStudies_mcc9_10_Overlay9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("MC"); }
-			else if (BaseMC == "Overlay9NuWro") { NameOfSamples.push_back("STVStudies_mcc9_10_Overlay9NuWro_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("MC"); }
-			else if (BaseMC == "GENIEv2Overlay9") { NameOfSamples.push_back("GENIEv2STVStudies_mcc9_10_Overlay9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("MC"); }		
-			else if (BaseMC == "NoTuneOverlay9") { NameOfSamples.push_back("NoTuneSTVStudies_mcc9_10_Overlay9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("MC"); }
-			else if (BaseMC == "TwiceMECOverlay9") { NameOfSamples.push_back("TwiceMECSTVStudies_mcc9_10_Overlay9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("MC"); }			
+			if (BaseMC == "") { NameOfSamples.push_back("STVStudies_mcc9_10_Overlay9_"+xsec_Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("MC"); }
+			else if (BaseMC == "Overlay9NuWro") { NameOfSamples.push_back("STVStudies_mcc9_10_Overlay9NuWro_"+xsec_Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("MC"); }
+			else if (BaseMC == "GENIEv2Overlay9") { NameOfSamples.push_back("GENIEv2STVStudies_mcc9_10_Overlay9_"+xsec_Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("MC"); }		
+			else if (BaseMC == "NoTuneOverlay9") { NameOfSamples.push_back("NoTuneSTVStudies_mcc9_10_Overlay9_"+xsec_Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("MC"); }
+			else if (BaseMC == "TwiceMECOverlay9") { NameOfSamples.push_back("TwiceMECSTVStudies_mcc9_10_Overlay9_"+xsec_Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("MC"); }			
 
 			// 2
-			NameOfSamples.push_back("STVStudies_mcc9_10_ExtBNB9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("ExtBNB");
+			NameOfSamples.push_back("STVStudies_mcc9_10_ExtBNB9_"+xsec_Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("ExtBNB");
 
 			// 3
-			if (BaseMC == "NoTuneOverlay9") { NameOfSamples.push_back("NoTuneSTVStudies_mcc9_10_OverlayDirt9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("Dirt"); }
-			else if (BaseMC == "TwiceMECOverlay9") { NameOfSamples.push_back("TwiceMECSTVStudies_mcc9_10_OverlayDirt9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("Dirt"); }
-			else { NameOfSamples.push_back("STVStudies_mcc9_10_OverlayDirt9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("Dirt"); }
+			if (BaseMC == "NoTuneOverlay9") { NameOfSamples.push_back("NoTuneSTVStudies_mcc9_10_OverlayDirt9_"+xsec_Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("Dirt"); }
+			else if (BaseMC == "TwiceMECOverlay9") { NameOfSamples.push_back("TwiceMECSTVStudies_mcc9_10_OverlayDirt9_"+xsec_Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("Dirt"); }
+			else { NameOfSamples.push_back("STVStudies_mcc9_10_OverlayDirt9_"+xsec_Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("Dirt"); }
 	
 			vector<int> Colors; Colors.clear(); 
 			// Unblind
@@ -262,7 +255,7 @@ void mcc9_10_topological_breakdown(TString BaseMC = "") {
 
 			for (int WhichPlot = 0; WhichPlot < N1DPlots; WhichPlot ++) {
 		
-				TString PlotCanvasName = Runs[WhichRun]+"_"+PlotNames[WhichPlot]+Cuts;
+				TString PlotCanvasName = xsec_Runs[WhichRun]+"_"+PlotNames[WhichPlot]+Cuts;
 				PlotCanvas.push_back(new TCanvas(PlotCanvasName,PlotCanvasName,205,34,1024,768));
 				PlotCanvas[WhichPlot]->cd();
 
@@ -308,13 +301,13 @@ void mcc9_10_topological_breakdown(TString BaseMC = "") {
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetNdivisions(6);
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetLabelSize(0.06);
 
-					if (Runs[WhichRun] == "Combined") {
+					if (xsec_Runs[WhichRun] == "Combined") {
 
 						Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitle("Number of  events / bin");
 
 					} else {
 
-						Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitle(Runs[WhichRun] + " events / bin");
+						Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitle(xsec_Runs[WhichRun] + " events / bin");
 
 					}
 
@@ -501,7 +494,7 @@ void mcc9_10_topological_breakdown(TString BaseMC = "") {
 				textPOT->SetTextFont(FontStyle);
 				textPOT->SetTextSize(0.07);
 
-				if (Runs[WhichRun] == "Combined") { 
+				if (xsec_Runs[WhichRun] == "Combined") { 
 
 					textPOT->DrawLatexNDC(0.115, 0.89,"MicroBooNE 1.30 #times 10^{21} POT");
 
@@ -725,7 +718,7 @@ void mcc9_10_topological_breakdown(TString BaseMC = "") {
 				//----------------------------------------//
 
 				TString CanvasPath = PlotPath + Cuts+"/TopologicalBreakDown/";
-				TString CanvasName = BaseMC + "mcc9_10_THStack_BreakDown_"+PlotNames[WhichPlot]+"_"+Runs[WhichRun]+"_"+UBCodeVersion+Cuts+".pdf";
+				TString CanvasName = BaseMC + "mcc9_10_THStack_BreakDown_"+PlotNames[WhichPlot]+"_"+xsec_Runs[WhichRun]+"_"+UBCodeVersion+Cuts+".pdf";
 				PlotCanvas[WhichPlot]->SaveAs(CanvasPath+CanvasName);
 				delete PlotCanvas[WhichPlot];
 

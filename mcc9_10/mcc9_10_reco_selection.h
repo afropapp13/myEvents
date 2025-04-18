@@ -111,6 +111,9 @@ public :
 
 	// Blip info
 
+   Float_t         wc_numu_score;
+   Float_t         wc_numu_cc_flag;
+   Float_t         ns_time;
 	Int_t           nBlips_saved;
 	vector<float>   *Blip_x;
 	vector<float>   *Blip_y;
@@ -164,6 +167,8 @@ public :
    Double_t        True_Vy;
    Double_t        True_Vz;
    Float_t         NuScore;
+   Float_t         orig_nuscore;
+   Int_t           slice_id;     
    Float_t         FlashScore;
    Int_t           crtveto;
    Float_t         crthitpe;
@@ -394,6 +399,8 @@ public :
    TBranch        *b_True_Vy;   //!
    TBranch        *b_True_Vz;   //!
    TBranch        *b_NuScore;   //!
+   TBranch        *b_orig_nuscore;   //!
+   TBranch        *b_slice_id;   //!   
    TBranch        *b_FlashScore;   //!
    TBranch        *b_crthitpe;   //!
    TBranch        *b_crtveto;   //!
@@ -517,6 +524,9 @@ public :
    TBranch        *b_StartToStartDistance;   //!
    TBranch        *b_EndToEndDistance;   //!
 
+   TBranch        *b_wc_numu_score;   //!
+   TBranch        *b_wc_numu_cc_flag;   //!
+   TBranch        *b_ns_time;   //!
    TBranch        *b_nBlips_saved;   //!
    TBranch        *b_Blip_x;   //!
    TBranch        *b_Blip_y;   //!
@@ -905,6 +915,8 @@ void mcc9_10_reco_selection::Init(TTree *tree)
    fChain->SetBranchAddress("True_Vy", &True_Vy, &b_True_Vy);
    fChain->SetBranchAddress("True_Vz", &True_Vz, &b_True_Vz);
    fChain->SetBranchAddress("NuScore", &NuScore, &b_NuScore);
+   fChain->SetBranchAddress("orig_nuscore", &orig_nuscore, &b_orig_nuscore);
+   fChain->SetBranchAddress("slice_id", &slice_id, &b_slice_id);      
    fChain->SetBranchAddress("FlashScore", &FlashScore, &b_FlashScore);
    fChain->SetBranchAddress("crtveto", &crtveto, &b_crtveto);
    fChain->SetBranchAddress("crthitpe", &crthitpe, &b_crthitpe);
@@ -1032,6 +1044,9 @@ void mcc9_10_reco_selection::Init(TTree *tree)
 
 	// Blip info
 
+   tree->SetBranchAddress("wc_numu_score",&wc_numu_score);
+   tree->SetBranchAddress("wc_numu_cc_flag",&wc_numu_cc_flag);
+   tree->SetBranchAddress("ns_time",&ns_time);
 	tree->SetBranchAddress("nBlips_saved",&nBlips_saved);
 	tree->SetBranchAddress("Blip_x",&Blip_x);
 	tree->SetBranchAddress("Blip_y",&Blip_y);
