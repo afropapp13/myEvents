@@ -52,9 +52,12 @@ void reco_selection::Loop() {
 		fWhichSample == "ExtBNB9BNBToHonda_Combined"
 	) {
 
-		f_bnb_honda = new TFile("../FlatTreeAnalyzer/OutputFiles/spline.root","readonly");
-		h_spline = (TH1D*)(f_bnb_honda->Get("TrueFineBinEvPlot"));
-	
+		//f_bnb_honda = new TFile("../FlatTreeAnalyzer/OutputFiles/spline.root","readonly");
+		//h_spline = (TH1D*)(f_bnb_honda->Get("TrueFineBinEvPlot"));
+
+		f_bnb_honda = new TFile("../FlatTreeAnalyzer/flux_study/honda_spline.root","readonly");
+		h_spline = (TH1D*)(f_bnb_honda->Get("spline"));		
+
 	}
 
 	//----------------------------------------//
@@ -690,8 +693,8 @@ void reco_selection::Loop() {
 
 				if (fWhichSample == "Overlay9BNBToHonda_Combined" || fWhichSample == "OverlayDirt9BNBToHonda_Combined") {
 
-					int bin_bnb_to_honda = LocateClosetsBinWithValue(h_spline,True_Ev); 
-					double scale_bnb_to_honda = h_spline->GetBinContent(bin_bnb_to_honda);
+					int bin_bnb_to_honda = LocateClosetsBinWithValue(h_spline,True_Ev); 				
+					double scale_bnb_to_honda = h_spline->GetBinContent(bin_bnb_to_honda);					
 					weight = weight * scale_bnb_to_honda;
 
 				} 
