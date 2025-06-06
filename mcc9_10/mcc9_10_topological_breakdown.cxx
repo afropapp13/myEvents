@@ -12,11 +12,11 @@
 #include <iostream>
 #include <vector>
 
-#include "../../myClasses/myFunctions.cpp"
-#include "../../myClasses/Constants.h"
+#include "../../../generators/constants.h"
+#include "../../../generators/helper_functions.cxx"
 
 using namespace std;
-using namespace Constants;
+using namespace constants;
 
 void mcc9_10_topological_breakdown(TString BaseMC = "") {
 
@@ -28,56 +28,50 @@ void mcc9_10_topological_breakdown(TString BaseMC = "") {
 
 	std::vector<TString> PlotNames; PlotNames.clear();
 
-	PlotNames.push_back("RecoMuonCosThetaPlot");
-	PlotNames.push_back("RecoMuonCosThetaSingleBinPlot");	
-	PlotNames.push_back("RecoThetaVisPlot");	
-	PlotNames.push_back("RecoCosThetaVisPlot");	
-	PlotNames.push_back("RecoPMissPlot");	
-	
-	PlotNames.push_back("RecoThetaVis_ECal_0_00To0_50Plot");	
-	PlotNames.push_back("RecoThetaVis_ECal_0_50To0_80Plot");	
-	PlotNames.push_back("RecoThetaVis_ECal_0_80To2_00Plot");	
-	PlotNames.push_back("RecoSerialThetaVis_ECalPlot");	
-	
-	PlotNames.push_back("RecoThetaVis_DeltaPn_0_00To0_20Plot");	
-	PlotNames.push_back("RecoThetaVis_DeltaPn_0_20To0_40Plot");	
-	PlotNames.push_back("RecoThetaVis_DeltaPn_0_40To1_00Plot");	
-	PlotNames.push_back("RecoSerialThetaVis_DeltaPnPlot");	
-	
-	PlotNames.push_back("RecoThetaVis_PMiss_0_00To0_10Plot");	
-	PlotNames.push_back("RecoThetaVis_PMiss_0_10To0_20Plot");	
-	PlotNames.push_back("RecoThetaVis_PMiss_0_20To0_50Plot");	
-	PlotNames.push_back("RecoSerialThetaVis_PMissPlot");	
-
-	PlotNames.push_back("RecoNuScorePlot");	
-	PlotNames.push_back("Recons_timePlot");		
+	PlotNames.push_back("RecoSingleBinPlot");
+	PlotNames.push_back("RecoPi0CosThetaPlot");
+	PlotNames.push_back("RecoPi0MomentumPlot");
+	PlotNames.push_back("Recog1CosThetaPlot");
+	PlotNames.push_back("Recog1MomentumPlot");
+	PlotNames.push_back("Recog2CosThetaPlot");
+	PlotNames.push_back("Recog2MomentumPlot");
+	PlotNames.push_back("Recotwo_shower_anglePlot");
 
 	// Blips
 
+	PlotNames.push_back("ReconBlips_radiusPlot");
 	PlotNames.push_back("ReconBlips_savedPlot");
 	PlotNames.push_back("RecoBlip_xPlot");
 	PlotNames.push_back("RecoBlip_yPlot");
 	PlotNames.push_back("RecoBlip_zPlot");
 	PlotNames.push_back("RecoBlip_energyPlot");
-	PlotNames.push_back("RecoBlip_sizePlot");						
-	PlotNames.push_back("RecoBlip_proxtrkdistPlot");
+	PlotNames.push_back("Recoblip_vrtPlot");
+	PlotNames.push_back("Recoblip_cos_alphapi0Plot");
+	PlotNames.push_back("Recoblip_cos_alphag1Plot");	
+	PlotNames.push_back("Recoblip_cos_alphag2Plot");	
+	
+	PlotNames.push_back("Reconc_pio_scorePlot");
+	PlotNames.push_back("Reconumu_scorePlot");
+	PlotNames.push_back("Recokine_pio_flagPlot");
+	PlotNames.push_back("Recokine_pio_vtx_disPlot");
 
-	PlotNames.push_back("Recoblip_vrtPlot");	
-	PlotNames.push_back("RecoBlip_pairdistPlot");	
-	PlotNames.push_back("Recowc_numu_scorePlot");	
+	PlotNames.push_back("Recosingle_photon_numu_scorePlot");
+	PlotNames.push_back("Recosingle_photon_other_scorePlot");
+	PlotNames.push_back("Recosingle_photon_ncpi0_scorePlot");
+	PlotNames.push_back("Recosingle_photon_nue_scorePlot");
 
 	const int N1DPlots = PlotNames.size();
 	cout << "Number of 1D Plots = " << N1DPlots << endl;
 
 	// ----------------------------------------------------------------------------------------------------------------------------------------
 
-	TString Cuts = "_NoCuts";
+	TString Cuts = "_nocuts";
 
 	vector<TString> VectorCuts; VectorCuts.clear();
 
 	// v52
-	//VectorCuts.push_back("");
-	VectorCuts.push_back("_PID_NuScore_CRT");
+	VectorCuts.push_back("");
+	//VectorCuts.push_back("_PID_NuScore_CRT");
 
 	int NCuts = (int)(VectorCuts.size());	
 
@@ -86,7 +80,7 @@ void mcc9_10_topological_breakdown(TString BaseMC = "") {
 	int NRuns = (int)(xsec_Runs.size());
 	cout << "Number of Runs = " << NRuns << endl;
 
-	TFile* FluxFile = TFile::Open("../../mySTVAnalysis/MCC9_FluxHist_volTPCActive.root"); 
+	TFile* FluxFile = TFile::Open("MCC9_FluxHist_volTPCActive.root"); 
 	TH1D* HistoFlux = (TH1D*)(FluxFile->Get("hEnumu_cv"));		
 
 	// -----------------------------------------------------------------------------------------------------------------------------------------
@@ -97,9 +91,9 @@ void mcc9_10_topological_breakdown(TString BaseMC = "") {
 
 		// We needs these for the uncertainty band
 		// event rate based
-		TString NameExtractedXSec = MigrationMatrixPath+"ER_WienerSVD_Total_CovarianceMatrices_Overlay9_"+xsec_Runs[WhichRun]+"_"+UBCodeVersion+".root";
+		/*TString NameExtractedXSec = MigrationMatrixPath+"ER_WienerSVD_Total_CovarianceMatrices_Overlay9_"+xsec_Runs[WhichRun]+".root";
 		TFile* CovFile = new TFile(NameExtractedXSec,"readonly");		
-
+*/
 		double DataPOT = PeLEE_ReturnBeamOnRunPOT(xsec_Runs[WhichRun]);
 		double IntegratedFlux = (HistoFlux->Integral() * DataPOT / POTPerSpill / Nominal_UB_XY_Surface) * (SoftFidSurface / Nominal_UB_XY_Surface);	
 				
@@ -110,7 +104,7 @@ void mcc9_10_topological_breakdown(TString BaseMC = "") {
 
 		//-------------------------------------//
 
-		Cuts = "_NoCuts";
+		Cuts = "_nocuts";
 
 		for (int i = 0; i < NCuts; i++) {
 
@@ -122,7 +116,7 @@ void mcc9_10_topological_breakdown(TString BaseMC = "") {
 			if (BaseMC == "NoTuneOverlay9" && i != NCuts-1) { continue; }		
 			if (BaseMC == "TwiceMECOverlay9" && i != NCuts-1) { continue; }		
 
-			TString PathToFilesCut = PathToFiles+"/"+Cuts+"/";
+			TString PathToFilesCut = event_selection_file_path+"/"+Cuts+"/";
 
 			TH1D::SetDefaultSumw2();
 
@@ -137,12 +131,12 @@ void mcc9_10_topological_breakdown(TString BaseMC = "") {
 			vector<TLegend*> leg; leg.clear();
 
 			vector<vector<TH1D*> > Plots; Plots.clear();
-			vector<vector<TH1D*> > CC1pPlots; CC1pPlots.clear();
-			vector<vector<TH1D*> > NonCC1pPlots; NonCC1pPlots.clear();
+			vector<vector<TH1D*> > NCCOHPlots; NCCOHPlots.clear();
+			vector<vector<TH1D*> > NonNCCOHPlots; NonNCCOHPlots.clear();
 
 			vector<vector<TH1D*> > bin_width_Plots; bin_width_Plots.clear();
-			vector<vector<TH1D*> > bin_width_CC1pPlots; bin_width_CC1pPlots.clear();
-			vector<vector<TH1D*> > bin_width_NonCC1pPlots; bin_width_NonCC1pPlots.clear();
+			vector<vector<TH1D*> > bin_width_NCCOHPlots; bin_width_NCCOHPlots.clear();
+			vector<vector<TH1D*> > bin_width_NonNCCOHPlots; bin_width_NonNCCOHPlots.clear();
 
 			vector<vector<TH1D*> > hratio;  hratio.clear();
 
@@ -155,22 +149,22 @@ void mcc9_10_topological_breakdown(TString BaseMC = "") {
 			// 3: Dirt
 	
 			// 0	
-			NameOfSamples.push_back("STVStudies_mcc9_10_BeamOn9_"+xsec_Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("BeamOn");
+			NameOfSamples.push_back("ncpi0_mcc9_10_BeamOn9_"+xsec_Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("BeamOn");
 
 			// 1
-			if (BaseMC == "") { NameOfSamples.push_back("STVStudies_mcc9_10_Overlay9_"+xsec_Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("MC"); }
-			else if (BaseMC == "Overlay9NuWro") { NameOfSamples.push_back("STVStudies_mcc9_10_Overlay9NuWro_"+xsec_Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("MC"); }
-			else if (BaseMC == "GENIEv2Overlay9") { NameOfSamples.push_back("GENIEv2STVStudies_mcc9_10_Overlay9_"+xsec_Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("MC"); }		
-			else if (BaseMC == "NoTuneOverlay9") { NameOfSamples.push_back("NoTuneSTVStudies_mcc9_10_Overlay9_"+xsec_Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("MC"); }
-			else if (BaseMC == "TwiceMECOverlay9") { NameOfSamples.push_back("TwiceMECSTVStudies_mcc9_10_Overlay9_"+xsec_Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("MC"); }			
+			if (BaseMC == "") { NameOfSamples.push_back("ncpi0_mcc9_10_Overlay9_"+xsec_Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("MC"); }
+			else if (BaseMC == "Overlay9NuWro") { NameOfSamples.push_back("ncpi0_mcc9_10_Overlay9NuWro_"+xsec_Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("MC"); }
+			else if (BaseMC == "GENIEv2Overlay9") { NameOfSamples.push_back("GENIEv2ncpi0_mcc9_10_Overlay9_"+xsec_Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("MC"); }		
+			else if (BaseMC == "NoTuneOverlay9") { NameOfSamples.push_back("NoTunencpi0_mcc9_10_Overlay9_"+xsec_Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("MC"); }
+			else if (BaseMC == "TwiceMECOverlay9") { NameOfSamples.push_back("TwiceMECncpi0_mcc9_10_Overlay9_"+xsec_Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("MC"); }			
 
 			// 2
-			NameOfSamples.push_back("STVStudies_mcc9_10_ExtBNB9_"+xsec_Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("ExtBNB");
+			NameOfSamples.push_back("ncpi0_mcc9_10_ExtBNB9_"+xsec_Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("ExtBNB");
 
 			// 3
-			if (BaseMC == "NoTuneOverlay9") { NameOfSamples.push_back("NoTuneSTVStudies_mcc9_10_OverlayDirt9_"+xsec_Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("Dirt"); }
-			else if (BaseMC == "TwiceMECOverlay9") { NameOfSamples.push_back("TwiceMECSTVStudies_mcc9_10_OverlayDirt9_"+xsec_Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("Dirt"); }
-			else { NameOfSamples.push_back("STVStudies_mcc9_10_OverlayDirt9_"+xsec_Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("Dirt"); }
+			if (BaseMC == "NoTuneOverlay9") { NameOfSamples.push_back("NoTunencpi0_mcc9_10_OverlayDirt9_"+xsec_Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("Dirt"); }
+			else if (BaseMC == "TwiceMECOverlay9") { NameOfSamples.push_back("TwiceMECncpi0_mcc9_10_OverlayDirt9_"+xsec_Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("Dirt"); }
+			else { NameOfSamples.push_back("ncpi0_mcc9_10_OverlayDirt9_"+xsec_Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("Dirt"); }
 	
 			vector<int> Colors; Colors.clear(); 
 			// Unblind
@@ -180,7 +174,7 @@ void mcc9_10_topological_breakdown(TString BaseMC = "") {
 			Colors.push_back(kRed); Colors.push_back(kGray+2); Colors.push_back(kMagenta);
 
 //			vector<int> ColorsOverlay{kBlue-5,kYellow+1,kOrange+7,kRed+1,kBlue};
-			vector<int> ColorsOverlay{OverlayColor,kOrange-3,kGreen+1,kRed+1,kBlue};
+			vector<int> ColorsOverlay{kMagenta,kAzure+7,kOrange-3,kGreen+1,kRed+1,kBlue};
 
 			const int NSamples = NameOfSamples.size();
 			vector<TFile*> FileSample; FileSample.clear();
@@ -190,16 +184,16 @@ void mcc9_10_topological_breakdown(TString BaseMC = "") {
 				FileSample.push_back(TFile::Open(PathToFilesCut+NameOfSamples[WhichSample]));
 
 				vector<TH1D*> CurrentPlots; CurrentPlots.clear();
-				vector<TH1D*> CC1pCurrentPlots; CC1pCurrentPlots.clear();
-				vector<TH1D*> NonCC1pCurrentPlots; NonCC1pCurrentPlots.clear();
+				vector<TH1D*> NCCOHCurrentPlots; NCCOHCurrentPlots.clear();
+				vector<TH1D*> NonNCCOHCurrentPlots; NonNCCOHCurrentPlots.clear();
 
 				vector<TH1D*> Currenthratio;  Currenthratio.clear();
 
 				for (int WhichPlot = 0; WhichPlot < N1DPlots; WhichPlot ++){
 
 					TH1D* hist = (TH1D*)(FileSample[WhichSample]->Get(PlotNames[WhichPlot]));
-					TH1D* CC1phist = (TH1D*)(FileSample[WhichSample]->Get("CC1p"+PlotNames[WhichPlot]));
-					TH1D* NonCC1phist = (TH1D*)(FileSample[WhichSample]->Get("NonCC1p"+PlotNames[WhichPlot]));
+					TH1D* NCCOHhist = (TH1D*)(FileSample[WhichSample]->Get("NCCOH"+PlotNames[WhichPlot]));
+					TH1D* NonNCCOHhist = (TH1D*)(FileSample[WhichSample]->Get("NonNCCOH"+PlotNames[WhichPlot]));
 
 					hist->GetXaxis()->CenterTitle();
 					hist->GetYaxis()->CenterTitle();
@@ -232,20 +226,20 @@ void mcc9_10_topological_breakdown(TString BaseMC = "") {
 					}
 
 					CurrentPlots.push_back(hist);
-					CC1pCurrentPlots.push_back(CC1phist);
-					NonCC1pCurrentPlots.push_back(NonCC1phist);
+					NCCOHCurrentPlots.push_back(NCCOHhist);
+					NonNCCOHCurrentPlots.push_back(NonNCCOHhist);
 
 					Currenthratio.push_back((TH1D*)hist->Clone());
 			
 				}
 
 				Plots.push_back(CurrentPlots);
-				CC1pPlots.push_back(CC1pCurrentPlots);
-				NonCC1pPlots.push_back(NonCC1pCurrentPlots);
+				NCCOHPlots.push_back(NCCOHCurrentPlots);
+				NonNCCOHPlots.push_back(NonNCCOHCurrentPlots);
 
 				bin_width_Plots.push_back(CurrentPlots);
-				bin_width_CC1pPlots.push_back(CC1pCurrentPlots);
-				bin_width_NonCC1pPlots.push_back(NonCC1pCurrentPlots);
+				bin_width_NCCOHPlots.push_back(NCCOHCurrentPlots);
+				bin_width_NonNCCOHPlots.push_back(NonNCCOHCurrentPlots);
 
 				hratio.push_back(Currenthratio);
 
@@ -318,8 +312,8 @@ void mcc9_10_topological_breakdown(TString BaseMC = "") {
 					if (WhichSample == 0) { 
 
 						bin_width_Plots[0][WhichPlot] = (TH1D*)(Plots[0][WhichPlot]->Clone()); 
-						Reweight(bin_width_Plots[0][WhichPlot]); 
-						//max = FindOneDimHistoMaxValue(bin_width_Plots[0][WhichPlot]);
+						divide_bin_width(bin_width_Plots[0][WhichPlot]); 
+						//max = find_bin_max_value(bin_width_Plots[0][WhichPlot]);
 						//bin_width_Plots[0][WhichPlot]->GetYaxis()->SetRangeUser(0.,1.47*max);
 
 					}
@@ -342,7 +336,7 @@ void mcc9_10_topological_breakdown(TString BaseMC = "") {
 							Plots[WhichSample][WhichPlot]->SetLineWidth(1);
 
 							bin_width_Plots[WhichSample][WhichPlot] = (TH1D*)(Plots[WhichSample][WhichPlot]->Clone());
-							Reweight(bin_width_Plots[WhichSample][WhichPlot]);
+							divide_bin_width(bin_width_Plots[WhichSample][WhichPlot]);
 	
 							TString NExtBNBEvents = ToString( (int)(Plots[WhichSample][WhichPlot]->Integral() ) );
 							THStacks[WhichPlot]->Add(bin_width_Plots[WhichSample][WhichPlot],"hist");
@@ -352,50 +346,50 @@ void mcc9_10_topological_breakdown(TString BaseMC = "") {
 
 					if (LabelsOfSamples[WhichSample] == "Dirt") {
 
-							TString NCC1pEvents = ToString( (int)(CC1pPlots[WhichSample][WhichPlot]->Integral() ) );
-							CC1pPlots[WhichSample][WhichPlot]->SetLineColor(ColorsOverlay[2]);
-							CC1pPlots[WhichSample][WhichPlot]->SetFillColor(ColorsOverlay[2]);
-							bin_width_CC1pPlots[WhichSample][WhichPlot] = (TH1D*)(CC1pPlots[WhichSample][WhichPlot]->Clone());
-							Reweight(bin_width_CC1pPlots[WhichSample][WhichPlot]);
-							THStacks[WhichPlot]->Add(bin_width_CC1pPlots[WhichSample][WhichPlot],"hist");
+							TString NNCCOHEvents = ToString( (int)(NCCOHPlots[WhichSample][WhichPlot]->Integral() ) );
+							NCCOHPlots[WhichSample][WhichPlot]->SetLineColor(ColorsOverlay[2]);
+							NCCOHPlots[WhichSample][WhichPlot]->SetFillColor(ColorsOverlay[2]);
+							bin_width_NCCOHPlots[WhichSample][WhichPlot] = (TH1D*)(NCCOHPlots[WhichSample][WhichPlot]->Clone());
+							divide_bin_width(bin_width_NCCOHPlots[WhichSample][WhichPlot]);
+							THStacks[WhichPlot]->Add(bin_width_NCCOHPlots[WhichSample][WhichPlot],"hist");
 							THStacks[WhichPlot]->Draw("same");
 
-							TString NNonCC1pEvents = ToString( (int)(NonCC1pPlots[WhichSample][WhichPlot]->Integral() ) );
-							NonCC1pPlots[WhichSample][WhichPlot]->SetLineColor(ColorsOverlay[3]);
-							NonCC1pPlots[WhichSample][WhichPlot]->SetFillColor(ColorsOverlay[3]);
-							bin_width_NonCC1pPlots[WhichSample][WhichPlot] = (TH1D*)(NonCC1pPlots[WhichSample][WhichPlot]->Clone());
-							Reweight(bin_width_NonCC1pPlots[WhichSample][WhichPlot]);
-							THStacks[WhichPlot]->Add(bin_width_NonCC1pPlots[WhichSample][WhichPlot],"hist");
-							leg[WhichPlot]->AddEntry(NonCC1pPlots[WhichSample][WhichPlot],"Out-of-cryo ("+NNonCC1pEvents+")","f");
+							TString NNonNCCOHEvents = ToString( (int)(NonNCCOHPlots[WhichSample][WhichPlot]->Integral() ) );
+							NonNCCOHPlots[WhichSample][WhichPlot]->SetLineColor(ColorsOverlay[3]);
+							NonNCCOHPlots[WhichSample][WhichPlot]->SetFillColor(ColorsOverlay[3]);
+							bin_width_NonNCCOHPlots[WhichSample][WhichPlot] = (TH1D*)(NonNCCOHPlots[WhichSample][WhichPlot]->Clone());
+							divide_bin_width(bin_width_NonNCCOHPlots[WhichSample][WhichPlot]);
+							THStacks[WhichPlot]->Add(bin_width_NonNCCOHPlots[WhichSample][WhichPlot],"hist");
+							leg[WhichPlot]->AddEntry(NonNCCOHPlots[WhichSample][WhichPlot],"Out-of-cryo ("+NNonNCCOHEvents+")","f");
 							THStacks[WhichPlot]->Draw("same");
 
 					}
 
 					if (LabelsOfSamples[WhichSample] == "MC") {
 
-							TString NCC1pEvents = ToString( (int)(CC1pPlots[WhichSample][WhichPlot]->Integral() ) );
-							CC1pPlots[WhichSample][WhichPlot]->SetLineColor(ColorsOverlay[0]);
-							CC1pPlots[WhichSample][WhichPlot]->SetFillColor(ColorsOverlay[0]);
-							bin_width_CC1pPlots[WhichSample][WhichPlot] = (TH1D*)(CC1pPlots[WhichSample][WhichPlot]->Clone());
-							Reweight(bin_width_CC1pPlots[WhichSample][WhichPlot]);
-							THStacks[WhichPlot]->Add(bin_width_CC1pPlots[WhichSample][WhichPlot],"hist");
+							TString NNCCOHEvents = ToString( (int)(NCCOHPlots[WhichSample][WhichPlot]->Integral() ) );
+							NCCOHPlots[WhichSample][WhichPlot]->SetLineColor(ColorsOverlay[0]);
+							NCCOHPlots[WhichSample][WhichPlot]->SetFillColor(ColorsOverlay[0]);
+							bin_width_NCCOHPlots[WhichSample][WhichPlot] = (TH1D*)(NCCOHPlots[WhichSample][WhichPlot]->Clone());
+							divide_bin_width(bin_width_NCCOHPlots[WhichSample][WhichPlot]);
+							THStacks[WhichPlot]->Add(bin_width_NCCOHPlots[WhichSample][WhichPlot],"hist");
 
 							// add the cosmic label first
 							TString NExtBNBEvents = ToString( (int)(Plots[2][WhichPlot]->Integral() ) );							
 							leg[WhichPlot]->AddEntry(Plots[2][WhichPlot],"Cosmic ("+NExtBNBEvents+")","f");							
 							// Unblind
-							leg[WhichPlot]->AddEntry(Plots[2][WhichPlot],"","");	 // blanck space
+							leg[WhichPlot]->AddEntry(Plots[2][WhichPlot],"","");	 // blank space
 
-							leg[WhichPlot]->AddEntry(CC1pPlots[WhichSample][WhichPlot],"MC CC1p0#pi ("+NCC1pEvents+")","f");
+							leg[WhichPlot]->AddEntry(NCCOHPlots[WhichSample][WhichPlot],"MC NCCOH-like ("+NNCCOHEvents+")","f");
 							THStacks[WhichPlot]->Draw("same");
 
-							TString NNonCC1pEvents = ToString( (int)(NonCC1pPlots[WhichSample][WhichPlot]->Integral() ) );
-							NonCC1pPlots[WhichSample][WhichPlot]->SetLineColor(ColorsOverlay[1]);
-							NonCC1pPlots[WhichSample][WhichPlot]->SetFillColor(ColorsOverlay[1]);
-							bin_width_NonCC1pPlots[WhichSample][WhichPlot] = (TH1D*)(NonCC1pPlots[WhichSample][WhichPlot]->Clone());
-							Reweight(bin_width_NonCC1pPlots[WhichSample][WhichPlot]);
-							THStacks[WhichPlot]->Add(bin_width_NonCC1pPlots[WhichSample][WhichPlot],"hist");
-							leg[WhichPlot]->AddEntry(NonCC1pPlots[WhichSample][WhichPlot],"MC non-CC1p0#pi ("+NNonCC1pEvents+")","f");
+							TString NNonNCCOHEvents = ToString( (int)(NonNCCOHPlots[WhichSample][WhichPlot]->Integral() ) );
+							NonNCCOHPlots[WhichSample][WhichPlot]->SetLineColor(ColorsOverlay[1]);
+							NonNCCOHPlots[WhichSample][WhichPlot]->SetFillColor(ColorsOverlay[1]);
+							bin_width_NonNCCOHPlots[WhichSample][WhichPlot] = (TH1D*)(NonNCCOHPlots[WhichSample][WhichPlot]->Clone());
+							divide_bin_width(bin_width_NonNCCOHPlots[WhichSample][WhichPlot]);
+							THStacks[WhichPlot]->Add(bin_width_NonNCCOHPlots[WhichSample][WhichPlot],"hist");
+							leg[WhichPlot]->AddEntry(NonNCCOHPlots[WhichSample][WhichPlot],"MC nonNCCOH-like ("+NNonNCCOHEvents+")","f");
 							THStacks[WhichPlot]->Draw("same");
 
 					}
@@ -404,7 +398,7 @@ void mcc9_10_topological_breakdown(TString BaseMC = "") {
 				} // End of the loop over the samples
 
 				TH1D* stack_max = (TH1D*) (THStacks[WhichPlot]->GetStack()->Last());
-				double m_stack = TMath::Max( FindOneDimHistoMaxValue(bin_width_Plots[0][WhichPlot]) , FindOneDimHistoMaxValue(stack_max) );
+				double m_stack = TMath::Max( find_bin_max_value(bin_width_Plots[0][WhichPlot]) , find_bin_max_value(stack_max) );
 				bin_width_Plots[0][WhichPlot]->GetYaxis()->SetRangeUser(0.,1.35*m_stack);
 
 				// Area normalize bc we don't have POT
@@ -474,16 +468,16 @@ void mcc9_10_topological_breakdown(TString BaseMC = "") {
 				SumNonBeamOn->Add(Plots[2][WhichPlot]); // Overlay
 				SumNonBeamOn->Add(Plots[3][WhichPlot]); // Dirt
 
-				// CC1p Purity 
+				// NCCOH Purity 
 
-				int CC1pPurity = CC1pPlots[1][WhichPlot]->Integral() / SumNonBeamOn->Integral() * 1000.;
+				int NCCOHPurity = NCCOHPlots[1][WhichPlot]->Integral() / SumNonBeamOn->Integral() * 1000.;
 
 				midPad->cd();
 				
 				TLatex latexPurity;
 				latexPurity.SetTextFont(FontStyle);
 				latexPurity.SetTextSize(0.07);
-				TString LabelPurity = "CC1p0#pi = " + ToString(CC1pPurity/10.) + " %";
+				TString LabelPurity = "NCCOH-like = " + ToString(NCCOHPurity/10.) + " %";
 				latexPurity.DrawLatexNDC(0.61,0.89, LabelPurity);
 				
 				//----------------------------------------//
@@ -523,7 +517,7 @@ void mcc9_10_topological_breakdown(TString BaseMC = "") {
 					TLatex latexDataStats;
 					latexDataStats.SetTextFont(FontStyle);
 					latexDataStats.SetTextSize(0.07);
-					double data_peak = FindOneDimHistoMaxValueBin(bin_width_Plots[0][WhichPlot]);
+					double data_peak = find_bin_max_value(bin_width_Plots[0][WhichPlot]);
 					double data_mean = bin_width_Plots[0][WhichPlot]->GetMean();
 					double data_std = bin_width_Plots[0][WhichPlot]->GetRMS();
 					TString LabelDataStats = "#splitline{Data peak = " + to_string_with_precision(data_peak,2) + "}{#mu = " + to_string_with_precision(data_mean,2) + ", #sigma' = " + to_string_with_precision(data_std,2) + "}";
@@ -535,7 +529,7 @@ void mcc9_10_topological_breakdown(TString BaseMC = "") {
 					TLatex latexMCStats;
 					latexMCStats.SetTextFont(FontStyle);
 					latexMCStats.SetTextSize(0.07);
-					double mc_peak = FindOneDimHistoMaxValueBin(MC);
+					double mc_peak = find_bin_max_value(MC);
 					double mc_mean = MC->GetMean();
 					double mc_std = MC->GetRMS();
 					TString LabelMCStats = "#splitline{MC peak = " + to_string_with_precision(mc_peak,2) + "}{#mu = " + to_string_with_precision(mc_mean,2) + ", #sigma' = " + to_string_with_precision(mc_std,2) + "}";
@@ -717,8 +711,8 @@ void mcc9_10_topological_breakdown(TString BaseMC = "") {
 */
 				//----------------------------------------//
 
-				TString CanvasPath = PlotPath + Cuts+"/TopologicalBreakDown/";
-				TString CanvasName = BaseMC + "mcc9_10_THStack_BreakDown_"+PlotNames[WhichPlot]+"_"+xsec_Runs[WhichRun]+"_"+UBCodeVersion+Cuts+".pdf";
+				TString CanvasPath = plot_path + Cuts+"/TopologicalBreakDown/";
+				TString CanvasName = BaseMC + "mcc9_10_THStack_BreakDown_"+PlotNames[WhichPlot]+"_"+xsec_Runs[WhichRun]+".pdf";
 				PlotCanvas[WhichPlot]->SaveAs(CanvasPath+CanvasName);
 				delete PlotCanvas[WhichPlot];
 

@@ -12,10 +12,10 @@
 #include <iostream>
 #include <vector>
 
-#include "../../myClasses/Constants.h"
+#include "../../../generators/constants.h"
 
 using namespace std;
-using namespace Constants;
+using namespace constants;
 
 // -------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -85,8 +85,7 @@ void mcc9_10_print_latex_tables(TString BaseMC = "", bool PrintStats = false, bo
 	TString Cuts = "_NoCuts";
 
 	vector<TString> VectorCuts; VectorCuts.clear();
-
-	VectorCuts.push_back("_PID_NuScore_CRT");
+	VectorCuts.push_back("");
 
 	int NCuts = (int)(VectorCuts.size());	
 
@@ -94,7 +93,6 @@ void mcc9_10_print_latex_tables(TString BaseMC = "", bool PrintStats = false, bo
 
 	vector<TString> Runs;
 	Runs.push_back("Run4b_unified");
-	Runs.push_back("Run4b_standalone");	
 
 	int NRuns = (int)(Runs.size());
 //	cout << "Number of Runs = " << NRuns << endl;
@@ -108,7 +106,7 @@ void mcc9_10_print_latex_tables(TString BaseMC = "", bool PrintStats = false, bo
 		//cout << "// -------------------------------------------------" << endl << endl;
 		//cout << Runs[WhichRun] << endl << endl;
 
-		Cuts = "_NoCuts";
+		Cuts = "_nocuts";
 
 		for (int i = 0; i < NCuts; i++) {
 
@@ -116,7 +114,7 @@ void mcc9_10_print_latex_tables(TString BaseMC = "", bool PrintStats = false, bo
 
 //		} // If we want to run only on a specific cut combination, include this } and remove the one at the end of the program
 
-			TString PathToFilesCut = PathToFiles+"/"+Cuts+"/";
+			TString PathToFilesCut = event_selection_file_path+"/"+Cuts+"/";
 
 			TH1D::SetDefaultSumw2();
 
@@ -130,20 +128,20 @@ void mcc9_10_print_latex_tables(TString BaseMC = "", bool PrintStats = false, bo
 			// 2: ExtBNB
 			// 3: Dirt
 		
-			NameOfSamples.push_back("STVStudies_mcc9_10_BeamOn9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("BeamOn");
+			NameOfSamples.push_back("ncpi0_mcc9_10_BeamOn9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("BeamOn");
 
-			if (BaseMC == "") { NameOfSamples.push_back("STVStudies_mcc9_10_Overlay9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("MC"); }
-			else if (BaseMC == "mcc9_10_Overlay9NuWro") { NameOfSamples.push_back("STVStudies_mcc9_10_Overlay9NuWro_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("NuWro MC"); }
+			if (BaseMC == "") { NameOfSamples.push_back("ncpi0_mcc9_10_Overlay9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("MC"); }
+			else if (BaseMC == "mcc9_10_Overlay9NuWro") { NameOfSamples.push_back("ncpi0_mcc9_10_Overlay9NuWro_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("NuWro MC"); }
 
-			NameOfSamples.push_back("STVStudies_mcc9_10_ExtBNB9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("ExtBNB");
-			NameOfSamples.push_back("STVStudies_mcc9_10_OverlayDirt9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("Dirt");
+			NameOfSamples.push_back("ncpi0_mcc9_10_ExtBNB9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("ExtBNB");
+			NameOfSamples.push_back("ncpi0_mcc9_10_OverlayDirt9_"+Runs[WhichRun]+Cuts+".root"); LabelsOfSamples.push_back("Dirt");
 
 			// ---------------------------------------------------------------------------------------------------------------------
 
 			// Truth level plot for efficiency & purity 
 
-			TFile* TruthCC1pFile = TFile::Open(PathToFiles+"TruthSTVAnalysis_mcc9_10_Overlay9_"+Runs[WhichRun]+"_"+UBCodeVersion+".root");
-			TH1D* hTruthCC1pOverlay = (TH1D*)(TruthCC1pFile->Get("TrueMuonCosThetaSingleBinPlot"));
+			TFile* TruthNCCOHFile = TFile::Open(event_selection_file_path+"Truthncpi0_mcc9_10_Overlay9_"+Runs[WhichRun]+".root");
+			TH1D* hTruthNCCOHOverlay = (TH1D*)(TruthNCCOHFile->Get("TrueSingleBinPlot"));
 
 			// ---------------------------------------------------------------------------------------------------------------------
 
@@ -154,21 +152,22 @@ void mcc9_10_print_latex_tables(TString BaseMC = "", bool PrintStats = false, bo
 			vector<double> FilePreSel; FilePreSel.clear();
 			vector<double> FileFinal; FileFinal.clear();
 			vector<double> FileFinalError; FileFinalError.clear();
-			vector<double> FileCC1p; FileCC1p.clear();
-			vector<double> FileCC1pError; FileCC1pError.clear();
-			vector<double> FileNonCC1p; FileNonCC1p.clear();
-			vector<double> FileNonCC1pError; FileNonCC1pError.clear();
+			vector<double> FileNCCOH; FileNCCOH.clear();
+			vector<double> FileNCCOHError; FileNCCOHError.clear();
+			vector<double> FileNonNCCOH; FileNonNCCOH.clear();
+			vector<double> FileNonNCCOHError; FileNonNCCOHError.clear();
 
 
 			vector<TH1D*> Plots; Plots.resize(NSamples);
-			vector<TH1D*> CC1pPlots; CC1pPlots.resize(NSamples);
-			vector<TH1D*> NonCC1pPlots; NonCC1pPlots.resize(NSamples);
-			vector<TH1D*> NonCC1pPlotsEvents; NonCC1pPlotsEvents.resize(NSamples);
+			vector<TH1D*> NCCOHPlots; NCCOHPlots.resize(NSamples);
+			vector<TH1D*> NonNCCOHPlots; NonNCCOHPlots.resize(NSamples);
+			vector<TH1D*> NonNCCOHPlotsEvents; NonNCCOHPlotsEvents.resize(NSamples);
 
-			vector<TH1D*> CCQEPlots; CCQEPlots.resize(NSamples);
-			vector<TH1D*> CCMECPlots; CCMECPlots.resize(NSamples);
-			vector<TH1D*> CCRESPlots; CCRESPlots.resize(NSamples);
-			vector<TH1D*> CCDISPlots; CCDISPlots.resize(NSamples);
+			vector<TH1D*> QEPlots; QEPlots.resize(NSamples);
+			vector<TH1D*> MECPlots; MECPlots.resize(NSamples);
+			vector<TH1D*> RESPlots; RESPlots.resize(NSamples);
+			vector<TH1D*> DISPlots; DISPlots.resize(NSamples);
+			vector<TH1D*> COHPlots; COHPlots.resize(NSamples);			
 
 			// -----------------------------------------------------------------------------------------------------------------------
 
@@ -182,38 +181,39 @@ void mcc9_10_print_latex_tables(TString BaseMC = "", bool PrintStats = false, bo
 
 				// --------------------------------------------------------------------------------------------
 	
-				Plots[WhichSample] = (TH1D*)(FileSample[WhichSample]->Get("RecoMuonCosThetaSingleBinPlot"));
-				CC1pPlots[WhichSample] = (TH1D*)(FileSample[WhichSample]->Get("CC1pRecoMuonCosThetaSingleBinPlot"));
-				NonCC1pPlots[WhichSample] = (TH1D*)(FileSample[WhichSample]->Get("NonCC1pRecoMuonCosThetaSingleBinPlot"));
-				NonCC1pPlotsEvents[WhichSample] = (TH1D*)(FileSample[WhichSample]->Get("NonCC1pEventPlot"));
+				Plots[WhichSample] = (TH1D*)(FileSample[WhichSample]->Get("RecoSingleBinPlot"));
+				NCCOHPlots[WhichSample] = (TH1D*)(FileSample[WhichSample]->Get("NCCOHRecoSingleBinPlot"));
+				NonNCCOHPlots[WhichSample] = (TH1D*)(FileSample[WhichSample]->Get("NonNCCOHRecoSingleBinPlot"));
+				NonNCCOHPlotsEvents[WhichSample] = (TH1D*)(FileSample[WhichSample]->Get("NonNCCOHEventPlot"));
 
-				CCQEPlots[WhichSample] = (TH1D*)(FileSample[WhichSample]->Get("CCQERecoMuonCosThetaSingleBinPlot"));
-				CCMECPlots[WhichSample] = (TH1D*)(FileSample[WhichSample]->Get("CCMECRecoMuonCosThetaSingleBinPlot"));
-				CCRESPlots[WhichSample] = (TH1D*)(FileSample[WhichSample]->Get("CCRESRecoMuonCosThetaSingleBinPlot"));
-				CCDISPlots[WhichSample] = (TH1D*)(FileSample[WhichSample]->Get("CCDISRecoMuonCosThetaSingleBinPlot"));
+				QEPlots[WhichSample] = (TH1D*)(FileSample[WhichSample]->Get("QERecoSingleBinPlot"));
+				MECPlots[WhichSample] = (TH1D*)(FileSample[WhichSample]->Get("MECRecoSingleBinPlot"));
+				RESPlots[WhichSample] = (TH1D*)(FileSample[WhichSample]->Get("RESRecoSingleBinPlot"));
+				DISPlots[WhichSample] = (TH1D*)(FileSample[WhichSample]->Get("DISRecoSingleBinPlot"));
+				COHPlots[WhichSample] = (TH1D*)(FileSample[WhichSample]->Get("COHRecoSingleBinPlot"));				
 
 				// --------------------------------------------------------------------------------------------
 
-				TH1D* FinalPlot = (TH1D*)(FileSample[WhichSample]->Get("RecoMuonCosThetaSingleBinPlot"));
+				TH1D* FinalPlot = (TH1D*)(FileSample[WhichSample]->Get("RecoSingleBinPlot"));
 				double FinalCount = FinalPlot->GetBinContent(1);
 				FileFinal.push_back(FinalCount);
 
 				double FinalCountError = FinalPlot->GetBinError(1);
 				FileFinalError.push_back(FinalCountError);
 
-				TH1D* CC1pPlot = (TH1D*)(FileSample[WhichSample]->Get("CC1pRecoMuonCosThetaSingleBinPlot"));
-				double CC1pCount = CC1pPlot->GetBinContent(1);
-				FileCC1p.push_back(CC1pCount);
+				TH1D* NCCOHPlot = (TH1D*)(FileSample[WhichSample]->Get("NCCOHRecoSingleBinPlot"));
+				double NCCOHCount = NCCOHPlot->GetBinContent(1);
+				FileNCCOH.push_back(NCCOHCount);
 
-				double CC1pCountError = CC1pPlot->GetBinError(1);
-				FileCC1pError.push_back(CC1pCountError);
+				double NCCOHCountError = NCCOHPlot->GetBinError(1);
+				FileNCCOHError.push_back(NCCOHCountError);
 
-				TH1D* NonCC1pPlot = (TH1D*)(FileSample[WhichSample]->Get("NonCC1pRecoMuonCosThetaSingleBinPlot"));
-				double NonCC1pCount = NonCC1pPlot->GetBinContent(1);
-				FileNonCC1p.push_back(NonCC1pCount);
+				TH1D* NonNCCOHPlot = (TH1D*)(FileSample[WhichSample]->Get("NonNCCOHRecoSingleBinPlot"));
+				double NonNCCOHCount = NonNCCOHPlot->GetBinContent(1);
+				FileNonNCCOH.push_back(NonNCCOHCount);
 
-				double NonCC1pCountError = NonCC1pPlot->GetBinError(1);
-				FileNonCC1pError.push_back(NonCC1pCountError);
+				double NonNCCOHCountError = NonNCCOHPlot->GetBinError(1);
+				FileNonNCCOHError.push_back(NonNCCOHCountError);
 
 			//-------------------//
 
@@ -237,14 +237,14 @@ void mcc9_10_print_latex_tables(TString BaseMC = "", bool PrintStats = false, bo
 					cout << label << " & " << FileFinal[WhichSample] << " $\\pm$ " << FileFinalError[WhichSample];
 					cout << " \\tabularnewline \\hline" << endl;
 
-					// Special case for MC, print also the CC1p event count
+					// Special case for MC, print also the NCCOH event count
 
 					if (string(LabelsOfSamples[WhichSample]).find("MC") != std::string::npos) {
 
-						cout << "CC1p0$\\pi$ \\," << LabelsOfSamples[WhichSample] << " (signal) & " << FileCC1p[WhichSample] << " $\\pm$ " << FileCC1pError[WhichSample];
+						cout << "NCCOH0$\\pi$ \\," << LabelsOfSamples[WhichSample] << " (signal) & " << FileNCCOH[WhichSample] << " $\\pm$ " << FileNCCOHError[WhichSample];
 						cout << " \\tabularnewline \\hline" << endl;
 
-						cout << "non-CC1p0$\\pi$ \\," << LabelsOfSamples[WhichSample] << " (bkg) & " << FileNonCC1p[WhichSample] << " $\\pm$ " << FileNonCC1pError[WhichSample];
+						cout << "non-NCCOH0$\\pi$ \\," << LabelsOfSamples[WhichSample] << " (bkg) & " << FileNonNCCOH[WhichSample] << " $\\pm$ " << FileNonNCCOHError[WhichSample];
 						cout << " \\tabularnewline \\hline" << endl;
 
 
@@ -267,14 +267,14 @@ void mcc9_10_print_latex_tables(TString BaseMC = "", bool PrintStats = false, bo
 
 			// 1: Overlay
 
-			double CC1p = CC1pPlots[1]->GetBinContent(1);
-			double CC1pError = CC1pPlots[1]->GetBinError(1);
+			double NCCOH = NCCOHPlots[1]->GetBinContent(1);
+			double NCCOHError = NCCOHPlots[1]->GetBinError(1);
 
-			double TrueCC1p = hTruthCC1pOverlay->GetBinContent(1);
-			double TrueCC1pError = hTruthCC1pOverlay->GetBinError(1);
+			double TrueNCCOH = hTruthNCCOHOverlay->GetBinContent(1);
+			double TrueNCCOHError = hTruthNCCOHOverlay->GetBinError(1);
 
-			double Efficiency = CC1p / TrueCC1p * 100.;
-			double EfficiencyError = Efficiency * TMath::Sqrt( TMath::Power(CC1pError/CC1p,2.) + TMath::Power(TrueCC1pError/TrueCC1p,2.) );
+			double Efficiency = NCCOH / TrueNCCOH * 100.;
+			double EfficiencyError = Efficiency * TMath::Sqrt( TMath::Power(NCCOHError/NCCOH,2.) + TMath::Power(TrueNCCOHError/TrueNCCOH,2.) );
 
 			// -----------------------------------------------------------------------------------------------------------------------
 			// Purity
@@ -297,8 +297,8 @@ void mcc9_10_print_latex_tables(TString BaseMC = "", bool PrintStats = false, bo
 			SumErrors = TMath::Sqrt(SumErrors);
 			double Sum = SumNonBeamOn->Integral();
 
-			double Purity = CC1p / Sum * 100.;
-			double PurityError = Purity * TMath::Sqrt( TMath::Power(CC1pError/CC1p,2.) + TMath::Power(SumErrors/Sum,2.) );
+			double Purity = NCCOH / Sum * 100.;
+			double PurityError = Purity * TMath::Sqrt( TMath::Power(NCCOHError/NCCOH,2.) + TMath::Power(SumErrors/Sum,2.) );
 
 			// -----------------------------------------------------------------------------------------------------------------------
 	
@@ -336,17 +336,18 @@ void mcc9_10_print_latex_tables(TString BaseMC = "", bool PrintStats = false, bo
 
 			// Interaction break down
 
-			double QE = CCQEPlots[1]->Integral() / Plots[1]->Integral() * 100.;
-			double MEC = CCMECPlots[1]->Integral() / Plots[1]->Integral() * 100.;
-			double RES = CCRESPlots[1]->Integral() / Plots[1]->Integral() * 100.;
-			double DIS = CCDISPlots[1]->Integral() / Plots[1]->Integral() * 100.;
+			double QE = QEPlots[1]->Integral() / Plots[1]->Integral() * 100.;
+			double MEC = MECPlots[1]->Integral() / Plots[1]->Integral() * 100.;
+			double RES = RESPlots[1]->Integral() / Plots[1]->Integral() * 100.;
+			double DIS = DISPlots[1]->Integral() / Plots[1]->Integral() * 100.;
+			double COH = COHPlots[1]->Integral() / Plots[1]->Integral() * 100.;			
 
-			double sum = QE + MEC + RES + DIS;
+			double sum = QE + MEC + RES + DIS + COH;
 			if (sum > 105 || sum < 95) { cout << "UNITARITY CHECKED FAILED! sum = " << sum << endl; }
 
 			if (PrintIntBreakDown) {
 
-	 			cout << Runs[WhichRun] << " & " << QE << " & " << MEC << " & " << RES << " & " << DIS << " \\tabularnewline \\hline" << endl;
+	 			cout << Runs[WhichRun] << " & " << QE << " & " << MEC << " & " << RES << " & " << DIS << " & " << COH << " \\tabularnewline \\hline" << endl;
 				//cout << endl << endl;
 
 			}

@@ -36,8 +36,8 @@
 
 	// Run 4b
 
-	WhichSampleArray.push_back("mcc9_10_OverlayDirt9_Run4b_standalone");
-	WhichSampleArray.push_back("mcc9_10_Overlay9_Run4b_standalone");
+	//WhichSampleArray.push_back("mcc9_10_OverlayDirt9_Run4b_standalone");
+	//WhichSampleArray.push_back("mcc9_10_Overlay9_Run4b_standalone");
 
 	WhichSampleArray.push_back("mcc9_10_OverlayDirt9_Run4b_unified");
 	WhichSampleArray.push_back("mcc9_10_Overlay9_Run4b_unified");	
@@ -279,9 +279,7 @@
 
 	//--------------------//
 
-	gROOT->ProcessLine(".L ../../myClasses/Tools.cxx++");
-	gROOT->ProcessLine(".L ../../myClasses/STV_Tools.cxx++");	
-
+	gROOT->ProcessLine(".L ../../../generators/Tools.cxx++");
 	gROOT->ProcessLine(".L mcc9_10_true_selection.cxx++");
 
 	for (int i = 0;i < (int)(WhichSampleArray.size()); i++) {
@@ -309,7 +307,7 @@
 	FluxWhichSampleArray.push_back("mcc9_10_Overlay9_Run4b");
 	FluxWhichSampleArray.push_back("mcc9_10_Overlay9_Run4b_noweights");*/
 	
-	FluxWhichSampleArray.push_back("mcc9_10_Overlay9_Run4b_standalone");
+	//FluxWhichSampleArray.push_back("mcc9_10_Overlay9_Run4b_standalone");
 
 	FluxWhichSampleArray.push_back("mcc9_10_Overlay9_Run4b_unified");
 	
@@ -354,7 +352,7 @@
 	G4WhichSampleArray.push_back("mcc9_10_Overlay9_Run4b");
 	G4WhichSampleArray.push_back("mcc9_10_Overlay9_Run4b_noweights");*/
 
-	G4WhichSampleArray.push_back("mcc9_10_Overlay9_Run4b_standalone");
+	//G4WhichSampleArray.push_back("mcc9_10_Overlay9_Run4b_standalone");
 
 	G4WhichSampleArray.push_back("mcc9_10_Overlay9_Run4b_unified");
 
@@ -399,7 +397,7 @@
 	XSecWhichSampleArray.push_back("mcc9_10_Overlay9_Run4b");
 	XSecWhichSampleArray.push_back("mcc9_10_Overlay9_Run4b_noweights");*/
 	
-	XSecWhichSampleArray.push_back("mcc9_10_Overlay9_Run4b_standalone");
+	//XSecWhichSampleArray.push_back("mcc9_10_Overlay9_Run4b_standalone");
 
 	XSecWhichSampleArray.push_back("mcc9_10_Overlay9_Run4b_unified");
 	
@@ -452,7 +450,7 @@
 	MCStatWhichSampleArray.push_back("mcc9_10_Overlay9_Run4b");
 	MCStatWhichSampleArray.push_back("mcc9_10_Overlay9_Run4b_noweights");*/	
 
-	MCStatWhichSampleArray.push_back("mcc9_10_Overlay9_Run4b_standalone");
+	//MCStatWhichSampleArray.push_back("mcc9_10_Overlay9_Run4b_standalone");
 
 	MCStatWhichSampleArray.push_back("mcc9_10_Overlay9_Run4b_unified");	
 
@@ -511,7 +509,7 @@
 
 	FDSWhichSampleArray.push_back("mcc9_10_Overlay9_Run4b_noweights");*/	
 
-	FDSWhichSampleArray.push_back("mcc9_10_Overlay9_Run4b_standalone");	
+	//FDSWhichSampleArray.push_back("mcc9_10_Overlay9_Run4b_standalone");	
 
 	FDSWhichSampleArray.push_back("mcc9_10_Overlay9_Run4b_unified");
 

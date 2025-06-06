@@ -48,10 +48,10 @@
 
 	// Run 4b standalone
 
-	WhichSampleArray.push_back("mcc9_10_BeamOn9_Run4b_standalone");
-	WhichSampleArray.push_back("mcc9_10_ExtBNB9_Run4b_standalone");
-	WhichSampleArray.push_back("mcc9_10_OverlayDirt9_Run4b_standalone");
-	WhichSampleArray.push_back("mcc9_10_Overlay9_Run4b_standalone");
+	//WhichSampleArray.push_back("mcc9_10_BeamOn9_Run4b_standalone");
+	//WhichSampleArray.push_back("mcc9_10_ExtBNB9_Run4b_standalone");
+	//WhichSampleArray.push_back("mcc9_10_OverlayDirt9_Run4b_standalone");
+	//WhichSampleArray.push_back("mcc9_10_Overlay9_Run4b_standalone");
 
 	// Run 4b unified
 
@@ -307,9 +307,7 @@
 
 	//--------------------//
 
-	gROOT->ProcessLine(".L ../../myClasses/Tools.cxx++");
-	gROOT->ProcessLine(".L ../../myClasses/STV_Tools.cxx++");	
-
+	gROOT->ProcessLine(".L ../../../generators/Tools.cxx++");
 	gROOT->ProcessLine(".L mcc9_10_reco_selection.cxx++");
 
 	for (int i = 0;i < (int)(WhichSampleArray.size()); i++) {
@@ -336,7 +334,7 @@
 	FluxWhichSampleArray.push_back("mcc9_10_Overlay9_Run4b");
 	FluxWhichSampleArray.push_back("mcc9_10_Overlay9_Run4b_noweights");*/	
 
-	FluxWhichSampleArray.push_back("mcc9_10_Overlay9_Run4b_standalone");	
+	//FluxWhichSampleArray.push_back("mcc9_10_Overlay9_Run4b_standalone");	
 	FluxWhichSampleArray.push_back("mcc9_10_Overlay9_Run4b_unified");
 
 	/*FluxWhichSampleArray.push_back("mcc9_10_Overlay9_Run4c");
@@ -381,7 +379,7 @@
 	G4WhichSampleArray.push_back("mcc9_10_Overlay9_Run4b");
 	G4WhichSampleArray.push_back("mcc9_10_Overlay9_Run4b_noweights");*/	
 
-	G4WhichSampleArray.push_back("mcc9_10_Overlay9_Run4b_standalone");
+	//G4WhichSampleArray.push_back("mcc9_10_Overlay9_Run4b_standalone");
 	G4WhichSampleArray.push_back("mcc9_10_Overlay9_Run4b_unified");
 
 	/*G4WhichSampleArray.push_back("mcc9_10_Overlay9_Run4c");
@@ -422,7 +420,7 @@
 	XSecWhichSampleArray.push_back("mcc9_10_Overlay9_Run4b");
 	XSecWhichSampleArray.push_back("mcc9_10_Overlay9_Run4b_noweights");	*/
 
-	XSecWhichSampleArray.push_back("mcc9_10_Overlay9_Run4b_standalone");	
+	//XSecWhichSampleArray.push_back("mcc9_10_Overlay9_Run4b_standalone");	
 	XSecWhichSampleArray.push_back("mcc9_10_Overlay9_Run4b_unified");
 
 	/*XSecWhichSampleArray.push_back("mcc9_10_Overlay9_Run4c");
@@ -471,7 +469,7 @@
 	MCStatWhichSampleArray.push_back("mcc9_10_Overlay9_Run4b");
 	MCStatWhichSampleArray.push_back("mcc9_10_Overlay9_Run4b_noweights");*/	
 
-	MCStatWhichSampleArray.push_back("mcc9_10_Overlay9_Run4b_standalone");
+	//MCStatWhichSampleArray.push_back("mcc9_10_Overlay9_Run4b_standalone");
 	MCStatWhichSampleArray.push_back("mcc9_10_Overlay9_Run4b_unified");
 
 	/*MCStatWhichSampleArray.push_back("mcc9_10_Overlay9_Run4c");
@@ -522,8 +520,8 @@
 	FDSWhichSampleArray.push_back("mcc9_10_Overlay9_Run4b");
 	FDSWhichSampleArray.push_back("mcc9_10_Overlay9_Run4b_noweights");*/	
 
-	FDSWhichSampleArray.push_back("mcc9_10_Overlay9_Run4b_standalone");	
-	FDSWhichSampleArray.push_back("mcc9_10_Overlay9_Run4b_unified");	
+	//FDSWhichSampleArray.push_back("mcc9_10_Overlay9_Run4b_standalone");	
+	//FDSWhichSampleArray.push_back("mcc9_10_Overlay9_Run4b_unified");	
 
 	/*FDSWhichSampleArray.push_back("mcc9_10_OverlayDirt9_Run4c");
 	FDSWhichSampleArray.push_back("mcc9_10_Overlay9_Run4c");
@@ -537,12 +535,12 @@
 	FDSWhichSampleArray.push_back("mcc9_10_OverlayDirt9_unified");
 	FDSWhichSampleArray.push_back("mcc9_10_Overlay9_unified");*/
 
-	for (int i = 0;i < (int)(FDSWhichSampleArray.size()); i++) {
+	//for (int i = 0;i < (int)(FDSWhichSampleArray.size()); i++) {
 
-		gROOT->ProcessLine("mcc9_10_reco_selection(\""+FDSWhichSampleArray[i]+"\",\"NoTune\").Loop()");
-		gROOT->ProcessLine("mcc9_10_reco_selection(\""+FDSWhichSampleArray[i]+"\",\"TwiceMEC\").Loop()");		
+		//gROOT->ProcessLine("mcc9_10_reco_selection(\""+FDSWhichSampleArray[i]+"\",\"NoTune\").Loop()");
+		//gROOT->ProcessLine("mcc9_10_reco_selection(\""+FDSWhichSampleArray[i]+"\",\"TwiceMEC\").Loop()");		
 
-	}	
+	//}	
 
 	//--------------------//
 	
