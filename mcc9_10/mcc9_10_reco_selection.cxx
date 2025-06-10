@@ -709,6 +709,8 @@ void mcc9_10_reco_selection::Loop() {
 			TVector3 RecoVertex(Vertex_X->at(0),Vertex_Y->at(0),Vertex_Z->at(0));
 
 			if ( !tools.inFVVector(RecoVertex) ) { continue; }
+			if ( Vertex_Z->at(0) < 250 ) { continue; }
+			if ( Vertex_Z->at(0) > 660 && Vertex_Z->at(0) < 760 ) { continue; }			
 
 			int cut_reco_blip_counter_radius = 0;
 
@@ -762,7 +764,16 @@ void mcc9_10_reco_selection::Loop() {
 			g1_v.SetPhi(g1_phi);
 			g1_v.SetTheta(TMath::ACos(g1_costheta));
 
-			if (g1_costheta < gamma_costheta_thres) { continue; }			
+			if (g1_costheta < gamma1_costheta_thres) { continue; }			
+
+			TVector3 g1_start(g1_start_x,g1_start_y,g1_start_z);
+			TVector3 g1_end(g1_end_x,g1_end_y,g1_end_z);	
+			
+			if ( FVz - g1_end_z < 10 ) { continue; } // cm
+			//if ( !tools.loose_inFVVector(g1_end) ) { continue; }			
+
+			//if ( !tools.inFVVector(g1_start) ) { continue; }
+			//if ( !tools.inFVVector(g1_end) ) { continue; }			
 			
 			//--------------------//			
 
@@ -777,11 +788,21 @@ void mcc9_10_reco_selection::Loop() {
 			g2_v.SetPhi(g2_phi);
 			g2_v.SetTheta(TMath::ACos(g2_costheta));
 
-			if (g2_costheta < gamma_costheta_thres) { continue; }				
+			if (g2_costheta < gamma2_costheta_thres) { continue; }		
+			
+			TVector3 g2_start(g2_start_x,g2_start_y,g2_start_z);
+			TVector3 g2_end(g2_end_x,g2_end_y,g2_end_z);
+
+			//if ( FVz - g2_end_z < 10 ) { continue; } // cm			
+			
+			//if ( !tools.inFVVector(g2_start) ) { continue; }
+			//if ( !tools.inFVVector(g2_end) ) { continue; }				
 
 			// two-shower opening angle
 
-			double two_shower_angle = reco_shower_opening_angle->at(0);
+			double two_shower_angle = reco_shower_opening_angle->at(0); // deg
+
+			if ( two_shower_angle > 70 ) { continue; }
 
 			//--------------------//
 
@@ -873,7 +894,11 @@ void mcc9_10_reco_selection::Loop() {
 					// Only neutron candidates
 					else if (wc_reco_pdg->at(ipfp) == NeutronPdg) {
 
-						if (mom > 0.) { primary_neutron_counter++; }
+						double e = TMath::Sqrt( mom*mom + NeutronMass_GeV * NeutronMass_GeV);
+						double ke = e - NeutronMass_GeV;						
+						//cout << "neutron mom = " << mom << " ke = " << ke << " bkg_1n_0p_1pi0_X = " << bkg_1n_0p_1pi0_X << endl;
+						//if (mom > 0.) { primary_neutron_counter++; }
+						if (ke > 0.01) { primary_neutron_counter++; }						
 										
 					} // end of the primary neutrons
 
@@ -967,6 +992,7 @@ void mcc9_10_reco_selection::Loop() {
 
 			// wc
 
+			//if (primary_neutron_counter != 0) { continue; }			
 			if (primary_proton_counter != 0) { continue; }
 			if (primary_muon_counter != 0) { continue; }
 			if (primary_charged_pion_counter != 0) { continue; }
@@ -975,7 +1001,7 @@ void mcc9_10_reco_selection::Loop() {
 			if (secondary_muon_counter != 0) { continue; }
 			if (secondary_charged_pion_counter != 0) { continue; }
 
-			if (wc_single_photon_other_score < 0) { continue; }
+			if (wc_single_photon_other_score < 0 || wc_single_photon_other_score > 2.) { continue; }
 			if (wc_single_photon_numu_score < -1) { continue; }
 			if (wc_single_photon_ncpi0_score > 0.6) { continue; }
 			if (wc_single_photon_nue_score < -2.5) { continue; }
@@ -993,6 +1019,7 @@ void mcc9_10_reco_selection::Loop() {
 			// cout << "secondary charged pion counter = " << secondary_charged_pion_counter << endl;
 			// cout << "secondary electron counter = " << secondary_electron_counter << endl << endl;
 			// cout << "secondary photon counter = " << secondary_photon_counter << endl << endl;
+			//cout << "secondary neutron counter = " << secondary_neutron_counter << endl;
 
 			//cout << endl;
 
@@ -1049,6 +1076,7 @@ void mcc9_10_reco_selection::Loop() {
 			// reco_pi0_p_gammas uses teh vector sum of the two gammas
 
 			if ( TMath::Abs(pi0_p - reco_pi0_p_gammas->at(0)) / pi0_p * 100. > 200) { continue; }
+			if (two_shower_start_dist > 100) { continue; } // cm
 
 			pass_selection_counter++;			
 
@@ -1085,6 +1113,10 @@ void mcc9_10_reco_selection::Loop() {
 
 			myRunTxtFile << "run = " << Run << ",  subrun = " << SubRun << ", event = " << Event << ", coh = " << coh << ", signal = " << signal << endl;
 			myRunTxtFile << "vertex x = " << RecoVertex.X() << ",  y = " << RecoVertex.Y() << ", z = " << RecoVertex.Z() << endl;
+			myRunTxtFile << "g1_start_x = " << g1_start_x << ",  g1_start_y = " << g1_start_y << ", g1_start_z = " << g1_start_z << endl;
+			myRunTxtFile << "g1_end_x = " << g1_end_x << ",  g1_end_y = " << g1_end_y << ", g1_end_z = " << g1_end_z << endl;
+			myRunTxtFile << "g2_start_x = " << g2_start_x << ",  g2_start_y = " << g2_start_y << ", g2_start_z = " << g2_start_z << endl;			
+			myRunTxtFile << "g2_end_x = " << g2_end_x << ",  g2_end_y = " << g2_end_y << ", g2_end_z = " << g2_end_z << endl;						
 			myRunTxtFile << "bkg_1n_0p_1pi0_X = " << bkg_1n_0p_1pi0_X << endl << endl;			
 			
 			//--------------------//

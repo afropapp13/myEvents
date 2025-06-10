@@ -146,6 +146,22 @@ public :
    vector<float>   *pd_trk_llr_pid_score_v;
    Int_t           pd_reco_track_count;
    Int_t           pd_reco_shower_count;
+   double two_shower_start_dist;
+   double reco_cm_costheta;  
+	//int wc_reco_g1_id;
+	//int wc_reco_g2_id;    
+   double g1_start_x;
+   double g1_start_y;
+   double g1_start_z;
+   double g1_end_x;
+   double g1_end_y;
+   double g1_end_z;   
+   double g2_start_x;
+   double g2_start_y;
+   double g2_start_z;  
+   double g2_end_x;
+   double g2_end_y;
+   double g2_end_z;      
 
    // List of branches
     TBranch        *b_Weight;   //!
@@ -267,6 +283,22 @@ public :
    TBranch        *b_pd_trk_llr_pid_score_v;   //!
    TBranch        *b_pd_reco_track_count;   //!
    TBranch        *b_pd_reco_shower_count;   //!
+   TBranch        *b_two_shower_start_dist;   //!   
+   TBranch        *b_reco_cm_costheta;   //! 
+   //TBranch        *b_wc_reco_g1_id;   //!
+   //TBranch        *b_wc_reco_g2_id;   //!  
+   TBranch        *b_g1_start_x;   //! 
+   TBranch        *b_g1_start_y;   //! 
+   TBranch        *b_g1_start_z;   //!       
+   TBranch        *b_g1_end_x;   //! 
+   TBranch        *b_g1_end_y;   //! 
+   TBranch        *b_g1_end_z;   //!      
+   TBranch        *b_g2_start_x;   //! 
+   TBranch        *b_g2_start_y;   //! 
+   TBranch        *b_g2_start_z;   //!       
+   TBranch        *b_g2_end_x;   //! 
+   TBranch        *b_g2_end_y;   //! 
+   TBranch        *b_g2_end_z;   //!      
 
    mcc9_10_reco_selection(TString WhichSample="",TString Tune="",TString WhichEventWeightLabel="", int UniverseIndex=-1, TTree *tree=0);
    virtual ~mcc9_10_reco_selection();
@@ -548,6 +580,22 @@ void mcc9_10_reco_selection::Init(TTree *tree)
    fChain->SetBranchAddress("pd_trk_llr_pid_score_v", &pd_trk_llr_pid_score_v, &b_pd_trk_llr_pid_score_v);
    fChain->SetBranchAddress("pd_reco_track_count", &pd_reco_track_count, &b_pd_reco_track_count);
    fChain->SetBranchAddress("pd_reco_shower_count", &pd_reco_shower_count, &b_pd_reco_shower_count);
+   fChain->SetBranchAddress("two_shower_start_dist", &two_shower_start_dist, &b_two_shower_start_dist);
+   fChain->SetBranchAddress("reco_cm_costheta", &reco_cm_costheta, &b_reco_cm_costheta);
+   //fChain->SetBranchAddress("wc_reco_g1_id", &wc_reco_g1_id, &b_wc_reco_g1_id);
+   //fChain->SetBranchAddress("wc_reco_g2_id", &wc_reco_g2_id, &b_wc_reco_g2_id);   
+   fChain->SetBranchAddress("g1_start_x", &g1_start_x, &b_g1_start_x);
+   fChain->SetBranchAddress("g1_start_y", &g1_start_y, &b_g1_start_y);
+   fChain->SetBranchAddress("g1_start_z", &g1_start_z, &b_g1_start_z);
+   fChain->SetBranchAddress("g1_end_x", &g1_end_x, &b_g1_end_x);
+   fChain->SetBranchAddress("g1_end_y", &g1_end_y, &b_g1_end_y);
+   fChain->SetBranchAddress("g1_end_z", &g1_end_z, &b_g1_end_z);    
+   fChain->SetBranchAddress("g2_start_x", &g2_start_x, &b_g2_start_x);
+   fChain->SetBranchAddress("g2_start_y", &g2_start_y, &b_g2_start_y);
+   fChain->SetBranchAddress("g2_start_z", &g2_start_z, &b_g2_start_z);
+   fChain->SetBranchAddress("g2_end_x", &g2_end_x, &b_g2_end_x);
+   fChain->SetBranchAddress("g2_end_y", &g2_end_y, &b_g2_end_y);
+   fChain->SetBranchAddress("g2_end_z", &g2_end_z, &b_g2_end_z);            
 
    Notify();
 }
