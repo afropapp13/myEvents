@@ -161,7 +161,21 @@ public :
    double g2_start_z;  
    double g2_end_x;
    double g2_end_y;
-   double g2_end_z;      
+   double g2_end_z;  
+	int g1_truthMatch_pdg;
+	double g1_truthMatch_p;
+	double g1_truthMatch_px;
+	double g1_truthMatch_py;
+	double g1_truthMatch_pz;
+	double g1_truthMatch_costheta;
+	double g1_truthMatch_phi; // rad		
+	int g2_truthMatch_pdg;
+	double g2_truthMatch_p;
+	double g2_truthMatch_px;
+	double g2_truthMatch_py;
+	double g2_truthMatch_pz;
+	double g2_truthMatch_costheta;
+	double g2_truthMatch_phi; // rad       
 
    // List of branches
     TBranch        *b_Weight;   //!
@@ -298,7 +312,21 @@ public :
    TBranch        *b_g2_start_z;   //!       
    TBranch        *b_g2_end_x;   //! 
    TBranch        *b_g2_end_y;   //! 
-   TBranch        *b_g2_end_z;   //!      
+   TBranch        *b_g2_end_z;   //!  
+   TBranch        *b_g1_truthMatch_pdg;   //!  
+   TBranch        *b_g1_truthMatch_p;   //!  
+   TBranch        *b_g1_truthMatch_px;   //!  
+   TBranch        *b_g1_truthMatch_py;   //!  
+   TBranch        *b_g1_truthMatch_pz;   //!  
+   TBranch        *b_g1_truthMatch_costheta;   //!  
+   TBranch        *b_g1_truthMatch_phi;   //!     
+   TBranch        *b_g2_truthMatch_pdg;   //!  
+   TBranch        *b_g2_truthMatch_p;   //!  
+   TBranch        *b_g2_truthMatch_px;   //!  
+   TBranch        *b_g2_truthMatch_py;   //!  
+   TBranch        *b_g2_truthMatch_pz;   //!  
+   TBranch        *b_g2_truthMatch_costheta;   //!  
+   TBranch        *b_g2_truthMatch_phi;   //!            
 
    mcc9_10_reco_selection(TString WhichSample="",TString Tune="",TString WhichEventWeightLabel="", int UniverseIndex=-1, TTree *tree=0);
    virtual ~mcc9_10_reco_selection();
@@ -595,7 +623,23 @@ void mcc9_10_reco_selection::Init(TTree *tree)
    fChain->SetBranchAddress("g2_start_z", &g2_start_z, &b_g2_start_z);
    fChain->SetBranchAddress("g2_end_x", &g2_end_x, &b_g2_end_x);
    fChain->SetBranchAddress("g2_end_y", &g2_end_y, &b_g2_end_y);
-   fChain->SetBranchAddress("g2_end_z", &g2_end_z, &b_g2_end_z);            
+   fChain->SetBranchAddress("g2_end_z", &g2_end_z, &b_g2_end_z); 
+   
+	fChain->SetBranchAddress("g1_truthMatch_pdg",&g1_truthMatch_pdg, &b_g1_truthMatch_pdg);
+	fChain->SetBranchAddress("g1_truthMatch_p",&g1_truthMatch_p, &b_g1_truthMatch_p);
+	fChain->SetBranchAddress("g1_truthMatch_px",&g1_truthMatch_px, &b_g1_truthMatch_px);
+	fChain->SetBranchAddress("g1_truthMatch_py",&g1_truthMatch_py, &b_g1_truthMatch_py);
+	fChain->SetBranchAddress("g1_truthMatch_pz",&g1_truthMatch_pz, &b_g1_truthMatch_pz);
+	fChain->SetBranchAddress("g1_truthMatch_costheta",&g1_truthMatch_costheta, &b_g1_truthMatch_costheta);
+	fChain->SetBranchAddress("g1_truthMatch_phi",&g1_truthMatch_phi, &b_g1_truthMatch_phi);
+	
+	fChain->SetBranchAddress("g2_truthMatch_pdg",&g2_truthMatch_pdg, &b_g2_truthMatch_pdg);
+	fChain->SetBranchAddress("g2_truthMatch_p",&g2_truthMatch_p, &b_g2_truthMatch_p);
+	fChain->SetBranchAddress("g2_truthMatch_px",&g2_truthMatch_px, &b_g2_truthMatch_px);
+	fChain->SetBranchAddress("g2_truthMatch_py",&g2_truthMatch_py, &b_g2_truthMatch_py);
+	fChain->SetBranchAddress("g2_truthMatch_pz",&g2_truthMatch_pz, &b_g2_truthMatch_pz);
+	fChain->SetBranchAddress("g2_truthMatch_costheta",&g2_truthMatch_costheta, &b_g2_truthMatch_costheta);
+	fChain->SetBranchAddress("g2_truthMatch_phi",&g2_truthMatch_phi, &b_g2_truthMatch_phi);
 
    Notify();
 }

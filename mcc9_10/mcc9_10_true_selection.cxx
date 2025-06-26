@@ -63,6 +63,15 @@ void mcc9_10_true_selection::Loop() {
 
 	}
 
+	//--------------------------------------------------//
+	
+	// file for fake data study
+
+	TFile* f_fds = new TFile("reinseghal/rs_spline.root","readonly");
+	TGraph* g_fds = (TGraph*)(f_fds->Get("h_spline"));
+
+	//--------------------------------------------------//	
+
 	// Output Files
 
 	TString FileName = event_selection_file_path+fTune+"Truthncpi0_"+fWhichSample+Extension+".root";	
@@ -135,16 +144,21 @@ void mcc9_10_true_selection::Loop() {
 		// Weight from v3.0.4 to v.3.0.6 * weight from application of T2K tune
 		double weight = POTWeight * Weight * T2KWeight * ROOTinoWeight;
 
-		// Fake data studies: removing the T2K tune weight
-		if (fTune == "GENIEv2") { weight = POTWeight; }
-		if (fTune == "NoTune") { weight = POTWeight * Weight * ROOTinoWeight; }
-		// Double the MEC weight  (mode = 10)
-		//if (fTune == "TwiceMEC" && Muon_MCParticle_Mode->at(0) == 10) { weight = 2 * POTWeight * Weight * T2KWeight * ROOTinoWeight; }
-		//if (fTune == "TwiceMEC" && Muon_MCParticle_Mode->at(0) != 10) { weight = POTWeight * Weight * T2KWeight * ROOTinoWeight; }		
+		// Fake data studies: reweight to Rein Sehgal (RS)
+		if (fTune == "RS" && pi0_MCParticle_Mode->at(0) == 3) { 
+				
+			double rw = g_fds->Eval(True_Ev);
+			weight = rw * weight; 
+				
+		}		
 
 		//--------------------------------------------------//
 
-		// Genie, flux & reinteraction weights for systematics
+		// Genie, flux & reinteraction weights for multisim systematics
+		// !!!!!!!!!!!!!IMPORTANT!!!!!!!!!!!!!!
+		// divide all the weights by 1000
+		// PeLEE choice to stor integers instead of doubles	
+		// Not applicable to MCStat weights		
 
 		if ( 
 			   fUniverseIndex != -1 && (
@@ -164,6 +178,8 @@ void mcc9_10_true_selection::Loop() {
 			|| fWhichSample == "mcc9_10_OverlayDirt9_Run3" 
 			|| fWhichSample == "mcc9_10_OverlayDirt9_Run4a" 
 			|| fWhichSample == "mcc9_10_OverlayDirt9_Run4b" 
+			|| fWhichSample == "mcc9_10_OverlayDirt9_Run4b_unified" 
+			|| fWhichSample == "mcc9_10_OverlayDirt9_Run4b_standalone"			
 			|| fWhichSample == "mcc9_10_OverlayDirt9_Run4c" 
 			|| fWhichSample == "mcc9_10_OverlayDirt9_Run4d" 
 			|| fWhichSample == "mcc9_10_OverlayDirt9_Run5" 
@@ -178,7 +194,7 @@ void mcc9_10_true_selection::Loop() {
 
 				if ( int(All_UBGenie->size()) > fUniverseIndex ) {
 
-					weight = weight*All_UBGenie->at(fUniverseIndex) / T2KWeight; 
+					weight = weight*All_UBGenie->at(fUniverseIndex) / T2KWeight / 1000.; 
 
 				}
 
@@ -279,7 +295,7 @@ void mcc9_10_true_selection::Loop() {
 
 				if ( int(fluxes->size()) > fUniverseIndex ) {
 
-					 weight = weight*fluxes->at(fUniverseIndex); 
+					 weight = weight*fluxes->at(fUniverseIndex) / 1000.; 
 
 				}
 
@@ -290,7 +306,7 @@ void mcc9_10_true_selection::Loop() {
 
 				if ( int(reinteractions->size()) > fUniverseIndex ) {
 				
-					weight = weight*reinteractions->at(fUniverseIndex);
+					weight = weight*reinteractions->at(fUniverseIndex) / 1000.;
 
 				} 
 
@@ -302,9 +318,9 @@ void mcc9_10_true_selection::Loop() {
 				int concat = tools.ConcatRunSubRunEvent(Run,SubRun,Event,fUniverseIndex);
 				weight = weight*tools.PoissonRandomNumber(concat); 
 				
-			}			
+			}						
 
-		}				
+		} // end of the multisim weights			
 
 		//--------------------------------------------------//
 
@@ -379,6 +395,7 @@ void mcc9_10_true_selection::Loop() {
 	OutputFile->Close();
 
 	fFile->Close();
+	f_fds->Close();
 
 	//----------------------------------------//
 

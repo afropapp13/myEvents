@@ -36,6 +36,7 @@ void mcc9_10_interaction_breakdown(TString BaseMC = "") {
 	PlotNames.push_back("Recog2CosThetaPlot");
 	PlotNames.push_back("Recog2MomentumPlot");
 	PlotNames.push_back("Recotwo_shower_anglePlot");
+	PlotNames.push_back("Recotwo_shower_start_distPlot");		
 
 	// Blips
 

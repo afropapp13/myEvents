@@ -36,6 +36,7 @@ void mcc9_10_topological_breakdown(TString BaseMC = "") {
 	PlotNames.push_back("Recog2CosThetaPlot");
 	PlotNames.push_back("Recog2MomentumPlot");
 	PlotNames.push_back("Recotwo_shower_anglePlot");
+	PlotNames.push_back("Recotwo_shower_start_distPlot");	
 
 	// Blips
 
@@ -438,7 +439,7 @@ void mcc9_10_topological_breakdown(TString BaseMC = "") {
 
 				hratio[0][WhichPlot]->GetYaxis()->SetTitleFont(FontStyle);
 				hratio[0][WhichPlot]->GetYaxis()->SetLabelFont(FontStyle);
-				hratio[0][WhichPlot]->GetYaxis()->SetRangeUser(0.51,1.49);
+				hratio[0][WhichPlot]->GetYaxis()->SetRangeUser(0.51,1.89);
 				hratio[0][WhichPlot]->GetYaxis()->SetNdivisions(6);
 				hratio[0][WhichPlot]->GetYaxis()->SetTitleOffset(0.35);
 				hratio[0][WhichPlot]->GetYaxis()->SetTitleSize(0.1);
@@ -454,6 +455,7 @@ void mcc9_10_topological_breakdown(TString BaseMC = "") {
 				RatioLine->SetLineWidth(2);
 				RatioLine->SetLineColor(kBlack);
 				RatioLine->SetLineStyle(kDashed);
+				RatioLine->Draw("same");
 			
 				topPad->cd();
 				leg[WhichPlot]->SetTextSize(0.5);

@@ -529,8 +529,7 @@
 
 		if (string(FDSWhichSampleArray[i]).find("Overlay9") != std::string::npos) { 
 
-			gROOT->ProcessLine("mcc9_10_true_selection(\""+FDSWhichSampleArray[i]+"\",\"NoTune\").Loop()"); 
-		  	gROOT->ProcessLine("mcc9_10_true_selection(\""+FDSWhichSampleArray[i]+"\",\"TwiceMEC\").Loop()"); 
+			gROOT->ProcessLine("mcc9_10_true_selection(\""+FDSWhichSampleArray[i]+"\",\"RS\").Loop()"); 
 
 		}		   
 

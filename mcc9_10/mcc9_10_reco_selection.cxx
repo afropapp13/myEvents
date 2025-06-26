@@ -65,6 +65,13 @@ void mcc9_10_reco_selection::Loop() {
 		TH2D::SetDefaultSumw2();
 		double weight = 1.;
 
+		//--------------------------------------------------//
+		
+		// file for fake data study
+
+		TFile* f_fds = new TFile("reinseghal/rs_spline.root","readonly");
+		TGraph* g_fds = (TGraph*)(f_fds->Get("h_spline"));			
+
 		//----------------------------------------//
 
 		TString Extension = "";
@@ -76,6 +83,8 @@ void mcc9_10_reco_selection::Loop() {
 			Extension = "_"+fEventWeightLabel+"_"+ToStringInt(fUniverseIndex); 
 
 		}
+
+		//--------------------------------------------------//		
 
 		TString FileName = event_selection_file_path+Cuts+"/"+fTune+"ncpi0_"+fWhichSample+Extension+Cuts+".root";
 		TFile* file = new TFile(FileName,"recreate");
@@ -89,7 +98,7 @@ void mcc9_10_reco_selection::Loop() {
 		ofstream myRunTxtFile;
 		myRunTxtFile.open(RunTxtName);
 		myRunTxtFile << std::fixed << std::setprecision(2);
-		myRunTxtFile << fWhichSample << endl << endl;			
+		myRunTxtFile << fWhichSample << endl << endl;		
 
 		//----------------------------------------//
 
@@ -468,6 +477,24 @@ void mcc9_10_reco_selection::Loop() {
 
 		//----------------------------------------//		
 
+		// two-shower start point distance
+
+		TH1D* Recotwo_shower_start_distPlot = new TH1D("Recotwo_shower_start_distPlot",LabelXAxistwo_shower_start_dist,NBinstwo_shower_start_dist,ArrayNBinstwo_shower_start_dist);
+		TH1D* NCCOHRecotwo_shower_start_distPlot = new TH1D("NCCOHRecotwo_shower_start_distPlot",LabelXAxistwo_shower_start_dist,NBinstwo_shower_start_dist,ArrayNBinstwo_shower_start_dist);	
+		TH1D* NCCOHTruetwo_shower_start_distPlot = new TH1D("NCCOHTruetwo_shower_start_distPlot",LabelXAxistwo_shower_start_dist,NBinstwo_shower_start_dist,ArrayNBinstwo_shower_start_dist);
+		TH2D* NCCOHRecotwo_shower_start_distPlot2D = new TH2D("NCCOHRecotwo_shower_start_distPlot2D",LabelXAxistwo_shower_start_dist2D,NBinstwo_shower_start_dist,
+			  ArrayNBinstwo_shower_start_dist,NBinstwo_shower_start_dist,ArrayNBinstwo_shower_start_dist);
+		TH2D* POTScaledNCCOHRecotwo_shower_start_distPlot2D = new TH2D("POTScaledNCCOHRecotwo_shower_start_distPlot2D",LabelXAxistwo_shower_start_dist2D,NBinstwo_shower_start_dist,
+			  ArrayNBinstwo_shower_start_dist,NBinstwo_shower_start_dist,ArrayNBinstwo_shower_start_dist);
+		TH1D* NonNCCOHRecotwo_shower_start_distPlot = new TH1D("NonNCCOHRecotwo_shower_start_distPlot",LabelXAxistwo_shower_start_dist,NBinstwo_shower_start_dist,ArrayNBinstwo_shower_start_dist);
+		TH1D* QERecotwo_shower_start_distPlot = new TH1D("QERecotwo_shower_start_distPlot",LabelXAxistwo_shower_start_dist,NBinstwo_shower_start_dist,ArrayNBinstwo_shower_start_dist);
+		TH1D* MECRecotwo_shower_start_distPlot = new TH1D("MECRecotwo_shower_start_distPlot",LabelXAxistwo_shower_start_dist,NBinstwo_shower_start_dist,ArrayNBinstwo_shower_start_dist);
+		TH1D* RESRecotwo_shower_start_distPlot = new TH1D("RESRecotwo_shower_start_distPlot",LabelXAxistwo_shower_start_dist,NBinstwo_shower_start_dist,ArrayNBinstwo_shower_start_dist);
+		TH1D* DISRecotwo_shower_start_distPlot = new TH1D("DISRecotwo_shower_start_distPlot",LabelXAxistwo_shower_start_dist,NBinstwo_shower_start_dist,ArrayNBinstwo_shower_start_dist);
+		TH1D* COHRecotwo_shower_start_distPlot = new TH1D("COHRecotwo_shower_start_distPlot",LabelXAxistwo_shower_start_dist,NBinstwo_shower_start_dist,ArrayNBinstwo_shower_start_dist);		
+
+		//----------------------------------------//		
+
 		// g1 CosTheta
 
 		TH1D* Recog1CosThetaPlot = new TH1D("Recog1CosThetaPlot",LabelXAxisg1CosTheta,NBinsg1CosTheta,ArrayNBinsg1CosTheta);
@@ -575,7 +602,7 @@ void mcc9_10_reco_selection::Loop() {
 			//--------------------//
 
 			weight = POTWeight;
-			if (jentry == nentries -1) { cout << "pot scale = " << POTWeight << endl; }
+			//if (jentry == nentries -1) { cout << "pot scale = " << POTWeight << endl; }
 
 			if (string(fWhichSample).find("Overlay") != std::string::npos) { 
 
@@ -609,18 +636,30 @@ void mcc9_10_reco_selection::Loop() {
 				// For the detector variations, Weight (bug fix) = 1		
 				weight = POTWeight * Weight * T2KWeight * ROOTinoWeight;
 
-				// Fake data studies: removing the T2K tune weight
-				if (fTune == "GENIEv2") { weight = POTWeight; }
-				if (fTune == "NoTune") { weight = POTWeight * Weight * ROOTinoWeight; }
-				// Double the MEC weight (mode = 10)
-				if (fTune == "TwiceMEC" && MCParticle_Mode == 10) { weight = 2 * POTWeight * Weight * T2KWeight * ROOTinoWeight; }
-				if (fTune == "TwiceMEC" && MCParticle_Mode != 10) { weight = POTWeight * Weight * T2KWeight * ROOTinoWeight; }									
+				// Fake data studies: reweight to Rein Sehgal (RS)
+				if (fTune == "RS" && MCParticle_Mode == 3) { 
+					
+					weight = 2 * weight; 
+				
+				}
 				
 			}
+
+			// Fake data studies: reweight to Rein Sehgal (RS)
+			if (fTune == "RS" && MCParticle_Mode == 3) { 
+					
+				double rw = g_fds->Eval(True_Ev);
+				weight = rw * weight; 
+					
+			}				
 			
 			//--------------------//
 
-			// Genie, flux & reinteraction weights for systematics
+			// Genie, flux & reinteraction weights for multisim systematics
+			// !!!!!!!!!!!!!IMPORTANT!!!!!!!!!!!!!!
+			// divide all the weights by 1000
+			// PeLEE choice to store integers instead of doubles	
+			// Not applicable to MCStat weights			
 
 			if ( 
 				   fUniverseIndex != -1 && (
@@ -629,6 +668,8 @@ void mcc9_10_reco_selection::Loop() {
 				|| fWhichSample == "mcc9_10_Overlay9_Run3" 
 				|| fWhichSample == "mcc9_10_Overlay9_Run4a" 
 				|| fWhichSample == "mcc9_10_Overlay9_Run4b"
+				|| fWhichSample == "mcc9_10_Overlay9_Run4b_standalone"
+				|| fWhichSample == "mcc9_10_Overlay9_Run4b_unified"				
 				|| fWhichSample == "mcc9_10_Overlay9_Run4c" 
 				|| fWhichSample == "mcc9_10_Overlay9_Run4d" 
 				|| fWhichSample == "mcc9_10_Overlay9_Run5" 
@@ -653,7 +694,7 @@ void mcc9_10_reco_selection::Loop() {
 				
 				if (fUniverseIndex < (int)(All_UBGenie->size())) {
 
-					if (fEventWeightLabel == "All_UBGenie") { weight = weight*All_UBGenie->at(fUniverseIndex) / T2KWeight; }
+					if (fEventWeightLabel == "All_UBGenie") { weight = weight*All_UBGenie->at(fUniverseIndex) / T2KWeight / 1000.; }
 					if (fEventWeightLabel == "AxFFCCQEshape_UBGenie") { weight = weight*AxFFCCQEshape_UBGenie->at(fUniverseIndex) / T2KWeight; }
 					if (fEventWeightLabel == "DecayAngMEC_UBGenie") { weight = weight*DecayAngMEC_UBGenie->at(fUniverseIndex) / T2KWeight; }
 					if (fEventWeightLabel == "NormCCCOH_UBGenie") { weight = weight*NormCCCOH_UBGenie->at(fUniverseIndex) / T2KWeight; }
@@ -671,7 +712,7 @@ void mcc9_10_reco_selection::Loop() {
 
 					if ( fUniverseIndex < (int)(fluxes->size()) ) {
 
-						weight = weight*fluxes->at(fUniverseIndex); 
+						weight = weight*fluxes->at(fUniverseIndex) / 1000.; 
 
 					}
 
@@ -682,7 +723,7 @@ void mcc9_10_reco_selection::Loop() {
 				
 					if ( fUniverseIndex < (int)(reinteractions->size()) ) {
 
-						weight = weight*reinteractions->at(fUniverseIndex); 
+						weight = weight*reinteractions->at(fUniverseIndex) / 1000.; 
 
 					}
 
@@ -696,7 +737,7 @@ void mcc9_10_reco_selection::Loop() {
 				
 				}				
 
-			}	
+			} // end of the multisim weights
 
 			//--------------------//
 
@@ -706,11 +747,7 @@ void mcc9_10_reco_selection::Loop() {
 
 			// Contained Reconstructed Vertex
 
-			TVector3 RecoVertex(Vertex_X->at(0),Vertex_Y->at(0),Vertex_Z->at(0));
-
-			if ( !tools.inFVVector(RecoVertex) ) { continue; }
-			if ( Vertex_Z->at(0) < 250 ) { continue; }
-			if ( Vertex_Z->at(0) > 660 && Vertex_Z->at(0) < 760 ) { continue; }			
+			TVector3 RecoVertex(Vertex_X->at(0),Vertex_Y->at(0),Vertex_Z->at(0));	
 
 			int cut_reco_blip_counter_radius = 0;
 
@@ -725,17 +762,6 @@ void mcc9_10_reco_selection::Loop() {
 
 			}
 
-			//if (cut_reco_blip_counter_radius != 0) { continue; }
-
-			//--------------------//
-
-// need to check containment
-			//TVector3 CandidateMuonStart(CandidateMu_StartX->at(0),CandidateMu_StartY->at(0),CandidateMu_StartZ->at(0));
-			//TVector3 CandidateMuonEnd(CandidateMu_EndX->at(0),CandidateMu_EndY->at(0),CandidateMu_EndZ->at(0));
-
-			//TVector3 CandidateProtonStart(CandidateP_StartX->at(0),CandidateP_StartY->at(0),CandidateP_StartZ->at(0));
-			//TVector3 CandidateProtonEnd(CandidateP_EndX->at(0),CandidateP_EndY->at(0),CandidateP_EndZ->at(0));
-
 			//--------------------//
 
 			// Pi0 kinematics
@@ -749,8 +775,6 @@ void mcc9_10_reco_selection::Loop() {
 			pi0_v.SetPhi(pi0_phi);
 			pi0_v.SetTheta(TMath::ACos(pi0_costheta));
 
-			if (pi0_costheta < pi0_costheta_thres) { continue; }
-
 			//--------------------//
 			
 			// g1 kinematics
@@ -762,18 +786,10 @@ void mcc9_10_reco_selection::Loop() {
 			TVector3 g1_v(-1.,-1.,-1.);
 			g1_v.SetMag(g1_p);
 			g1_v.SetPhi(g1_phi);
-			g1_v.SetTheta(TMath::ACos(g1_costheta));
-
-			if (g1_costheta < gamma1_costheta_thres) { continue; }			
+			g1_v.SetTheta(TMath::ACos(g1_costheta));	
 
 			TVector3 g1_start(g1_start_x,g1_start_y,g1_start_z);
 			TVector3 g1_end(g1_end_x,g1_end_y,g1_end_z);	
-			
-			if ( FVz - g1_end_z < 10 ) { continue; } // cm
-			//if ( !tools.loose_inFVVector(g1_end) ) { continue; }			
-
-			//if ( !tools.inFVVector(g1_start) ) { continue; }
-			//if ( !tools.inFVVector(g1_end) ) { continue; }			
 			
 			//--------------------//			
 
@@ -787,32 +803,15 @@ void mcc9_10_reco_selection::Loop() {
 			g2_v.SetMag(g2_p);
 			g2_v.SetPhi(g2_phi);
 			g2_v.SetTheta(TMath::ACos(g2_costheta));
-
-			if (g2_costheta < gamma2_costheta_thres) { continue; }		
 			
 			TVector3 g2_start(g2_start_x,g2_start_y,g2_start_z);
-			TVector3 g2_end(g2_end_x,g2_end_y,g2_end_z);
+			TVector3 g2_end(g2_end_x,g2_end_y,g2_end_z);			
 
-			//if ( FVz - g2_end_z < 10 ) { continue; } // cm			
-			
-			//if ( !tools.inFVVector(g2_start) ) { continue; }
-			//if ( !tools.inFVVector(g2_end) ) { continue; }				
+			//--------------------//			
 
 			// two-shower opening angle
 
 			double two_shower_angle = reco_shower_opening_angle->at(0); // deg
-
-			if ( two_shower_angle > 70 ) { continue; }
-
-			//--------------------//
-
-			// Event selection
-
-			// Needs to be fine-tuned
-			if (pi0_costheta < pi0_costheta_thres) { continue; }
-			//if (wc_nc_pio_score < -0.5) {continue;}
-			//if (wc_kine_pio_flag!=2) {continue;}
-			//if (wc_kine_pio_flag==0) {continue;}
 
 			//--------------------//
 
@@ -990,39 +989,6 @@ void mcc9_10_reco_selection::Loop() {
 
 			}
 
-			// wc
-
-			//if (primary_neutron_counter != 0) { continue; }			
-			if (primary_proton_counter != 0) { continue; }
-			if (primary_muon_counter != 0) { continue; }
-			if (primary_charged_pion_counter != 0) { continue; }
-
-			if (secondary_proton_counter != 0) { continue; }
-			if (secondary_muon_counter != 0) { continue; }
-			if (secondary_charged_pion_counter != 0) { continue; }
-
-			if (wc_single_photon_other_score < 0 || wc_single_photon_other_score > 2.) { continue; }
-			if (wc_single_photon_numu_score < -1) { continue; }
-			if (wc_single_photon_ncpi0_score > 0.6) { continue; }
-			if (wc_single_photon_nue_score < -2.5) { continue; }
-
-			// cout << "primary muon counter = " << primary_muon_counter << endl;
-			// cout << "primary proton counter = " << primary_proton_counter << endl;
-			// cout << "primary charged pion counter = " << primary_charged_pion_counter << endl;
-			//cout << "primary neutral pion counter = " << primary_neutral_pion_counter << endl;
-			//cout << "primary electron counter = " << primary_electron_counter << endl;
-			//cout << "primary photon counter = " << primary_photon_counter << endl;
-			//cout << "primary neutron counter = " << primary_neutron_counter << endl;
-
-			// cout << "secondary muon counter = " << secondary_muon_counter << endl;
-			// cout << "secondary proton counter = " << secondary_proton_counter << endl;
-			// cout << "secondary charged pion counter = " << secondary_charged_pion_counter << endl;
-			// cout << "secondary electron counter = " << secondary_electron_counter << endl << endl;
-			// cout << "secondary photon counter = " << secondary_photon_counter << endl << endl;
-			//cout << "secondary neutron counter = " << secondary_neutron_counter << endl;
-
-			//cout << endl;
-
 			//--------------------//
 
 			// Reject events that do not have two showers
@@ -1061,28 +1027,52 @@ void mcc9_10_reco_selection::Loop() {
 				}	
 
 			}		
-			
-			//if (nshowers != 2) { continue; }
-			//if (nprotontracks != 0) { continue; }
-			if (nmuontracks != 0) { continue; }
-			if (npiontracks != 0) { continue; }
-
-			//if (reco_pi0_invmass->at(0) > 0.4) { continue; } // GeV	
 
 			//--------------------//
 
-			// Quality cut
-			// pi0_p uses the expression with alpha/ the opening angle between the two showers
-			// reco_pi0_p_gammas uses teh vector sum of the two gammas
+			// event selection
 
-			if ( TMath::Abs(pi0_p - reco_pi0_p_gammas->at(0)) / pi0_p * 100. > 200) { continue; }
-			if (two_shower_start_dist > 100) { continue; } // cm
+			// wc counters
+		
+			if (primary_proton_counter != 0) { continue; }
+			if (primary_muon_counter != 0) { continue; }
+			if (primary_charged_pion_counter != 0) { continue; }
 
+			if (secondary_proton_counter != 0) { continue; }
+			if (secondary_muon_counter != 0) { continue; }
+			if (secondary_charged_pion_counter != 0) { continue; }
+
+			if (nmuontracks != 0) { continue; }
+			if (npiontracks != 0) { continue; }		
+			
+			// fv requirements
+
+			if ( !tools.inFVVector(RecoVertex) ) { continue; }
+			if ( Vertex_Z->at(0) < 250 ) { continue; }
+			if ( Vertex_Z->at(0) > 660 && Vertex_Z->at(0) < 760 ) { continue; }		
+			if ( FVz - g1_end_z < 10 ) { continue; } // cm	
+
+			// single photon bdt cuts
+			
+			if (wc_single_photon_numu_score < -1) { continue; }
+			if (wc_single_photon_other_score < 0 || wc_single_photon_other_score > 2.) { continue; }
+			if (wc_single_photon_ncpi0_score > 0.6) { continue; }
+			if (wc_single_photon_nue_score < -2.5) { continue; }				
+			
+			// angular quality cuts
+
+			if (g1_costheta < gamma1_costheta_thres) { continue; }				
+			if (g2_costheta < gamma2_costheta_thres) { continue; }		
+			
+			if (two_shower_angle > 70) { continue; } // deg	
+			if (two_shower_start_dist > 150) { continue; } // cm				
+			
 			pass_selection_counter++;			
 
 			//--------------------//
 	
-			// Underflow / overflow
+			// Underflow / overflow reco level
+
 			if (pi0_p < ArrayNBinsPi0Momentum[0]) { pi0_p = (ArrayNBinsPi0Momentum[0] + ArrayNBinsPi0Momentum[1])/2.; }
 			if (pi0_p > ArrayNBinsPi0Momentum[NBinsPi0Momentum]) { pi0_p = (ArrayNBinsPi0Momentum[NBinsPi0Momentum] + ArrayNBinsPi0Momentum[NBinsPi0Momentum-1])/2.; }
 
@@ -1093,23 +1083,6 @@ void mcc9_10_reco_selection::Loop() {
 			if (g2_p > ArrayNBinsg2Momentum[NBinsg2Momentum]) { g2_p = (ArrayNBinsg2Momentum[NBinsg2Momentum] + ArrayNBinsg2Momentum[NBinsg2Momentum-1])/2.; }
 
 			//--------------------//
-
-			// Selection Cuts
-
-			//bool PassedSelection = true;
-
-			// for (int i = 0; i < NCuts; i++) {
-
-			// 	if (VectorCuts[i] == "_PID_NuScore" && !(reco_p_LLR_Score < ProtonLLRPIDScore) ) 
-			// 		{ PassedSelection = false; }
-
-			// 	if (VectorCuts[i] == "_PID_NuScore_CRT" && !( reco_p_LLR_Score < ProtonLLRPIDScore) ) 
-			// 		{ PassedSelection = false; }
-
-
-			// }
-
-			// if (PassedSelection == false) { continue; }
 
 			myRunTxtFile << "run = " << Run << ",  subrun = " << SubRun << ", event = " << Event << ", coh = " << coh << ", signal = " << signal << endl;
 			myRunTxtFile << "vertex x = " << RecoVertex.X() << ",  y = " << RecoVertex.Y() << ", z = " << RecoVertex.Z() << endl;
@@ -1130,7 +1103,6 @@ void mcc9_10_reco_selection::Loop() {
 			double true_g1_costheta = -1;
 			double true_g2_p = -1;
 			double true_g2_costheta = -1;
-			double true_two_shower_angle = -1;
 
 			//----------------------------------------//
 
@@ -1142,11 +1114,27 @@ void mcc9_10_reco_selection::Loop() {
 				
 				genie_mode = MCParticle_Mode; 
 
-				//true_ECal = True_ECal->at(0);
+				TVector3 g1_truthMatch_v(g1_truthMatch_px,g1_truthMatch_py,g1_truthMatch_pz);
+				TVector3 g2_truthMatch_v(g2_truthMatch_px,g2_truthMatch_py,g2_truthMatch_pz);	
+				TVector3 pi0_truthMatch_v = g1_truthMatch_v + g2_truthMatch_v;		
 
-                // // Underflow / overflow
-                // if (true_ThetaVis < ArrayNBinsThetaVis[0]) { true_ThetaVis = (ArrayNBinsThetaVis[0] + ArrayNBinsThetaVis[1])/2.; }
-                // if (true_ThetaVis > ArrayNBinsThetaVis[NBinsThetaVis]) { true_ThetaVis = (ArrayNBinsThetaVis[NBinsThetaVis] + ArrayNBinsThetaVis[NBinsThetaVis-1])/2.; }
+				true_pi0_p = pi0_truthMatch_v.Mag();
+				true_pi0_costheta = pi0_truthMatch_v.CosTheta();
+				true_g1_p = g1_truthMatch_v.Mag();
+				true_g1_costheta = g1_truthMatch_v.CosTheta();
+				true_g2_p = g2_truthMatch_v.Mag();
+				true_g2_costheta = g2_truthMatch_v.CosTheta();
+
+                // Underflow / overflow at truthMatched level
+
+				if (true_pi0_p < ArrayNBinsPi0Momentum[0]) { true_pi0_p = (ArrayNBinsPi0Momentum[0] + ArrayNBinsPi0Momentum[1])/2.; }
+				if (true_pi0_p > ArrayNBinsPi0Momentum[NBinsPi0Momentum]) { true_pi0_p = (ArrayNBinsPi0Momentum[NBinsPi0Momentum] + ArrayNBinsPi0Momentum[NBinsPi0Momentum-1])/2.; }
+
+				if (true_g1_p < ArrayNBinsg1Momentum[0]) { true_g1_p = (ArrayNBinsg1Momentum[0] + ArrayNBinsg1Momentum[1])/2.; }
+				if (true_g1_p > ArrayNBinsg1Momentum[NBinsg1Momentum]) { true_g1_p = (ArrayNBinsg1Momentum[NBinsg1Momentum] + ArrayNBinsg1Momentum[NBinsg1Momentum-1])/2.; }
+
+				if (true_g2_p < ArrayNBinsg2Momentum[0]) { true_g2_p = (ArrayNBinsg2Momentum[0] + ArrayNBinsg2Momentum[1])/2.; }
+				if (true_g2_p > ArrayNBinsg2Momentum[NBinsg2Momentum]) { true_g2_p = (ArrayNBinsg2Momentum[NBinsg2Momentum] + ArrayNBinsg2Momentum[NBinsg2Momentum-1])/2.; }
 
 			} // End of if statement: Only for MC to obtain true vales
 
@@ -1163,6 +1151,7 @@ void mcc9_10_reco_selection::Loop() {
 			Recog2MomentumPlot->Fill(g2_p,weight);
 			Recog2CosThetaPlot->Fill(g2_costheta,weight);
 			Recotwo_shower_anglePlot->Fill(two_shower_angle,weight);
+			Recotwo_shower_start_distPlot->Fill(two_shower_start_dist,weight);			
 			Recokine_pio_vtx_disPlot->Fill(wc_kine_pio_vtx_dis,weight);
 			Recosingle_photon_numu_scorePlot->Fill(wc_single_photon_numu_score,weight);
 			Recosingle_photon_other_scorePlot->Fill(wc_single_photon_other_score,weight);
@@ -1216,51 +1205,17 @@ void mcc9_10_reco_selection::Loop() {
 
 					signal_counter++;
 
-			// 		NCCOHTruePi0CosThetaPlot->Fill(True_CandidateMu_CosTheta->at(0),weight);
-			// 		NCCOHTrueSingleBinPlot->Fill(0.5,weight);
-			// 		NCCOHTruePi0MomentumPlot->Fill(true_pmiss,weight);
-			// Reconc_pio_scorePlot->Fill(wc_nc_pio_score,weight);
-			// Reconumu_scorePlot->Fill(wc_numu_score,weight);
-			// 			Recokine_pio_flagPlot->Fill(wc_kine_pio_flag,weight);
-			// 		Recog1MomentumPlot->Fill(g1_p,weight);
-			// Recog1CosThetaPlot->Fill(g1_costheta,weight);
-			// Recog2MomentumPlot->Fill(g2_p,weight);
-			// Recog2CosThetaPlot->Fill(g2_costheta,weight);
-			// Recotwo_shower_anglePlot->Fill(two_shower_angle,weight);
-			// Recokine_pio_vtx_disPlot->Fill(wc_kine_pio_vtx_dis,weight);
-			// Recosingle_photon_numu_scorePlot->Fill(wc_single_photon_numu_score,weight);
-			// Recosingle_photon_other_scorePlot->Fill(wc_single_photon_other_score,weight);
-			// Recosingle_photon_ncpi0_scorePlot->Fill(wc_single_photon_ncpi0_score,weight);
-			// Recosingle_photon_nue_scorePlot->Fill(wc_single_photon_nue_score,weight);
+					//----------------------------------------//
 
-			// 		// Blips
-			// 		NCCOHTruenBlips_savedPlot->Fill(nBlips_saved,weight);
-			// 		int nchohtrue_blip_counter_radius = 0;
+					// numerator for efficiency calculation
 
-			// 		for (int iblip = 0; iblip < nBlips_saved; iblip++) {
-
-			// 			NCCOHTrueBlip_xPlot->Fill(Blip_x->at(iblip),weight);
-			// 			NCCOHTrueBlip_yPlot->Fill(Blip_y->at(iblip),weight);
-			// 			NCCOHTrueBlip_zPlot->Fill(Blip_z->at(iblip),weight);
-			// 			NCCOHTrueBlip_proxtrkdistPlot->Fill(Blip_proxtrkdist->at(iblip),weight);
-
-			// 			TVector3 blip_3d(Blip_x->at(iblip),Blip_y->at(iblip),Blip_z->at(iblip) );
-			// 			double blip_vrt_dist = (RecoVertex - blip_3d).Mag();
-			// 			NCCOHTrueblip_vrtPlot->Fill(blip_vrt_dist,weight);	
-						
-			// 			if (blip_vrt_dist < radius) { 
-			// 
-						// 			NCCOHTrueBlip_energyPlot->Fill(Blip_energy->at(iblip),weight);
-			// nchohtrue_blip_counter_radius++; 
-						//				Recoblip_cos_alphapi0Plot->Fill( tools.CosAlpha(blip_3d, RecoVertex, pi0_v),weight);	
-							//Recoblip_cos_alphag1Plot->Fill( tools.CosAlpha(blip_3d, RecoVertex, g1_v),weight);	
-				//Recoblip_cos_alphag2Plot->Fill( tools.CosAlpha(blip_3d, RecoVertex, g2_v),weight);
-		
-		//}
-
-			// 		}
-
-			// 		NCCOHTruenBlips_radiusPlot->Fill(reco_blip_counter_radius,weight);		
+			 		NCCOHTrueSingleBinPlot->Fill(0.5,weight);
+			 		NCCOHTruePi0CosThetaPlot->Fill(true_pi0_costheta,weight);
+			 		NCCOHTruePi0MomentumPlot->Fill(true_pi0_p,weight);
+					NCCOHTrueg1MomentumPlot->Fill(true_g1_p,weight);
+					NCCOHTrueg1CosThetaPlot->Fill(true_g1_costheta,weight);
+					NCCOHTrueg2MomentumPlot->Fill(true_g2_p,weight);
+					NCCOHTrueg2CosThetaPlot->Fill(true_g2_costheta,weight);					
 
 					//----------------------------------------//
 
@@ -1277,6 +1232,7 @@ void mcc9_10_reco_selection::Loop() {
 					NCCOHRecog2MomentumPlot->Fill(g2_p,weight);
 					NCCOHRecog2CosThetaPlot->Fill(g2_costheta,weight);
 					NCCOHRecotwo_shower_anglePlot->Fill(two_shower_angle,weight);	
+					NCCOHRecotwo_shower_start_distPlot->Fill(two_shower_start_dist,weight);	
 					NCCOHRecokine_pio_vtx_disPlot->Fill(wc_kine_pio_vtx_dis,weight);	
 					NCCOHRecosingle_photon_numu_scorePlot->Fill(wc_single_photon_numu_score,weight);
 					NCCOHRecosingle_photon_other_scorePlot->Fill(wc_single_photon_other_score,weight);
@@ -1314,65 +1270,27 @@ void mcc9_10_reco_selection::Loop() {
 
 					//------------------------------//
 
-			// 							NCCOHReconc_pio_scorePlot->Fill(wc_nc_pio_score,weight);
-			// 		NCCOHReconumu_scorePlot->Fill(wc_numu_score,weight);
-			// 					Recokine_pio_flagPlot->Fill(wc_kine_pio_flag,weight);
-			// 		NCCOHRecoPi0CosThetaPlot2D->Fill(True_CandidateMu_CosTheta->at(0),reco_Pmu_cos_theta);
-			// 		NCCOHRecoSingleBinPlot2D->Fill(0.5,0.5);
-			// 		NCCOHRecoPi0MomentumPlot2D->Fill(true_pmiss,pmiss);			
+					// migration matrices
+
+			 		NCCOHRecoPi0CosThetaPlot2D->Fill(true_pi0_costheta,pi0_costheta);
+			 		NCCOHRecoSingleBinPlot2D->Fill(0.5,0.5);
+			 		NCCOHRecoPi0MomentumPlot2D->Fill(true_pi0_p,pi0_p);							
+					NCCOHRecog1MomentumPlot2D->Fill(true_g1_p,g1_p);
+					NCCOHRecog1CosThetaPlot2D->Fill(true_g1_costheta,g1_costheta);
+					NCCOHRecog2MomentumPlot2D->Fill(true_g2_p,g2_p);
+					NCCOHRecog2CosThetaPlot2D->Fill(true_g2_costheta,g2_costheta);					
 					
-			// 					Recog1MomentumPlot->Fill(g1_p,weight);
-			// Recog1CosThetaPlot->Fill(g1_costheta,weight);
-			// Recog2MomentumPlot->Fill(g2_p,weight);
-			// Recog2CosThetaPlot->Fill(g2_costheta,weight);
-			// Recotwo_shower_anglePlot->Fill(two_shower_angle,weight);
-			//Recokine_pio_vtx_disPlot->Fill(wc_kine_pio_vtx_dis,weight);
-			// Recosingle_photon_numu_scorePlot->Fill(wc_single_photon_numu_score,weight);
-			// Recosingle_photon_other_scorePlot->Fill(wc_single_photon_other_score,weight);
-			// Recosingle_photon_ncpi0_scorePlot->Fill(wc_single_photon_ncpi0_score,weight);
-			// Recosingle_photon_nue_scorePlot->Fill(wc_single_photon_nue_score,weight);
+					//------------------------------//
 
-					// Blips
-					NCCOHReconBlips_savedPlot2D->Fill(nBlips_saved, nBlips_saved);
-					NCCOHReconBlips_radiusPlot2D->Fill(nccohreco_blip_counter_radius,nccohreco_blip_counter_radius,weight);
+					// response matrices
 
-					for (int iblip = 0; iblip < nBlips_saved; iblip++) {
-
-						NCCOHRecoBlip_xPlot2D->Fill(Blip_x->at(iblip),Blip_x->at(iblip));
-						NCCOHRecoBlip_yPlot2D->Fill(Blip_y->at(iblip),Blip_y->at(iblip));
-						NCCOHRecoBlip_zPlot2D->Fill(Blip_z->at(iblip),Blip_z->at(iblip));
-						NCCOHRecoBlip_energyPlot2D->Fill(Blip_energy->at(iblip),Blip_energy->at(iblip));
-						NCCOHRecoBlip_proxtrkdistPlot2D->Fill(Blip_proxtrkdist->at(iblip),Blip_proxtrkdist->at(iblip));
-
-						TVector3 blip_3d(Blip_x->at(iblip),Blip_y->at(iblip),Blip_z->at(iblip) );
-						double blip_vrt_dist = (RecoVertex - blip_3d).Mag();
-						NCCOHRecoblip_vrtPlot2D->Fill(blip_vrt_dist,blip_vrt_dist);
-						NCCOHRecoblip_cos_alphapi0Plot2D->Fill( tools.CosAlpha(blip_3d, RecoVertex, pi0_v),tools.CosAlpha(blip_3d, RecoVertex, pi0_v));
-						NCCOHRecoblip_cos_alphag1Plot2D->Fill( tools.CosAlpha(blip_3d, RecoVertex, g1_v),tools.CosAlpha(blip_3d, RecoVertex, g1_v));	
-						NCCOHRecoblip_cos_alphag2Plot2D->Fill( tools.CosAlpha(blip_3d, RecoVertex, g2_v),tools.CosAlpha(blip_3d, RecoVertex, g2_v));
-
-					}						
-
-					// Blips
-					POTScaledNCCOHReconBlips_savedPlot2D->Fill(nBlips_saved, nBlips_saved,weight);
-					POTScaledNCCOHReconBlips_radiusPlot2D->Fill(nccohreco_blip_counter_radius,nccohreco_blip_counter_radius,weight);
-
-					for (int iblip = 0; iblip < nBlips_saved; iblip++) {
-
-						POTScaledNCCOHRecoBlip_xPlot2D->Fill(Blip_x->at(iblip),Blip_x->at(iblip),weight);
-						POTScaledNCCOHRecoBlip_yPlot2D->Fill(Blip_y->at(iblip),Blip_y->at(iblip),weight);
-						POTScaledNCCOHRecoBlip_zPlot2D->Fill(Blip_z->at(iblip),Blip_z->at(iblip),weight);
-						POTScaledNCCOHRecoBlip_energyPlot2D->Fill(Blip_energy->at(iblip),Blip_energy->at(iblip),weight);
-						POTScaledNCCOHRecoBlip_proxtrkdistPlot2D->Fill(Blip_proxtrkdist->at(iblip),Blip_proxtrkdist->at(iblip),weight);
-
-						TVector3 blip_3d(Blip_x->at(iblip),Blip_y->at(iblip),Blip_z->at(iblip) );
-						double blip_vrt_dist = (RecoVertex - blip_3d).Mag();
-						POTScaledNCCOHRecoblip_vrtPlot2D->Fill(blip_vrt_dist, blip_vrt_dist,weight);
-						POTScaledNCCOHRecoblip_cos_alphapi0Plot2D->Fill( tools.CosAlpha(blip_3d, RecoVertex, pi0_v),tools.CosAlpha(blip_3d, RecoVertex, pi0_v), weight);
-						POTScaledNCCOHRecoblip_cos_alphag1Plot2D->Fill( tools.CosAlpha(blip_3d, RecoVertex, g1_v),tools.CosAlpha(blip_3d, RecoVertex, g1_v), weight);	
-						POTScaledNCCOHRecoblip_cos_alphag2Plot2D->Fill( tools.CosAlpha(blip_3d, RecoVertex, g2_v),tools.CosAlpha(blip_3d, RecoVertex, g2_v), weight);
-
-					}						
+			 		POTScaledNCCOHRecoPi0CosThetaPlot2D->Fill(true_pi0_costheta,pi0_costheta,weight);
+			 		POTScaledNCCOHRecoSingleBinPlot2D->Fill(0.5,0.5,weight);
+			 		POTScaledNCCOHRecoPi0MomentumPlot2D->Fill(true_pi0_p,pi0_p,weight);	
+					POTScaledNCCOHRecog1MomentumPlot2D->Fill(true_g1_p,g1_p,weight);
+					POTScaledNCCOHRecog1CosThetaPlot2D->Fill(true_g1_costheta,g1_costheta,weight);
+					POTScaledNCCOHRecog2MomentumPlot2D->Fill(true_g2_p,g2_p,weight);
+					POTScaledNCCOHRecog2CosThetaPlot2D->Fill(true_g2_costheta,g2_costheta,weight);
 
 				} // End of the NCCOH signal
 
@@ -1411,6 +1329,7 @@ void mcc9_10_reco_selection::Loop() {
 					NonNCCOHRecog2MomentumPlot->Fill(g2_p,weight);
 					NonNCCOHRecog2CosThetaPlot->Fill(g2_costheta,weight);
 					NonNCCOHRecotwo_shower_anglePlot->Fill(two_shower_angle,weight);
+					NonNCCOHRecotwo_shower_start_distPlot->Fill(two_shower_start_dist,weight);	
 					NonNCCOHRecokine_pio_vtx_disPlot->Fill(wc_kine_pio_vtx_dis,weight);
 					NonNCCOHRecosingle_photon_numu_scorePlot->Fill(wc_single_photon_numu_score,weight);
 					NonNCCOHRecosingle_photon_other_scorePlot->Fill(wc_single_photon_other_score,weight);
@@ -1450,7 +1369,7 @@ void mcc9_10_reco_selection::Loop() {
 
 				} // End of the Non-NCCOH beam related background
 
-				//----------------------------------------//
+				//------------------------------//
 
 				// QE
 
@@ -1467,6 +1386,7 @@ void mcc9_10_reco_selection::Loop() {
 					QERecog2MomentumPlot->Fill(g2_p,weight);
 					QERecog2CosThetaPlot->Fill(g2_costheta,weight);
 					QERecotwo_shower_anglePlot->Fill(two_shower_angle,weight);	
+					QERecotwo_shower_start_distPlot->Fill(two_shower_start_dist,weight);	
 					QERecokine_pio_vtx_disPlot->Fill(wc_kine_pio_vtx_dis,weight);	
 					QERecosingle_photon_numu_scorePlot->Fill(wc_single_photon_numu_score,weight);
 					QERecosingle_photon_other_scorePlot->Fill(wc_single_photon_other_score,weight);
@@ -1504,7 +1424,7 @@ void mcc9_10_reco_selection::Loop() {
 
 				} // End of QE selection
 
-				//----------------------------------------//
+				//------------------------------//
 
 				// MEC
 
@@ -1521,6 +1441,7 @@ void mcc9_10_reco_selection::Loop() {
 					MECRecog2MomentumPlot->Fill(g2_p,weight);
 					MECRecog2CosThetaPlot->Fill(g2_costheta,weight);
 					MECRecotwo_shower_anglePlot->Fill(two_shower_angle,weight);		
+					MECRecotwo_shower_start_distPlot->Fill(two_shower_start_dist,weight);	
 					MECRecokine_pio_vtx_disPlot->Fill(wc_kine_pio_vtx_dis,weight);
 					MECRecosingle_photon_numu_scorePlot->Fill(wc_single_photon_numu_score,weight);
 					MECRecosingle_photon_other_scorePlot->Fill(wc_single_photon_other_score,weight);
@@ -1558,7 +1479,7 @@ void mcc9_10_reco_selection::Loop() {
 		
 				}
 
-				//----------------------------------------//
+				//------------------------------//
 
 				// RES
 
@@ -1575,6 +1496,7 @@ void mcc9_10_reco_selection::Loop() {
 					RESRecog2MomentumPlot->Fill(g2_p,weight);
 					RESRecog2CosThetaPlot->Fill(g2_costheta,weight);
 					RESRecotwo_shower_anglePlot->Fill(two_shower_angle,weight);
+					RESRecotwo_shower_start_distPlot->Fill(two_shower_start_dist,weight);	
 					RESRecokine_pio_vtx_disPlot->Fill(wc_kine_pio_vtx_dis,weight);
 					RESRecosingle_photon_numu_scorePlot->Fill(wc_single_photon_numu_score,weight);
 					RESRecosingle_photon_other_scorePlot->Fill(wc_single_photon_other_score,weight);
@@ -1612,7 +1534,7 @@ void mcc9_10_reco_selection::Loop() {
 	
 				}
 
-				//----------------------------------------//
+				//------------------------------//
 
 				// DIS
 
@@ -1628,7 +1550,8 @@ void mcc9_10_reco_selection::Loop() {
 					DISRecog1CosThetaPlot->Fill(g1_costheta,weight);
 					DISRecog2MomentumPlot->Fill(g2_p,weight);
 					DISRecog2CosThetaPlot->Fill(g2_costheta,weight);
-					DISRecotwo_shower_anglePlot->Fill(two_shower_angle,weight);		
+					DISRecotwo_shower_anglePlot->Fill(two_shower_angle,weight);
+					DISRecotwo_shower_start_distPlot->Fill(two_shower_start_dist,weight);			
 					DISRecokine_pio_vtx_disPlot->Fill(wc_kine_pio_vtx_dis,weight);
 					DISRecosingle_photon_numu_scorePlot->Fill(wc_single_photon_numu_score,weight);
 					DISRecosingle_photon_other_scorePlot->Fill(wc_single_photon_other_score,weight);
@@ -1666,7 +1589,7 @@ void mcc9_10_reco_selection::Loop() {
 
 				}
 
-				//----------------------------------------//
+				//------------------------------//
 
 				// COH
 
@@ -1683,6 +1606,7 @@ void mcc9_10_reco_selection::Loop() {
 					COHRecog2MomentumPlot->Fill(g2_p,weight);
 					COHRecog2CosThetaPlot->Fill(g2_costheta,weight);
 					COHRecotwo_shower_anglePlot->Fill(two_shower_angle,weight);		
+					COHRecotwo_shower_start_distPlot->Fill(two_shower_start_dist,weight);	
 					COHRecokine_pio_vtx_disPlot->Fill(wc_kine_pio_vtx_dis,weight);
 					COHRecosingle_photon_numu_scorePlot->Fill(wc_single_photon_numu_score,weight);
 					COHRecosingle_photon_other_scorePlot->Fill(wc_single_photon_other_score,weight);
@@ -1720,36 +1644,45 @@ void mcc9_10_reco_selection::Loop() {
 
 				}
 
-
 			} // End of the Overlay case and the breakdown into NCCOH/NonNCCOH & QE,MEC,RES,DIS
 
 		} // End of the loop over the events
 
 		std::cout << std::endl << "Created file: " << FileName << std::endl << std::endl;
-		std::cout << "candidate events: " << pass_selection_counter << " [" << std::setprecision(2) << double(pass_selection_counter)/double(pass_selection_counter) *100. <<"%]" << std::endl;
-		std::cout << "coh events: " << coh_counter << " [" << std::setprecision(2) << double(coh_counter)/double(pass_selection_counter) *100. <<"%]" << std::endl;
-		std::cout << "signal events: " << signal_counter << " [" << std::setprecision(2) << double(signal_counter)/double(pass_selection_counter) *100. <<"%]" << std::endl << std::endl;
 
-		std::cout << "bkg_0pi0_X events: " << bkg_0pi0_X_counter << " [" << std::setprecision(2) << double(bkg_0pi0_X_counter)/double(pass_selection_counter) *100. <<"%]" << std::endl;
-		std::cout << "bkg_Mpi0_X events: " << bkg_Mpi0_X_counter << " [" << std::setprecision(2) << double(bkg_Mpi0_X_counter)/double(pass_selection_counter) *100. <<"%]" << std::endl;
-		std::cout << "bkg_bwds_1pi0_X events: " << bkg_bwds_1pi0_X_counter << " [" << std::setprecision(2) << double(bkg_bwds_1pi0_X_counter)/double(pass_selection_counter) *100. <<"%]" << std::endl;
-		std::cout << "bkg_1n_0p_1pi0_X events: " << bkg_1n_0p_1pi0_X_counter << " [" << std::setprecision(2) << double(bkg_1n_0p_1pi0_X_counter)/double(pass_selection_counter) *100. <<"%]" << std::endl;
-		std::cout << "bkg_Nn_0p_1pi0_X events: " << bkg_Nn_0p_1pi0_X_counter << " [" << std::setprecision(2) << double(bkg_Nn_0p_1pi0_X_counter)/double(pass_selection_counter) *100. <<"%]" << std::endl;
-		std::cout << "bkg_1p_0n_1pi0_X events: " << bkg_1p_0n_1pi0_X_counter << " [" << std::setprecision(2) << double(bkg_1p_0n_1pi0_X_counter)/double(pass_selection_counter) *100. <<"%]" << std::endl;
-		std::cout << "bkg_Np_0n_1pi0_X events: " << bkg_Np_0n_1pi0_X_counter << " [" << std::setprecision(2) << double(bkg_Np_0n_1pi0_X_counter)/double(pass_selection_counter) *100. <<"%]" << std::endl;
-		std::cout << "bkg_1pi0_Npipm_X events: " << bkg_1pi0_Npipm_X_counter << " [" << std::setprecision(2) << double(bkg_1pi0_Npipm_X_counter)/double(pass_selection_counter) *100. <<"%]" << std::endl;
-		std::cout << "bkg_1pi0_Np_Nn_0pipm_X events: " << bkg_1pi0_Np_Nn_0pipm_X_counter << " [" << std::setprecision(2) << double(bkg_1pi0_Np_Nn_0pipm_X_counter)/double(pass_selection_counter) *100. <<"%]" << std::endl;
-		std::cout << "bkg_1pi0_Np_Nn_Npipm_X events: " << bkg_1pi0_Np_Nn_Npipm_X_counter << " [" << std::setprecision(2) << double(bkg_1pi0_Np_Nn_Npipm_X_counter)/double(pass_selection_counter) *100. <<"%]" << std::endl;
-		std::cout << "bkg_1pi0_Nmh_X events: " << bkg_1pi0_Nmh_X_counter << " [" << std::setprecision(2) << double(bkg_1pi0_Nmh_X_counter)/double(pass_selection_counter) *100. <<"%]" << std::endl;
-		std::cout << "bkg_1pi0_Nl_X events: " << bkg_1pi0_Nl_X_counter << " [" << std::setprecision(2) << double(bkg_1pi0_Nl_X_counter)/double(pass_selection_counter) *100. <<"%]" << std::endl;								
-		std::cout << "bkg_other events: " << bkg_other_counter << " [" << std::setprecision(2) << double(bkg_other_counter)/double(pass_selection_counter) *100. <<"%]" << std::endl;
-	
+		if (fUniverseIndex == -1) {		
+
+			std::cout << "candidate events: " << pass_selection_counter << " [" << std::setprecision(2) << double(pass_selection_counter)/double(pass_selection_counter) *100. <<"%]" << std::endl;
+			std::cout << "coh events: " << coh_counter << " [" << std::setprecision(2) << double(coh_counter)/double(pass_selection_counter) *100. <<"%]" << std::endl;
+			std::cout << "signal events: " << signal_counter << " [" << std::setprecision(2) << double(signal_counter)/double(pass_selection_counter) *100. <<"%]" << std::endl << std::endl;
+
+			if (string(fWhichSample).find("Overlay") != std::string::npos) {
+			
+				std::cout << "bkg_0pi0_X events: " << bkg_0pi0_X_counter << " [" << std::setprecision(2) << double(bkg_0pi0_X_counter)/double(pass_selection_counter) *100. <<"%]" << std::endl;
+				std::cout << "bkg_Mpi0_X events: " << bkg_Mpi0_X_counter << " [" << std::setprecision(2) << double(bkg_Mpi0_X_counter)/double(pass_selection_counter) *100. <<"%]" << std::endl;
+				std::cout << "bkg_bwds_1pi0_X events: " << bkg_bwds_1pi0_X_counter << " [" << std::setprecision(2) << double(bkg_bwds_1pi0_X_counter)/double(pass_selection_counter) *100. <<"%]" << std::endl;
+				std::cout << "bkg_1n_0p_1pi0_X events: " << bkg_1n_0p_1pi0_X_counter << " [" << std::setprecision(2) << double(bkg_1n_0p_1pi0_X_counter)/double(pass_selection_counter) *100. <<"%]" << std::endl;
+				std::cout << "bkg_Nn_0p_1pi0_X events: " << bkg_Nn_0p_1pi0_X_counter << " [" << std::setprecision(2) << double(bkg_Nn_0p_1pi0_X_counter)/double(pass_selection_counter) *100. <<"%]" << std::endl;
+				std::cout << "bkg_1p_0n_1pi0_X events: " << bkg_1p_0n_1pi0_X_counter << " [" << std::setprecision(2) << double(bkg_1p_0n_1pi0_X_counter)/double(pass_selection_counter) *100. <<"%]" << std::endl;
+				std::cout << "bkg_Np_0n_1pi0_X events: " << bkg_Np_0n_1pi0_X_counter << " [" << std::setprecision(2) << double(bkg_Np_0n_1pi0_X_counter)/double(pass_selection_counter) *100. <<"%]" << std::endl;
+				std::cout << "bkg_1pi0_Npipm_X events: " << bkg_1pi0_Npipm_X_counter << " [" << std::setprecision(2) << double(bkg_1pi0_Npipm_X_counter)/double(pass_selection_counter) *100. <<"%]" << std::endl;
+				std::cout << "bkg_1pi0_Np_Nn_0pipm_X events: " << bkg_1pi0_Np_Nn_0pipm_X_counter << " [" << std::setprecision(2) << double(bkg_1pi0_Np_Nn_0pipm_X_counter)/double(pass_selection_counter) *100. <<"%]" << std::endl;
+				std::cout << "bkg_1pi0_Np_Nn_Npipm_X events: " << bkg_1pi0_Np_Nn_Npipm_X_counter << " [" << std::setprecision(2) << double(bkg_1pi0_Np_Nn_Npipm_X_counter)/double(pass_selection_counter) *100. <<"%]" << std::endl;
+				std::cout << "bkg_1pi0_Nmh_X events: " << bkg_1pi0_Nmh_X_counter << " [" << std::setprecision(2) << double(bkg_1pi0_Nmh_X_counter)/double(pass_selection_counter) *100. <<"%]" << std::endl;
+				std::cout << "bkg_1pi0_Nl_X events: " << bkg_1pi0_Nl_X_counter << " [" << std::setprecision(2) << double(bkg_1pi0_Nl_X_counter)/double(pass_selection_counter) *100. <<"%]" << std::endl;								
+				std::cout << "bkg_other events: " << bkg_other_counter << " [" << std::setprecision(2) << double(bkg_other_counter)/double(pass_selection_counter) *100. <<"%]" << std::endl;
+			
+			}
+
+		} // end of the loop over the events
+
 		//----------------------------------------//	
 
 		file->cd();
 		file->Write();
 		file->Close();
 		fFile->Close();
+		f_fds->Close();
 
 		//----------------------------------------//	
 
