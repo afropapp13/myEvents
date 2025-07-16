@@ -686,7 +686,7 @@ void interaction_breakdown(TString BaseMC = "") {
 				double chi2, pval, sigma; int ndof;
 				
 				CalcChiSquared(Plots[0][WhichPlot],MCStackClone,CovMatrixEvents,chi2,ndof,pval,sigma);
-				TString Chi2Ndof = "#chi^{2}/ndof = " + to_string_with_precision(chi2,1) + "/" + TString(std::to_string(ndof)) +", p = " + to_string_with_precision(pval,2) + ", " + to_string_with_precision(sigma,2) + "#sigma";
+				TString Chi2Ndof = "#chi^{2}/ndf = " + to_string_with_precision(chi2,1) + "/" + TString(std::to_string(ndof)) +", p = " + to_string_with_precision(pval,2) + ", " + to_string_with_precision(sigma,2) + "#sigma";
 
 				TLatex latexChi2;
 				latexChi2.SetTextFont(FontStyle);

@@ -585,8 +585,13 @@ void topological_breakdown(TString BaseMC = "") {
 
 				TH1D* MCUnc = (TH1D*)(Plots[0][WhichPlot]->Clone());				
 				TH1D* MCStack = (TH1D*) (THStacks[WhichPlot]->GetStack())->Last();
-				TH1D* MCStackClone = (TH1D*)(MCStack->Clone());
-				rm_bin_width(MCStackClone);
+				
+				//TH1D* MCStackClone = (TH1D*)(MCStack->Clone());
+				//rm_bin_width(MCStackClone);
+
+				TH1D* MCStackClone = (TH1D*)(Plots[1][WhichPlot]->Clone()); // Overlay
+				MCStackClone->Add(Plots[2][WhichPlot]); // ExtBNB
+				MCStackClone->Add(Plots[3][WhichPlot]); // Dirt
 
 				for (int i = 1; i <= n;i++ ) { 
 
@@ -659,7 +664,7 @@ void topological_breakdown(TString BaseMC = "") {
 				double chi2, pval, sigma; int ndof;
 				
 				CalcChiSquared(Plots[0][WhichPlot],MCStackClone,CovMatrixEvents,chi2,ndof,pval,sigma);
-				TString Chi2Ndof = "#chi^{2}/ndof = " + to_string_with_precision(chi2,1) + "/" + TString(std::to_string(ndof)) +", p = " + to_string_with_precision(pval,2) + ", " + to_string_with_precision(sigma,2) + "#sigma";
+				TString Chi2Ndof = "#chi^{2}/ndf = " + to_string_with_precision(chi2,1) + "/" + TString(std::to_string(ndof)) +", p = " + to_string_with_precision(pval,2) + ", " + to_string_with_precision(sigma,2) + "#sigma";
 
 				TLatex latexChi2;
 				latexChi2.SetTextFont(FontStyle);
