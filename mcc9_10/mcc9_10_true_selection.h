@@ -56,6 +56,7 @@ public :
    Int_t           signal;
    Int_t           NCcoh;
    Int_t           NCres;
+   Int_t           nupdg;   
    vector<int>     *pi0_MCParticle_Mode;
    vector<double>  *pi0_MCParticle_Mom;
    vector<double>  *pi0_MCParticle_Phi;
@@ -98,6 +99,7 @@ public :
    TBranch        *b_signal;   //!
    TBranch        *b_NCcoh;   //!
    TBranch        *b_NCres;   //!
+   TBranch        *b_nupdg;   //!   
    TBranch        *b_pi0_MCParticle_Mode;   //!
    TBranch        *b_pi0_MCParticle_Mom;   //!
    TBranch        *b_pi0_MCParticle_Phi;   //!
@@ -255,6 +257,7 @@ void mcc9_10_true_selection::Init(TTree *tree)
    fChain->SetBranchAddress("signal", &signal, &b_signal);
    fChain->SetBranchAddress("NCcoh", &NCcoh, &b_NCcoh);
    fChain->SetBranchAddress("NCres", &NCres, &b_NCres);
+   fChain->SetBranchAddress("nupdg", &nupdg, &b_nupdg);   
    fChain->SetBranchAddress("pi0_MCParticle_Mode", &pi0_MCParticle_Mode, &b_pi0_MCParticle_Mode);
    fChain->SetBranchAddress("pi0_MCParticle_Mom", &pi0_MCParticle_Mom, &b_pi0_MCParticle_Mom);
    fChain->SetBranchAddress("pi0_MCParticle_Phi", &pi0_MCParticle_Phi, &b_pi0_MCParticle_Phi);

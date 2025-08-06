@@ -60,6 +60,7 @@ void mcc9_10_interaction_breakdown(TString BaseMC = "") {
 	PlotNames.push_back("Recosingle_photon_other_scorePlot");
 	PlotNames.push_back("Recosingle_photon_ncpi0_scorePlot");
 	PlotNames.push_back("Recosingle_photon_nue_scorePlot");
+	PlotNames.push_back("ReconshowersPlot");	
 	
 	const int N1DPlots = PlotNames.size();
 	cout << "Number of 1D Plots = " << N1DPlots << endl;

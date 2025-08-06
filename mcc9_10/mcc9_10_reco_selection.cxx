@@ -10,6 +10,7 @@
 #include <TFile.h>
 #include <TSpline.h>
 #include <TF1.h>
+#include <TRandom3.h>
 
 #include <iostream>
 #include <iomanip>
@@ -18,6 +19,7 @@
 #include <sstream>
 
 #include "../../../generators/Tools.h"
+#include "../../../generators/helper_functions.cxx"
 
 using namespace std;
 
@@ -491,7 +493,25 @@ void mcc9_10_reco_selection::Loop() {
 		TH1D* MECRecotwo_shower_start_distPlot = new TH1D("MECRecotwo_shower_start_distPlot",LabelXAxistwo_shower_start_dist,NBinstwo_shower_start_dist,ArrayNBinstwo_shower_start_dist);
 		TH1D* RESRecotwo_shower_start_distPlot = new TH1D("RESRecotwo_shower_start_distPlot",LabelXAxistwo_shower_start_dist,NBinstwo_shower_start_dist,ArrayNBinstwo_shower_start_dist);
 		TH1D* DISRecotwo_shower_start_distPlot = new TH1D("DISRecotwo_shower_start_distPlot",LabelXAxistwo_shower_start_dist,NBinstwo_shower_start_dist,ArrayNBinstwo_shower_start_dist);
-		TH1D* COHRecotwo_shower_start_distPlot = new TH1D("COHRecotwo_shower_start_distPlot",LabelXAxistwo_shower_start_dist,NBinstwo_shower_start_dist,ArrayNBinstwo_shower_start_dist);		
+		TH1D* COHRecotwo_shower_start_distPlot = new TH1D("COHRecotwo_shower_start_distPlot",LabelXAxistwo_shower_start_dist,NBinstwo_shower_start_dist,ArrayNBinstwo_shower_start_dist);
+		
+		//----------------------------------------//		
+
+		// nshowers
+
+		TH1D* ReconshowersPlot = new TH1D("ReconshowersPlot",LabelXAxisnshowers,NBinsnshowers,ArrayNBinsnshowers);
+		TH1D* NCCOHReconshowersPlot = new TH1D("NCCOHReconshowersPlot",LabelXAxisnshowers,NBinsnshowers,ArrayNBinsnshowers);	
+		TH1D* NCCOHTruenshowersPlot = new TH1D("NCCOHTruenshowersPlot",LabelXAxisnshowers,NBinsnshowers,ArrayNBinsnshowers);
+		TH2D* NCCOHReconshowersPlot2D = new TH2D("NCCOHReconshowersPlot2D",LabelXAxisnshowers2D,NBinsnshowers,
+			  ArrayNBinsnshowers,NBinsnshowers,ArrayNBinsnshowers);
+		TH2D* POTScaledNCCOHReconshowersPlot2D = new TH2D("POTScaledNCCOHReconshowersPlot2D",LabelXAxisnshowers2D,NBinsnshowers,
+			  ArrayNBinsnshowers,NBinsnshowers,ArrayNBinsnshowers);
+		TH1D* NonNCCOHReconshowersPlot = new TH1D("NonNCCOHReconshowersPlot",LabelXAxisnshowers,NBinsnshowers,ArrayNBinsnshowers);
+		TH1D* QEReconshowersPlot = new TH1D("QEReconshowersPlot",LabelXAxisnshowers,NBinsnshowers,ArrayNBinsnshowers);
+		TH1D* MECReconshowersPlot = new TH1D("MECReconshowersPlot",LabelXAxisnshowers,NBinsnshowers,ArrayNBinsnshowers);
+		TH1D* RESReconshowersPlot = new TH1D("RESReconshowersPlot",LabelXAxisnshowers,NBinsnshowers,ArrayNBinsnshowers);
+		TH1D* DISReconshowersPlot = new TH1D("DISReconshowersPlot",LabelXAxisnshowers,NBinsnshowers,ArrayNBinsnshowers);
+		TH1D* COHReconshowersPlot = new TH1D("COHReconshowersPlot",LabelXAxisnshowers,NBinsnshowers,ArrayNBinsnshowers);		
 
 		//----------------------------------------//		
 
@@ -571,6 +591,11 @@ void mcc9_10_reco_selection::Loop() {
 		int coh_counter = 0;
 		int pass_selection_counter = 0;
 
+		int numu_counter = 0;
+		int nue_counter = 0;
+		int numubar_counter = 0;
+		int nuebar_counter = 0;			
+
 		int bkg_0pi0_X_counter = 0;
 		int bkg_Mpi0_X_counter = 0; 
 		int bkg_bwds_1pi0_X_counter = 0;
@@ -635,13 +660,6 @@ void mcc9_10_reco_selection::Loop() {
 				if (T2KWeight <= 0 || T2KWeight > 30) { continue; }	// T2K tune weight	
 				// For the detector variations, Weight (bug fix) = 1		
 				weight = POTWeight * Weight * T2KWeight * ROOTinoWeight;
-
-				// Fake data studies: reweight to Rein Sehgal (RS)
-				if (fTune == "RS" && MCParticle_Mode == 3) { 
-					
-					weight = 2 * weight; 
-				
-				}
 				
 			}
 
@@ -776,36 +794,91 @@ void mcc9_10_reco_selection::Loop() {
 			pi0_v.SetTheta(TMath::ACos(pi0_costheta));
 
 			//--------------------//
+
+			// make sure that g1 is more energetic
+
+			double g1_p = -1; // GeV
+			double g1_costheta = -1;	
+			double g1_phi = -1; // rad	
+
+			double g2_p = -1; // GeV
+			double g2_costheta = -1;	
+			double g2_phi = -1; // rad	
+			
+			TVector3 g1_v(-1.,-1.,-1.);	
+			TVector3 g2_v(-1.,-1.,-1.);	
+			
+			TVector3 g1_start(-1.,-1.,-1.);	
+			TVector3 g1_end(-1.,-1.,-1.);
+			
+			TVector3 g2_start(-1.,-1.,-1.);	
+			TVector3 g2_end(-1.,-1.,-1.);			
 			
 			// g1 kinematics
 
-			double g1_p = reco_g1_p->at(0); // GeV
-			double g1_costheta = reco_g1_costheta->at(0);	
-			double g1_phi = reco_g1_phi->at(0); // rad	
+			g1_p = reco_g1_p->at(0); // GeV
+			g1_costheta = reco_g1_costheta->at(0);	
+			g1_phi = reco_g1_phi->at(0); // rad	
 
-			TVector3 g1_v(-1.,-1.,-1.);
 			g1_v.SetMag(g1_p);
 			g1_v.SetPhi(g1_phi);
 			g1_v.SetTheta(TMath::ACos(g1_costheta));	
 
-			TVector3 g1_start(g1_start_x,g1_start_y,g1_start_z);
-			TVector3 g1_end(g1_end_x,g1_end_y,g1_end_z);	
-			
+			g1_start.SetXYZ(g1_start_x,g1_start_y,g1_start_z);
+			g1_end.SetXYZ(g1_end_x,g1_end_y,g1_end_z);	
+				
 			//--------------------//			
 
 			// g2 kinematics
 
-			double g2_p = reco_g2_p->at(0); // GeV
-			double g2_costheta = reco_g2_costheta->at(0);	
-			double g2_phi = reco_g2_phi->at(0); // rad	
+			g2_p = reco_g2_p->at(0); // GeV
+			g2_costheta = reco_g2_costheta->at(0);	
+			g2_phi = reco_g2_phi->at(0); // rad	
 
-			TVector3 g2_v(-1.,-1.,-1.);
 			g2_v.SetMag(g2_p);
 			g2_v.SetPhi(g2_phi);
 			g2_v.SetTheta(TMath::ACos(g2_costheta));
+				
+			g2_start.SetXYZ(g2_start_x,g2_start_y,g2_start_z);
+			g2_end.SetXYZ(g2_end_x,g2_end_y,g2_end_z);	
 			
-			TVector3 g2_start(g2_start_x,g2_start_y,g2_start_z);
-			TVector3 g2_end(g2_end_x,g2_end_y,g2_end_z);			
+			// make sure that g1 is the most energetic shower
+
+			bool flip = false;
+
+			if (reco_g1_p->at(0) < reco_g2_p->at(0)) {
+
+				flip = true;
+
+				// g1 kinematics
+
+				double g1_p = reco_g2_p->at(0); // GeV
+				double g1_costheta = reco_g2_costheta->at(0);	
+				double g1_phi = reco_g2_phi->at(0); // rad	
+
+				g1_v.SetMag(g1_p);
+				g1_v.SetPhi(g1_phi);
+				g1_v.SetTheta(TMath::ACos(g1_costheta));	
+
+				g1_start.SetXYZ(g2_start_x,g2_start_y,g2_start_z);
+				g1_end.SetXYZ(g2_end_x,g2_end_y,g2_end_z);	
+				
+				//--------------------//			
+
+				// g2 kinematics
+
+				double g2_p = reco_g1_p->at(0); // GeV
+				double g2_costheta = reco_g1_costheta->at(0);	
+				double g2_phi = reco_g1_phi->at(0); // rad	
+
+				g2_v.SetMag(g2_p);
+				g2_v.SetPhi(g2_phi);
+				g2_v.SetTheta(TMath::ACos(g2_costheta));
+				
+				g2_start.SetXYZ(g1_start_x,g1_start_y,g1_start_z);
+				g2_end.SetXYZ(g1_end_x,g1_end_y,g1_end_z);					
+
+			}
 
 			//--------------------//			
 
@@ -850,7 +923,6 @@ void mcc9_10_reco_selection::Loop() {
 
 						double e = TMath::Sqrt( mom*mom + ProtonMass_GeV * ProtonMass_GeV);
 						double ke = e - ProtonMass_GeV;
-
 						if (ke > proton_ke_thres) { primary_proton_counter++; }
 
 					} // end of the primary protons
@@ -998,8 +1070,8 @@ void mcc9_10_reco_selection::Loop() {
 			int nprotontracks = 0;
 			int npiontracks = 0;
 
-			for(int i=0; i < (int)wc_kine_energy_particle->size(); i++)
-			{
+			for(int i=0; i < (int)wc_kine_energy_particle->size(); i++) {
+
 				int pdgcode = wc_kine_particle_type->at(i);
 
 				if( TMath::Abs(pdgcode) == ElectronPdg && wc_kine_energy_particle->at(i) > 10) { // KE in MeV
@@ -1008,25 +1080,25 @@ void mcc9_10_reco_selection::Loop() {
 
 				}
 
-				if( TMath::Abs(pdgcode) == ProtonPdg && wc_kine_energy_particle->at(i) > 0) { // KE in MeV
+				else if( TMath::Abs(pdgcode) == ProtonPdg && wc_kine_energy_particle->at(i) > 10) { // KE in MeV
 					
 					nprotontracks++;
 
 				}			
 				
-				if( TMath::Abs(pdgcode) == MuonPdg && wc_kine_energy_particle->at(i) > 10) { // KE in MeV
+				else if( TMath::Abs(pdgcode) == MuonPdg && wc_kine_energy_particle->at(i) > 10) { // KE in MeV
 					
 					nmuontracks++;
 
 				}	
 				
-				if( TMath::Abs(pdgcode) == AbsChargedPionPdg && wc_kine_energy_particle->at(i) > 10) { // KE in MeV
+				else if( TMath::Abs(pdgcode) == AbsChargedPionPdg && wc_kine_energy_particle->at(i) > 10) { // KE in MeV
 					
 					npiontracks++;
 
 				}	
 
-			}		
+			}	
 
 			//--------------------//
 
@@ -1042,8 +1114,8 @@ void mcc9_10_reco_selection::Loop() {
 			if (secondary_muon_counter != 0) { continue; }
 			if (secondary_charged_pion_counter != 0) { continue; }
 
-			if (nmuontracks != 0) { continue; }
-			if (npiontracks != 0) { continue; }		
+			//if (nmuontracks != 0) { continue; }
+			if (npiontracks != 0) { continue; }							
 			
 			// fv requirements
 
@@ -1065,9 +1137,21 @@ void mcc9_10_reco_selection::Loop() {
 			if (g2_costheta < gamma2_costheta_thres) { continue; }		
 			
 			if (two_shower_angle > 70) { continue; } // deg	
-			if (two_shower_start_dist > 150) { continue; } // cm				
+			if (two_shower_start_dist > 150) { continue; } // cm		
 			
-			pass_selection_counter++;			
+			//--------------------//			
+
+			pass_selection_counter++;	
+			
+			if (string(fWhichSample).find("Overlay") != std::string::npos) {		
+
+				if (nupdg == 14) { numu_counter++; }
+				else if (nupdg == 12) { nue_counter++; }
+				else if (nupdg == -14) { numubar_counter++; }
+				else if (nupdg == -12) { nuebar_counter++; }	
+				else { cout << "unknown neutrino flavor!" << endl; }	
+
+			}
 
 			//--------------------//
 	
@@ -1125,6 +1209,15 @@ void mcc9_10_reco_selection::Loop() {
 				true_g2_p = g2_truthMatch_v.Mag();
 				true_g2_costheta = g2_truthMatch_v.CosTheta();
 
+				if (flip) {
+
+					true_g1_p = g2_truthMatch_v.Mag();
+					true_g1_costheta = g2_truthMatch_v.CosTheta();
+					true_g2_p = g1_truthMatch_v.Mag();
+					true_g2_costheta = g1_truthMatch_v.CosTheta();
+
+				}
+
                 // Underflow / overflow at truthMatched level
 
 				if (true_pi0_p < ArrayNBinsPi0Momentum[0]) { true_pi0_p = (ArrayNBinsPi0Momentum[0] + ArrayNBinsPi0Momentum[1])/2.; }
@@ -1151,7 +1244,8 @@ void mcc9_10_reco_selection::Loop() {
 			Recog2MomentumPlot->Fill(g2_p,weight);
 			Recog2CosThetaPlot->Fill(g2_costheta,weight);
 			Recotwo_shower_anglePlot->Fill(two_shower_angle,weight);
-			Recotwo_shower_start_distPlot->Fill(two_shower_start_dist,weight);			
+			Recotwo_shower_start_distPlot->Fill(two_shower_start_dist,weight);
+			ReconshowersPlot->Fill(nshowers,weight);						
 			Recokine_pio_vtx_disPlot->Fill(wc_kine_pio_vtx_dis,weight);
 			Recosingle_photon_numu_scorePlot->Fill(wc_single_photon_numu_score,weight);
 			Recosingle_photon_other_scorePlot->Fill(wc_single_photon_other_score,weight);
@@ -1233,6 +1327,7 @@ void mcc9_10_reco_selection::Loop() {
 					NCCOHRecog2CosThetaPlot->Fill(g2_costheta,weight);
 					NCCOHRecotwo_shower_anglePlot->Fill(two_shower_angle,weight);	
 					NCCOHRecotwo_shower_start_distPlot->Fill(two_shower_start_dist,weight);	
+					NCCOHReconshowersPlot->Fill(nshowers,weight);
 					NCCOHRecokine_pio_vtx_disPlot->Fill(wc_kine_pio_vtx_dis,weight);	
 					NCCOHRecosingle_photon_numu_scorePlot->Fill(wc_single_photon_numu_score,weight);
 					NCCOHRecosingle_photon_other_scorePlot->Fill(wc_single_photon_other_score,weight);
@@ -1330,6 +1425,7 @@ void mcc9_10_reco_selection::Loop() {
 					NonNCCOHRecog2CosThetaPlot->Fill(g2_costheta,weight);
 					NonNCCOHRecotwo_shower_anglePlot->Fill(two_shower_angle,weight);
 					NonNCCOHRecotwo_shower_start_distPlot->Fill(two_shower_start_dist,weight);	
+					NonNCCOHReconshowersPlot->Fill(nshowers,weight);
 					NonNCCOHRecokine_pio_vtx_disPlot->Fill(wc_kine_pio_vtx_dis,weight);
 					NonNCCOHRecosingle_photon_numu_scorePlot->Fill(wc_single_photon_numu_score,weight);
 					NonNCCOHRecosingle_photon_other_scorePlot->Fill(wc_single_photon_other_score,weight);
@@ -1387,6 +1483,7 @@ void mcc9_10_reco_selection::Loop() {
 					QERecog2CosThetaPlot->Fill(g2_costheta,weight);
 					QERecotwo_shower_anglePlot->Fill(two_shower_angle,weight);	
 					QERecotwo_shower_start_distPlot->Fill(two_shower_start_dist,weight);	
+					QEReconshowersPlot->Fill(nshowers,weight);
 					QERecokine_pio_vtx_disPlot->Fill(wc_kine_pio_vtx_dis,weight);	
 					QERecosingle_photon_numu_scorePlot->Fill(wc_single_photon_numu_score,weight);
 					QERecosingle_photon_other_scorePlot->Fill(wc_single_photon_other_score,weight);
@@ -1442,6 +1539,7 @@ void mcc9_10_reco_selection::Loop() {
 					MECRecog2CosThetaPlot->Fill(g2_costheta,weight);
 					MECRecotwo_shower_anglePlot->Fill(two_shower_angle,weight);		
 					MECRecotwo_shower_start_distPlot->Fill(two_shower_start_dist,weight);	
+					MECReconshowersPlot->Fill(nshowers,weight);
 					MECRecokine_pio_vtx_disPlot->Fill(wc_kine_pio_vtx_dis,weight);
 					MECRecosingle_photon_numu_scorePlot->Fill(wc_single_photon_numu_score,weight);
 					MECRecosingle_photon_other_scorePlot->Fill(wc_single_photon_other_score,weight);
@@ -1497,6 +1595,7 @@ void mcc9_10_reco_selection::Loop() {
 					RESRecog2CosThetaPlot->Fill(g2_costheta,weight);
 					RESRecotwo_shower_anglePlot->Fill(two_shower_angle,weight);
 					RESRecotwo_shower_start_distPlot->Fill(two_shower_start_dist,weight);	
+					RESReconshowersPlot->Fill(nshowers,weight);
 					RESRecokine_pio_vtx_disPlot->Fill(wc_kine_pio_vtx_dis,weight);
 					RESRecosingle_photon_numu_scorePlot->Fill(wc_single_photon_numu_score,weight);
 					RESRecosingle_photon_other_scorePlot->Fill(wc_single_photon_other_score,weight);
@@ -1551,7 +1650,8 @@ void mcc9_10_reco_selection::Loop() {
 					DISRecog2MomentumPlot->Fill(g2_p,weight);
 					DISRecog2CosThetaPlot->Fill(g2_costheta,weight);
 					DISRecotwo_shower_anglePlot->Fill(two_shower_angle,weight);
-					DISRecotwo_shower_start_distPlot->Fill(two_shower_start_dist,weight);			
+					DISRecotwo_shower_start_distPlot->Fill(two_shower_start_dist,weight);
+					DISReconshowersPlot->Fill(nshowers,weight);			
 					DISRecokine_pio_vtx_disPlot->Fill(wc_kine_pio_vtx_dis,weight);
 					DISRecosingle_photon_numu_scorePlot->Fill(wc_single_photon_numu_score,weight);
 					DISRecosingle_photon_other_scorePlot->Fill(wc_single_photon_other_score,weight);
@@ -1607,6 +1707,7 @@ void mcc9_10_reco_selection::Loop() {
 					COHRecog2CosThetaPlot->Fill(g2_costheta,weight);
 					COHRecotwo_shower_anglePlot->Fill(two_shower_angle,weight);		
 					COHRecotwo_shower_start_distPlot->Fill(two_shower_start_dist,weight);	
+					COHReconshowersPlot->Fill(nshowers,weight);
 					COHRecokine_pio_vtx_disPlot->Fill(wc_kine_pio_vtx_dis,weight);
 					COHRecosingle_photon_numu_scorePlot->Fill(wc_single_photon_numu_score,weight);
 					COHRecosingle_photon_other_scorePlot->Fill(wc_single_photon_other_score,weight);
@@ -1656,8 +1757,13 @@ void mcc9_10_reco_selection::Loop() {
 			std::cout << "coh events: " << coh_counter << " [" << std::setprecision(2) << double(coh_counter)/double(pass_selection_counter) *100. <<"%]" << std::endl;
 			std::cout << "signal events: " << signal_counter << " [" << std::setprecision(2) << double(signal_counter)/double(pass_selection_counter) *100. <<"%]" << std::endl << std::endl;
 
-			if (string(fWhichSample).find("Overlay") != std::string::npos) {
-			
+			if (string(fWhichSample).find("Overlay") != std::string::npos && fUniverseIndex == -1) {
+						
+				std::cout << std::endl << "numu events = " << numu_counter << " (" + to_string_with_precision( (double)(numu_counter)/(double)(pass_selection_counter)*100.,2 ) + "%)"<< std::endl;
+				std::cout << "nue events = " << nue_counter << " (" + to_string_with_precision( (double)(nue_counter)/(double)(pass_selection_counter)*100.,2 ) + "%)"<< std::endl;
+				std::cout << "numubar events = " << numubar_counter << " (" + to_string_with_precision( (double)(numubar_counter)/(double)(pass_selection_counter)*100.,2 ) + "%)"<< std::endl;
+				std::cout << "nuebar events = " << nuebar_counter << " (" + to_string_with_precision( (double)(nuebar_counter)/(double)(pass_selection_counter)*100.,2 ) + "%)"<< std::endl << std::endl;
+
 				std::cout << "bkg_0pi0_X events: " << bkg_0pi0_X_counter << " [" << std::setprecision(2) << double(bkg_0pi0_X_counter)/double(pass_selection_counter) *100. <<"%]" << std::endl;
 				std::cout << "bkg_Mpi0_X events: " << bkg_Mpi0_X_counter << " [" << std::setprecision(2) << double(bkg_Mpi0_X_counter)/double(pass_selection_counter) *100. <<"%]" << std::endl;
 				std::cout << "bkg_bwds_1pi0_X events: " << bkg_bwds_1pi0_X_counter << " [" << std::setprecision(2) << double(bkg_bwds_1pi0_X_counter)/double(pass_selection_counter) *100. <<"%]" << std::endl;

@@ -27,7 +27,7 @@ public :
    TTree          *fChain;   //!pointer to the analyzed TTree or TChain
    Int_t           fCurrent; //!current Tree number in a TChain
 
-    Double_t        Weight;
+     Double_t        Weight;
    Double_t        T2KWeight;
    Double_t        ROOTinoWeight;
    Double_t        POTWeight;
@@ -48,10 +48,16 @@ public :
    Int_t           wc_kine_pio_flag;
    vector<int>     *wc_kine_particle_type;
    vector<float>   *wc_kine_energy_particle;
+   vector<double>  *trecchargeblob_spacepoints_x;
+   vector<double>  *trecchargeblob_spacepoints_y;
+   vector<double>  *trecchargeblob_spacepoints_z;
+   vector<double>  *trecchargeblob_spacepoints_q;
+   vector<double>  *trecchargeblob_spacepoints_real_cluster_id;
    Int_t           Run;
    Int_t           SubRun;
    Int_t           Event;
    TString         *run_period;
+   Int_t           nupdg;
    Int_t           signal;
    Int_t           nc;
    Int_t           numu;
@@ -61,19 +67,19 @@ public :
    Int_t           dis;
    Int_t           coh;
    Int_t           other;
-	int bkg_0pi0_X;
-	int bkg_Mpi0_X;
-	int bkg_bwds_1pi0_X;		
-	int bkg_1n_0p_1pi0_X;	
-	int bkg_Nn_0p_1pi0_X;
-	int bkg_1p_0n_1pi0_X;	
-	int bkg_Np_0n_1pi0_X;	
-	int bkg_1pi0_Npipm_X;	
-	int bkg_1pi0_Np_Nn_0pipm_X;
-	Int_t bkg_1pi0_Np_Nn_Npipm_X;		
-	int bkg_1pi0_Nmh_X; // m = mesons (mostly etas), h = heavy particles (Sigmas, Lambdas)	
-	int bkg_1pi0_Nl_X; // l = lepton		
-	int bkg_other;	   
+   Int_t           bkg_0pi0_X;
+   Int_t           bkg_Mpi0_X;
+   Int_t           bkg_bwds_1pi0_X;
+   Int_t           bkg_1n_0p_1pi0_X;
+   Int_t           bkg_Nn_0p_1pi0_X;
+   Int_t           bkg_1p_0n_1pi0_X;
+   Int_t           bkg_Np_0n_1pi0_X;
+   Int_t           bkg_1pi0_Npipm_X;
+   Int_t           bkg_1pi0_Np_Nn_0pipm_X;
+   Int_t           bkg_1pi0_Np_Nn_Npipm_X;
+   Int_t           bkg_1pi0_Nmh_X;
+   Int_t           bkg_1pi0_Nl_X;
+   Int_t           bkg_other;
    vector<unsigned short> *All_UBGenie;
    vector<double>  *AxFFCCQEshape_UBGenie;
    vector<double>  *DecayAngMEC_UBGenie;
@@ -103,6 +109,8 @@ public :
    vector<float>   *Vertex_X;
    vector<float>   *Vertex_Y;
    vector<float>   *Vertex_Z;
+   Int_t           wc_reco_g1_id;
+   Int_t           wc_reco_g2_id;
    vector<int>     *wc_reco_mother;
    vector<vector<float> > *wc_reco_p;
    vector<vector<float> > *wc_reco_start;
@@ -115,13 +123,41 @@ public :
    vector<double>  *reco_pi0_p;
    vector<double>  *reco_pi0_phi;
    vector<double>  *reco_pi0_costheta;
-   vector<double>  *reco_pi0_invmass;   
+   vector<double>  *reco_cm_costheta;
+   vector<double>  *reco_pi0_invmass;
    vector<double>  *reco_g1_p;
    vector<double>  *reco_g1_phi;
    vector<double>  *reco_g1_costheta;
+   Double_t        g1_start_x;
+   Double_t        g1_start_y;
+   Double_t        g1_start_z;
+   Double_t        g1_end_x;
+   Double_t        g1_end_y;
+   Double_t        g1_end_z;
    vector<double>  *reco_g2_p;
    vector<double>  *reco_g2_phi;
    vector<double>  *reco_g2_costheta;
+   Double_t        g2_start_x;
+   Double_t        g2_start_y;
+   Double_t        g2_start_z;
+   Double_t        g2_end_x;
+   Double_t        g2_end_y;
+   Double_t        g2_end_z;
+   Double_t        two_shower_start_dist;
+   Int_t           g1_truthMatch_pdg;
+   Double_t        g1_truthMatch_p;
+   Double_t        g1_truthMatch_px;
+   Double_t        g1_truthMatch_py;
+   Double_t        g1_truthMatch_pz;
+   Double_t        g1_truthMatch_costheta;
+   Double_t        g1_truthMatch_phi;
+   Int_t           g2_truthMatch_pdg;
+   Double_t        g2_truthMatch_p;
+   Double_t        g2_truthMatch_px;
+   Double_t        g2_truthMatch_py;
+   Double_t        g2_truthMatch_pz;
+   Double_t        g2_truthMatch_costheta;
+   Double_t        g2_truthMatch_phi;
    Int_t           nBlips_saved;
    vector<float>   *Blip_x;
    vector<float>   *Blip_y;
@@ -145,40 +181,10 @@ public :
    vector<float>   *pd_trk_score_v;
    vector<float>   *pd_trk_llr_pid_score_v;
    Int_t           pd_reco_track_count;
-   Int_t           pd_reco_shower_count;
-   double two_shower_start_dist;
-   double reco_cm_costheta;  
-	//int wc_reco_g1_id;
-	//int wc_reco_g2_id;    
-   double g1_start_x;
-   double g1_start_y;
-   double g1_start_z;
-   double g1_end_x;
-   double g1_end_y;
-   double g1_end_z;   
-   double g2_start_x;
-   double g2_start_y;
-   double g2_start_z;  
-   double g2_end_x;
-   double g2_end_y;
-   double g2_end_z;  
-	int g1_truthMatch_pdg;
-	double g1_truthMatch_p;
-	double g1_truthMatch_px;
-	double g1_truthMatch_py;
-	double g1_truthMatch_pz;
-	double g1_truthMatch_costheta;
-	double g1_truthMatch_phi; // rad		
-	int g2_truthMatch_pdg;
-	double g2_truthMatch_p;
-	double g2_truthMatch_px;
-	double g2_truthMatch_py;
-	double g2_truthMatch_pz;
-	double g2_truthMatch_costheta;
-	double g2_truthMatch_phi; // rad       
+   Int_t           pd_reco_shower_count; 
 
    // List of branches
-    TBranch        *b_Weight;   //!
+   TBranch        *b_Weight;   //!
    TBranch        *b_T2KWeight;   //!
    TBranch        *b_ROOTinoWeight;   //!
    TBranch        *b_POTWeight;   //!
@@ -199,10 +205,16 @@ public :
    TBranch        *b_wc_kine_pio_flag;   //!
    TBranch        *b_wc_kine_particle_type;   //!
    TBranch        *b_wc_kine_energy_particle;   //!
+   TBranch        *b_trecchargeblob_spacepoints_x;   //!
+   TBranch        *b_trecchargeblob_spacepoints_y;   //!
+   TBranch        *b_trecchargeblob_spacepoints_z;   //!
+   TBranch        *b_trecchargeblob_spacepoints_q;   //!
+   TBranch        *b_trecchargeblob_spacepoints_real_cluster_id;   //!
    TBranch        *b_Run;   //!
    TBranch        *b_SubRun;   //!
    TBranch        *b_Event;   //!
    TBranch        *b_run_period;   //!
+   TBranch        *b_nupdg;   //!
    TBranch        *b_signal;   //!
    TBranch        *b_nc;   //!
    TBranch        *b_numu;   //!
@@ -212,19 +224,19 @@ public :
    TBranch        *b_dis;   //!
    TBranch        *b_coh;   //!
    TBranch        *b_other;   //!
-   TBranch        *b_bkg_0pi0_X;
-   TBranch        *b_bkg_Mpi0_X;
-   TBranch        *b_bkg_bwds_1pi0_X;		
-   TBranch        *b_bkg_1n_0p_1pi0_X;	
-   TBranch        *b_bkg_Nn_0p_1pi0_X;
-   TBranch        *b_bkg_1p_0n_1pi0_X;	
-   TBranch        *b_bkg_Np_0n_1pi0_X;	
-   TBranch        *b_bkg_1pi0_Npipm_X;	
-   TBranch        *b_bkg_1pi0_Np_Nn_0pipm_X;
-   TBranch        *b_bkg_1pi0_Np_Nn_Npipm_X;		
-   TBranch        *b_bkg_1pi0_Nmh_X; // m = mesons (mostly etas), h = heavy particles (Sigmas, Lambdas)	
-   TBranch        *b_bkg_1pi0_Nl_X; // l = lepton		
-   TBranch        *b_bkg_other;	   
+   TBranch        *b_bkg_0pi0_X;   //!
+   TBranch        *b_bkg_Mpi0_X;   //!
+   TBranch        *b_bkg_bwds_1pi0_X;   //!
+   TBranch        *b_bkg_1n_0p_1pi0_X;   //!
+   TBranch        *b_bkg_Nn_0p_1pi0_X;   //!
+   TBranch        *b_bkg_1p_0n_1pi0_X;   //!
+   TBranch        *b_bkg_Np_0n_1pi0_X;   //!
+   TBranch        *b_bkg_1pi0_Npipm_X;   //!
+   TBranch        *b_bkg_1pi0_Np_Nn_0pipm_X;   //!
+   TBranch        *b_bkg_1pi0_Np_Nn_Npipm_X;   //!
+   TBranch        *b_bkg_1pi0_Nmh_X;   //!
+   TBranch        *b_bkg_1pi0_Nl_X;   //!
+   TBranch        *b_bkg_other;   //!
    TBranch        *b_All_UBGenie;   //!
    TBranch        *b_AxFFCCQEshape_UBGenie;   //!
    TBranch        *b_DecayAngMEC_UBGenie;   //!
@@ -254,6 +266,8 @@ public :
    TBranch        *b_Vertex_X;   //!
    TBranch        *b_Vertex_Y;   //!
    TBranch        *b_Vertex_Z;   //!
+   TBranch        *b_wc_reco_g1_id;   //!
+   TBranch        *b_wc_reco_g2_id;   //!
    TBranch        *b_wc_reco_mother;   //!
    TBranch        *b_wc_reco_p;   //!
    TBranch        *b_wc_reco_start;   //!
@@ -266,13 +280,41 @@ public :
    TBranch        *b_reco_pi0_p;   //!
    TBranch        *b_reco_pi0_phi;   //!
    TBranch        *b_reco_pi0_costheta;   //!
-   TBranch        *b_reco_pi0_invmass;   //!   
+   TBranch        *b_reco_cm_costheta;   //!
+   TBranch        *b_reco_pi0_invmass;   //!
    TBranch        *b_reco_g1_p;   //!
    TBranch        *b_reco_g1_phi;   //!
    TBranch        *b_reco_g1_costheta;   //!
+   TBranch        *b_g1_start_x;   //!
+   TBranch        *b_g1_start_y;   //!
+   TBranch        *b_g1_start_z;   //!
+   TBranch        *b_g1_end_x;   //!
+   TBranch        *b_g1_end_y;   //!
+   TBranch        *b_g1_end_z;   //!
    TBranch        *b_reco_g2_p;   //!
    TBranch        *b_reco_g2_phi;   //!
    TBranch        *b_reco_g2_costheta;   //!
+   TBranch        *b_g2_start_x;   //!
+   TBranch        *b_g2_start_y;   //!
+   TBranch        *b_g2_start_z;   //!
+   TBranch        *b_g2_end_x;   //!
+   TBranch        *b_g2_end_y;   //!
+   TBranch        *b_g2_end_z;   //!
+   TBranch        *b_two_shower_start_dist;   //!
+   TBranch        *b_g1_truthMatch_pdg;   //!
+   TBranch        *b_g1_truthMatch_p;   //!
+   TBranch        *b_g1_truthMatch_px;   //!
+   TBranch        *b_g1_truthMatch_py;   //!
+   TBranch        *b_g1_truthMatch_pz;   //!
+   TBranch        *b_g1_truthMatch_costheta;   //!
+   TBranch        *b_g1_truthMatch_phi;   //!
+   TBranch        *b_g2_truthMatch_pdg;   //!
+   TBranch        *b_g2_truthMatch_p;   //!
+   TBranch        *b_g2_truthMatch_px;   //!
+   TBranch        *b_g2_truthMatch_py;   //!
+   TBranch        *b_g2_truthMatch_pz;   //!
+   TBranch        *b_g2_truthMatch_costheta;   //!
+   TBranch        *b_g2_truthMatch_phi;   //!
    TBranch        *b_nBlips_saved;   //!
    TBranch        *b_Blip_x;   //!
    TBranch        *b_Blip_y;   //!
@@ -296,37 +338,7 @@ public :
    TBranch        *b_pd_trk_score_v;   //!
    TBranch        *b_pd_trk_llr_pid_score_v;   //!
    TBranch        *b_pd_reco_track_count;   //!
-   TBranch        *b_pd_reco_shower_count;   //!
-   TBranch        *b_two_shower_start_dist;   //!   
-   TBranch        *b_reco_cm_costheta;   //! 
-   //TBranch        *b_wc_reco_g1_id;   //!
-   //TBranch        *b_wc_reco_g2_id;   //!  
-   TBranch        *b_g1_start_x;   //! 
-   TBranch        *b_g1_start_y;   //! 
-   TBranch        *b_g1_start_z;   //!       
-   TBranch        *b_g1_end_x;   //! 
-   TBranch        *b_g1_end_y;   //! 
-   TBranch        *b_g1_end_z;   //!      
-   TBranch        *b_g2_start_x;   //! 
-   TBranch        *b_g2_start_y;   //! 
-   TBranch        *b_g2_start_z;   //!       
-   TBranch        *b_g2_end_x;   //! 
-   TBranch        *b_g2_end_y;   //! 
-   TBranch        *b_g2_end_z;   //!  
-   TBranch        *b_g1_truthMatch_pdg;   //!  
-   TBranch        *b_g1_truthMatch_p;   //!  
-   TBranch        *b_g1_truthMatch_px;   //!  
-   TBranch        *b_g1_truthMatch_py;   //!  
-   TBranch        *b_g1_truthMatch_pz;   //!  
-   TBranch        *b_g1_truthMatch_costheta;   //!  
-   TBranch        *b_g1_truthMatch_phi;   //!     
-   TBranch        *b_g2_truthMatch_pdg;   //!  
-   TBranch        *b_g2_truthMatch_p;   //!  
-   TBranch        *b_g2_truthMatch_px;   //!  
-   TBranch        *b_g2_truthMatch_py;   //!  
-   TBranch        *b_g2_truthMatch_pz;   //!  
-   TBranch        *b_g2_truthMatch_costheta;   //!  
-   TBranch        *b_g2_truthMatch_phi;   //!            
+   TBranch        *b_pd_reco_shower_count;   //!  
 
    mcc9_10_reco_selection(TString WhichSample="",TString Tune="",TString WhichEventWeightLabel="", int UniverseIndex=-1, TTree *tree=0);
    virtual ~mcc9_10_reco_selection();
@@ -426,6 +438,11 @@ void mcc9_10_reco_selection::Init(TTree *tree)
    // Set object pointer
    wc_kine_particle_type = 0;
    wc_kine_energy_particle = 0;
+   trecchargeblob_spacepoints_x = 0;
+   trecchargeblob_spacepoints_y = 0;
+   trecchargeblob_spacepoints_z = 0;
+   trecchargeblob_spacepoints_q = 0;
+   trecchargeblob_spacepoints_real_cluster_id = 0;
    run_period = 0;
    All_UBGenie = 0;
    AxFFCCQEshape_UBGenie = 0;
@@ -454,7 +471,8 @@ void mcc9_10_reco_selection::Init(TTree *tree)
    reco_pi0_p = 0;
    reco_pi0_phi = 0;
    reco_pi0_costheta = 0;
-   reco_pi0_invmass = 0;   
+   reco_cm_costheta = 0;
+   reco_pi0_invmass = 0;
    reco_g1_p = 0;
    reco_g1_phi = 0;
    reco_g1_costheta = 0;
@@ -510,10 +528,16 @@ void mcc9_10_reco_selection::Init(TTree *tree)
    fChain->SetBranchAddress("wc_kine_pio_flag", &wc_kine_pio_flag, &b_wc_kine_pio_flag);
    fChain->SetBranchAddress("wc_kine_particle_type", &wc_kine_particle_type, &b_wc_kine_particle_type);
    fChain->SetBranchAddress("wc_kine_energy_particle", &wc_kine_energy_particle, &b_wc_kine_energy_particle);
+   fChain->SetBranchAddress("trecchargeblob_spacepoints_x", &trecchargeblob_spacepoints_x, &b_trecchargeblob_spacepoints_x);
+   fChain->SetBranchAddress("trecchargeblob_spacepoints_y", &trecchargeblob_spacepoints_y, &b_trecchargeblob_spacepoints_y);
+   fChain->SetBranchAddress("trecchargeblob_spacepoints_z", &trecchargeblob_spacepoints_z, &b_trecchargeblob_spacepoints_z);
+   fChain->SetBranchAddress("trecchargeblob_spacepoints_q", &trecchargeblob_spacepoints_q, &b_trecchargeblob_spacepoints_q);
+   fChain->SetBranchAddress("trecchargeblob_spacepoints_real_cluster_id", &trecchargeblob_spacepoints_real_cluster_id, &b_trecchargeblob_spacepoints_real_cluster_id);
    fChain->SetBranchAddress("Run", &Run, &b_Run);
    fChain->SetBranchAddress("SubRun", &SubRun, &b_SubRun);
    fChain->SetBranchAddress("Event", &Event, &b_Event);
    fChain->SetBranchAddress("run_period", &run_period, &b_run_period);
+   fChain->SetBranchAddress("nupdg", &nupdg, &b_nupdg);
    fChain->SetBranchAddress("signal", &signal, &b_signal);
    fChain->SetBranchAddress("nc", &nc, &b_nc);
    fChain->SetBranchAddress("numu", &numu, &b_numu);
@@ -522,20 +546,20 @@ void mcc9_10_reco_selection::Init(TTree *tree)
    fChain->SetBranchAddress("res", &res, &b_res);
    fChain->SetBranchAddress("dis", &dis, &b_dis);
    fChain->SetBranchAddress("coh", &coh, &b_coh);
-   fChain->SetBranchAddress("other", &other, &b_other);  
-	fChain->SetBranchAddress("bkg_0pi0_X",&bkg_0pi0_X,&b_bkg_0pi0_X);
-	fChain->SetBranchAddress("bkg_Mpi0_X",&bkg_Mpi0_X,&b_bkg_Mpi0_X);
-	fChain->SetBranchAddress("bkg_bwds_1pi0_X",&bkg_bwds_1pi0_X,&b_bkg_bwds_1pi0_X);
-	fChain->SetBranchAddress("bkg_1n_0p_1pi0_X",&bkg_1n_0p_1pi0_X,&b_bkg_1n_0p_1pi0_X);			
-	fChain->SetBranchAddress("bkg_Nn_0p_1pi0_X",&bkg_Nn_0p_1pi0_X,&b_bkg_Nn_0p_1pi0_X);
-	fChain->SetBranchAddress("bkg_1p_0n_1pi0_X",&bkg_1p_0n_1pi0_X,&b_bkg_1p_0n_1pi0_X);
-	fChain->SetBranchAddress("bkg_Np_0n_1pi0_X",&bkg_Np_0n_1pi0_X,&b_bkg_Np_0n_1pi0_X);
-	fChain->SetBranchAddress("bkg_1pi0_Npipm_X",&bkg_1pi0_Npipm_X,&b_bkg_1pi0_Npipm_X);
-	fChain->SetBranchAddress("bkg_1pi0_Np_Nn_0pipm_X",&bkg_1pi0_Np_Nn_0pipm_X,&b_bkg_1pi0_Np_Nn_0pipm_X);
-	fChain->SetBranchAddress("bkg_1pi0_Np_Nn_Npipm_X",&bkg_1pi0_Np_Nn_0pipm_X,&b_bkg_1pi0_Np_Nn_0pipm_X);	
-	fChain->SetBranchAddress("bkg_1pi0_Nmh_X",&bkg_1pi0_Np_Nn_0pipm_X,&b_bkg_1pi0_Np_Nn_0pipm_X);
-	fChain->SetBranchAddress("bkg_1pi0_Nl_X",&bkg_1pi0_Nl_X,&b_bkg_1pi0_Nl_X);
-	fChain->SetBranchAddress("bkg_other",&bkg_other,&b_bkg_other);	   
+   fChain->SetBranchAddress("other", &other, &b_other);
+   fChain->SetBranchAddress("bkg_0pi0_X", &bkg_0pi0_X, &b_bkg_0pi0_X);
+   fChain->SetBranchAddress("bkg_Mpi0_X", &bkg_Mpi0_X, &b_bkg_Mpi0_X);
+   fChain->SetBranchAddress("bkg_bwds_1pi0_X", &bkg_bwds_1pi0_X, &b_bkg_bwds_1pi0_X);
+   fChain->SetBranchAddress("bkg_1n_0p_1pi0_X", &bkg_1n_0p_1pi0_X, &b_bkg_1n_0p_1pi0_X);
+   fChain->SetBranchAddress("bkg_Nn_0p_1pi0_X", &bkg_Nn_0p_1pi0_X, &b_bkg_Nn_0p_1pi0_X);
+   fChain->SetBranchAddress("bkg_1p_0n_1pi0_X", &bkg_1p_0n_1pi0_X, &b_bkg_1p_0n_1pi0_X);
+   fChain->SetBranchAddress("bkg_Np_0n_1pi0_X", &bkg_Np_0n_1pi0_X, &b_bkg_Np_0n_1pi0_X);
+   fChain->SetBranchAddress("bkg_1pi0_Npipm_X", &bkg_1pi0_Npipm_X, &b_bkg_1pi0_Npipm_X);
+   fChain->SetBranchAddress("bkg_1pi0_Np_Nn_0pipm_X", &bkg_1pi0_Np_Nn_0pipm_X, &b_bkg_1pi0_Np_Nn_0pipm_X);
+   fChain->SetBranchAddress("bkg_1pi0_Np_Nn_Npipm_X", &bkg_1pi0_Np_Nn_Npipm_X, &b_bkg_1pi0_Np_Nn_Npipm_X);
+   fChain->SetBranchAddress("bkg_1pi0_Nmh_X", &bkg_1pi0_Nmh_X, &b_bkg_1pi0_Nmh_X);
+   fChain->SetBranchAddress("bkg_1pi0_Nl_X", &bkg_1pi0_Nl_X, &b_bkg_1pi0_Nl_X);
+   fChain->SetBranchAddress("bkg_other", &bkg_other, &b_bkg_other);
    fChain->SetBranchAddress("All_UBGenie", &All_UBGenie, &b_All_UBGenie);
    fChain->SetBranchAddress("AxFFCCQEshape_UBGenie", &AxFFCCQEshape_UBGenie, &b_AxFFCCQEshape_UBGenie);
    fChain->SetBranchAddress("DecayAngMEC_UBGenie", &DecayAngMEC_UBGenie, &b_DecayAngMEC_UBGenie);
@@ -565,6 +589,8 @@ void mcc9_10_reco_selection::Init(TTree *tree)
    fChain->SetBranchAddress("Vertex_X", &Vertex_X, &b_Vertex_X);
    fChain->SetBranchAddress("Vertex_Y", &Vertex_Y, &b_Vertex_Y);
    fChain->SetBranchAddress("Vertex_Z", &Vertex_Z, &b_Vertex_Z);
+   fChain->SetBranchAddress("wc_reco_g1_id", &wc_reco_g1_id, &b_wc_reco_g1_id);
+   fChain->SetBranchAddress("wc_reco_g2_id", &wc_reco_g2_id, &b_wc_reco_g2_id);
    fChain->SetBranchAddress("wc_reco_mother", &wc_reco_mother, &b_wc_reco_mother);
    fChain->SetBranchAddress("wc_reco_p", &wc_reco_p, &b_wc_reco_p);
    fChain->SetBranchAddress("wc_reco_start", &wc_reco_start, &b_wc_reco_start);
@@ -577,13 +603,41 @@ void mcc9_10_reco_selection::Init(TTree *tree)
    fChain->SetBranchAddress("reco_pi0_p", &reco_pi0_p, &b_reco_pi0_p);
    fChain->SetBranchAddress("reco_pi0_phi", &reco_pi0_phi, &b_reco_pi0_phi);
    fChain->SetBranchAddress("reco_pi0_costheta", &reco_pi0_costheta, &b_reco_pi0_costheta);
-   fChain->SetBranchAddress("reco_pi0_invmass", &reco_pi0_invmass, &b_reco_pi0_invmass);   
+   fChain->SetBranchAddress("reco_cm_costheta", &reco_cm_costheta, &b_reco_cm_costheta);
+   fChain->SetBranchAddress("reco_pi0_invmass", &reco_pi0_invmass, &b_reco_pi0_invmass);
    fChain->SetBranchAddress("reco_g1_p", &reco_g1_p, &b_reco_g1_p);
    fChain->SetBranchAddress("reco_g1_phi", &reco_g1_phi, &b_reco_g1_phi);
    fChain->SetBranchAddress("reco_g1_costheta", &reco_g1_costheta, &b_reco_g1_costheta);
+   fChain->SetBranchAddress("g1_start_x", &g1_start_x, &b_g1_start_x);
+   fChain->SetBranchAddress("g1_start_y", &g1_start_y, &b_g1_start_y);
+   fChain->SetBranchAddress("g1_start_z", &g1_start_z, &b_g1_start_z);
+   fChain->SetBranchAddress("g1_end_x", &g1_end_x, &b_g1_end_x);
+   fChain->SetBranchAddress("g1_end_y", &g1_end_y, &b_g1_end_y);
+   fChain->SetBranchAddress("g1_end_z", &g1_end_z, &b_g1_end_z);
    fChain->SetBranchAddress("reco_g2_p", &reco_g2_p, &b_reco_g2_p);
    fChain->SetBranchAddress("reco_g2_phi", &reco_g2_phi, &b_reco_g2_phi);
    fChain->SetBranchAddress("reco_g2_costheta", &reco_g2_costheta, &b_reco_g2_costheta);
+   fChain->SetBranchAddress("g2_start_x", &g2_start_x, &b_g2_start_x);
+   fChain->SetBranchAddress("g2_start_y", &g2_start_y, &b_g2_start_y);
+   fChain->SetBranchAddress("g2_start_z", &g2_start_z, &b_g2_start_z);
+   fChain->SetBranchAddress("g2_end_x", &g2_end_x, &b_g2_end_x);
+   fChain->SetBranchAddress("g2_end_y", &g2_end_y, &b_g2_end_y);
+   fChain->SetBranchAddress("g2_end_z", &g2_end_z, &b_g2_end_z);
+   fChain->SetBranchAddress("two_shower_start_dist", &two_shower_start_dist, &b_two_shower_start_dist);
+   fChain->SetBranchAddress("g1_truthMatch_pdg", &g1_truthMatch_pdg, &b_g1_truthMatch_pdg);
+   fChain->SetBranchAddress("g1_truthMatch_p", &g1_truthMatch_p, &b_g1_truthMatch_p);
+   fChain->SetBranchAddress("g1_truthMatch_px", &g1_truthMatch_px, &b_g1_truthMatch_px);
+   fChain->SetBranchAddress("g1_truthMatch_py", &g1_truthMatch_py, &b_g1_truthMatch_py);
+   fChain->SetBranchAddress("g1_truthMatch_pz", &g1_truthMatch_pz, &b_g1_truthMatch_pz);
+   fChain->SetBranchAddress("g1_truthMatch_costheta", &g1_truthMatch_costheta, &b_g1_truthMatch_costheta);
+   fChain->SetBranchAddress("g1_truthMatch_phi", &g1_truthMatch_phi, &b_g1_truthMatch_phi);
+   fChain->SetBranchAddress("g2_truthMatch_pdg", &g2_truthMatch_pdg, &b_g2_truthMatch_pdg);
+   fChain->SetBranchAddress("g2_truthMatch_p", &g2_truthMatch_p, &b_g2_truthMatch_p);
+   fChain->SetBranchAddress("g2_truthMatch_px", &g2_truthMatch_px, &b_g2_truthMatch_px);
+   fChain->SetBranchAddress("g2_truthMatch_py", &g2_truthMatch_py, &b_g2_truthMatch_py);
+   fChain->SetBranchAddress("g2_truthMatch_pz", &g2_truthMatch_pz, &b_g2_truthMatch_pz);
+   fChain->SetBranchAddress("g2_truthMatch_costheta", &g2_truthMatch_costheta, &b_g2_truthMatch_costheta);
+   fChain->SetBranchAddress("g2_truthMatch_phi", &g2_truthMatch_phi, &b_g2_truthMatch_phi);
    fChain->SetBranchAddress("nBlips_saved", &nBlips_saved, &b_nBlips_saved);
    fChain->SetBranchAddress("Blip_x", &Blip_x, &b_Blip_x);
    fChain->SetBranchAddress("Blip_y", &Blip_y, &b_Blip_y);
@@ -608,38 +662,6 @@ void mcc9_10_reco_selection::Init(TTree *tree)
    fChain->SetBranchAddress("pd_trk_llr_pid_score_v", &pd_trk_llr_pid_score_v, &b_pd_trk_llr_pid_score_v);
    fChain->SetBranchAddress("pd_reco_track_count", &pd_reco_track_count, &b_pd_reco_track_count);
    fChain->SetBranchAddress("pd_reco_shower_count", &pd_reco_shower_count, &b_pd_reco_shower_count);
-   fChain->SetBranchAddress("two_shower_start_dist", &two_shower_start_dist, &b_two_shower_start_dist);
-   fChain->SetBranchAddress("reco_cm_costheta", &reco_cm_costheta, &b_reco_cm_costheta);
-   //fChain->SetBranchAddress("wc_reco_g1_id", &wc_reco_g1_id, &b_wc_reco_g1_id);
-   //fChain->SetBranchAddress("wc_reco_g2_id", &wc_reco_g2_id, &b_wc_reco_g2_id);   
-   fChain->SetBranchAddress("g1_start_x", &g1_start_x, &b_g1_start_x);
-   fChain->SetBranchAddress("g1_start_y", &g1_start_y, &b_g1_start_y);
-   fChain->SetBranchAddress("g1_start_z", &g1_start_z, &b_g1_start_z);
-   fChain->SetBranchAddress("g1_end_x", &g1_end_x, &b_g1_end_x);
-   fChain->SetBranchAddress("g1_end_y", &g1_end_y, &b_g1_end_y);
-   fChain->SetBranchAddress("g1_end_z", &g1_end_z, &b_g1_end_z);    
-   fChain->SetBranchAddress("g2_start_x", &g2_start_x, &b_g2_start_x);
-   fChain->SetBranchAddress("g2_start_y", &g2_start_y, &b_g2_start_y);
-   fChain->SetBranchAddress("g2_start_z", &g2_start_z, &b_g2_start_z);
-   fChain->SetBranchAddress("g2_end_x", &g2_end_x, &b_g2_end_x);
-   fChain->SetBranchAddress("g2_end_y", &g2_end_y, &b_g2_end_y);
-   fChain->SetBranchAddress("g2_end_z", &g2_end_z, &b_g2_end_z); 
-   
-	fChain->SetBranchAddress("g1_truthMatch_pdg",&g1_truthMatch_pdg, &b_g1_truthMatch_pdg);
-	fChain->SetBranchAddress("g1_truthMatch_p",&g1_truthMatch_p, &b_g1_truthMatch_p);
-	fChain->SetBranchAddress("g1_truthMatch_px",&g1_truthMatch_px, &b_g1_truthMatch_px);
-	fChain->SetBranchAddress("g1_truthMatch_py",&g1_truthMatch_py, &b_g1_truthMatch_py);
-	fChain->SetBranchAddress("g1_truthMatch_pz",&g1_truthMatch_pz, &b_g1_truthMatch_pz);
-	fChain->SetBranchAddress("g1_truthMatch_costheta",&g1_truthMatch_costheta, &b_g1_truthMatch_costheta);
-	fChain->SetBranchAddress("g1_truthMatch_phi",&g1_truthMatch_phi, &b_g1_truthMatch_phi);
-	
-	fChain->SetBranchAddress("g2_truthMatch_pdg",&g2_truthMatch_pdg, &b_g2_truthMatch_pdg);
-	fChain->SetBranchAddress("g2_truthMatch_p",&g2_truthMatch_p, &b_g2_truthMatch_p);
-	fChain->SetBranchAddress("g2_truthMatch_px",&g2_truthMatch_px, &b_g2_truthMatch_px);
-	fChain->SetBranchAddress("g2_truthMatch_py",&g2_truthMatch_py, &b_g2_truthMatch_py);
-	fChain->SetBranchAddress("g2_truthMatch_pz",&g2_truthMatch_pz, &b_g2_truthMatch_pz);
-	fChain->SetBranchAddress("g2_truthMatch_costheta",&g2_truthMatch_costheta, &b_g2_truthMatch_costheta);
-	fChain->SetBranchAddress("g2_truthMatch_phi",&g2_truthMatch_phi, &b_g2_truthMatch_phi);
 
    Notify();
 }

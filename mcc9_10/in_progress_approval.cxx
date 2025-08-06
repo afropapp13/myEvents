@@ -18,7 +18,7 @@
 using namespace std;
 using namespace constants;
 
-void mcc9_10_topological_breakdown(TString BaseMC = "") {
+void in_progress_approval(TString BaseMC = "") {
 
 	// -----------------------------------------------------------------------------------------------------------------------------------------
 
@@ -29,38 +29,6 @@ void mcc9_10_topological_breakdown(TString BaseMC = "") {
 	std::vector<TString> PlotNames; PlotNames.clear();
 
 	PlotNames.push_back("RecoSingleBinPlot");
-	PlotNames.push_back("RecoPi0CosThetaPlot");
-	PlotNames.push_back("RecoPi0MomentumPlot");
-	PlotNames.push_back("Recog1CosThetaPlot");
-	PlotNames.push_back("Recog1MomentumPlot");
-	PlotNames.push_back("Recog2CosThetaPlot");
-	PlotNames.push_back("Recog2MomentumPlot");
-	PlotNames.push_back("Recotwo_shower_anglePlot");
-	PlotNames.push_back("Recotwo_shower_start_distPlot");	
-
-	// Blips
-
-	PlotNames.push_back("ReconBlips_radiusPlot");
-	PlotNames.push_back("ReconBlips_savedPlot");
-	PlotNames.push_back("RecoBlip_xPlot");
-	PlotNames.push_back("RecoBlip_yPlot");
-	PlotNames.push_back("RecoBlip_zPlot");
-	PlotNames.push_back("RecoBlip_energyPlot");
-	PlotNames.push_back("Recoblip_vrtPlot");
-	PlotNames.push_back("Recoblip_cos_alphapi0Plot");
-	PlotNames.push_back("Recoblip_cos_alphag1Plot");	
-	PlotNames.push_back("Recoblip_cos_alphag2Plot");	
-	
-	PlotNames.push_back("Reconc_pio_scorePlot");
-	PlotNames.push_back("Reconumu_scorePlot");
-	PlotNames.push_back("Recokine_pio_flagPlot");
-	PlotNames.push_back("Recokine_pio_vtx_disPlot");
-
-	PlotNames.push_back("Recosingle_photon_numu_scorePlot");
-	PlotNames.push_back("Recosingle_photon_other_scorePlot");
-	PlotNames.push_back("Recosingle_photon_ncpi0_scorePlot");
-	PlotNames.push_back("Recosingle_photon_nue_scorePlot");
-	PlotNames.push_back("ReconshowersPlot");	
 
 	const int N1DPlots = PlotNames.size();
 	cout << "Number of 1D Plots = " << N1DPlots << endl;
@@ -170,9 +138,9 @@ void mcc9_10_topological_breakdown(TString BaseMC = "") {
 	
 			vector<int> Colors; Colors.clear(); 
 			// Unblind
-			Colors.push_back(kBlack);
+			//Colors.push_back(kBlack);
 			// Blind 
-			//Colors.push_back(kWhite); 
+			Colors.push_back(kWhite); 
 			Colors.push_back(kRed); Colors.push_back(kGray+2); Colors.push_back(kMagenta);
 
 //			vector<int> ColorsOverlay{kBlue-5,kYellow+1,kOrange+7,kRed+1,kBlue};
@@ -197,24 +165,15 @@ void mcc9_10_topological_breakdown(TString BaseMC = "") {
 					TH1D* NCCOHhist = (TH1D*)(FileSample[WhichSample]->Get("NCCOH"+PlotNames[WhichPlot]));
 					TH1D* NonNCCOHhist = (TH1D*)(FileSample[WhichSample]->Get("NonNCCOH"+PlotNames[WhichPlot]));
 
+					// Scale to full data set
+					hist->Scale(10.);
+					NCCOHhist->Scale(10.);
+					NonNCCOHhist->Scale(10.);										
+
 					hist->GetXaxis()->CenterTitle();
 					hist->GetYaxis()->CenterTitle();
 
-					//------------------------------//
-
-					// The N-dimensional analysis has been developed based on the bin number, not the actual range
-
-					if (string(PlotNames[WhichPlot]).find("Serial") != std::string::npos) {	
-
-						TString XaxisTitle = hist->GetXaxis()->GetTitle();
-						XaxisTitle.ReplaceAll("deg","bin #");
-						XaxisTitle.ReplaceAll("GeV/c","bin #");
-						XaxisTitle.ReplaceAll("GeV","bin #");				
-						hist->GetXaxis()->SetTitle(XaxisTitle);
-
-					}								
-
-					//------------------------------//										
+					//------------------------------//								
 
 					hist->SetLineColor(Colors[WhichSample]);
 				
@@ -222,9 +181,9 @@ void mcc9_10_topological_breakdown(TString BaseMC = "") {
 				
 						hist->SetMarkerStyle(20);
 						// Unblind
-						hist->SetMarkerSize(1.); 
+						//hist->SetMarkerSize(2.); 
 						// Blind
-						//hist->SetMarkerSize(0.); 
+						hist->SetMarkerSize(0.); 
 					}
 
 					CurrentPlots.push_back(hist);
@@ -258,23 +217,17 @@ void mcc9_10_topological_breakdown(TString BaseMC = "") {
 				THStacks.push_back(new THStack(PlotNames[WhichPlot],""));
 
 				TPad *topPad = new TPad("topPad", "", 0.005, 0.92, 0.995, 0.995);
-				TPad *midPad = new TPad("midPad", "", 0.005, 0.3  , 0.995, 0.92);
-				TPad *botPad = new TPad("botPad", "", 0.005, 0.005, 0.995, 0.3);
+				TPad *midPad = new TPad("midPad", "", 0.005, 0.005  , 0.995, 0.92);
 				topPad->SetTopMargin(0.3);
 				topPad->SetBottomMargin(0.0);
-				midPad->SetBottomMargin(0.03);
+				midPad->SetBottomMargin(0.1);
 				midPad->SetTopMargin(0.03);
-				botPad->SetTopMargin(0.03);
-				botPad->SetBottomMargin(0.3);
-				//botPad->SetGridx();
-				//botPad->SetGridy();
 				topPad->Draw();
 				midPad->Draw();
-				botPad->Draw();
 
-				leg.push_back(new TLegend(0.1,0.005,0.9,0.995));
+				leg.push_back(new TLegend(0.1,0.,0.9,0.85));
 				leg[WhichPlot]->SetBorderSize(0);
-				leg[WhichPlot]->SetNColumns(3);
+				leg[WhichPlot]->SetNColumns(2);
 				leg[WhichPlot]->SetMargin(0.15);				
 
 				double max = -99.;
@@ -289,7 +242,7 @@ void mcc9_10_topological_breakdown(TString BaseMC = "") {
 
 					Plots[WhichSample][WhichPlot]->GetXaxis()->SetTitleFont(FontStyle);
 					Plots[WhichSample][WhichPlot]->GetXaxis()->SetLabelFont(FontStyle);
-					Plots[WhichSample][WhichPlot]->GetXaxis()->SetNdivisions(8);
+					Plots[WhichSample][WhichPlot]->GetXaxis()->SetNdivisions(0);
 					Plots[WhichSample][WhichPlot]->GetXaxis()->SetLabelSize(0);
 
 					Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitleFont(FontStyle);
@@ -299,11 +252,11 @@ void mcc9_10_topological_breakdown(TString BaseMC = "") {
 
 					if (xsec_Runs[WhichRun] == "Combined") {
 
-						Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitle("Number of  events / bin");
+						Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitle("Events");
 
 					} else {
 
-						Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitle(xsec_Runs[WhichRun] + " events / bin");
+						Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitle("Events");
 
 					}
 
@@ -326,7 +279,7 @@ void mcc9_10_topological_breakdown(TString BaseMC = "") {
 						bin_width_Plots[WhichSample][WhichPlot]->Draw("e same"); 
 						TString NBeamOnEvents = ToString((int)(Plots[WhichSample][WhichPlot]->Integral()));
 						// Unblind
-						leg[WhichPlot]->AddEntry(Plots[WhichSample][WhichPlot], "BNB Data ("+NBeamOnEvents+")","ep");
+						//leg[WhichPlot]->AddEntry(Plots[WhichSample][WhichPlot], "BNB Data ("+NBeamOnEvents+")","ep");
 
 					}
 
@@ -377,10 +330,9 @@ void mcc9_10_topological_breakdown(TString BaseMC = "") {
 							THStacks[WhichPlot]->Add(bin_width_NCCOHPlots[WhichSample][WhichPlot],"hist");
 
 							// add the cosmic label first
-							TString NExtBNBEvents = ToString( (int)(Plots[2][WhichPlot]->Integral() ) );							
-							leg[WhichPlot]->AddEntry(Plots[2][WhichPlot],"Cosmic ("+NExtBNBEvents+")","f");							
+							TString NExtBNBEvents = ToString( (int)(Plots[2][WhichPlot]->Integral() ) );												
 							// Unblind
-							leg[WhichPlot]->AddEntry(Plots[2][WhichPlot],"","");	 // blank space
+							//leg[WhichPlot]->AddEntry(Plots[2][WhichPlot],"","");	 // blank space
 
 							leg[WhichPlot]->AddEntry(NCCOHPlots[WhichSample][WhichPlot],"MC NCCOH#pi^{0}-like ("+NNCCOHEvents+")","f");
 							THStacks[WhichPlot]->Draw("same");
@@ -394,6 +346,8 @@ void mcc9_10_topological_breakdown(TString BaseMC = "") {
 							leg[WhichPlot]->AddEntry(NonNCCOHPlots[WhichSample][WhichPlot],"MC nonNCCOH#pi^{0}-like ("+NNonNCCOHEvents+")","f");
 							THStacks[WhichPlot]->Draw("same");
 
+							leg[WhichPlot]->AddEntry(Plots[2][WhichPlot],"Cosmic ("+NExtBNBEvents+")","f");									
+
 					}
 					
 
@@ -401,65 +355,14 @@ void mcc9_10_topological_breakdown(TString BaseMC = "") {
 
 				TH1D* stack_max = (TH1D*) (THStacks[WhichPlot]->GetStack()->Last());
 				double m_stack = TMath::Max( find_bin_max_value(bin_width_Plots[0][WhichPlot]) , find_bin_max_value(stack_max) );
-				bin_width_Plots[0][WhichPlot]->GetYaxis()->SetRangeUser(0.,1.35*m_stack);
-
-				// Area normalize bc we don't have POT
-				//bin_width_Plots[0][WhichPlot]->Scale( stack_max->Integral("width") / bin_width_Plots[0][WhichPlot]->Integral("width") );
-				// Unblind and draw on top
-				bin_width_Plots[0][WhichPlot]->Draw("e same"); 
+				bin_width_Plots[0][WhichPlot]->GetYaxis()->SetRangeUser(0.,1.2*m_stack);
 				
 				// -----------------------------------------------------------------------------------	
 
 				gPad->RedrawAxis();
-
-				TLatex *text = new TLatex();
-				text->SetTextFont(FontStyle);
-				text->SetTextSize(0.07);
-
-				TLatex *textSlice = new TLatex();
-				textSlice->SetTextFont(FontStyle);
-				textSlice->SetTextSize(0.07);
-				TString PlotNameDuplicate = PlotNames[WhichPlot];
-				TString ReducedPlotName = PlotNameDuplicate.ReplaceAll("Reco","") ;
-				textSlice->DrawLatexNDC(0.115, 0.8, LatexLabel[ReducedPlotName]);	
-
-				// ------------------------------------------------------------------------------------
-
-				hratio[1][WhichPlot]->Add(hratio[2][WhichPlot]);
-				hratio[1][WhichPlot]->Add(hratio[3][WhichPlot]);
-				hratio[0][WhichPlot]->Divide(hratio[1][WhichPlot]);
-				
-				hratio[0][WhichPlot]->GetXaxis()->SetTitleFont(FontStyle);
-				hratio[0][WhichPlot]->GetXaxis()->SetLabelFont(FontStyle);
-				hratio[0][WhichPlot]->GetYaxis()->SetTitle("#frac{Data}{Prediction}");
-				hratio[0][WhichPlot]->GetXaxis()->SetTitle(Plots[0][WhichPlot]->GetXaxis()->GetTitle());
-				hratio[0][WhichPlot]->GetXaxis()->SetTitleSize(0.13);
-				hratio[0][WhichPlot]->GetXaxis()->SetLabelSize(0.12);
-				hratio[0][WhichPlot]->GetXaxis()->SetTitleOffset(0.88);
-				hratio[0][WhichPlot]->GetXaxis()->SetNdivisions(8);
-
-				hratio[0][WhichPlot]->GetYaxis()->SetTitleFont(FontStyle);
-				hratio[0][WhichPlot]->GetYaxis()->SetLabelFont(FontStyle);
-				hratio[0][WhichPlot]->GetYaxis()->SetRangeUser(0.51,1.89);
-				hratio[0][WhichPlot]->GetYaxis()->SetNdivisions(6);
-				hratio[0][WhichPlot]->GetYaxis()->SetTitleOffset(0.35);
-				hratio[0][WhichPlot]->GetYaxis()->SetTitleSize(0.1);
-				hratio[0][WhichPlot]->GetYaxis()->SetLabelSize(0.11);
-
-				botPad->cd();
-				hratio[0][WhichPlot]->Draw("e same");
-
-				double RatioMin = hratio[0][WhichPlot]->GetXaxis()->GetXmin();
-				double RatioMax = hratio[0][WhichPlot]->GetXaxis()->GetXmax();
-				double YRatioCoord = 1.;
-				TLine* RatioLine = new TLine(RatioMin,YRatioCoord,RatioMax,YRatioCoord);
-				RatioLine->SetLineWidth(2);
-				RatioLine->SetLineColor(kBlack);
-				RatioLine->SetLineStyle(kDashed);
-				RatioLine->Draw("same");
 			
 				topPad->cd();
-				leg[WhichPlot]->SetTextSize(0.5);
+				leg[WhichPlot]->SetTextSize(0.6);
 				leg[WhichPlot]->SetTextFont(FontStyle);
 				leg[WhichPlot]->Draw();
 
@@ -479,9 +382,9 @@ void mcc9_10_topological_breakdown(TString BaseMC = "") {
 				
 				TLatex latexPurity;
 				latexPurity.SetTextFont(FontStyle);
-				latexPurity.SetTextSize(0.07);
+				latexPurity.SetTextSize(0.06);
 				TString LabelPurity = "NCCOH#pi^{0}-like = " + ToString(NCCOHPurity/10.) + " %";
-				latexPurity.DrawLatexNDC(0.59,0.89, LabelPurity);
+				latexPurity.DrawLatexNDC(0.13,0.76, LabelPurity);
 				
 				//----------------------------------------//
 				
@@ -489,16 +392,8 @@ void mcc9_10_topological_breakdown(TString BaseMC = "") {
 				
 				TLatex *textPOT = new TLatex();
 				textPOT->SetTextFont(FontStyle);
-				textPOT->SetTextSize(0.07);
-
-				if (xsec_Runs[WhichRun] == "Combined") { 
-
-					textPOT->DrawLatexNDC(0.115, 0.89,"MicroBooNE 1.30 #times 10^{21} POT");
-
-				} else {
-								
-					textPOT->DrawLatexNDC(0.115, 0.89,"MicroBooNE " + ToString(DataPOT).ReplaceAll("e"," #times 10").ReplaceAll("+","^{")+"} POT");								
-				}
+				textPOT->SetTextSize(0.06);
+				textPOT->DrawLatexNDC(0.13, 0.83,"MicroBooNE 1.31 #times 10^{21} POT");
 
 				//----------------------------------------//
 
@@ -509,36 +404,9 @@ void mcc9_10_topological_breakdown(TString BaseMC = "") {
 				midPad->cd();
 				TLatex latexCosmic;
 				latexCosmic.SetTextFont(FontStyle);
-				latexCosmic.SetTextSize(0.07);
-				TString LabelCosmic = "Cosmics = " + ToString(CosmicContamination/10.) + " %";
-				latexCosmic.DrawLatexNDC(0.59,0.8, LabelCosmic);				
-
-				// -------------------------------------------------------------------- //				
-
-				if ( string(PlotNames[WhichPlot]).find("RecoThetaVis") != std::string::npos ) {
-
-					TLatex latexDataStats;
-					latexDataStats.SetTextFont(FontStyle);
-					latexDataStats.SetTextSize(0.07);
-					double data_peak = find_bin_max_value(bin_width_Plots[0][WhichPlot]);
-					double data_mean = bin_width_Plots[0][WhichPlot]->GetMean();
-					double data_std = bin_width_Plots[0][WhichPlot]->GetRMS();
-					TString LabelDataStats = "#splitline{Data peak = " + to_string_with_precision(data_peak,2) + "}{#mu = " + to_string_with_precision(data_mean,2) + ", #sigma' = " + to_string_with_precision(data_std,2) + "}";
-					//latexDataStats.DrawLatexNDC(0.61,0.6, LabelDataStats);				
-
-					TH1D* MC = (TH1D*) (THStacks[WhichPlot]->GetStack()->Last());
-					TH1D* clone_MC = (TH1D*)(MC->Clone());
-					rm_bin_width(clone_MC);
-					TLatex latexMCStats;
-					latexMCStats.SetTextFont(FontStyle);
-					latexMCStats.SetTextSize(0.07);
-					double mc_peak = find_bin_max_value(MC);
-					double mc_mean = MC->GetMean();
-					double mc_std = MC->GetRMS();
-					TString LabelMCStats = "#splitline{MC peak = " + to_string_with_precision(mc_peak,2) + "}{#mu = " + to_string_with_precision(mc_mean,2) + ", #sigma' = " + to_string_with_precision(mc_std,2) + "}";
-					//latexMCStats.DrawLatexNDC(0.61,0.4, LabelMCStats);				
-
-				}
+				latexCosmic.SetTextSize(0.06);
+				TString LabelCosmic = "MicroBooNE Simulation In Progress";
+				latexCosmic.DrawLatexNDC(0.13,0.9, LabelCosmic);				
 
 				//----------------------------------------//
 /*
@@ -643,8 +511,6 @@ void mcc9_10_topological_breakdown(TString BaseMC = "") {
 				MCUncTwice->SetFillColor(MCUncColor);
 				MCUncTwice->SetLineWidth(1);				
 
-				botPad->cd();
-
 				THStacksMCUnc[WhichPlot]->Add(MCUncDown,"hist");
 				if (plot_unc) { THStacksMCUnc[WhichPlot]->Draw("same"); }
 
@@ -662,12 +528,7 @@ void mcc9_10_topological_breakdown(TString BaseMC = "") {
 				double chi2, pval, sigma; int ndof;
 				
 				CalcChiSquared(Plots[0][WhichPlot],MCStackClone,CovMatrixEvents,chi2,ndof,pval,sigma);
-				TString Chi2Ndof = "#chi^{2}/ndf = " + to_string_with_precision(chi2,1) + "/" + TString(std::to_string(ndof)) +", p = " + to_string_with_precision(pval,2) + ", " + to_string_with_precision(sigma,2) + "#sigma'";
-
-				TLatex latexChi2;
-				latexChi2.SetTextFont(FontStyle);
-				latexChi2.SetTextSize(0.1);
-				if (plot_unc) { latexChi2.DrawLatexNDC(0.15,0.88,Chi2Ndof); }				
+				TString Chi2Ndof = "#chi^{2}/ndf = " + to_string_with_precision(chi2,1) + "/" + TString(std::to_string(ndof)) +", p = " + to_string_with_precision(pval,2) + ", " + to_string_with_precision(sigma,2) + "#sigma'";		
 
 				//----------------------------------------//
 
@@ -694,28 +555,12 @@ void mcc9_10_topological_breakdown(TString BaseMC = "") {
 	
 					//----------------------------------------//
 
-					vector<TLatex*> slice; slice.resize(nbreaks+1);
-
-					for (int ipoint = 0; ipoint < nbreaks + 1; ipoint ++) {
-
-			
-						slice.at(ipoint) = new TLatex();
-						slice.at(ipoint)->SetTextFont(FontStyle);
-						slice.at(ipoint)->SetTextSize(0.04);
-						TString phase_space = MapUncorCor[ clone_name + "_" + TString(std::to_string(ipoint) ) ];
-						midPad->cd();
-						if (ipoint == 0) { slice.at(ipoint)->DrawLatex( bin_break_points.at(ipoint) / 3. , 0.7 * bin_width_Plots[0][WhichPlot]->GetMaximum(), LatexLabel[phase_space ]); }
-						else { slice.at(ipoint)->DrawLatex( bin_break_points.at(ipoint - 1) + ( bin_break_points.at(ipoint) - bin_break_points.at(ipoint-1) ) / 3. , 0.7 * bin_width_Plots[0][WhichPlot]->GetMaximum(), LatexLabel[phase_space ]); }
-
-
-					}
-
 				}
 */
 				//----------------------------------------//
 
 				TString CanvasPath = plot_path + Cuts+"/TopologicalBreakDown/";
-				TString CanvasName = BaseMC + "mcc9_10_THStack_BreakDown_"+PlotNames[WhichPlot]+"_"+xsec_Runs[WhichRun]+".pdf";
+				TString CanvasName = BaseMC + "in_progress_approval_"+PlotNames[WhichPlot]+"_"+xsec_Runs[WhichRun]+".pdf";
 				PlotCanvas[WhichPlot]->SaveAs(CanvasPath+CanvasName);
 				delete PlotCanvas[WhichPlot];
 

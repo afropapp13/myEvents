@@ -22,6 +22,7 @@
 using namespace std;
 
 #include "../../../generators/Tools.h"
+#include "../../../generators/helper_functions.cxx"
 
 //--------------------------------------------------//
 
@@ -95,6 +96,16 @@ void mcc9_10_true_selection::Loop() {
 		TruePi0MomentumPlot[inte] = new TH1D(InteractionLabels[inte]+"TruePi0MomentumPlot",LabelXAxisPi0Momentum,NBinsPi0Momentum,ArrayNBinsPi0Momentum);
 	
 	} // End of the loop over the interaction processes	
+
+	//--------------------------------------------------//
+
+	// counters
+
+	int event_counter = 0;	
+	int numu_counter = 0;
+	int nue_counter = 0;
+	int numubar_counter = 0;
+	int nuebar_counter = 0;		
 
 	//--------------------------------------------------//
 
@@ -336,6 +347,13 @@ void mcc9_10_true_selection::Loop() {
 		// No other heavier mesons or baryons
 
 		if (signal) {
+
+			event_counter++;
+			if (nupdg == 14) { numu_counter++; }
+			else if (nupdg == 12) { nue_counter++; }
+			else if (nupdg == -14) { numubar_counter++; }
+			else if (nupdg == -12) { nuebar_counter++; }	
+			else { cout << "unknown neutrino flavor!" << endl; }								
 		
 			//--------------------------------------------------//	
 
@@ -388,8 +406,15 @@ void mcc9_10_true_selection::Loop() {
 	//----------------------------------------//
 
 	std::cout << std::endl;
-
 	std::cout << std::endl << "File " << FileName << " has been created"<< std::endl << std::endl;
+	std::cout << std::endl << "selected events = " << event_counter << std::endl;	
+	std::cout << std::endl << "numu events = " << numu_counter << " (" + to_string_with_precision( (double)(numu_counter)/(double)(event_counter)*100.,2 ) + "%)"<< std::endl;
+	std::cout << "nue events = " << nue_counter << " (" + to_string_with_precision( (double)(nue_counter)/(double)(event_counter)*100.,2 ) + "%)"<< std::endl;
+	std::cout << "numubar events = " << numubar_counter << " (" + to_string_with_precision( (double)(numubar_counter)/(double)(event_counter)*100.,2 ) + "%)"<< std::endl;
+	std::cout << "nuebar events = " << nuebar_counter << " (" + to_string_with_precision( (double)(nuebar_counter)/(double)(event_counter)*100.,2 ) + "%)"<< std::endl << std::endl;	
+
+	//----------------------------------------//
+
 	OutputFile->cd();
 	OutputFile->Write();
 	OutputFile->Close();
