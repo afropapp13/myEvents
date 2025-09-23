@@ -6,12 +6,12 @@
 #include <TString.h>
 #include <TStyle.h>
 
-#include "../myClasses/Constants.h"
+#include "../../myClasses/Constants.h"
 
 using namespace std;
 using namespace Constants;
 
-void print_2d() {
+void mcc9_10_print_2d() {
 
 	// -------------------------------------------------------------------------------------
 
@@ -49,29 +49,10 @@ void print_2d() {
 
 	vector<TString> PlotNames;
 
-	PlotNames.push_back("BVectorAnglePlot"); 
-	PlotNames.push_back("MuonCosThetaPlot"); 
-	PlotNames.push_back("ProtonCosThetaPlot"); 
-	PlotNames.push_back("RecoThetaVisRecoECalPlot"); 
-	PlotNames.push_back("MuonMomentumPlot"); 
-	PlotNames.push_back("ProtonMomentumPlot"); 
-	PlotNames.push_back("RecoThetaVisRecoDeltaPnPlot"); 
-	PlotNames.push_back("RecoThetaVisRecoPMissPlot");
-	PlotNames.push_back("RecoDeltaPnRecoPMissPlot");
-	PlotNames.push_back("RecoThetaVisRecoDeltaPTPlot"); 
-	PlotNames.push_back("RecoECalTrueECalPlot"); 
-	PlotNames.push_back("RecoECalTrueEnuPlot"); 
-	PlotNames.push_back("RecoThetaVisRecoPMissPlot"); 
-
-	PlotNames.push_back("TrueThetaVisTrueECalPlot"); 
-	PlotNames.push_back("TrueThetaVisTrueEnuPlot"); 
-	
-	PlotNames.push_back("TruePLGKIvsPLVisPlot"); 
-	PlotNames.push_back("PLGKIvsPLVisPlot"); 
-
-	PlotNames.push_back("LowEBVectorAnglePlot");
-	PlotNames.push_back("MidEBVectorAnglePlot");
-	PlotNames.push_back("HighEBVectorAnglePlot");			
+	PlotNames.push_back("POTScaledMuonMomentum_pd_vs_wcPlot2D"); 
+	PlotNames.push_back("POTScaledMuonMomentum_pd_vs_wc_recalcPlot2D"); 	
+	PlotNames.push_back("POTScaledProtonMomentum_pd_vs_wcPlot2D"); 
+	PlotNames.push_back("POTScaledProtonMomentum_pd_vs_wc_recalcPlot2D"); 				
 	
 	const int N2DPlots = PlotNames.size();
 	cout << "Number of 2D Plots = " << N2DPlots << endl;
@@ -88,9 +69,9 @@ void print_2d() {
 	//Runs.push_back("Run1");
 //	Runs.push_back("Run2");
 	//Runs.push_back("Run3");
-//	Runs.push_back("Run4");
+	Runs.push_back("Run4b_unified");
 //	Runs.push_back("Run5");				
-	Runs.push_back("Combined");				
+//	Runs.push_back("Combined");				
 
 	const int NRuns = (int)(Runs.size());
 	cout << "Number of Runs = " << NRuns << endl;	
@@ -112,7 +93,7 @@ void print_2d() {
 		
 			TString ExactFileLocation = PathToFiles+CutExtension;
 
-			FileSample[WhichSample][WhichRun] = TFile::Open(ExactFileLocation+"/STVStudies_"+NameOfSamples[WhichSample]+"_"+\
+			FileSample[WhichSample][WhichRun] = TFile::Open(ExactFileLocation+"/STVStudies_mcc9_10_"+NameOfSamples[WhichSample]+"_"+\
 							  Runs[WhichRun]+CutExtension+".root");
 
 		}
@@ -122,7 +103,7 @@ void print_2d() {
 			for (int WhichPlot = 0; WhichPlot < N2DPlots; WhichPlot ++) {
 
 
-				Plots[WhichSample][WhichPlot] = (TH2D*)(FileSample[WhichSample][WhichRun]->Get("POTScaledCC1p"+PlotNames[WhichPlot]+"2D"));
+				Plots[WhichSample][WhichPlot] = (TH2D*)(FileSample[WhichSample][WhichRun]->Get(PlotNames[WhichPlot]));
 				
 				// ---------------------------------------------------------------------------------------				
 	

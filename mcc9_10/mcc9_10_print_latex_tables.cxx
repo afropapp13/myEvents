@@ -94,7 +94,7 @@ void mcc9_10_print_latex_tables(TString BaseMC = "", bool PrintStats = false, bo
 
 	vector<TString> Runs;
 	Runs.push_back("Run4b_unified");
-	Runs.push_back("Run4b_standalone");	
+	//Runs.push_back("Run4b_standalone");	
 
 	int NRuns = (int)(Runs.size());
 //	cout << "Number of Runs = " << NRuns << endl;

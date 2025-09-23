@@ -610,6 +610,10 @@ void reco_selection::Loop() {
 		// 1st collaboration review
 		// Comments by David Caratelli 03/04/2025
 
+        TH2D* POTScaledCC1pLowEBVectorAnglePlot2D = new TH2D("POTScaledCC1pLowEBVectorAnglePlot2D",";\\theta_{vis}^{true} [deg];\\theta_{vis}^{reco} [deg]",90,0.,180.,90,0.,180.);
+	    TH2D* POTScaledCC1pMidEBVectorAnglePlot2D = new TH2D("POTScaledCC1pMidEBVectorAnglePlot2D",";\\theta_{vis}^{true} [deg];\\theta_{vis}^{reco} [deg]",90,0.,180.,90,0.,180.);
+		TH2D* POTScaledCC1pHighEBVectorAnglePlot2D = new TH2D("POTScaledCC1pHighEBVectorAnglePlot2D",";\\theta_{vis}^{true} [deg];\\theta_{vis}^{reco} [deg]",90,0.,180.,90,0.,180.);	
+
         TH2D* POTScaledCC1pBVectorAnglePlot2D = new TH2D("POTScaledCC1pBVectorAnglePlot2D",";\\theta_{vis}^{true} [deg];\\theta_{vis}^{reco} [deg]",90,0.,180.,90,0.,180.);
         TH2D* POTScaledCC1pMuonCosThetaPlot2D = new TH2D("POTScaledCC1pMuonCosThetaPlot2D",";cos\\theta_{\\mu}^{true};cos\\theta_{\\mu}^{reco}",100,-1.,1.,100,-1.,1.);
         TH2D* POTScaledCC1pProtonCosThetaPlot2D = new TH2D("POTScaledCC1pProtonCosThetaPlot2D",";cos\\theta_{p}^{true};cos\\theta_{p}^{reco}",100,-1.,1.,100,-1.,1.);
@@ -1413,6 +1417,10 @@ void reco_selection::Loop() {
 
 					POTScaledCC1pMuonMomentumPlot2D->Fill(True_CandidateMu_P->at(0),reco_Pmu,weight);
 					POTScaledCC1pProtonMomentumPlot2D->Fill(True_CandidateP_P->at(0),reco_Pp,weight);
+
+					if (ECal < 0.5) { POTScaledCC1pLowEBVectorAnglePlot2D->Fill(true_ThetaVis,ThetaVis,weight); }	
+					if (ECal > 0.5 && ECal < 0.8) { POTScaledCC1pMidEBVectorAnglePlot2D->Fill(true_ThetaVis,ThetaVis,weight); }										
+					if (ECal > 0.8) { POTScaledCC1pHighEBVectorAnglePlot2D->Fill(true_ThetaVis,ThetaVis,weight); }	
 
 				} // End of the CC1p signal
 

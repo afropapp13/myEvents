@@ -51,6 +51,7 @@ void mcc9_10_interaction_breakdown(TString BaseMC = "") {
 
 	PlotNames.push_back("RecoNuScorePlot");	
 	PlotNames.push_back("Recons_timePlot");		
+	PlotNames.push_back("Recowc_numu_scorePlot");
 
 	// Blips
 
@@ -59,11 +60,10 @@ void mcc9_10_interaction_breakdown(TString BaseMC = "") {
 	PlotNames.push_back("RecoBlip_yPlot");
 	PlotNames.push_back("RecoBlip_zPlot");
 	PlotNames.push_back("RecoBlip_energyPlot");
-	PlotNames.push_back("RecoBlip_sizePlot");						
 	PlotNames.push_back("RecoBlip_proxtrkdistPlot");	
 	PlotNames.push_back("RecoBlip_pairdistPlot");	
-
-	PlotNames.push_back("Recoblip_vrtPlot");		
+	PlotNames.push_back("Recoblip_vrtPlot");	
+	PlotNames.push_back("ReconBlips_radiusPlot");	
 	
 	const int N1DPlots = PlotNames.size();
 	cout << "Number of 1D Plots = " << N1DPlots << endl;

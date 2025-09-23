@@ -118,7 +118,6 @@ public :
 	vector<float>   *Blip_x;
 	vector<float>   *Blip_y;
 	vector<float>   *Blip_z;
-	vector<float>   *Blip_size;
 	vector<float>   *Blip_energy;
 	vector<float>   *Blip_charge;
 	vector<int>     *Blip_nplanes;
@@ -126,18 +125,30 @@ public :
 	vector<int>     *Blip_proxtrkid;
 	vector<bool>    *Blip_touchtrk;
 	vector<int>     *Blip_touchtrkid;
-	vector<float>   *Blip_badwirefrac;
 	vector<int>     *Blip_pl0_nwires;
 	vector<int>     *Blip_pl1_nwires;
 	vector<int>     *Blip_pl2_nwires;
 	vector<bool>    *Blip_pl0_bydeadwire;
 	vector<bool>    *Blip_pl1_bydeadwire;
 	vector<bool>    *Blip_pl2_bydeadwire;
-	vector<int>     *Blip_pl0_centerwire;
-	vector<int>     *Blip_pl1_centerwire;
-	vector<int>     *Blip_pl2_centerwire;
 	vector<int>     *Blip_true_g4id;
+   vector<int>     *Blip_true_pdg;
 	vector<float>   *Blip_true_energy;
+
+	//----------------------------------------// 
+
+   //WC
+
+   vector<int> *wc_reco_id;
+   vector<int> *wc_reco_pdg;
+   vector<int> *wc_reco_mother;
+	vector< vector<float> > *wc_reco_p;
+
+	vector<double>  *trecchargeblob_spacepoints_x;
+	vector<double>  *trecchargeblob_spacepoints_y;
+	vector<double>  *trecchargeblob_spacepoints_z;
+	vector<double>  *trecchargeblob_spacepoints_q;
+	vector<double>  *trecchargeblob_spacepoints_real_cluster_id;	   
 
 	//----------------------------------------//   
    
@@ -178,6 +189,9 @@ public :
    vector<float>   *Vertex_X;
    vector<float>   *Vertex_Y;
    vector<float>   *Vertex_Z;
+   vector<float>   *wc_Vertex_X;
+   vector<float>   *wc_Vertex_Y;
+   vector<float>   *wc_Vertex_Z;   
    vector<double>  *CandidateMuStartVertexDistance;
    vector<double>  *CandidatePStartVertexDistance;
    vector<double>  *CandidateMuEndVertexDistance;
@@ -291,6 +305,8 @@ public :
    vector<double>  *True_ThetaVis;
    vector<double>  *StartToStartDistance;
    vector<double>  *EndToEndDistance;
+ 	Double_t        wc_mcs_mu_tracklen;
+	Double_t        wc_mcs_emu_tracklen;   
 
    // List of branches
    TBranch        *b_Weight;   //!
@@ -370,7 +386,20 @@ public :
    TBranch        *b_UnShortRPA_CCQE_UBGenie;
    TBranch        *b_UnShortTheta_Delta2Npi_UBGenie;
    TBranch        *b_UnShortVecFFCCQEshape_UBGenie;
-   TBranch        *b_UnShortXSecShape_CCMEC_UBGenie;               			
+   TBranch        *b_UnShortXSecShape_CCMEC_UBGenie;     
+   
+	//----------------------------------------// 
+
+   TBranch        *b_wc_reco_mother;   //!
+   TBranch        *b_wc_reco_p;   //! 
+   TBranch        *b_wc_reco_id;   //! 
+   TBranch        *b_wc_reco_pdg;   //! 
+
+   TBranch        *b_trecchargeblob_spacepoints_x;   //!    
+   TBranch        *b_trecchargeblob_spacepoints_y;   //!    
+   TBranch        *b_trecchargeblob_spacepoints_z;   //!    
+   TBranch        *b_trecchargeblob_spacepoints_q;   //!    
+   TBranch        *b_trecchargeblob_spacepoints_real_cluster_id;   //!                
 
 	//----------------------------------------//   
    
@@ -410,6 +439,9 @@ public :
    TBranch        *b_Vertex_X;   //!
    TBranch        *b_Vertex_Y;   //!
    TBranch        *b_Vertex_Z;   //!
+   TBranch        *b_wc_Vertex_X;   //!
+   TBranch        *b_wc_Vertex_Y;   //!
+   TBranch        *b_wc_Vertex_Z;   //!   
    TBranch        *b_CandidateMuStartVertexDistance;   //!
    TBranch        *b_CandidatePStartVertexDistance;   //!
    TBranch        *b_CandidateMuEndVertexDistance;   //!
@@ -531,7 +563,6 @@ public :
    TBranch        *b_Blip_x;   //!
    TBranch        *b_Blip_y;   //!
    TBranch        *b_Blip_z;   //!
-   TBranch        *b_Blip_size;   //!
    TBranch        *b_Blip_energy;   //!
    TBranch        *b_Blip_charge;   //!
    TBranch        *b_Blip_nplanes;   //!
@@ -539,18 +570,17 @@ public :
    TBranch        *b_Blip_proxtrkid;   //!
    TBranch        *b_Blip_touchtrk;   //!
    TBranch        *b_Blip_touchtrkid;   //!
-   TBranch        *b_Blip_badwirefrac;   //!
    TBranch        *b_Blip_pl0_nwires;   //!
    TBranch        *b_Blip_pl1_nwires;   //!
    TBranch        *b_Blip_pl2_nwires;   //!
    TBranch        *b_Blip_pl0_bydeadwire;   //!
    TBranch        *b_Blip_pl1_bydeadwire;   //!
    TBranch        *b_Blip_pl2_bydeadwire;   //!
-   TBranch        *b_Blip_pl0_centerwire;   //!
-   TBranch        *b_Blip_pl1_centerwire;   //!
-   TBranch        *b_Blip_pl2_centerwire;   //!
    TBranch        *b_Blip_true_g4id;   //!
+   TBranch        *b_Blip_true_pdg;   //!
    TBranch        *b_Blip_true_energy;   //!   
+   TBranch        *b_wc_mcs_mu_tracklen;   //!  
+   TBranch        *b_wc_mcs_emu_tracklen;   //!  
 
    mcc9_10_reco_selection(TString WhichSample="",TString Tune="",TString WhichEventWeightLabel="", int UniverseIndex=-1, TTree *tree=0);
    virtual ~mcc9_10_reco_selection();
@@ -715,7 +745,22 @@ void mcc9_10_reco_selection::Init(TTree *tree)
 	UnShortRPA_CCQE_UBGenie = 0;
 	UnShortTheta_Delta2Npi_UBGenie = 0;
 	UnShortVecFFCCQEshape_UBGenie = 0;
-	UnShortXSecShape_CCMEC_UBGenie = 0;	 	 	 	 	 	   		
+	UnShortXSecShape_CCMEC_UBGenie = 0;	 
+   
+	//----------------------------------------//
+
+   // WC
+
+   wc_reco_mother = 0;
+   wc_reco_p = 0;
+   wc_reco_pdg = 0;
+   wc_reco_id = 0;
+
+   trecchargeblob_spacepoints_x = 0;
+   trecchargeblob_spacepoints_y = 0;
+   trecchargeblob_spacepoints_z = 0;
+   trecchargeblob_spacepoints_q = 0;
+   trecchargeblob_spacepoints_real_cluster_id = 0;                 
 
 	//----------------------------------------//     
    
@@ -725,6 +770,9 @@ void mcc9_10_reco_selection::Init(TTree *tree)
    Vertex_X = 0;
    Vertex_Y = 0;
    Vertex_Z = 0;
+   wc_Vertex_X = 0;
+   wc_Vertex_Y = 0;
+   wc_Vertex_Z = 0;   
    CandidateMuStartVertexDistance = 0;
    CandidatePStartVertexDistance = 0;
    CandidateMuEndVertexDistance = 0;
@@ -842,7 +890,6 @@ void mcc9_10_reco_selection::Init(TTree *tree)
 	Blip_x = 0;
 	Blip_y = 0;
 	Blip_z = 0;
-	Blip_size = 0;
 	Blip_energy = 0;
 	Blip_charge = 0;
 	Blip_nplanes = 0;
@@ -850,17 +897,14 @@ void mcc9_10_reco_selection::Init(TTree *tree)
 	Blip_proxtrkid = 0;
 	Blip_touchtrk = 0;
 	Blip_touchtrkid = 0;
-	Blip_badwirefrac = 0;
 	Blip_pl0_nwires = 0;
 	Blip_pl1_nwires = 0;
 	Blip_pl2_nwires = 0;
 	Blip_pl0_bydeadwire = 0;
 	Blip_pl1_bydeadwire = 0;
 	Blip_pl2_bydeadwire = 0;
-	Blip_pl0_centerwire = 0;
-	Blip_pl1_centerwire = 0;
-	Blip_pl2_centerwire = 0;
 	Blip_true_g4id = 0;
+   Blip_true_pdg = 0;
 	Blip_true_energy = 0;
 
    // Set branch addresses and branch pointers
@@ -910,6 +954,18 @@ void mcc9_10_reco_selection::Init(TTree *tree)
    fChain->SetBranchAddress("NumberProtons", &NumberProtons, &b_NumberProtons);
    fChain->SetBranchAddress("NumberMuons", &NumberMuons, &b_NumberMuons);
    fChain->SetBranchAddress("NumberChargedPions", &NumberChargedPions, &b_NumberChargedPions);
+
+   fChain->SetBranchAddress("wc_reco_mother", &wc_reco_mother, &b_wc_reco_mother);
+   fChain->SetBranchAddress("wc_reco_p", &wc_reco_p, &b_wc_reco_p);
+   fChain->SetBranchAddress("wc_reco_pdg", &wc_reco_pdg, &b_wc_reco_pdg);
+   fChain->SetBranchAddress("wc_reco_id", &wc_reco_id, &b_wc_reco_id);
+
+   fChain->SetBranchAddress("trecchargeblob_spacepoints_x", &trecchargeblob_spacepoints_x, &b_trecchargeblob_spacepoints_x);
+   fChain->SetBranchAddress("trecchargeblob_spacepoints_y", &trecchargeblob_spacepoints_y, &b_trecchargeblob_spacepoints_y);
+   fChain->SetBranchAddress("trecchargeblob_spacepoints_z", &trecchargeblob_spacepoints_z, &b_trecchargeblob_spacepoints_z);
+   fChain->SetBranchAddress("trecchargeblob_spacepoints_q", &trecchargeblob_spacepoints_q, &b_trecchargeblob_spacepoints_q);
+   fChain->SetBranchAddress("trecchargeblob_spacepoints_real_cluster_id", &trecchargeblob_spacepoints_real_cluster_id, &b_trecchargeblob_spacepoints_real_cluster_id);                  
+
    fChain->SetBranchAddress("True_Ev", &True_Ev, &b_True_Ev);
    fChain->SetBranchAddress("True_Vx", &True_Vx, &b_True_Vx);
    fChain->SetBranchAddress("True_Vy", &True_Vy, &b_True_Vy);
@@ -926,6 +982,9 @@ void mcc9_10_reco_selection::Init(TTree *tree)
    fChain->SetBranchAddress("Vertex_X", &Vertex_X, &b_Vertex_X);
    fChain->SetBranchAddress("Vertex_Y", &Vertex_Y, &b_Vertex_Y);
    fChain->SetBranchAddress("Vertex_Z", &Vertex_Z, &b_Vertex_Z);
+   fChain->SetBranchAddress("wc_Vertex_X", &wc_Vertex_X, &b_wc_Vertex_X);
+   fChain->SetBranchAddress("wc_Vertex_Y", &wc_Vertex_Y, &b_wc_Vertex_Y);
+   fChain->SetBranchAddress("wc_Vertex_Z", &wc_Vertex_Z, &b_wc_Vertex_Z);   
    fChain->SetBranchAddress("CandidateMuStartVertexDistance", &CandidateMuStartVertexDistance, &b_CandidateMuStartVertexDistance);
    fChain->SetBranchAddress("CandidatePStartVertexDistance", &CandidatePStartVertexDistance, &b_CandidatePStartVertexDistance);
    fChain->SetBranchAddress("CandidateMuEndVertexDistance", &CandidateMuEndVertexDistance, &b_CandidateMuEndVertexDistance);
@@ -1044,33 +1103,32 @@ void mcc9_10_reco_selection::Init(TTree *tree)
 
 	// Blip info
 
-   tree->SetBranchAddress("wc_numu_score",&wc_numu_score);
-   tree->SetBranchAddress("wc_numu_cc_flag",&wc_numu_cc_flag);
-   tree->SetBranchAddress("ns_time",&ns_time);
-	tree->SetBranchAddress("nBlips_saved",&nBlips_saved);
-	tree->SetBranchAddress("Blip_x",&Blip_x);
-	tree->SetBranchAddress("Blip_y",&Blip_y);
-	tree->SetBranchAddress("Blip_z",&Blip_z);
-	tree->SetBranchAddress("Blip_size",&Blip_size);
-	tree->SetBranchAddress("Blip_energy",&Blip_energy);
-	tree->SetBranchAddress("Blip_charge",&Blip_charge);
-	tree->SetBranchAddress("Blip_nplanes",&Blip_nplanes);
-	tree->SetBranchAddress("Blip_proxtrkdist",&Blip_proxtrkdist);
-	tree->SetBranchAddress("Blip_proxtrkid",&Blip_proxtrkid);
-	tree->SetBranchAddress("Blip_touchtrk",&Blip_touchtrk);
-	tree->SetBranchAddress("Blip_touchtrkid",&Blip_touchtrkid);
-	tree->SetBranchAddress("Blip_badwirefrac",&Blip_badwirefrac);
-	tree->SetBranchAddress("Blip_pl0_nwires",&Blip_pl0_nwires);
-	tree->SetBranchAddress("Blip_pl1_nwires",&Blip_pl1_nwires);
-	tree->SetBranchAddress("Blip_pl2_nwires",&Blip_pl2_nwires);
-	tree->SetBranchAddress("Blip_pl0_bydeadwire",&Blip_pl0_bydeadwire);
-	tree->SetBranchAddress("Blip_pl1_bydeadwire",&Blip_pl1_bydeadwire);
-	tree->SetBranchAddress("Blip_pl2_bydeadwire",&Blip_pl2_bydeadwire);
-	tree->SetBranchAddress("Blip_pl0_centerwire",&Blip_pl0_centerwire);
-	tree->SetBranchAddress("Blip_pl1_centerwire",&Blip_pl1_centerwire);
-	tree->SetBranchAddress("Blip_pl2_centerwire",&Blip_pl2_centerwire);
-	tree->SetBranchAddress("Blip_true_g4id",&Blip_true_g4id);	
-	tree->SetBranchAddress("Blip_true_energy",&Blip_true_energy);
+   fChain->SetBranchAddress("wc_numu_score",&wc_numu_score);
+   fChain->SetBranchAddress("wc_numu_cc_flag",&wc_numu_cc_flag);
+   fChain->SetBranchAddress("ns_time",&ns_time);
+	fChain->SetBranchAddress("nBlips_saved",&nBlips_saved);
+	fChain->SetBranchAddress("Blip_x",&Blip_x);
+	fChain->SetBranchAddress("Blip_y",&Blip_y);
+	fChain->SetBranchAddress("Blip_z",&Blip_z);
+	fChain->SetBranchAddress("Blip_energy",&Blip_energy);
+	fChain->SetBranchAddress("Blip_charge",&Blip_charge);
+	fChain->SetBranchAddress("Blip_nplanes",&Blip_nplanes);
+	fChain->SetBranchAddress("Blip_proxtrkdist",&Blip_proxtrkdist);
+	fChain->SetBranchAddress("Blip_proxtrkid",&Blip_proxtrkid);
+	fChain->SetBranchAddress("Blip_touchtrk",&Blip_touchtrk);
+	fChain->SetBranchAddress("Blip_touchtrkid",&Blip_touchtrkid);
+	fChain->SetBranchAddress("Blip_pl0_nwires",&Blip_pl0_nwires);
+	fChain->SetBranchAddress("Blip_pl1_nwires",&Blip_pl1_nwires);
+	fChain->SetBranchAddress("Blip_pl2_nwires",&Blip_pl2_nwires);
+	fChain->SetBranchAddress("Blip_pl0_bydeadwire",&Blip_pl0_bydeadwire);
+	fChain->SetBranchAddress("Blip_pl1_bydeadwire",&Blip_pl1_bydeadwire);
+	fChain->SetBranchAddress("Blip_pl2_bydeadwire",&Blip_pl2_bydeadwire);
+	fChain->SetBranchAddress("Blip_true_g4id",&Blip_true_g4id);	
+   fChain->SetBranchAddress("Blip_true_pdg",&Blip_true_pdg);	
+	fChain->SetBranchAddress("Blip_true_energy",&Blip_true_energy);
+
+   fChain->SetBranchAddress("wc_mcs_mu_tracklen", &wc_mcs_mu_tracklen, &b_wc_mcs_mu_tracklen);
+   fChain->SetBranchAddress("wc_mcs_emu_tracklen", &wc_mcs_emu_tracklen, &b_wc_mcs_emu_tracklen);   
 
    Notify();
 }

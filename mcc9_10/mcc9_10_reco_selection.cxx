@@ -46,7 +46,11 @@ void mcc9_10_reco_selection::Loop() {
 
 	//----------------------------------------//
 
-	int NEventsPassingSelectionCuts = 0;
+	// Counters
+
+	int candidate_events = 0;
+	int wc_candidate_events = 0;
+
 	int CC1pEventsPassingSelectionCuts = 0;
 	int NonCC1pEventsPassingSelectionCuts = 0;
 	
@@ -81,6 +85,13 @@ void mcc9_10_reco_selection::Loop() {
 
 		//----------------------------------------//
 
+		// File raneg vs KE for recalculation of WC proton kinetic energy
+
+		TFile* range_vs_ke_f = new TFile("ave_range_to_kenergy.root","readonly");
+		TGraph* proton_range_vs_ke_h = (TGraph*)(range_vs_ke_f->Get("proton"));
+
+		//----------------------------------------//
+
 		TString Extension = "";
 
 		// For overlays only for genie, flux and reinteraction uncertainties
@@ -93,7 +104,7 @@ void mcc9_10_reco_selection::Loop() {
 
 		TString FileName = PathToFiles+Cuts+"/"+fTune+"STVStudies_"+fWhichSample+Extension+Cuts+".root";
 		TFile* file = new TFile(FileName,"recreate");
-		std::cout << std::endl << "Creating a new file: " << FileName << std::endl << std::endl << std::endl;
+		std::cout << std::endl << "Creating a new file: " << FileName << std::endl << std::endl << std::endl;	
 
 		//----------------------------------------//
 
@@ -108,7 +119,7 @@ void mcc9_10_reco_selection::Loop() {
 		TH1D* CCQERecowc_numu_scorePlot = new TH1D("CCQERecowc_numu_scorePlot",LabelXAxiswc_numu_score,NBinswc_numu_score,min_wc_numu_score,max_wc_numu_score);
 		TH1D* CCMECRecowc_numu_scorePlot = new TH1D("CCMECRecowc_numu_scorePlot",LabelXAxiswc_numu_score,NBinswc_numu_score,min_wc_numu_score,max_wc_numu_score);
 		TH1D* CCRESRecowc_numu_scorePlot = new TH1D("CCRESRecowc_numu_scorePlot",LabelXAxiswc_numu_score,NBinswc_numu_score,min_wc_numu_score,max_wc_numu_score);
-		TH1D* CCDISRecowc_numu_scorePlot = new TH1D("CCDISRecowc_numu_scorePlot",LabelXAxiswc_numu_score,NBinsBlip_x,min_wc_numu_score,max_wc_numu_score);		
+		TH1D* CCDISRecowc_numu_scorePlot = new TH1D("CCDISRecowc_numu_scorePlot",LabelXAxiswc_numu_score,NBinswc_numu_score,min_wc_numu_score,max_wc_numu_score);		
 
 		//----------------------------------------//
 
@@ -123,7 +134,7 @@ void mcc9_10_reco_selection::Loop() {
 		TH1D* CCQERecons_timePlot = new TH1D("CCQERecons_timePlot",LabelXAxisns_time,NBinsns_time,min_ns_time,max_ns_time);
 		TH1D* CCMECRecons_timePlot = new TH1D("CCMECRecons_timePlot",LabelXAxisns_time,NBinsns_time,min_ns_time,max_ns_time);
 		TH1D* CCRESRecons_timePlot = new TH1D("CCRESRecons_timePlot",LabelXAxisns_time,NBinsns_time,min_ns_time,max_ns_time);
-		TH1D* CCDISRecons_timePlot = new TH1D("CCDISRecons_timePlot",LabelXAxisns_time,NBinsBlip_x,min_ns_time,max_ns_time);
+		TH1D* CCDISRecons_timePlot = new TH1D("CCDISRecons_timePlot",LabelXAxisns_time,NBinsns_time,min_ns_time,max_ns_time);
 
 		// nuscore
 
@@ -136,7 +147,7 @@ void mcc9_10_reco_selection::Loop() {
 		TH1D* CCQERecoNuScorePlot = new TH1D("CCQERecoNuScorePlot",LabelXAxisNuScore,NBinsNuScore,min_nuscore,max_nuscore);
 		TH1D* CCMECRecoNuScorePlot = new TH1D("CCMECRecoNuScorePlot",LabelXAxisNuScore,NBinsNuScore,min_nuscore,max_nuscore);
 		TH1D* CCRESRecoNuScorePlot = new TH1D("CCRESRecoNuScorePlot",LabelXAxisNuScore,NBinsNuScore,min_nuscore,max_nuscore);
-		TH1D* CCDISRecoNuScorePlot = new TH1D("CCDISRecoNuScorePlot",LabelXAxisNuScore,NBinsBlip_x,min_nuscore,max_nuscore);
+		TH1D* CCDISRecoNuScorePlot = new TH1D("CCDISRecoNuScorePlot",LabelXAxisNuScore,NBinsNuScore,min_nuscore,max_nuscore);
 
 		// Blips
 
@@ -180,6 +191,19 @@ void mcc9_10_reco_selection::Loop() {
 		TH1D* CCRESRecoBlip_zPlot = new TH1D("CCRESRecoBlip_zPlot",LabelXAxisBlip_z,NBinsBlip_z,borderz,FVz-borderz);
 		TH1D* CCDISRecoBlip_zPlot = new TH1D("CCDISRecoBlip_zPlot",LabelXAxisBlip_z,NBinsBlip_z,borderz,FVz-borderz);
 		
+		TH1D* ReconBlips_radiusPlot = new TH1D("ReconBlips_radiusPlot",LabelXAxisnBlips_radius,NBinsnBlips_radius,nBlips_radius_min,nBlips_radius_max);
+		TH1D* CC1pReconBlips_radiusPlot = new TH1D("CC1pReconBlips_radiusPlot",LabelXAxisnBlips_radius,NBinsnBlips_radius,nBlips_radius_min,nBlips_radius_max);	
+		TH1D* CC1pTruenBlips_radiusPlot = new TH1D("CC1pTruenBlips_radiusPlot",LabelXAxisnBlips_radius,NBinsnBlips_radius,nBlips_radius_min,nBlips_radius_max);
+		TH2D* CC1pReconBlips_radiusPlot2D = new TH2D("CC1pReconBlips_radiusPlot2D",LabelXAxisnBlips_radius2D,NBinsnBlips_radius,
+			  nBlips_radius_min,nBlips_radius_max,NBinsnBlips_radius,nBlips_radius_min,nBlips_radius_max);
+		TH2D* POTScaledCC1pReconBlips_radiusPlot2D = new TH2D("POTScaledCC1pReconBlips_radiusPlot2D",LabelXAxisnBlips_radius2D,NBinsnBlips_radius,
+			  nBlips_radius_min,nBlips_radius_max,NBinsnBlips_radius,nBlips_radius_min,nBlips_radius_max);
+		TH1D* NonCC1pReconBlips_radiusPlot = new TH1D("NonCC1pReconBlips_radiusPlot",LabelXAxisnBlips_radius,NBinsnBlips_radius,nBlips_radius_min,nBlips_radius_max);
+		TH1D* CCQEReconBlips_radiusPlot = new TH1D("CCQEReconBlips_radiusPlot",LabelXAxisnBlips_radius,NBinsnBlips_radius,nBlips_radius_min,nBlips_radius_max);
+		TH1D* CCMECReconBlips_radiusPlot = new TH1D("CCMECReconBlips_radiusPlot",LabelXAxisnBlips_radius,NBinsnBlips_radius,nBlips_radius_min,nBlips_radius_max);
+		TH1D* CCRESReconBlips_radiusPlot = new TH1D("CCRESReconBlips_radiusPlot",LabelXAxisnBlips_radius,NBinsnBlips_radius,nBlips_radius_min,nBlips_radius_max);
+		TH1D* CCDISReconBlips_radiusPlot = new TH1D("CCDISReconBlips_radiusPlot",LabelXAxisnBlips_radius,NBinsnBlips_radius,nBlips_radius_min,nBlips_radius_max);
+
 		TH1D* ReconBlips_savedPlot = new TH1D("ReconBlips_savedPlot",LabelXAxisnBlips_saved,NBinsnBlips_saved,nBlips_saved_min,nBlips_saved_max);
 		TH1D* CC1pReconBlips_savedPlot = new TH1D("CC1pReconBlips_savedPlot",LabelXAxisnBlips_saved,NBinsnBlips_saved,nBlips_saved_min,nBlips_saved_max);	
 		TH1D* CC1pTruenBlips_savedPlot = new TH1D("CC1pTruenBlips_savedPlot",LabelXAxisnBlips_saved,NBinsnBlips_saved,nBlips_saved_min,nBlips_saved_max);
@@ -193,19 +217,6 @@ void mcc9_10_reco_selection::Loop() {
 		TH1D* CCRESReconBlips_savedPlot = new TH1D("CCRESReconBlips_savedPlot",LabelXAxisnBlips_saved,NBinsnBlips_saved,nBlips_saved_min,nBlips_saved_max);
 		TH1D* CCDISReconBlips_savedPlot = new TH1D("CCDISReconBlips_savedPlot",LabelXAxisnBlips_saved,NBinsnBlips_saved,nBlips_saved_min,nBlips_saved_max);		
 
-		TH1D* RecoBlip_sizePlot = new TH1D("RecoBlip_sizePlot",LabelXAxisBlip_size,NBinsBlip_size,Blip_size_min,Blip_size_max);
-		TH1D* CC1pRecoBlip_sizePlot = new TH1D("CC1pRecoBlip_sizePlot",LabelXAxisBlip_size,NBinsBlip_size,Blip_size_min,Blip_size_max);	
-		TH1D* CC1pTrueBlip_sizePlot = new TH1D("CC1pTrueBlip_sizePlot",LabelXAxisBlip_size,NBinsBlip_size,Blip_size_min,Blip_size_max);
-		TH2D* CC1pRecoBlip_sizePlot2D = new TH2D("CC1pRecoBlip_sizePlot2D",LabelXAxisBlip_size2D,NBinsBlip_size,
-			Blip_size_min,Blip_size_max,NBinsBlip_size,Blip_size_min,Blip_size_max);
-		TH2D* POTScaledCC1pRecoBlip_sizePlot2D = new TH2D("POTScaledCC1pRecoBlip_sizePlot2D",LabelXAxisBlip_size2D,NBinsBlip_size,
-			Blip_size_min,Blip_size_max,NBinsBlip_size,Blip_size_min,Blip_size_max);
-		TH1D* NonCC1pRecoBlip_sizePlot = new TH1D("NonCC1pRecoBlip_sizePlot",LabelXAxisBlip_size,NBinsBlip_size,Blip_size_min,Blip_size_max);
-		TH1D* CCQERecoBlip_sizePlot = new TH1D("CCQERecoBlip_sizePlot",LabelXAxisBlip_size,NBinsBlip_size,Blip_size_min,Blip_size_max);
-		TH1D* CCMECRecoBlip_sizePlot = new TH1D("CCMECRecoBlip_sizePlot",LabelXAxisBlip_size,NBinsBlip_size,Blip_size_min,Blip_size_max);
-		TH1D* CCRESRecoBlip_sizePlot = new TH1D("CCRESRecoBlip_sizePlot",LabelXAxisBlip_size,NBinsBlip_size,Blip_size_min,Blip_size_max);
-		TH1D* CCDISRecoBlip_sizePlot = new TH1D("CCDISRecoBlip_sizePlot",LabelXAxisBlip_size,NBinsBlip_size,Blip_size_min,Blip_size_max);
-		
 		TH1D* RecoBlip_energyPlot = new TH1D("RecoBlip_energyPlot",LabelXAxisBlip_energy,NBinsBlip_energy,Blip_energy_min,Blip_energy_max);
 		TH1D* CC1pRecoBlip_energyPlot = new TH1D("CC1pRecoBlip_energyPlot",LabelXAxisBlip_energy,NBinsBlip_energy,Blip_energy_min,Blip_energy_max);	
 		TH1D* CC1pTrueBlip_energyPlot = new TH1D("CC1pTrueBlip_energyPlot",LabelXAxisBlip_energy,NBinsBlip_energy,Blip_energy_min,Blip_energy_max);
@@ -697,39 +708,39 @@ void mcc9_10_reco_selection::Loop() {
 
 		// Reco
 
-                TH2D* POTScaledCC1pRecoThetaVisRecoECalPlot2D = new TH2D("POTScaledCC1pRecoThetaVisRecoECalPlot2D",";#theta_{vis} [deg];E_{reco} [GeV]",
+        TH2D* POTScaledCC1pRecoThetaVisRecoECalPlot2D = new TH2D("POTScaledCC1pRecoThetaVisRecoECalPlot2D",";#theta_{vis} [deg];E_{reco} [GeV]",
                         NBinsThetaVis,ArrayNBinsThetaVis,20,ArrayNBinsECal[0],ArrayNBinsECal[NBinsECal]);
 
-                TH2D* POTScaledCC1pRecoThetaVisRecoDeltaPnPlot2D = new TH2D("POTScaledCC1pRecoThetaVisRecoDeltaPnPlot2D",";#theta_{vis}^{reco} [deg];p_{n}^{reco} [GeV/c]",
+        TH2D* POTScaledCC1pRecoThetaVisRecoDeltaPnPlot2D = new TH2D("POTScaledCC1pRecoThetaVisRecoDeltaPnPlot2D",";#theta_{vis}^{reco} [deg];p_{n}^{reco} [GeV/c]",
                         NBinsThetaVis,ArrayNBinsThetaVis,20,ArrayNBinsDeltaPn[0],ArrayNBinsDeltaPn[NBinsDeltaPn]);
 
-                TH2D* POTScaledCC1pRecoThetaVisRecoPMissPlot2D = new TH2D("POTScaledCC1pRecoThetaVisRecoPMissPlot2D",";#theta_{vis}^{reco} [deg];p_{miss}^{reco} [GeV/c]",
+        TH2D* POTScaledCC1pRecoThetaVisRecoPMissPlot2D = new TH2D("POTScaledCC1pRecoThetaVisRecoPMissPlot2D",";#theta_{vis}^{reco} [deg];p_{miss}^{reco} [GeV/c]",
                         NBinsThetaVis,ArrayNBinsThetaVis,20,ArrayNBinsPMiss[0],ArrayNBinsPMiss[NBinsPMiss]);
 
-                TH2D* POTScaledCC1pRecoDeltaPnRecoPMissPlot2D = new TH2D("POTScaledCC1pRecoDeltaPnRecoPMissPlot2D","; p_{n}^{reco} [GeV/c];p_{miss}^{reco} [GeV/c]",
+        TH2D* POTScaledCC1pRecoDeltaPnRecoPMissPlot2D = new TH2D("POTScaledCC1pRecoDeltaPnRecoPMissPlot2D","; p_{n}^{reco} [GeV/c];p_{miss}^{reco} [GeV/c]",
                         30,ArrayNBinsDeltaPn[0],ArrayNBinsDeltaPn[NBinsDeltaPn],30,ArrayNBinsPMiss[0],ArrayNBinsPMiss[NBinsPMiss]);
 
-                TH2D* POTScaledCC1pRecoThetaVisRecoDeltaPTPlot2D = new TH2D("POTScaledCC1pRecoThetaVisRecoDeltaPTPlot2D",";#theta_{vis}^{reco} [deg];#deltap_{T}^{reco} [GeV/c]",
+        TH2D* POTScaledCC1pRecoThetaVisRecoDeltaPTPlot2D = new TH2D("POTScaledCC1pRecoThetaVisRecoDeltaPTPlot2D",";#theta_{vis}^{reco} [deg];#deltap_{T}^{reco} [GeV/c]",
                         NBinsThetaVis,ArrayNBinsThetaVis,20,ArrayNBinsDeltaPT[0],ArrayNBinsDeltaPT[NBinsDeltaPT]);
 
-                TH2D* POTScaledCC1pRecoECalTrueECalPlot2D = new TH2D("POTScaledCC1pRecoECalTrueECalPlot2D",";E_{Cal}^{true} [GeV];E_{Cal}^{reco} [GeV]",
+        TH2D* POTScaledCC1pRecoECalTrueECalPlot2D = new TH2D("POTScaledCC1pRecoECalTrueECalPlot2D",";E_{Cal}^{true} [GeV];E_{Cal}^{reco} [GeV]",
                         20,ArrayNBinsECal[0],ArrayNBinsECal[NBinsECal],20,ArrayNBinsECal[0],ArrayNBinsECal[NBinsECal]);
 
-                TH2D* POTScaledCC1pRecoECalTrueEnuPlot2D = new TH2D("POTScaledCC1pRecoECalTrueEnuPlot2D",";E_{#nu}^{true} [GeV];E_{Cal}^{reco} [GeV]",
+        TH2D* POTScaledCC1pRecoECalTrueEnuPlot2D = new TH2D("POTScaledCC1pRecoECalTrueEnuPlot2D",";E_{#nu}^{true} [GeV];E_{Cal}^{reco} [GeV]",
                         20,ArrayNBinsECal[0],ArrayNBinsECal[NBinsECal],20,ArrayNBinsECal[0],ArrayNBinsECal[NBinsECal]);
 
 		// True
 
-                TH2D* POTScaledCC1pTrueThetaVisTrueECalPlot2D = new TH2D("POTScaledCC1pTrueThetaVisTrueECalPlot2D",";#theta_{vis}^{true} [deg];E_{Cal}^{true} [GeV]",
+        TH2D* POTScaledCC1pTrueThetaVisTrueECalPlot2D = new TH2D("POTScaledCC1pTrueThetaVisTrueECalPlot2D",";#theta_{vis}^{true} [deg];E_{Cal}^{true} [GeV]",
                         NBinsThetaVis,ArrayNBinsThetaVis,20,ArrayNBinsECal[0],ArrayNBinsECal[NBinsECal]);
 
-                TH2D* POTScaledCC1pTrueThetaVisTrueEnuPlot2D = new TH2D("POTScaledCC1pTrueThetaVisTrueEnuPlot2D",";#theta_{vis}^{true} [deg];E_{#nu}^{true} [GeV]",
+        TH2D* POTScaledCC1pTrueThetaVisTrueEnuPlot2D = new TH2D("POTScaledCC1pTrueThetaVisTrueEnuPlot2D",";#theta_{vis}^{true} [deg];E_{#nu}^{true} [GeV]",
                         NBinsThetaVis,ArrayNBinsThetaVis,20,ArrayNBinsECal[0],ArrayNBinsECal[NBinsECal]);
 
 		// PL_GKI vs PL_Vis
 
-                TH2D* POTScaledCC1pTruePLGKIvsPLVisPlot2D = new TH2D("POTScaledCC1pTruePLGKIvsPLVisPlot2D",";true p_{L}^{GKI} [GeV/c];true p_{L}^{vis} [GeV/c]",20,-0.5,0.5,20,-0.5,0.5);
-                TH2D* POTScaledCC1pPLGKIvsPLVisPlot2D = new TH2D("POTScaledCC1pPLGKIvsPLVisPlot2D",";reco p_{L}^{GKI} [GeV/c];reco p_{L}^{vis} [GeV/c]",20,-0.5,0.5,20,-0.5,0.5);
+        TH2D* POTScaledCC1pTruePLGKIvsPLVisPlot2D = new TH2D("POTScaledCC1pTruePLGKIvsPLVisPlot2D",";true p_{L}^{GKI} [GeV/c];true p_{L}^{vis} [GeV/c]",20,-0.5,0.5,20,-0.5,0.5);
+        TH2D* POTScaledCC1pPLGKIvsPLVisPlot2D = new TH2D("POTScaledCC1pPLGKIvsPLVisPlot2D",";reco p_{L}^{GKI} [GeV/c];reco p_{L}^{vis} [GeV/c]",20,-0.5,0.5,20,-0.5,0.5);
 
 		// 1st collaboration review
 		// Comments by David Caratelli 03/04/2025
@@ -742,6 +753,16 @@ void mcc9_10_reco_selection::Loop() {
         TH2D* POTScaledCC1pProtonMomentumPlot2D = new TH2D("POTScaledCC1pProtonMomentumPlot2D",";p_{p}^{true} [GeV/c];p_{p}^{reco} [GeV/c]",100,0.3,1.,100,0.3,1.);
 
 		//----------------------------------------//
+
+		TH2D* POTScaledMuonMomentum_pd_vs_wcPlot2D = new TH2D("POTScaledMuonMomentum_pd_vs_wcPlot2D",";Pandora p_{\\mu}^{reco} [GeV/c];WC p_{\\mu}^{reco} [GeV/c]",100,0.1,1.2,100,0.1,1.2);
+		TH2D* POTScaledMuonMomentum_pd_vs_wc_recalcPlot2D = new TH2D("POTScaledMuonMomentum_pd_vs_wc_recalcPlot2D",";Pandora p_{\\mu}^{reco} [GeV/c];WC p_{\\mu}^{reco,recalc} [GeV/c]",100,0.1,1.2,100,0.1,1.2);		
+        TH2D* POTScaledProtonMomentum_pd_vs_wcPlot2D = new TH2D("POTScaledProtonMomentum_pd_vs_wcPlot2D",";Pandora p_{p}^{reco} [GeV/c];WC p_{p}^{reco} [GeV/c]",100,0.3,1.,100,0.3,1.);
+        TH2D* POTScaledProtonMomentum_pd_vs_wc_recalcPlot2D = new TH2D("POTScaledProtonMomentum_pd_vs_wc_recalcPlot2D",";Pandora p_{p}^{reco} [GeV/c];WC p_{p}^{reco,recal} [GeV/c]",100,0.3,1.,100,0.3,1.);		
+
+		TH1D* Reco_pd_vs_wc_vertexPlot = new TH1D("Reco_pd_vs_wc_vertexPlot",";Pandora-WC vertex distance [cm]",20,0.,10.); // cm
+		TH1D* CC1pReco_pd_vs_wc_vertexPlot = new TH1D("CC1pReco_pd_vs_wc_vertexPlot",";Pandora-WC vertex distance [cm]",20,0.,10.); // cm
+		TH1D* NonCC1pReco_pd_vs_wc_vertexPlot = new TH1D("NonCC1pReco_pd_vs_wc_vertexPlot",";Pandora-WC vertex distance [cm]",20,0.,10.); // cm				
+
 		//----------------------------------------//
 
 		// Loop over the events
@@ -776,7 +797,7 @@ void mcc9_10_reco_selection::Loop() {
 			// WC generic neutrino selection
 
 			//if (wc_numu_cc_flag < 0) { continue; }
-			//if (wc_numu_score < 0.9) { continue; }			
+			if (wc_numu_score < 0.9) { continue; }			
 //cout << "wc_numu_score = " << wc_numu_score << endl;
 			//--------------------//
 			
@@ -936,8 +957,13 @@ void mcc9_10_reco_selection::Loop() {
 			// Contained Reconstructed Vertex
 
 			TVector3 RecoVertex(Vertex_X->at(0),Vertex_Y->at(0),Vertex_Z->at(0));
+			TVector3 wc_RecoVertex(wc_Vertex_X->at(0),wc_Vertex_Y->at(0),wc_Vertex_Z->at(0));			
 
 			if ( !tools.inFVVector(RecoVertex) ) { continue; }
+			if ( !tools.inFVVector(wc_RecoVertex) ) { continue; }		
+			
+			double pd_vs_wc_vertex_dist = (RecoVertex - wc_RecoVertex).Mag();
+			if (pd_vs_wc_vertex_dist > 5) { continue; } // cm
 
 			// -----------------------------------------------------------------------------------------------------------------------------
 
@@ -988,7 +1014,256 @@ void mcc9_10_reco_selection::Loop() {
 
 			if (DistanceStartPoints > DistanceEndPoints) { continue; }
 
-			// -------------------------------------------------------------------------------------------------------------------------
+			//--------------------//
+
+			// Loop over primary pfparticles
+			// Reject those events with protons above kinetic energy threshold
+			// The proton threshold can be located under NCpi0/generators/constants.h 
+
+			int primary_proton_counter = 0;
+			int primary_muon_counter = 0;
+			int primary_charged_pion_counter = 0;
+			int primary_electron_counter = 0;
+			int primary_photon_counter = 0;
+			int primary_neutron_counter = 0;
+			int primary_neutral_pion_counter = 0;
+
+			int secondary_proton_counter = 0;
+			int secondary_muon_counter = 0;
+			int secondary_charged_pion_counter = 0;
+			int secondary_electron_counter = 0;
+			int secondary_photon_counter = 0;
+			int secondary_neutron_counter = 0;
+			int secondary_neutral_pion_counter = 0;
+
+			int pfps = wc_reco_pdg->size();
+
+			vector<int> wc_proton_id;
+			vector<int> wc_muon_id;	
+			vector<double> wc_proton_sp_mom;					
+
+			for (int ipfp = 0; ipfp < pfps; ipfp++ ) {
+
+				// only primaries (mother = 0) 
+				if (wc_reco_mother->at(ipfp) == 0) {
+
+					TVector3 v_mom(wc_reco_p->at(ipfp).at(0), wc_reco_p->at(ipfp).at(1), wc_reco_p->at(ipfp).at(2)); 
+					double mom = v_mom.Mag();
+
+					// Only proton candidates
+					if (wc_reco_pdg->at(ipfp) == ProtonPdg) {
+
+						// recalculate momentum using spacepoints
+						// loop over spacepoints
+
+						int nsps = trecchargeblob_spacepoints_x->size();
+						double ke = 0;
+						double length = 0;
+						int id = wc_reco_id->at(ipfp);
+
+						vector<double> temp_sp_x;
+						vector<double> temp_sp_y;
+						vector<double> temp_sp_z;
+						vector<double> temp_sp_q;																		
+
+						// store the relevant spacepoints for the candidate proton
+						for (int isp = 0; isp < nsps; isp++) {
+
+							if (trecchargeblob_spacepoints_real_cluster_id->at(isp) == id) { 
+								
+								temp_sp_x.push_back(trecchargeblob_spacepoints_x->at(isp));
+								temp_sp_y.push_back(trecchargeblob_spacepoints_y->at(isp));
+								temp_sp_z.push_back(trecchargeblob_spacepoints_z->at(isp));
+								temp_sp_q.push_back(trecchargeblob_spacepoints_q->at(isp));
+
+							}
+
+						}
+
+						//Get the length of the proton by adding up the distance between each pair of spacepoints
+
+						double range = 0; // cm
+
+						for (int isp = 0; isp < (int)(temp_sp_x.size()-1); isp++) {
+
+							double dx = temp_sp_x.at(isp+1) - temp_sp_x.at(isp);
+							double dy = temp_sp_y.at(isp+1) - temp_sp_y.at(isp);
+							double dz = temp_sp_z.at(isp+1) - temp_sp_z.at(isp);	
+							
+							double dist = TMath::Sqrt( TMath::Power(dx,2.) + TMath::Power(dy,2.) + TMath::Power(dz,2.) );
+							range += dist;
+
+						}
+
+						// Find which bin the length falls in and linearly extrapolate between the bin edges to get an exact value
+
+						double ke_p = proton_range_vs_ke_h->Eval(range)/1e3; // GeV
+						double recal_e = ke_p + ProtonMass_GeV; // GeV
+						double wc_recal_p = TMath::Sqrt( recal_e*recal_e - ProtonMass_GeV*ProtonMass_GeV ); // GeV/c
+
+//						if (mom > ArrayNBinsProtonMomentum[0]) { 
+						if (wc_recal_p > ArrayNBinsProtonMomentum[0]) { 							
+							primary_proton_counter++; 
+							wc_proton_id.push_back(ipfp); 
+							wc_proton_sp_mom.push_back(wc_recal_p);
+						
+						}
+
+					} // end of the primary protons
+
+					// Only muon candidates
+					else if (wc_reco_pdg->at(ipfp) == MuonPdg) {
+
+						double recalc_mu_mom = TMath::Sqrt( wc_mcs_emu_tracklen*wc_mcs_emu_tracklen - MuonMass_GeV*MuonMass_GeV );
+						//cout << "wc_mcs_emu_tracklen = " << wc_mcs_emu_tracklen  <<  " recalc_mu_mom = " << recalc_mu_mom << "  mom = " << mom << endl;					
+
+						//if (mom > ArrayNBinsMuonMomentum[0]) { primary_muon_counter++; wc_muon_id.push_back(ipfp); }
+						if (recalc_mu_mom > ArrayNBinsMuonMomentum[0]) { primary_muon_counter++; wc_muon_id.push_back(ipfp); }						
+					
+					} // end of the primary muons
+
+					// Only charged pion candidates
+					else if (wc_reco_pdg->at(ipfp) == AbsChargedPionPdg) {
+
+						if (mom > ChargedPionMomentumThres) { primary_charged_pion_counter++; }
+					
+					} // end of the primary charged pions
+
+					// Only neutral pion candidates
+					else if (wc_reco_pdg->at(ipfp) == NeutralPionPdg) {
+
+						if (mom > 0.) { primary_neutral_pion_counter++; }
+					
+					} // end of the primary neutral pions
+
+					// Only electron candidates
+					else if (wc_reco_pdg->at(ipfp) == ElectronPdg) {
+
+						if (mom > 0.07) { primary_electron_counter++; }
+										
+					} // end of the primary charged pions
+
+					// Only photon candidates
+					else if (wc_reco_pdg->at(ipfp) == PhotonPdg) {
+
+						if (mom > 0.07) { primary_photon_counter++; }
+										
+					} // end of the primary photons
+
+					// Only neutron candidates
+					else if (wc_reco_pdg->at(ipfp) == NeutronPdg) {
+
+						if (mom > 0.) { primary_neutron_counter++; }
+										
+					} // end of the primary neutrons
+
+					else { 
+						
+						cout << "primary non proton/muon/charged pion/electron candidate with pdg = " << wc_reco_pdg->at(ipfp) << " run = " << Run << "  subrun = " << SubRun << " event = " << Event << endl; 
+					
+					}
+
+				} else {
+
+					// secondary particles
+
+					//cout << "wc_reco_mother->at(ipfp) = " << wc_reco_mother->at(ipfp) << endl;
+					int mother = wc_reco_mother->at(ipfp);
+
+					// loop over the secondary particles
+					for (int ipfp_s = 0; ipfp_s < pfps; ipfp_s++ ) {
+
+						if ( mother == wc_reco_id->at(ipfp_s) ) {
+
+							int secondary_pdg = wc_reco_pdg->at(ipfp_s); 
+
+							//secondary protons
+							if ( TMath::Abs(secondary_pdg) == ProtonPdg) {
+
+								secondary_proton_counter++;
+
+							}
+
+							//secondary charged pions
+							else if ( TMath::Abs(secondary_pdg) == AbsChargedPionPdg) {
+
+								secondary_charged_pion_counter++;
+							
+							}
+
+							//secondary neutral pions
+							else if ( TMath::Abs(secondary_pdg) == NeutralPionPdg) {
+
+								secondary_neutral_pion_counter++;
+							
+							}
+
+							//secondary muons
+							else if ( TMath::Abs(secondary_pdg) == MuonPdg) {
+
+								secondary_muon_counter++;
+							
+							}
+
+							//secondary electrons
+							else if ( TMath::Abs(secondary_pdg) == ElectronPdg) {
+
+								secondary_electron_counter++;
+							
+							}
+
+							//secondary photons
+							else if ( TMath::Abs(secondary_pdg) == PhotonPdg) {
+
+								secondary_photon_counter++;
+							
+							}
+
+							//secondary neutron
+							else if ( TMath::Abs(secondary_pdg) == NeutronPdg) {
+
+								secondary_neutron_counter++;
+							
+							}
+
+							else { 
+						
+								cout << "secondary non proton/muon/charged pion/electron candidate with pdg = " << wc_reco_pdg->at(ipfp_s) << " run = " << Run << "  subrun = " << SubRun << " event = " << Event << endl; 
+							
+							}
+
+						} // end of grabbing the correct secondary particle
+
+					} // end of the loop over the secondary particles
+
+				}
+
+			}
+
+			// cout << "primary muon counter = " << primary_muon_counter << endl;
+			// cout << "primary proton counter = " << primary_proton_counter << endl;
+			// cout << "primary charged pion counter = " << primary_charged_pion_counter << endl;
+			// cout << "primary neutral pion counter = " << primary_neutral_pion_counter << endl;
+			// cout << "primary electron counter = " << primary_electron_counter << endl << endl;
+			//cout << "primary photon counter = " << primary_photon_counter << endl << endl;
+			//cout << "primary neutron counter = " << primary_neutron_counter << endl << endl;
+
+			// cout << "secondary muon counter = " << secondary_muon_counter << endl;
+			// cout << "secondary proton counter = " << secondary_proton_counter << endl;
+			// cout << "secondary charged pion counter = " << secondary_charged_pion_counter << endl;
+			// cout << "secondary electron counter = " << secondary_electron_counter << endl << endl;
+			// cout << "secondary photon counter = " << secondary_photon_counter << endl << endl;
+
+			//if (primary_muon_counter != 1) { continue; }
+			//if (primary_proton_counter != 1) { continue; }
+
+			//if (secondary_proton_counter != 0) { continue; }
+			//if (secondary_charged_pion_counter != 0) { continue; }
+			//if (secondary_electron_counter != 0) { continue; }
+
+			//cout << endl;
+
+			//--------------------//
 
 			// Muon info
 
@@ -1103,7 +1378,7 @@ void mcc9_10_reco_selection::Loop() {
 				if (VectorCuts[i] == "_PID_NuScore" && !(reco_p_LLR_Score < ProtonLLRPIDScore) ) 
 					{ PassedSelection = false; }
 
-				if (VectorCuts[i] == "_PID_NuScore_CRT" && !( reco_p_LLR_Score < ProtonLLRPIDScore /*&& crtveto == 0*/) ) 
+				if (VectorCuts[i] == "_PID_NuScore_CRT" && !( reco_p_LLR_Score < ProtonLLRPIDScore) ) 
 					{ PassedSelection = false; }
 
 
@@ -1124,7 +1399,43 @@ void mcc9_10_reco_selection::Loop() {
 			if (reco_Pmu > ArrayNBinsMuonMomentum[NBinsMuonMomentum]) { continue; }
 			if (reco_Pp > ArrayNBinsProtonMomentum[NBinsProtonMomentum]) { continue; }
 
-			NEventsPassingSelectionCuts++;
+			candidate_events++;
+
+			bool wc_cc1p = false;
+			if (
+				primary_proton_counter == 1 && primary_muon_counter == 1 && 
+				primary_charged_pion_counter == 0 && primary_neutral_pion_counter == 0 &&
+				primary_electron_counter == 0 && primary_photon_counter == 0
+			
+			) {
+
+				wc_candidate_events++;
+				wc_cc1p = true;
+
+			}
+
+			if (!wc_cc1p) { continue; }
+
+			TVector3 wc_proton_v(wc_reco_p->at( wc_proton_id.at(0) ).at(0), wc_reco_p->at(wc_proton_id.at(0)).at(1), wc_reco_p->at(wc_proton_id.at(0)).at(2)); 
+			double wc_proton_p = wc_proton_v.Mag();	
+			
+			TVector3 wc_muon_v(wc_reco_p->at( wc_muon_id.at(0) ).at(0), wc_reco_p->at(wc_muon_id.at(0)).at(1), wc_reco_p->at(wc_muon_id.at(0)).at(2)); 
+			double wc_muon_p = wc_muon_v.Mag();	
+			double wc_mu_mom_recalc = TMath::Sqrt( wc_mcs_emu_tracklen*wc_mcs_emu_tracklen - MuonMass_GeV*MuonMass_GeV );
+			
+			// Quality cut 
+			// require consistent momentum values for muon / proton momenta
+			// between pandora and wc with 10%
+			//if ( TMath::Abs(wc_muon_p - reco_Pmu) / reco_Pmu > 0.1) { continue; }
+			//if ( TMath::Abs(wc_proton_p - reco_Pp) / reco_Pp > 0.1) { continue; }			
+			
+			POTScaledMuonMomentum_pd_vs_wcPlot2D->Fill(reco_Pmu,wc_muon_p,weight);
+			POTScaledMuonMomentum_pd_vs_wc_recalcPlot2D->Fill(reco_Pmu,wc_mu_mom_recalc,weight);
+
+			POTScaledProtonMomentum_pd_vs_wcPlot2D->Fill(reco_Pp,wc_proton_p,weight);
+			POTScaledProtonMomentum_pd_vs_wc_recalcPlot2D->Fill(reco_Pp,wc_proton_sp_mom.at(0),weight);				
+			
+			Reco_pd_vs_wc_vertexPlot->Fill(pd_vs_wc_vertex_dist,weight);
 
 			// --------------------------------------------------------------------------------------------------------------------------------
 
@@ -1234,6 +1545,7 @@ void mcc9_10_reco_selection::Loop() {
 
 			// Blips
 			ReconBlips_savedPlot->Fill(nBlips_saved,weight);
+			int reco_blip_counter_radius = 0;
 
 			for (int iblip = 0; iblip < nBlips_saved; iblip++) {
 
@@ -1241,7 +1553,6 @@ void mcc9_10_reco_selection::Loop() {
 				RecoBlip_yPlot->Fill(Blip_y->at(iblip),weight);
 				RecoBlip_zPlot->Fill(Blip_z->at(iblip),weight);
 				RecoBlip_energyPlot->Fill(Blip_energy->at(iblip),weight);												
-				RecoBlip_sizePlot->Fill(Blip_size->at(iblip),weight);
 				RecoBlip_proxtrkdistPlot->Fill(Blip_proxtrkdist->at(iblip),weight);
 
 				TVector3 blip_3d(Blip_x->at(iblip),Blip_y->at(iblip),Blip_z->at(iblip) );
@@ -1251,9 +1562,13 @@ void mcc9_10_reco_selection::Loop() {
 				double mu_pair_dist =  ( (blip_3d.Cross(CandidateMuonEnd - CandidateMuonStart)) ).Mag() / (CandidateMuonEnd - CandidateMuonStart).Mag();
 				double p_pair_dist =  ( (blip_3d.Cross(CandidateProtonEnd - CandidateProtonStart)) ).Mag() / (CandidateProtonEnd - CandidateProtonStart).Mag();	
 				double pair_dist = TMath::Min( mu_pair_dist, p_pair_dist);			
-				RecoBlip_pairdistPlot->Fill(pair_dist,weight);				
+				RecoBlip_pairdistPlot->Fill(pair_dist,weight);
+				
+				if (blip_vrt_dist < radius) { reco_blip_counter_radius++; }
 
 			}
+
+			ReconBlips_radiusPlot->Fill(reco_blip_counter_radius,weight);
 
 			// 2D analysis
 			RecoThetaVis_ECalSlicesPlot[ECalTwoDIndex]->Fill(ThetaVis,weight);
@@ -1316,6 +1631,7 @@ void mcc9_10_reco_selection::Loop() {
 
 					// Blips
 					CC1pTruenBlips_savedPlot->Fill(nBlips_saved,weight);
+					int cc1ptrue_blip_counter_radius = 0;
 
 					for (int iblip = 0; iblip < nBlips_saved; iblip++) {
 
@@ -1323,7 +1639,6 @@ void mcc9_10_reco_selection::Loop() {
 						CC1pTrueBlip_yPlot->Fill(Blip_y->at(iblip),weight);
 						CC1pTrueBlip_zPlot->Fill(Blip_z->at(iblip),weight);
 						CC1pTrueBlip_energyPlot->Fill(Blip_energy->at(iblip),weight);												
-						CC1pTrueBlip_sizePlot->Fill(Blip_size->at(iblip),weight);
 						CC1pTrueBlip_proxtrkdistPlot->Fill(Blip_proxtrkdist->at(iblip),weight);
 
 						TVector3 blip_3d(Blip_x->at(iblip),Blip_y->at(iblip),Blip_z->at(iblip) );
@@ -1333,9 +1648,13 @@ void mcc9_10_reco_selection::Loop() {
 						double mu_pair_dist =  ( (blip_3d.Cross(CandidateMuonEnd - CandidateMuonStart)) ).Mag() / (CandidateMuonEnd - CandidateMuonStart).Mag();
 						double p_pair_dist =  ( (blip_3d.Cross(CandidateProtonEnd - CandidateProtonStart)) ).Mag() / (CandidateProtonEnd - CandidateProtonStart).Mag();	
 						double pair_dist = TMath::Min( mu_pair_dist, p_pair_dist);			
-						CC1pTrueBlip_pairdistPlot->Fill(pair_dist,weight);						
+						CC1pTrueBlip_pairdistPlot->Fill(pair_dist,weight);		
+						
+						if (blip_vrt_dist < radius) { cc1ptrue_blip_counter_radius++; }
 
-					}					
+					}
+					
+					CC1pTruenBlips_radiusPlot->Fill(cc1ptrue_blip_counter_radius,weight);
 
 					// 2D analysis
 					CC1pTrueThetaVis_ECalSlicesPlot[TrueECalTwoDIndex]->Fill(true_ThetaVis,weight);
@@ -1344,12 +1663,14 @@ void mcc9_10_reco_selection::Loop() {
 					CC1pTrueThetaVis_DeltaPnSlicesPlot[TrueDeltaPnTwoDIndex]->Fill(true_ThetaVis,weight);
 					SerialCC1pTrueThetaVis_InDeltaPnPlot->Fill(TrueSerialThetaVisInDeltaPnIndex,weight);
 
-					CC1pTrueThetaVis_PMissSlicesPlot[TruePMissTwoDIndex]->Fill(true_ThetaVis,weight);
-					SerialCC1pTrueThetaVis_InPMissPlot->Fill(TrueSerialThetaVisInPMissIndex,weight);
+					//CC1pTrueThetaVis_PMissSlicesPlot[TruePMissTwoDIndex]->Fill(true_ThetaVis,weight);
+					//SerialCC1pTrueThetaVis_InPMissPlot->Fill(TrueSerialThetaVisInPMissIndex,weight);
 
 					//----------------------------------------//
 
 					// 1D Reco Plots for the selected CC1p events 
+
+					CC1pReco_pd_vs_wc_vertexPlot->Fill(pd_vs_wc_vertex_dist,weight);					
 
 					CC1pRecoMuonCosThetaPlot->Fill(reco_Pmu_cos_theta,weight);
 					CC1pRecoMuonCosThetaSingleBinPlot->Fill(0.5,weight);
@@ -1363,6 +1684,7 @@ void mcc9_10_reco_selection::Loop() {
 
 					// Blips
 					CC1pReconBlips_savedPlot->Fill(nBlips_saved,weight);
+					int cc1preco_blip_counter_radius = 0;
 
 					for (int iblip = 0; iblip < nBlips_saved; iblip++) {
 
@@ -1370,7 +1692,6 @@ void mcc9_10_reco_selection::Loop() {
 						CC1pRecoBlip_yPlot->Fill(Blip_y->at(iblip),weight);
 						CC1pRecoBlip_zPlot->Fill(Blip_z->at(iblip),weight);
 						CC1pRecoBlip_energyPlot->Fill(Blip_energy->at(iblip),weight);												
-						CC1pRecoBlip_sizePlot->Fill(Blip_size->at(iblip),weight);
 						CC1pRecoBlip_proxtrkdistPlot->Fill(Blip_proxtrkdist->at(iblip),weight);
 
 						TVector3 blip_3d(Blip_x->at(iblip),Blip_y->at(iblip),Blip_z->at(iblip) );
@@ -1382,7 +1703,11 @@ void mcc9_10_reco_selection::Loop() {
 						double pair_dist = TMath::Min( mu_pair_dist, p_pair_dist);			
 						CC1pRecoBlip_pairdistPlot->Fill(pair_dist,weight);
 
-					}				
+						if (blip_vrt_dist < radius) { cc1preco_blip_counter_radius++; }
+
+					}		
+					
+					CC1pReconBlips_radiusPlot->Fill(reco_blip_counter_radius,weight);
 	
 					// 2D analysis
 					CC1pRecoThetaVis_ECalSlicesPlot[ECalTwoDIndex]->Fill(ThetaVis,weight);
@@ -1415,7 +1740,6 @@ void mcc9_10_reco_selection::Loop() {
 						CC1pRecoBlip_yPlot2D->Fill(Blip_y->at(iblip),Blip_y->at(iblip));
 						CC1pRecoBlip_zPlot2D->Fill(Blip_z->at(iblip),Blip_z->at(iblip));
 						CC1pRecoBlip_energyPlot2D->Fill(Blip_energy->at(iblip),Blip_energy->at(iblip));												
-						CC1pRecoBlip_sizePlot2D->Fill(Blip_size->at(iblip),Blip_size->at(iblip));
 						CC1pRecoBlip_proxtrkdistPlot2D->Fill(Blip_proxtrkdist->at(iblip),Blip_proxtrkdist->at(iblip));
 
 						TVector3 blip_3d(Blip_x->at(iblip),Blip_y->at(iblip),Blip_z->at(iblip) );
@@ -1427,7 +1751,9 @@ void mcc9_10_reco_selection::Loop() {
 						double pair_dist = TMath::Min( mu_pair_dist, p_pair_dist);			
 						CC1pRecoBlip_pairdistPlot2D->Fill(pair_dist,pair_dist);
 
-					}						
+					}		
+					
+					CC1pReconBlips_radiusPlot2D->Fill(cc1preco_blip_counter_radius,cc1preco_blip_counter_radius);
 
 					// 2D analysis
 					CC1pRecoThetaVis_ECalSlicesPlot2D[ECalTwoDIndex]->Fill(true_ThetaVis,ThetaVis,weight);
@@ -1458,7 +1784,6 @@ void mcc9_10_reco_selection::Loop() {
 						POTScaledCC1pRecoBlip_yPlot2D->Fill(Blip_y->at(iblip),Blip_y->at(iblip),weight);
 						POTScaledCC1pRecoBlip_zPlot2D->Fill(Blip_z->at(iblip),Blip_z->at(iblip),weight);
 						POTScaledCC1pRecoBlip_energyPlot2D->Fill(Blip_energy->at(iblip),Blip_energy->at(iblip),weight);												
-						POTScaledCC1pRecoBlip_sizePlot2D->Fill(Blip_size->at(iblip),Blip_size->at(iblip),weight);
 						POTScaledCC1pRecoBlip_proxtrkdistPlot2D->Fill(Blip_proxtrkdist->at(iblip),Blip_proxtrkdist->at(iblip),weight);
 
 						TVector3 blip_3d(Blip_x->at(iblip),Blip_y->at(iblip),Blip_z->at(iblip) );
@@ -1471,6 +1796,8 @@ void mcc9_10_reco_selection::Loop() {
 						POTScaledCC1pRecoBlip_pairdistPlot2D->Fill(pair_dist,pair_dist,weight);
 
 					}						
+
+					POTScaledCC1pReconBlips_radiusPlot2D->Fill(cc1preco_blip_counter_radius,cc1preco_blip_counter_radius,weight);
 
 					// 2D analysis
 					POTScaledCC1pRecoThetaVis_ECalSlicesPlot2D[ECalTwoDIndex]->Fill(true_ThetaVis,ThetaVis,weight);
@@ -1485,7 +1812,7 @@ void mcc9_10_reco_selection::Loop() {
 					//------------------------------//
 
 					// Atmospherics
-				
+			
 					double diff = ThetaVis - true_ThetaVis; // deg
 					double reso = diff / true_ThetaVis * 100.; // %
 
@@ -1673,18 +2000,21 @@ void mcc9_10_reco_selection::Loop() {
 
 					NonCC1pEventsPassingSelectionCuts++;
 
+					NonCC1pReco_pd_vs_wc_vertexPlot->Fill(pd_vs_wc_vertex_dist,weight);
+
 					NonCC1pRecoMuonCosThetaPlot->Fill(reco_Pmu_cos_theta,weight);
 					NonCC1pRecoMuonCosThetaSingleBinPlot->Fill(0.5,weight);
 					NonCC1pRecoThetaVisPlot->Fill(ThetaVis,weight);
 					NonCC1pRecoCosThetaVisPlot->Fill(CosThetaVis,weight);
 					NonCC1pRecoPMissPlot->Fill(pmiss,weight);
 
-					Recowc_numu_scorePlot->Fill(wc_numu_score,weight);
+					NonCC1pRecowc_numu_scorePlot->Fill(wc_numu_score,weight);
 					NonCC1pRecons_timePlot->Fill(ns_time,weight);
 					NonCC1pRecoNuScorePlot->Fill(NuScore,weight);					
 
 					// Blips
 					NonCC1pReconBlips_savedPlot->Fill(nBlips_saved,weight);
+					int noncc1preco_blip_counter_radius = 0;
 
 					for (int iblip = 0; iblip < nBlips_saved; iblip++) {
 
@@ -1692,7 +2022,6 @@ void mcc9_10_reco_selection::Loop() {
 						NonCC1pRecoBlip_yPlot->Fill(Blip_y->at(iblip),weight);
 						NonCC1pRecoBlip_zPlot->Fill(Blip_z->at(iblip),weight);
 						NonCC1pRecoBlip_energyPlot->Fill(Blip_energy->at(iblip),weight);												
-						NonCC1pRecoBlip_sizePlot->Fill(Blip_size->at(iblip),weight);
 						NonCC1pRecoBlip_proxtrkdistPlot->Fill(Blip_proxtrkdist->at(iblip),weight);
 
 						TVector3 blip_3d(Blip_x->at(iblip),Blip_y->at(iblip),Blip_z->at(iblip) );
@@ -1704,7 +2033,11 @@ void mcc9_10_reco_selection::Loop() {
 						double pair_dist = TMath::Min( mu_pair_dist, p_pair_dist);			
 						NonCC1pRecoBlip_pairdistPlot->Fill(pair_dist,weight);
 
-					}						
+						if (blip_vrt_dist < radius) { noncc1preco_blip_counter_radius++; }
+
+					}		
+					
+					NonCC1pReconBlips_radiusPlot->Fill(noncc1preco_blip_counter_radius,weight);
 
 					// 2D analysis
 					NonCC1pRecoThetaVis_ECalSlicesPlot[ECalTwoDIndex]->Fill(ThetaVis,weight);
@@ -1716,7 +2049,7 @@ void mcc9_10_reco_selection::Loop() {
 					NonCC1pRecoThetaVis_PMissSlicesPlot[PMissTwoDIndex]->Fill(ThetaVis,weight);
 					SerialNonCC1pRecoThetaVis_InPMissPlot->Fill(SerialThetaVisInPMissIndex,weight);
 
-				//------------------------------//
+					//------------------------------//
 
 				} // End of the Non-CC1p beam related background
 
@@ -1739,6 +2072,7 @@ void mcc9_10_reco_selection::Loop() {
 
 					// Blips
 					CCQEReconBlips_savedPlot->Fill(nBlips_saved,weight);
+					int ccqereco_blip_counter_radius = 0;
 
 					for (int iblip = 0; iblip < nBlips_saved; iblip++) {
 
@@ -1746,7 +2080,6 @@ void mcc9_10_reco_selection::Loop() {
 						CCQERecoBlip_yPlot->Fill(Blip_y->at(iblip),weight);
 						CCQERecoBlip_zPlot->Fill(Blip_z->at(iblip),weight);
 						CCQERecoBlip_energyPlot->Fill(Blip_energy->at(iblip),weight);												
-						CCQERecoBlip_sizePlot->Fill(Blip_size->at(iblip),weight);
 						CCQERecoBlip_proxtrkdistPlot->Fill(Blip_proxtrkdist->at(iblip),weight);
 
 						TVector3 blip_3d(Blip_x->at(iblip),Blip_y->at(iblip),Blip_z->at(iblip) );
@@ -1757,8 +2090,11 @@ void mcc9_10_reco_selection::Loop() {
 						double p_pair_dist =  ( (blip_3d.Cross(CandidateProtonEnd - CandidateProtonStart)) ).Mag() / (CandidateProtonEnd - CandidateProtonStart).Mag();	
 						double pair_dist = TMath::Min( mu_pair_dist, p_pair_dist);			
 						CCQERecoBlip_pairdistPlot->Fill(pair_dist,weight);
+						if (blip_vrt_dist < radius) { ccqereco_blip_counter_radius++; }
 
-					}						
+					}		
+
+					CCQEReconBlips_radiusPlot->Fill(ccqereco_blip_counter_radius,weight);				
 
 					// 2D analysis
 					CCQERecoThetaVis_ECalSlicesPlot[ECalTwoDIndex]->Fill(ThetaVis,weight);
@@ -1790,6 +2126,7 @@ void mcc9_10_reco_selection::Loop() {
 
 					// Blips
 					CCMECReconBlips_savedPlot->Fill(nBlips_saved,weight);
+					int ccmecreco_blip_counter_radius = 0;
 
 					for (int iblip = 0; iblip < nBlips_saved; iblip++) {
 
@@ -1797,7 +2134,6 @@ void mcc9_10_reco_selection::Loop() {
 						CCMECRecoBlip_yPlot->Fill(Blip_y->at(iblip),weight);
 						CCMECRecoBlip_zPlot->Fill(Blip_z->at(iblip),weight);
 						CCMECRecoBlip_energyPlot->Fill(Blip_energy->at(iblip),weight);												
-						CCMECRecoBlip_sizePlot->Fill(Blip_size->at(iblip),weight);
 						CCMECRecoBlip_proxtrkdistPlot->Fill(Blip_proxtrkdist->at(iblip),weight);
 
 
@@ -1810,9 +2146,12 @@ void mcc9_10_reco_selection::Loop() {
 						double pair_dist = TMath::Min( mu_pair_dist, p_pair_dist);			
 						CCMECRecoBlip_pairdistPlot->Fill(pair_dist,weight);
 
-					}						
+					}
+					
+					CCMECReconBlips_radiusPlot->Fill(ccmecreco_blip_counter_radius,weight);
 
 					// 2D analysis
+
 					CCMECRecoThetaVis_ECalSlicesPlot[ECalTwoDIndex]->Fill(ThetaVis,weight);
 					SerialCCMECRecoThetaVis_InECalPlot->Fill(SerialThetaVisInECalIndex,weight);
 	
@@ -1842,6 +2181,7 @@ void mcc9_10_reco_selection::Loop() {
 
 					// Blips
 					CCRESReconBlips_savedPlot->Fill(nBlips_saved,weight);
+					int ccresreco_blip_counter_radius = 0;
 
 					for (int iblip = 0; iblip < nBlips_saved; iblip++) {
 
@@ -1849,7 +2189,6 @@ void mcc9_10_reco_selection::Loop() {
 						CCRESRecoBlip_yPlot->Fill(Blip_y->at(iblip),weight);
 						CCRESRecoBlip_zPlot->Fill(Blip_z->at(iblip),weight);
 						CCRESRecoBlip_energyPlot->Fill(Blip_energy->at(iblip),weight);												
-						CCRESRecoBlip_sizePlot->Fill(Blip_size->at(iblip),weight);
 						CCRESRecoBlip_proxtrkdistPlot->Fill(Blip_proxtrkdist->at(iblip),weight);
 
 						TVector3 blip_3d(Blip_x->at(iblip),Blip_y->at(iblip),Blip_z->at(iblip) );
@@ -1859,9 +2198,13 @@ void mcc9_10_reco_selection::Loop() {
 						double mu_pair_dist =  ( (blip_3d.Cross(CandidateMuonEnd - CandidateMuonStart)) ).Mag() / (CandidateMuonEnd - CandidateMuonStart).Mag();
 						double p_pair_dist =  ( (blip_3d.Cross(CandidateProtonEnd - CandidateProtonStart)) ).Mag() / (CandidateProtonEnd - CandidateProtonStart).Mag();	
 						double pair_dist = TMath::Min( mu_pair_dist, p_pair_dist);			
-						CCRESRecoBlip_pairdistPlot->Fill(pair_dist,weight);						
+						CCRESRecoBlip_pairdistPlot->Fill(pair_dist,weight);		
+						
+						if (blip_vrt_dist < radius) { ccresreco_blip_counter_radius++; }
 
-					}						
+					}		
+					
+					CCRESReconBlips_radiusPlot->Fill(reco_blip_counter_radius,weight);
 	
 					// 2D analysis
 					CCRESRecoThetaVis_ECalSlicesPlot[ECalTwoDIndex]->Fill(ThetaVis,weight);
@@ -1893,6 +2236,7 @@ void mcc9_10_reco_selection::Loop() {
 
 					// Blips
 					CCDISReconBlips_savedPlot->Fill(nBlips_saved,weight);
+					int ccdisreco_blip_counter_radius = 0;
 
 					for (int iblip = 0; iblip < nBlips_saved; iblip++) {
 
@@ -1900,7 +2244,6 @@ void mcc9_10_reco_selection::Loop() {
 						CCDISRecoBlip_yPlot->Fill(Blip_y->at(iblip),weight);
 						CCDISRecoBlip_zPlot->Fill(Blip_z->at(iblip),weight);
 						CCDISRecoBlip_energyPlot->Fill(Blip_energy->at(iblip),weight);												
-						CCDISRecoBlip_sizePlot->Fill(Blip_size->at(iblip),weight);
 						CCDISRecoBlip_proxtrkdistPlot->Fill(Blip_proxtrkdist->at(iblip),weight);
 
 						TVector3 blip_3d(Blip_x->at(iblip),Blip_y->at(iblip),Blip_z->at(iblip) );
@@ -1912,7 +2255,11 @@ void mcc9_10_reco_selection::Loop() {
 						double pair_dist = TMath::Min( mu_pair_dist, p_pair_dist);			
 						CCDISRecoBlip_pairdistPlot->Fill(pair_dist,weight);
 
-					}						
+						if (blip_vrt_dist < radius) { ccdisreco_blip_counter_radius++; }
+
+					}	
+					
+					CCDISReconBlips_radiusPlot->Fill(reco_blip_counter_radius,weight);
 
 					// 2D analysis
 					CCDISRecoThetaVis_ECalSlicesPlot[ECalTwoDIndex]->Fill(ThetaVis,weight);
@@ -1949,7 +2296,8 @@ void mcc9_10_reco_selection::Loop() {
 
 		//----------------------------------------//
 
-		cout << fWhichSample << "  " << NEventsPassingSelectionCuts << " events passing selection criteria" << endl << endl;
+		cout << fWhichSample << "  " << candidate_events << " events passing selection criteria" << endl << endl;
+		cout << "wc selected CC1p0pi  " << wc_candidate_events << ", fraction = " << std::setprecision(2) << (double)(wc_candidate_events)/(double)(candidate_events) * 100. << "%" << endl << endl;
 
 		//----------------------------------------//	
 

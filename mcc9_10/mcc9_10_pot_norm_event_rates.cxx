@@ -93,8 +93,9 @@ void mcc9_10_pot_norm_event_rates() {
 
 	// -----------------------------------------------------------------------------------------------------------------------------
 
-	FileNames.push_back("mcc9_10_BeamOn9_Run4b_standalone"); Label.push_back("standalone"); 
-	FileNames.push_back("mcc9_10_BeamOn9_Run4b_unified"); Label.push_back("unified");
+	//FileNames.push_back("mcc9_10_BeamOn9_Run4b_standalone"); Label.push_back("standalone"); 
+	FileNames.push_back("mcc9_10_BeamOn9_Run4b_unified"); Label.push_back("SURPRISE");
+	FileNames.push_back("BeamOn9_Run4b"); Label.push_back("mcc9");
 
 	const int NFiles = FileNames.size();
 
@@ -120,7 +121,8 @@ void mcc9_10_pot_norm_event_rates() {
 			
 		Plots[WhichFile]->SetLineColor(Colors[WhichFile]);
 		PrettyPlot(Plots[WhichFile]);
-		Plots[WhichFile]->Draw("hist same");
+		//Plots[WhichFile]->Draw("hist same");
+		Plots[WhichFile]->Draw("e1p0 same");
 
 		leg->AddEntry(Plots[WhichFile],Label[WhichFile],"l");
 
@@ -132,6 +134,8 @@ void mcc9_10_pot_norm_event_rates() {
 	leg->SetTextSize(TextSize);
 	leg->SetTextFont(FontStyle);
 	leg->Draw();
+
+	can->SaveAs("pot_comp.pdf");
 
 	// -----------------------------------------------------------------------------------------------------------------------------
 

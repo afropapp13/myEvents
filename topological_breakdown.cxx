@@ -490,7 +490,7 @@ void topological_breakdown(TString BaseMC = "") {
 
 				if (Runs[WhichRun] == "Combined") { 
 
-					textPOT->DrawLatexNDC(0.115, 0.89,"MicroBooNE 1.30 #times 10^{21} POT");
+					textPOT->DrawLatexNDC(0.115, 0.89,"MicroBooNE 1.31 #times 10^{21} POT");
 
 				} else {
 								
