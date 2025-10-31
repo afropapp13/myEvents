@@ -104,6 +104,312 @@ void mcc9_10_reco_selection::Loop() {
 
 		//----------------------------------------//
 
+		// primary neutron counters
+
+		TH1D* Recoprimary_neutron_counterPlot = new TH1D("Recoprimary_neutron_counterPlot",LabelXAxisneutron_counter,NBinsneutron_counter,min_neutron_counter,max_neutron_counter);
+		TH1D* NCCOHRecoprimary_neutron_counterPlot = new TH1D("NCCOHRecoprimary_neutron_counterPlot",LabelXAxisneutron_counter,NBinsneutron_counter,min_neutron_counter,max_neutron_counter);	
+		TH1D* NCCOHTrueprimary_neutron_counterPlot = new TH1D("NCCOHTrueprimary_neutron_counterPlot",LabelXAxisneutron_counter,NBinsneutron_counter,min_neutron_counter,max_neutron_counter);
+		TH2D* NCCOHRecoprimary_neutron_counterPlot2D = new TH2D("NCCOHRecoprimary_neutron_counterPlot2D",LabelXAxisneutron_counter2D,NBinsneutron_counter,
+			  min_neutron_counter,max_neutron_counter,NBinsneutron_counter,min_neutron_counter,max_neutron_counter);
+		TH2D* POTScaledNCCOHRecoprimary_neutron_counterPlot2D = new TH2D("POTScaledNCCOHRecoprimary_neutron_counterPlot2D",LabelXAxisneutron_counter2D,NBinsneutron_counter,
+			  min_neutron_counter,max_neutron_counter,NBinsneutron_counter,min_neutron_counter,max_neutron_counter);
+		TH1D* NonNCCOHRecoprimary_neutron_counterPlot = new TH1D("NonNCCOHRecoprimary_neutron_counterPlot",LabelXAxisneutron_counter,NBinsneutron_counter,min_neutron_counter,max_neutron_counter);
+		TH1D* QERecoprimary_neutron_counterPlot = new TH1D("QERecoprimary_neutron_counterPlot",LabelXAxisneutron_counter,NBinsneutron_counter,min_neutron_counter,max_neutron_counter);
+		TH1D* MECRecoprimary_neutron_counterPlot = new TH1D("MECRecoprimary_neutron_counterPlot",LabelXAxisneutron_counter,NBinsneutron_counter,min_neutron_counter,max_neutron_counter);
+		TH1D* RESRecoprimary_neutron_counterPlot = new TH1D("RESRecoprimary_neutron_counterPlot",LabelXAxisneutron_counter,NBinsneutron_counter,min_neutron_counter,max_neutron_counter);
+		TH1D* DISRecoprimary_neutron_counterPlot = new TH1D("DISRecoprimary_neutron_counterPlot",LabelXAxisneutron_counter,NBinsneutron_counter,min_neutron_counter,max_neutron_counter);
+		TH1D* COHRecoprimary_neutron_counterPlot = new TH1D("COHRecoprimary_neutron_counterPlot",LabelXAxisneutron_counter,NBinsneutron_counter,min_neutron_counter,max_neutron_counter);
+		
+		//----------------------------------------//
+
+		// secondary neutron counters
+
+		TH1D* Recosecondary_neutron_counterPlot = new TH1D("Recosecondary_neutron_counterPlot",LabelXAxisneutron_counter,NBinsneutron_counter,min_neutron_counter,max_neutron_counter);
+		TH1D* NCCOHRecosecondary_neutron_counterPlot = new TH1D("NCCOHRecosecondary_neutron_counterPlot",LabelXAxisneutron_counter,NBinsneutron_counter,min_neutron_counter,max_neutron_counter);	
+		TH1D* NCCOHTruesecondary_neutron_counterPlot = new TH1D("NCCOHTruesecondary_neutron_counterPlot",LabelXAxisneutron_counter,NBinsneutron_counter,min_neutron_counter,max_neutron_counter);
+		TH2D* NCCOHRecosecondary_neutron_counterPlot2D = new TH2D("NCCOHRecosecondary_neutron_counterPlot2D",LabelXAxisneutron_counter2D,NBinsneutron_counter,
+			  min_neutron_counter,max_neutron_counter,NBinsneutron_counter,min_neutron_counter,max_neutron_counter);
+		TH2D* POTScaledNCCOHRecosecondary_neutron_counterPlot2D = new TH2D("POTScaledNCCOHRecosecondary_neutron_counterPlot2D",LabelXAxisneutron_counter2D,NBinsneutron_counter,
+			  min_neutron_counter,max_neutron_counter,NBinsneutron_counter,min_neutron_counter,max_neutron_counter);
+		TH1D* NonNCCOHRecosecondary_neutron_counterPlot = new TH1D("NonNCCOHRecosecondary_neutron_counterPlot",LabelXAxisneutron_counter,NBinsneutron_counter,min_neutron_counter,max_neutron_counter);
+		TH1D* QERecosecondary_neutron_counterPlot = new TH1D("QERecosecondary_neutron_counterPlot",LabelXAxisneutron_counter,NBinsneutron_counter,min_neutron_counter,max_neutron_counter);
+		TH1D* MECRecosecondary_neutron_counterPlot = new TH1D("MECRecosecondary_neutron_counterPlot",LabelXAxisneutron_counter,NBinsneutron_counter,min_neutron_counter,max_neutron_counter);
+		TH1D* RESRecosecondary_neutron_counterPlot = new TH1D("RESRecosecondary_neutron_counterPlot",LabelXAxisneutron_counter,NBinsneutron_counter,min_neutron_counter,max_neutron_counter);
+		TH1D* DISRecosecondary_neutron_counterPlot = new TH1D("DISRecosecondary_neutron_counterPlot",LabelXAxisneutron_counter,NBinsneutron_counter,min_neutron_counter,max_neutron_counter);
+		TH1D* COHRecosecondary_neutron_counterPlot = new TH1D("COHRecosecondary_neutron_counterPlot",LabelXAxisneutron_counter,NBinsneutron_counter,min_neutron_counter,max_neutron_counter);		
+
+		//----------------------------------------//
+
+		// g1 start x
+
+		TH1D* Recog1_start_xPlot = new TH1D("Recog1_start_xPlot",LabelXAxisg1_start_x,NBinsg1_start_x,min_g1_start_x,max_g1_start_x);
+		TH1D* NCCOHRecog1_start_xPlot = new TH1D("NCCOHRecog1_start_xPlot",LabelXAxisg1_start_x,NBinsg1_start_x,min_g1_start_x,max_g1_start_x);	
+		TH1D* NCCOHTrueg1_start_xPlot = new TH1D("NCCOHTrueg1_start_xPlot",LabelXAxisg1_start_x,NBinsg1_start_x,min_g1_start_x,max_g1_start_x);
+		TH2D* NCCOHRecog1_start_xPlot2D = new TH2D("NCCOHRecog1_start_xPlot2D",LabelXAxisg1_start_x2D,NBinsg1_start_x,
+			  min_g1_start_x,max_g1_start_x,NBinsg1_start_x,min_g1_start_x,max_g1_start_x);
+		TH2D* POTScaledNCCOHRecog1_start_xPlot2D = new TH2D("POTScaledNCCOHRecog1_start_xPlot2D",LabelXAxisg1_start_x2D,NBinsg1_start_x,
+			  min_g1_start_x,max_g1_start_x,NBinsg1_start_x,min_g1_start_x,max_g1_start_x);
+		TH1D* NonNCCOHRecog1_start_xPlot = new TH1D("NonNCCOHRecog1_start_xPlot",LabelXAxisg1_start_x,NBinsg1_start_x,min_g1_start_x,max_g1_start_x);
+		TH1D* QERecog1_start_xPlot = new TH1D("QERecog1_start_xPlot",LabelXAxisg1_start_x,NBinsg1_start_x,min_g1_start_x,max_g1_start_x);
+		TH1D* MECRecog1_start_xPlot = new TH1D("MECRecog1_start_xPlot",LabelXAxisg1_start_x,NBinsg1_start_x,min_g1_start_x,max_g1_start_x);
+		TH1D* RESRecog1_start_xPlot = new TH1D("RESRecog1_start_xPlot",LabelXAxisg1_start_x,NBinsg1_start_x,min_g1_start_x,max_g1_start_x);
+		TH1D* DISRecog1_start_xPlot = new TH1D("DISRecog1_start_xPlot",LabelXAxisg1_start_x,NBinsg1_start_x,min_g1_start_x,max_g1_start_x);
+		TH1D* COHRecog1_start_xPlot = new TH1D("COHRecog1_start_xPlot",LabelXAxisg1_start_x,NBinsg1_start_x,min_g1_start_x,max_g1_start_x);	
+
+		//----------------------------------------//
+
+		// g1 start y
+
+		TH1D* Recog1_start_yPlot = new TH1D("Recog1_start_yPlot",LabelXAxisg1_start_y,NBinsg1_start_y,min_g1_start_y,max_g1_start_y);
+		TH1D* NCCOHRecog1_start_yPlot = new TH1D("NCCOHRecog1_start_yPlot",LabelXAxisg1_start_y,NBinsg1_start_y,min_g1_start_y,max_g1_start_y);	
+		TH1D* NCCOHTrueg1_start_yPlot = new TH1D("NCCOHTrueg1_start_yPlot",LabelXAxisg1_start_y,NBinsg1_start_y,min_g1_start_y,max_g1_start_y);
+		TH2D* NCCOHRecog1_start_yPlot2D = new TH2D("NCCOHRecog1_start_yPlot2D",LabelXAxisg1_start_y2D,NBinsg1_start_y,
+			  min_g1_start_y,max_g1_start_y,NBinsg1_start_y,min_g1_start_y,max_g1_start_y);
+		TH2D* POTScaledNCCOHRecog1_start_yPlot2D = new TH2D("POTScaledNCCOHRecog1_start_yPlot2D",LabelXAxisg1_start_y2D,NBinsg1_start_y,
+			  min_g1_start_y,max_g1_start_y,NBinsg1_start_y,min_g1_start_y,max_g1_start_y);
+		TH1D* NonNCCOHRecog1_start_yPlot = new TH1D("NonNCCOHRecog1_start_yPlot",LabelXAxisg1_start_y,NBinsg1_start_y,min_g1_start_y,max_g1_start_y);
+		TH1D* QERecog1_start_yPlot = new TH1D("QERecog1_start_yPlot",LabelXAxisg1_start_y,NBinsg1_start_y,min_g1_start_y,max_g1_start_y);
+		TH1D* MECRecog1_start_yPlot = new TH1D("MECRecog1_start_yPlot",LabelXAxisg1_start_y,NBinsg1_start_y,min_g1_start_y,max_g1_start_y);
+		TH1D* RESRecog1_start_yPlot = new TH1D("RESRecog1_start_yPlot",LabelXAxisg1_start_y,NBinsg1_start_y,min_g1_start_y,max_g1_start_y);
+		TH1D* DISRecog1_start_yPlot = new TH1D("DISRecog1_start_yPlot",LabelXAxisg1_start_y,NBinsg1_start_y,min_g1_start_y,max_g1_start_y);
+		TH1D* COHRecog1_start_yPlot = new TH1D("COHRecog1_start_yPlot",LabelXAxisg1_start_y,NBinsg1_start_y,min_g1_start_y,max_g1_start_y);	
+		
+		//----------------------------------------//
+
+		// g1 start z
+
+		TH1D* Recog1_start_zPlot = new TH1D("Recog1_start_zPlot",LabelXAxisg1_start_z,NBinsg1_start_z,min_g1_start_z,max_g1_start_z);
+		TH1D* NCCOHRecog1_start_zPlot = new TH1D("NCCOHRecog1_start_zPlot",LabelXAxisg1_start_z,NBinsg1_start_z,min_g1_start_z,max_g1_start_z);	
+		TH1D* NCCOHTrueg1_start_zPlot = new TH1D("NCCOHTrueg1_start_zPlot",LabelXAxisg1_start_z,NBinsg1_start_z,min_g1_start_z,max_g1_start_z);
+		TH2D* NCCOHRecog1_start_zPlot2D = new TH2D("NCCOHRecog1_start_zPlot2D",LabelXAxisg1_start_z2D,NBinsg1_start_z,
+			  min_g1_start_z,max_g1_start_z,NBinsg1_start_z,min_g1_start_z,max_g1_start_z);
+		TH2D* POTScaledNCCOHRecog1_start_zPlot2D = new TH2D("POTScaledNCCOHRecog1_start_zPlot2D",LabelXAxisg1_start_z2D,NBinsg1_start_z,
+			  min_g1_start_z,max_g1_start_z,NBinsg1_start_z,min_g1_start_z,max_g1_start_z);
+		TH1D* NonNCCOHRecog1_start_zPlot = new TH1D("NonNCCOHRecog1_start_zPlot",LabelXAxisg1_start_z,NBinsg1_start_z,min_g1_start_z,max_g1_start_z);
+		TH1D* QERecog1_start_zPlot = new TH1D("QERecog1_start_zPlot",LabelXAxisg1_start_z,NBinsg1_start_z,min_g1_start_z,max_g1_start_z);
+		TH1D* MECRecog1_start_zPlot = new TH1D("MECRecog1_start_zPlot",LabelXAxisg1_start_z,NBinsg1_start_z,min_g1_start_z,max_g1_start_z);
+		TH1D* RESRecog1_start_zPlot = new TH1D("RESRecog1_start_zPlot",LabelXAxisg1_start_z,NBinsg1_start_z,min_g1_start_z,max_g1_start_z);
+		TH1D* DISRecog1_start_zPlot = new TH1D("DISRecog1_start_zPlot",LabelXAxisg1_start_z,NBinsg1_start_z,min_g1_start_z,max_g1_start_z);
+		TH1D* COHRecog1_start_zPlot = new TH1D("COHRecog1_start_zPlot",LabelXAxisg1_start_z,NBinsg1_start_z,min_g1_start_z,max_g1_start_z);			
+
+		//----------------------------------------//
+
+		// g1 end x
+
+		TH1D* Recog1_end_xPlot = new TH1D("Recog1_end_xPlot",LabelXAxisg1_end_x,NBinsg1_end_x,min_g1_end_x,max_g1_end_x);
+		TH1D* NCCOHRecog1_end_xPlot = new TH1D("NCCOHRecog1_end_xPlot",LabelXAxisg1_end_x,NBinsg1_end_x,min_g1_end_x,max_g1_end_x);	
+		TH1D* NCCOHTrueg1_end_xPlot = new TH1D("NCCOHTrueg1_end_xPlot",LabelXAxisg1_end_x,NBinsg1_end_x,min_g1_end_x,max_g1_end_x);
+		TH2D* NCCOHRecog1_end_xPlot2D = new TH2D("NCCOHRecog1_end_xPlot2D",LabelXAxisg1_end_x2D,NBinsg1_end_x,
+			  min_g1_end_x,max_g1_end_x,NBinsg1_end_x,min_g1_end_x,max_g1_end_x);
+		TH2D* POTScaledNCCOHRecog1_end_xPlot2D = new TH2D("POTScaledNCCOHRecog1_end_xPlot2D",LabelXAxisg1_end_x2D,NBinsg1_end_x,
+			  min_g1_end_x,max_g1_end_x,NBinsg1_end_x,min_g1_end_x,max_g1_end_x);
+		TH1D* NonNCCOHRecog1_end_xPlot = new TH1D("NonNCCOHRecog1_end_xPlot",LabelXAxisg1_end_x,NBinsg1_end_x,min_g1_end_x,max_g1_end_x);
+		TH1D* QERecog1_end_xPlot = new TH1D("QERecog1_end_xPlot",LabelXAxisg1_end_x,NBinsg1_end_x,min_g1_end_x,max_g1_end_x);
+		TH1D* MECRecog1_end_xPlot = new TH1D("MECRecog1_end_xPlot",LabelXAxisg1_end_x,NBinsg1_end_x,min_g1_end_x,max_g1_end_x);
+		TH1D* RESRecog1_end_xPlot = new TH1D("RESRecog1_end_xPlot",LabelXAxisg1_end_x,NBinsg1_end_x,min_g1_end_x,max_g1_end_x);
+		TH1D* DISRecog1_end_xPlot = new TH1D("DISRecog1_end_xPlot",LabelXAxisg1_end_x,NBinsg1_end_x,min_g1_end_x,max_g1_end_x);
+		TH1D* COHRecog1_end_xPlot = new TH1D("COHRecog1_end_xPlot",LabelXAxisg1_end_x,NBinsg1_end_x,min_g1_end_x,max_g1_end_x);	
+
+		//----------------------------------------//
+
+		// g1 end y
+
+		TH1D* Recog1_end_yPlot = new TH1D("Recog1_end_yPlot",LabelXAxisg1_end_y,NBinsg1_end_y,min_g1_end_y,max_g1_end_y);
+		TH1D* NCCOHRecog1_end_yPlot = new TH1D("NCCOHRecog1_end_yPlot",LabelXAxisg1_end_y,NBinsg1_end_y,min_g1_end_y,max_g1_end_y);	
+		TH1D* NCCOHTrueg1_end_yPlot = new TH1D("NCCOHTrueg1_end_yPlot",LabelXAxisg1_end_y,NBinsg1_end_y,min_g1_end_y,max_g1_end_y);
+		TH2D* NCCOHRecog1_end_yPlot2D = new TH2D("NCCOHRecog1_end_yPlot2D",LabelXAxisg1_end_y2D,NBinsg1_end_y,
+			  min_g1_end_y,max_g1_end_y,NBinsg1_end_y,min_g1_end_y,max_g1_end_y);
+		TH2D* POTScaledNCCOHRecog1_end_yPlot2D = new TH2D("POTScaledNCCOHRecog1_end_yPlot2D",LabelXAxisg1_end_y2D,NBinsg1_end_y,
+			  min_g1_end_y,max_g1_end_y,NBinsg1_end_y,min_g1_end_y,max_g1_end_y);
+		TH1D* NonNCCOHRecog1_end_yPlot = new TH1D("NonNCCOHRecog1_end_yPlot",LabelXAxisg1_end_y,NBinsg1_end_y,min_g1_end_y,max_g1_end_y);
+		TH1D* QERecog1_end_yPlot = new TH1D("QERecog1_end_yPlot",LabelXAxisg1_end_y,NBinsg1_end_y,min_g1_end_y,max_g1_end_y);
+		TH1D* MECRecog1_end_yPlot = new TH1D("MECRecog1_end_yPlot",LabelXAxisg1_end_y,NBinsg1_end_y,min_g1_end_y,max_g1_end_y);
+		TH1D* RESRecog1_end_yPlot = new TH1D("RESRecog1_end_yPlot",LabelXAxisg1_end_y,NBinsg1_end_y,min_g1_end_y,max_g1_end_y);
+		TH1D* DISRecog1_end_yPlot = new TH1D("DISRecog1_end_yPlot",LabelXAxisg1_end_y,NBinsg1_end_y,min_g1_end_y,max_g1_end_y);
+		TH1D* COHRecog1_end_yPlot = new TH1D("COHRecog1_end_yPlot",LabelXAxisg1_end_y,NBinsg1_end_y,min_g1_end_y,max_g1_end_y);	
+		
+		//----------------------------------------//
+
+		// g1 end z
+
+		TH1D* Recog1_end_zPlot = new TH1D("Recog1_end_zPlot",LabelXAxisg1_end_z,NBinsg1_end_z,min_g1_end_z,max_g1_end_z);
+		TH1D* NCCOHRecog1_end_zPlot = new TH1D("NCCOHRecog1_end_zPlot",LabelXAxisg1_end_z,NBinsg1_end_z,min_g1_end_z,max_g1_end_z);	
+		TH1D* NCCOHTrueg1_end_zPlot = new TH1D("NCCOHTrueg1_end_zPlot",LabelXAxisg1_end_z,NBinsg1_end_z,min_g1_end_z,max_g1_end_z);
+		TH2D* NCCOHRecog1_end_zPlot2D = new TH2D("NCCOHRecog1_end_zPlot2D",LabelXAxisg1_end_z2D,NBinsg1_end_z,
+			  min_g1_end_z,max_g1_end_z,NBinsg1_end_z,min_g1_end_z,max_g1_end_z);
+		TH2D* POTScaledNCCOHRecog1_end_zPlot2D = new TH2D("POTScaledNCCOHRecog1_end_zPlot2D",LabelXAxisg1_end_z2D,NBinsg1_end_z,
+			  min_g1_end_z,max_g1_end_z,NBinsg1_end_z,min_g1_end_z,max_g1_end_z);
+		TH1D* NonNCCOHRecog1_end_zPlot = new TH1D("NonNCCOHRecog1_end_zPlot",LabelXAxisg1_end_z,NBinsg1_end_z,min_g1_end_z,max_g1_end_z);
+		TH1D* QERecog1_end_zPlot = new TH1D("QERecog1_end_zPlot",LabelXAxisg1_end_z,NBinsg1_end_z,min_g1_end_z,max_g1_end_z);
+		TH1D* MECRecog1_end_zPlot = new TH1D("MECRecog1_end_zPlot",LabelXAxisg1_end_z,NBinsg1_end_z,min_g1_end_z,max_g1_end_z);
+		TH1D* RESRecog1_end_zPlot = new TH1D("RESRecog1_end_zPlot",LabelXAxisg1_end_z,NBinsg1_end_z,min_g1_end_z,max_g1_end_z);
+		TH1D* DISRecog1_end_zPlot = new TH1D("DISRecog1_end_zPlot",LabelXAxisg1_end_z,NBinsg1_end_z,min_g1_end_z,max_g1_end_z);
+		TH1D* COHRecog1_end_zPlot = new TH1D("COHRecog1_end_zPlot",LabelXAxisg1_end_z,NBinsg1_end_z,min_g1_end_z,max_g1_end_z);				
+
+		//----------------------------------------//
+
+		// g2 start x
+
+		TH1D* Recog2_start_xPlot = new TH1D("Recog2_start_xPlot",LabelXAxisg2_start_x,NBinsg2_start_x,min_g2_start_x,max_g2_start_x);
+		TH1D* NCCOHRecog2_start_xPlot = new TH1D("NCCOHRecog2_start_xPlot",LabelXAxisg2_start_x,NBinsg2_start_x,min_g2_start_x,max_g2_start_x);	
+		TH1D* NCCOHTrueg2_start_xPlot = new TH1D("NCCOHTrueg2_start_xPlot",LabelXAxisg2_start_x,NBinsg2_start_x,min_g2_start_x,max_g2_start_x);
+		TH2D* NCCOHRecog2_start_xPlot2D = new TH2D("NCCOHRecog2_start_xPlot2D",LabelXAxisg2_start_x2D,NBinsg2_start_x,
+			  min_g2_start_x,max_g2_start_x,NBinsg2_start_x,min_g2_start_x,max_g2_start_x);
+		TH2D* POTScaledNCCOHRecog2_start_xPlot2D = new TH2D("POTScaledNCCOHRecog2_start_xPlot2D",LabelXAxisg2_start_x2D,NBinsg2_start_x,
+			  min_g2_start_x,max_g2_start_x,NBinsg2_start_x,min_g2_start_x,max_g2_start_x);
+		TH1D* NonNCCOHRecog2_start_xPlot = new TH1D("NonNCCOHRecog2_start_xPlot",LabelXAxisg2_start_x,NBinsg2_start_x,min_g2_start_x,max_g2_start_x);
+		TH1D* QERecog2_start_xPlot = new TH1D("QERecog2_start_xPlot",LabelXAxisg2_start_x,NBinsg2_start_x,min_g2_start_x,max_g2_start_x);
+		TH1D* MECRecog2_start_xPlot = new TH1D("MECRecog2_start_xPlot",LabelXAxisg2_start_x,NBinsg2_start_x,min_g2_start_x,max_g2_start_x);
+		TH1D* RESRecog2_start_xPlot = new TH1D("RESRecog2_start_xPlot",LabelXAxisg2_start_x,NBinsg2_start_x,min_g2_start_x,max_g2_start_x);
+		TH1D* DISRecog2_start_xPlot = new TH1D("DISRecog2_start_xPlot",LabelXAxisg2_start_x,NBinsg2_start_x,min_g2_start_x,max_g2_start_x);
+		TH1D* COHRecog2_start_xPlot = new TH1D("COHRecog2_start_xPlot",LabelXAxisg2_start_x,NBinsg2_start_x,min_g2_start_x,max_g2_start_x);	
+		
+		//----------------------------------------//
+
+		// g2 start y
+
+		TH1D* Recog2_start_yPlot = new TH1D("Recog2_start_yPlot",LabelXAxisg2_start_y,NBinsg2_start_y,min_g2_start_y,max_g2_start_y);
+		TH1D* NCCOHRecog2_start_yPlot = new TH1D("NCCOHRecog2_start_yPlot",LabelXAxisg2_start_y,NBinsg2_start_y,min_g2_start_y,max_g2_start_y);	
+		TH1D* NCCOHTrueg2_start_yPlot = new TH1D("NCCOHTrueg2_start_yPlot",LabelXAxisg2_start_y,NBinsg2_start_y,min_g2_start_y,max_g2_start_y);
+		TH2D* NCCOHRecog2_start_yPlot2D = new TH2D("NCCOHRecog2_start_yPlot2D",LabelXAxisg2_start_y2D,NBinsg2_start_y,
+			  min_g2_start_y,max_g2_start_y,NBinsg2_start_y,min_g2_start_y,max_g2_start_y);
+		TH2D* POTScaledNCCOHRecog2_start_yPlot2D = new TH2D("POTScaledNCCOHRecog2_start_yPlot2D",LabelXAxisg2_start_y2D,NBinsg2_start_y,
+			  min_g2_start_y,max_g2_start_y,NBinsg2_start_y,min_g2_start_y,max_g2_start_y);
+		TH1D* NonNCCOHRecog2_start_yPlot = new TH1D("NonNCCOHRecog2_start_yPlot",LabelXAxisg2_start_y,NBinsg2_start_y,min_g2_start_y,max_g2_start_y);
+		TH1D* QERecog2_start_yPlot = new TH1D("QERecog2_start_yPlot",LabelXAxisg2_start_y,NBinsg2_start_y,min_g2_start_y,max_g2_start_y);
+		TH1D* MECRecog2_start_yPlot = new TH1D("MECRecog2_start_yPlot",LabelXAxisg2_start_y,NBinsg2_start_y,min_g2_start_y,max_g2_start_y);
+		TH1D* RESRecog2_start_yPlot = new TH1D("RESRecog2_start_yPlot",LabelXAxisg2_start_y,NBinsg2_start_y,min_g2_start_y,max_g2_start_y);
+		TH1D* DISRecog2_start_yPlot = new TH1D("DISRecog2_start_yPlot",LabelXAxisg2_start_y,NBinsg2_start_y,min_g2_start_y,max_g2_start_y);
+		TH1D* COHRecog2_start_yPlot = new TH1D("COHRecog2_start_yPlot",LabelXAxisg2_start_y,NBinsg2_start_y,min_g2_start_y,max_g2_start_y);
+		
+		//----------------------------------------//
+
+		// g2 start z
+
+		TH1D* Recog2_start_zPlot = new TH1D("Recog2_start_zPlot",LabelXAxisg2_start_z,NBinsg2_start_z,min_g2_start_z,max_g2_start_z);
+		TH1D* NCCOHRecog2_start_zPlot = new TH1D("NCCOHRecog2_start_zPlot",LabelXAxisg2_start_z,NBinsg2_start_z,min_g2_start_z,max_g2_start_z);	
+		TH1D* NCCOHTrueg2_start_zPlot = new TH1D("NCCOHTrueg2_start_zPlot",LabelXAxisg2_start_z,NBinsg2_start_z,min_g2_start_z,max_g2_start_z);
+		TH2D* NCCOHRecog2_start_zPlot2D = new TH2D("NCCOHRecog2_start_zPlot2D",LabelXAxisg2_start_z2D,NBinsg2_start_z,
+			  min_g2_start_z,max_g2_start_z,NBinsg2_start_z,min_g2_start_z,max_g2_start_z);
+		TH2D* POTScaledNCCOHRecog2_start_zPlot2D = new TH2D("POTScaledNCCOHRecog2_start_zPlot2D",LabelXAxisg2_start_z2D,NBinsg2_start_z,
+			  min_g2_start_z,max_g2_start_z,NBinsg2_start_z,min_g2_start_z,max_g2_start_z);
+		TH1D* NonNCCOHRecog2_start_zPlot = new TH1D("NonNCCOHRecog2_start_zPlot",LabelXAxisg2_start_z,NBinsg2_start_z,min_g2_start_z,max_g2_start_z);
+		TH1D* QERecog2_start_zPlot = new TH1D("QERecog2_start_zPlot",LabelXAxisg2_start_z,NBinsg2_start_z,min_g2_start_z,max_g2_start_z);
+		TH1D* MECRecog2_start_zPlot = new TH1D("MECRecog2_start_zPlot",LabelXAxisg2_start_z,NBinsg2_start_z,min_g2_start_z,max_g2_start_z);
+		TH1D* RESRecog2_start_zPlot = new TH1D("RESRecog2_start_zPlot",LabelXAxisg2_start_z,NBinsg2_start_z,min_g2_start_z,max_g2_start_z);
+		TH1D* DISRecog2_start_zPlot = new TH1D("DISRecog2_start_zPlot",LabelXAxisg2_start_z,NBinsg2_start_z,min_g2_start_z,max_g2_start_z);
+		TH1D* COHRecog2_start_zPlot = new TH1D("COHRecog2_start_zPlot",LabelXAxisg2_start_z,NBinsg2_start_z,min_g2_start_z,max_g2_start_z);	
+		
+		//----------------------------------------//
+
+		// g2 end x
+
+		TH1D* Recog2_end_xPlot = new TH1D("Recog2_end_xPlot",LabelXAxisg2_end_x,NBinsg2_end_x,min_g2_end_x,max_g2_end_x);
+		TH1D* NCCOHRecog2_end_xPlot = new TH1D("NCCOHRecog2_end_xPlot",LabelXAxisg2_end_x,NBinsg2_end_x,min_g2_end_x,max_g2_end_x);	
+		TH1D* NCCOHTrueg2_end_xPlot = new TH1D("NCCOHTrueg2_end_xPlot",LabelXAxisg2_end_x,NBinsg2_end_x,min_g2_end_x,max_g2_end_x);
+		TH2D* NCCOHRecog2_end_xPlot2D = new TH2D("NCCOHRecog2_end_xPlot2D",LabelXAxisg2_end_x2D,NBinsg2_end_x,
+			  min_g2_end_x,max_g2_end_x,NBinsg2_end_x,min_g2_end_x,max_g2_end_x);
+		TH2D* POTScaledNCCOHRecog2_end_xPlot2D = new TH2D("POTScaledNCCOHRecog2_end_xPlot2D",LabelXAxisg2_end_x2D,NBinsg2_end_x,
+			  min_g2_end_x,max_g2_end_x,NBinsg2_end_x,min_g2_end_x,max_g2_end_x);
+		TH1D* NonNCCOHRecog2_end_xPlot = new TH1D("NonNCCOHRecog2_end_xPlot",LabelXAxisg2_end_x,NBinsg2_end_x,min_g2_end_x,max_g2_end_x);
+		TH1D* QERecog2_end_xPlot = new TH1D("QERecog2_end_xPlot",LabelXAxisg2_end_x,NBinsg2_end_x,min_g2_end_x,max_g2_end_x);
+		TH1D* MECRecog2_end_xPlot = new TH1D("MECRecog2_end_xPlot",LabelXAxisg2_end_x,NBinsg2_end_x,min_g2_end_x,max_g2_end_x);
+		TH1D* RESRecog2_end_xPlot = new TH1D("RESRecog2_end_xPlot",LabelXAxisg2_end_x,NBinsg2_end_x,min_g2_end_x,max_g2_end_x);
+		TH1D* DISRecog2_end_xPlot = new TH1D("DISRecog2_end_xPlot",LabelXAxisg2_end_x,NBinsg2_end_x,min_g2_end_x,max_g2_end_x);
+		TH1D* COHRecog2_end_xPlot = new TH1D("COHRecog2_end_xPlot",LabelXAxisg2_end_x,NBinsg2_end_x,min_g2_end_x,max_g2_end_x);		
+		
+		//----------------------------------------//
+
+		// g2 end y
+
+		TH1D* Recog2_end_yPlot = new TH1D("Recog2_end_yPlot",LabelXAxisg2_end_y,NBinsg2_end_y,min_g2_end_y,max_g2_end_y);
+		TH1D* NCCOHRecog2_end_yPlot = new TH1D("NCCOHRecog2_end_yPlot",LabelXAxisg2_end_y,NBinsg2_end_y,min_g2_end_y,max_g2_end_y);	
+		TH1D* NCCOHTrueg2_end_yPlot = new TH1D("NCCOHTrueg2_end_yPlot",LabelXAxisg2_end_y,NBinsg2_end_y,min_g2_end_y,max_g2_end_y);
+		TH2D* NCCOHRecog2_end_yPlot2D = new TH2D("NCCOHRecog2_end_yPlot2D",LabelXAxisg2_end_y2D,NBinsg2_end_y,
+			  min_g2_end_y,max_g2_end_y,NBinsg2_end_y,min_g2_end_y,max_g2_end_y);
+		TH2D* POTScaledNCCOHRecog2_end_yPlot2D = new TH2D("POTScaledNCCOHRecog2_end_yPlot2D",LabelXAxisg2_end_y2D,NBinsg2_end_y,
+			  min_g2_end_y,max_g2_end_y,NBinsg2_end_y,min_g2_end_y,max_g2_end_y);
+		TH1D* NonNCCOHRecog2_end_yPlot = new TH1D("NonNCCOHRecog2_end_yPlot",LabelXAxisg2_end_y,NBinsg2_end_y,min_g2_end_y,max_g2_end_y);
+		TH1D* QERecog2_end_yPlot = new TH1D("QERecog2_end_yPlot",LabelXAxisg2_end_y,NBinsg2_end_y,min_g2_end_y,max_g2_end_y);
+		TH1D* MECRecog2_end_yPlot = new TH1D("MECRecog2_end_yPlot",LabelXAxisg2_end_y,NBinsg2_end_y,min_g2_end_y,max_g2_end_y);
+		TH1D* RESRecog2_end_yPlot = new TH1D("RESRecog2_end_yPlot",LabelXAxisg2_end_y,NBinsg2_end_y,min_g2_end_y,max_g2_end_y);
+		TH1D* DISRecog2_end_yPlot = new TH1D("DISRecog2_end_yPlot",LabelXAxisg2_end_y,NBinsg2_end_y,min_g2_end_y,max_g2_end_y);
+		TH1D* COHRecog2_end_yPlot = new TH1D("COHRecog2_end_yPlot",LabelXAxisg2_end_y,NBinsg2_end_y,min_g2_end_y,max_g2_end_y);
+		
+		//----------------------------------------//
+
+		// g2 end z
+
+		TH1D* Recog2_end_zPlot = new TH1D("Recog2_end_zPlot",LabelXAxisg2_end_z,NBinsg2_end_z,min_g2_end_z,max_g2_end_z);
+		TH1D* NCCOHRecog2_end_zPlot = new TH1D("NCCOHRecog2_end_zPlot",LabelXAxisg2_end_z,NBinsg2_end_z,min_g2_end_z,max_g2_end_z);	
+		TH1D* NCCOHTrueg2_end_zPlot = new TH1D("NCCOHTrueg2_end_zPlot",LabelXAxisg2_end_z,NBinsg2_end_z,min_g2_end_z,max_g2_end_z);
+		TH2D* NCCOHRecog2_end_zPlot2D = new TH2D("NCCOHRecog2_end_zPlot2D",LabelXAxisg2_end_z2D,NBinsg2_end_z,
+			  min_g2_end_z,max_g2_end_z,NBinsg2_end_z,min_g2_end_z,max_g2_end_z);
+		TH2D* POTScaledNCCOHRecog2_end_zPlot2D = new TH2D("POTScaledNCCOHRecog2_end_zPlot2D",LabelXAxisg2_end_z2D,NBinsg2_end_z,
+			  min_g2_end_z,max_g2_end_z,NBinsg2_end_z,min_g2_end_z,max_g2_end_z);
+		TH1D* NonNCCOHRecog2_end_zPlot = new TH1D("NonNCCOHRecog2_end_zPlot",LabelXAxisg2_end_z,NBinsg2_end_z,min_g2_end_z,max_g2_end_z);
+		TH1D* QERecog2_end_zPlot = new TH1D("QERecog2_end_zPlot",LabelXAxisg2_end_z,NBinsg2_end_z,min_g2_end_z,max_g2_end_z);
+		TH1D* MECRecog2_end_zPlot = new TH1D("MECRecog2_end_zPlot",LabelXAxisg2_end_z,NBinsg2_end_z,min_g2_end_z,max_g2_end_z);
+		TH1D* RESRecog2_end_zPlot = new TH1D("RESRecog2_end_zPlot",LabelXAxisg2_end_z,NBinsg2_end_z,min_g2_end_z,max_g2_end_z);
+		TH1D* DISRecog2_end_zPlot = new TH1D("DISRecog2_end_zPlot",LabelXAxisg2_end_z,NBinsg2_end_z,min_g2_end_z,max_g2_end_z);
+		TH1D* COHRecog2_end_zPlot = new TH1D("COHRecog2_end_zPlot",LabelXAxisg2_end_z,NBinsg2_end_z,min_g2_end_z,max_g2_end_z);		
+
+		//----------------------------------------//
+
+		// vertex x
+
+		TH1D* Recovertex_xPlot = new TH1D("Recovertex_xPlot",LabelXAxisvertex_x,NBinsvertex_x,min_vertex_x,max_vertex_x);
+		TH1D* NCCOHRecovertex_xPlot = new TH1D("NCCOHRecovertex_xPlot",LabelXAxisvertex_x,NBinsvertex_x,min_vertex_x,max_vertex_x);	
+		TH1D* NCCOHTruevertex_xPlot = new TH1D("NCCOHTruevertex_xPlot",LabelXAxisvertex_x,NBinsvertex_x,min_vertex_x,max_vertex_x);
+		TH2D* NCCOHRecovertex_xPlot2D = new TH2D("NCCOHRecovertex_xPlot2D",LabelXAxisvertex_x2D,NBinsvertex_x,
+			  min_vertex_x,max_vertex_x,NBinsvertex_x,min_vertex_x,max_vertex_x);
+		TH2D* POTScaledNCCOHRecovertex_xPlot2D = new TH2D("POTScaledNCCOHRecovertex_xPlot2D",LabelXAxisvertex_x2D,NBinsvertex_x,
+			  min_vertex_x,max_vertex_x,NBinsvertex_x,min_vertex_x,max_vertex_x);
+		TH1D* NonNCCOHRecovertex_xPlot = new TH1D("NonNCCOHRecovertex_xPlot",LabelXAxisvertex_x,NBinsvertex_x,min_vertex_x,max_vertex_x);
+		TH1D* QERecovertex_xPlot = new TH1D("QERecovertex_xPlot",LabelXAxisvertex_x,NBinsvertex_x,min_vertex_x,max_vertex_x);
+		TH1D* MECRecovertex_xPlot = new TH1D("MECRecovertex_xPlot",LabelXAxisvertex_x,NBinsvertex_x,min_vertex_x,max_vertex_x);
+		TH1D* RESRecovertex_xPlot = new TH1D("RESRecovertex_xPlot",LabelXAxisvertex_x,NBinsvertex_x,min_vertex_x,max_vertex_x);
+		TH1D* DISRecovertex_xPlot = new TH1D("DISRecovertex_xPlot",LabelXAxisvertex_x,NBinsvertex_x,min_vertex_x,max_vertex_x);
+		TH1D* COHRecovertex_xPlot = new TH1D("COHRecovertex_xPlot",LabelXAxisvertex_x,NBinsvertex_x,min_vertex_x,max_vertex_x);			
+
+		//----------------------------------------//
+
+		// vertex y
+
+		TH1D* Recovertex_yPlot = new TH1D("Recovertex_yPlot",LabelXAxisvertex_y,NBinsvertex_y,min_vertex_y,max_vertex_y);
+		TH1D* NCCOHRecovertex_yPlot = new TH1D("NCCOHRecovertex_yPlot",LabelXAxisvertex_y,NBinsvertex_y,min_vertex_y,max_vertex_y);	
+		TH1D* NCCOHTruevertex_yPlot = new TH1D("NCCOHTruevertex_yPlot",LabelXAxisvertex_y,NBinsvertex_y,min_vertex_y,max_vertex_y);
+		TH2D* NCCOHRecovertex_yPlot2D = new TH2D("NCCOHRecovertex_yPlot2D",LabelXAxisvertex_y2D,NBinsvertex_y,
+			  min_vertex_y,max_vertex_y,NBinsvertex_y,min_vertex_y,max_vertex_y);
+		TH2D* POTScaledNCCOHRecovertex_yPlot2D = new TH2D("POTScaledNCCOHRecovertex_yPlot2D",LabelXAxisvertex_y2D,NBinsvertex_y,
+			  min_vertex_y,max_vertex_y,NBinsvertex_y,min_vertex_y,max_vertex_y);
+		TH1D* NonNCCOHRecovertex_yPlot = new TH1D("NonNCCOHRecovertex_yPlot",LabelXAxisvertex_y,NBinsvertex_y,min_vertex_y,max_vertex_y);
+		TH1D* QERecovertex_yPlot = new TH1D("QERecovertex_yPlot",LabelXAxisvertex_y,NBinsvertex_y,min_vertex_y,max_vertex_y);
+		TH1D* MECRecovertex_yPlot = new TH1D("MECRecovertex_yPlot",LabelXAxisvertex_y,NBinsvertex_y,min_vertex_y,max_vertex_y);
+		TH1D* RESRecovertex_yPlot = new TH1D("RESRecovertex_yPlot",LabelXAxisvertex_y,NBinsvertex_y,min_vertex_y,max_vertex_y);
+		TH1D* DISRecovertex_yPlot = new TH1D("DISRecovertex_yPlot",LabelXAxisvertex_y,NBinsvertex_y,min_vertex_y,max_vertex_y);
+		TH1D* COHRecovertex_yPlot = new TH1D("COHRecovertex_yPlot",LabelXAxisvertex_y,NBinsvertex_y,min_vertex_y,max_vertex_y);	
+
+		//----------------------------------------//
+
+		// vertex z
+
+		TH1D* Recovertex_zPlot = new TH1D("Recovertex_zPlot",LabelXAxisvertex_z,NBinsvertex_z,min_vertex_z,max_vertex_z);
+		TH1D* NCCOHRecovertex_zPlot = new TH1D("NCCOHRecovertex_zPlot",LabelXAxisvertex_z,NBinsvertex_z,min_vertex_z,max_vertex_z);	
+		TH1D* NCCOHTruevertex_zPlot = new TH1D("NCCOHTruevertex_zPlot",LabelXAxisvertex_z,NBinsvertex_z,min_vertex_z,max_vertex_z);
+		TH2D* NCCOHRecovertex_zPlot2D = new TH2D("NCCOHRecovertex_zPlot2D",LabelXAxisvertex_z2D,NBinsvertex_z,
+			  min_vertex_z,max_vertex_z,NBinsvertex_z,min_vertex_z,max_vertex_z);
+		TH2D* POTScaledNCCOHRecovertex_zPlot2D = new TH2D("POTScaledNCCOHRecovertex_zPlot2D",LabelXAxisvertex_z2D,NBinsvertex_z,
+			  min_vertex_z,max_vertex_z,NBinsvertex_z,min_vertex_z,max_vertex_z);
+		TH1D* NonNCCOHRecovertex_zPlot = new TH1D("NonNCCOHRecovertex_zPlot",LabelXAxisvertex_z,NBinsvertex_z,min_vertex_z,max_vertex_z);
+		TH1D* QERecovertex_zPlot = new TH1D("QERecovertex_zPlot",LabelXAxisvertex_z,NBinsvertex_z,min_vertex_z,max_vertex_z);
+		TH1D* MECRecovertex_zPlot = new TH1D("MECRecovertex_zPlot",LabelXAxisvertex_z,NBinsvertex_z,min_vertex_z,max_vertex_z);
+		TH1D* RESRecovertex_zPlot = new TH1D("RESRecovertex_zPlot",LabelXAxisvertex_z,NBinsvertex_z,min_vertex_z,max_vertex_z);
+		TH1D* DISRecovertex_zPlot = new TH1D("DISRecovertex_zPlot",LabelXAxisvertex_z,NBinsvertex_z,min_vertex_z,max_vertex_z);
+		TH1D* COHRecovertex_zPlot = new TH1D("COHRecovertex_zPlot",LabelXAxisvertex_z,NBinsvertex_z,min_vertex_z,max_vertex_z);	
+
+		//----------------------------------------//
+
 		// kine_pio_vtx_dis
 
 		TH1D* Recokine_pio_vtx_disPlot = new TH1D("Recokine_pio_vtx_disPlot",LabelXAxiskine_pio_vtx_dis,NBinskine_pio_vtx_dis,min_kine_pio_vtx_dis,max_kine_pio_vtx_dis);
@@ -497,7 +803,7 @@ void mcc9_10_reco_selection::Loop() {
 		
 		//----------------------------------------//		
 
-		// nshowers
+		// wc nshowers
 
 		TH1D* ReconshowersPlot = new TH1D("ReconshowersPlot",LabelXAxisnshowers,NBinsnshowers,ArrayNBinsnshowers);
 		TH1D* NCCOHReconshowersPlot = new TH1D("NCCOHReconshowersPlot",LabelXAxisnshowers,NBinsnshowers,ArrayNBinsnshowers);	
@@ -511,7 +817,25 @@ void mcc9_10_reco_selection::Loop() {
 		TH1D* MECReconshowersPlot = new TH1D("MECReconshowersPlot",LabelXAxisnshowers,NBinsnshowers,ArrayNBinsnshowers);
 		TH1D* RESReconshowersPlot = new TH1D("RESReconshowersPlot",LabelXAxisnshowers,NBinsnshowers,ArrayNBinsnshowers);
 		TH1D* DISReconshowersPlot = new TH1D("DISReconshowersPlot",LabelXAxisnshowers,NBinsnshowers,ArrayNBinsnshowers);
-		TH1D* COHReconshowersPlot = new TH1D("COHReconshowersPlot",LabelXAxisnshowers,NBinsnshowers,ArrayNBinsnshowers);		
+		TH1D* COHReconshowersPlot = new TH1D("COHReconshowersPlot",LabelXAxisnshowers,NBinsnshowers,ArrayNBinsnshowers);
+		
+		//----------------------------------------//		
+
+		// pd nshowers
+
+		TH1D* Recopd_nshowersPlot = new TH1D("Recopd_nshowersPlot",LabelXAxispd_nshowers,NBinspd_nshowers,ArrayNBinspd_nshowers);
+		TH1D* NCCOHRecopd_nshowersPlot = new TH1D("NCCOHRecopd_nshowersPlot",LabelXAxispd_nshowers,NBinspd_nshowers,ArrayNBinspd_nshowers);	
+		TH1D* NCCOHTruepd_nshowersPlot = new TH1D("NCCOHTruepd_nshowersPlot",LabelXAxispd_nshowers,NBinspd_nshowers,ArrayNBinspd_nshowers);
+		TH2D* NCCOHRecopd_nshowersPlot2D = new TH2D("NCCOHRecopd_nshowersPlot2D",LabelXAxispd_nshowers2D,NBinspd_nshowers,
+			  ArrayNBinspd_nshowers,NBinspd_nshowers,ArrayNBinspd_nshowers);
+		TH2D* POTScaledNCCOHRecopd_nshowersPlot2D = new TH2D("POTScaledNCCOHRecopd_nshowersPlot2D",LabelXAxispd_nshowers2D,NBinspd_nshowers,
+			  ArrayNBinspd_nshowers,NBinspd_nshowers,ArrayNBinspd_nshowers);
+		TH1D* NonNCCOHRecopd_nshowersPlot = new TH1D("NonNCCOHRecopd_nshowersPlot",LabelXAxispd_nshowers,NBinspd_nshowers,ArrayNBinspd_nshowers);
+		TH1D* QERecopd_nshowersPlot = new TH1D("QERecopd_nshowersPlot",LabelXAxispd_nshowers,NBinspd_nshowers,ArrayNBinspd_nshowers);
+		TH1D* MECRecopd_nshowersPlot = new TH1D("MECRecopd_nshowersPlot",LabelXAxispd_nshowers,NBinspd_nshowers,ArrayNBinspd_nshowers);
+		TH1D* RESRecopd_nshowersPlot = new TH1D("RESRecopd_nshowersPlot",LabelXAxispd_nshowers,NBinspd_nshowers,ArrayNBinspd_nshowers);
+		TH1D* DISRecopd_nshowersPlot = new TH1D("DISRecopd_nshowersPlot",LabelXAxispd_nshowers,NBinspd_nshowers,ArrayNBinspd_nshowers);
+		TH1D* COHRecopd_nshowersPlot = new TH1D("COHRecopd_nshowersPlot",LabelXAxispd_nshowers,NBinspd_nshowers,ArrayNBinspd_nshowers);		
 
 		//----------------------------------------//		
 
@@ -582,6 +906,14 @@ void mcc9_10_reco_selection::Loop() {
 		TH1D* RESRecoSingleBinPlot = new TH1D("RESRecoSingleBinPlot","",1,0.,1.);
 		TH1D* DISRecoSingleBinPlot = new TH1D("DISRecoSingleBinPlot","",1,0.,1.);
 		TH1D* COHRecoSingleBinPlot = new TH1D("COHRecoSingleBinPlot","",1,0.,1.);
+
+		//----------------------------------------//
+
+		// 2d vertex plots
+
+		TH2D* Recopd_vs_wc_vertex_xPlot2D = new TH2D("Recopd_vs_wc_vertex_xPlot2D",";wc vertex x [cm];pd vertex x [cm]",NBinsvertex_x,min_vertex_x,max_vertex_x,NBinsvertex_x,min_vertex_x,max_vertex_x);
+		TH2D* Recopd_vs_wc_vertex_yPlot2D = new TH2D("Recopd_vs_wc_vertex_yPlot2D",";wc vertex y [cm];pd vertex y [cm]",NBinsvertex_y,min_vertex_y,max_vertex_y,NBinsvertex_y,min_vertex_y,max_vertex_y);
+		TH2D* Recopd_vs_wc_vertex_zPlot2D = new TH2D("Recopd_vs_wc_vertex_zPlot2D",";wc vertex z [cm];pd vertex z [cm]",NBinsvertex_z,min_vertex_z,max_vertex_z,NBinsvertex_z,min_vertex_z,max_vertex_z);				
 
 		//----------------------------------------//
 
@@ -765,7 +1097,11 @@ void mcc9_10_reco_selection::Loop() {
 
 			// Contained Reconstructed Vertex
 
+			// wc vertex
 			TVector3 RecoVertex(Vertex_X->at(0),Vertex_Y->at(0),Vertex_Z->at(0));	
+
+			// pd vertex
+			TVector3 pd_reco_vertex(pd_vertex_x->at(0),pd_vertex_y->at(0),pd_vertex_z->at(0));			
 
 			int cut_reco_blip_counter_radius = 0;
 
@@ -888,256 +1224,65 @@ void mcc9_10_reco_selection::Loop() {
 
 			//--------------------//
 
-			// Loop over primary pfparticles
-			// Reject those events with protons above kinetic energy threshold
-			// The proton threshold can be located under NCpi0/generators/constants.h 
-
-			int primary_proton_counter = 0;
-			int primary_muon_counter = 0;
-			int primary_charged_pion_counter = 0;
-			int primary_electron_counter = 0;
-			int primary_photon_counter = 0;
-			int primary_neutron_counter = 0;
-			int primary_neutral_pion_counter = 0;
-
-			int secondary_proton_counter = 0;
-			int secondary_muon_counter = 0;
-			int secondary_charged_pion_counter = 0;
-			int secondary_electron_counter = 0;
-			int secondary_photon_counter = 0;
-			int secondary_neutron_counter = 0;
-			int secondary_neutral_pion_counter = 0;
-
-			int pfps = wc_reco_pdg->size();
-
-			for (int ipfp = 0; ipfp < pfps; ipfp++ ) {
-
-				// only primaries (mother = 0) 
-				if (wc_reco_mother->at(ipfp) == 0) {
-
-					TVector3 v_mom(wc_reco_p->at(ipfp).at(0), wc_reco_p->at(ipfp).at(1), wc_reco_p->at(ipfp).at(2)); 
-					double mom = v_mom.Mag();
-
-					// Only proton candidates
-					if (wc_reco_pdg->at(ipfp) == ProtonPdg) {
-
-						double e = TMath::Sqrt( mom*mom + ProtonMass_GeV * ProtonMass_GeV);
-						double ke = e - ProtonMass_GeV;
-						if (ke > proton_ke_thres) { primary_proton_counter++; }
-
-					} // end of the primary protons
-
-					// Only muon candidates
-					else if (wc_reco_pdg->at(ipfp) == MuonPdg) {
-
-						if (mom > 0.) { primary_muon_counter++; }
-					
-					} // end of the primary muons
-
-					// Only charged pion candidates
-					else if (wc_reco_pdg->at(ipfp) == AbsChargedPionPdg) {
-
-						if (mom > 0.) { primary_charged_pion_counter++; }
-					
-					} // end of the primary charged pions
-
-					// Only neutral pion candidates
-					else if (wc_reco_pdg->at(ipfp) == NeutralPionPdg) {
-
-						if (mom > 0.) { primary_neutral_pion_counter++; }
-					
-					} // end of the primary neutral pions
-
-					// Only electron candidates
-					else if (wc_reco_pdg->at(ipfp) == ElectronPdg) {
-
-						if (mom > 0.07) { primary_electron_counter++; }
-										
-					} // end of the primary charged pions
-
-					// Only photon candidates
-					else if (wc_reco_pdg->at(ipfp) == PhotonPdg) {
-
-						if (mom > 0.07) { primary_photon_counter++; }
-										
-					} // end of the primary photons
-
-					// Only neutron candidates
-					else if (wc_reco_pdg->at(ipfp) == NeutronPdg) {
-
-						double e = TMath::Sqrt( mom*mom + NeutronMass_GeV * NeutronMass_GeV);
-						double ke = e - NeutronMass_GeV;						
-						//cout << "neutron mom = " << mom << " ke = " << ke << " bkg_1n_0p_1pi0_X = " << bkg_1n_0p_1pi0_X << endl;
-						//if (mom > 0.) { primary_neutron_counter++; }
-						if (ke > 0.01) { primary_neutron_counter++; }						
-										
-					} // end of the primary neutrons
-
-					else { 
-						
-						cout << "primary non proton/muon/charged pion/electron candidate with pdg = " << wc_reco_pdg->at(ipfp) << " run = " << Run << "  subrun = " << SubRun << " event = " << Event << endl; 
-					
-					}
-
-				} else {
-
-					// secondary particles
-
-					//cout << "wc_reco_mother->at(ipfp) = " << wc_reco_mother->at(ipfp) << endl;
-					int mother = wc_reco_mother->at(ipfp);
-
-					// loop over the secondary particles
-					for (int ipfp_s = 0; ipfp_s < pfps; ipfp_s++ ) {
-
-						if ( mother == wc_reco_id->at(ipfp_s) ) {
-
-							int secondary_pdg = wc_reco_pdg->at(ipfp_s); 
-
-							//secondary protons
-							if ( TMath::Abs(secondary_pdg) == ProtonPdg) {
-
-								TVector3 v_mom(wc_reco_p->at(ipfp_s).at(0), wc_reco_p->at(ipfp_s).at(1), wc_reco_p->at(ipfp_s).at(2)); 
-								double mom = v_mom.Mag();
-								double e = TMath::Sqrt( mom*mom + ProtonMass_GeV * ProtonMass_GeV);
-								double ke = e - ProtonMass_GeV;
-
-								if (ke > proton_ke_thres) { secondary_proton_counter++; }
-
-							}
-
-							//secondary charged pions
-							else if ( TMath::Abs(secondary_pdg) == AbsChargedPionPdg) {
-
-								secondary_charged_pion_counter++;
-							
-							}
-
-							//secondary neutral pions
-							else if ( TMath::Abs(secondary_pdg) == NeutralPionPdg) {
-
-								secondary_neutral_pion_counter++;
-							
-							}
-
-							//secondary muons
-							else if ( TMath::Abs(secondary_pdg) == MuonPdg) {
-
-								secondary_muon_counter++;
-							
-							}
-
-							//secondary electrons
-							else if ( TMath::Abs(secondary_pdg) == ElectronPdg) {
-
-								secondary_electron_counter++;
-							
-							}
-
-							//secondary photons
-							else if ( TMath::Abs(secondary_pdg) == PhotonPdg) {
-
-								secondary_photon_counter++;
-							
-							}
-
-							//secondary neutron
-							else if ( TMath::Abs(secondary_pdg) == NeutronPdg) {
-
-								secondary_neutron_counter++;
-							
-							}
-
-							else { 
-						
-								cout << "secondary non proton/muon/charged pion/electron candidate with pdg = " << wc_reco_pdg->at(ipfp_s) << " run = " << Run << "  subrun = " << SubRun << " event = " << Event << endl; 
-							
-							}
-
-						} // end of grabbing the correct secondary particle
-
-					} // end of the loop over the secondary particles
-
-				}
-
-			}
-
-			//--------------------//
-
-			// Reject events that do not have two showers
-
-			int nshowers = 0;
-			int nmuontracks = 0;
-			int nprotontracks = 0;
-			int npiontracks = 0;
-
-			for(int i=0; i < (int)wc_kine_energy_particle->size(); i++) {
-
-				int pdgcode = wc_kine_particle_type->at(i);
-
-				if( TMath::Abs(pdgcode) == ElectronPdg && wc_kine_energy_particle->at(i) > 10) { // KE in MeV
-					
-					nshowers++;
-
-				}
-
-				else if( TMath::Abs(pdgcode) == ProtonPdg && wc_kine_energy_particle->at(i) > 10) { // KE in MeV
-					
-					nprotontracks++;
-
-				}			
-				
-				else if( TMath::Abs(pdgcode) == MuonPdg && wc_kine_energy_particle->at(i) > 10) { // KE in MeV
-					
-					nmuontracks++;
-
-				}	
-				
-				else if( TMath::Abs(pdgcode) == AbsChargedPionPdg && wc_kine_energy_particle->at(i) > 10) { // KE in MeV
-					
-					npiontracks++;
-
-				}	
-
-			}	
-
-			//--------------------//
-
 			// event selection
 
 			// wc counters
 		
-			if (primary_proton_counter != 0) { continue; }
-			if (primary_muon_counter != 0) { continue; }
-			if (primary_charged_pion_counter != 0) { continue; }
+			if (wc_primary_proton_counter != 0) { continue; }
+			if (wc_primary_muon_counter != 0) { continue; }
+			if (wc_primary_charged_pion_counter != 0) { continue; }
+			if (wc_primary_neutron_counter != 0) { continue; }
 
-			if (secondary_proton_counter != 0) { continue; }
-			if (secondary_muon_counter != 0) { continue; }
-			if (secondary_charged_pion_counter != 0) { continue; }
+			if (wc_secondary_proton_counter != 0) { continue; }
+			if (wc_secondary_muon_counter != 0) { continue; }
+			if (wc_secondary_charged_pion_counter != 0) { continue; }
+			//if (wc_secondary_neutron_counter != 0) { continue; }
 
-			//if (nmuontracks != 0) { continue; }
-			if (npiontracks != 0) { continue; }							
+			if (wc_nprotontracks != 0) { continue; }			
+			if (wc_nmuontracks != 0) { continue; }
+			if (wc_npiontracks != 0) { continue; }
+			if (wc_nshowers > 5) { continue; }		
+			
+			// pd counters
+
+			if (pd_reco_track_count != 0) { continue; }
+			if (pd_reco_shower_count > 3) { continue; }
 			
 			// fv requirements
 
-			if ( !tools.inFVVector(RecoVertex) ) { continue; }
-			if ( Vertex_Z->at(0) < 250 ) { continue; }
-			if ( Vertex_Z->at(0) > 660 && Vertex_Z->at(0) < 760 ) { continue; }		
-			if ( FVz - g1_end_z < 10 ) { continue; } // cm	
+			if ( !wc_vertex_contained ) { continue; }
+			if ( !pd_vertex_contained ) { continue; }
+			//if ( !dl_vertex_contained ) { continue; }
+			if ( !gl_vertex_contained ) { continue; }			
+			if ( !g1_start_contained ) { continue; }
+			if ( !g2_start_contained ) { continue; }		
+			if ( !g1_end_contained ) { continue; }
+			if ( !g2_end_contained ) { continue; }	
 
-			// single photon bdt cuts
-			
-			if (wc_single_photon_numu_score < -1) { continue; }
-			if (wc_single_photon_other_score < 0 || wc_single_photon_other_score > 2.) { continue; }
-			if (wc_single_photon_ncpi0_score > 0.6) { continue; }
-			if (wc_single_photon_nue_score < -2.5) { continue; }				
-			
-			// angular quality cuts
+			// kinematics
 
-			if (g1_costheta < gamma1_costheta_thres) { continue; }				
-			if (g2_costheta < gamma2_costheta_thres) { continue; }		
+			if (two_shower_start_dist > 50) { continue; } // cm	
+			if (two_shower_angle > 90) { continue; } // deg		
 			
-			if (two_shower_angle > 70) { continue; } // deg	
-			if (two_shower_start_dist > 150) { continue; } // cm		
+			// dl lantern
+			if (dl_nTracks != 0) { continue; }
+
+			// bdt and score cuts cuts
+
+			if (wc_numu_score > 0.1 || wc_numu_score < -2) { continue; }
+			if (wc_shw_sp_n_20mev_showers < 2 || wc_shw_sp_n_20mev_showers > 3) { continue; }		
+			if (wc_shw_sp_n_br4_showers >= 8) { continue; }		
+			
+			// spacepoints
+			if (nspacepoints < 100 || nspacepoints > 400) { continue; }
+
+			// blips
+			if (n_blip_pd_vtx_25cm_g1_anticone > 1) { continue; }
+			
+			// // angular quality cuts
+
+			// if (g1_costheta < gamma1_costheta_thres) { continue; }				
+			// if (g2_costheta < gamma2_costheta_thres) { continue; }	
 			
 			//--------------------//			
 
@@ -1152,6 +1297,14 @@ void mcc9_10_reco_selection::Loop() {
 				else { cout << "unknown neutrino flavor!" << endl; }	
 
 			}
+
+			//--------------------//
+			
+			// 2D wc vs pd vertex plots
+
+			Recopd_vs_wc_vertex_xPlot2D->Fill(RecoVertex.X(),pd_reco_vertex.X(),weight);
+			Recopd_vs_wc_vertex_yPlot2D->Fill(RecoVertex.Y(),pd_reco_vertex.Y(),weight);
+			Recopd_vs_wc_vertex_zPlot2D->Fill(RecoVertex.Z(),pd_reco_vertex.Z(),weight);						
 
 			//--------------------//
 	
@@ -1245,7 +1398,25 @@ void mcc9_10_reco_selection::Loop() {
 			Recog2CosThetaPlot->Fill(g2_costheta,weight);
 			Recotwo_shower_anglePlot->Fill(two_shower_angle,weight);
 			Recotwo_shower_start_distPlot->Fill(two_shower_start_dist,weight);
-			ReconshowersPlot->Fill(nshowers,weight);						
+			Recopd_nshowersPlot->Fill(pd_reco_shower_count,weight);	
+			ReconshowersPlot->Fill(wc_nshowers,weight);	
+			Recoprimary_neutron_counterPlot->Fill(wc_primary_neutron_counter,weight);
+			Recosecondary_neutron_counterPlot->Fill(wc_secondary_neutron_counter,weight);						
+			Recog1_start_xPlot->Fill(g1_start_x,weight);			
+			Recog1_start_yPlot->Fill(g1_start_y,weight);		
+			Recog1_start_zPlot->Fill(g1_start_z,weight);
+			Recog1_end_xPlot->Fill(g1_end_x,weight);
+			Recog1_end_yPlot->Fill(g1_end_y,weight);		
+			Recog1_end_zPlot->Fill(g1_end_z,weight);
+			Recog2_start_xPlot->Fill(g2_start_x,weight);
+			Recog2_start_yPlot->Fill(g2_start_y,weight);		
+			Recog2_start_zPlot->Fill(g2_start_z,weight);
+			Recog2_end_xPlot->Fill(g2_end_x,weight);
+			Recog2_end_yPlot->Fill(g2_end_y,weight);		
+			Recog2_end_zPlot->Fill(g2_end_z,weight);													
+			Recovertex_xPlot->Fill(Vertex_X->at(0),weight);
+			Recovertex_yPlot->Fill(Vertex_Y->at(0),weight);	
+			Recovertex_zPlot->Fill(Vertex_Z->at(0),weight);		
 			Recokine_pio_vtx_disPlot->Fill(wc_kine_pio_vtx_dis,weight);
 			Recosingle_photon_numu_scorePlot->Fill(wc_single_photon_numu_score,weight);
 			Recosingle_photon_other_scorePlot->Fill(wc_single_photon_other_score,weight);
@@ -1327,7 +1498,25 @@ void mcc9_10_reco_selection::Loop() {
 					NCCOHRecog2CosThetaPlot->Fill(g2_costheta,weight);
 					NCCOHRecotwo_shower_anglePlot->Fill(two_shower_angle,weight);	
 					NCCOHRecotwo_shower_start_distPlot->Fill(two_shower_start_dist,weight);	
-					NCCOHReconshowersPlot->Fill(nshowers,weight);
+					NCCOHRecopd_nshowersPlot->Fill(pd_reco_shower_count,weight);						
+					NCCOHReconshowersPlot->Fill(wc_nshowers,weight);
+					NCCOHRecoprimary_neutron_counterPlot->Fill(wc_primary_neutron_counter,weight);	
+					NCCOHRecosecondary_neutron_counterPlot->Fill(wc_secondary_neutron_counter,weight);										
+					NCCOHRecog1_start_xPlot->Fill(g1_start_x,weight);
+					NCCOHRecog1_start_yPlot->Fill(g1_start_y,weight);		
+					NCCOHRecog1_start_zPlot->Fill(g1_start_z,weight);
+					NCCOHRecog1_end_xPlot->Fill(g1_end_x,weight);
+					NCCOHRecog1_end_yPlot->Fill(g1_end_y,weight);		
+					NCCOHRecog1_end_zPlot->Fill(g1_end_z,weight);
+					NCCOHRecog2_start_xPlot->Fill(g2_start_x,weight);
+					NCCOHRecog2_start_yPlot->Fill(g2_start_y,weight);		
+					NCCOHRecog2_start_zPlot->Fill(g2_start_z,weight);
+					NCCOHRecog2_end_xPlot->Fill(g2_end_x,weight);
+					NCCOHRecog2_end_yPlot->Fill(g2_end_y,weight);		
+					NCCOHRecog2_end_zPlot->Fill(g2_end_z,weight);	
+					NCCOHRecovertex_xPlot->Fill(Vertex_X->at(0),weight);
+					NCCOHRecovertex_yPlot->Fill(Vertex_Y->at(0),weight);	
+					NCCOHRecovertex_zPlot->Fill(Vertex_Z->at(0),weight);						
 					NCCOHRecokine_pio_vtx_disPlot->Fill(wc_kine_pio_vtx_dis,weight);	
 					NCCOHRecosingle_photon_numu_scorePlot->Fill(wc_single_photon_numu_score,weight);
 					NCCOHRecosingle_photon_other_scorePlot->Fill(wc_single_photon_other_score,weight);
@@ -1425,7 +1614,25 @@ void mcc9_10_reco_selection::Loop() {
 					NonNCCOHRecog2CosThetaPlot->Fill(g2_costheta,weight);
 					NonNCCOHRecotwo_shower_anglePlot->Fill(two_shower_angle,weight);
 					NonNCCOHRecotwo_shower_start_distPlot->Fill(two_shower_start_dist,weight);	
-					NonNCCOHReconshowersPlot->Fill(nshowers,weight);
+					NonNCCOHRecopd_nshowersPlot->Fill(pd_reco_shower_count,weight);						
+					NonNCCOHReconshowersPlot->Fill(wc_nshowers,weight);
+					NonNCCOHRecoprimary_neutron_counterPlot->Fill(wc_primary_neutron_counter,weight);
+					NonNCCOHRecosecondary_neutron_counterPlot->Fill(wc_secondary_neutron_counter,weight);										
+					NonNCCOHRecog1_start_xPlot->Fill(g1_start_x,weight);
+					NonNCCOHRecog1_start_yPlot->Fill(g1_start_y,weight);		
+					NonNCCOHRecog1_start_zPlot->Fill(g1_start_z,weight);
+					NonNCCOHRecog1_end_xPlot->Fill(g1_end_x,weight);
+					NonNCCOHRecog1_end_yPlot->Fill(g1_end_y,weight);		
+					NonNCCOHRecog1_end_zPlot->Fill(g1_end_z,weight);
+					NonNCCOHRecog2_start_xPlot->Fill(g2_start_x,weight);
+					NonNCCOHRecog2_start_yPlot->Fill(g2_start_y,weight);		
+					NonNCCOHRecog2_start_zPlot->Fill(g2_start_z,weight);
+					NonNCCOHRecog2_end_xPlot->Fill(g2_end_x,weight);
+					NonNCCOHRecog2_end_yPlot->Fill(g2_end_y,weight);		
+					NonNCCOHRecog2_end_zPlot->Fill(g2_end_z,weight);	
+					NonNCCOHRecovertex_xPlot->Fill(Vertex_X->at(0),weight);
+					NonNCCOHRecovertex_yPlot->Fill(Vertex_Y->at(0),weight);	
+					NonNCCOHRecovertex_zPlot->Fill(Vertex_Z->at(0),weight);						
 					NonNCCOHRecokine_pio_vtx_disPlot->Fill(wc_kine_pio_vtx_dis,weight);
 					NonNCCOHRecosingle_photon_numu_scorePlot->Fill(wc_single_photon_numu_score,weight);
 					NonNCCOHRecosingle_photon_other_scorePlot->Fill(wc_single_photon_other_score,weight);
@@ -1483,7 +1690,25 @@ void mcc9_10_reco_selection::Loop() {
 					QERecog2CosThetaPlot->Fill(g2_costheta,weight);
 					QERecotwo_shower_anglePlot->Fill(two_shower_angle,weight);	
 					QERecotwo_shower_start_distPlot->Fill(two_shower_start_dist,weight);	
-					QEReconshowersPlot->Fill(nshowers,weight);
+					QERecopd_nshowersPlot->Fill(pd_reco_shower_count,weight);						
+					QEReconshowersPlot->Fill(wc_nshowers,weight);
+					QERecoprimary_neutron_counterPlot->Fill(wc_primary_neutron_counter,weight);
+					QERecosecondary_neutron_counterPlot->Fill(wc_secondary_neutron_counter,weight);					
+					QERecog1_start_xPlot->Fill(g1_start_x,weight);
+					QERecog1_start_yPlot->Fill(g1_start_y,weight);		
+					QERecog1_start_zPlot->Fill(g1_start_z,weight);
+					QERecog1_end_xPlot->Fill(g1_end_x,weight);
+					QERecog1_end_yPlot->Fill(g1_end_y,weight);		
+					QERecog1_end_zPlot->Fill(g1_end_z,weight);
+					QERecog2_start_xPlot->Fill(g2_start_x,weight);
+					QERecog2_start_yPlot->Fill(g2_start_y,weight);		
+					QERecog2_start_zPlot->Fill(g2_start_z,weight);
+					QERecog2_end_xPlot->Fill(g2_end_x,weight);
+					QERecog2_end_yPlot->Fill(g2_end_y,weight);		
+					QERecog2_end_zPlot->Fill(g2_end_z,weight);						
+					QERecovertex_xPlot->Fill(Vertex_X->at(0),weight);
+					QERecovertex_yPlot->Fill(Vertex_Y->at(0),weight);	
+					QERecovertex_zPlot->Fill(Vertex_Z->at(0),weight);						
 					QERecokine_pio_vtx_disPlot->Fill(wc_kine_pio_vtx_dis,weight);	
 					QERecosingle_photon_numu_scorePlot->Fill(wc_single_photon_numu_score,weight);
 					QERecosingle_photon_other_scorePlot->Fill(wc_single_photon_other_score,weight);
@@ -1539,7 +1764,25 @@ void mcc9_10_reco_selection::Loop() {
 					MECRecog2CosThetaPlot->Fill(g2_costheta,weight);
 					MECRecotwo_shower_anglePlot->Fill(two_shower_angle,weight);		
 					MECRecotwo_shower_start_distPlot->Fill(two_shower_start_dist,weight);	
-					MECReconshowersPlot->Fill(nshowers,weight);
+					MECRecopd_nshowersPlot->Fill(pd_reco_shower_count,weight);						
+					MECReconshowersPlot->Fill(wc_nshowers,weight);
+					MECRecoprimary_neutron_counterPlot->Fill(wc_primary_neutron_counter,weight);
+					MECRecosecondary_neutron_counterPlot->Fill(wc_secondary_neutron_counter,weight);					
+					MECRecog1_start_xPlot->Fill(g1_start_x,weight);
+					MECRecog1_start_yPlot->Fill(g1_start_y,weight);		
+					MECRecog1_start_zPlot->Fill(g1_start_z,weight);
+					MECRecog1_end_xPlot->Fill(g1_end_x,weight);
+					MECRecog1_end_yPlot->Fill(g1_end_y,weight);		
+					MECRecog1_end_zPlot->Fill(g1_end_z,weight);
+					MECRecog2_start_xPlot->Fill(g2_start_x,weight);
+					MECRecog2_start_yPlot->Fill(g2_start_y,weight);		
+					MECRecog2_start_zPlot->Fill(g2_start_z,weight);
+					MECRecog2_end_xPlot->Fill(g2_end_x,weight);
+					MECRecog2_end_yPlot->Fill(g2_end_y,weight);		
+					MECRecog2_end_zPlot->Fill(g2_end_z,weight);						
+					MECRecovertex_xPlot->Fill(Vertex_X->at(0),weight);
+					MECRecovertex_yPlot->Fill(Vertex_Y->at(0),weight);	
+					MECRecovertex_zPlot->Fill(Vertex_Z->at(0),weight);						
 					MECRecokine_pio_vtx_disPlot->Fill(wc_kine_pio_vtx_dis,weight);
 					MECRecosingle_photon_numu_scorePlot->Fill(wc_single_photon_numu_score,weight);
 					MECRecosingle_photon_other_scorePlot->Fill(wc_single_photon_other_score,weight);
@@ -1595,7 +1838,25 @@ void mcc9_10_reco_selection::Loop() {
 					RESRecog2CosThetaPlot->Fill(g2_costheta,weight);
 					RESRecotwo_shower_anglePlot->Fill(two_shower_angle,weight);
 					RESRecotwo_shower_start_distPlot->Fill(two_shower_start_dist,weight);	
-					RESReconshowersPlot->Fill(nshowers,weight);
+					RESRecopd_nshowersPlot->Fill(pd_reco_shower_count,weight);						
+					RESReconshowersPlot->Fill(wc_nshowers,weight);
+					RESRecoprimary_neutron_counterPlot->Fill(wc_primary_neutron_counter,weight);
+					RESRecosecondary_neutron_counterPlot->Fill(wc_secondary_neutron_counter,weight);					
+					RESRecog1_start_xPlot->Fill(g1_start_x,weight);
+					RESRecog1_start_yPlot->Fill(g1_start_y,weight);		
+					RESRecog1_start_zPlot->Fill(g1_start_z,weight);
+					RESRecog1_end_xPlot->Fill(g1_end_x,weight);
+					RESRecog1_end_yPlot->Fill(g1_end_y,weight);		
+					RESRecog1_end_zPlot->Fill(g1_end_z,weight);
+					RESRecog2_start_xPlot->Fill(g2_start_x,weight);
+					RESRecog2_start_yPlot->Fill(g2_start_y,weight);		
+					RESRecog2_start_zPlot->Fill(g2_start_z,weight);
+					RESRecog2_end_xPlot->Fill(g2_end_x,weight);
+					RESRecog2_end_yPlot->Fill(g2_end_y,weight);		
+					RESRecog2_end_zPlot->Fill(g2_end_z,weight);						
+					RESRecovertex_xPlot->Fill(Vertex_X->at(0),weight);
+					RESRecovertex_yPlot->Fill(Vertex_Y->at(0),weight);	
+					RESRecovertex_zPlot->Fill(Vertex_Z->at(0),weight);						
 					RESRecokine_pio_vtx_disPlot->Fill(wc_kine_pio_vtx_dis,weight);
 					RESRecosingle_photon_numu_scorePlot->Fill(wc_single_photon_numu_score,weight);
 					RESRecosingle_photon_other_scorePlot->Fill(wc_single_photon_other_score,weight);
@@ -1651,7 +1912,25 @@ void mcc9_10_reco_selection::Loop() {
 					DISRecog2CosThetaPlot->Fill(g2_costheta,weight);
 					DISRecotwo_shower_anglePlot->Fill(two_shower_angle,weight);
 					DISRecotwo_shower_start_distPlot->Fill(two_shower_start_dist,weight);
-					DISReconshowersPlot->Fill(nshowers,weight);			
+					DISRecopd_nshowersPlot->Fill(pd_reco_shower_count,weight);		
+					DISRecoprimary_neutron_counterPlot->Fill(wc_primary_neutron_counter,weight);
+					DISRecosecondary_neutron_counterPlot->Fill(wc_secondary_neutron_counter,weight);									
+					DISReconshowersPlot->Fill(wc_nshowers,weight);		
+					DISRecog1_start_xPlot->Fill(g1_start_x,weight);
+					DISRecog1_start_yPlot->Fill(g1_start_y,weight);		
+					DISRecog1_start_zPlot->Fill(g1_start_z,weight);
+					DISRecog1_end_xPlot->Fill(g1_end_x,weight);
+					DISRecog1_end_yPlot->Fill(g1_end_y,weight);		
+					DISRecog1_end_zPlot->Fill(g1_end_z,weight);
+					DISRecog2_start_xPlot->Fill(g2_start_x,weight);
+					DISRecog2_start_yPlot->Fill(g2_start_y,weight);		
+					Recog2_start_zPlot->Fill(g2_start_z,weight);
+					DISRecog2_end_xPlot->Fill(g2_end_x,weight);
+					DISRecog2_end_yPlot->Fill(g2_end_y,weight);		
+					DISRecog2_end_zPlot->Fill(g2_end_z,weight);						
+					DISRecovertex_xPlot->Fill(Vertex_X->at(0),weight);
+					DISRecovertex_yPlot->Fill(Vertex_Y->at(0),weight);	
+					DISRecovertex_zPlot->Fill(Vertex_Z->at(0),weight);							
 					DISRecokine_pio_vtx_disPlot->Fill(wc_kine_pio_vtx_dis,weight);
 					DISRecosingle_photon_numu_scorePlot->Fill(wc_single_photon_numu_score,weight);
 					DISRecosingle_photon_other_scorePlot->Fill(wc_single_photon_other_score,weight);
@@ -1707,7 +1986,25 @@ void mcc9_10_reco_selection::Loop() {
 					COHRecog2CosThetaPlot->Fill(g2_costheta,weight);
 					COHRecotwo_shower_anglePlot->Fill(two_shower_angle,weight);		
 					COHRecotwo_shower_start_distPlot->Fill(two_shower_start_dist,weight);	
-					COHReconshowersPlot->Fill(nshowers,weight);
+					COHRecopd_nshowersPlot->Fill(pd_reco_shower_count,weight);						
+					COHReconshowersPlot->Fill(wc_nshowers,weight);
+					COHRecoprimary_neutron_counterPlot->Fill(wc_primary_neutron_counter,weight);
+					COHRecosecondary_neutron_counterPlot->Fill(wc_secondary_neutron_counter,weight);					
+					COHRecog1_start_xPlot->Fill(g1_start_x,weight);
+					COHRecog1_start_yPlot->Fill(g1_start_y,weight);		
+					COHRecog1_start_zPlot->Fill(g1_start_z,weight);
+					COHRecog1_end_xPlot->Fill(g1_end_x,weight);
+					COHRecog1_end_yPlot->Fill(g1_end_y,weight);		
+					COHRecog1_end_zPlot->Fill(g1_end_z,weight);
+					COHRecog2_start_xPlot->Fill(g2_start_x,weight);
+					COHRecog2_start_yPlot->Fill(g2_start_y,weight);		
+					COHRecog2_start_zPlot->Fill(g2_start_z,weight);
+					COHRecog2_end_xPlot->Fill(g2_end_x,weight);
+					COHRecog2_end_yPlot->Fill(g2_end_y,weight);		
+					COHRecog2_end_zPlot->Fill(g2_end_z,weight);						
+					COHRecovertex_xPlot->Fill(Vertex_X->at(0),weight);
+					COHRecovertex_yPlot->Fill(Vertex_Y->at(0),weight);	
+					COHRecovertex_zPlot->Fill(Vertex_Z->at(0),weight);	
 					COHRecokine_pio_vtx_disPlot->Fill(wc_kine_pio_vtx_dis,weight);
 					COHRecosingle_photon_numu_scorePlot->Fill(wc_single_photon_numu_score,weight);
 					COHRecosingle_photon_other_scorePlot->Fill(wc_single_photon_other_score,weight);

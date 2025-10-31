@@ -60,7 +60,28 @@ void mcc9_10_interaction_breakdown(TString BaseMC = "") {
 	PlotNames.push_back("Recosingle_photon_other_scorePlot");
 	PlotNames.push_back("Recosingle_photon_ncpi0_scorePlot");
 	PlotNames.push_back("Recosingle_photon_nue_scorePlot");
-	PlotNames.push_back("ReconshowersPlot");	
+	PlotNames.push_back("ReconshowersPlot");
+	PlotNames.push_back("Recopd_nshowersPlot");	
+	
+	PlotNames.push_back("Recovertex_xPlot");
+	PlotNames.push_back("Recovertex_yPlot");	
+	PlotNames.push_back("Recovertex_zPlot");
+	
+	PlotNames.push_back("Recog1_start_xPlot");
+	PlotNames.push_back("Recog1_start_yPlot");
+	PlotNames.push_back("Recog1_start_zPlot");
+	PlotNames.push_back("Recog1_end_xPlot");
+	PlotNames.push_back("Recog1_end_yPlot");
+	PlotNames.push_back("Recog1_end_zPlot");
+	PlotNames.push_back("Recog2_start_xPlot");
+	PlotNames.push_back("Recog2_start_yPlot");
+	PlotNames.push_back("Recog2_start_zPlot");
+	PlotNames.push_back("Recog2_end_xPlot");
+	PlotNames.push_back("Recog2_end_yPlot");
+	PlotNames.push_back("Recog2_end_zPlot");
+	
+	PlotNames.push_back("Recoprimary_neutron_counterPlot");
+	PlotNames.push_back("Recosecondary_neutron_counterPlot");		
 	
 	const int N1DPlots = PlotNames.size();
 	cout << "Number of 1D Plots = " << N1DPlots << endl;
@@ -295,7 +316,7 @@ void mcc9_10_interaction_breakdown(TString BaseMC = "") {
 				midPad->Draw();
 				botPad->Draw();
 
-				leg.push_back(new TLegend(0.1,0.,0.93,0.98));
+				leg.push_back(new TLegend(0.05,0.,0.93,0.98));
 				leg[WhichPlot]->SetBorderSize(0);
 				leg[WhichPlot]->SetNColumns(4);
 

@@ -27,7 +27,7 @@ public :
    TTree          *fChain;   //!pointer to the analyzed TTree or TChain
    Int_t           fCurrent; //!current Tree number in a TChain
 
-     Double_t        Weight;
+   Double_t        Weight;
    Double_t        T2KWeight;
    Double_t        ROOTinoWeight;
    Double_t        POTWeight;
@@ -46,13 +46,18 @@ public :
    Float_t         wc_kine_pio_phi_2;
    Bool_t          wc_match_isFC;
    Int_t           wc_kine_pio_flag;
+   Float_t         wc_numu_cc_flag;
    vector<int>     *wc_kine_particle_type;
    vector<float>   *wc_kine_energy_particle;
+   Int_t           nspacepoints;
    vector<double>  *trecchargeblob_spacepoints_x;
    vector<double>  *trecchargeblob_spacepoints_y;
    vector<double>  *trecchargeblob_spacepoints_z;
    vector<double>  *trecchargeblob_spacepoints_q;
    vector<double>  *trecchargeblob_spacepoints_real_cluster_id;
+   Double_t        sp_q_median;
+   vector<double>  *photon_q_median;
+   vector<double>  *neutron_q_median;
    Int_t           Run;
    Int_t           SubRun;
    Int_t           Event;
@@ -80,6 +85,10 @@ public :
    Int_t           bkg_1pi0_Nmh_X;
    Int_t           bkg_1pi0_Nl_X;
    Int_t           bkg_other;
+   Double_t        true_sum_neutron_ke;
+   vector<double>  *true_neutron_ke;
+   Double_t        true_sum_proton_ke;
+   vector<double>  *true_proton_ke;
    vector<unsigned short> *All_UBGenie;
    vector<double>  *AxFFCCQEshape_UBGenie;
    vector<double>  *DecayAngMEC_UBGenie;
@@ -109,14 +118,19 @@ public :
    vector<float>   *Vertex_X;
    vector<float>   *Vertex_Y;
    vector<float>   *Vertex_Z;
+   Int_t           wc_vertex_contained;
+   vector<float>   *pd_vertex_x;
+   vector<float>   *pd_vertex_y;
+   vector<float>   *pd_vertex_z;
+   Int_t           pd_vertex_contained;   
    Int_t           wc_reco_g1_id;
    Int_t           wc_reco_g2_id;
+   vector<int>     *wc_larpid_process;
    vector<int>     *wc_reco_mother;
-   vector<vector<float> > *wc_reco_p;
-   vector<vector<float> > *wc_reco_start;
-   vector<vector<float> > *wc_reco_end;
    vector<int>     *wc_reco_pdg;
    vector<int>     *wc_reco_id;
+   Int_t           wc_temp_g1_id;
+   Int_t           wc_temp_g2_id;
    vector<double>  *reco_alpha;
    vector<double>  *reco_shower_opening_angle;
    vector<double>  *reco_pi0_p_gammas;
@@ -124,26 +138,35 @@ public :
    vector<double>  *reco_pi0_phi;
    vector<double>  *reco_pi0_costheta;
    vector<double>  *reco_cm_costheta;
+   vector<double>  *reco_deltapt;
    vector<double>  *reco_pi0_invmass;
    vector<double>  *reco_g1_p;
    vector<double>  *reco_g1_phi;
    vector<double>  *reco_g1_costheta;
+   Double_t        reco_g1_length;
    Double_t        g1_start_x;
    Double_t        g1_start_y;
    Double_t        g1_start_z;
+   Int_t           g1_start_contained;
    Double_t        g1_end_x;
    Double_t        g1_end_y;
    Double_t        g1_end_z;
+   Int_t           g1_end_contained;
    vector<double>  *reco_g2_p;
    vector<double>  *reco_g2_phi;
    vector<double>  *reco_g2_costheta;
+   Double_t        reco_g2_length;
    Double_t        g2_start_x;
    Double_t        g2_start_y;
    Double_t        g2_start_z;
+   Int_t           g2_start_contained;
    Double_t        g2_end_x;
    Double_t        g2_end_y;
    Double_t        g2_end_z;
+   Int_t           g2_end_contained;
    Double_t        two_shower_start_dist;
+   Double_t        two_shower_end_dist;
+   Bool_t          flipped_showers;
    Int_t           g1_truthMatch_pdg;
    Double_t        g1_truthMatch_p;
    Double_t        g1_truthMatch_px;
@@ -158,6 +181,33 @@ public :
    Double_t        g2_truthMatch_pz;
    Double_t        g2_truthMatch_costheta;
    Double_t        g2_truthMatch_phi;
+   Int_t           wc_primary_proton_counter;
+   Int_t           wc_primary_muon_counter;
+   Int_t           wc_primary_charged_pion_counter;
+   Int_t           wc_primary_electron_counter;
+   Int_t           wc_primary_photon_counter;
+   Int_t           wc_primary_neutron_counter;
+   Int_t           wc_primary_neutral_pion_counter;
+   Int_t           wc_secondary_proton_counter;
+   Int_t           wc_secondary_muon_counter;
+   Int_t           wc_secondary_charged_pion_counter;
+   Int_t           wc_secondary_electron_counter;
+   Int_t           wc_secondary_photon_counter;
+   Int_t           wc_secondary_neutron_counter;
+   Int_t           wc_secondary_neutral_pion_counter;
+   Int_t           wc_nshowers;
+   Int_t           wc_nshowers_0MeV;
+   Int_t           wc_nshowers_20MeV;
+   Int_t           wc_nmuontracks;
+   Int_t           wc_nprotontracks;
+   Int_t           wc_npiontracks;
+   Float_t         wc_shw_sp_n_good_showers;
+   Float_t         wc_shw_sp_n_20mev_showers;
+   Float_t         wc_shw_sp_n_br1_showers;
+   Float_t         wc_shw_sp_n_br2_showers;
+   Float_t         wc_shw_sp_n_br3_showers;
+   Float_t         wc_shw_sp_n_br4_showers;
+   Float_t         wc_shw_sp_n_20br1_showers;
    Int_t           nBlips_saved;
    vector<float>   *Blip_x;
    vector<float>   *Blip_y;
@@ -177,11 +227,43 @@ public :
    vector<bool>    *Blip_pl2_bydeadwire;
    vector<int>     *Blip_true_g4id;
    vector<float>   *Blip_true_energy;
+   Int_t           n_blip_pd_vtx_25cm;
+   Int_t           n_blip_pd_vtx_50cm;
+   Int_t           n_blip_pd_vtx_100cm;
+   Int_t           n_blip_pd_vtx_25cm_g1_anticone;
+   Int_t           n_blip_pd_vtx_50cm_g1_anticone;
+   Int_t           n_blip_pd_vtx_100cm_g1_anticone;
+   Int_t           n_blip_pd_vtx_25cm_g1_cone;
+   Int_t           n_blip_pd_vtx_50cm_g1_cone;
+   Int_t           n_blip_pd_vtx_100cm_g1_cone;
+   Int_t           n_blip_pd_vtx_25cm_g2_anticone;
+   Int_t           n_blip_pd_vtx_50cm_g2_anticone;
+   Int_t           n_blip_pd_vtx_100cm_g2_anticone;
+   Int_t           n_blip_pd_vtx_25cm_g2_cone;
+   Int_t           n_blip_pd_vtx_50cm_g2_cone;
+   Int_t           n_blip_pd_vtx_100cm_g2_cone;
    vector<unsigned int> *pd_generation_v;
    vector<float>   *pd_trk_score_v;
+   Float_t         pd_shr_score;
    vector<float>   *pd_trk_llr_pid_score_v;
    Int_t           pd_reco_track_count;
-   Int_t           pd_reco_shower_count; 
+   Int_t           pd_reco_shower_count;
+   Int_t           pd_reco_secondary_track_count;
+   Int_t           pd_reco_secondary_shower_count;
+   vector<double>  *gl_trackstub_candidate_veto_score;
+   Int_t           gl_trackstub_num_candidates;
+   bool            gl_vertex_contained;
+   Int_t           dl_foundVertex;
+   Float_t         dl_vtxX;
+   Float_t         dl_vtxY;
+   Float_t         dl_vtxZ;
+   bool            dl_vertex_contained;
+   Float_t         dl_vtxScore;
+   Int_t           dl_nTracks;
+   Int_t           dl_nSecTracks;
+   Int_t           dl_nShowers;
+   Int_t           dl_nSecShowers;
+
 
    // List of branches
    TBranch        *b_Weight;   //!
@@ -203,13 +285,18 @@ public :
    TBranch        *b_wc_kine_pio_phi_2;   //!
    TBranch        *b_wc_match_isFC;   //!
    TBranch        *b_wc_kine_pio_flag;   //!
+   TBranch        *b_wc_numu_cc_flag;   //!
    TBranch        *b_wc_kine_particle_type;   //!
    TBranch        *b_wc_kine_energy_particle;   //!
+   TBranch        *b_nspacepoints;   //!
    TBranch        *b_trecchargeblob_spacepoints_x;   //!
    TBranch        *b_trecchargeblob_spacepoints_y;   //!
    TBranch        *b_trecchargeblob_spacepoints_z;   //!
    TBranch        *b_trecchargeblob_spacepoints_q;   //!
    TBranch        *b_trecchargeblob_spacepoints_real_cluster_id;   //!
+   TBranch        *b_sp_q_median;   //!
+   TBranch        *b_photon_q_median;   //!
+   TBranch        *b_neutron_q_median;   //!
    TBranch        *b_Run;   //!
    TBranch        *b_SubRun;   //!
    TBranch        *b_Event;   //!
@@ -237,6 +324,10 @@ public :
    TBranch        *b_bkg_1pi0_Nmh_X;   //!
    TBranch        *b_bkg_1pi0_Nl_X;   //!
    TBranch        *b_bkg_other;   //!
+   TBranch        *b_true_sum_neutron_ke;   //!
+   TBranch        *b_true_neutron_ke;   //!
+   TBranch        *b_true_sum_proton_ke;   //!
+   TBranch        *b_true_proton_ke;   //!
    TBranch        *b_All_UBGenie;   //!
    TBranch        *b_AxFFCCQEshape_UBGenie;   //!
    TBranch        *b_DecayAngMEC_UBGenie;   //!
@@ -266,14 +357,19 @@ public :
    TBranch        *b_Vertex_X;   //!
    TBranch        *b_Vertex_Y;   //!
    TBranch        *b_Vertex_Z;   //!
+   TBranch        *b_wc_vertex_contained;   //!
+   TBranch        *b_pd_vertex_x;   //!
+   TBranch        *b_pd_vertex_y;   //!
+   TBranch        *b_pd_vertex_z;   //!
+   TBranch        *b_pd_vertex_contained;   //!
    TBranch        *b_wc_reco_g1_id;   //!
    TBranch        *b_wc_reco_g2_id;   //!
+   TBranch        *b_wc_larpid_process;   //!
    TBranch        *b_wc_reco_mother;   //!
-   TBranch        *b_wc_reco_p;   //!
-   TBranch        *b_wc_reco_start;   //!
-   TBranch        *b_wc_reco_end;   //!
    TBranch        *b_wc_reco_pdg;   //!
    TBranch        *b_wc_reco_id;   //!
+   TBranch        *b_wc_temp_g1_id;   //!
+   TBranch        *b_wc_temp_g2_id;   //!
    TBranch        *b_reco_alpha;   //!
    TBranch        *b_reco_shower_opening_angle;   //!
    TBranch        *b_reco_pi0_p_gammas;   //!
@@ -281,26 +377,35 @@ public :
    TBranch        *b_reco_pi0_phi;   //!
    TBranch        *b_reco_pi0_costheta;   //!
    TBranch        *b_reco_cm_costheta;   //!
+   TBranch        *b_reco_deltapt;   //!
    TBranch        *b_reco_pi0_invmass;   //!
    TBranch        *b_reco_g1_p;   //!
    TBranch        *b_reco_g1_phi;   //!
    TBranch        *b_reco_g1_costheta;   //!
+   TBranch        *b_reco_g1_length;   //!
    TBranch        *b_g1_start_x;   //!
    TBranch        *b_g1_start_y;   //!
    TBranch        *b_g1_start_z;   //!
+   TBranch        *b_g1_start_contained;   //!
    TBranch        *b_g1_end_x;   //!
    TBranch        *b_g1_end_y;   //!
    TBranch        *b_g1_end_z;   //!
+   TBranch        *b_g1_end_contained;   //!
    TBranch        *b_reco_g2_p;   //!
    TBranch        *b_reco_g2_phi;   //!
    TBranch        *b_reco_g2_costheta;   //!
+   TBranch        *b_reco_g2_length;   //!
    TBranch        *b_g2_start_x;   //!
    TBranch        *b_g2_start_y;   //!
    TBranch        *b_g2_start_z;   //!
+   TBranch        *b_g2_start_contained;   //!
    TBranch        *b_g2_end_x;   //!
    TBranch        *b_g2_end_y;   //!
    TBranch        *b_g2_end_z;   //!
+   TBranch        *b_g2_end_contained;   //!
    TBranch        *b_two_shower_start_dist;   //!
+   TBranch        *b_two_shower_end_dist;   //!
+   TBranch        *b_flipped_showers;   //!
    TBranch        *b_g1_truthMatch_pdg;   //!
    TBranch        *b_g1_truthMatch_p;   //!
    TBranch        *b_g1_truthMatch_px;   //!
@@ -315,6 +420,33 @@ public :
    TBranch        *b_g2_truthMatch_pz;   //!
    TBranch        *b_g2_truthMatch_costheta;   //!
    TBranch        *b_g2_truthMatch_phi;   //!
+   TBranch        *b_wc_primary_proton_counter;   //!
+   TBranch        *b_wc_primary_muon_counter;   //!
+   TBranch        *b_wc_primary_charged_pion_counter;   //!
+   TBranch        *b_wc_primary_electron_counter;   //!
+   TBranch        *b_wc_primary_photon_counter;   //!
+   TBranch        *b_wc_primary_neutron_counter;   //!
+   TBranch        *b_wc_primary_neutral_pion_counter;   //!
+   TBranch        *b_wc_secondary_proton_counter;   //!
+   TBranch        *b_wc_secondary_muon_counter;   //!
+   TBranch        *b_wc_secondary_charged_pion_counter;   //!
+   TBranch        *b_wc_secondary_electron_counter;   //!
+   TBranch        *b_wc_secondary_photon_counter;   //!
+   TBranch        *b_wc_secondary_neutron_counter;   //!
+   TBranch        *b_wc_secondary_neutral_pion_counter;   //!
+   TBranch        *b_wc_nshowers;   //!
+   TBranch        *b_wc_nshowers_0MeV;   //!
+   TBranch        *b_wc_nshowers_20MeV;   //!
+   TBranch        *b_wc_nmuontracks;   //!
+   TBranch        *b_wc_nprotontracks;   //!
+   TBranch        *b_wc_npiontracks;   //!
+   TBranch        *b_wc_shw_sp_n_good_showers;   //!
+   TBranch        *b_wc_shw_sp_n_20mev_showers;   //!
+   TBranch        *b_wc_shw_sp_n_br1_showers;   //!
+   TBranch        *b_wc_shw_sp_n_br2_showers;   //!
+   TBranch        *b_wc_shw_sp_n_br3_showers;   //!
+   TBranch        *b_wc_shw_sp_n_br4_showers;   //!
+   TBranch        *b_wc_shw_sp_n_20br1_showers;   //!
    TBranch        *b_nBlips_saved;   //!
    TBranch        *b_Blip_x;   //!
    TBranch        *b_Blip_y;   //!
@@ -334,11 +466,42 @@ public :
    TBranch        *b_Blip_pl2_bydeadwire;   //!
    TBranch        *b_Blip_true_g4id;   //!
    TBranch        *b_Blip_true_energy;   //!
+   TBranch        *b_n_blip_pd_vtx_25cm;   //!
+   TBranch        *b_n_blip_pd_vtx_50cm;   //!
+   TBranch        *b_n_blip_pd_vtx_100cm;   //!
+   TBranch        *b_n_blip_pd_vtx_25cm_g1_anticone;   //!
+   TBranch        *b_n_blip_pd_vtx_50cm_g1_anticone;   //!
+   TBranch        *b_n_blip_pd_vtx_100cm_g1_anticone;   //!
+   TBranch        *b_n_blip_pd_vtx_25cm_g1_cone;   //!
+   TBranch        *b_n_blip_pd_vtx_50cm_g1_cone;   //!
+   TBranch        *b_n_blip_pd_vtx_100cm_g1_cone;   //!
+   TBranch        *b_n_blip_pd_vtx_25cm_g2_anticone;   //!
+   TBranch        *b_n_blip_pd_vtx_50cm_g2_anticone;   //!
+   TBranch        *b_n_blip_pd_vtx_100cm_g2_anticone;   //!
+   TBranch        *b_n_blip_pd_vtx_25cm_g2_cone;   //!
+   TBranch        *b_n_blip_pd_vtx_50cm_g2_cone;   //!
+   TBranch        *b_n_blip_pd_vtx_100cm_g2_cone;   //!
    TBranch        *b_pd_generation_v;   //!
    TBranch        *b_pd_trk_score_v;   //!
+   TBranch        *b_pd_shr_score;   //!
    TBranch        *b_pd_trk_llr_pid_score_v;   //!
    TBranch        *b_pd_reco_track_count;   //!
-   TBranch        *b_pd_reco_shower_count;   //!  
+   TBranch        *b_pd_reco_shower_count;   //!
+   TBranch        *b_pd_reco_secondary_track_count;   //!
+   TBranch        *b_pd_reco_secondary_shower_count;   //!
+   TBranch        *b_gl_trackstub_candidate_veto_score;   //!
+   TBranch        *b_gl_trackstub_num_candidates;   //!
+   TBranch        *b_gl_vertex_contained;   //!   
+   TBranch        *b_dl_foundVertex;   //!
+   TBranch        *b_dl_vtxX;   //!
+   TBranch        *b_dl_vtxY;   //!
+   TBranch        *b_dl_vtxZ;   //!
+   TBranch        *b_dl_vertex_contained;   //!   
+   TBranch        *b_dl_vtxScore;   //!
+   TBranch        *b_dl_nTracks;   //!
+   TBranch        *b_dl_nSecTracks;   //!
+   TBranch        *b_dl_nShowers;   //!
+   TBranch        *b_dl_nSecShowers;   //!
 
    mcc9_10_reco_selection(TString WhichSample="",TString Tune="",TString WhichEventWeightLabel="", int UniverseIndex=-1, TTree *tree=0);
    virtual ~mcc9_10_reco_selection();
@@ -443,7 +606,11 @@ void mcc9_10_reco_selection::Init(TTree *tree)
    trecchargeblob_spacepoints_z = 0;
    trecchargeblob_spacepoints_q = 0;
    trecchargeblob_spacepoints_real_cluster_id = 0;
+   photon_q_median = 0;
+   neutron_q_median = 0;
    run_period = 0;
+   true_neutron_ke = 0;
+   true_proton_ke = 0;
    All_UBGenie = 0;
    AxFFCCQEshape_UBGenie = 0;
    DecayAngMEC_UBGenie = 0;
@@ -459,10 +626,11 @@ void mcc9_10_reco_selection::Init(TTree *tree)
    Vertex_X = 0;
    Vertex_Y = 0;
    Vertex_Z = 0;
+   pd_vertex_x = 0;
+   pd_vertex_y = 0;
+   pd_vertex_z = 0;
+   wc_larpid_process = 0;
    wc_reco_mother = 0;
-   wc_reco_p = 0;
-   wc_reco_start = 0;
-   wc_reco_end = 0;
    wc_reco_pdg = 0;
    wc_reco_id = 0;
    reco_alpha = 0;
@@ -472,6 +640,7 @@ void mcc9_10_reco_selection::Init(TTree *tree)
    reco_pi0_phi = 0;
    reco_pi0_costheta = 0;
    reco_cm_costheta = 0;
+   reco_deltapt = 0;
    reco_pi0_invmass = 0;
    reco_g1_p = 0;
    reco_g1_phi = 0;
@@ -500,6 +669,7 @@ void mcc9_10_reco_selection::Init(TTree *tree)
    pd_generation_v = 0;
    pd_trk_score_v = 0;
    pd_trk_llr_pid_score_v = 0;
+   gl_trackstub_candidate_veto_score = 0;
 
    // Set branch addresses and branch pointers
    if (!tree) return;
@@ -526,13 +696,18 @@ void mcc9_10_reco_selection::Init(TTree *tree)
    fChain->SetBranchAddress("wc_kine_pio_phi_2", &wc_kine_pio_phi_2, &b_wc_kine_pio_phi_2);
    fChain->SetBranchAddress("wc_match_isFC", &wc_match_isFC, &b_wc_match_isFC);
    fChain->SetBranchAddress("wc_kine_pio_flag", &wc_kine_pio_flag, &b_wc_kine_pio_flag);
+   fChain->SetBranchAddress("wc_numu_cc_flag", &wc_numu_cc_flag, &b_wc_numu_cc_flag);
    fChain->SetBranchAddress("wc_kine_particle_type", &wc_kine_particle_type, &b_wc_kine_particle_type);
    fChain->SetBranchAddress("wc_kine_energy_particle", &wc_kine_energy_particle, &b_wc_kine_energy_particle);
+   fChain->SetBranchAddress("nspacepoints", &nspacepoints, &b_nspacepoints);
    fChain->SetBranchAddress("trecchargeblob_spacepoints_x", &trecchargeblob_spacepoints_x, &b_trecchargeblob_spacepoints_x);
    fChain->SetBranchAddress("trecchargeblob_spacepoints_y", &trecchargeblob_spacepoints_y, &b_trecchargeblob_spacepoints_y);
    fChain->SetBranchAddress("trecchargeblob_spacepoints_z", &trecchargeblob_spacepoints_z, &b_trecchargeblob_spacepoints_z);
    fChain->SetBranchAddress("trecchargeblob_spacepoints_q", &trecchargeblob_spacepoints_q, &b_trecchargeblob_spacepoints_q);
    fChain->SetBranchAddress("trecchargeblob_spacepoints_real_cluster_id", &trecchargeblob_spacepoints_real_cluster_id, &b_trecchargeblob_spacepoints_real_cluster_id);
+   fChain->SetBranchAddress("sp_q_median", &sp_q_median, &b_sp_q_median);
+   fChain->SetBranchAddress("photon_q_median", &photon_q_median, &b_photon_q_median);
+   fChain->SetBranchAddress("neutron_q_median", &neutron_q_median, &b_neutron_q_median);
    fChain->SetBranchAddress("Run", &Run, &b_Run);
    fChain->SetBranchAddress("SubRun", &SubRun, &b_SubRun);
    fChain->SetBranchAddress("Event", &Event, &b_Event);
@@ -560,6 +735,10 @@ void mcc9_10_reco_selection::Init(TTree *tree)
    fChain->SetBranchAddress("bkg_1pi0_Nmh_X", &bkg_1pi0_Nmh_X, &b_bkg_1pi0_Nmh_X);
    fChain->SetBranchAddress("bkg_1pi0_Nl_X", &bkg_1pi0_Nl_X, &b_bkg_1pi0_Nl_X);
    fChain->SetBranchAddress("bkg_other", &bkg_other, &b_bkg_other);
+   fChain->SetBranchAddress("true_sum_neutron_ke", &true_sum_neutron_ke, &b_true_sum_neutron_ke);
+   fChain->SetBranchAddress("true_neutron_ke", &true_neutron_ke, &b_true_neutron_ke);
+   fChain->SetBranchAddress("true_sum_proton_ke", &true_sum_proton_ke, &b_true_sum_proton_ke);
+   fChain->SetBranchAddress("true_proton_ke", &true_proton_ke, &b_true_proton_ke);
    fChain->SetBranchAddress("All_UBGenie", &All_UBGenie, &b_All_UBGenie);
    fChain->SetBranchAddress("AxFFCCQEshape_UBGenie", &AxFFCCQEshape_UBGenie, &b_AxFFCCQEshape_UBGenie);
    fChain->SetBranchAddress("DecayAngMEC_UBGenie", &DecayAngMEC_UBGenie, &b_DecayAngMEC_UBGenie);
@@ -589,14 +768,19 @@ void mcc9_10_reco_selection::Init(TTree *tree)
    fChain->SetBranchAddress("Vertex_X", &Vertex_X, &b_Vertex_X);
    fChain->SetBranchAddress("Vertex_Y", &Vertex_Y, &b_Vertex_Y);
    fChain->SetBranchAddress("Vertex_Z", &Vertex_Z, &b_Vertex_Z);
+   fChain->SetBranchAddress("wc_vertex_contained", &wc_vertex_contained, &b_wc_vertex_contained);
+   fChain->SetBranchAddress("pd_vertex_x", &pd_vertex_x, &b_pd_vertex_x);
+   fChain->SetBranchAddress("pd_vertex_y", &pd_vertex_y, &b_pd_vertex_y);
+   fChain->SetBranchAddress("pd_vertex_z", &pd_vertex_z, &b_pd_vertex_z);
+   fChain->SetBranchAddress("pd_vertex_contained", &pd_vertex_contained, &b_pd_vertex_contained);
    fChain->SetBranchAddress("wc_reco_g1_id", &wc_reco_g1_id, &b_wc_reco_g1_id);
    fChain->SetBranchAddress("wc_reco_g2_id", &wc_reco_g2_id, &b_wc_reco_g2_id);
+   fChain->SetBranchAddress("wc_larpid_process", &wc_larpid_process, &b_wc_larpid_process);
    fChain->SetBranchAddress("wc_reco_mother", &wc_reco_mother, &b_wc_reco_mother);
-   fChain->SetBranchAddress("wc_reco_p", &wc_reco_p, &b_wc_reco_p);
-   fChain->SetBranchAddress("wc_reco_start", &wc_reco_start, &b_wc_reco_start);
-   fChain->SetBranchAddress("wc_reco_end", &wc_reco_end, &b_wc_reco_end);
    fChain->SetBranchAddress("wc_reco_pdg", &wc_reco_pdg, &b_wc_reco_pdg);
    fChain->SetBranchAddress("wc_reco_id", &wc_reco_id, &b_wc_reco_id);
+   fChain->SetBranchAddress("wc_temp_g1_id", &wc_temp_g1_id, &b_wc_temp_g1_id);
+   fChain->SetBranchAddress("wc_temp_g2_id", &wc_temp_g2_id, &b_wc_temp_g2_id);
    fChain->SetBranchAddress("reco_alpha", &reco_alpha, &b_reco_alpha);
    fChain->SetBranchAddress("reco_shower_opening_angle", &reco_shower_opening_angle, &b_reco_shower_opening_angle);
    fChain->SetBranchAddress("reco_pi0_p_gammas", &reco_pi0_p_gammas, &b_reco_pi0_p_gammas);
@@ -604,26 +788,35 @@ void mcc9_10_reco_selection::Init(TTree *tree)
    fChain->SetBranchAddress("reco_pi0_phi", &reco_pi0_phi, &b_reco_pi0_phi);
    fChain->SetBranchAddress("reco_pi0_costheta", &reco_pi0_costheta, &b_reco_pi0_costheta);
    fChain->SetBranchAddress("reco_cm_costheta", &reco_cm_costheta, &b_reco_cm_costheta);
+   fChain->SetBranchAddress("reco_deltapt", &reco_deltapt, &b_reco_deltapt);
    fChain->SetBranchAddress("reco_pi0_invmass", &reco_pi0_invmass, &b_reco_pi0_invmass);
    fChain->SetBranchAddress("reco_g1_p", &reco_g1_p, &b_reco_g1_p);
    fChain->SetBranchAddress("reco_g1_phi", &reco_g1_phi, &b_reco_g1_phi);
    fChain->SetBranchAddress("reco_g1_costheta", &reco_g1_costheta, &b_reco_g1_costheta);
+   fChain->SetBranchAddress("reco_g1_length", &reco_g1_length, &b_reco_g1_length);
    fChain->SetBranchAddress("g1_start_x", &g1_start_x, &b_g1_start_x);
    fChain->SetBranchAddress("g1_start_y", &g1_start_y, &b_g1_start_y);
    fChain->SetBranchAddress("g1_start_z", &g1_start_z, &b_g1_start_z);
+   fChain->SetBranchAddress("g1_start_contained", &g1_start_contained, &b_g1_start_contained);
    fChain->SetBranchAddress("g1_end_x", &g1_end_x, &b_g1_end_x);
    fChain->SetBranchAddress("g1_end_y", &g1_end_y, &b_g1_end_y);
    fChain->SetBranchAddress("g1_end_z", &g1_end_z, &b_g1_end_z);
+   fChain->SetBranchAddress("g1_end_contained", &g1_end_contained, &b_g1_end_contained);
    fChain->SetBranchAddress("reco_g2_p", &reco_g2_p, &b_reco_g2_p);
    fChain->SetBranchAddress("reco_g2_phi", &reco_g2_phi, &b_reco_g2_phi);
    fChain->SetBranchAddress("reco_g2_costheta", &reco_g2_costheta, &b_reco_g2_costheta);
+   fChain->SetBranchAddress("reco_g2_length", &reco_g2_length, &b_reco_g2_length);
    fChain->SetBranchAddress("g2_start_x", &g2_start_x, &b_g2_start_x);
    fChain->SetBranchAddress("g2_start_y", &g2_start_y, &b_g2_start_y);
    fChain->SetBranchAddress("g2_start_z", &g2_start_z, &b_g2_start_z);
+   fChain->SetBranchAddress("g2_start_contained", &g2_start_contained, &b_g2_start_contained);
    fChain->SetBranchAddress("g2_end_x", &g2_end_x, &b_g2_end_x);
    fChain->SetBranchAddress("g2_end_y", &g2_end_y, &b_g2_end_y);
    fChain->SetBranchAddress("g2_end_z", &g2_end_z, &b_g2_end_z);
+   fChain->SetBranchAddress("g2_end_contained", &g2_end_contained, &b_g2_end_contained);
    fChain->SetBranchAddress("two_shower_start_dist", &two_shower_start_dist, &b_two_shower_start_dist);
+   fChain->SetBranchAddress("two_shower_end_dist", &two_shower_end_dist, &b_two_shower_end_dist);
+   fChain->SetBranchAddress("flipped_showers", &flipped_showers, &b_flipped_showers);
    fChain->SetBranchAddress("g1_truthMatch_pdg", &g1_truthMatch_pdg, &b_g1_truthMatch_pdg);
    fChain->SetBranchAddress("g1_truthMatch_p", &g1_truthMatch_p, &b_g1_truthMatch_p);
    fChain->SetBranchAddress("g1_truthMatch_px", &g1_truthMatch_px, &b_g1_truthMatch_px);
@@ -638,6 +831,33 @@ void mcc9_10_reco_selection::Init(TTree *tree)
    fChain->SetBranchAddress("g2_truthMatch_pz", &g2_truthMatch_pz, &b_g2_truthMatch_pz);
    fChain->SetBranchAddress("g2_truthMatch_costheta", &g2_truthMatch_costheta, &b_g2_truthMatch_costheta);
    fChain->SetBranchAddress("g2_truthMatch_phi", &g2_truthMatch_phi, &b_g2_truthMatch_phi);
+   fChain->SetBranchAddress("wc_primary_proton_counter", &wc_primary_proton_counter, &b_wc_primary_proton_counter);
+   fChain->SetBranchAddress("wc_primary_muon_counter", &wc_primary_muon_counter, &b_wc_primary_muon_counter);
+   fChain->SetBranchAddress("wc_primary_charged_pion_counter", &wc_primary_charged_pion_counter, &b_wc_primary_charged_pion_counter);
+   fChain->SetBranchAddress("wc_primary_electron_counter", &wc_primary_electron_counter, &b_wc_primary_electron_counter);
+   fChain->SetBranchAddress("wc_primary_photon_counter", &wc_primary_photon_counter, &b_wc_primary_photon_counter);
+   fChain->SetBranchAddress("wc_primary_neutron_counter", &wc_primary_neutron_counter, &b_wc_primary_neutron_counter);
+   fChain->SetBranchAddress("wc_primary_neutral_pion_counter", &wc_primary_neutral_pion_counter, &b_wc_primary_neutral_pion_counter);
+   fChain->SetBranchAddress("wc_secondary_proton_counter", &wc_secondary_proton_counter, &b_wc_secondary_proton_counter);
+   fChain->SetBranchAddress("wc_secondary_muon_counter", &wc_secondary_muon_counter, &b_wc_secondary_muon_counter);
+   fChain->SetBranchAddress("wc_secondary_charged_pion_counter", &wc_secondary_charged_pion_counter, &b_wc_secondary_charged_pion_counter);
+   fChain->SetBranchAddress("wc_secondary_electron_counter", &wc_secondary_electron_counter, &b_wc_secondary_electron_counter);
+   fChain->SetBranchAddress("wc_secondary_photon_counter", &wc_secondary_photon_counter, &b_wc_secondary_photon_counter);
+   fChain->SetBranchAddress("wc_secondary_neutron_counter", &wc_secondary_neutron_counter, &b_wc_secondary_neutron_counter);
+   fChain->SetBranchAddress("wc_secondary_neutral_pion_counter", &wc_secondary_neutral_pion_counter, &b_wc_secondary_neutral_pion_counter);
+   fChain->SetBranchAddress("wc_nshowers", &wc_nshowers, &b_wc_nshowers);
+   fChain->SetBranchAddress("wc_nshowers_0MeV", &wc_nshowers_0MeV, &b_wc_nshowers_0MeV);
+   fChain->SetBranchAddress("wc_nshowers_20MeV", &wc_nshowers_20MeV, &b_wc_nshowers_20MeV);
+   fChain->SetBranchAddress("wc_nmuontracks", &wc_nmuontracks, &b_wc_nmuontracks);
+   fChain->SetBranchAddress("wc_nprotontracks", &wc_nprotontracks, &b_wc_nprotontracks);
+   fChain->SetBranchAddress("wc_npiontracks", &wc_npiontracks, &b_wc_npiontracks);
+   fChain->SetBranchAddress("wc_shw_sp_n_good_showers", &wc_shw_sp_n_good_showers, &b_wc_shw_sp_n_good_showers);
+   fChain->SetBranchAddress("wc_shw_sp_n_20mev_showers", &wc_shw_sp_n_20mev_showers, &b_wc_shw_sp_n_20mev_showers);
+   fChain->SetBranchAddress("wc_shw_sp_n_br1_showers", &wc_shw_sp_n_br1_showers, &b_wc_shw_sp_n_br1_showers);
+   fChain->SetBranchAddress("wc_shw_sp_n_br2_showers", &wc_shw_sp_n_br2_showers, &b_wc_shw_sp_n_br2_showers);
+   fChain->SetBranchAddress("wc_shw_sp_n_br3_showers", &wc_shw_sp_n_br3_showers, &b_wc_shw_sp_n_br3_showers);
+   fChain->SetBranchAddress("wc_shw_sp_n_br4_showers", &wc_shw_sp_n_br4_showers, &b_wc_shw_sp_n_br4_showers);
+   fChain->SetBranchAddress("wc_shw_sp_n_20br1_showers", &wc_shw_sp_n_20br1_showers, &b_wc_shw_sp_n_20br1_showers);
    fChain->SetBranchAddress("nBlips_saved", &nBlips_saved, &b_nBlips_saved);
    fChain->SetBranchAddress("Blip_x", &Blip_x, &b_Blip_x);
    fChain->SetBranchAddress("Blip_y", &Blip_y, &b_Blip_y);
@@ -657,11 +877,42 @@ void mcc9_10_reco_selection::Init(TTree *tree)
    fChain->SetBranchAddress("Blip_pl2_bydeadwire", &Blip_pl2_bydeadwire, &b_Blip_pl2_bydeadwire);
    fChain->SetBranchAddress("Blip_true_g4id", &Blip_true_g4id, &b_Blip_true_g4id);
    fChain->SetBranchAddress("Blip_true_energy", &Blip_true_energy, &b_Blip_true_energy);
+   fChain->SetBranchAddress("n_blip_pd_vtx_25cm", &n_blip_pd_vtx_25cm, &b_n_blip_pd_vtx_25cm);
+   fChain->SetBranchAddress("n_blip_pd_vtx_50cm", &n_blip_pd_vtx_50cm, &b_n_blip_pd_vtx_50cm);
+   fChain->SetBranchAddress("n_blip_pd_vtx_100cm", &n_blip_pd_vtx_100cm, &b_n_blip_pd_vtx_100cm);
+   fChain->SetBranchAddress("n_blip_pd_vtx_25cm_g1_anticone", &n_blip_pd_vtx_25cm_g1_anticone, &b_n_blip_pd_vtx_25cm_g1_anticone);
+   fChain->SetBranchAddress("n_blip_pd_vtx_50cm_g1_anticone", &n_blip_pd_vtx_50cm_g1_anticone, &b_n_blip_pd_vtx_50cm_g1_anticone);
+   fChain->SetBranchAddress("n_blip_pd_vtx_100cm_g1_anticone", &n_blip_pd_vtx_100cm_g1_anticone, &b_n_blip_pd_vtx_100cm_g1_anticone);
+   fChain->SetBranchAddress("n_blip_pd_vtx_25cm_g1_cone", &n_blip_pd_vtx_25cm_g1_cone, &b_n_blip_pd_vtx_25cm_g1_cone);
+   fChain->SetBranchAddress("n_blip_pd_vtx_50cm_g1_cone", &n_blip_pd_vtx_50cm_g1_cone, &b_n_blip_pd_vtx_50cm_g1_cone);
+   fChain->SetBranchAddress("n_blip_pd_vtx_100cm_g1_cone", &n_blip_pd_vtx_100cm_g1_cone, &b_n_blip_pd_vtx_100cm_g1_cone);
+   fChain->SetBranchAddress("n_blip_pd_vtx_25cm_g2_anticone", &n_blip_pd_vtx_25cm_g2_anticone, &b_n_blip_pd_vtx_25cm_g2_anticone);
+   fChain->SetBranchAddress("n_blip_pd_vtx_50cm_g2_anticone", &n_blip_pd_vtx_50cm_g2_anticone, &b_n_blip_pd_vtx_50cm_g2_anticone);
+   fChain->SetBranchAddress("n_blip_pd_vtx_100cm_g2_anticone", &n_blip_pd_vtx_100cm_g2_anticone, &b_n_blip_pd_vtx_100cm_g2_anticone);
+   fChain->SetBranchAddress("n_blip_pd_vtx_25cm_g2_cone", &n_blip_pd_vtx_25cm_g2_cone, &b_n_blip_pd_vtx_25cm_g2_cone);
+   fChain->SetBranchAddress("n_blip_pd_vtx_50cm_g2_cone", &n_blip_pd_vtx_50cm_g2_cone, &b_n_blip_pd_vtx_50cm_g2_cone);
+   fChain->SetBranchAddress("n_blip_pd_vtx_100cm_g2_cone", &n_blip_pd_vtx_100cm_g2_cone, &b_n_blip_pd_vtx_100cm_g2_cone);
    fChain->SetBranchAddress("pd_generation_v", &pd_generation_v, &b_pd_generation_v);
    fChain->SetBranchAddress("pd_trk_score_v", &pd_trk_score_v, &b_pd_trk_score_v);
+   fChain->SetBranchAddress("pd_shr_score", &pd_shr_score, &b_pd_shr_score);
    fChain->SetBranchAddress("pd_trk_llr_pid_score_v", &pd_trk_llr_pid_score_v, &b_pd_trk_llr_pid_score_v);
    fChain->SetBranchAddress("pd_reco_track_count", &pd_reco_track_count, &b_pd_reco_track_count);
    fChain->SetBranchAddress("pd_reco_shower_count", &pd_reco_shower_count, &b_pd_reco_shower_count);
+   fChain->SetBranchAddress("pd_reco_secondary_track_count", &pd_reco_secondary_track_count, &b_pd_reco_secondary_track_count);
+   fChain->SetBranchAddress("pd_reco_secondary_shower_count", &pd_reco_secondary_shower_count, &b_pd_reco_secondary_shower_count);
+   fChain->SetBranchAddress("gl_trackstub_candidate_veto_score", &gl_trackstub_candidate_veto_score, &b_gl_trackstub_candidate_veto_score);
+   fChain->SetBranchAddress("gl_trackstub_num_candidates", &gl_trackstub_num_candidates, &b_gl_trackstub_num_candidates);
+   fChain->SetBranchAddress("gl_vertex_contained", &gl_vertex_contained, &b_gl_vertex_contained);   
+   fChain->SetBranchAddress("dl_foundVertex", &dl_foundVertex, &b_dl_foundVertex);
+   fChain->SetBranchAddress("dl_vtxX", &dl_vtxX, &b_dl_vtxX);
+   fChain->SetBranchAddress("dl_vtxY", &dl_vtxY, &b_dl_vtxY);
+   fChain->SetBranchAddress("dl_vtxZ", &dl_vtxZ, &b_dl_vtxZ);
+   fChain->SetBranchAddress("dl_vertex_contained", &dl_vertex_contained, &b_dl_vertex_contained);   
+   fChain->SetBranchAddress("dl_vtxScore", &dl_vtxScore, &b_dl_vtxScore);
+   fChain->SetBranchAddress("dl_nTracks", &dl_nTracks, &b_dl_nTracks);
+   fChain->SetBranchAddress("dl_nSecTracks", &dl_nSecTracks, &b_dl_nSecTracks);
+   fChain->SetBranchAddress("dl_nShowers", &dl_nShowers, &b_dl_nShowers);
+   fChain->SetBranchAddress("dl_nSecShowers", &dl_nSecShowers, &b_dl_nSecShowers);
 
    Notify();
 }

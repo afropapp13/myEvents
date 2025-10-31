@@ -1,0 +1,153 @@
+#include <TFile.h>
+#include <TF1.h>
+#include <TH2D.h>
+#include <TCanvas.h>
+#include <TMath.h>
+#include <TString.h>
+#include <TStyle.h>
+
+#include "../../../generators/constants.h"
+
+using namespace std;
+using namespace constants;
+
+void mcc9_10_print_2d() {
+
+	// -------------------------------------------------------------------------------------
+
+	TH2D::SetDefaultSumw2();
+	
+	double TextSize = 0.07;
+	const Int_t NCont = 999;	
+	gStyle->SetPalette(55); 
+	gStyle->SetNumberContours(NCont); 
+	gStyle->SetTitleSize(TextSize,"t"); 
+	gStyle->SetTitleFont(FontStyle,"t");
+	gStyle->SetOptStat(0);
+
+	// -------------------------------------------------------------------------------------
+
+	int NEventsPassingSelectionCuts = 0;
+	TString CutExtension = "_nocuts";
+
+	vector<TString> VectorCuts; VectorCuts.clear();
+	
+	VectorCuts.push_back("");
+
+	int NCuts = (int)(VectorCuts.size());	
+
+	for (int i = 0; i < NCuts; i++) {
+
+		CutExtension = CutExtension + VectorCuts[i];
+
+	}
+
+	// -------------------------------------------------------------------------------------
+
+	vector<TString> PlotNames;
+
+	PlotNames.push_back("Recopd_vs_wc_vertex_xPlot2D");
+	PlotNames.push_back("Recopd_vs_wc_vertex_yPlot2D");
+	PlotNames.push_back("Recopd_vs_wc_vertex_zPlot2D");		
+	
+	const int N2DPlots = PlotNames.size();
+	cout << "Number of 2D Plots = " << N2DPlots << endl;
+
+	// -------------------------------------------------------------------------------------------------------------------------------------
+	
+	vector<TString> NameOfSamples;
+	NameOfSamples.push_back("Overlay9");
+	const int NSamples = NameOfSamples.size();
+		
+	// -------------------------------------------------------------------------------------------------------------------------------------
+
+	vector<TString> Runs;
+	Runs.push_back("Run4b_unified");
+	Runs.push_back("Run4b_standalone");
+
+	const int NRuns = (int)(Runs.size());
+	cout << "Number of Runs = " << NRuns << endl;	
+
+	// -------------------------------------------------------------------------------------
+
+	vector< vector<TFile*>> FileSample;
+	FileSample.resize(NSamples, vector<TFile*>(NRuns));
+	vector< vector <TH2D*> > Plots;
+	Plots.resize(NSamples, vector<TH2D*>(N2DPlots));
+
+	// ---------------------------------------------------------------------------------------------------------------------------------------------
+
+	for (int WhichRun = 0; WhichRun < NRuns; WhichRun++) {
+
+		// -------------------------------------------------------------------------------------
+
+		for (int WhichSample = 0; WhichSample < NSamples; WhichSample ++) {
+		
+			TString PathToFilesCut = event_selection_file_path+"/"+CutExtension+"/";
+			FileSample[WhichSample][WhichRun] = TFile::Open(PathToFilesCut+"ncpi0_mcc9_10_"+NameOfSamples[WhichSample]+"_"+Runs[WhichRun]+CutExtension+".root");
+
+		}
+
+		for (int WhichSample = 0; WhichSample < NSamples; WhichSample ++) {
+
+			for (int WhichPlot = 0; WhichPlot < N2DPlots; WhichPlot ++) {
+
+
+				Plots[WhichSample][WhichPlot] = (TH2D*)(FileSample[WhichSample][WhichRun]->Get(PlotNames[WhichPlot]));
+				
+				// ---------------------------------------------------------------------------------------				
+	
+				TString PlotCanvasName = Runs[WhichRun]+"_"+PlotNames[WhichPlot]+NameOfSamples[WhichSample];
+				TCanvas* PlotCanvas = new TCanvas(PlotCanvasName,PlotCanvasName,205,34,1024,768);
+				PlotCanvas->cd();
+				PlotCanvas->SetBottomMargin(0.16);
+				PlotCanvas->SetLeftMargin(0.15);
+				PlotCanvas->SetRightMargin(0.15);				
+					
+				gStyle->SetMarkerSize(1.5);
+				gStyle->SetPaintTextFormat("4.2f");				
+					
+				Plots[WhichSample][WhichPlot]->GetXaxis()->SetTitleFont(FontStyle);
+				Plots[WhichSample][WhichPlot]->GetXaxis()->SetLabelFont(FontStyle);
+				Plots[WhichSample][WhichPlot]->GetXaxis()->SetTitleSize(TextSize);
+				Plots[WhichSample][WhichPlot]->GetXaxis()->SetLabelSize(TextSize);				
+				Plots[WhichSample][WhichPlot]->GetXaxis()->CenterTitle();
+				Plots[WhichSample][WhichPlot]->GetXaxis()->SetNdivisions(6);
+				Plots[WhichSample][WhichPlot]->GetXaxis()->SetLabelOffset(0.01);				
+					
+				Plots[WhichSample][WhichPlot]->GetYaxis()->SetLabelFont(FontStyle);
+				Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitleFont(FontStyle);
+				Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitleSize(TextSize);
+				Plots[WhichSample][WhichPlot]->GetYaxis()->SetLabelSize(TextSize);				
+				Plots[WhichSample][WhichPlot]->GetYaxis()->CenterTitle();
+				Plots[WhichSample][WhichPlot]->GetYaxis()->SetNdivisions(6);
+				Plots[WhichSample][WhichPlot]->GetYaxis()->SetTitleOffset(1.);				
+									
+				Plots[WhichSample][WhichPlot]->GetZaxis()->SetLabelFont(FontStyle);
+				Plots[WhichSample][WhichPlot]->GetZaxis()->SetLabelSize(TextSize);
+				Plots[WhichSample][WhichPlot]->GetZaxis()->SetNdivisions(6);				
+//				Plots[WhichSample][WhichPlot]->GetZaxis()->SetRangeUser(-0.1,1.);
+
+				Plots[WhichSample][WhichPlot]->SetMarkerColor(kWhite);				
+				Plots[WhichSample][WhichPlot]->SetMarkerSize(0.9);
+				//Plots[WhichSample][WhichPlot]->SetTitle(Runs[WhichRun]);					
+				Plots[WhichSample][WhichPlot]->Draw("colz"); 
+
+				TLatex *bnb = new TLatex();
+				bnb->SetTextFont(FontStyle);
+				bnb->SetTextSize(TextSize);
+				bnb->DrawLatexNDC(0.15,0.91,"MicroBooNE Simulation");				
+					
+				PlotCanvas->SaveAs(plot_path+PlotNames[WhichPlot]+NameOfSamples[WhichSample]+"_"+Runs[WhichRun]+".pdf");
+					
+				delete PlotCanvas;				
+				 
+			} // End of the loop over the plots
+			
+			FileSample[WhichSample][WhichRun]->Close();
+
+		} // End of the loop over the samples
+
+	} // End of the loop over the runs	
+
+} // End of the program
